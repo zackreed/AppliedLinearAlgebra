@@ -1,16 +1,18 @@
 ## Don't push ximeraserve
 .ximeraserve
-## Don't ignore things in ./graphics
-graphics/*
-!graphics/*.jpg
-!graphics/*.pdf
-!graphics/*.png
+
 ## Graphics - may be not ignored
 *.jpg
 ## Graphics - recommend to be ignored
 *.svg
 *.png
 *.pdf
+## Don't ignore things in ./graphics   https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+## DOESN"T SEEEM TO WORK YET
+graphics/*
+!graphics/*.jpg
+!graphics/*.pdf
+!graphics/*.png
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

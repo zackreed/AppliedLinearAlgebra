@@ -1,9 +1,9 @@
 ## Don't push ximeraserve
 .ximeraserve
 ## Don't ignore things in ./graphics
-!./graphics/*.jpg
-!./graphics/*.pdf
-!./graphics/*.png
+!graphics/*.jpg
+!graphics/*.pdf
+!graphics/*.png
 ## Graphics - may be not ignored
 *.jpg
 ## Graphics - recommend to be ignored

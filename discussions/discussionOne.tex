@@ -5,6 +5,182 @@
 {./pictures/}   %% then look for a pictures folder,
 {../pictures/}  %% which may be a directory up.
 }
+\usepackage{listings}
+\lstdefinestyle{Matlab}{
+  language=Matlab,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  morekeywords={matlab2tikz},
+  morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+  commentstyle=\color{green},
+  showstringspaces=false,
+  numbers=left,
+  numberstyle={\tiny \color{black}},
+  numbersep=9pt,
+  emph=[1]{star_wars_ratings.mat, pivcol_new,B,A,t, reduced, v, tau},emphstyle=[1]\color{purple}, 
+}
+%make a maroon color
+\definecolor{maroon}{RGB}{128,0,0}
+%make a dark blue color
+\definecolor{darkblue}{RGB}{0,0,139}
+%define the color fourier0 to be the maroon color
+\definecolor{fourier0}{RGB}{128,0,0}
+%define the color fourier1 to be the dark blue color
+\definecolor{fourier1}{RGB}{0,0,139}
+%define the color fourier 1t to be the light blue color
+\definecolor{fourier1t}{RGB}{173,216,230}
+%define the color fourier2 to be the dark green color
+\definecolor{fourier2}{RGB}{0,100,0}
+%define teh color fourier2t to be the light green color
+\definecolor{fourier2t}{RGB}{144,238,144}
+%define the color fourier3 to be the dark purple color
+\definecolor{fourier3}{RGB}{128,0,128}
+%define the color fourier3t to be the light purple color
+\definecolor{fourier3t}{RGB}{221,160,221}
+%define the color fourier0t to be the red color
+\definecolor{fourier0t}{RGB}{255,0,0}
+%define the color fourier4 to be the orange color
+\definecolor{fourier4}{RGB}{255,165,0}
+%define the color fourier4t to be the darker orange color
+\definecolor{fourier4t}{RGB}{255,215,0}
+%define the color fourier5 to be the yellow color
+\definecolor{fourier5}{RGB}{255,255,0}
+%define the color fourier5t to be the darker yellow color
+\definecolor{fourier5t}{RGB}{255,255,100}
+%define the color fourier6 to be the green color
+\definecolor{fourier6}{RGB}{0,128,0}
+%define the color fourier6t to be the darker green color
+\definecolor{fourier6t}{RGB}{0,255,0}
+
+%New commands for this doc for errors in copying
+\newcommand{\eigenvar}{\lambda}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\renewcommand{\th}{^{\text{th}}}
+\newcommand{\st}{^{\text{st}}}
+\newcommand{\nd}{^{\text{nd}}}
+\newcommand{\rd}{^{\text{rd}}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Hilb}{\mathbb{H}}
+\newcommand{\qq}[1]{\text{#1}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\q}[1]{\text{``#1''}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\rref}{\text{reduced row echelon form}}
+\newcommand{\ef}{\text{echelon form}}
+\newcommand{\ohm}{\Omega}
+\newcommand{\volt}{\text{V}}
+\newcommand{\amp}{\text{A}}
+\newcommand{\Seq}{\textbf{Seq}}
+\newcommand{\Poly}{\textbf{P}}
+\renewcommand{\quad}{\text{    }}
+\newcommand{\roweq}{\simeq}
+\newcommand{\rowop}{\simeq}
+\newcommand{\rowswap}{\leftrightarrow}
+\newcommand{\Mat}{\textbf{M}}
+\newcommand{\Func}{\textbf{Func}}
+\newcommand{\Hw}{\textbf{Hamming weight}}
+\newcommand{\Hd}{\textbf{Hamming distance}}
+\newcommand{\rank}{\text{rank}}
+\newcommand{\longvect}[1]{\overrightarrow{#1}}
+% Define the circled command
+\newcommand{\circled}[1]{%
+  \tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=2pt,red,fill=red!20,text=black] (char) {#1};}%
+}
+
+%an environment of proof extending to proof of
+\newenvironment{proofof}[1]{%
+  \proof[\textbf{Proof #1}]%
+}{%
+  \endproof
+}
+
+% Define custom command \strikeh that just puts red text on the 2nd argument
+\newcommand{\strikeh}[2]{\textcolor{red}{#2}}
+
+% Define custom command \strikev that just puts red text on the 2nd argument
+\newcommand{\strikev}[2]{\textcolor{red}{#2}}
+
+%an environment for \mymatrix
+% Define the mymatrix environment
+\newenvironment{mymatrix}[1]
+  {% Begin code
+   \left[\begin{array}{#1}}
+  {% End code
+   \end{array}\right]}
+%an environment for \absmatrix
+% Define the absmatrix environment
+\newenvironment{absmatrix}[1]
+  {% Begin code
+   \left|\begin{array}{#1}}
+  {% End code
+   \end{array}\right|}
+
+% Define the custom environment enumialphparenastyle that for now just makes everything red
+\newenvironment{enumialphparenastyle}
+{% Begin code - executed at the start of the environment
+  \color{red} % Set text color to red
+}
+{% End code - executed at the end of the environment
+}
+
+% Define the custom environment mysmallmatrix
+\newenvironment{mysmallmatrix}
+{% Begin code - executed at the start of the environment
+  \left[\begin{smallmatrix}
+}
+{% End code - executed at the end of the environment
+  \end{smallmatrix}\right]
+}
+
+%define a new "ex" environment that is the same as the "exercise" environment
+\newenvironment{ex}{\begin{exercise}}{\end{exercise}}
+%define a new "sol" environment that is the same as the "solution" environment
+\newenvironment{sol}{\begin{solution}}{\end{solution}}
+
+%more new commands for this doc for errors in copying
+\newcommand{\SI}{\text{SI}}
+\newcommand{\kg}{\text{kg}}
+\newcommand{\m}{\text{m}}
+\newcommand{\s}{\text{s}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\col}{\text{col}}
+\newcommand{\sspan}{\text{span}}
+\newcommand{\proj}{\text{proj}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\degC}{^\circ\text{C}}
+\newcommand{\centroid}[1]{\overline{#1}}
+\newcommand{\dotprod}{\boldsymbol{\cdot}}
+\newcommand{\coord}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\iprod}[1]{\langle #1 \rangle}
+\newcommand{\adjoint}{^{*}}
+\newcommand{\conjugate}[1]{\overline{#1}}
+\newcommand{\eigenvarA}{\lambda}
+\newcommand{\eigenvarB}{\mu}
+\newcommand{\orth}{\perp}
+\newcommand{\bigbracket}[1]{\left[#1\right]}
+\newcommand{\textiff}{\text{ if and only if }}
+\newcommand{\adj}{\text{adj}}
+\newcommand{\ijth}{\emph{ij}^\text{th}}
+\newcommand{\minor}[2]{M_{#2}}
+\newcommand{\cofactor}{\text{C}}
+\newcommand{\shift}{\textbf{shift}}
+
+
+%Some boiler plate for putting matlab in 
+%Write A as a matrix in MATLAB in a lstlisting environment
+%\begin{lstlisting}[style=Matlab]
+%    A = [1 0 3; 0 1 5; 1 1 8]
+%    reduced=rref(A)
+%\end{lstlisting}
 \author{Zack Reed}
 %borrowed from selinger linear algebra
 \title{Discussion}
@@ -98,8 +274,8 @@
 
 
     \begin{center}
-        \pdfOnly{\includegraphics[width=.75\textwidth]{apple-pear.png}\\
-        $$\vec{F}\text{ is within the Apple cluster, and is thus an apple rather than a pear.}$$}
+        %\pdfOnly{\includegraphics[width=.75\textwidth]{apple-pear.png}\\
+       % $$\vec{F}\text{ is within the Apple cluster, and is thus an apple rather than a pear.}$$}
         \geogebra{qnghrmdg}{800}{600} %%https://www.geogebra.org/m/qnghrmdg
     \end{center}
 
@@ -150,17 +326,25 @@
   \begin{hint}{MATLAB Code}
     %\revealbutton{Click to see MATLAB code}
         %Write A as a matrix in MATLAB in a lstlisting environment
-        \begin{lstlisting}[style=Matlab]
-            load star_wars_ratings.mat
-        \end{lstlisting}
+        %\begin{pdfOnly}
+          %\begin{lstlisting}[style=Matlab]
+          \begin{verbatim}
+              load star_wars_ratings.mat
+          \end{verbatim}
+          %\end{lstlisting}
+        %\end{pdfOnly}
   \end{hint}
 
   Let's visualize the differences and similarities in these 125 users' ratings of the Star Wars Trilogy. Either plot the points on your own, or use the course helper function ``plot\_star\_wars'', being sure to input the vector list ``star\_wars\_ratings'' as an argument.
 
   \begin{hint}{MATLAB Code}
-        \begin{lstlisting}[style=Matlab]
+    %\begin{pdfOnly}
+        %\begin{lstlisting}[style=Matlab]
+        \begin{verbatim}
             linalg.plot_star_wars(star_wars_ratings)
-        \end{lstlisting}
+        \end{verbatim}
+        %\end{lstlisting}
+      %\end{pdfOnly}
   \end{hint}
 
   Your plot should look something like the Figure below, and you should be able to click and drag within the figure to rotate the plot and see the data from different angles.
@@ -178,12 +362,16 @@
   Let's try it out to find the norms of our two vectors in question. 
 
   \begin{hint}{MATLAB Code}
-    \begin{lstlisting}[style=Matlab]
+    %\begin{pdfOnly}
+    %\begin{lstlisting}[style=Matlab]
+    \begin{verbatim}
         best=[5,5,5];
         worst=[3,1,2];
         best_norm=norm(best);
         worst_norm=norm(worst);
-    \end{lstlisting}
+    \end{verbatim}
+    %\end{lstlisting}
+    %\begin{pdfOnly}
   \end{hint}
 
   \begin{example}
@@ -197,12 +385,13 @@
   \begin{example}
   
   For instance, if you wanted to quickly calculate the square of each nubmer from 1 to 10, you could use the following code:
+  \begin{verbatim}
 
-    \begin{lstlisting}[style=Matlab]
         for i=1:10
             i_squared=i^2
         end
-    \end{lstlisting}
+
+  \end{verbatim}
 
     With just three lines of code, you quickly get the computer to tell you all of the squares of the first 10 numbers. We'll be using for loops quite a bit in this course, as ways to quickly do lots of calculations. 
 
@@ -213,15 +402,18 @@
     \begin{example}
 
       For instance, if we wanted to check which number(s) from 1 to 10 squared to 25, we could use an "if" statement in the following way:
-
-      \begin{lstlisting}[style=Matlab]
+%\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
           for i=1:10
               i_squared=i^2;
               if i_squared==25
                   i
               end
           end
-      \end{lstlisting}
+      \end{verbatim}
+      %\end{lstlisting}
+   % \end{pdfOnly}
 
       This code only outputs the number 5, as 5 is the only number from 1 to 10 that squares to 25. For each other "i" from 1 to 10, the computer first defined ``i\_squared'' as $i^2$, and then checked if $i^2$ was equal to 25. If it was, the computer outputted the value of $i$.
 
@@ -246,16 +438,22 @@
     \begin{hint}
 
       Remember that ``star\_wars\_ratings'' is a matrix of row vectors, and that matrices' dimensions are organized first by rows and then by columns. You can access the ith user's ratings with 
-      \begin{lstlisting}[style=Matlab]
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
         star_wars_ratings(i,:)
-      \end{lstlisting}
+      \end{verbatim}
+      %\end{lstlisting}
+    %\end{pdfOnly}
       
       which returns a vector of the form [rating\_1, rating\_2, rating\_3].
 
     \end{hint}
 
     \begin{hint}{MATLAB Code}
-      \begin{lstlisting}[style=Matlab]
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
           best=[5,5,5];
           worst=[3,1,2];
           best_norm=norm(best);
@@ -272,7 +470,9 @@
                   worst_count=worst_count+1;
               end
           end
-      \end{lstlisting}
+      \end{verbatim}
+      %\end{lstlisting}
+   % \end{pdfOnly}
     \end{hint}
 
     \subsection*{Task Two: Predicting Recommendations}
@@ -296,8 +496,9 @@
       You'll want to isolate only the users who rated the Original Trilogy like you did, and then average their ratings of ``Star Wars Episode I - The Phantom Menace (1999)''. To just isolate the closest users and get their new rating, all you need are the index values of the users. So within the loop to find the closest users, you can just append each new index to a previous list of indices, and then use that list to find the new ratings.
 
       For instance, if you wanted to find which elements of the list [1, 2, 3, 2, 3, 5, 1, 2] square to 4, you could use the following code:
-
-      \begin{lstlisting}[style=Matlab]
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
         indices=[];
         list=[1, 2, 3, 2, 3, 5, 1, 2];
         for i=1:8
@@ -307,24 +508,37 @@
                 indices=[indices,i];
             end
         end
-      \end{lstlisting}
+      \end{verbatim}
+      %\end{lstlisting}
+   % \end{pdfOnly}
       
       This will start with an empty list of indices, and then add the index of each element of the list that squares to 4 to the list of indices. The line ``indices=[indices,i]'' appends the index of the element to the list of indices.
 
       Then, you can get a smaller list of the elements that squared to 4 by using the list of indices:
-
-      \begin{lstlisting}[style=Matlab]
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
         new_list=list(indices)
-      \end{lstlisting}
+      \end{verbatim}
+        
+      %\end{lstlisting}
+      %\end{pdfOnly}
+
 
       This will return the list [2, 2, 2], as the 2nd, 4th, and 8th elements of the original list squared to 4.
 
       Finally, you'll also want to average the ratings of the closest users. You can take the average of a list of numbers in MATLAB with the ``mean'' function. For instance, if you wanted to find the average of the list [1, 2, 3, 4, 5], you could use the following code:
 
-      \begin{lstlisting}[style=Matlab]
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
         list=[1, 2, 3, 4, 5];
-        average=mean(list)
-      \end{lstlisting}
+        average=mean(list)        
+      \end{verbatim}
+
+      %\end{lstlisting}
+
+    %\end{pdfOnly}
 
       This will return the value 3, as the average of 1, 2, 3, 4, and 5 is 3.
 
@@ -358,9 +572,9 @@
       If you need to find the user with the single minimum distance from a test user, there are a few ways to do this, but one of the easiest ways is to first make a vector of the distances between the test user and all of the training users, and then find the index of the minimum value of that vector using the ``min'' function.
 
       As an example, if you wanted to find the index of the number with the minimum square value from the list [3, 3, 1, 2, 3, 4, 5, 2], you could do the following:
-
-      \begin{lstlisting}[style=Matlab]
-        
+      %\begin{pdfOnly}
+      %\begin{lstlisting}[style=Matlab]
+      \begin{verbatim}
         list=[3, 3, 1, 2, 3, 4, 5, 2];
         squared_list=[]
         for i=1:8
@@ -369,8 +583,9 @@
             squared_list=[squared_list,squared];
         end
         [square, idx]=min(squared_list)
-
-      \end{lstlisting}
+      \end{verbatim}
+      %\end{lstlisting}
+    %\end{pdfOnly}
 
       The syntax [square,idx] means that the ``min'' function returns two numbers, first the minimum value and then second the index of that value in the original list. It should return square=1 and idx=3, as the 3rd element of the original list squared to 1.
 

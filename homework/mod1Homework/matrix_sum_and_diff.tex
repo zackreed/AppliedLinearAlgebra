@@ -1,6 +1,13 @@
 \documentclass{ximera}
 \input{../../preamble.tex}
 
+% Define the mymatrix environment
+\renewenvironment{mymatrix}[1]
+  {% Begin code
+   \left[\begin{array}{#1}}
+  {% End code
+   \end{array}\right]}
+
 \author{Zack Reed}
 \begin{document}
 

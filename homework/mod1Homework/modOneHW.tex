@@ -1,0 +1,71 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\title{Module One Discussion: Vector Unknown}
+\begin{document}
+\begin{abstract}
+
+    In this introductory discussion, you will as a class explore the basics of vectors geometrically.
+
+\end{abstract}
+\maketitle
+
+
+\section{Discussion Introduction}
+
+  In the reading this week, you'll learn about how vectors can be used to represent data, physical concepts, lists of numbers, and really anything for which adding and multiplying by numbers makes sense. 
+  
+  A main theme of the course is going to be the interplay between geometry and application. Specifically, we'll see time and again that rules for vector and matrix manipulation established in geometry tell us how best to apply vectors and matrices to solve problems in other areas. This week's discussion will set up this theme by having you explore the geometry of vectors by playing and reflecting on the game Vector Unknown, and then using Vectors to see how we can tell machines to make sense of words and sentences in a way that is similar to how we make sense of them.
+
+\section{An Intro to Linear Combinations}
+
+  The ``linear'' in  ``Linear Algebra'' is largely captured by two key operations: addition and multiplication by scalars. We can do both at the same time in what's called a \emph{linear combination}. Linear combinations are the bread and butter of many important calculations in Linear Algebra. 
+
+  If we have two vectors $\vec{v}$ and $\vec{w}$, and two scalars (e.g. real numbers) $a$ and $b$ then a linear combination of $\vec{v}$ and $\vec{w}$ is a new vector of the form $a\vec{v} + b\vec{w}$.
+
+  For instance, if $\vec{v}=\begin{bmatrix}1\\-2\end{bmatrix}$, $\vec{u}= \begin{bmatrix}3\\4\end{bmatrix}$, and $\vec{w}=\begin{bmatrix}1\\-3\end{bmatrix}$, then $\vec{v} + +2\vec{u}+3\vec{w} = \begin{bmatrix}1\\-2\end{bmatrix} + 2\begin{bmatrix}3\\4\end{bmatrix} + 3\begin{bmatrix}1\\-3\end{bmatrix} = \begin{bmatrix}1\\-2\end{bmatrix} + \begin{bmatrix}6\\8\end{bmatrix} + \begin{bmatrix}3\\-9\end{bmatrix} = \begin{bmatrix}10\\-3\end{bmatrix}$.
+
+  We geometrically find the result of this linear combination as is visualized in the GeoGebra applet below. We follow the first vector $\vec{v}$, then add the second vector $2\vec{u}$ to the end (the ``tip'' or the ``head''), then add the third vector $3\vec{w}$ to the end of that. The final vector is the one that starts at the origin and ends at the tip of the last vector we added.
+
+  Put the vectors $\vec{v}$, $\vec{u}$, and $\vec{w}$ and the scalars $1$, $2$, and $3$ into the GeoGebra applet below to see the result of the linear combination $1\vec{v} + 2\vec{u} + 3\vec{w}$.
+
+  \begin{center}
+    \geogebra{serypqvd}{823}{445}
+  \end{center}
+
+  Here, we follow the first vector $\vec{v_1}$, then follow the two orange vectors after $\vec{v_1}$, and the result is the same as the blue vector $\vec{S}$, which as we computed is $\begin{bmatrix}10\\-3\end{bmatrix}$.
+
+  \subsection*{Vector Unknown: Exploring Vectors and Linear Combinations}
+
+  In the game Vector Unknown, you'll control a bunny rabbit who wants to find food, keys, and other objects within a field. You'll be given the target vector, where the object is located, and you'll need to direct the bunny to the target vector by taking linear combinations of provided vectors. 
+
+  Here's a brief video walking through the basic controls of the game:
+
+  \begin{center}
+    %\youtube{1JW3xJ1QZ1A}
+    Some YouTube Video
+  \end{center}
+
+  \subsubsection{Task One}
+
+  Play through the ``Easy" difficulty and answer the following questions:
+  \begin{enumerate}
+
+    \item If your first attempt went off course, what did you do to correct and bring the bunny back to the target vector?
+    \item In number 7, you were told that all targets lay along the line $t\vec{v}+\vec{w}$, where $\vec{v}$ and $\vec{w}$ were given. If you were then given a new target that lay off of this line, would you be able to reach it by taking linear combinations of $\vec{v}$ and $\vec{w}$? If so, how would you reach it? If not, why?
+
+  \end{enumerate}
+
+  Now play through the ``Medium" difficulty and answer the following questions:
+
+  \begin{enumerate}
+
+    \item In number 3, you needed to find two keys and then find the lock. If you were given just one vector to work with, could you have accomplished the task? If so, how? If not, why?
+    \item While there are four vectors available to you in number 3, what is the minimum number of vectors you need to reach find the keys and reach the lock? Why?
+    \item In number 4, all of the food is located along a line through the origin. Said differently, all of the food is located in the span of a single vector. If a new piece of food was placed off of this line, what new vectors would not allow you to reach the food? What new vectors \emph{would} allow you to reach the food? Why?
+
+  \end{enumerate}
+
+\end{document}

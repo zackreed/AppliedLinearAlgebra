@@ -1,189 +1,10 @@
 \documentclass{ximera}
-\graphicspath{  %% When looking for images,
-{./}            %% look here first,
-{./pictures/}   %% then look for a pictures folder,
-{../pictures/}  %% which may be a directory up.
-}
-\usepackage{listings}
-\lstdefinestyle{Matlab}{
-  language=Matlab,
-  basicstyle=\ttfamily,
-  keywordstyle=\color{blue},
-  commentstyle=\color{green},
-  stringstyle=\color{red},
-  morekeywords={matlab2tikz},
-  morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
-  identifierstyle=\color{black},
-  stringstyle=\color{red},
-  commentstyle=\color{green},
-  showstringspaces=false,
-  numbers=left,
-  numberstyle={\tiny \color{black}},
-  numbersep=9pt,
-  emph=[1]{star_wars_ratings.mat, pivcol_new,B,A,t, reduced, v, tau},emphstyle=[1]\color{purple}, 
-}
-%make a maroon color
-\definecolor{maroon}{RGB}{128,0,0}
-%make a dark blue color
-\definecolor{darkblue}{RGB}{0,0,139}
-%define the color fourier0 to be the maroon color
-\definecolor{fourier0}{RGB}{128,0,0}
-%define the color fourier1 to be the dark blue color
-\definecolor{fourier1}{RGB}{0,0,139}
-%define the color fourier 1t to be the light blue color
-\definecolor{fourier1t}{RGB}{173,216,230}
-%define the color fourier2 to be the dark green color
-\definecolor{fourier2}{RGB}{0,100,0}
-%define teh color fourier2t to be the light green color
-\definecolor{fourier2t}{RGB}{144,238,144}
-%define the color fourier3 to be the dark purple color
-\definecolor{fourier3}{RGB}{128,0,128}
-%define the color fourier3t to be the light purple color
-\definecolor{fourier3t}{RGB}{221,160,221}
-%define the color fourier0t to be the red color
-\definecolor{fourier0t}{RGB}{255,0,0}
-%define the color fourier4 to be the orange color
-\definecolor{fourier4}{RGB}{255,165,0}
-%define the color fourier4t to be the darker orange color
-\definecolor{fourier4t}{RGB}{255,215,0}
-%define the color fourier5 to be the yellow color
-\definecolor{fourier5}{RGB}{255,255,0}
-%define the color fourier5t to be the darker yellow color
-\definecolor{fourier5t}{RGB}{255,255,100}
-%define the color fourier6 to be the green color
-\definecolor{fourier6}{RGB}{0,128,0}
-%define the color fourier6t to be the darker green color
-\definecolor{fourier6t}{RGB}{0,255,0}
+\input{../preamble.tex}
 
-%New commands for this doc for errors in copying
-\newcommand{\eigenvar}{\lambda}
-\newcommand{\vect}[1]{\mathbf{#1}}
-\renewcommand{\th}{^{\text{th}}}
-\newcommand{\st}{^{\text{st}}}
-\newcommand{\nd}{^{\text{nd}}}
-\newcommand{\rd}{^{\text{rd}}}
-\newcommand{\paren}[1]{\left(#1\right)}
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Hilb}{\mathbb{H}}
-\newcommand{\qq}[1]{\text{#1}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\q}[1]{\text{``#1''}}
-\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
-\newcommand{\rref}{\text{reduced row echelon form}}
-\newcommand{\ef}{\text{echelon form}}
-\newcommand{\ohm}{\Omega}
-\newcommand{\volt}{\text{V}}
-\newcommand{\amp}{\text{A}}
-\newcommand{\Seq}{\textbf{Seq}}
-\newcommand{\Poly}{\textbf{P}}
-\renewcommand{\quad}{\text{    }}
-\newcommand{\roweq}{\simeq}
-\newcommand{\rowop}{\simeq}
-\newcommand{\rowswap}{\leftrightarrow}
-\newcommand{\Mat}{\textbf{M}}
-\newcommand{\Func}{\textbf{Func}}
-\newcommand{\Hw}{\textbf{Hamming weight}}
-\newcommand{\Hd}{\textbf{Hamming distance}}
-\newcommand{\rank}{\text{rank}}
-\newcommand{\longvect}[1]{\overrightarrow{#1}}
-% Define the circled command
-\newcommand{\circled}[1]{%
-  \tikz[baseline=(char.base)]{
-    \node[shape=circle,draw,inner sep=2pt,red,fill=red!20,text=black] (char) {#1};}%
-}
-
-%an environment of proof extending to proof of
-\newenvironment{proofof}[1]{%
-  \proof[\textbf{Proof #1}]%
-}{%
-  \endproof
-}
-
-% Define custom command \strikeh that just puts red text on the 2nd argument
-\newcommand{\strikeh}[2]{\textcolor{red}{#2}}
-
-% Define custom command \strikev that just puts red text on the 2nd argument
-\newcommand{\strikev}[2]{\textcolor{red}{#2}}
-
-%an environment for \mymatrix
-% Define the mymatrix environment
-\newenvironment{mymatrix}[1]
-  {% Begin code
-   \left[\begin{array}{#1}}
-  {% End code
-   \end{array}\right]}
-%an environment for \absmatrix
-% Define the absmatrix environment
-\newenvironment{absmatrix}[1]
-  {% Begin code
-   \left|\begin{array}{#1}}
-  {% End code
-   \end{array}\right|}
-
-% Define the custom environment enumialphparenastyle that for now just makes everything red
-\newenvironment{enumialphparenastyle}
-{% Begin code - executed at the start of the environment
-  \color{red} % Set text color to red
-}
-{% End code - executed at the end of the environment
-}
-
-% Define the custom environment mysmallmatrix
-\newenvironment{mysmallmatrix}
-{% Begin code - executed at the start of the environment
-  \left[\begin{smallmatrix}
-}
-{% End code - executed at the end of the environment
-  \end{smallmatrix}\right]
-}
-
-%define a new "ex" environment that is the same as the "exercise" environment
-\newenvironment{ex}{\begin{exercise}}{\end{exercise}}
-%define a new "sol" environment that is the same as the "solution" environment
-\newenvironment{sol}{\begin{solution}}{\end{solution}}
-
-%more new commands for this doc for errors in copying
-\newcommand{\SI}{\text{SI}}
-\newcommand{\kg}{\text{kg}}
-\newcommand{\m}{\text{m}}
-\newcommand{\s}{\text{s}}
-\newcommand{\norm}[1]{\left\|#1\right\|}
-\newcommand{\col}{\text{col}}
-\newcommand{\sspan}{\text{span}}
-\newcommand{\proj}{\text{proj}}
-\newcommand{\set}[1]{\left\{#1\right\}}
-\newcommand{\degC}{^\circ\text{C}}
-\newcommand{\centroid}[1]{\overline{#1}}
-\newcommand{\dotprod}{\boldsymbol{\cdot}}
-\newcommand{\coord}[1]{\begin{bmatrix}#1\end{bmatrix}}
-\newcommand{\iprod}[1]{\langle #1 \rangle}
-\newcommand{\adjoint}{^{*}}
-\newcommand{\conjugate}[1]{\overline{#1}}
-\newcommand{\eigenvarA}{\lambda}
-\newcommand{\eigenvarB}{\mu}
-\newcommand{\orth}{\perp}
-\newcommand{\bigbracket}[1]{\left[#1\right]}
-\newcommand{\textiff}{\text{ if and only if }}
-\newcommand{\adj}{\text{adj}}
-\newcommand{\ijth}{\emph{ij}^\text{th}}
-\newcommand{\minor}[2]{M_{#2}}
-\newcommand{\cofactor}{\text{C}}
-\newcommand{\shift}{\textbf{shift}}
-
-
-%Some boiler plate for putting matlab in 
-%Write A as a matrix in MATLAB in a lstlisting environment
-%\begin{lstlisting}[style=Matlab]
-%    A = [1 0 3; 0 1 5; 1 1 8]
-%    reduced=rref(A)
-%\end{lstlisting}
 
 \author{Zack Reed}
 %borrowed from selinger linear algebra
-\title{Module One Discussion: Vector Unknown and Movie Ratings}
+\title{Module One Mini Project: Movie Ratings}
 \begin{document}
 \begin{abstract}
 
@@ -192,13 +13,13 @@
 \end{abstract}
 \maketitle
 
-\section{Movie Ratings: Making Sense of Data as Vectors}
+\section*{Movie Ratings: Making Sense of Data as Vectors}
 
   We're going to look into our first application of vectors! We'll start with a context in which some of the early concepts we care about (e.g. vector arithmetic, distances between vectors, vector norms) are all raedily accessible and allow us some initial insight into how we help computers make sense of the real world through nubmers. 
 
   We'll be using MATLAB to organize and do some calculations on and visualizations of the data, and then we'll use the results of the MATLAB calculations to make sense of the the data. 
 
-  \begin{hint} 
+  \begin{summary} 
 
     For a primer on installing MATLAB with all of the required toolboxes, setting up the helper files for the class into the right folders, and getting started with a few calculations, check out the video below:
 
@@ -207,13 +28,14 @@
       Some YouTube Video
     \end{center}
 
-  \end{hint}
+  \end{summary}
 
-  \subsection{Making Sense of Clusters in Data}
+  \begin{example}
+    
+    \name{Making Sense of Clusters in Data}
 
   Looking back at the fruit classification example from the early sections of the book, we already examined the potential insights gained from clusters of vectors where the dimensions of the vectors were measurements of fruit. 
 
-  \begin{example}
     In this hypothetical example, where we took the measurements of pear and apple weights, max circumferences, and stem lengths, a data scientist might hope that there's an easy way to geometrically separate all of the apple vectors from pear vectors in a given data set. They'd then use that geometry to predict whether a new fruit is an apple or a pear based on its measurement. 
 
 
@@ -230,7 +52,8 @@
     
 \end{example}
 
-  \subsection{Movie Ratings: Getting Started}
+\begin{exploration}\name{Task One: Getting Started}
+
   %https://grouplens.org/datasets/movielens/
   We're going to draw some idealized data from a larger data set of people's preferences for certain movies. We'll be looking at a very idealistic subset of the data, one where every rater has rated every movie on the list. We'll deal with a slightly more complicated example later for the course projects. 
 
@@ -238,36 +61,31 @@
 
   For now, we'll be looking at people's ratings (1:bad to 5:good) for the following 20 movies:
 
-  \begin{itemize}
+  \vspace{1em}
 
-    \item E.T. the Extra-Terrestrial (1982) 
-    \item Star Wars Episode IV - A New Hope (1977) 
-    \item Star Wars Episode V - The Empire Strikes Back (1980) 
-    \item Star Wars Episode VI - Return of the Jedi (1983) 
-    \item Jurassic Park (1993) 
-    \item Saving Private Ryan (1998) 
-    \item Terminator 2 (1991)
-    \item Matrix, The (1999) 
-    \item Back to the Future (1985) 
-    \item Silence of the Lambs, The (1991) 
-    \item Star Wars Episode I - The Phantom Menace (1999) 
-    \item Raiders of the Lost Ark (1981) 
-    \item Fargo (1996) 
-    \item Sixth Sense, The (1999) 
-    \item Braveheart (1995) 
-    \item Shakespeare in Love (1998) 
-    \item Princess Bride, The (1987) 
-    \item Schindler's List (1993) 
-    \item Shawshank Redemption, The (1994) 
-    \item Groundhog Day (1993) 
+  %make two columns of movies out of the list below, using an array environment
+  \begin{small} % or \footnotesize for even smaller text
+    \begin{tabular}{p{0.45\linewidth} p{0.45\linewidth}} % Adjust width as needed
+      E.T. the Extra-Terrestrial (1982) & Star Wars Episode IV - A New Hope (1977) \\
+      Star Wars Episode V - The Empire Strikes Back (1980) & Star Wars Episode VI - Return of the Jedi (1983) \\
+      Jurassic Park (1993) & Saving Private Ryan (1998) \\
+      Terminator 2 (1991) & The Matrix (1999) \\
+      Back to the Future (1985) & The Silence of the Lambs (1991) \\
+      Star Wars Episode I - The Phantom Menace (1999) & Raiders of the Lost Ark (1981) \\
+      Fargo (1996) & The Sixth Sense (1999) \\
+      Braveheart (1995) & Shakespeare in Love (1998) \\
+      The Princess Bride (1987) & Schindler's List (1993) \\
+      The Shawshank Redemption (1994) & Groundhog Day (1993) \\
+    \end{tabular}
+    \end{small}
 
-  \end{itemize}
+  \vspace{1em}
 
   First, to get an idea of how we'll approach the data, we'll look at the ratings of 3 movies, the original Star Wars Trilogy, which lets us visualize the data.
 
   To get things started, open up a MATLAB live script and load star\_wars\_ratings.mat.
 
-  \begin{hint}{MATLAB Code}
+  \begin{remark}\name{MATLAB Code}
     %\revealbutton{Click to see MATLAB code}
         %Write A as a matrix in MATLAB in a lstlisting environment
         %\begin{pdfOnly}
@@ -277,11 +95,11 @@
           \end{verbatim}
           %\end{lstlisting}
         %\end{pdfOnly}
-  \end{hint}
+  \end{remark}
 
   Let's visualize the differences and similarities in these 125 users' ratings of the Star Wars Trilogy. Either plot the points on your own, or use the course helper function ``plot\_star\_wars'', being sure to input the vector list ``star\_wars\_ratings'' as an argument.
 
-  \begin{hint}{MATLAB Code}
+  \begin{remark}\name{MATLAB Code}
     %\begin{pdfOnly}
         %\begin{lstlisting}[style=Matlab]
         \begin{verbatim}
@@ -289,23 +107,27 @@
         \end{verbatim}
         %\end{lstlisting}
       %\end{pdfOnly}
-  \end{hint}
+  \end{remark}
 
   Your plot should look something like the Figure below, and you should be able to click and drag within the figure to rotate the plot and see the data from different angles.
 
   \begin{center}
-    \includegraphics[width=.75\textwidth]{star_wars_ratings.png}
+    \includegraphics[width=\textwidth]{star_wars_ratings.png}
   \end{center}
 
   Unsurprisingly, many users rated the original Star Wars Trilogy highly, as most of the points are towards the upper left of the plot (where the ratings are higher). This doesn't account for how many users fall in each category, however, as there's no indication of how  many users fall on each dot. 
 
-  Let's warm up by comparing the number of users located at [5,5,5] to the number of users located at [3,1,2] (the user who had the lowest ratings of the movies).
+\end{exploration}
+
+  \begin{exploration}
+  
+ Let's warm up by comparing the number of users located at [5,5,5] to the number of users located at [3,1,2] (the user who had the lowest ratings of the movies).
 
   This will be an opportunity to learn a few useful MATLAB commands that will be used throughout the course. The first is the ``norm'' function, which calculates the norm of a vector, which we learned about this module.
 
   Let's try it out to find the norms of our two vectors in question. 
 
-  \begin{hint}{MATLAB Code}
+  \begin{remark}\name{MATLAB Code}
     %\begin{pdfOnly}
     %\begin{lstlisting}[style=Matlab]
     \begin{verbatim}
@@ -316,7 +138,7 @@
     \end{verbatim}
     %\end{lstlisting}
     %\begin{pdfOnly}
-  \end{hint}
+  \end{remark}
 
   \begin{example}
 
@@ -324,10 +146,18 @@
 
   \end{example}
 
-  We're going to use these norms to see how many users rated the movies in the best and worst categories. This will use want's called a "for loop" in MATLAB, which is a way to do lots of calculations at once without the computer having to be told to do each one individually.
-
-  \begin{example}
+  We're going to use these norms to see how many users rated the movies in the best and worst categories. 
   
+  This will use want's called a "for loop" in MATLAB, which is a way to do lots of calculations at once without the computer having to be told to do each one individually. See the HINT if you're unfamiliar with for loops.
+
+\end{exploration}
+
+
+  
+  \begin{hint}
+      
+      A for loop in MATLAB is a way to quickly do lots of calculations at once.
+
   For instance, if you wanted to quickly calculate the square of each nubmer from 1 to 10, you could use the following code:
   \begin{verbatim}
 
@@ -337,13 +167,39 @@
 
   \end{verbatim}
 
-    With just three lines of code, you quickly get the computer to tell you all of the squares of the first 10 numbers. We'll be using for loops quite a bit in this course, as ways to quickly do lots of calculations. 
+  Try it out, you should get the following output:
 
-  \end{example}
+  \begin{verbatim}
+    i_squared=1
+    i_squared=4
+    i_squared=9
+    i_squared=16
+    i_squared=25
+    i_squared=36
+    i_squared=49
+    i_squared=64
+    i_squared=81
+    i_squared=100
+  \end{verbatim}
 
-    We'll use a for loop to count how many users rated the movies in the best and worst categories. We'll loop through the whole list of users, calculating each norm along the way, and compare it to the norms of the best and worst ratings. For the comparison, we need to use what's called an "if statement" in MATLAB, which is a way to tell the computer to do something only if a certain condition is met.
+  If you want to hide the output (which will be necessary when you're doing lots of calculations), you can put a semicolon at the end of the line, like so:
 
-    \begin{example}
+  \begin{verbatim}
+
+        for i=1:10
+            i_squared=i^2;
+        end
+  \end{verbatim}
+
+  With just three lines of code, you quickly get the computer to tell you all of the squares of the first 10 numbers. We'll be using for loops quite a bit in this course, as ways to quickly do lots of calculations. 
+  \end{hint}
+
+\begin{exploration}
+    We'll use a for loop to count how many users rated the movies in the best and worst categories. We'll loop through the whole list of users, calculating each norm along the way, and compare it to the norms of the best and worst ratings. 
+    
+    For the comparison, we need to use what's called an "if statement" in MATLAB, which is a way to tell the computer to do something only if a certain condition is met. (See the HINT if you're unfamiliar with if statements.)
+
+    \begin{hint}
 
       For instance, if we wanted to check which number(s) from 1 to 10 squared to 25, we could use an "if" statement in the following way:
 %\begin{pdfOnly}
@@ -359,17 +215,23 @@
       %\end{lstlisting}
    % \end{pdfOnly}
 
+   This should output the following:
+
+    \begin{verbatim}
+      i=5
+    \end{verbatim}
+
       This code only outputs the number 5, as 5 is the only number from 1 to 10 that squares to 25. For each other "i" from 1 to 10, the computer first defined ``i\_squared'' as $i^2$, and then checked if $i^2$ was equal to 25. If it was, the computer outputted the value of $i$.
 
       Note that we had to use ``=='' instead of just ``='', since ``='' is used to assign values to variables in MATLAB, and ``=='' is used to check if two values are equal.
 
-    \end{example}
+    \end{hint}
     
     We're going to start two numbers, best\_count and worst\_count, at 0, and then we're going to loop through each user's ratings. 
     
     If the norm of the user's ratings is equal to the norm of the best ratings, we'll add one to best\_count. If the norm of the user's ratings is equal to the norm of the worst ratings, we'll add one to worst\_count.
 
-    I'll get you started in the hint, you alter the code to do what we want. Paste your code into the discussion, and then also answer the following questions:
+    I'll get you started in the next hint (but think about how you'd do it before the hint is revealed), you alter the code to do what we want. Paste your code into the discussion, and then also answer the following questions:
 
     \begin{enumerate}
 
@@ -379,7 +241,7 @@
       
     \end{enumerate}
 
-    \begin{hint}
+    \begin{remark}\name{MATLAB Code}
 
       Remember that ``star\_wars\_ratings'' is a matrix of row vectors, and that matrices' dimensions are organized first by rows and then by columns. You can access the ith user's ratings with 
       %\begin{pdfOnly}
@@ -392,11 +254,13 @@
       
       which returns a vector of the form [rating\_1, rating\_2, rating\_3].
 
-    \end{hint}
+    \end{remark}
 
     \begin{hint}{MATLAB Code}
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
+      Any place with "\%" is a comment, and the computer will ignore it. I want you to fill in the "\% your code here".
+
       \begin{verbatim}
           best=[5,5,5];
           worst=[3,1,2];
@@ -418,12 +282,16 @@
       %\end{lstlisting}
    % \end{pdfOnly}
     \end{hint}
+  \end{exploration}
 
-    \subsection{Task Two: Predicting Recommendations}
+
+    \begin{exploration}\name{Task Two: Predicting Recommendations}
 
     We don't just use data to make observations, but also to find patterns that allow us to predict unknown events. The strategy is to use our observed data to find patterns, and then to use those patterns for prediction. In this case, we're going to see if the users' ratings of the Star Wars Trilogy can predict their ratings of ``Star Wars Episode I - The Phantom Menace (1999)''. 
 
-    Let's use you and two of your friends or family members as test cases in the following way: 
+    \begin{problem}
+    
+      Let's use you and two of your friends or family members as test cases in the following way: 
     
     \begin{enumerate}
     
@@ -431,7 +299,7 @@
       \item Find the norms of your ratings and your friends' ratings.
       \item Find the users in the data set whose ratings of the \emph{Original Trilogy} are closest to yours, and then do the same for your friends' ratings.
       \item Load phantom\_menace\_ratings.mat to average the closest users' ratings of ``Star Wars Episode I - The Phantom Menace (1999)''. The indices of phantom\_menace\_ratings correspond to the indices of the users in the data set, so you can use the same indices you found in the previous step to find the ratings of the closest users.
-      \item Share your results with the class, and see if you can explain why the predictions were or were not accurate, and what we might do to improve them.
+      \item Reflect on the results and see if you can explain why the predictions were or were not accurate, and what we might do to improve them.
       \item Reflect on the following question: Is just using the norm of the ratings a good way to predict how users will rate movies? What users' ratings might we unintentionally catch in our predictions, and how might we avoid this?
     \end{enumerate}
 
@@ -488,16 +356,19 @@
 
     \end{hint}
 
+    \end{problem}
+      
+      \end{exploration}
 
-      
-      
-  \subsection{Task Three: Scaling Up}
+  \begin{exploration}\name{Task Three: Scaling Up}
   
     To get more nuanced data, we don't only want to compare the ratings of similar movies like the Star Wars Trilogy, but ideally we'd like to predict users' ratings of varoius movies from all kinds of genres. We'll still stick to ideal data and the somewhat naive comparison of distance, but we'll get a better feel for how we might scale up our analysis.
 
     We're going to take all 125 users' ratings of the first 19 movies, and then see how closely we can use their ratings to make predictions for three test users' ratings of the 20th movie, ``Groundhog Day (1993)''. This is common when training more complicated methods of computer prediction, to split the data into "training" and "testing" data so that the predictive power of our models can be assessed.
 
     As we saw in Task Two, we should be more nuanced in our analysis than just using the norms of vectors for comparison. Instead, we'll find the users whose vectors are closest to the test users' vectors, and then average their ratings of the 20th movie to make our prediction. The importance of using distance instead of just norm comparison is that we're minimizing the difference between the test users and potentially close users, so that we only use the vectors that lie within very similar regions of our 19-dimensional space.
+
+    \begin{problem}
 
     Do the following to complete the activity:
 
@@ -508,7 +379,7 @@
       \item Find the training users whose ratings of the first 19 movies are less than a distance of 1, 2, and 3 from the test users' ratings. If there are none, find the closest training user possible.
       \item Load the ratings of the 20th movie, ``Groundhog Day (1993)'', from ``groundhog\_day\_train.mat'' and ``groundhog\_day\_test.mat''.
       \item Average the closest users' ratings of the 20th movie, ``Groundhog Day (1993)'' and compare the average to the test users' ratings.
-      \item Share your results with the class. Think about what factors might be obscuring predictability by also getting a feel for the test users as well. For isntance, are they harsh raters? Easy raters? What other factors might be at play in the data that we're not considering?
+      \item Describe your results in a final reflection. Think about what factors might be obscuring predictability by also getting a feel for the test users as well. For isntance, are they harsh raters? Easy raters? What other factors might be at play in the data that we're not considering?
     \end{enumerate}
 
     \begin{hint}
@@ -534,5 +405,7 @@
       The syntax [square,idx] means that the ``min'' function returns two numbers, first the minimum value and then second the index of that value in the original list. It should return square=1 and idx=3, as the 3rd element of the original list squared to 1.
 
     \end{hint}
+  \end{problem}
+  \end{exploration}
 
 \end{document}

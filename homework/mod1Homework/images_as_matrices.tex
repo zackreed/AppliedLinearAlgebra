@@ -7,46 +7,25 @@
 %images_as_matrices
 \begin{problem}
 
-  %Show images as the transpose of matrices using includegraphics on test_image.jpg
-  
-  Suppose that the matrix $A$ gives the grayscale values of the following image of a lion:
-  
+  Suppose that the matrix $A$ gives the grayscale values of the image of a lion below:
+
   \begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{test_image.jpg}
-      \caption{Original Image}
+      \includegraphics[width=.5\textwidth]{test_image.jpg}
+      \caption{Original Image (Option A)}
       \label{fig:original}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{test_image_rot_2.jpg}
-      \caption{Option A}
-      \label{fig:optionA}
-    \end{subfigure}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.35\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{test_image_rot_1.jpg}
-      \caption{Option C}
-      \label{fig:optionC}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.35\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{test_image_rot_3.jpg}
-      \caption{Option D}
-      \label{fig:optionD}
-    \end{subfigure}
   \end{figure}
   
   Which image(s) below correspond to $A^T$? (Select all that apply)
   
+  \begin{hint}
+  
+    Remember that the transpose of a matrix is obtained by switching the rows and columns of the matrix.
+
+    Also remember that for an image, each pixel is an entry in a matrix, where the number (from 0 to 255) represents how dark or light the pixel is. So this $1080 \times 1920$ image is given by a $1080 \times 1920$ matrix of numbers.
+
+  \end{hint}
+
   \begin{selectAll}
   
     \choice{Option A}
@@ -57,6 +36,12 @@
   \end{selectAll}
   
   Which image(s) below correspond to $(A^T)^T$? (Select all that apply)
+
+  \begin{hint}
+  
+    Remember that $(A^T)$ is a new matrix, so $(A^T)^T$ is the transpose of that new matrix.
+
+  \end{hint}
   
   \begin{selectAll}
   
@@ -66,6 +51,39 @@
     \choice{Option D}
   
   \end{selectAll}
+
+    %Show images as the transpose of matrices using includegraphics on test_image.jpg
+  
+    \begin{figure}[h]
+      \centering
+        \includegraphics[width=.5\textwidth]{test_image.jpg}
+        \caption{Original Image (Option A)}
+        \label{fig:original}
+    \end{figure}
+  
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=.5\textwidth]{test_image_rot_2.jpg}
+        \caption{Option B}
+        \label{fig:optionA}
+    \end{figure}
+
+    %make two vertical figures in a row out of test_image_rot_1 and test_image_rot_3
+    \begin{figure}[h]
+      \centering
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=.4\textwidth]{test_image_rot_1.jpg}
+        \caption{Option C}
+        \label{fig:optionC}
+      \end{minipage}%
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=.4\textwidth]{test_image_rot_3.jpg}
+        \caption{Option D}
+        \label{fig:optionD}
+      \end{minipage}
+    \end{figure}
   
   
   \end{problem}

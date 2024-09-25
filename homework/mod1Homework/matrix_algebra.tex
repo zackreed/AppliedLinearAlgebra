@@ -6,27 +6,29 @@
 
 %matrix_algebra
 \begin{problem}
-  Let $A = \begin{mymatrix}{rrr}
+  Let $A = \startmat{ccc}
     1 & 2 & -1 \\
     -1 & 4 & 0 \\
-  \end{mymatrix}$ and
-  $B = \begin{mymatrix}{rrr}
+  \stopmat$ and
+  $B = \startmat{ccc}
     0 & 3 & 0 \\
     1 & -1 & 1 \\
-  \end{mymatrix}$.\par\noindent
+  \stopmat$.\par\noindent
   Find a matrix $X$ such that $(A+X)-(B+0) = B+A$. 
   
   \begin{hint}
-    First simplify the matrix equation using properties of matrix addition and scaling, then solve for $X$ using the matrices $A$ and $B$.
+    First simplify the matrix equation using properties of matrix addition and scaling, then solve for $X$ using the matrices $A$ and $B$. Treat the equation as if it were an algebraic equation.
   \end{hint}
+  
+    The equation simplifies to $X=\answer{0}A+\answer{2}B$.
 
-  \begin{sol}
-    The equation simplifies to $X=B+B=2B$, so $X = \begin{mymatrix}{rrr}
-    0 & 6 & 0 \\
-    2 & -2 & 2 \\
-    \end{mymatrix}$.
-  \end{sol}
+    $X = \startmat{ccc}
+    0 & \answer{6} & 0 \\
+    \answer{2} & -2 & \answer{2} \\
+    \stopmat$.
+
 \end{problem}
+
 
 
 \end{document}

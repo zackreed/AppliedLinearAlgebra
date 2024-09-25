@@ -9,54 +9,63 @@
 
   For each group of matrices and each group of scalars, find the linear combination.
 
+  \begin{hint}
+  
+    Linear combinations just entail scalar multiplication and matrix addition, which respectively are carreid out by multiplying the entries of a matrix by a scalar and adding the corresponding entries of two matrices.
+    
+    Arithmetic in MATLAB will make this easier. For example, if you define $A$, $B$, and $C$ as matrices and then $a$, $b$, and $c$ as scalars, you can calculate the linear combination with the command \texttt{a*A + b*B + c*C}.
+
+  \end{hint}
+
   \begin{enumerate}
-  \item
-    $A = \begin{mymatrix}{rr}
-      1 & 2 \\
-      2 & 1
-    \end{mymatrix}$,\quad
-    $B = \begin{mymatrix}{rr}
-      0 & 1 \\
-      1 & 0
-    \end{mymatrix}$,\quad
-    $C = \begin{mymatrix}{rr}
-      1 & 0 \\
-      0 & 1
-    \end{mymatrix}$,\quad
-    $a = 2$, $b = -1$, $c = 3$.
+    \item
+      $A = \startmat{cc}
+        1 & 2 \\
+        2 & 1
+      \stopmat$,\quad
+      $B = \startmat{cc}
+        0 & 1 \\
+        1 & 0
+      \stopmat$,\quad
+      $C = \startmat{cc}
+        1 & 0 \\
+        0 & 1
+      \stopmat$,\quad
+      $a = 2$, $b = -1$, $c = 3$.
+  
+      $aA + bB + cC = \startmat{cc}
+        \answer{5} & \answer{3} \\
+        \answer{3} & \answer{5}
+      \stopmat$.
+  
+    \item 
+      $A = \startmat{cccc}
+        1 & 2 & 5 & 4 \\
+        2 & 0 & 3 & 1
+      \stopmat$,\quad
+      $B = \startmat{cccc}
+        0 & 3 & 1 & 2 \\
+        10 & 8 & 0 & 1
+      \stopmat$,\quad
+      $C = \startmat{cccc}
+        10 & 6 & 2 & 3 \\
+        1 & 4 & 7 & 3
+      \stopmat$,\quad
+      $a = 3$, $b = -2$, $c = 4$.
 
-    $aA + bB + cC = \begin{mymatrix}{rr}
-      \answer{5} & \answer{3} \\
-      \answer{3} & \answer{5}
-    \end{mymatrix}$.
+      \begin{hint}
+      
+        If you find yourself not getting the correct answer, double check your arithmetic. It is easy to make a mistake when multiplying and adding matrices, or even when entering the matrices into MATLAB.
 
-  \item 
-    $A = \begin{mymatrix}{rrrr}
-      1 & 2 & 5 & 4 \\
-      2 & 0 & 3 & 1
-    \end{mymatrix}$,\quad
-    $B = \begin{mymatrix}{rrrr}
-      0 & 3 & 1 & 2 \\
-      10 & 8 & 0 & 1
-    \end{mymatrix}$,\quad
-    $C = \begin{mymatrix}{rrrr}
-      10 & 6 & 2 & 3 \\
-      1 & 4 & 7 & 3
-    \end{mymatrix}$,\quad
-    $a = 3$, $b = -2$, $c = 4$.
-
-    \begin{hint}
-
-      Arithmetic in MATLAB will make this easier. For example, if you define $A$, $B$, and $C$ as matrices and then $a$, $b$, and $c$ as scalars, you can calculate the linear combination with the command $a*A + b*B + c*C$.
-
-    \end{hint}
-
-    $aA + bB + cC = \begin{mymatrix}{rrrr}
-      \answer{43} & \answer{24} & \answer{21} & \answer{20} \\
-      \answer{-10} & \answer{0} & \answer{37} & \answer{13}
-    \end{mymatrix}$.
-
-  \end{enumerate}
+      \end{hint}
+  
+      $aA + bB + cC = \startmat{cccc}
+        \answer{43} & \answer{24} & \answer{21} & \answer{20} \\
+        \answer{-10} & \answer{0} & \answer{37} & \answer{13}
+      \stopmat$.
+  
+    \end{enumerate}
+  
 
 \end{problem}
 

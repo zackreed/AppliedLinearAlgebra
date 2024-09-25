@@ -9,23 +9,7 @@
 \usepackage{amsmath,amsthm}
 \usepackage{subcaption}
 \usepackage{graphicx}
-\lstdefinestyle{Matlab}{
-  language=Matlab,
-  basicstyle=\ttfamily,
-  keywordstyle=\color{blue},
-  commentstyle=\color{green},
-  stringstyle=\color{red},
-  morekeywords={matlab2tikz},
-  morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
-  identifierstyle=\color{black},
-  stringstyle=\color{red},
-  commentstyle=\color{green},
-  showstringspaces=false,
-  numbers=left,
-  numberstyle={\tiny \color{black}},
-  numbersep=9pt,
-  emph=[1]{star_wars_ratings.mat, pivcol_new,B,A,t, reduced, v, tau},emphstyle=[1]\color{purple}, 
-}
+
 
 %make a maroon color
 \definecolor{maroon}{RGB}{128,0,0}
@@ -76,7 +60,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\q}[1]{\text{``#1''}}
-\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+%\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\rref}{\text{reduced row echelon form}}
 \newcommand{\ef}{\text{echelon form}}
 \newcommand{\ohm}{\Omega}
@@ -100,55 +84,11 @@
     \node[shape=circle,draw,inner sep=2pt,red,fill=red!20,text=black] (char) {#1};}%
 }
 
-%an environment of proof extending to proof of
-\newenvironment{proofof}[1]{%
-  \proof[\textbf{Proof #1}]%
-}{%
-  \endproof
-}
-
 % Define custom command \strikeh that just puts red text on the 2nd argument
 \newcommand{\strikeh}[2]{\textcolor{red}{#2}}
 
 % Define custom command \strikev that just puts red text on the 2nd argument
 \newcommand{\strikev}[2]{\textcolor{red}{#2}}
-
-%an environment for \mymatrix
-% Define the mymatrix environment
-\newenvironment{mymatrix}[1]
-  {% Begin code
-   \left[\begin{array}{#1}}
-  {% End code
-   \end{array}\right]}
-%an environment for \absmatrix
-% Define the absmatrix environment
-\newenvironment{absmatrix}[1]
-  {% Begin code
-   \left|\begin{array}{#1}}
-  {% End code
-   \end{array}\right|}
-
-% Define the custom environment enumialphparenastyle that for now just makes everything red
-\newenvironment{enumialphparenastyle}
-{% Begin code - executed at the start of the environment
-  \color{red} % Set text color to red
-}
-{% End code - executed at the end of the environment
-}
-
-% Define the custom environment mysmallmatrix
-\newenvironment{mysmallmatrix}
-{% Begin code - executed at the start of the environment
-  \left[\begin{smallmatrix}
-}
-{% End code - executed at the end of the environment
-  \end{smallmatrix}\right]
-}
-
-%define a new "ex" environment that is the same as the "exercise" environment
-\newenvironment{ex}{\begin{exercise}}{\end{exercise}}
-%define a new "sol" environment that is the same as the "solution" environment
-\newenvironment{sol}{\begin{solution}}{\end{solution}}
 
 %more new commands for this doc for errors in copying
 \newcommand{\SI}{\text{SI}}
@@ -163,7 +103,7 @@
 \newcommand{\degC}{^\circ\text{C}}
 \newcommand{\centroid}[1]{\overline{#1}}
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
-\newcommand{\coord}[1]{\begin{bmatrix}#1\end{bmatrix}}
+%\newcommand{\coord}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\iprod}[1]{\langle #1 \rangle}
 \newcommand{\adjoint}{^{*}}
 \newcommand{\conjugate}[1]{\overline{#1}}
@@ -177,11 +117,9 @@
 \newcommand{\minor}[2]{M_{#2}}
 \newcommand{\cofactor}{\text{C}}
 \newcommand{\shift}{\textbf{shift}}
-
-
-%Some boiler plate for putting matlab in 
-%Write A as a matrix in MATLAB in a lstlisting environment
-%\begin{lstlisting}[style=Matlab]
-%    A = [1 0 3; 0 1 5; 1 1 8]
-%    reduced=rref(A)
-%\end{lstlisting}
+\newcommand{\startmat}[1]{
+  \left[\begin{array}{#1}
+}
+\newcommand{\stopmat}{\end{array}\right]}
+%a command to give a name to explorations and hints and theorems
+\newcommand{\name}[1]{\begin{centering}\textbf{#1}\end{centering}}

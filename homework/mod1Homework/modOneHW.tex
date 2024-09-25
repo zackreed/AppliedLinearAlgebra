@@ -1,9 +1,10 @@
 \documentclass{ximera}
 \input{../../preamble.tex}
 
+\author{Zack Reed}
 \begin{document}
 
-
+%matrix_sum_and_diff
 \begin{problem}
   For the following pairs of matrices, does the sum $A+B$ and difference $A-B$ make sense? (i.e. is an element-by-element calculation possible?) If so, calculate them.
   \begin{enumerate}
@@ -124,6 +125,7 @@
   \end{enumerate}
 \end{problem}
 
+%matrix_neg_and_transpose
 \begin{problem}
   For each matrix $A$, find the matrix $-A$ and $A^T$.
   \begin{enumerate}
@@ -150,6 +152,7 @@
   % \end{sol}
 \end{problem}
 
+%matrix_linear_combinations
 \begin{problem}
 
   For each group of matrices and each group of scalars, find the linear combination.
@@ -205,6 +208,7 @@
 
 \end{problem}
 
+%matrix_algebra
 \begin{problem}
   Let $A = \begin{mymatrix}{rrr}
     1 & 2 & -1 \\
@@ -228,6 +232,7 @@
   \end{sol}
 \end{problem}
 
+%matrix_equality
 \begin{problem}
   Find scalars $x,y,z$ such that the following two matrices are equal.
   \begin{equation*}
@@ -246,6 +251,7 @@
   \end{sol}
 \end{problem}
 
+%matrix_dimensions
 \begin{problem}
   What are the dimensions of the following matrices?
   \begin{equation*}
@@ -272,6 +278,7 @@
   \end{sol}
 \end{problem}
 
+%big_matrix_entries
 \begin{problem}
   What is the $(2,3)$-entry of the matrix $A=\begin{mymatrix}{rrr}
     1 & 2 & 1 \\
@@ -281,9 +288,7 @@
   \begin{sol}
     $A(2,3)=\answer{7}$.
   \end{sol}
-\end{problem}
 
-\begin{problem}
   What is the $(17,8)$ entry of $A$, the $(2,22)$ entry of $A^T$, and the $(29,8)$ entry of $30A$, where $A$ is given in the hint below. 
   
   You will want to copy the matrix directly into MATLAB and then use MATLAB to find the answers.
@@ -329,6 +334,7 @@ $A(17,8)=\answer{0.5482}$, $A^T(2,22)=\answer{0.3498}$, and $30A(29,8)=\answer{2
 
 \end{problem}
 
+%matrix_products
 \begin{problem}
   For each matrix $A$, find the products $(-2)A$, $0A$, and $512A$.
   \begin{enumerate}
@@ -353,7 +359,7 @@ $A(17,8)=\answer{0.5482}$, $A^T(2,22)=\answer{0.3498}$, and $30A(29,8)=\answer{2
   % \end{sol}
 \end{problem}
 
-
+%matrix_symmetry
 \begin{problem}
   Consider the matrices
   \begin{equation*}
@@ -386,9 +392,7 @@ $A(17,8)=\answer{0.5482}$, $A^T(2,22)=\answer{0.3498}$, and $30A(29,8)=\answer{2
       \end{mymatrix}$.
     \end{enumerate}
   \end{sol}
-\end{problem}
 
-\begin{problem}
   Which of the following matrices are symmetric, antisymmetric, both,
   or neither?
   \begin{equation*}
@@ -417,6 +421,7 @@ $A(17,8)=\answer{0.5482}$, $A^T(2,22)=\answer{0.3498}$, and $30A(29,8)=\answer{2
   \end{sol}
 \end{problem}
 
+%images_as_matrices
 \begin{problem}
 
 %Show images as the transpose of matrices using includegraphics on test_image.jpg

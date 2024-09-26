@@ -1,0 +1,90 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+%matrix_sums
+\begin{problem}
+
+  For the following pairs of matrices, determine if the sum $A+B$
+  and the difference $A-B$ are defined. If so, calculate them.
+
+  \begin{hint}[A note on answer entry]
+    Enter the strings "both" or "not" without quotes in your answers. If the operations are not defined, enter "n" in each entry of the given matrix.
+  \end{hint}
+
+  \begin{enumerate}
+  \item
+    $A = \startmat{rr}
+      1 & 0 \\
+      0 & 1
+    \stopmat$,\quad
+    $B = \startmat{rr}
+      0 & 1 \\
+      1 & 0
+    \stopmat$.
+
+    $A+B$ and $A-B$ are $\answer[format=string]{both}$ defined.
+    
+    $A + B = \startmat{rr}
+      \answer{1} & \answer{1} \\
+      \answer{1} & \answer{1}
+    \stopmat$
+  
+    and $A - B = \startmat{rr}
+      \answer{1} & \answer{-1} \\
+      \answer{-1} & \answer{1}
+    \stopmat$.
+
+  \item %A+B=[1,1,5;1,2,4], A-B=[3,1,-1;1,0,-4]
+    $A = \startmat{rrr}
+      2 & 1 & 2 \\
+      1 & 1 & 0
+    \stopmat$,\quad
+    $B = \startmat{rrr}
+      -1 & 0 & 3 \\
+      0 & 1 & 4
+    \stopmat$.
+
+    $A+B$ and $A-B$ are $\answer[format=string]{both}$ defined.
+
+    $A + B = \startmat{rrr}
+      \answer{1} & \answer{1} & \answer{5} \\
+      \answer{1} & \answer{2} & \answer{4}
+    \stopmat$
+
+    and $A - B = \startmat{rrr}
+      \answer{3} & \answer{1} & \answer{-1} \\
+      \answer{1} & \answer{0} & \answer{-4}
+    \stopmat$.
+
+  \item %A+B and A-B are not defined, A+B and A-B are 2x2 matrices with n as entries
+    $A = \startmat{rr}
+      1 & 0 \\
+      -2 & 3 \\
+      4 & 2
+    \stopmat$,\quad
+    $B = \startmat{rrr}
+      2 & 7 & -1 \\
+      0 & 3 & 4
+    \stopmat$.
+
+    $A+B$ and $A-B$ are $\answer[format=string]{not}$ defined.
+
+    $A + B = \startmat{rr}
+      \answer[format=string]{n} & \answer[format=string]{n} \\
+      \answer[format=string]{n} & \answer[format=string]{n}
+    \stopmat$
+    and $A - B = \startmat{rr}
+      \answer[format=string]{n} & \answer[format=string]{n} \\
+      \answer[format=string]{n} & \answer[format=string]{n}
+    \stopmat$.
+
+  \end{enumerate}
+
+\end{problem}
+
+
+\end{document}

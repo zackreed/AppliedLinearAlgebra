@@ -9,6 +9,23 @@
 \usepackage{amsmath,amsthm}
 \usepackage{subcaption}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsfonts}
+\usepackage{mdframed} % For framing content
+
+
+  \renewcommand{\vector}[1]{\left\langle #1\right\rangle}
+  \newcommand{\arrowvec}[1]{{\overset{\rightharpoonup}{#1}}}
+  \newcommand{\ro}{\texttt{R}}%% row operation
+  \newcommand{\dotp}{\bullet}%% dot product
+  \renewcommand{\l}{\ell}
+  \let\defaultAnswerFormat\answerFormatBoxed
+  \usetikzlibrary{calc,bending}
+  \tikzset{>=stealth}
+  
+
+
 
 
 %make a maroon color
@@ -124,3 +141,5 @@
 %a command to give a name to explorations and hints and theorems
 \newcommand{\name}[1]{\begin{centering}\textbf{#1}\end{centering}}
 \newcommand{\vect}[1]{\vec{#1}}
+\newcommand{\dfn}[1]{\textbf{#1}}
+\newcommand{\transpose}{\mathsf{T}}

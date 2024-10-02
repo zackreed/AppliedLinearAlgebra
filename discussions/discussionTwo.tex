@@ -1,0 +1,127 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\title{Chapter Two Discussion: Liner Transformations}
+\begin{document}
+\begin{abstract}
+
+    In this introductory discussion, you will as a class explore linear transformations in MATLAB.
+
+\end{abstract}
+\maketitle
+
+\begin{exploration}\name{Introduction: Loading and Visualizing the Smiley Face}
+
+Do this if you've been working on another project and might have other defined variables.
+\begin{verbatim}
+%clear all; close all
+\end{verbatim}
+
+Load the collection of vectors
+\begin{verbatim}load +linalg/face_points.mat\end{verbatim}
+
+View the list of vectors (in the form of an nx2 matrix). The final two vectors are the standard basis vectors for \(\mathbb{R}^2\)
+
+$\texttt{face\_points}$
+
+This first course command visualizes just the points of whatever list of vectors you give it.
+
+$\texttt{linalg.plot\_img\_points(face\_points)}$
+
+This next command visualizes the same vectors but puts arrows on the last two, as they are the standard basis vectors.
+
+$\texttt{linalg.plot\_points\_with\_vectors(face\_points)}$
+
+There are course commands called $\texttt{rotate\_points}$, $\texttt{shear\_points}$, and $\texttt{scale\_points}$ that perform the associated linear transformations.
+
+First, let's rotate the smiley face 90 degrees in the clockwise direction. Note that we'll make a new list of points called $\texttt{rotated\_face}$ so that we don't alter the original $\texttt{face\_points}$ and can use them later.
+\begin{verbatim}
+rotated_face = linalg.rotate_points(face_points, -90)
+\end{verbatim}
+
+The previous code should be understood as "create a new array of vectors called $\texttt{rotated\_face}$ by applying a 90-degree clockwise rotation transformation to the original array of vectors, $\texttt{face\_points}$"
+
+$\texttt{linalg.plot\_points\_with\_vectors(rotated\_face)}$
+
+Importantly, notice that the standard basis vectors were also affected by the same rotation.
+
+Now let's stack on a shear on top of the rotation. So we take the now rotated points $\texttt{rotated\_face}$ and define a new array of vectors called $\texttt{sheared\_face}$ by applying the shear command.
+
+\textbf{Note:} Basic shear transformations shift one of the basis vectors vertically or horizontally while keeping the other vector fixed.
+
+The command $\texttt{shear\_points()}$ first takes in the array of vectors, then you tell it how much you want to shear by, and then whether you want a vertical shear (1) or a horizontal shear (0).
+
+For this, we shift the face horizontally by an amount of 2.
+\begin{verbatim}
+sheared_face = linalg.shear_points(rotated_face, 2, 0)
+linalg.plot_points_with_vectors(sheared_face)
+\end{verbatim}
+
+As is discussed in the Chapter Two Learning Activities, shearing the already rotated vectors is function composition. The output vectors of the rotation become the input vectors of the shear. We see this clearly in MATLAB since we have to do them in sequence.
+
+As is explained in the Chapter Two Learning Activities, linear transformations all depend only on what you do to the standard basis vectors. Because of this, you can define any general transformation by assigning a new location for each basis vector using the $\texttt{transform\_from\_vectors}$ command.
+
+Here, we further alter the sheared face by the transformation that would take the standard basis vectors \([1,0] \rightarrow [3,-1]\) and \([0,1] \rightarrow [-2,1]\).
+
+\textbf{Note:} This is still function composition, so the basis vectors that we've been tracking won't go to the specified vectors.
+\begin{verbatim}
+transformed_face = linalg.transform_from_vectors(sheared_face, [3,-1], [-2,1])
+linalg.plot_points_with_vectors(transformed_face)
+\end{verbatim}
+
+\end{exploration}
+
+\begin{exploration}\name{Task One: Discovering Meaning in Messy Data}
+
+First, I'm going to give you a highly skewed and rotated matrix of smiley face vectors. Your job is to progressively rotate, scale, and shear the data until it returns to a normal position. Record your progress and post which operations you did in sequence so that people can recreate your work!
+
+See, as a group, how efficiently you can return the face to normal, and at the end record the final location of the transformed basis vectors. Ideally, by the end, you should use the basis vector information to define just a single transformation that immediately returns the skewed data to its original state.
+
+$\texttt{load +linalg/skewed\_face.mat}$
+
+\end{exploration}
+
+\begin{exploration}\name{Task Two: Cleaning Each Others' Messy Data}
+
+Pair up within your group and do the following:
+\begin{enumerate}
+    \item Choose one point cloud between the dog, cat, leaf, plane, or llama in the course files and load it with
+    $\texttt{load +linalg/YOURCHOICE.mat}$
+    
+    \begin{verbatim}
+    %load +linalg/...
+    \end{verbatim}
+
+    By now, you should have hopefully gotten through the Chapter Two Learning Activities section detailing how matrices and linear transformations are one and the same. If not, that's okay; you can work with the linear transformation functions until you're ready to work with matrices.
+
+    \item Use rotations, scalings, and shears (no general transformations) to skew the data in whatever way you want. Ideally, the data would be some kind of blob by the end, not identifiable as the image. Then save the data cloud as a .mat file and attach the .mat file to the discussion. Once you have a data array (i.e., an Nx2 matrix) that you're satisfied with, save it by whatever name you want. In the following example, my data is called $\texttt{skewed\_data}$, and I'm saving it to a file called $\texttt{tricky\_tricky.mat}$. Uncomment the data to use it.
+    \begin{verbatim}
+    %save('tricky_tricky.mat', 'skewed_data')
+    \end{verbatim}
+\end{enumerate}
+
+Give your skewed data matrix to somebody else, and take someone else's skewed data matrix. Do the same \textbf{Task One} steps, but on your partner's data, and record the matrix transformations you used, the entirety of the product to return the data to something close to an original state, and the single matrix that takes the data from its original skew to its returned state. Help each other out!
+
+\end{exploration}
+
+\begin{exploration}\name{Task Three: Working in 3D}
+
+Finally, I'm going to give you a 3D point cloud, and again as a class, you need to return it to its original state. This time, use whatever 3x3 matrices you think would help! Remember to record your steps, record the whole matrix product, and record the final matrix transformation.
+
+Here's the mug in its original state. Notice that there's a new function for this called $\texttt{plot\_point\_cloud\_with\_vectors}$:
+\begin{verbatim}
+load +linalg/mug.mat
+linalg.plot_point_cloud_with_vectors(normal_mug)
+\end{verbatim}
+
+Now, here's the skewed mug data. Good luck!
+\begin{verbatim}
+linalg.plot_point_cloud_with_vectors(skewed_mug)
+\end{verbatim}
+
+\end{exploration}
+
+
+\end{document}

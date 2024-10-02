@@ -252,6 +252,81 @@ The dimension of $A^\transpose$ is $\answer{4}\times \answer{3}$ because we swap
 
 \end{exploration}
 
+\begin{exploration}\name{Images as Matrices}
+
+  A manifestation of matrices in every day life is in the digital world. Any image or movie rendered on a computer screen is coming from a matrix (or for a movie, a sequence of matrices).
+  
+  Images thus give us a very intuitive way to make meaning from matrices, and we will repeatedly return to images throughout the course as a way to visually ground things we do with and to matrices.
+  
+  \begin{example}
+  
+    This is also a great opportunity for you to get started with MATLAB! MATLAB will be a major learning tool in this course, as we can offload many lengthy calculations to the computer, allowing us to quickly, efficiently, and consistently gain better insights into vectors and matrices.
+  
+    If you haven't yet installed MALTAB and got set up with the course folder and files, watch this video here to get started:
+  
+    %\youtube{https://www.youtube.com/watch?v=3Z1cZk5J2jw}
+  
+    Once you're set up, open MATLAB and make a new live script. Make sure that MATLAB is set to load from the same folder that contains the course folder, $\texttt{+linalg}$.
+  
+    All we'll do right now is load a simple $21\times 21$ image of a smiley face into MATLAB, display it, alter some values in the matrix to see the visual effect of matrix manipulation, and then you'll do more work with images in the homework and in the Chapter 2 mini-project.
+  
+    First, we load the image and take a look at the matrix:
+  
+    \begin{verbatim}
+    
+      load +linalg/smiley.mat
+      smiley
+  
+    \end{verbatim}
+  
+    Notice that $\texttt{smiley}$ is a $21\times 21$ matrix. Its values vary between $0$ and $255$, where $0$ is black and $255$ is white. For now we'll stick to ``grayscale'' images, but color images can be thought of as three matrices stacked on top of each other.
+  
+    Now, because the image is quite small, there's a course-specific command that will render the image in a larger window. 
+  
+    \begin{verbatim}
+    
+      linalg.smiley_show(smiley)
+  
+    \end{verbatim}
+  
+    You should see the following figure render:
+  
+    \begin{center}
+      \includegraphics{smiley_mat.png}
+    \end{center}
+  
+    For now, all we'll do is change one of the rows of the image to be all white, and one of the columns to be all black. This can help us see that there's some alignment between matrix notation and how matrices are manipulated in software, and also reinforce the basic idea that matrices are just rows and/or columns of vectors.
+  
+    First, let's change the $11$th row to be all white. We do this by setting all the values in the $11$th row to $255$. In matrix notation, $11$ is the first index. In MATLAB, we use a colon ``\:'' specify that we want to take all possible columns for the $11$th row.
+  
+    \begin{verbatim}
+    
+      smiley(11,:) = 255;
+  
+    \end{verbatim}
+  
+    By saying that the $11$th row is equal to $255$, we re-assign the value of each entry to be $255$.
+  
+    Now let's change the $11$th column to be all black. Using very similar notation, we do the following:
+  
+    \begin{verbatim}
+    
+      smiley(:,11) = 0;
+  
+    \end{verbatim}
+  
+    Now if we render the figure again, we should see the following:
+  
+    \begin{center}
+      \includegraphics{smiley_mat_changed.png}
+    \end{center}
+  
+    As you can see, the middle row has become white, and the middle column has become black. This is a simple example of how we can manipulate images using matrices.
+  
+  \end{example}
+  
+  \end{exploration}
+
 \begin{exploration}\name{Data Storing and Manipulation}
 
 Now that we know the basics, onto the examples!
@@ -471,7 +546,7 @@ You should get the following:
 
 \end{exploration}
  
-\begin{exploration}
+\begin{exploration}\name{Matrix Properties and Operations}
 
 \begin{remark}
 

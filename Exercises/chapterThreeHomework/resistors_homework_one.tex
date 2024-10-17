@@ -1,0 +1,74 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+%unit_vectors
+\begin{problem}
+
+    Consider the following diagram of four circuits.
+    \begin{center}
+      \scalebox{0.8}{
+        \begin{circuitikz}[american, scale=0.7] \draw
+          (0,0) to [battery1, v^= $5\volt$~~] (0,4)
+          (0,0) to [R = $2 \ohm$] (4,0)
+          to [R = $5 \ohm$] (4,4)
+          (0,4) to [R =$3 \ohm$] (4,4)
+          (6,4) to [battery1, v_= \raisebox{1ex}{$20\volt$}] (4,4)
+          (6,4) to [R = $1 \ohm$] (8,4)
+          to [R = $1 \ohm$] (8,0)
+          (4,0) to [R = $6 \ohm$] (8,0)
+          to [R = $3 \ohm$] (8,-4)
+          to [R = $2 \ohm$] (4,-4)
+          to [R = $1 \ohm$] (4,0)
+          (4,-4)to [R = $4 \ohm$] (0,-4)
+          (0,0 )to [battery1, v_= $10\volt$~~] (0,-4)
+          (2,2) node[scale=3]{$\circlearrowleft$}
+          (2,2) node{$I_2$}
+          (6,2) node[scale=3]{$\circlearrowleft$}
+          (6,2) node{$I_3$}
+          (6,-2) node[scale=3]{$\circlearrowleft$}
+          (6,-2) node{$I_4$}
+          (2,-2) node[scale=3]{$\circlearrowleft$}
+          (2,-2) node{$I_1$}
+          ;
+        \end{circuitikz}
+      }
+    \end{center}
+    The current in amperes in the four circuits is denoted by $I_1$,
+    $I_2$, $I_3$, and $I_4$. It is understood that a positive
+    current means a current flowing in the counterclockwise direction. If
+    $I_k$ ends up being negative, then it just means the current flows
+    in the clockwise direction.  In the above diagram, the top left
+    circuit should give the equation
+    \begin{equation*}
+      2I_2 - 2I_1+5I_2 - 5I_3+3I_2=5.
+    \end{equation*}
+    Write equations for each of the other three circuits and then give a solution
+    to the resulting system of equations.
+    %\begin{sol}
+      The other three equations are
+  
+      \begin{eqnarray*}
+        \answer{4}I_1 + I_1 - I_4 + \answer{2}I_1 - \answer{2}I_2 &=& \answer{-10} \\
+        \answer{6}I_3 - \answer{6}I_4 + I_3 + I_3 + \answer{5}I_3 - \answer{5}I_2 &=& \answer{-20} \\
+        \answer{2}I_4 + \answer{3}I_4 + \answer{6}I_4 - \answer{6}I_3 + I_4 - I_1 &=& \answer{0}.
+      \end{eqnarray*}
+
+        The solution to the system of equations is (in fraction form)
+  
+      \begin{eqnarray*}
+        I_1 &=& -\frac{\answer{750}}{\answer{373}} \amp \\
+        I_2 &=& -\frac{\answer{1421}}{\answer{1119}} \amp \\
+        I_3 &=& -\frac{\answer{3061}}{\answer{1119}} \amp \\
+        I_4 &=& -\frac{\answer{1718}}{\answer{1119}} \amp.
+      \end{eqnarray*}
+  
+  
+    %\end{sol}
+
+\end{problem}
+
+\end{document}

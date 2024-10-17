@@ -1,0 +1,87 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\begin{problem}
+
+Consider the following augmented matrices in which $\ast$ denotes an
+arbitrary number and $\blacksquare$ denotes a non-zero number. Determine
+whether the given augmented matrices correspond to consistent systems of equations. If consistent, is the
+solution unique?
+
+\begin{enumerate}
+    \item \begin{equation*}
+    \startmat{ccccc|c}
+      \blacksquare & \ast & \ast & \ast & \ast & \ast \\
+      0 & \blacksquare & \ast & \ast & 0 & \ast \\
+      0 & 0 & \blacksquare & \ast & \ast & \ast \\
+      0 & 0 & 0 & 0 & \blacksquare & \ast
+    \stopmat
+\end{equation*}
+
+The solution \wordChoice{
+    \choice[correct]{does}
+    \choice{might}
+    \choice{doesn't}} exist.
+
+    \begin{problem}
+    
+        The solution \wordChoice{
+            \choice{is}
+            \choice[correct]{isn't}} unique.
+
+    \end{problem}
+
+\item \begin{equation*}
+    \startmat{ccc|c}
+      \blacksquare & \ast & \ast & \ast \\
+      0 & \blacksquare & \ast & \ast \\
+      0 & 0 & \blacksquare & \ast
+    \stopmat
+\end{equation*}
+
+%A solution exists and is unique.
+The solution \wordChoice{
+    \choice[correct]{does}
+    \choice{might}
+    \choice{doesn't}} exist.
+
+    \begin{problem}
+    
+        The solution \wordChoice{
+            \choice[correct]{is}
+            \choice{isn't}} unique.
+
+    \end{problem}
+
+\item \begin{equation*}
+    \startmat{ccccc|c}
+      \blacksquare & \ast & \ast & \ast & \ast & \ast \\
+      0 & \blacksquare & \ast & \ast & 0 & \ast \\
+      0 & 0 & 0 & 0 & \blacksquare & 0 \\
+      0 & 0 & 0 & 0 & \ast & \blacksquare
+    \stopmat
+\end{equation*}
+
+%There might be a solution. If so, there are infinitely many.
+The solution \wordChoice{
+    \choice{does}
+    \choice[correct]{might}
+    \choice{doesn't}} exist.
+
+    \begin{problem}
+    
+        If it exists, there is(are) \wordChoice{
+            \choice{one}
+            \choice[correct]{infinitely many}} solution(s).
+
+    \end{problem}
+
+
+\end{enumerate}
+
+\end{problem}
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+%unit_vectors
+\begin{problem}
+
+    Find $I_1$, $I_2$, and $I_3$, the counterclockwise currents in
+    amperes in the three circuits of the following diagram.
+  
+    \begin{center}
+      \scalebox{0.8}{
+        \begin{circuitikz}[american, scale=0.7] \draw
+          (0,0) to [battery1, v^= $10\volt$~~] (0,4)
+          (0,0) to [R = $2 \ohm$] (4,0)
+          to [R = $5 \ohm$] (4,4)
+          (0,4) to [R =$3 \ohm$] (4,4)
+          (6,4) to [battery1, v_= \raisebox{1ex}{$12\volt$}] (4,4)
+          (6,4) to [R = $7 \ohm$] (8,4)
+          to [R = $3 \ohm$] (8,0)
+          (4,0) to [R = $1 \ohm$] (8,0)
+          to [R = $4 \ohm$] (8,-4)
+          to [R = $4 \ohm$] (4,-4)
+          to [R = $2 \ohm$] (4,0)
+          (2,2) node[scale=3]{$\circlearrowleft$}
+          (2,2) node{$I_1$}
+          (6,2) node[scale=3]{$\circlearrowleft$}
+          (6,2) node{$I_2$}
+          (6,-2) node[scale=3]{$\circlearrowleft$}
+          (6,-2) node{$I_3$}
+          ;
+        \end{circuitikz}
+      }
+    \end{center}
+  
+    %\begin{sol}
+  
+      \begin{eqnarray*}
+        \answer{2}I_1 + \answer{5}I_1 + \answer{3}I_1 - \answer{5}I_2 &=& \answer{10} \\
+        I_2 - I_3 + \answer{3}I_2 + \answer{7}I_2 + \answer{5}I_2 - \answer{5}I_1 &=& \answer{-12} \\
+        \answer{2}I_3 + \answer{4}I_3 + \answer{4}I_3 + I_3 - I_2 &=& \answer{0}.
+      \end{eqnarray*}
+
+        The solution to the system of equations is (in fraction form)
+  
+      \begin{equation*}
+        I_1 = \frac{\answer{218}}{\answer{295}},\quad
+        I_2 = -\frac{\answer{154}}{\answer{295}},\quad
+        I_3 = -\frac{\answer{14}}{\answer{295}}.
+      \end{equation*}
+  
+    %\end{sol}
+
+\end{problem}
+
+\end{document}

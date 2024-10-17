@@ -1,0 +1,59 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{problem}
+
+\begin{enumerate}
+
+    \item Let $A=\startmat{rr}
+  1 & 2 \\
+  3 & 4
+\stopmat$ and $B=\startmat{rr}
+  1 & 2 \\
+  1 & k
+\stopmat$. Is it possible to choose $k$ such that $AB=BA$? If so, what
+should $k$ equal?
+
+It \wordChoice{
+    \choice{is}
+    \choice[correct]{is not}} possible to find a value of $k$ such that $AB=BA$.
+
+As such, $k=\answer[format=string]{none}$. (If there is no solution, enter "none".)
+
+\item Let $A=\startmat{rr}
+    1 & 2 \\
+    3 & 4
+  \stopmat$ and $B=\startmat{rr}
+    1 & 2 \\
+    3 & k
+  \stopmat$. 
+  
+  Is it possible to find $k$ such that $AB=BA$? If
+  so, what should $k$ equal?
+  
+
+It \wordChoice{
+    \choice[correct]{is}
+    \choice{is not}} possible to find a value of $k$ such that $AB=BA$.
+
+    As such, $k=\answer{4}$. (If there is no solution, enter "none".)
+
+\end{enumerate}
+
+\begin{hint}
+  
+
+    Set $k$ to be a symbolic variable in MATLAB and calculate $AB$ and $BA$. Remember that matrices are only equal if their corresponding entries are equal.
+
+    The equality $AB=BA$ should give you at most four equations involving $k$. If there's at least one $k$ that satisfies all equations, then $k$ is the solution. If there's no $k$ that satisfies all equations, then there is no solution.
+  
+    \end{hint}
+
+\end{problem}
+
+\end{document}

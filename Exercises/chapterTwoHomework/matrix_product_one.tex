@@ -1,0 +1,182 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{problem}
+
+    Consider the matrices
+    \begin{equation*}
+      A = \startmat{rrr}
+        1 & 2 & 3 \\
+        2 & 1 & 7
+      \stopmat,\quad
+      B = \startmat{rrr}
+        3 & -1 & 2 \\
+        -3 & 2 & 1
+      \stopmat,\quad
+      C = \startmat{rr}
+        1 & 2 \\
+        3 & 1
+      \stopmat,\quad
+      D = \startmat{rr}
+        -1 & 2 \\
+        2 & -3
+      \stopmat,\quad
+      E = \startmat{r}
+        2 \\
+        3
+      \stopmat.
+    \end{equation*}
+    Find the following products if possible. Explain any that are not possible
+
+\begin{hint}
+
+    If you're having trouble determining whether a product is possible think about the input and output vectors of each matrix. 
+
+    If the dimension of the output vector of the first matrix is not equal to the dimension of the input vector of the second matrix, then the composition transformation (and hence the product) is not possible.
+
+    Use the following applets to help you think about inputs and outputs. Add zeros into the applet matrices as necessary.
+
+    The first applet shows 2x2 matrices mapping vectors:
+
+    \begin{center}
+    
+        \geogebra{zjzjzj7x}{800}{600}
+
+    \end{center}
+
+    The second applet shows 3x3 matrices mapping vectors:
+
+    \begin{center}
+    
+        \geogebra{zjzjzj7x}{800}{600}
+
+    \end{center}
+
+\end{hint}
+
+    \begin{enumerate}
+      \item $-3A$ is \wordChoice{\choice[correct]{possible}\choice{not possible}}.
+      \begin{problem}
+
+            $-3A=\startmat{rrr}
+                \answer{-3} & \answer{-6} & -9 \\
+                \answer{-6} & -3 & \answer{-21}
+            \stopmat$.
+
+
+      \end{problem}
+
+      \item $3B-A$ is \wordChoice{\choice[correct]{possible}\choice{not possible}}.
+      
+        \begin{problem}
+            
+            $3B-A=\startmat{rrr}
+                \answer{8} & \answer{-5} & 3 \\
+                \answer{-11} & 5 & \answer{-4}
+            \stopmat$.
+
+        \end{problem}
+      
+
+      \item $AC$ is \wordChoice{\choice{possible}\choice[correct]{not possible}}
+      
+      \begin{problem}
+      
+        because \begin{selectAll}
+        
+            \choice{the number of columns in $A$ is equal to the number of rows in $C$}
+            \choice[correct]{the number of columns in $A$ is not equal to the number of rows in $C$}
+            \choice[correct]{$C$ outputs a vector in $\R^2$ and $A$ inputs a vector in $\R^3$}
+            \choice{$C$ outputs a vector in $\R^3$ and $A$ inputs a vector in $\R^2$}
+            \choice{$C$ inputs a vector in $\R^2$ and $A$ outputs a vector in $\R^2$}
+            \choice{$C$ inputs a vector in $\R^3$ and $A$ outputs a vector in $\R^3$}
+
+        \end{selectAll}
+
+        We can, however, compute $CA$.
+
+        $CA=\startmat{rrr}
+            \answer{5} & \answer{4} & 17 \\
+            5 & \answer{7} & \answer{16}
+        \stopmat$.
+
+
+
+      \end{problem}
+      
+
+      \item $CB$ is \wordChoice{\choice[correct]{possible}\choice{not possible}}
+      
+        \begin{problem}
+
+
+            $CB=\startmat{rrr}
+                -3 & \answer{3} & \answer{4} \\
+                \answer{6} & -1 & \answer{7}
+            \stopmat$.
+
+
+        \end{problem}
+      
+
+      \item $AE$ is \wordChoice{\choice{possible}\choice[correct]{not possible}}
+      
+        \begin{problem}
+        
+            because \begin{selectAll}
+            
+                \choice{the number of columns in $A$ is equal to the number of rows in $E$}
+                \choice[correct]{the number of columns in $A$ is not equal to the number of rows in $E$}
+                \choice[correct]{$E$ outputs a vector in $\R^2$ and $A$ inputs a vector in $\R^3$}
+                \choice{$E$ outputs a vector in $\R^3$ and $A$ inputs a vector in $\R^1$}
+                \choice{$E$ inputs a vector in $\R^1$ and $A$ outputs a vector in $\R^2$}
+                \choice{$E$ inputs a vector in $\R^3$ and $A$ outputs a vector in $\R^3$}
+    
+            \end{selectAll}
+    
+            We can, however, compute $A^TE$.
+
+            $A^TE=\startmat{r}
+                8 \\
+                \answer{7} \\
+                \answer{27}
+            \stopmat$.
+
+        \end{problem}
+      
+
+      \item $EA$ is \wordChoice{\choice{possible}\choice[correct]{not possible}}
+      
+        \begin{problem}
+        
+            because \begin{selectAll}
+            
+                \choice{the number of columns in $E$ is equal to the number of rows in $A$}
+                \choice[correct]{the number of columns in $E$ is not equal to the number of rows in $A$}
+                \choice[correct]{$A$ outputs a vector in $\R^3$ and $E$ inputs a vector in $\R^1$}
+                \choice{$A$ outputs a vector in $\R^3$ and $E$ inputs a vector in $\R^2$}
+                \choice{$A$ inputs a vector in $\R^2$ and $E$ outputs a vector in $\R^2$}
+                \choice{$A$ inputs a vector in $\R^3$ and $E$ outputs a vector in $\R^3$}
+            \end{selectAll}
+    
+            We can, however, compute $E^TA$.
+    
+            $E^TA=\startmat{rrr}
+                \answer{8} & \answer{7} & 27
+            \stopmat$.
+
+        \end{problem}
+      
+        
+
+    \end{enumerate}
+    
+
+\end{problem}
+
+\end{document}

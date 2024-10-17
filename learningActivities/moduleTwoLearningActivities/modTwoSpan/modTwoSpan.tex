@@ -1,0 +1,786 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\title{Learning Activity: Linear Combination, Span, and Bases}
+\begin{document}
+\begin{abstract}
+
+    In this learning activity, you will be introduced to another fundamental building block of Linear Algebra: linear combinations, span, and bases.
+
+\end{abstract}
+\maketitle
+
+Let's think about two vectors, $\vect{u}$ and $\vect{v}$ in $\R^n$. In the previous chapter, we noted that \emph{linear combinations} provide the fundamental operations on vectors in Linear Algebra. In fact, most of waht we will discuss in this course will be based on linear combinations, structured in certain ways.
+
+\begin{exploration}\name{Span}
+
+One very important way of thinking about how vectors relate to each other is to consider their \emph{span}.
+
+
+\begin{definition}\name{Span of a set of vectors}
+  The set of all linear combinations of the vectors
+  $\vect{u}_1, \ldots,\vect{u}_k$ in $\R^n$ is known as the
+  \textbf{span}%
+  \index{span}%
+  \index{vector!span} of these vectors and is written as
+  $\sspan\set{\vect{u}_1,\ldots,\vect{u}_k}$. Using set notation, we
+  can write
+  \begin{equation*}
+    \sspan\set{\vect{u}_1,\ldots,\vect{u}_k}
+    ~=~ \set{a_1\vect{u}_1+\ldots+a_k\vect{u}_k \mid a_1,\ldots,a_k\text{ in }\R}.
+  \end{equation*}
+  \begin{hint}
+  
+    Notation alert! Set notation is a common and succinct way to describe collections of mathematical objects. Learning to read set-notation is important for being increasingly comfortable with the language of mathematics as it applies to the sciences.
+
+    The notation $\set{a_1\vect{u}_1+\ldots+a_k\vect{u}_k \mid a_1,\ldots,a_k\text{ in }\R}$ reads "all new vectors $\vect{v}$ of the form $a_1\vect{u}_1+\ldots+a_k\vect{u}_k$ where $a_1,\ldots,a_k$ are real numbers." In words we would say this is all possible linear combinations of the vectors $\vect{u}_1,\ldots,\vect{u}_k$, since we're allowing any collection of real nubmers to scale and add the vectors together.
+
+  \end{hint}
+\end{definition}
+
+We can picture the set of their linear combinations as follows:
+\begin{center}
+  \begin{tikzpicture}[scale=1.5]
+    \draw[->, thick, blue] (0,0) -- node[below]{$\vect{u}$} (1.5,0.5);
+    \draw[->, thick, red] (0,0) -- node[left]{$\vect{v}$} (0.5,1);
+    \draw[-, gray] (-2,-1.5)--(4,0.5);
+    \draw[-, gray] (-1.5,-0.5)--(0,0);
+    \draw[-, gray] (1.5,0.5)--(4.5,1.5);
+    \draw[-, gray] (-1,0.5)--(5,2.5);
+    \draw[-, gray] (-0.5,1.5)--(5.5,3.5);
+    \draw[-, gray] (0,2.5)--(6,4.5);
+    \draw[-, gray] (-2,-1.5)--(0,2.5);
+    \draw[-, gray] (-0.5,-1)--(0,0);
+    \draw[-, gray] (0.5,1)--(1.5,3);
+    \draw[-, gray] (1,-0.5)--(3,3.5);
+    \draw[-, gray] (2.5,0)--(4.5,4);
+    \draw[-, gray] (4,0.5)--(6,4.5);
+    \draw (-2.0,-1.5) node[left]{$-1\vect{u}-1\vect{v}$};
+    \draw (-1.5,-0.5) node[left]{$-1\vect{u}+0\vect{v}$};
+    \draw (-1.0,0.5) node[left]{$-1\vect{u}+1\vect{v}$};
+    \draw (-0.5,1.5) node[left]{$-1\vect{u}+2\vect{v}$};
+    \draw (0.0,2.5) node[left]{$-1\vect{u}+3\vect{v}$};
+    \draw (1.5,3.0) node[above=0.75ex]{$0\vect{u}+3\vect{v}$};
+    \draw (3.0,3.5) node[above=0.75ex]{$1\vect{u}+3\vect{v}$};
+    \draw (4.5,4.0) node[above=0.75ex]{$1\vect{u}+3\vect{v}$};
+    \draw (6.0,4.5) node[right]{$3\vect{u}+3\vect{v}$};
+    \draw (5.5,3.5) node[right]{$3\vect{u}+2\vect{v}$};
+    \draw (5.0,2.5) node[right]{$3\vect{u}+1\vect{v}$};
+    \draw (4.5,1.5) node[right]{$3\vect{u}+0\vect{v}$};
+    \draw (4.0,0.5) node[right]{$3\vect{u}-1\vect{v}$};
+    \draw (2.5,0.0) node[below=0.75ex]{$2\vect{u}-1\vect{v}$};
+    \draw (1.0,-0.5) node[below=0.75ex]{$1\vect{u}-1\vect{v}$};
+    \draw (-0.5,-1.0) node[below=0.75ex]{$0\vect{u}-1\vect{v}$};
+    \draw[fill] (0,0) circle [radius=1.2pt] node[below right]{$\vect{0}$};
+  \end{tikzpicture}
+\end{center}
+
+As the picture shows, the linear combinations of $\vect{u}$ and
+$\vect{v}$ form a \emph{$2$-dimensional plane} through the origin. We say
+that this plane is \textbf{spanned}%
+\index{span}%
+\index{vector!span} by the vectors $\vect{u}$ and $\vect{v}$. 
+
+\begin{remark}
+
+If you're not familiar with planes from previous courses, think of a flat sheet of paper cutting through 3-D space. We'll make this more sophisticated in later chapters, but for now we're only going to define planes in terms of span, below.
+
+\end{remark}
+
+This
+concept generalizes to more than two vectors. For example, three
+vectors may span a $3$-dimensional space (or sometimes a $2$-dimensional space, a line, or just the origin). We'll dig into this more in the next exploration, for now let's just work with the span of a couple of vectors.
+
+\end{exploration}
+
+\begin{exploration}\name{Span in $\R^2$ and $\R^3$}
+
+Let's start by looking in $\R^2$. The following GeoGebra applet allows you to input two vectors and see their span in $\R^2$. 
+
+You can select the appropriate boxes to set the spanning vectors, and then click the "Show Span" button to see the span. You can then drag the vector $\vect{v}$ to see the linear combination of the spanning vectors that make up $\vect{v}$.
+
+\begin{example}
+
+  Using the applet, set $\vect{u}=\startmat{r} 1 \\ 1 \stopmat$ and $\vec{w}=\startmat{r} 2 \\ 3 \stopmat$. Then click "Show Span" to see the span of these vectors in $\R^2$.
+
+  \begin{center}
+    \geogebra{rfbeefhu}{846}{503}
+  \end{center}
+1
+  Select the "Standard Span" button and drag the vector $\vec{v}$ to $\vec{v}=[1,2]$. If you then check the "See New Span" box, the grid will shift to the span of your two vectors. 
+  
+  Using the applet, what linear combination of $\vec{u}$ and $\vec{w}$ makes up $\vec{v}$?
+
+  \begin{hint}
+  
+    Remember that a negative scalar multiple of a vector poitns in the opposite direction of the vector.
+
+  \end{hint}
+
+  \begin{solution}
+  
+    $\vec{v}=\answer{-1}\vec{u}+\answer{1}\vec{w}$.
+
+  \end{solution}
+
+\end{example}
+
+\begin{example}\name{Spanning Multiple Vectors}
+
+  Now, use the applet to find the linear combinations of the vectors $\vec{u}$ and $\vec{w}$ that make up the vectors $\vec{v}$:
+
+  \begin{enumerate}
+  
+    \item $\vec{u}=[1,2]$, $\vec{w}=[2,1]$, 
+    
+    $$\answer{2}\vec{u}+\answer{1}\vec{w}=[4,5].$$
+
+    \item $\vec{u}=[1,2]$, $\vec{w}=[-2,1]$,
+    
+    $$\answer{-1}\vec{u}+\answer{3}\vec{w}=[-7,1].$$
+
+  \end{enumerate}
+
+\end{example}
+
+\begin{example}\name{Vectors in a span}
+  Let $\vect{u}=\startmat{r} 1 \\ 1 \\ 1 \stopmat$ and
+  $\vect{v}=\startmat{r} 3 \\ 2 \\ 1 \stopmat$. Which
+  of the following vectors are elements of
+  $\sspan\set{\vect{u},\vect{v}}$?
+  \begin{equation*}
+    (a)\quad\vect{w} = \startmat{r} 2 \\ 3 \\ 4 \stopmat,
+    \qquad
+    (b)\quad\vect{z} = \startmat{r} 1 \\ 1 \\ 2 \stopmat.
+  \end{equation*}
+
+  \begin{hint}
+  
+    Remember that to be in $\sspan{\vect{u},\vect{v}}$, a vector must be a linear combination of $\vect{u}$ and $\vect{v}$.
+
+  \end{hint}
+
+  \begin{solution}
+
+  Before we work it out analytically, let's visualize this example in GeoGebra. The following applet lets you input three vectors to view their span in $\R^3$.
+
+  You can select the appropriate boxes to set the spanning vectors, and then click the "Show Span" button to see the span. You can then drag the vector $\vect{v}$ to see whether or not it is in the span of the vectors.
+
+  Since the applet requires 3 vectors, for this example input $\vec{u}, \vec{v}, \vec{w}$. 
+
+  \begin{center}
+    \geogebra{y95ydrhy}{798}{478}
+  \end{center}
+
+  Notice that the span of $\vect{u}$ and $\vect{v}$ is a plane, and that $\vect{w}$ is in this plane, while $\vect{z}$ is not.
+
+\end{solution}
+
+  \begin{solution}
+    (a) For a vector to be in $\sspan\set{\vect{u},\vect{v}}$, it must
+    be a linear combination of $\vect{u}$ and $\vect{v}$. Therefore,
+    $\vect{w}\in\sspan\set{\vect{u},\vect{v}}$ if and only if we can
+    find find scalars $a,b$ such that
+    $a\,\vect{u} + b\,\vect{v} = \vect{w}$. We must therefore solve the
+    equation
+    \begin{equation*}
+      a \startmat{r} 1 \\ 1 \\ 1 \stopmat
+      + b \startmat{r} 3 \\ 2 \\ 1 \stopmat
+      = \startmat{r} 2 \\ 3 \\ 4 \stopmat.
+    \end{equation*}
+   
+    If we take each component individually, this gives us the system of equations
+    \begin{equation*}
+      \begin{array}{r@{~}c@{~}r@{~}c@{~}r@{~}r}
+        a & + & 3b & = & 2, \\
+        a & + & 2b & = & 3, \\
+        a & + & b & = & 4.
+      \end{array}
+    \end{equation*}
+
+    We solve this by isolating $a$ in the last equation: 
+
+    \begin{equation*}
+      a = 4 - b.
+    \end{equation*}
+
+    Substituting this into the first equation gives us
+
+    \begin{equation*}
+      4 - b + 3b = 2 \quad \Rightarrow \quad 4 + 2b = 2 \quad \Rightarrow \quad 2b = -2 \quad \Rightarrow \quad b = -1.
+    \end{equation*}
+
+    We then substitute back into the third equation to find $a$:
+
+    \begin{equation*}
+      a = 4 - (-1) = 5.
+    \end{equation*}
+
+    Luckily, this solution works in the second equation as well:
+
+    \begin{equation*}
+      5 + 2(-1) = 3.
+    \end{equation*}
+  
+    The solution is $a=5$ and $b=-1$. This means that
+    $\vect{w} = 5\vect{u} + (-1)\vect{v}$. Therefore, $\vect{w}$ is an
+    element of $\sspan\set{\vect{u},\vect{v}}$.
+  
+    (b) If we try the same approach with $\vect{z}$, we get the system of equations
+  
+    \begin{equation*}
+      \begin{array}{r@{~}c@{~}r@{~}c@{~}r@{~}r}
+        a & + & 3b & = & 1, \\
+        a & + & 2b & = & 1, \\
+        a & + & b & = & 2.
+      \end{array}
+    \end{equation*}
+
+    Again isolating $a$ in the last equation gives us
+
+    \begin{equation*}
+      a = 2 - b.
+    \end{equation*}
+
+    Substituting this into the first equation gives us
+
+    \begin{equation*}
+      2 - b + 3b = 1 \quad \Rightarrow \quad 2 + 2b = 1 \quad \Rightarrow \quad 2b = -1 \quad \Rightarrow \quad b = -\frac{1}{2}.
+    \end{equation*}
+
+    We then substitute back into the third equation to find $a$:
+
+    \begin{equation*}
+      a = 2 - \left(-\frac{1}{2}\right) = \frac{5}{2}.
+    \end{equation*}
+
+    Substituting these values back into the second equation gives us
+
+    \begin{equation*}
+      \frac{5}{2} + 2\left(-\frac{1}{2}\right) = \frac{3}{2}\neq 1.
+    \end{equation*}
+
+    So $a=\frac{5}{2}$ and $b=-\frac{1}{2}$ do not satisfy the second equation.
+
+    Since our $a$ and $b$ can't satisfy all three equations at once, there is no solution. We conclude
+    that $\vect{z}$ is not an element of
+    $\sspan\set{\vect{u},\vect{v}}$.
+  \end{solution}
+
+  \begin{example}
+  
+    One final time, let's solve this problem, but with MATLAB. 
+
+    MATLAB provides a fast way to solve systems of equations and vector equations, using the $\texttt{solve}$ function.
+
+    First set up your vectors:
+\begin{verbatim}
+u=[1,1,1]
+v=[3, 2, 1]
+w=[2, 3, 4]
+z=[1,1,2]
+\end{verbatim}
+
+Then set up the variables for the unknown coefficients:
+\begin{verbatim}
+syms a b
+\end{verbatim}
+
+Also assume that their square sum is not zero, so that we ignore any trivial results like \(0 + 0 = 0\):
+\begin{verbatim}
+assume(a^2+b^2>0)
+\end{verbatim}
+
+First check \verb|u|, \verb|v|, and \verb|w|, setting up the linear combination. We use \verb|==| because \verb|=| is used for naming:
+\begin{verbatim}
+vector_equation = a*u + b*v == w
+\end{verbatim}
+
+Solve for the \verb|a| and \verb|b| if they exist:
+\begin{verbatim}
+solve(vector_equation, [a,b])
+\end{verbatim}
+
+Now try \verb|u|, \verb|v|, and \verb|z|:
+\begin{verbatim}
+vector_equation_2 = a*u + b*v == z
+solve(vector_equation_2, [a,b])
+\end{verbatim}
+
+There's no solution, so \verb|z| is not in the span of \verb|u| and \verb|v|.
+
+
+  \end{example}
+  
+\end{example}
+
+\end{exploration}
+
+\begin{exploration}\name{Redundant Vectors, Lines, and Planes}
+
+  In the previous example, we saw that the span of the three vectors $\vect{u}$, $\vect{v}$, and $\vect{w}$ in $\R^3$ was not enough to reach $\vec{z}$. More generally, the span of these three vectors can at most reach the plane spanned by $\vect{u}$ and $\vect{v}$, and so we would say that $\vect{w}$ is \emph{redundant} in this case.
+
+  The issue of redundancy means that even if you have $n$ vectors in $\R^n$, they may not be enough to span all of $\R^n$. In fact, a collection of vectors might only span any $k$-dimensional space within $\R^n$, where $k$ is less than or equal to $n$.
+
+  This motivates the following definitions of lines, planes, and what are called \emph{hyperplanes} in $\R^n$.
+
+  \begin{remark}
+
+  \begin{definition}\name{Lines}
+
+    A \textbf{line} in $\R^n$ is the span of one vectors $\vect{u}$ in $\R^n$. 
+    
+    Since linear combinations of a single vector are just scalar multiples of that vector, the line is the set of all scalar multiples of $\vect{u}$, and is written as $\sspan\set{\vect{u}}=\set{a\vect{u}\mid a\text{ in }\R}$.
+
+  \end{definition}
+
+  \begin{definition}\name{Planes}
+
+    A \textbf{plane} in $\R^n$ is the span of two  non-redundant vectors $\vect{u}$ and $\vect{v}$ in $\R^n$. 
+    
+    Planes are written as $\sspan\set{\vect{u},\vect{v}}=\set{a\vect{u}+b\vect{v}\mid a,b\text{ in }\R}$.
+
+  \end{definition}
+
+  \begin{definition}\name{Hyperplanes}
+
+    A \textbf{hyperplane} in $\R^n$ is the span of $k$ non-redundant vectors in $\R^n$, where $k< n$. 
+    
+    Hyperplanes are written as 
+    
+    $$\sspan\set{\vect{u}_1,\ldots,\vect{u}_{n-1}}=\set{a_1\vect{u}_1+\ldots+a_{n-1}\vect{u}_{n-1}\mid a_1,\ldots,a_{n-1}\text{ in }\R}.$$
+
+  \end{definition}
+
+  You can visualize at least the constructions of lines and planes from spans in $\R^2$ and $\R^3$, and to be exhaustive let's also consider the span of 0 vectors.
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{scope}[xshift=-6cm]
+        \draw[fill](0,0) circle [radius=1.8pt];
+        \path(0,-2) node {Span of 0 vectors: a point};
+      \end{scope}
+      \begin{scope}[xshift=-0.5cm]
+        \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)}]
+          \draw[red!80](-2.5,0) -- (2.5,0);
+          \draw[->, thick, blue](0,0) -- +(1.5,0);
+          \draw[fill](0,0) circle [radius=1.8pt];
+        \end{scope}
+        \path(0,-2) node {Span of one vector: a line};
+      \end{scope}
+      \begin{scope}[xshift=6cm]
+        \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)},z={(0cm,1cm)}]
+          \filldraw[draw=red!80,fill=red!10](-2,-2,0) -- (2,-2,0) -- (2,2,0) -- (-2,2,0) -- cycle;
+          \draw[->, thick, blue](0,0) -- +(0,1,0);
+          \draw[->, thick, blue](0,0,0) -- +(1,0,0);
+          \draw[fill](0,0) circle [radius=1.8pt];
+        \end{scope}
+        \path(0,-2) node {Span of two vectors: a plane};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  The issue of redundancy is important, so if you have a set of vectors that includes redundant vectors, you can rewrite the span just in terms of the non-redundant vectors.
+
+  For instance, in our previous example we would say that $\sspan\set{\vect{u},\vect{v},\vect{w}}=\sspan\set{\vect{u},\vect{v}}$.
+
+\end{remark}
+
+\begin{example}\name{Span of redundant vectors}
+  Let $\vect{u}=\startmat{r} 1 \\ 1 \\ 1 \stopmat$,
+  $\vect{v}=\startmat{r} 3 \\ 2 \\ 1 \stopmat$, and
+  $\vect{w}=\startmat{r} 9 \\ 6 \\ 3 \stopmat$.
+  Use the applet and then use linear combinations to conclude that
+  $\sspan\set{\vect{u},\vect{v},\vect{w}} =
+  \sspan\set{\vect{u},\vect{v}}\neq\sspan\set{\vec{v},\vec{w}}$.
+\end{example}
+
+\begin{hint}
+
+  To view just the span of two vectors using the applet, set the third vector to the zero vector. 
+
+\end{hint}
+
+%put the geogebra applet here
+\begin{center}
+  \geogebra{y95ydrhy}{798}{478}
+\end{center}
+
+
+\begin{solution}
+  
+  If you use $\vec{u}, \vec{v}, \vec{w}$ in the applet, you can see a plane, meaning one of the vectors is redunant. If you use $\vec{0}$ in place of $\vec{w}$, the plane does not change. This means that you only need $\vec{u}$ and $\vec{v}$ to span the plane.
+  
+  If you instead replace $\vec{u}$ with $\vec{0}$, you will see a line. This means that $\vec{v}$ and $\vec{w}$ are in the same direction, and so $\sspan\set{\vec{v},\vec{w}}$ is a line, and you need $\vec{u}$ to span the plane.
+  
+  In terms of linear combinations, note that $\vect{w} = 3\vect{v}$, so $\sspan\set{\vec{v},\vec{w}}=\sspan\set{\vec{v}}$, a line. Since $\vec{u}$ is not a scalar mulitple of $\vec{v}$, $\sspan\set{\vec{u},\vec{v}}$ is a plane.
+  
+  
+\end{solution}
+
+\end{exploration}
+
+\begin{exploration}\name{Bases: No Redundancy}
+  
+  The magic of linear combinations, span, and redundancy is that when you have a set of only non-redundant vectors, you can build an entire space from them. This is the idea behind \emph{spaces}, \emph{subspaces} and \emph{bases}. 
+
+  As we saw earlier, the span of 0 vectors in $\R^n$ is a point, namely the set $\set{\vect{0}}$. The span of one non-zero vector is a line
+through the origin, and the span of two linearly independent vectors
+is a plane through the origin.
+
+As we saw in the previous exploration, you can have points, lines, and planes that live within larger spaces, such as the line and plane living in $\R^3$.
+
+We need some language to describe when you have an entire space of vectors, when you have a spanned space within a larger space, and when you have vectors that can't build an entire space.
+
+This requires the langauge of \emph{vector spaces}, \emph{subspaces} and \emph{bases}.
+
+\begin{remark}\name{Definitions}
+
+  \begin{definition}\name{Vector Spaces}
+
+    A set of vectors, $V$, is a \textbf{vector space} is a set of vectors that have the following properties:
+
+    \begin{enumerate}
+    
+      \item $V$ is closed under addition, i.e., for all $\vect{u},\vect{v}$ in $V$, $\vect{u}+\vect{v}$ is in $V$.
+      
+      \item $V$ is closed under scalar multiplication, i.e., for all $\vect{u}$ in $V$ and scalars $k$, $k\,\vect{u}$ is in $V$.
+      
+      \item $V$ contains the zero vector, i.e., $\vect{0}\in V$.
+    \end{enumerate}
+
+  \end{definition}
+
+  While this might seem abstract and arbitrary at first, if you consider that a spanning set builds from linear combinations, we want to build vector spaces from these operations as well.
+
+  Now, a subspace is essentially a vector space, but we contextualize it within a larger vector space.
+
+Take a look back at the slinear spaces we've defined so far: points, lines, and planes. Each of these are spaces in their own right, and can be considered ``subspaces'' of $\R^n$ for any $n$ greater than the minimum number of necessary spanning vectors.
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{scope}[xshift=-6cm]
+      \draw[fill](0,0) circle [radius=1.8pt];
+      \path(0,-2) node {Span of 0 vectors: a point};
+    \end{scope}
+    \begin{scope}[xshift=-0.5cm]
+      \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)}]
+        \draw[red!80](-2.5,0) -- (2.5,0);
+        \draw[->, thick, blue](0,0) -- +(1.5,0);
+        \draw[fill](0,0) circle [radius=1.8pt];
+      \end{scope}
+      \path(0,-2) node {Span of one vector: a line};
+    \end{scope}
+    \begin{scope}[xshift=6cm]
+      \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)},z={(0cm,1cm)}]
+        \filldraw[draw=red!80,fill=red!10](-2,-2,0) -- (2,-2,0) -- (2,2,0) -- (-2,2,0) -- cycle;
+        \draw[->, thick, blue](0,0) -- +(0,1,0);
+        \draw[->, thick, blue](0,0,0) -- +(1,0,0);
+        \draw[fill](0,0) circle [radius=1.8pt];
+      \end{scope}
+      \path(0,-2) node {Span of two vectors: a plane};
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+We also call these sets, respectively, a {\em $0$-dimensional
+  subspace}, a {\em $1$-dimensional subspace}, and a {\em
+  $2$-dimensional subspace} of\/ $\R^n$. The purpose of this section is
+to generalize this concept of subspace to arbitrary dimensions.
+
+\begin{definition}\name{Subspace}
+  A subset $V$ of $\R^n$ is called a \textbf{subspace}%
+  \index{subspace}%
+  \index{subspace!of Rn@of\/ $\R^n$}
+  of $\R^n$ if
+  \begin{enumerate}
+  \item $V$ contains the zero vector of $\R^n$, i.e., $\vect{0}$ is in $V$;
+  \item $V$ is closed under addition, i.e., for all
+    $\vect{u},\vect{w}$ in $V$, we have $\vect{u}+\vect{w}$ is in $V$;
+  \item $V$ is closed under scalar multiplication, i.e., for all
+    $\vect{u}$ in $V$ and scalars $k$, we have $k\,\vect{u}$ are in $V$.
+  \end{enumerate}
+\end{definition}
+
+Finally, we need to remove some redundancy. We only really care about the vectors \emph{needed} to span a space, and so we define a \emph{basis} as exactly such a set of vectors.
+
+\begin{definition}\name{Basis}
+  Let $V$ be a subspace of\/ $\R^n$. Then
+  $\set{\vect{u}_1,\ldots,\vect{u}_k}$ is a \textbf{basis} for
+  $V$ if the following two conditions hold:%
+  \index{basis}%
+  \index{subspace!basis|see{basis}}%
+  \index{vector!basis|see{basis}}%
+  \begin{enumerate}
+  \item $\sspan\set{\vect{u}_1,\ldots,\vect{u}_k}=V$, and
+  \item $\vect{u}_1,\ldots,\vect{u}_k$ are not redundant.
+  \end{enumerate}
+\end{definition}
+
+\end{remark}
+
+\end{exploration}
+
+\begin{exploration}\name{Examples of Bases}
+
+\begin{example}\name{Standard basis of\/ $\R^n$}
+  Let $\vect{e}_i$ be the vector in $\R^n$ whose $i\th$ component is $1$
+  and all of whose other components are $0$. In other words, $\vect{e}_i$
+  is the $i\th$ column of the identity matrix.
+  \begin{equation*}
+    \vect{e}_1 = \startmat{c} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \stopmat,\quad
+    \vect{e}_2 = \startmat{c} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \stopmat,\quad
+    \vect{e}_3 = \startmat{c} 0 \\ 0 \\ 1 \\ \vdots \\ 0 \stopmat,\quad
+    \ldots~,\quad
+    \vect{e}_n = \startmat{c} 0 \\ 0 \\ 0 \\ \vdots \\ 1\stopmat.
+  \end{equation*}
+  Then $\set{\vect{e}_1,\vect{e}_2,\ldots,\vect{e}_n}$ is a basis for
+  $\R^n$. It is called the \textbf{standard basis}% 
+  \index{standard basis}% 
+  \index{basis!standard}
+  of\/ $\R^n$.
+\end{example}
+
+\begin{example}\name{A non-standard basis of\/ $\R^3$}
+  \index{basis!of Rn@of\/ $\R^n$}% 
+  Check that the vectors
+  \begin{equation*}
+    \vect{u}_1 = \startmat{r} 1 \\ 2 \\ 1 \stopmat,\quad
+    \vect{u}_2 = \startmat{r} 0 \\ 1 \\ 0 \stopmat,\quad
+    \mbox{and}\quad
+    \vect{u}_3 = \startmat{r} -1 \\ 0 \\ 1 \stopmat
+  \end{equation*}
+  form a basis of\/ $\R^3$.
+\end{example}
+
+\begin{solution}
+  We must check that the vectors $\vect{u}_1,\vect{u}_2,\vect{u}_3$
+  are linearly independent and span $\R^3$. To check linear
+  independence, 
+
+
+  so $\vect{u}_1,\vect{u}_2,\vect{u}_3$ are linearly independent.
+
+
+  To check that they span all of\/ $\R^3$, let $\vect{w}=\begin{bmatrix} w_1 \\ w_2 \\ w_3 \end{bmatrix}$
+  be an arbitrary element of\/ $\R^3$. We must show that $\vect{w}$ is a linear
+  combination of $\vect{u}_1,\vect{u}_2,\vect{u}_3$. This amounts to
+  solving the system of equations
+  \begin{equation*}
+    a_1\,\vect{u}_1+a_2\,\vect{u}_2+a_3\,\vect{u}_3 = \vect{w},
+  \end{equation*}
+  
+  The system is clearly consistent, so it has a solution, and
+  therefore $\vect{w}$ is indeed a linear combination of
+  $\vect{u}_1,\vect{u}_2,\vect{u}_3$. Since $\vect{w}$ was an
+  arbitrary vector of\/ $\R^3$, it follows that
+  $\vect{u}_1,\vect{u}_2,\vect{u}_3$ span $\R^3$.
+\end{solution}
+
+
+\end{exploration}
+
+\begin{exploration}\name{Bases, Redundancy, and Linear Independence}
+
+The point of a basis is that it exactly builds the space you want, without redundancy. This means that if we have a redundant set of vectors, we can make a basis by removing the redundancy. 
+
+There are more techincal terms for redundant/not redundant that we will adopt from here on out. The terms are \emph{linearly dependent} (meaning some vectors in the set depend on others) and \emph{linearly independent} (meaning no redundancies exist in the set).
+
+With this terminology, we can say that a basis for a space $V$ is a linearly independent set of vectors that spans $V$.
+
+\begin{example}\name{Basis from span}
+  Let
+  \begin{equation*}
+    \vect{u}_1 = \startmat{r} 2 \\ 0 \\ -2 \stopmat,
+    \quad
+    \vect{u}_2 = \startmat{r} -1 \\ 0 \\ 1 \stopmat,
+    \quad
+    \vect{u}_3 = \startmat{r} 1 \\ 3 \\ 5 \stopmat,
+    \quad
+    \vect{u}_4 = \startmat{r} 3 \\ 5 \\ 7 \stopmat,
+  \end{equation*}
+  Find a basis of $\sspan\set{\vect{u}_1,\ldots,\vect{u}_4}$%
+  \index{basis!of a span}.
+\end{example}
+
+\begin{solution}
+  Let $S=\sspan\set{\vect{u}_1,\ldots,\vect{u}_4}$. We need to remove redundancy from the set to find a basis for $S$.
+
+  We will use MATALB to speed up our calculations, as we will have more sophisticated ways of doing this process in the next chapter.
+
+  Setting up a system of equations, we want to know if you can make any of the vectors from linear combinations of the others. The \texttt{solve()} command will do this for us.
+
+  Let's start with just $u_1$ and $u_2$, and see if they make up $u_3$ and $u_4$:
+
+  \begin{verbatim}
+  
+  u1=[2,0,-2]
+  u2=[-1,0,1]
+  u3=[1,3,5]
+  u4=[3,5,7]
+
+  syms a b
+
+  %this assumption will help with linear independence in a moment
+  assume(a^2+b^2>0)
+
+  %check if u3 is in the span of u1 and u2
+  vector_equation = a*u1 + b*u2 == u3
+  solve(vector_equation, [a,b])
+
+  %check if u4 is in the span of u1 and u2
+  vector_equation_2 = a*u1 + b*u2 == u4
+  solve(vector_equation_2, [a,b])
+  
+
+  \end{verbatim}
+
+  That yielded no solutions, so $u_3$ and $u_4$ are not in the span of $u_1$ and $u_2$. We can actually see this on inspection, since $u_1$ and $u_2$ are multiples of each other, and $u_3$ and $u_4$ are not multiples of $u_1$ or $u_2$.
+
+  Now let's check $u_1$ and $u_3$:
+
+  \begin{verbatim}
+
+  %check if u3 is in the span of u1 and u3
+  vector_equation_3 = a*u1 + b*u3 == u2
+  solve(vector_equation_3, [a,b])
+
+  %check if u4 is in the span of u1 and u3
+  vector_equation_4 = a*u1 + b*u3 == u4
+
+  solve(vector_equation_4, [a,b])
+
+  \end{verbatim}
+
+  This yields $-1/2 u_1 + 0 u_3 = u_2$, and $2/3 u_1 + 5/3 u_3 = u_4$. This means that $u_1$ and $u_3$ are linearly independent, so we need them in the basis. Moreover, we were able to make $u_2$ and $u_4$ from $u_1$ and $u_3$, so we don't need them in the basis.
+
+  Therefore, a basis for $\sspan\set{\vect{u}_1,\ldots,\vect{u}_4}$ is $\set{\vect{u}_1,\vect{u}_3}$.
+
+  You can visualize this subspace of $\R^3$ in the following applet:
+
+  \begin{center}
+    \geogebra{y95ydrhy}{798}{478}
+  \end{center}
+
+\end{solution}
+
+\begin{remark}\name{Defining Dimension in terms of Space}
+
+  In Chapter One we defined the dimension of a vector as the number of components in the vector. So 
+
+  $$\vec{v}=\startmat{r} 1 \\ 2 \\ 3 \stopmat$$
+
+  is a 3-dimensional vector.
+
+  We now want to define the dimension of a space as the number of basis vectors spanning the space.
+
+  \begin{definition}
+  
+    The \textbf{dimension} of a space $V$ is the number of basis vectors needed to span $V$.
+
+  \end{definition}
+
+  Luckily, these two notions of dimension align, since any vector is a linear combination of the standard basis vectors, $\vec{e}_1,\ldots,\vec{e}_n$, and so it makes sense to say that 
+
+  $$\vec{v}=\startmat{r} 1 \\ 2 \\ 3 \stopmat=1\vec{e}_1+2\vec{e}_2+3\vec{e}_3$$
+
+  is a 3-dimensional vector (hence, living in $\R^3$, a 3-dimensional space).
+
+\end{remark}
+
+\begin{example}
+
+  For the following vector sets, find the basis for the span of the vectors, name the kind of subspace set by the span (i.e. point, plane, line) and give the dimension of the spanning subspace.
+
+  \begin{enumerate}
+
+    \item $\vect{u}_1=\startmat{r} 1 \\ 1 \\ 1 \stopmat$, $\vect{u}_2=\startmat{r} 1 \\ 1 \\ 0 \stopmat$, $\vect{u}_3=\startmat{r} 1 \\ 0 \\ 0 \stopmat$.
+    
+    \begin{solution}
+    
+      If you use MATLAB, you note that you cannot make $\vect{u}_3$ from $\vect{u}_1$ and $\vect{u}_2$, so $\vect{u}_1$ and $\vect{u}_2$ are linearly independent. 
+      
+      Thus, $\sspan\set{\vect{u}_1,\vect{u}_2}=\R^3$, since they are 3 $3$-dimensional linearly independent vectors. This technically makes a \wordChoice{
+        \choice{point}
+        \choice{line}
+        \choice{plane}
+        \choice[correct]{hyperplane}
+      }
+
+    \end{solution}
+
+    \item $\vect{u}_1=\startmat{r} 1 \\ -1 \\ 1 \stopmat$, $\vect{u}_2=\startmat{r} 2 \\ 0 \\ 1 \stopmat$, $\vect{u}_3=\startmat{r} 1 \\ 1 \\ 0 \stopmat$.
+    
+    \begin{solution}
+    
+      If you use MATLAB, you note that $\vec{u}_1-\vec{u}_2=\vec{u}_3$, so $\vec{u}_1$ and $\vec{u}_2$ are linearly dependent, and $\vec{u}_3$ is redundant.
+      
+      Thus, $\sspan\set{\vect{u}_1,\vect{u}_2}$ is a \wordChoice{
+        \choice{point}
+        \choice{line}
+        \choice[correct]{plane}
+        \choice{hyperplane}
+      }, a $\answer{2}$-dimensional subspace of $\R^3$.
+
+    \end{solution}
+
+    \item $\vect{u}_1=\startmat{r} 28 \\ -32 \stopmat$, $\vect{u}_2=\startmat{r} 0 \\ 0 \stopmat$, $\vect{u}_3=\startmat{r} -7/2 \\ 4 \stopmat$, $\vect{u}_4=\startmat{r} -21 \\ 24 \stopmat$.
+    
+    \begin{solution}
+    
+      Upon inspection, each vector is a scalar multiple of $\vect{u}_1$. Moreover, you can't have the $0$ vector in a basis, as you can't use it to span anything. So $\sspan\set{\vect{u}_1, \vect{u}_3, \vect{u}_4}=\sspan\set{\vect{u}_1}$, a $1$-dimensional subspace (e.g. a \wordChoice{
+        \choice{point}
+        \choice[correct]{line}
+        \choice{plane}
+        \choice{hyperplane}
+      }) in $\R^2$.
+
+    \end{solution}
+    
+  \end{enumerate}
+
+\end{example}
+
+\begin{remark}\name{A Test for Linear Independence}
+Our process was slightly inefficient, since we had to set up and solve multiple systems of equations iteratively. If we wanted a quicker check for linear independence, there is a single system that will tell us if a set of vectors is linearly independent or dependent (though it won't) tell us which vectors are dependent on which others. 
+
+In the past example we sovled the equation
+
+$$a_1\vect{u}_1+a_2\vect{u}_2=\vect{u}_3$$
+
+This is the same as solving the equation
+
+$$a_1\vect{u}_1+a_2\vect{u}_2-\vect{u}_3=0.$$
+
+More generally, if linear combinations of vectors add to the zero vector, then at least one of the vectors is a linear combination of the others. This means that the vectors are linearly dependent.
+
+This motivates the following definition:
+
+\begin{definition}\name{Linear Independence}
+  A set of vectors $\vect{u}_1,\ldots,\vect{u}_k$ is \textbf{linearly independent} if the only solution to the equation
+
+  $$a_1\vect{u}_1+\ldots+a_k\vect{u}_k=0$$
+
+  is $a_1=\ldots=a_k=0$. If there is a non-zero solution, then the vectors are \textbf{linearly dependent}.
+\end{definition}
+
+\begin{example}\name{Basis From Span Revisited}
+
+  Let's revisit the prevoius example.
+
+  Since the vectors are linearly dependent, the equation
+
+  $$a_1\vect{u}_1+a_2\vect{u}_2+a_3\vect{u}_3+a_4\vect{u}_4=0$$
+
+  can be satisfied with nonzero $a_1,a_2,a_3,a_4$.
+
+  The \texttt{solve} command can't actually solve this system, but we will find better methods in the next chapter.
+\end{example}
+
+\end{remark}
+
+\end{exploration}
+
+
+\end{document}

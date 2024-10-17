@@ -1,0 +1,81 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{problem}
+
+    Determine the true statements about the following system of equations:
+
+    \begin{enumerate}
+
+    \item Suppose a system of equations has fewer equations than
+    variables. 
+    
+    The system of equations is necessarily \wordChoice{
+        \choice{consistent}
+        \choice{inconsistent}
+        \choice[correct]{neither consistent nor inconsistent}}.
+    
+    
+    \begin{hint}
+      Consider the systems 
+
+        \begin{align*}
+            x+y+z&=2\\
+            x+y+z&=1
+        \end{align*}
+
+        and
+
+        \begin{align*}
+            2x+2y+2z&=2\\
+            x+y+z&=1\\
+        \end{align*}
+
+      %$x+y+z=2$ and $x+y+z=1$.
+    \end{hint}
+
+    \item Suppose a system of equations has more equations than variables.
+    
+    The system of equations necessarily has
+    \wordChoice{
+        \choice{one solution}
+        \choice{infinitely many solutions}
+        \choice{no solutions}.
+        \choice{any of the above}
+        \choice[correct]{either no solution or infinitely many solutions}
+        \choice{either one solution or infinitely many solutions}
+        \choice{either one solution or no solutions}
+        }.
+
+    \begin{hint}
+      Consider the systems:
+
+        \begin{align*}
+            x+y&=1\\
+            2x+2y&=1\\
+            -x-y&=0
+        \end{align*}
+
+        and
+
+        \begin{align*}
+            x+y&=1\\
+            2x+2y&=1\\
+            -x-y&=4
+        \end{align*}
+
+        and think about the possible sizes of the solution sets in these cases.
+
+    \end{hint}
+  
+
+\end{enumerate}
+
+\end{problem}
+
+\end{document}

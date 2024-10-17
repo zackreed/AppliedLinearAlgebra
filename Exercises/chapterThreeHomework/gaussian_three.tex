@@ -1,0 +1,93 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{problem}
+
+    Consider the following augmented matrices, where $h$ and $k$ are arbitrary numbers. Find values for $h$ and $k$ that satisfy the given conditions.
+
+    If no such values exist, enter "none." If any value of $h$ or $k$ will work, enter "any."
+
+    \begin{enumerate}
+        \item 
+        \begin{equation*}
+          \startmat{rr|r}
+            2 & h & 4 \\
+            3 & 6 & 7
+          \stopmat
+        \end{equation*}
+  
+        The system is inconsistent when $h = \answer{4}$.
+
+        If $h\neq 4$, the system is consistent when $h = \answer[format=string]{any}$.
+
+        \begin{hint}
+        
+            Find the rref of the matrix and determine for which values of h the matrix will have definite values. Any value for which the rref would not be defined would make the system inconsistent.
+
+            Test this out for any inconsistent values! Plug it in and see what the resulting rref matrix looks like.
+
+
+        \end{hint}
+        
+        
+        \item 
+        \begin{equation*}
+          \startmat{rr|r}
+            1 & h & 3 \\
+            2 & 4 & 6
+          \stopmat
+        \end{equation*}
+
+        The system is inconsistent when $h = \answer[format=string]{none}$. The system is consistent when $h = \answer[format=string]{any}$.
+        
+        
+        \item Choose $h$ and $k$ such that the augmented matrix shown has each of the following:
+        \begin{enumerate}
+          \item one solution
+          \item no solution
+          \item infinitely many solutions
+        \end{enumerate}
+        \begin{equation*}
+          \startmat{rr|r}
+            1 & h & 2 \\
+            2 & 4 & k
+          \stopmat
+        \end{equation*}
+        
+        If $h\neq \answer{2}$ there will be a unique solution for $k=\answer[format=string]{any}$. If $h=\answer{2}$ and $k\neq \answer{4}$, there are no solutions. If $h=\answer{2}$ and $k=\answer{4}$, then there are infinitely many solutions.
+
+        \begin{hint}
+        
+            Set $h$ and $k$ to symbolic variables and find the rref of the matrix. Once you determine the relevant information about $h$, set $h$ to the inconsistent value and test out different values of $k$ to see when (or if) the system becomes consistent.
+
+        \end{hint}
+        
+        \item Choose $h$ and $k$ such that the augmented matrix shown has each of the following:
+        \begin{enumerate}
+          \item one solution
+          \item no solution
+          \item infinitely many solutions
+        \end{enumerate}
+        \begin{equation*}
+          \startmat{rr|r}
+            1 & 2 & 2 \\
+            2 & h & k
+          \stopmat
+        \end{equation*}
+        
+        If $h\neq \answer{4}$, then there is exactly one solution. If $h=\answer{4}$ and $k\neq \answer{4}$, then there are no solutions. If $h=\answer{4}$ and $k=\answer{4}$, then there are \wordChoice{
+            \choice{no}
+            \choice{exactly one}
+            \choice[correct]{infinitely many}} solutions.
+        
+    \end{enumerate}
+    
+
+\end{problem}
+
+\end{document}

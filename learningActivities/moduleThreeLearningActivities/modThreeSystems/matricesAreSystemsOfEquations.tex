@@ -26,27 +26,31 @@ There is a difference in electric potential between the $+$ and $-$ terminals of
 An example of an electrical circuit is below.
 
 \begin{center}
-  \scalebox{0.8}{
-    \begin{circuitikz}[american] \draw
-      (0,0) to [battery1, v^= $18\volt$~~] (0,4)
-      (0,0) to [R = $2 \ohm$] (4,0)
-      to [R = $4 \ohm$] (4,4)
-      (0,4) to [R =$2 \ohm$] (4,4)
-      (2,2) node[scale=4]{$\circlearrowleft$}
-      (2,2) node{$I_1$}
-      ;
-    \end{circuitikz}
-  }
+  %\scalebox{0.8}{
+  %  \begin{circuitikz}[american] \draw
+  %    (0,0) to [battery1, v^= $18\volt$~~] (0,4)
+  %    (0,0) to [R = $2 \ohm$] (4,0)
+  %    to [R = $4 \ohm$] (4,4)
+  %    (0,4) to [R =$2 \ohm$] (4,4)
+  %    (2,2) node[scale=4]{$\circlearrowleft$}
+  %    (2,2) node{$I_1$}
+  %    ;
+  %  \end{circuitikz}
+  %}
+  %include image from circuit-1
+  \includegraphics{circuits-1.png}
 \end{center}
 
 \noindent
-The jagged lines (\begin{circuitikz}[baseline=-0.5ex] \draw (0,0) to
-  [R] (2,0); \end {circuitikz}) denote resistors and the numbers next
+The jagged lines %(\begin{circuitikz}[baseline=-0.5ex] \draw (0,0) to
+  %[R] (2,0); \end {circuitikz}) 
+  denote resistors and the numbers next
 to them give their resistance%
 \index{resistance} in ohms (i.e. volts/amperes), written as $\ohm$. The voltage%
-\index{voltage} source (\begin{circuitikz}[baseline=-0.5ex] \draw
-  (0,0) to [/tikz/circuitikz/bipoles/length=0.75cm, battery1]
-  (1,0); \end {circuitikz}) causes the current%
+\index{voltage} source %(\begin{circuitikz}[baseline=-0.5ex] \draw
+  %(0,0) to [/tikz/circuitikz/bipoles/length=0.75cm, battery1]
+  %(1,0); \end {circuitikz}) 
+  causes the current%
 \index{current} to flow in the direction from the longer of the two
 lines toward the shorter\footnote{By {\em current}, we always mean the
   {\em conventional current}, which flows from plus to minus. It is
@@ -86,17 +90,19 @@ of the current in the initial diagram.
   Applying Kirchhoff's Law to the diagram below, determine the value for $I_1$.
 
   \begin{center}
-    \scalebox{0.8}{
-      \begin{circuitikz}[american,scale=0.8] \draw
-        (0,0) to [battery1, v^= $18\volt$~~] (0,4)
-        (0,0) to [R = $2 \ohm$] (4,0)
-        to [R = $4 \ohm$] (4,4)
-        (0,4) to [R =$2 \ohm$] (4,4)
-        (2,2) node[scale=4]{$\circlearrowleft$}
-        (2,2) node{$I_1$}
-        ;
-      \end{circuitikz}
-    }
+    %\scalebox{0.8}{
+    %  \begin{circuitikz}[american,scale=0.8] \draw
+    %%    (0,0) to [battery1, v^= $18\volt$~~] (0,4)
+     %   (0,0) to [R = $2 \ohm$] (4,0)
+     %   to [R = $4 \ohm$] (4,4)
+     %   (0,4) to [R =$2 \ohm$] (4,4)
+     %   (2,2) node[scale=4]{$\circlearrowleft$}
+     %   (2,2) node{$I_1$}
+     %   ;
+     % \end{circuitikz}
+    %}
+    %include image from circuit-2
+    \includegraphics{circuits-2.png}
   \end{center}
 
 
@@ -135,32 +141,34 @@ of the current in the initial diagram.
   each current.
 
   \begin{center}
-    \scalebox{0.8}{
-      \begin{circuitikz}[american, scale=0.7] \draw
-        (0,0) to [battery1, v^= $18\volt$~~] (0,4)
-        (0,0) to [R = $2 \ohm$] (4,0)
-        to [R = $4 \ohm$] (4,4)
-        (0,4) to [R =$2 \ohm$] (4,4)
-        (6,4) to [battery1, v_= \raisebox{1ex}{$27\volt$}] (4,4)
-        (6,4) to [R = $3 \ohm$] (8,4)
-        to [R = $1 \ohm$] (8,0)
-        (4,0) to [R = $6 \ohm$] (8,0)
-        to [R = $2 \ohm$] (8,-4)
-        to [R = $3 \ohm$] (4,-4)
-        to [R = $1 \ohm$] (4,0)
-        (4,-4)to [R = $5 \ohm$] (0,-4)
-        (0,0) to [battery1, v_= $23\volt$~~] (0,-4)
-        (2,2) node[scale=3]{$\circlearrowleft$}
-        (2,2) node{$I_2$}
-        (6,2) node[scale=3]{$\circlearrowleft$}
-        (6,2) node{$I_3$}
-        (6,-2) node[scale=3]{$\circlearrowleft$}
-        (6,-2) node{$I_4$}
-        (2,-2) node[scale=3]{$\circlearrowleft$}
-        (2,-2) node{$I_1$}
-        ;
-      \end{circuitikz}
-    }
+    %\scalebox{0.8}{
+    %  \begin{circuitikz}[american, scale=0.7] \draw
+    %    (0,0) to [battery1, v^= $18\volt$~~] (0,4)
+    %    (0,0) to [R = $2 \ohm$] (4,0)
+    %    to [R = $4 \ohm$] (4,4)
+    %    (0,4) to [R =$2 \ohm$] (4,4)
+    %    (6,4) to [battery1, v_= \raisebox{1ex}{$27\volt$}] (4,4)
+    %    (6,4) to [R = $3 \ohm$] (8,4)
+    %    to [R = $1 \ohm$] (8,0)
+    %    (4,0) to [R = $6 \ohm$] (8,0)
+    %    to [R = $2 \ohm$] (8,-4)
+    %    to [R = $3 \ohm$] (4,-4)
+    %    to [R = $1 \ohm$] (4,0)
+    %    (4,-4)to [R = $5 \ohm$] (0,-4)
+    %    (0,0) to [battery1, v_= $23\volt$~~] (0,-4)
+    %    (2,2) node[scale=3]{$\circlearrowleft$}
+    %    (2,2) node{$I_2$}
+    %    (6,2) node[scale=3]{$\circlearrowleft$}
+    %    (6,2) node{$I_3$}
+    %    (6,-2) node[scale=3]{$\circlearrowleft$}
+    %    (6,-2) node{$I_4$}
+    %    (2,-2) node[scale=3]{$\circlearrowleft$}
+    %    (2,-2) node{$I_1$}
+    %    ;
+    %  \end{circuitikz}
+    %}
+    %include image from circuit-3
+    \includegraphics{circuits-3.png}
   \end{center}
 
   Starting with the top left circuit, multiply the resistance by the

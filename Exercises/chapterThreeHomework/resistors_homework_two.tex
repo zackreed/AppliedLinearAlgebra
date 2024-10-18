@@ -12,7 +12,7 @@
     amperes in the three circuits of the following diagram.
   
     \begin{center}
-      \scalebox{0.8}{
+      %\scalebox{0.8}{
         \begin{circuitikz}[american, scale=0.7] \draw
           (0,0) to [battery1, v^= $10\volt$~~] (0,4)
           (0,0) to [R = $2 \ohm$] (4,0)
@@ -33,7 +33,9 @@
           (6,-2) node{$I_3$}
           ;
         \end{circuitikz}
-      }
+      %}
+      %include graphics for circuits_three
+      \includegraphics{circuits_three.png}
     \end{center}
   
     %\begin{sol}

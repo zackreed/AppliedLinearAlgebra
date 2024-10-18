@@ -1,0 +1,80 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{exercise}
+
+    For the following subspaces of
+    $\R^n$, determine the dimension of the larger space in which the vectors live, determine the dimension of the subspace described, and find a basis for the subspace.
+
+    \begin{hint}
+    
+        This will take a few steps. You'll first need to interpret the subspace in terms of linear combinations of vectors, using the parameters $a, b, $ and $c$ to determine the spanning vectors.
+
+        Then you'll need to check whether the spanning vectors are a basis for the subspace or not. 
+
+        If they're not a basis, make a basis out of the first available linearly independent vectors.
+
+        Don't factor nor simplify the basis vectors at all when entering them.
+
+    \end{hint}
+
+    \begin{enumerate}
+
+    \item $S_1 =
+      \set{\left.\startmat{c}
+            4a+b-5c \\
+            12a+6b-6c \\
+            4a+4b+4c
+          \stopmat ~\right\vert~a,b,c\text{in} \R}.$
+
+          $S_1$ is a $\answer{2}$-dimensional subspace of $\R^{\answer{3}}$.
+
+          \begin{problem}
+
+            The basis vectors for $S_1$ are $u=\startmat{r} \answer{4} \\ \answer{12} \\ \answer{4} \stopmat$ and $v=\startmat{r} \answer{1} \\ \answer{6} \\ \answer{4} \stopmat$.
+
+          \end{problem}
+
+          \item $S_2 =
+          \set{\left.\startmat{c}
+                2a+6b+7c \\
+                -3a-9b-12c \\
+                2a+6b+6c \\
+                a+3b+3c
+              \stopmat ~\right\vert~a,b,c\text{in} \R}.$
+    
+                $S_2$ is a $\answer{2}$-dimensional subspace of $\R^{\answer{4}}$.
+    
+                \begin{problem}
+    
+                  The basis vectors for $S_2$ are $u=\startmat{r} \answer{2} \\ \answer{-3} \\ \answer{2} \\ \answer{1} \stopmat$ and $v=\startmat{r} \answer{7} \\ \answer{-12} \\ \answer{6} \\ \answer{3} \stopmat$.
+    
+                \end{problem}
+    
+                \item $S_3 =
+                \set{\left.\startmat{c}
+                      2a+b \\
+                      6b-3a+3c \\
+                      3b-6a+3c
+                    \stopmat ~\right\vert~a,b,c\text{in} \R}.$
+          
+                      $S_3$ is a $\answer{3}$-dimensional vector space.
+          
+                      \begin{problem}
+          
+                        The basis vectors for $S_3$ are $u=\startmat{r} 
+                        \answer{2} \\ \answer{-3} \\ \answer{-6} \stopmat$, $v=\startmat{r} \answer{1} \\ \answer{6} \\ \answer{3} \stopmat$, and $w=\startmat{r} \answer{0} \\ \answer{3} \\ \answer{3} \stopmat$.
+          
+                      \end{problem}       
+
+    \end{enumerate}    
+    
+
+\end{exercise}
+
+\end{document}

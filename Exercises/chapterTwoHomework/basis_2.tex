@@ -1,0 +1,69 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{exercise}
+
+    We want to make a basis for $\R^3$ using the vectors
+    \begin{equation*}
+      \vect{u}_1 = \startmat{r} -6 \\ 6 \\ -2\stopmat,\quad
+      \vect{u}_2 =\startmat{r} 4 \\ -4 \\ 12\stopmat.
+    \end{equation*}
+
+    Which of the following vectors can be added to $\set{\vect{u}_1,\vect{u}_2}$ to make a basis for $\R^3$?
+
+    \begin{enumerate}
+    \item $\vect{v}_1 = \startmat{r} -2 \\ 1 \\ 5\stopmat$ \wordChoice{\choice{will work}\choice[correct]{won't work}}
+    \begin{problem}
+
+        Using the \texttt{solve} command in MATLAB, first saying \texttt{syms a b c} and \texttt{assume($a^2+b^2+c^2>0$)}, we find that
+
+        \begin{equation*}
+        \answer{-1}\startmat{r} -6 \\ 6 \\ -2\stopmat + \answer{-1}\startmat{r} 4 \\ -4 \\ 12\stopmat + \startmat{r} -2 \\ 1 \\ 5\stopmat = \startmat{r} 0 \\ 0 \\ 0\stopmat
+        \end{equation*}
+
+        so the vectors are linearly dependent and can't form a basis for $\R^3$.
+
+    \end{problem}
+    \item $\vect{v}_2 = \startmat{r} 6 \\ 2 \\ -8\stopmat$
+    
+    \begin{problem}
+        
+        Using the \texttt{solve} command in MATLAB, first saying \texttt{syms a b c} and \texttt{assume($a^2+b^2+c^2>0$)}, we find that
+
+        \begin{equation*}
+        a\startmat{r} -6 \\ 6 \\ -2\stopmat + b\startmat{r} 4 \\ -4 \\ 12\stopmat + c\startmat{r} 6 \\ 2 \\ -8\stopmat = \startmat{r} 0 \\ 0 \\ 0\stopmat
+        \end{equation*}
+
+        has \wordChoice{
+        \choice[correct]{no nonzero solution}
+        \choice{many nonzero solutions}}, so the vectors are \wordChoice{
+        \choice[correct]{linearly independent}
+        \choice{linearly dependent}} and \wordChoice{
+        \choice[correct]{can}
+        \choice{can't}} form a basis for $\R^3$.
+
+    \end{problem}
+
+    \item $\vect{v}_3 = \startmat{r} -12 \\ 10 \\ -14\stopmat$
+    
+    \begin{problem}
+    
+        Using the \texttt{solve} command in MATLAB, first saying \texttt{syms a b c} and \texttt{assume($a^2+b^2+c^2>0$)}, we find that
+
+        \begin{equation*}
+        \answer{-1}\startmat{r} -6 \\ 6 \\ -2\stopmat + \answer{1}\startmat{r} 4 \\ -4 \\ 12\stopmat + \startmat{r} -12 \\ 10 \\ -14\stopmat = \startmat{r} 0 \\ 0 \\ 0\stopmat
+        \end{equation*}
+
+        so the vectors are linearly dependent and can't form a basis for $\R^3$.
+
+    \end{problem}
+    \end{enumerate}
+
+\end{exercise}
+
+\end{document}

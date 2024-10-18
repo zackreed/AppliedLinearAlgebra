@@ -1,0 +1,43 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{exercise}
+
+    Which of the following vectors are redundant? If there are redundant
+vectors, write each of them as a linear combination of previous
+vectors.
+
+(NOTE: Take the vectors in order. You want to consider the first available linearly independent vectors when filling in the answers.)
+
+\begin{hint}
+
+    If it's not immediately obvious which vectors are linear combinations of others,that's totally okay! 
+    
+    You'll want to use MATLAB to solve the linear combination equation for the redundant vectors.
+
+    First, use \texttt{assume($a^2+b^2+c^2>0$)} to get rid of the trivial solution, then use \texttt{solve} to see if a linear combination of the vectors add to the zero vector.
+
+    If you use the \texttt{"ReturnConditions",true} arguments at the end of solve, it will tell you which coefficients are non-zero. 
+
+    You might need to do this more than once depending on which and how many vectors are redundant.
+
+\end{hint}
+\begin{equation*}
+  \vect{u}_1 = \startmat{r} 1 \\ 0 \\ 1 \stopmat,\quad
+  \vect{u}_2 = \startmat{r} 2 \\ 0 \\ 2 \stopmat,\quad
+  \vect{u}_3 = \startmat{r} 1 \\ 2 \\ 1 \stopmat,\quad
+  \vect{u}_4 = \startmat{r} 1 \\ 6 \\ 1 \stopmat.
+\end{equation*}
+
+  $\vect{u}_{\answer{2}}$ and $\vect{u}_{\answer{4}}$ are redundant. We have
+  $\vect{u}_{\answer{2}}=\answer{2}\vect{u}_{\answer{1}}$ and $\vect{u}_{\answer{4}}=\answer{3}\vect{u}_{\answer{3}}-\answer{2}\vect{u}_{\answer{1}}$.
+
+
+\end{exercise}
+
+\end{document}

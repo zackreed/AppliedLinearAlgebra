@@ -14,11 +14,11 @@
 \end{abstract}
 \maketitle
 
-\subsection{Vectors in the Physical World}
+\section*{Vectors in the Physical World}
 
 If you're coming from STEM, you've probably more accustomed to thinking about vectors in relation to physical quantities like speed, acceleration, force, and electric fields. Whereas in other settings (such as the apple example above), the vector representations can be somewhat abstract, or arbitrary, and the structure of the geometry is key, in the physical world the geometry of vectors themselves are much more closely linked to a physical interpretation.
 
-\subsubsection{A Physical Example: Velocity}
+\begin{exploration}\name{A Physical Example: Velocity}
 
 Velocity, acceleration, and forces naturally lend themselves to vector representation, and point us towards other properties of vectors that we care to measure, namely those of \textit{magnitude} and \textit{direction}. This example will emphasize the utility of \textit{addition} and \textit{scaling} as fundamental to vectors.
 
@@ -40,7 +40,7 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
 
     Consider two points $P=(p_1,p_2)$ and
     $Q=(q_1,q_2)$ in the plane, as in the following picture.
-    \begin{equation*}
+   
       \begin{tikzpicture}[scale=1]
         \draw[dashed] (0,0) -- (0,2) -- (3,2);
         \draw[fill=blue!10] (0,0) -- (3,0) -- (3,2) -- cycle;
@@ -48,7 +48,7 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
         \draw[fill](0,0) circle [radius=1.8pt] node[left=1ex]{$Q=(q_1,q_2)$};
         \draw[fill](3,2) circle [radius=1.8pt] node[right=1ex]{$P=(p_1,p_2)$};
       \end{tikzpicture}
-    \end{equation*}
+
     The distance between $P$ and $Q$ is shown in the picture as a solid
     line, which is the hypotenuse of a right triangle.  The lengths of the
     two other sides of this triangle are $(p_1-q_1)$ and
@@ -63,7 +63,6 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
     Similarly in 3 dimensions, points $P=(p_1,p_2,p_3)$ and
     $Q = (q_1,q_2,q_3)$ have a distance of $d(P,Q)=\sqrt{(p_1-q_1)^2+(p_2-q_2)^2+(p_3-q_3)^2}$.
 
-    \begin{equation*}
       \begin{tikzpicture}[scale=1]
         \draw[dashed] (3,0,-2) -- (0,0,-2) -- (0,0,0);
         \draw[dashed] (0,0,0) -- (0,2,0);
@@ -78,7 +77,6 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
         %\draw[fill](3,0,-2) circle [radius=1.8pt] node[right=1ex]{$R=(p_1,p_2,q_3)$};
         %\draw[fill](3,0,0) circle [radius=1.8pt] node[right=1ex]{$S=(p_1,q_2,q_3)$};
       \end{tikzpicture}
-    \end{equation*}
 
   
 \begin{definition}\name{Distance between points}
@@ -144,9 +142,13 @@ A vector's \textit{magnitude}, then, can be thought of as its distance from $\ve
 
 \end{example}
 
-\begin{example}
+\end{exploration}
+
+\begin{exploration}\name{Blowing Off Course}
   
   Suppose that for the entire trip, the wind is blowing exactly in the northwestern direction at a speed of $100*\sqrt(2)$ knots ($\sqrt{2}$ in the applet). The wind (uniformly applied throughout the trip) is imposing another velocity on the plane. To determine the plane's new trajectory, we need the notion of \textit{vector addition}.
+
+  \begin{example}
 
   The plane's velocity vector is given in the GeoGebra environment below. You can always see its intended trajectory (and original velocity vector) in purple. Hit the ``Animate'' button to see the plane's path.
 
@@ -171,7 +173,9 @@ This is how we geometrically interpret \emph{vector addition}. If $\vec{v}$ is t
 
 Numerically, you find this by adding the coordinates of the vectors. So, if $\vec{v}=[2.79,1.12]$ and $\vec{w}=[1,1]$, then 
 
-$$\vec{v}+\vec{w}=[2.79+1,1.12+1]=[\answer{3.79},\answer{2.12}].$$
+\[
+\vec{v}+\vec{w}=[2.79+1,1.12+1]=[\answer{3.79},\answer{2.12}].
+\]
 
 \begin{definition}\name{Addition of vectors in $\R^n$}
   For vectors $\vec{u}=\startmat{c}
@@ -182,9 +186,7 @@ $$\vec{v}+\vec{w}=[2.79+1,1.12+1]=[\answer{3.79},\answer{2.12}].$$
     v_1 \\
     \vdots \\
     v_n
-  \stopmat$ in $\R^n$, the sum%
-  \index{vector!addition}%
-  \index{addition!of vectors} $\vec{u}+\vec{v}$ in $\R^n$ is defined
+  \stopmat$ in $\R^n$, the sum $\vec{u}+\vec{v}$ in $\R^n$ is defined
   by
   \begin{equation*}
     \vec{u}+\vec{v} = \startmat{c}
@@ -255,10 +257,13 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
 
 \end{example}
 
-\begin{example}
+\end{exploration}
+
+\begin{exploration}\name{Course Correction}
 
   By how much do you need to correct the plane to reach its destination in a straight shot? There are two immediately avaialable options, with one making more practical sense than the other. 
 
+\begin{example}
   First, you can direct the plane against the wind, so that the wind velocity is canceled out and the plane can return to its original course. This adds the negative of $\vec{w}$ to $\vec{v}$, so that the plane's new velocity vector is $\vec{v}+\vec{w}-\vec{w}=\vec{v}$.
 
   Try this in the applet, by selecting the "Allow Correction" check box and entering $-\vec{w}=[-1,-1]$. Setting the wind and correction then shows the plan on its original course, with the velocity vectors first moving along the initial velocity, then along the wind, then back down reversing the velocity. 
@@ -270,7 +275,6 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
   You could take a more efficient route, however, by noting that the wind does push the plane further north and west than it would have gone otherwise, so there is some added speed in a direction similar to the intended direction. If you set the correction vector correctly, you re-orient the plane along its intended path but also with less travel time than the original path.
 
   First, do so in the applet, then solve for the correction vector $\vec{c}$ algebraically below.
-
   
   We want $\vec{v}+\vec{w}+\vec{c}$ to be in the same direction as $\vec{v}$, but with a magnitude greater than $3$. Assuming that we want to minimally increase the plane's engine use, let's just give the correction vector a vertical component (really we would want to go at a right angle to the wind vector, but we'll cover that later). 
 
@@ -278,11 +282,9 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
 
   \begin{definition}\name{Unit Vectors}
 
-    A \textbf{unit vector}%
-    \index{unit vector}%
-    \index{vector!unit} is a vector of length $1$. 
+    A \textbf{unit vector} is a vector of length $1$. 
 
-    In $\R^n$, the standard coordinate vectors are examples of unit vectors. In $\R^3$, the coordiante vectors are $\vec{i}=[1,0,0]$, $\vec{j}=[0,1,0]$, and $\vec{k}=[0,0,1]$.
+    In $\R^n$, the standard coordinate vectors are examples of unit vectors. In $\R^3$, the coordiante vectors are $\vect{i}=[1,0,0]$, $\vect{j}=[0,1,0]$, and $\vect{k}=[0,0,1]$.
   \end{definition}
 
   Since we want $\vec{v}+\vec{w}+\vec{c}$ and $\vec{v}$ to be in the same direction, we can solve for the coordiantes of $\vec{v}+\vec{w}+\vec{c}$ in the following way: 
@@ -299,10 +301,12 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
 
   For instance, the steps to solving 
 
-  $$\begin{array}{rcl}
+  \[
+  \begin{array}{ccc}
     2x+y&=&3\\
     x-2y&=&-1
-  \end{array}$$
+  \end{array}
+  \]
 
   would be to first isolate $x$ in the second equation, so that $x=2y+1$, then substitute this into the first equation to get $2(2y+1)+y=3$, which simplifies to $5y+2=3$, so $y=1/5$. Substituting this back into $x=2y+1$ gives $x=7/5$.
 
@@ -328,6 +332,8 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
   When all is said and done, the plane's new velocity vector is $\vec{v}+\vec{w}+\vec{c}=[2.79, 1.12]+[1,1]+[0,\answer{-.61}]\approx [3.79,\answer{1.51}]$. With this velocity, the plane will travel along the same path but get to the destination in less time.
   
 \end{example}
+
+\end{exploration}
 
 
 \end{document}

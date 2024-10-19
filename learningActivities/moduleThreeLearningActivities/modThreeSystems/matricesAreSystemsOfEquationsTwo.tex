@@ -1,0 +1,439 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed} %PEter Selinger
+\title{Application 2: Balancing Chemical Reactions}
+\begin{document}
+\begin{abstract}
+Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+\end{abstract}
+\maketitle
+
+  Let's take a look at another application of systems of equations (now seen as vector equations): balancing chemical reactions.
+
+  \begin{exploration}\name{Chemical Reactions and Matrix Multiplications}
+
+ Consider
+  the chemical reaction \begin{equation*}
+    SnO_2+H_2\rightarrow Sn+H_2O.
+  \end{equation*}
+
+Chemical reactions occur when substances (reactants) are transformed to form new substances (products). This happens because the atoms in the reactants are rearranged and new bonds form the products. 
+
+Here the elements involved are tin ($Sn$), oxygen ($O$), and hydrogen
+($H$). A chemical reaction occurs that transforms a combination of tin
+dioxide ($SnO_2$, one tin and two oxygen) and hydrogen ($H_2$, two hydrogen) into a combination of tin
+($Sn$) and water ($H_2O$, two hydrogen one oxygen). 
+
+When considering chemical reactions, we
+want to investigate how much of each substance we began with and how
+much of each substance is involved in the result.
+
+An important theory we will use here is the {\bf mass balance theory}. It
+tells us that we cannot create or delete elements within a chemical
+reaction. For example, in the above expression, we must have the same
+number of atoms of oxygen, tin, and hydrogen on both sides of the
+reaction so that no mass is produced nor descrotyed in the reaction. 
+
+Notice that this is not currently the case.  For example,
+there are two oxygen atoms on the left and only one on the right. In
+order to fix this, we want to find numbers $x,y,z,w$ such that
+\begin{equation*}
+  x\;SnO_2+y\;H_2\rightarrow z\;Sn+w\;H_2O,
+\end{equation*}
+where both sides of the reaction have the same number of atoms of the
+various elements.
+
+\begin{example}\name{Balancing the tin, oxygen, hydrogen reaction}
+
+This is a familiar example. We can solve it by setting up a system of
+equations in the variables $x,y,z,w$. 
+
+Noting how many atoms are present in each side and part of the reaction, we need
+\begin{equation*}
+  \begin{array}{cl}
+    Sn: & x=z \\
+    O: & 2x=w \\
+    H: & 2y=2w.
+  \end{array}
+\end{equation*}
+
+We can rewrite these equations as
+\begin{equation*}
+  \begin{array}{cl}
+    Sn: & x - z = 0 \\
+    O: & 2x - w = 0 \\
+    H: & 2y - 2w = 0.
+  \end{array}
+\end{equation*}
+
+Let's think about this example in terms of matrix equations, becuase we can actually do the exact same elementary row operations as in the previous example, but by way of matrix mulitplication, which will save us some time (and lends itself to an intuitive interpretation at the end)
+
+Stating this system in matrix form, we have
+
+\begin{equation*}
+  \begin{bmatrix}
+    1 & 0 & -1 & 0 \\
+    2 & 0 & 0 & -1 \\
+    0 & 2 & 0 & -2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x \\
+    y \\
+    z \\
+    w
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\
+    0 \\
+    0
+  \end{bmatrix}.
+\end{equation*}
+
+So we have a $3\times 4$ matrix $A$ and a $4\times 1$ vector $\vec{x}$ that satisfy the equation $A\vec{x} = \vec{0}$.
+
+\begin{remark}\name{Elementary Matrices}
+
+  We're now going to use matrices to perform the same elementary row operations from the previous example. Remember that we solved the system by 1) replacing one row with another, 2) scaling one row, and 3) adding a multiple of one row to another.
+
+  As it turns out, we can use matrix multiplcation to use perform these same manipulations to matrices. We will call these matrices \emph{elementary matrices}.
+
+  \begin{definition}\name{Row Swapping Matrix}
+    The \textbf{row swapping matrix} $E_{ij}$ is the matrix that results from swapping rows $i$ and $j$ of the identity matrix.
+
+    It is the identity matrix with rows $i$ and $j$ swapped.
+
+    For instance, $E_{12}$ performed on a $3\times 3$ matrix would be the matrix
+
+    \begin{equation*}
+      \begin{bmatrix}
+        0 & 1 & 0 \\
+        1 & 0 & 0 \\
+        0 & 0 & 1
+      \end{bmatrix}
+    \end{equation*}
+
+    Notice that the first and second rows are swapped.
+  \end{definition}
+
+  \begin{definition}\name{Scaling Matrix}
+    The \textbf{scaling matrix} $E_{i}(c)$ is the matrix that results from multiplying row $i$ of the identity matrix by the scalar $c$.
+
+    For instance, $E_{2}(3)$ performed on a $3\times 3$ matrix would be the matrix
+
+    \begin{equation*}
+      \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 3 & 0 \\
+        0 & 0 & 1
+      \end{bmatrix}.
+    \end{equation*}
+
+    Notice that the second row is scaled by $3$.
+  \end{definition}
+
+  \begin{definition}\name{Row Addition Matrix}
+    The \textbf{row addition matrix} $E_{ij}(c)$ is the matrix that results from adding $c$ times row $i$ to row $j$ of the identity matrix.
+
+    For instance, $E_{3,2}(2)$ performed on a $3\times 3$ matrix would be the matrix
+
+    \begin{equation*}
+      \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 2 & 1
+      \end{bmatrix}.
+    \end{equation*}
+
+    This will add $2$ times the second row to the third row.
+  \end{definition}
+
+\end{remark}
+
+Now let's use these elementary matrices to solve the system of equations.
+
+Our chemical reaction matrix is 
+
+\begin{equation*}
+  A = \begin{bmatrix}
+    1 & 0 & -1 & 0 \\
+    2 & 0 & 0 & -1 \\
+    0 & 2 & 0 & -2
+  \end{bmatrix}.
+\end{equation*}
+
+We want to, as before, isolate each variable by eliminating it from the other equations. This amounts to having a $1$ in each column, and the rest of the column being $0$.
+
+This is already not too difficult for the first two columns of $A$. If we subtract twice the first row from the second row, and then halve the third row, we will have completed this task for the first two columns.
+
+Subtracting twice the first row from the second row is achieved by the {\bf row addition matrix} 
+
+$$E_{2,1}(-2)=\begin{bmatrix}1 & 0 & 0 \\ -2 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix},$$
+
+and halving the third row is achieved by the {\bf scaling matrix}
+
+$$E_{3}(1/2)=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & .5\end{bmatrix}.$$
+
+We can do this all at once by the matrix multiplciation $E_{3}(1/2)\cdot E_{2,1}(-2)\cdot A$.
+
+We'll confirm this in MATLAB in a moment, but the product is given by 
+
+\begin{equation*}
+ \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & .5
+  \end{bmatrix} \begin{bmatrix}
+    1 & 0 & 0 \\
+    -2 & 1 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 0 & -1 & 0 \\
+    2 & 0 & 0 & -1 \\
+    0 & 2 & 0 & -2
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 0 & -1 & 0 \\
+    0 & 0 & 2 & -1 \\
+    0 & 1 & 0 & -1
+  \end{bmatrix}.
+\end{equation*}
+
+Now we need to isolate a $1$ in the third column. We'll do this by the elementary matrices $E_{2}(1/2)$ and $E_{1,2}(1)$. Note that we need to do the matrix multiplication so that the halving of the second row is done first.
+
+If we take our current matrix to again be called $A$, then we want the new matrix $E_{1,2}(1)\cdot E_{2}(1/2)\cdot A$.
+
+Doing this yeilds the product
+
+\begin{equation*}
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1/2 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 1 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 0 & -1 & 0 \\
+    0 & 0 & 2 & -1 \\
+    0 & 1 & 0 & -1
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 0 & 0 & -1/2 \\
+    0 & 0 & 1 & -1/2 \\
+    0 & 1 & 0 & -1
+  \end{bmatrix}.
+\end{equation*}
+
+Well, now we've hit a roadblock. We can't get a $1$ in the fourth column without making changes to the other columns, since there are only three rows. So this matrix has been simplified as much as possible. This is what we call the \emph{row echelon form} of the matrix.
+
+Let's re-write the resulting matrix equation as a system of equations, and see if we can salvage a solution.
+
+In the new matrix equation, we want a vector 
+
+$$\begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix}$$
+
+such that
+
+$$\begin{bmatrix}
+    1 & 0 & 0 & -1/2 \\
+    0 & 0 & 1 & -1/2 \\
+    0 & 1 & 0 & -1
+  \end{bmatrix} \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.$$
+
+
+The resulting system of equations is given by
+
+\begin{equation*}
+  \begin{array}{cl}
+    Sn: & x - \frac{1}{2}w = 0 \\
+    O: & z - \frac{1}{2}w = 0 \\
+    H: & y - w = 0.
+  \end{array}
+\end{equation*}
+
+This doesn't look much different than the system we started with, however what we can now do is solve for $x,y,z$ in terms of $w$. 
+
+Doing so yields
+
+\begin{equation*}
+  \begin{array}{r@{~}c@{~}l}
+    x &=& \frac{1}{2}w \\
+    y &=& w \\
+    z &=& \frac{1}{2}w.
+  \end{array}
+\end{equation*}
+
+This actually gives us a lot of freedom, meaning there isn't just one solution to the system, but many (infinitely many)! If we pick an arbitrary $w$, we know that the system is solved by $x=\frac{1}{2}w$, $y=w$, and $z=\frac{1}{2}w$.
+
+Let's try it out with $w=2, 3, 5, 10, and \pi$ all at the same time in MATLAB. Hopefully for each of these values, the vector 
+
+$$\vec{x}=\begin{bmatrix} w/2 \\ w \\ w/2 \\ w \end{bmatrix}$$
+
+will solve the matrix equation
+
+$$A\vec{x}=\vec{0}.$$
+
+The code below will give these results quickly:
+
+\begin{verbatim}
+
+    A = [1 0 -1 0; 2 0 0 -1; 0 2 0 -2];
+    for w = [2, 3, 5, 10, pi]
+        x = [w/2; w; w/2; w]
+        A*x
+    end
+
+\end{verbatim}
+
+Sure enough, each product $A\vec{x}$ is the zero vector! So we now have much more information about the chemical reaction. We know how much we can start with of each reactant, and then what the resulting product will be!
+
+For instance, if we use $w=2$, we have the following chemcial reaction: 
+
+\begin{equation*}
+  SnO_2+2H_2\rightarrow Sn+2H_2O.
+\end{equation*}
+
+Observe that each side of the expression contains the same number of
+atoms of each element. This means that the chemical reaction is
+balanced. 
+
+If we use $w=4$, we have a doubled chemical reaction:
+\begin{equation*}
+  2SnO_2+4H_2\rightarrow 2Sn+4H_2O.
+\end{equation*}
+It just means that we have just doubled the amount of
+every substance involved. In chemistry, the numbers you are finding
+would typically be the number of mols of the molecules on each
+side. Thus one mol of $SnO_2$ added two mols of $H_2$ yields one mol
+of $Sn$ and two mols of $H_2O$.
+
+\begin{remark}
+
+  We need to be a little careful with our interpretation here. If we used $w=3$, we would have the chemical reaction
+
+  \begin{equation*}
+    \frac{3}{2}SnO_2+3H_2\rightarrow \frac{3}{2}Sn+3H_2O.
+  \end{equation*}
+
+  While this might make mathematical sense, it doesn't make physical sense to have fractional molecules, because the chemical bonds operate in units of atoms. So while the math might work out, we need to be careful to interpret the results in a way that makes physical sense.
+
+\end{remark}
+
+\end{example}
+
+
+\begin{example}\name{Balancing a potassium, oxygen, phosphorus, and hydrogen reaction}
+  Potassium is denoted by $K$, oxygen by $O$, phosphorus by $P$ and
+  hydrogen by $H$.  Consider the reaction given by
+  \begin{equation*}
+    KOH+H_3PO_4\rightarrow K_3PO_4+H_2O.
+  \end{equation*}
+  Balance this chemical reaction.
+
+
+\begin{solution}
+  We will use the same procedure as above to solve this example. We
+  need to find values for $x,y,z,w$ such that
+  \begin{equation*}
+    x\;KOH+y\;H_3PO_4\rightarrow z\;K_3PO_4+w\;H_2O.
+  \end{equation*}
+  preserves the total number of atoms of each element.  Finding these
+  values can be done by finding the solution to the following system
+  of equations.
+  \begin{equation*}
+    \begin{array}{cl}
+      K: & x=3z \\
+      O: & x+4y=4z+w \\
+      H: & x+3y=2w \\
+      P: & y=z.
+    \end{array}
+  \end{equation*}
+ 
+  We can rewrite these equations as
+  \begin{equation*}
+    \begin{array}{cl}
+      K: & \answer{1}x + \answer{0}y + \answer{-3}z + \answer{0}w = \answer{0} \\
+      O: & \answer{1}x + \answer{4}y + \answer{-4}z + \answer{-1}w = \answer{0} \\
+      H: & \answer{1}x + \answer{3}y + \answer{0}z + \answer{-2}w = \answer{0} \\
+      P: & \answer{0}x + \answer{1}y + \answer{-1}z + \answer{0}w = \answer{0}
+    \end{array}
+  \end{equation*}
+
+  This system can be written as a matrix equation
+
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 & \answer{-3} & 0 \\
+      1 & \answer{4} & -4 & -1 \\
+      1 & 3 & 0 & \answer{-2} \\
+      0 & \answer{1} & -1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      w
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0 \\
+      0 \\
+      0 \\
+      0
+    \end{bmatrix}.
+  \end{equation*}
+
+  While in the homework you will do more practice using elementary matrices to solve this system, there is a wonderful MATLAB command that will do this for us. 
+
+  The command $\texttt{rref}$ stands for \emph{reduced row echelon form}, which puts a matrix in its echelon form, but with the added condition that the leading entry in each row is a $1$.
+
+  Using the following MATLAB code:
+
+  \begin{verbatim}
+    A = [1 0 -3 0; 1 4 -4 -1; 1 3 0 -2; 0 1 -1 0];
+    rref(A)
+  \end{verbatim}
+
+  you get the result
+
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 & 0 & \answer{-1} \\
+      0 & 1 & 0 & \answer{-1/3} \\
+      0 & 0 & 1 & \answer{-1/3} \\
+      0 & 0 & 0 & \answer{0}
+    \end{bmatrix}.
+  \end{equation*}
+
+  Re-interpreting this as a system of equations, we have
+
+  \begin{equation*}
+    \begin{array}{c}
+      x = \answer{1}w \\
+      y = \answer{1/3}w \\
+      z = \answer{1/3}w \\
+    \end{array}
+  \end{equation*}
+
+  Choose a value for $w$, say $3$. This yields $x=\answer{3}$, $y=\answer{1}$, $z=\answer{1}$. It follows that the balanced reaction is given by
+  \begin{equation*}
+    \answer{3}KOH+\answer{1}H_3PO_4\rightarrow \answer{1}K_3PO_4+\answer{3}H_2O
+  \end{equation*}
+  Note that this results in the same number of atoms of each element
+  on both sides.
+
+
+\begin{remark}
+
+  In situations like this, were there is freedom to chose one of the variables, we call the chosen variable a \emph{free variable}. The other variables are then determined in terms of the free variable.
+
+\end{remark}
+
+\end{solution}
+
+\end{example}
+
+\end{exploration}
+
+\end{document}

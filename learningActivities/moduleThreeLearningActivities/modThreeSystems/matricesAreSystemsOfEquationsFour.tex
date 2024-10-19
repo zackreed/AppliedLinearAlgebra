@@ -1,0 +1,321 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed} %PEter Selinger
+\title{Review and Geometry of 2D and 3D Systems of Equations}
+\begin{document}
+\begin{abstract}
+Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+\end{abstract}
+\maketitle
+    
+    %\end{onlineOnly}
+     
+    \begin{exploration}\name{Review: Possible Outcomes of 2x2 and 3x2 Systems}
+    
+      Here's a brief review of the possible outcomes of 2x2 and 3x2 systems of equations.
+       
+      Given a system of two equations with two unknowns, there are three possible geometric outcomes. 
+      
+      \begin{itemize}
+          \item First, the graphs of the two equations intersect at a point.  If this is the case, the system has exactly one solution. We say that the system is \dfn{consistent} and has a \dfn{unique solution}. 
+           
+          \begin{center}
+            \begin{tikzpicture}[scale=.5]
+             
+              \draw[<->] (-4,0)--(4,0);
+              \draw[<->] (0,-4)--(0,4);
+             
+             \draw[line width=1pt](-4, -3)--(4,2);
+             \draw[line width=1pt](3, -4)--(1,4);
+                 
+            \end{tikzpicture}
+            \end{center}
+          \item Second, the two lines may have no points in common.  If this is the case, the system has no solutions.  We say that the system is \dfn{inconsistent}. 
+          \begin{center}
+            \begin{tikzpicture}[scale=.5]
+             
+              \draw[<->] (-4,0)--(4,0);
+              \draw[<->] (0,-4)--(0,4);
+             
+             \draw[line width=1pt](-4, -4)--(4,1);
+             \draw[line width=1pt](-4, -2)--(4,3);
+                 
+            \end{tikzpicture}
+            \end{center}
+          \item Finally, the two lines may coincide.  In this case, there are infinitely many points that satisfy both equations simultaneously.  We say that the system is consistent and has infinitely many solutions.
+          \begin{center}
+          \begin{tikzpicture}[scale=.5]
+           
+            \draw[<->] (-4,0)--(4,0);
+            \draw[<->] (0,-4)--(0,4);
+           
+           \draw[line width=2pt](-4, -3)--(4,2);
+            
+               
+          \end{tikzpicture}
+          \end{center}
+          \end{itemize}
+      
+                  Given a linear system in two variables and more than two equations, we have a variety of geometric possibilities.  In terms of the number of solutions, there are three possibilities.
+       
+                  \begin{itemize}
+                  \item First, it is possible for the graphs of all equations in the system to intersect at a single point, giving us a unique solution. 
+                   
+                  \begin{center}
+                  \begin{tikzpicture}[scale=.5]
+                   
+                    \draw[<->] (-4,0)--(4,0);
+                    \draw[<->] (0,-4)--(0,4);
+                   
+                   \draw[line width=1pt](-2, 4)--(4,1);
+                   \draw[line width=1pt](3, 4)--(-1,-4);
+                   \draw[line width=1pt](1, 4)--(4,-2);
+                       
+                  \end{tikzpicture}
+                  \end{center}
+                   
+                  \item Second, it is possible for the graphs to have no points common to all of them.  If this is the case, the system is inconsistent.
+                   
+                  %\begin{center}[3in]
+                  \begin{center}
+                  \begin{tikzpicture}[scale=.5]
+                   
+                    \draw[<->] (-4,0)--(4,0);
+                    \draw[<->] (0,-4)--(0,4);
+                   
+                   \draw[line width=1pt](-4, -3)--(4,4);
+                   \draw[line width=1pt](3, -4)--(1,4);
+                   \draw[line width=1pt](3, -1)--(-4,3);
+                       
+                  \end{tikzpicture}\quad\quad
+                  \begin{tikzpicture}[scale=.5]
+                   
+                    \draw[<->] (-4,0)--(4,0);
+                    \draw[<->] (0,-4)--(0,4);
+                   
+                   \draw[line width=1pt](-2, -3)--(3,3);
+                   \draw[line width=1pt](-2, -2)--(3,4);
+                   \draw[line width=1pt](-2, -4)--(3,2);
+                       
+                  \end{tikzpicture}
+                  \end{center}
+                  %\end{center}
+                   
+                  \item Finally, it is possible for all of the lines to coincide, giving us infinitely many solutions.
+                  \end{itemize}
+  
+    \end{exploration}
+    
+  \begin{exploration}\name{Geometry of Linear Systems in Three Variables}
+    Let's now consider the following  system of three equations and three unknowns
+
+    $$\begin{array}{ccccccc}
+        3x & -&y&+&z&= &0 \\
+        2x& +&y&+&2z&=&2\\
+        x& +&4y&-&2z&=&11.
+    \end{array}$$
+
+    Introducing a third variable means that each equation describes a plane in $\mathbb{R}^3$, rather than a line in $\mathbb{R}^2$.  Luckily, we again preserve the solution set by the same row operations, so our strategy for solving systems of equations remains the same.
+
+    \begin{example}
+
+        Use the GeoGebra environment to solve the system of equations above. 
+
+        \geogebra{stvqh3ts}{853}{364}
+
+        \begin{hint}
+
+            The solution to the system is $(1,2,-1)$, as depicted in the GeoGebra environment. If your constant terms are different, you may have made a mistake in your row operations.
+
+        \end{hint}
+
+        \begin{solution}
+
+            The system can be solved by the following row operations (you may first need to swap rows to get the order to match the stated system above):
+
+            %I NEED TO COME BACK AND JUST DO FRACTIONs
+
+            $$R_2\rightarrow R_2-2R_3$$
+
+            $$R_1\rightarrow R_1-3R_3$$
+
+            $$R_2\rightarrow -R_2/7$$
+
+            $$R_1\rightarrow R_1+13R_2$$
+
+            $$R_3\rightarrow R_3-4R_2$$
+
+            $$R_1\rightarrow -R_1/4.14$$
+
+            $$R_2\rightarrow R_2+.86R_1$$
+
+            $$R_3\rightarrow R_3-1.43R_1$$
+
+            $$R_1\leftrightarrow R_3$$
+
+            This gives the system 
+
+            $$\begin{array}{ccccccc}
+                 1x& +0y&+0z &=&1 \\
+                0x&+1y& +0z& =&2\\
+                0x &+1y &+1z 1z&=&-1.
+            \end{array}$$
+
+        \end{solution}
+    \end{example}
+
+    \begin{remark}
+
+        Notice that the final system visualized as entirely horizontal or vertical planes, corresponding to the equations $x=1$, $y=2$, and $z=-1$. This reduction to standard planes has an important corrolary in the next section, where we examine row operations from the perspective of matrices. 
+
+    \end{remark}
+
+    Now, let's use row operations to determine the geometry of less nice systems.
+
+\begin{example}
+
+    Use the GeoGebra environment to analyze the following system of equations, which again creates the third equation from the first two via linear combination:
+
+    $$\begin{array}{ccccccc}
+        2x & +&3y&-&z&= &5 \\
+        x& -&y&+&4z&=&6\\
+        4x& +&y&+&7z&=&17.
+    \end{array}$$
+
+    As always, use row operations to solve the system. We're going to pay particular attention to the format of the "solved" system at the end of this section, and in the coming sections as well.
+
+    \begin{solution}
+
+        While you don't need to know this to solve the system using row operations, the third row is created from $R_1+2*R_2$. So, again, the geometric reason that we don't have a solution is that the first two planes intersect at a line (rather than a point) and then the third plane doesn't change the solution set of the system, and hence does not create a new intersection point.
+
+        Solving the system using row operations (without the knowledge above) can be done in steps simlar to the following:
+
+        $$R_3\rightarrow R_3-4R_2$$
+
+        $$R_1\rightarrow R_1-2R_2$$
+
+        At this stage, note that $R_1$ and $R_3$ are the exact same equations, and so we can get rid of one by subtracting the other.
+
+        $$R_1\rightarrow R_1-R_3$$
+
+        Now, we see just the two "spanning" planes of the system, and can further reduce them as much as possible, but not likely to standard vertical or horizontal planes.
+
+        $$R_3\rightarrow R_3/5$$
+
+        $$R_2\rightarrow R_2+R_3$$
+
+        $$R_1\rightleftarrows R_2$$
+
+        $$R_2\rightleftarrows R_3$$
+
+        This gives the system, in its most reduced form:
+
+        $$\begin{array}{ccccccc}
+            1x& +0y&+2.2z &=&4.6 \\
+            0x&+1y& -1.8z& =&-1.4\\
+            0x &+0y &+0z &=&0.
+        \end{array}$$
+
+        So, here, we again have infinitely many solutions, as any point along the intersecting line between the two planes will satisfy the system.
+
+        In this case, let's set $z=\tau$, which is an unknown constant value. This changes the system to be 
+
+        $$\begin{array}{ccccccc}
+            1x& +0y&+2.2\tau &=&4.6 \\
+            0x&+1y& -1.8\tau& =&-1.4\\
+            0x &+0y &+0\tau &=&0.
+        \end{array}$$
+
+        Note that the third equations is still true for any number $\tau$. Then since $\tau$ is just some unknown constant, we can solve for $x$ and $y$, getting
+
+        $$x=4.6-2.2\tau$$
+        
+        $$y=-1.4+1.8\tau.$$
+
+        So any points of the form $(4.6-2.2\tau, -1.4+1.8\tau, \tau)$ will satisfy the system.
+
+    \end{solution}
+
+\end{example}
+
+\end{exploration}
+
+\begin{exploration}\name{Review: Possible Outcomes of 3x3 Systems}
+
+We'll be unpacking more examples of systems with or without solutions in the homework, but here's an overview of the different ways that solutions can or can't exist for 3x3 systems of equations.
+
+Given a linear system of three equations in three variables, there are three ways in which the system can be consistent.
+
+\begin{itemize}
+    \item First, the three planes could intersect at a single point, giving us a unique solution.
+    \begin{center}
+        \tdplotsetmaincoords{70}{130}
+            \begin{tikzpicture}
+        \filldraw[blue, opacity=0.3](0,0,0)--(2,0,0)--(2,2,0)--(0,2,0)--cycle;
+        \filldraw[red, opacity=0.3] (0,0,0)--(0,0,2)--(0,2,2)--(0,2,0)--cycle;
+        \filldraw[gray, opacity=0.5] (0,0,0)--(0,0,2)--(2,0,2)--(2,0,0)--cycle;
+        \fill[] (0,0,0) circle (0.1cm);
+            \end{tikzpicture}
+        \end{center}
+    \item Second, the three planes can intersect in a line, forming a paddle-wheel shape.  In this case, every point along the line of intersection is a solution to the system, giving us infinitely many solutions.
+        \begin{center}
+        \tdplotsetmaincoords{70}{130}
+                \begin{tikzpicture}[scale=0.8]
+                \filldraw[blue, opacity=0.3](0,-2,2)--(0,2,2)--(0,2,-2)--(0,-2,-2)--cycle;
+                \filldraw[red, opacity=0.3] (2,0,2)--(-2,0,2)--(-2,0,-2)--(2,0,-2)--cycle;
+                \filldraw[gray, opacity=0.5] (2,1,2)--(2,1,-2)--(-2,-1,-2)--(-2,-1,2)--cycle;
+                \draw[-](0,0,-2)--(0,0,2) ;
+            \end{tikzpicture}
+            \end{center}
+    \item Finally, the three planes can coincide.  If this is the case, there are infinitely many solutions.
+        \begin{center}
+        \tdplotsetmaincoords{70}{130}
+            \begin{tikzpicture}[scale=0.8]
+                \filldraw[gray, opacity=0.5] (2,0,2)--(-2,0,2)--(-2,0,-2)--(2,0,-2)--cycle;
+                \filldraw[blue, opacity=0.3] (1.5,0,1.5)--(-1.5,0,1.5)--(-1.5,0,-1.5)--(1.5,0,-1.5)--cycle;
+                \filldraw[red, opacity=0.3] (1,0,1)--(-1,0,1)--(-1,0,-1)--(1,0,-1)--cycle;
+            \end{tikzpicture}
+        \end{center}
+\end{itemize}
+
+There are four ways for a system to be inconsistent.  They are depicted below.
+%\begin{center}[4in]
+\begin{center}
+\tdplotsetmaincoords{70}{130}
+    \begin{tikzpicture}[scale=0.5]
+        \filldraw[blue, opacity=0.3](0,0,2)--(0,2,2)--(0,2,-2)--(0,0,-2)--cycle;
+        \filldraw[red, opacity=0.3] (2,0,2)--(0,0,2)--(0,0,-2)--(2,0,-2)--cycle;
+        \filldraw[gray, opacity=0.5] (0,2,2)--(0,2,-2)--(2,0,-2)--(2,0,2)--cycle;
+    \end{tikzpicture}\quad
+    \begin{tikzpicture}[scale=0.5]
+        \filldraw[blue, opacity=0.3](-1,-1,2)--(0,2,2)--(0,2,-2)--(-1,-1,-2)--cycle;
+        \filldraw[red, opacity=0.3] (2,0,2)--(-2,0,2)--(-2,0,-2)--(2,0,-2)--cycle;
+        \filldraw[gray, opacity=0.5] (2,1,2)--(-2,1,2)--(-2,1,-2)--(2,1,-2)--cycle;
+        \draw[-](-2/3,0,-2)--(-2/3,0,2) ;
+        \draw[-](-1/3,1,-2)--(-1/3,1,2) ;
+    \end{tikzpicture}\quad
+    \begin{tikzpicture}[scale=0.5]
+        \filldraw[gray, opacity=0.5] (2,1.2,2)--(-2,1.2,2)--(-2,1.2,-2)--(2,1.2,-2)--cycle;
+        \filldraw[red, opacity=0.3] (2,0,2)--(-2,0,2)--(-2,0,-2)--(2,0,-2)--cycle;
+        \filldraw[blue, opacity=0.3] (-1.5,0,1.5)--(-1.5,0,-1.5)--(1.5,0,-1.5)--(1.5,0,1.5)--cycle;
+    \end{tikzpicture}\quad
+    \begin{tikzpicture}[scale=0.5]
+        \filldraw[gray, opacity=0.5] (2,1.2,2)--(-2,1.2,2)--(-2,1.2,-2)--(2,1.2,-2)--cycle;
+        \filldraw[red, opacity=0.3] (2,0,2)--(-2,0,2)--(-2,0,-2)--(2,0,-2)--cycle;
+        \filldraw[blue, opacity=0.3] (2,-1.2,2)--(-2,-1.2,2)--(-2,-1.2,-2)--(2,-1.2,-2)--cycle;
+    \end{tikzpicture}
+\end{center}
+
+\end{exploration}
+
+In the next chapter, we'll apply these ideas to the notion of matrix inverses, which take a much more intentional orientation towards interpreting these operations for matrices, and determining whether the matrix equation 
+
+$$A\vec{x}=\vec{b}$$
+
+can be solved by finding an inverse matrix $A^{-1}$ that satisfies
+
+$$\vec{x}=A^{-1}A\vec{x}=A^{-1}\vec{b}$$
+
+
+\end{document}

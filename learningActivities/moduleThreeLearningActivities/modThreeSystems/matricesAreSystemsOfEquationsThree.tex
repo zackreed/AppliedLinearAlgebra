@@ -1,0 +1,377 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed} %PEter Selinger
+\title{Geometry of Systems of Equations: Introduction}
+\begin{document}
+\begin{abstract}
+Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+\end{abstract}
+\maketitle
+
+\begin{exploration}\name{The Geometry of Systems of Equations}
+
+  We've seen but two examples of the numerous ways that systems of equations can be used to model and solve examples. We now return with greater detail to the idea of \emph{elementary row operations} (and elementary matrices) to gain an intution for why they work, and to further see when any why some systems do or don't have solutions, and how many.
+
+  \begin{example}\name{$2\times 2$ Systems of Equations}
+
+    Now that we've seen systems arising in applications, let's examine some arbitrary systems of equations for the sake of characterization and exploration. Consider the following system of equations:
+ 
+    $$\begin{matrix}
+      2x& -&y&=&-10\\
+      3x & +&2y&= &-8
+    \end{matrix}$$
+
+    Why is it that row operations preserve the solution set to the system?
+
+    In the following GeoGebra applet, you can set up a $2\times 2$ system of equations, perform row operations on the system, and watch the underlying geometry of the system change. For this applet, the solution is visible, and located at the intersection of the two lines (if it exists).
+
+    \begin{center}
+      \geogebra{puvfq3n5}{913}{387}
+    \end{center}
+
+    Follow along the solution in the applet, performing the row operations as the solution is found. You can use the buttons next to the equations to perform a row operation on them. For scaling a row, you first need to enter the scalar in the top left box and hit enter. If you mess up, just do the reverse operation, or hit "reset equations" to start over.
+    
+    As you do, track your observations and select all of the following statements that are correct:
+
+    \begin{selectAll}
+      \choice[correct]{Row operations do not change the lines represented by the rows.}
+      \choice{Scaling a row changes the underlying linear equation of the row.}
+      \choice{Swapping rows changes the underlying linear equations of the rows.}
+      \choice[correct]{Adding a multiple of a row to another row changes the underlying linear equations of the rows.}
+      \choice[correct]{Scaling a row by a non-zero constant changes the solution to the system.}
+      \choice[correct]{Adding a multiple of a row to another row does not change the solution to the system.}
+      \choice{Scaling a row by a non-zero constant changes the solution to the system.}
+  \end{selectAll}
+     
+    We'll begin with the operation
+    
+    $$R_2\rightarrow R_2+2R_1,$$
+    
+    which results in changing the 2nd row into the sum of itself and twice the first row.  This gives us
+     
+    $$ \begin{matrix}
+          2x& -&y&=&-4\\
+          7x & +&0y&= &\answer{-28} 
+        \end{matrix}$$
+     
+    Note that this step eliminates $y$ from the second equation. We can solve for $x$ in the second equation by dividing the equation by $7$. 
+    
+    $$R_2\rightarrow \frac{1}{7}R_2$$
+    $$\begin{matrix}
+           2x& -&y&=&-4\\
+          x & &&= &\answer{-4}
+           \end{matrix}$$
+       
+    We now know what $x$ is, and we'll have found our solution if we can similarly isolate $y$. \\
+    
+    Our next goal is to eliminate $x$ from the first equation.  To this end, we utilize
+    
+    $$R_1\rightarrow R_1-2R_2$$
+
+    which yields
+     
+    $$\begin{matrix}
+         0x& -&y&=&\answer{-2}\\
+         x & &&= &\answer{-4} \\
+        \end{matrix}$$
+     
+    Finally we scale the first equation by $-1$. $$R_1\rightarrow -R_1$$
+         
+    and switch the order of equations in order to display $x$ in the top row. 
+    
+    $$R_1\leftrightarrow R_2$$ 
+     
+    $$\begin{matrix}
+          x & &&= &\answer{-4}\\
+          & &y&=&\answer{2}     
+        \end{matrix}$$
+    
+    This last step is mostly for convention, as we tend to write variables in the order $x, y, z$, etc.
+       
+    This solution can be written as an ordered pair $(\answer{-4}, \answer{2})$.
+    
+        \begin{solution}
+    
+            In summary, the row operations that we used in  order were:
+    
+            $$R_2\rightarrow R_2+2R_1$$
+            $$R_2\rightarrow \frac{1}{7}R_2$$
+            $$R_1\rightarrow R_1-2R_2$$
+            $$R_1\rightarrow -R_1$$
+
+        You'll note that the only row operation that alters the geometry of the system is adding multiples of rows to each other. This makes sense because the underlying lines are being altered, but because we're adding lines within the system, the solution itself does not change.
+
+        You'll also notice that the final solution geometrically reduces to the vertical line $x=-4$ and the horizontal line $y=2$. In some sense, row operations re-shift space to orient parallel to the axes, making the solution easier to find.
+    
+        \end{solution}
+
+      \end{example}
+    
+    The main idea behind row operations is that they generate \emph{equivalent} systems of equations. \emph{Equivalence} is a big picture idea in mathematics, where you can change mathematical objects while keeping some useful property the same.
+    
+    \begin{example}
+    
+        Row operations produce \emph{equivalent} systems of equations because each operation preserves $\ldots$
+    
+        \begin{multipleChoice}
+            \choice{the number of non-zero variables in the each equation.}
+            \choice{the underlying linear functions of the system.}
+            \choice[correct]{the solution set to the system.}
+        \end{multipleChoice}
+    
+    \end{example}
+
+    \begin{remark}
+      This process of applying row operations to systems of linear equations is analogous to using algebra to solve for some unknown variable. If we start with 
+      
+      $$4x^2+2=10$$
+      
+      we solve for the solution set (the $x$-values satisfying the equation) by first subtracting 2 from both sides, then dividing by 4, then taking the square root of both sides, producing the equations
+      
+      $$4x^2=8$$
+      
+      $$x^2=2$$
+      
+      $$x=\pm\sqrt{2}$$
+      
+      If you evaluate $x$ as either $\sqrt{2}$ or $-\sqrt{2}$ to the equations above, you'll find that {\bf each equation} is satisfied by either value. So, each equation is \emph{equivalent} to the others in the sense that {\bf they have the same solution set}.
+      
+      The utility of applying operations to mathematical objects is we can find some desired unknown information about the object. In this case we find the solution sets.
+      
+      \end{remark}
+
+  \end{exploration}
+
+  \begin{exploration}\name{More on the Geometry of Systems of Equations}
+    
+    The previous example features a linear system of two equations and two unknowns (variables) with a unique solution. We'll now go through a couple of other examples that have no solutions or infinitely many solutions, and examine their geometries. 
+    
+    We'll also introduce a third equation to the system, to see the impact of having a different number of equations than variables.
+    
+    \begin{example}
+    
+        Create your own system of equations and see if you can solve it. The following GeoGebra environment will let you create a system of up to three equations and perform row operations to search for a solution. For consistency, the color of the top row (and corresponding line) will be green, the 2nd row will be purple, and the bottom row will be pink. 
+    
+        If you want to only use two (or one) equations, put zeros in the other rows. 
+    
+        \begin{center}
+            \geogebra{ajwg6jqx}{913}{401}
+        \end{center}
+    
+        \begin{hint}
+    
+                The lines made by the rows need to intersect, so as long as the lines aren't parallel you're good to go!
+    
+        \end{hint}
+    
+    \end{example}
+    
+    \begin{example}
+    
+        Let's consider systems that don't have unique solutions. In a 2x2 case, this means the lines are parallel. Parallel lines depend only on the relationship between the coefficients of $x$ and $y$, not on the constants. This gives us some different scenarios, depending on the values of the constants in our system.
+    
+        First, create a 2x2 system of equations with parallel lines and check all that are true about such systems. Be sure to use row operations to solve the system as much as possible to view the resulting end equations.
+    
+        \begin{hint}
+    
+            Drag the point "System Solution" to see what possible solutions (if any) exist. A solution will exist if the point can lie on both lines at once.
+    
+        \end{hint}
+    
+        \begin{selectAll}
+            \choice[correct]{The system can have no solutions.}
+            \choice[correct]{The system can have infinitely many solutions.}
+            \choice{The system can have one unique solution.}
+            \choice{The system can have a finite (nonzero) number of solutions.}
+            \choice[correct]{The equations can describe the same line.}
+            \choice[correct]{The equations can describe two parallel lines.}
+        \end{selectAll}
+    
+        \begin{solution}
+    
+            \begin{enumerate}
+    
+                \item An example system with no solutions has parallel lines that lie at different heights. Enter the system
+    
+                    $$\begin{array}{ccccc}
+                            2x & +&4y&=&2 \\
+                            3x& +&6y&=&20
+                        \end{array}$$
+    
+                    into the GeoGebra environment. You'll see that the system gives parallel lines that never intersect, and so there is no one point that lies on both lines. 
+    
+                    In this case, $R2\rightarrow R2-3/2\cdot R1$ gives us the equivalent system
+    
+                    $$\begin{array}{ccccc}
+                            2x & +&4y&=&2 \\
+                            0x& +&0y&=&17
+                        \end{array}$$
+    
+                    Another way to see that no solution exists, is to note that the 2nd equation can never be true.
+    
+                \item A system with infinitely many solutions results from two equations that describe the same line. Enter the system
+    
+                    $$\begin{array}{ccccc}
+                            2x & +&4y&=&2 \\
+                            4x& +&8y&=&4
+                        \end{array}$$
+    
+                    into the GeoGebra environment. You'll see that the system gives the same line twice, and so every point "System Solution" that lies along the visible line is a solution to the system, since it satisfies both equations.
+    
+                    In this case, $R2\rightarrow R2-2\cdot R1$ gives us the equivalent system
+    
+                    $$\begin{array}{ccccc}
+                            2x & +&4y&=&2 \\
+                            0x& +&0y&=&0
+                        \end{array}$$
+    
+                    Here, we have infinitely many solutions because the 2nd equation is always true, and so any $(x,y)$ pair along Row 1 satisfies the system.
+    
+            \end{enumerate}
+               
+    
+        \end{solution}
+    
+    \end{example}
+    
+    Now let's explore some more complex scenarios. Earlier we noted that row operations don't necessarily preserve the underlying lines of the system, but they do preserve the \emph{solution set}. We're going to use this idea to create a 3x2 system of equations that has a unique solution, and then discuss ways to make other, not so nice, systems.
+    
+    %\begin{sageSilent}
+    
+    %    import random
+    
+    %    # Create a random coefficient lambda_coeff
+    %    lambda_coeff = random.randint(1, 10)
+    
+    %    #store the coefficients of the first equation
+    %    a1 = 4
+    %    b1 = -1
+    %    c1 = 5
+    
+    %    #store the coefficients of the second equation
+     %   a2 = 2
+      %  b2 = 3
+      %  c2 = 13
+    
+       % #create the answer as the linear combination of the coefficients in each equation with lambda_coeff
+    
+        %answer_1= lambda_coeff*(a1+a2)
+        %answer_2= lambda_coeff*(b1+b2)
+        %answer_3= lambda_coeff*(c1+c2)
+    
+    %\end{sageSilent}
+    
+    \begin{example}
+    
+        Start with the 2x2 system 
+    
+        $$4x-y=5$$
+    
+        $$2x+3y=13.$$
+    
+        First, enter this in the GeoGebra environment with the final row as $0x+0y=0$, and note the solution is $(2,3)$.
+    
+        Using just two row operations, and the scalar %$\lambda=\sage{lambda_coeff}$
+        $\lambda=2$
+        , create a 3x2 system that describes three different lines, but still has the solution $(2,3)$.
+    
+        \begin{hint}
+    
+            There was a particular row operation that alters the underlying lines of the system, but preserves the solution set. You need to use two operations, one for each of the first two rows.
+    
+        \end{hint}
+    
+        The third equation should be of the form $\answer{12}x+\answer{4}y=\answer{36}$.
+        (Note, this answer will only be correct if you've used the correct $\lambda$ value, and used only two row operations to create this new equation.)
+    
+        %The third equation should be of the form $\answer{\sage{answer_1}}x+\answer{\sage{answer_2}}y=\answer{\sage{answer_3}}$. (Note, this answer will only be correct if you've used the correct $\lambda$ value, and used only two row operations to create this new equation.)
+    
+    \end{example}
+    
+    \begin{remark}
+    
+        Note that except for swapping rows, the allowable row operations really boil down to linear combinations of the coefficients in the rows.
+    
+        This is a phenomenon to keep in mind, as later in the course we'll see that high-dimensional data has exactly this structure. For various high-dimensional data sets (such as images), you can describe the data mostly as linear combinations of lower-dimensional data sets that are easier to work with. 
+        
+        This loose idea will become much more clear in later sections, but it is useful to note now that we actually will make use of data sets that aren't at first structured "nicely" in the sense of enabling nice solutions to systems of equations.
+    
+    \end{remark}
+    
+    Now, let's make more 3x2 systems of equations.
+    
+    \begin{example}
+    
+        Use the GeoGebra environment to create a 3x2 system of equations that has no solutions, but if reduced to 2x2, would have a unique solution.
+    
+        Use row operations to verify that the system has these properties.
+    
+        Use new equations than the ones provided in previous examples. 
+    
+        \begin{solution}
+    
+            The system
+    
+            $$\begin{array}{ccccc}
+                    5x & -&2y&=&4 \\
+                    x& -&y&=&3 \\
+                    2x& +&3y&=&13
+                \end{array}$$
+    
+            has no solution. You can see this as the three lines never intersect together, each pair of lines intersects once. 
+    
+            We can also use row operations to confirm this.
+    
+            $$R_1\rightarrow R_1-5R_2$$
+    
+            and
+            
+            $$R_2\rightarrow R_2-2R_2$$
+    
+            gives the system
+    
+            $$\begin{array}{ccccc}
+                    0x & +&3y&=&-11 \\
+                    x& -&y&=&3 \\
+                    0x& +&5y&=&7.
+                \end{array}$$
+    
+            We can further reduce this by creating nonzero $y$ in another equation. This can be done via
+    
+            $$R_3\rightarrow R_3/5$$
+    
+            $$R_2\rightarrow R_2+R_3$$
+    
+            $$R_1\rightarrow R_1-3R_3$$
+    
+            This gives the final system
+    
+            $$\begin{array}{ccccc}
+                    0x & +&0y&=&-15.2 \\
+                    x& +&0y&=&4.4 \\
+                    0x& +&y&=&1.4.
+                \end{array}$$
+    
+            Since Row 1 is never true, the system has no solution. If we had removed the 3rd row in the beginning, the row operations 
+    
+            $$R_1\rightarrow R_1-5R_2$$
+    
+            $$R_1\rightarrow R_1/3$$
+    
+            $$R_2\rightarrow R_2+R_2$$
+    
+            yields the system
+    
+            $$\begin{array}{ccccc}
+                    0x & +&y&=&-3.67 \\
+                    x& +&y&=&-.67.
+                \end{array}$$
+    
+        \end{solution}
+    
+    \end{example}
+
+  \end{exploration}
+
+\end{document}

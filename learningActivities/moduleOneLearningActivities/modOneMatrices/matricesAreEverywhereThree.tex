@@ -1,0 +1,133 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed} %borrowed from Bart and PEter Selinger
+\title{Learning Activity: Matrix Properties and Operations}
+\begin{document}
+\begin{abstract}
+Here we introduce matrices similar to vectors
+\end{abstract}
+\maketitle
+ 
+\begin{exploration}\name{Matrix Properties and Operations}
+
+\begin{remark}
+
+  Because it is productive to think about matrices as arrays of vectors, we can take linear combinations of matrices in the same way we do with vectors. This is a powerful tool for data manipulation and analysis, and we'll gain even more useful relationships between matrices and vectors in the next chapter.
+
+  For now, some definitions to make more precise the idea of a linear combination of matrices:
+
+  \begin{definition}\name{Addition of matrices}
+    Let $A$ and $B$ be two
+    $m\times n$-matrices. Then $A+B=C$%
+    \index{matrix!addition}%
+    \index{sum|see{addition}}%
+    \index{addition!of matrices} where $C$ is the $m\times n$-matrix
+    $C$ defined by
+    \begin{equation*}
+      C_{ij}=A_{ij}+B_{ij}
+    \end{equation*}
+
+    Said differently, you add matrices by adding their corresponding entries.
+
+    (IMPORTANT NOTE: You can only add matrices of the same size. If you have missing data, you need to make a decision on how to fill it in before you can add matrices together.)
+  \end{definition}
+
+  \begin{definition}\name{Scalar multiplication of matrices}
+    Let $A$ be an $m\times n$-matrix and let $c$ be a scalar. Then $cA=D$%
+    \index{matrix!scalar multiplication}%
+    \index{scalar multiplication!of matrices} where $D$ is the $m\times n$-matrix
+    $D$ defined by
+    \begin{equation*}
+      D_{ij}=cA_{ij}
+    \end{equation*}
+
+    Said differently, you multiply a matrix by a scalar by multiplying each entry of the matrix by the scalar.
+  \end{definition}
+
+\end{remark}
+
+Let's finish by practicing on some basic matrices. If possible, perform the specified linear combinations.
+
+\[
+A = \begin{pmatrix}
+2 & -1 & 0 \\
+4 & 3 & -2 \\
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+0 & 2 \\
+-1 & 3
+\end{pmatrix}, \quad
+C = \begin{pmatrix}
+4 & 0 & 1 \\
+-2 & 2 & 5
+\end{pmatrix}, \quad
+D = \begin{pmatrix}
+1 & -3 \\
+2 & 1 \\
+0 & 4
+\end{pmatrix}
+\]
+
+\begin{enumerate}
+\item Find $2A+3B$.
+\begin{solution}
+
+  $2A+3B$ is \wordChoice{
+    \choice{possible}
+    \choice[correct]{not possible}
+  } because the matrices \wordChoice{
+    \choice[correct]{are not}
+    \choice{are}
+  } the same size.
+
+\end{solution}
+\item Find $-2C+5D$.
+
+\begin{solution}
+
+  $-2C+5D$ is \wordChoice{
+    \choice{possible}
+    \choice[correct]{not possible}
+  } because the matrices \wordChoice{
+    \choice[correct]{are not}
+    \choice{are}
+  } the same size.
+
+\begin{problem}
+
+  If we instead took the transpose of $C$, then 
+  
+  $$-2C^T+5D=\begin{pmatrix} \answer{-3} & -11 \\ 10 & \answer{1} \\ \answer{-2} & 10 \end{pmatrix}.$$
+
+\end{problem}
+
+\end{solution}
+
+\item Find $3A+5C-1D$.
+
+\begin{solution}
+
+  $3A+5C-1D$ is \wordChoice{
+    \choice{possible}
+    \choice[correct]{not possible}
+  } because the matrices \wordChoice{
+    \choice{are}
+    \choice[correct]{are not}
+  } the same size.
+
+  \begin{problem}
+
+    If we instead took the transpose of $D$, then 
+    
+    $$3A+5C-1D^T=\begin{pmatrix} 25 & \answer{-5} & \answer{5} \\ 5 & \answer{18} & 15 \end{pmatrix}.$$
+
+  \end{problem}
+
+\end{solution}
+
+\end{enumerate}
+
+\end{exploration}
+
+\end{document}

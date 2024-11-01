@@ -1,0 +1,79 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{exercise}
+
+    \section*{Exercises}
+
+    \begin{exercise}
+      Compute $e^A$ and $\cos A$ for the following matrices:
+      \begin{equation*}
+        (a)\quad
+        A = \startmat{rr}
+          1 & 0 \\
+          0 & 2 \\
+        \stopmat,
+        \quad
+        (b)\quad
+        A = \startmat{rr}
+          4  & 2  \\
+          -3 & -1 \\
+        \stopmat,
+        \quad
+        (c)\quad
+        A = \startmat{rrr}
+          0 & 1 & 1 \\
+          1 & 0 & -1 \\
+          -1 & 1 & 2 \\
+        \stopmat.
+      \end{equation*}
+    \end{exercise}
+    
+    
+    \begin{exercise}
+      Use matrix exponentials to find the solution to the
+      first-order linear differential equation
+      \begin{equation*}
+        \startmat{c}
+          x \\
+          y
+        \stopmat^{\prime} = \startmat{rr}
+          0 & -1 \\
+          6 & 5
+        \stopmat \startmat{c}
+          x \\
+          y
+        \stopmat
+      \end{equation*}
+      with initial value
+      \begin{equation*}
+        \startmat{c}
+          x(0) \\
+          y(0)
+        \stopmat = \startmat{r}
+          2 \\
+          2
+        \stopmat.
+      \end{equation*}
+      Hint: form the matrix exponential $e^{At}$ and then the solution is
+      $e^{At}\,\vect{v}_0$, where $\vect{v}_0$ is the initial vector.
+      \begin{solution}
+        The solution is
+        \begin{equation*}
+          e^{At}C = \startmat{c}
+            8e^{2t} - 6e^{3t} \\
+            18e^{3t} - 16e^{2t}
+          \stopmat.
+        \end{equation*}
+      \end{solution}
+    \end{exercise}
+    
+
+\end{exercise}
+
+\end{document}

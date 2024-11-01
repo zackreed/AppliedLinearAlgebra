@@ -1,0 +1,55 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+  \begin{exercise}
+    Consider the sequence of numbers defined by the recurrence
+    \begin{equation*}
+      \begin{array}{l@{~}c@{~}l}
+        a_0 &=& 0, \\
+        a_1 &=& 1, \\
+        a_{n+2} &=& 2a_{n+1} + 3a_n, \quad\mbox{for all $n\geq 0$.} \\
+      \end{array}
+    \end{equation*}
+    Find the first 5 members of this sequence. Then solve the recurrence
+    and find $a_{20}$.
+  \end{exercise}
+  
+  \begin{exercise}
+    Consider the sequence of numbers defined by the recurrence
+    \begin{equation*}
+      \begin{array}{l@{~}c@{~}l}
+        b_0 &=& 1, \\
+        b_1 &=& 2, \\
+        b_2 &=& 3, \\
+        b_{n+3} &=& 2b_{n+2} + b_{n+1} - 2b_n, \quad\mbox{for all $n\geq 0$.} \\
+      \end{array}
+    \end{equation*}
+    Find the first 5 members of this sequence. Then solve the recurrence
+    and find $b_{20}$.
+  \end{exercise}
+  
+  \begin{exercise}
+    Consider two sequences of numbers $c_0,c_1,c_2,\ldots$ and
+    $d_0,d_1,d_2,\ldots$, defined by the following mutual recurrence
+    relation.
+    \begin{equation*}
+      \begin{array}{l@{~}c@{~}l@{\quad}l@{~}c@{~}l}
+        c_0 &=& 0,             & d_0 = 1 \\
+        c_{n+1} &=& 4c_n - 3d_n, & d_{n+1} = 2c_n - d_n, \quad\mbox{for all $n\geq 0$.} \\
+      \end{array}
+    \end{equation*}
+    Find the first 5 members of both sequences. Then solve the
+    recurrence. Hint: first find a matrix $A$ such that
+    \begin{equation*}
+      \startmat{c} c_{n+1} \\ d_{n+1} \stopmat
+      = A \startmat{c} c_n \\ d_n \stopmat.
+    \end{equation*}
+  \end{exercise}
+  
+
+
+\end{document}

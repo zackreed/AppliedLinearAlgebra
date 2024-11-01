@@ -1,0 +1,133 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\section*{Exercises}
+
+\begin{exercise}
+  For each of the following matrices, find the eigenvectors and
+  eigenvalues. Use this to visualize the linear transformation
+  $T:\R^2\to\R^2$ that is described by the matrix.
+  \begin{equation*}
+    A = \startmat{rr}
+      1 & 2 \\
+      2 & 1 \\
+    \stopmat,
+    \quad
+    B = \startmat{rr}
+      1 & 0 \\
+      2 & -1 \\
+    \stopmat,
+    \quad
+    C = \startmat{rr}
+      1 & 1 \\
+      0 & 2 \\
+    \stopmat,
+    \quad
+    D = \startmat{rr}
+      1 & 1 \\
+      1 & 1 \\
+    \stopmat,
+    \quad
+    E = \startmat{rr}
+      1 & 0 \\
+      -1 & 2 \\
+    \stopmat.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+  If $A$ is the matrix of a linear transformation that rotates all
+  vectors in $\R^2$ by $60^{\circ}$, explain why $A$ cannot have any
+  real eigenvalues. Is there an angle such that rotation by this
+  angle would have a real eigenvalue? What eigenvalues would be
+  obtainable in this way?
+  \begin{solution}
+    A rotation by $60^{\circ}$ cannot map any non-zero vector to a
+    scalar multiple of itself. The only rotations of $\R^2$ that have
+    real eigenvalues are rotations by $180^{\circ}$ and $0^{\circ}$.
+    The former has eigenvalue $-1$, and the latter has eigenvalue $1$
+    (with all vectors being eigenvectors).
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Let $T$ be the linear transformation that reflects vectors about
+  the $x$-axis. Find a matrix for $T$ and then find its eigenvalues and
+  eigenvectors.
+  \begin{solution}
+    The matrix of $T$ is $\startmat{rr}
+      1 & 0 \\
+      0 & -1
+    \stopmat$. The eigenvectors and eigenvalues are:
+    \begin{equation*}
+      \set{\startmat{c}
+          0 \\
+          1
+        \stopmat} ~\mbox{for eigenvalue}~ {-1},
+      \quad\set{\startmat{c}
+          1 \\
+          0
+        \stopmat} ~\mbox{for eigenvalue}~ {1}.
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Let $T$ be the linear transformation that reflects vectors about the
+  line $x=y$. Find a matrix of $T$ and then find eigenvalues and
+  eigenvectors.
+  \begin{solution}
+    The matrix of $T$ is $\startmat{rr}
+      0 & 1 \\
+      1 & 0
+    \stopmat$. The eigenvectors and eigenvalues are:
+    \begin{equation*}
+      \set{\startmat{c}
+          1 \\
+          1
+        \stopmat} ~\mbox{for eigenvalue}~ {-1},
+      \quad\set{\startmat{c}
+          -1 \\
+          1
+        \stopmat} ~\mbox{for eigenvalue}~ {1}.
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Let $T$ be the linear transformation that reflects all vectors in
+  $\R^3$ about the $xy$-plane. Find a matrix for $T$ and then
+  obtain its eigenvalues and eigenvectors.
+  \begin{solution}
+    The matrix of $T$ is $\startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & -1
+    \stopmat$
+    The eigenvectors and eigenvalues are:
+    \begin{equation*}
+      \set{\startmat{c}
+          0 \\
+          0 \\
+          1
+        \stopmat} ~\mbox{for eigenvalue $-1$},
+      \quad\set{\startmat{c}
+          1 \\
+          0 \\
+          0
+        \stopmat,
+        \startmat{c}
+          0 \\
+          1 \\
+          0
+        \stopmat} ~\mbox{for eigenvalue $1$}.
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\end{document}

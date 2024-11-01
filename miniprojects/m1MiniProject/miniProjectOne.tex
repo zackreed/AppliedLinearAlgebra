@@ -57,10 +57,11 @@
   %https://grouplens.org/datasets/movielens/
   We're going to draw some idealized data from a larger data set of people's preferences for certain movies. We'll be looking at a very idealistic subset of the data, one where every rater has rated every movie on the list. We'll deal with a slightly more complicated example later for the course projects. 
 
-  The full data set contains around 1 million ratings of 3952 movies by 6040 users. One issue with the data set is that, as one might expect, not every rater has rated every movie, so that introduces some complexities that data scientists spend lots of time dealing with. We're just going to look at a simpler subset of the data where 125 users have rated 20 movies.
+  The full data set contains around 1 million ratings of 3952 movies by 6040 users. One issue with the data set is that, as one might expect, not every rater has rated every movie, so that introduces some complexities that data scientists spend lots of time dealing with. We're just going to look at a simpler subset of the data where 125 users have rated Star Wars movies.
 
-  For now, we'll be looking at people's ratings (1:bad to 5:good) for the following 20 movies:
+  For now, we'll be looking at people's ratings (1:bad to 5:good).
 
+  Here are some examples of movies that were rated in the data set:
   \vspace{1em}
 
   %make two columns of movies out of the list below, using an array environment
@@ -81,7 +82,19 @@
 
   \vspace{1em}
 
-  First, to get an idea of how we'll approach the data, we'll look at the ratings of 3 movies, the original Star Wars Trilogy, which lets us visualize the data.
+  \begin{remark}\name{Work-Along pt 1}
+  
+    In the following YouTube video, I walk through the mini-project with you, explaining much of the set up and descriptions you'll find below. 
+    
+    The best way to use this video is to do the work along with me, pausing the video when you need to, and then filling in any missing code along the way.
+
+    \begin{center}
+      \youtube{dSNbc78181g}
+    \end{center}
+
+  \end{remark}
+
+  First, to get an idea of how we'll approach the data, we'll start with some visualization.
 
   To get things started, open up a MATLAB live script and load star\_wars\_ratings.mat.
 
@@ -150,7 +163,15 @@
   
   This will use want's called a "for loop" in MATLAB, which is a way to do lots of calculations at once without the computer having to be told to do each one individually. See the HINT if you're unfamiliar with for loops.
 
+\begin{remark}
 
+  Here is the second half of the work-along video. If you want, watch as you work through the next exploration, pausing when you need to, and then filling in any missing code along the way.
+
+  \begin{center}
+    \youtube{c-ZRacLk3jl}
+  \end{center}
+
+\end{remark}
 
 
   

@@ -1,0 +1,178 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\section*{Exercises}
+
+\begin{exercise}
+  Find the vector equation for the line through $(-7,6,0)$ and
+  $(-1,1,4)$. Then, find the parametric equations for this
+  line.
+\end{exercise}
+
+\begin{exercise}
+  Find parametric equations for the line through the point
+  $(7,7,1)$ with direction vector
+  $\vect{d} = \startmat{c} 1 \\ 6 \\ 2 \stopmat$.
+\end{exercise}
+
+\begin{exercise}
+  Parametric equations of the line are
+  \begin{equation*}
+    \begin{array}{c}
+      x = t+2, \\
+      y = 6-3t, \\
+      z = -t-6.
+    \end{array}
+  \end{equation*}
+  Find a direction vector for the line and a point on the line.
+\end{exercise}
+
+\begin{exercise}
+  The equation of a line in two dimensions is written as $y=x-5$. Find
+  a vector equation for this line.
+\end{exercise}
+
+\begin{exercise}
+  Find parametric equations for the line through $(6, 5, -2, 3)$
+  and $(5, 1, 2, 1)$.
+\end{exercise}
+
+\begin{exercise}
+  Consider the following vector equation for a line in $\R^3$:
+  \begin{equation*}
+    \startmat{c} x\\y\\z \stopmat
+    = \startmat{r} 1\\2\\0 \stopmat
+    + t\,\startmat{r} 1\\0\\1 \stopmat.
+  \end{equation*}
+  Find a new vector equation for the same line by doing the change of
+  parameter $t=2-s$.
+  \begin{solution}
+    We have
+    \begin{equation*}
+      \startmat{c} x\\y\\z \stopmat
+      = \startmat{r} 1\\2\\0 \stopmat
+      + (2-s)\,\startmat{c} 1\\0\\1 \stopmat
+      = \startmat{r} 3\\2\\2 \stopmat
+      + s\,\startmat{r} -1\\0\\-1 \stopmat.
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Consider the line given by the following parametric equations:
+  \begin{equation*}
+    \begin{array}{c}
+      x = 2t+2, \\
+      y = 5-4t, \\
+      z= -t-3.
+    \end{array}
+  \end{equation*}
+  Find symmetric equations for the line.
+\end{exercise}
+
+\begin{exercise}
+  Find the point on the line segment from $P = (-4, 7, 5)$ to
+  $Q = (2, -2, -3)$ which is $\frac{1}{7}$ of the way from $P$
+  to $Q$.
+\end{exercise}
+
+\begin{exercise} Suppose a triangle in $\R^n$ has vertices at $P$, $Q$,
+  and $R$.  Consider the lines which are drawn from a vertex to the
+  mid point of the opposite side. Show these three lines intersect in
+  a point and find the coordinates of this point.
+\end{exercise}
+
+\begin{exercise}
+  Determine whether the lines
+  \begin{equation*}
+    \startmat{c} x \\ y \\ z \stopmat
+    = \startmat{c} 1 \\ 1 \\ 2 \stopmat
+    + t \startmat{c} 1 \\ 2 \\ 2 \stopmat
+    \quad\mbox{and}\quad
+    \startmat{c} x \\ y \\ z \stopmat
+    = \startmat{c} 1 \\ -1 \\ -4 \stopmat
+    + s \startmat{c} 1 \\ 1 \\ -1 \stopmat
+  \end{equation*}
+  intersect. If yes, find the point of intersection.
+\end{exercise}
+
+\begin{exercise}
+  Determine whether the lines
+  \begin{equation*}
+    \startmat{c} x \\ y \\ z \stopmat
+    = \startmat{c} 2 \\ -1 \\ 0 \stopmat
+    + t \startmat{c} 1 \\ 3 \\ 2 \stopmat
+    \quad\mbox{and}\quad
+    \startmat{c} x \\ y \\ z \stopmat
+    = \startmat{c} 1 \\ 1 \\ 3 \stopmat
+    + s \startmat{c} 1 \\ 2 \\ 0 \stopmat
+  \end{equation*}
+  intersect. If yes, find the point of intersection.
+\end{exercise}
+
+\begin{exercise}
+  Find the angle between the two lines
+  \begin{equation*}
+    \startmat{r} x \\ y \\ z \stopmat
+    = \startmat{r} 3 \\ 0 \\ 1 \stopmat
+    + t \startmat{r} 3 \\ -3 \\ 0 \stopmat
+    \quad\mbox{and}\quad
+    \startmat{r} x \\ y \\ z \stopmat
+    = \startmat{r} 3 \\ 0 \\ 1 \stopmat
+    + s \startmat{r} -1 \\ 2 \\ 2 \stopmat.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise} Let $P = (1,2,3)$ be a point in $\R^3$. Let $L$ be the line
+  through the point $P_0 = (1, 4, 5)$ with direction vector
+  $\vect{d} = \startmat{c} 1 \\ -1 \\
+    1 \stopmat$. Find the shortest distance from $P$ to
+  $L$, and find the point $Q$ on $L$ that is closest to $P$.
+\end{exercise}
+
+\begin{exercise} Let $P = (0,2,1)$ be a point in $\R^3$. Let $L$ be the line through the points $P_0 = (1, 1, 1)$ and $P_1 = (4, 1, 2)$. Find the shortest distance from $P$ to $L$, and find the point $Q$ on $L$ that is closest to $P$.
+\end{exercise}
+
+\begin{exercise}\label{ex:angle-lines}
+  When we computed the angle between two lines in
+  Example~\ref{exa:angle-between-two-lines}, we calculated two
+  different angles and took the smaller of the two. Show that one can
+  get the same answer by taking the absolute value of the dot product,
+  i.e., by solving
+  \begin{equation*}
+    \cos\theta =
+    \frac{\abs{\vect{u}\dotprod\vect{v}}}{\norm{\vect{u}}\norm{\vect{v}}}.
+  \end{equation*}
+  \begin{solution}
+    From trigonometry, we have the following properties of the cosine
+    function:
+    \begin{itemize}
+    \item $\cos\theta$ is positive for $0\leq\theta\leq\frac{\pi}{2}$,
+      and negative for $\frac{\pi}{2}\leq\theta\leq\pi$.
+    \item $\cos(\pi-\theta) = -\cos\theta$.
+    \end{itemize}
+    By the method in Example~\ref{exa:angle-between-two-lines}, we
+    calculated $\theta$ such that
+    \begin{equation*}
+      \cos\theta =
+      \frac{\vect{u}\dotprod\vect{v}}{\norm{\vect{u}}\norm{\vect{v}}}.
+    \end{equation*}
+    If $0\leq\theta\leq\frac{\pi}{2}$, the answer is $\theta$. If
+    $\frac{\pi}{2}\leq\theta\leq\pi$, the answer is $\phi=\pi-\theta$.
+    But in the last case, the dot product is negative and we have
+    \begin{equation*}
+      \cos\phi = \cos(\pi-\theta) = -\cos\theta = \frac{-\vect{u}\dotprod\vect{v}~~}{\norm{\vect{u}}\norm{\vect{v}}}
+      =
+      \frac{\abs{\vect{u}\dotprod\vect{v}}}{\norm{\vect{u}}\norm{\vect{v}}}.
+    \end{equation*}
+    So in either case we get the correct answer by taking the absolute
+    value.
+  \end{solution}
+\end{exercise}
+
+
+\end{document}

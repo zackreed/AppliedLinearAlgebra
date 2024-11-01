@@ -1,0 +1,627 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from chrichton ogle Linear
+\title{Elementary Matrices: Row Reduction, Matrix Decomposition, and Finding the Inverse of a Matrix}
+\begin{document}
+\begin{abstract}
+
+    In this section we re-examine row operations, but as matrices in addition to transformations of systems of equations. We will find that the sequence of row operations that reduce a matrix to reduced row-echelon form give us the inverse of a matrix (if it exists). This is one useful instance of the idea of matrix decomposition, writing a matrix as a product of nice matrices.
+
+\end{abstract}
+\maketitle
+
+%THE MAIN IDEA IS THAT WE CONSTRUCT THE INVERSE OF A MATRIX BY USING ELEMENTARY MATRICES, AND SO THAT'S THE POINT OF REDUCED ROW ECHELON FORM AND STUFF. 
+%ALSO SET UP AN RREF IN GEOGEBRA WITH "Reduced" function as part of it, just so they can 
+%See the full process, then use rref in maltab and stuff for higher dimensions.
+
+As we have seen, systems of equations are solved by applying row operations to generate equivalent systems that are progressively easier to solve. 
+
+We'll now return to our primary lense of vectors, matrices, and linear transformations. First, we'll re-cast systems of equations as matrix-vector products, and then re-cast finding a solution as solving an \emph{inverse} problem. That is, systems of equations give us a matrix $M$, and a known output $\vec{w}$, and we want to find the input $\vec{v}$ such that $M\vec{v} = \vec{w}$.
+ 
+\section{A return to elementary matrices}
+
+Recall that in Section BLAH, we established that some matrices were intertible, namely a few simple square matrices, and that we could build new invertible matrices as a product of these elementary matrices. The central tension we left unresolved was how to determine whether a random matrix was invertible without knowing its construction ahead of time. Now that we've built up the idea of row operations from systems of equations, and have some understanding of what it means to solve such systems, we're ready to resolve the tension and develop a methodology for determining whether or not a matrix is invertible.
+
+%% SO A PRE-SYSTEMS section will involve just building up a few matrices from elementary matrices, and then setting up the need to sovle the inverse problem. Then we'll return here. 
+
+It turns out these row operations can be realized by left
+multiplication by a certain type of matrix, and these matrices have
+uses beyond that of performing row operations. To explain how matrix
+multiplication comes into play, let us write $\cal R(_-)$ for a
+particular row operation on $m\times n$ matrices, so that the given
+operation is represented by $A\mapsto {\cal R}(A)$. It turns out that
+for any of the three types of row operations we have considered above,
+one has the identity
+\[
+{\cal R}(A) = {\cal R}(I*A) = {\cal R}(I)*A
+\]
+In other words, {\it the row operation ${\cal R}(_-)$, applied to $A$, can be realized in terms of left multiplication by the $m\times m$ matrix ${\cal R}(I)$ gotten by applying $\cal R$ to the $m\times m$ identity matrix}.
+ 
+As one would then expect, one has - for each row operation - a
+corresponding {\it elementary matrix} derived from the identity matrix
+of the appropriate dimension by application of that given operation.
+ 
+These matrices, and the notation used to define them, can be recorded
+in an expanded version of the table above in which we indicated the
+types of operations and their representation:
+ 
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $R_i\leftrightarrow R_j$} & {\large ${\cal R}(I) = P_{ij}$}\\
+    \phantom{x} & {\large rows} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ row} & {\large $r\cdot R_i$} & {\large ${\cal R}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ row} & {\large $a\cdot R_i$ added to $R_j$} & {\large ${\cal R}(I) = E_{ji}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ row} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+ 
+%BADBAD: Examples to be included
+ 
+In an analogous fashion, one can also perform column operations on a
+matrix. As with row operations there are three types, and each type
+can be achieved via {\it right} multiplication with the corresponding
+matrix. In other words, if ${\cal C}(_-)$ indicates the given column
+operation, then for each type one has
+\[
+{\cal C}(A) = {\cal C}(A*I) = A*{\cal C}(I)
+\]
+Denoting the $k^{th}$ column by $C_k$, we have
+ 
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $C_i\leftrightarrow C_j$} & {\large ${\cal C}(I) = P_{ij}$}\\
+    \phantom{x} & {\large colmns} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ column} & {\large $r\cdot C_i$} & {\large ${\cal C}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ column} & {\large $a\cdot C_i$ added to $C_j$} & {\large ${\cal C}(I) = E_{ij}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ column} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+ 
+% BADBAD: [Examples to be included]
+ 
+Each elementary matrix is invertible, and of the same type. The
+following indicates how each elementary matrix behaves under i)
+inversion and ii) transposition:
+\begin{align}
+P_{ij}^{-1} = P_{ij},&\qquad P_{ij}^T = P_{ij}\\
+D_i(r)^{-1} = D_i(r^{-1}),&\qquad D_i(r)^T = D_i(r)\\
+E_{ij}(a)^{-1} = E_{ij}(-a),&\qquad E_{ij}(a)^T = E_{ji}(a)
+\end{align}
+\vskip.4in
+ 
+Elementary matrices are useful in problems where one wants to express the inverse of a matrix explicitly as a product of elementary matrices. We have already seen that a square matrix $A$ is invertible iff is is row equivalent to the identity matrix. By keeping track of the row operations used and then realizing them in terms of left multiplication by elementary matrices, we can write down a product of matrices ending in $A$ that equals $I$. The product of elementary matrices appearing to the left of $A$ must then be equal to $A^{-1}$. With such an expression for $A^{-1}$ we can also represent $A$ itself as a product of elementray matrices.
+\vskip.2in
+ 
+\begin{example} Suppose $A = \begin{bmatrix} 2 & 3\\3 & 5\end{bmatrix}$. The following (non-unique) sequence of row operations reduces $A$ to $I$:
+\[\begin{split}
+\begin{bmatrix} 2 & 3\\3 & 5\end{bmatrix}
+\xrightarrow{R_2 := R_2 + (-1)*R_1}
+\begin{bmatrix} 2 & 3\\1 & 2\end{bmatrix}
+\xrightarrow{R_1 := R_1 + (-2)*R_2}
+\begin{bmatrix} 0 & -1\\1 & 2
+\end{bmatrix}\\
+\xrightarrow{R_2 := R_2 + 2*R_1}
+\begin{bmatrix} 0 & -1\\1 & 0
+\end{bmatrix}
+\xrightarrow{R_1\leftrightarrow R_2}\begin{bmatrix} 1 & 0\\0 & -1
+\end{bmatrix}\xrightarrow{(-1)*R_2}\begin{bmatrix} 1 & 0\\0 & 1\end{bmatrix}
+\end{split}
+\]
+Remembering that elementary matrices realize row operations via left-multiplication, transforming the above sequence into a product yields the equation
+\[
+D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)*A = I
+\]
+Setting $B = D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)$, we see that $B*A = I$. But we have already seen that this implies $B = A^{-1}$, the unique inverse of $A$.
+\vskip.2in
+ 
+Now if we want to also represent $A$ as a product of elementary matrices, we could do so by the sequence of equalities
+\begin{align*}
+A &= \big(A^{-1}\big)^{-1}\\
+  &= \big(D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)\big)^{-1}\\
+  &= E_{21}(-1)^{-1}*E_{12}(-2)^{-1}*E_{21}(2)^{-1}*P_{12}^{-1}*D_2(-1)^{-1}\\
+  &= E_{21}(1)*E_{12}(2)*E_{21}(-2)*P_{12}*D_2(-1)
+\end{align*}
+\end{example}
+\vskip.2in
+ 
+\begin{exercise} Suppose $B = \begin{bmatrix} 5 & 1\\4 & 2\end{bmatrix}$. Find a sequence of row operations that row reduce $B$ to $I$. Then use this to express both $B^{-1}$ an $B$ as a product of elementary matrices.
+ 
+\end{exercise}
+
+\subsection{Inverses of elementary matrices}
+
+Suppose we have applied a row operation to a matrix $A$. Consider the
+row operation required to return $A$ to its original form, i.e., to
+undo the row operation. It turns out that this action is described by
+the inverse of an elementary matrix. The following theorem ensures
+that the inverse of each elementary matrix is itself an elementary
+matrix.
+
+\begin{theorem}{Inverses of elementary matrices}{inverse-elementary-matrix}
+  Every elementary matrix is invertible and its inverse is also an
+  elementary matrix%
+  \index{elementary matrix!inverse}%
+  \index{matrix!elementary matrix!inverse}.
+\end{theorem}
+
+In fact, the inverse of an elementary matrix is constructed by doing
+the {\em reverse} row operation on $I$. $E^{-1}$ is obtained by
+performing the row operation which would carry $E$ back to $I$.
+
+\begin{itemize}
+\item If $E$ is obtained by switching rows $i$ and $j$, then $E^{-1}$
+  is also obtained by switching rows $i$ and $j$.
+\item If $E$ is obtained by multiplying row $i$ by the scalar $k$,
+  then $E^{-1}$ is obtained by multiplying row $i$ by the scalar
+  $\frac{1}{k}$.
+\item If $E$ is obtained by adding $k$ times row $i$ to row $j$, then
+  $E^{-1}$ is obtained by subtracting $k$ times row $i$ from row $j$.
+\end{itemize}
+
+\begin{example}{Inverse of an elementary matrix}{inverse-elementary-matrix}
+  Find $E^{-1}$, where $E$ is the elementary matrix
+  \begin{equation*}
+    E
+    =
+    \startmat{cc}
+      1 & 0 \\
+      0 & 2
+    \stopmat
+  \end{equation*}
+\end{example}
+
+\begin{solution}
+  $E$ is obtained from the $2\times 2$ identity matrix by multiplying
+  the second row by $2$. In order to carry $E$ back to the identity,
+  we need to multiply the second row of $E$ by $\frac{1}{2}$.  Hence,
+  $E^{-1}$ is given by
+  \begin{equation*}
+    E^{-1}
+    =
+    \startmat{cc}
+      1 & 0 \\
+      0 & \frac{1}{2}
+    \stopmat.
+  \end{equation*}
+\end{solution}
+
+\subsection{More properties of inverses}
+
+% ======================================================================
+
+In this section, we will use elementary matrices to prove a useful
+theorem about the inverse of a square matrix. We start with an
+observation about the {\ef} of a right invertible matrix.
+
+\begin{lemma}\name{\Ef of a right invertible matrix}
+  Suppose that $A$ is right invertible. Then the {\rref} of $A$ does
+  not have a row of zeros.
+\end{lemma}
+
+\begin{proof}
+  Let $R$ be the {\rref} of $A$. Then by Theorem~\ref{thm:form-rua},
+  we can write $R=UA$ for some invertible square matrix $U$. By
+  assumption, we have $AB=I$, and therefore
+  \begin{equation*}
+    R(BU^{-1})
+    ~=~
+    (UA)(BU^{-1})
+    ~=~
+    U(AB)U^{-1}
+    ~=~
+    UIU^{-1}
+    ~=~
+    UU^{-1}
+    ~=~
+    I.
+  \end{equation*}
+  If $R$ had a row of zeros, then so would the product
+  $R(BU^{-1})$. But since the identity matrix $I$ does not have a row
+  of zeros, neither does $R$.
+\end{proof}
+
+\begin{theorem}{Right invertible square matrices are invertible}{right-square-left}
+  Suppose $A$ and $B$ are square matrices such that $AB=I$. Then it
+  follows that $BA=I$, and therefore $B=A^{-1}$. In particular, a
+  square matrix is right invertible if and only if it is left
+  invertible if and only if it is invertible.
+\end{theorem}
+
+\begin{proof}
+  Assume $A$ and $B$ are square matrices such that $AB=I$. Let $R$ be
+  the {\rref} of $A$. Then by Theorem~\ref{thm:form-rua}, we can write
+  $R=UA$ where $U$ is an invertible matrix. Since $AB=I$, we know by
+  Lemma~\ref{lem:no-zero-row} that $R$ does not have a row of
+  zeros. Since $R$ is a square {\rref} with no row of zeros, each
+  column must be a pivot column, and it follows that $R=I$. Hence,
+  $UA=I$, and therefore $A$ is left invertible. Moreover, we have
+  \begin{equation*}
+    B ~=~ IB ~=~ (UA)B ~=~ U(AB) ~=~ UI ~=~ U,
+  \end{equation*}
+  and therefore $B=U$. It follows that $BA=UA=I$, as claimed.
+
+  To prove the last claim, note that we just proved that for square
+  matrices, $AB=I$ implies $BA=I$. Therefore, every right inverse of
+  $A$ is also a left inverse, and therefore an inverse. But of course,
+  we also have that $BA=I$ implies $AB=I$. This is just the same
+  theorem, with the roles of $A$ and $B$ interchanged. Therefore,
+  every left inverse of $A$ is also a right inverse.
+\end{proof}
+
+This theorem is very useful, because it allows us to test only one of
+the products $AB$ or $BA$ in order to check that $B$ is the inverse of
+$A$, saving us half of the work. It is important to stress, however,
+that this only works for {\em square} matrices. As we saw in
+Example~\ref{exa:right-inverse}, non-square matrices can be right
+invertible without being left invertible, or vice versa.
+
+\subsection{Writing an invertible matrix as a product of elementary matrices}
+
+Recall from Algorithm~\ref{algo:matrix-inversion-algorithm} that an
+$n\times n$-matrix $A$ is invertible if and only if $A$ can be carried
+to the $n\times n$ identity matrix using elementary row
+operations. Combining this with our discussion of elementary matrices
+we see that $A$ is invertible if and only if it can be written as a
+product of elementary matrices. This is the content of the following
+theorem.
+
+\begin{theorem}{Product of elementary matrices}{prod-elementary}
+  Let $A$ be an $n \times n$-matrix. Then $A$ is invertible if and
+  only if it can be written as a product of elementary matrices.
+\end{theorem}
+
+\begin{proof}
+  If $A$ is an invertible $n\times n$-matrix, then its {\rref} is the
+  $n\times n$ identity matrix $I$. By Theorem~\ref{thm:form-rua}, we
+  can write $I=UA$, where $U = E_k\cdots E_2E_1$ is a product of
+  elementary matrices. Then
+  \begin{equation*}
+    A ~=~ U^{-1} ~=~ E_1^{-1}E_2^{-1}\cdots E_k^{-1}.
+  \end{equation*}
+  By Theorem~\ref{thm:inverse-elementary-matrix}, if $E_i$ is an
+  elementary matrix, then so is $E_i^{-1}$. Therefore, $A$ has been
+  written as a product of elementary matrices. Conversely, if $A$ can
+  be written as a product of elementary matrices, then $A$ is clearly
+  invertible, because each elementary matrix is invertible.
+\end{proof}
+
+\begin{example}{Product of elementary matrices}{prod-elementary}
+  Let $A = \startmat{rrr}
+    0 &  1 & 0 \\
+    1 &  1 & 0 \\
+    0 & -2 & 1
+  \stopmat$.
+  Write $A$ as a product of elementary matrices.
+\end{example}
+
+\begin{solution}
+  Following the process of Theorem~\ref{thm:prod-elementary}, we first
+  row-reduce $A$ to its {\rref}, recording each row operation as an
+  elementary matrix.
+  \begin{equation*}
+    \startmat{rrr}
+      0 & 1 & 0 \\
+      1 & 1 & 0 \\
+      0 & -2 & 1 \\
+    \stopmat
+    \quad\stackrel{R_1\rowswap R_2}{\roweq}\quad
+    \startmat{rrr}
+      1 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1 \\
+    \stopmat
+    \quad\mbox{with elementary matrix}\quad
+    E_1 ~=~ \startmat{rrr}
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      0 & 0 & 1
+    \stopmat,
+  \end{equation*}
+  \begin{equation*}
+    \startmat{rrr}
+      1 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1 \\
+    \stopmat
+    \quad\stackrel{R_1\rowop R_1-R_2}{\roweq}\quad
+    \startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1 \\
+    \stopmat
+    \quad\mbox{with elementary matrix}\quad
+    E_2 ~=~  \startmat{rrr}
+      1 & -1 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \stopmat,
+  \end{equation*}
+  \begin{equation*}
+    \startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1 \\
+    \stopmat
+    \quad\stackrel{R_3\rowop R_3+2R_2}{\roweq}\quad
+    \startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1 \\
+    \stopmat
+    \quad\mbox{with elementary matrix}\quad
+    E_3 ~=~ \startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 2 & 1 \\
+    \stopmat.
+  \end{equation*}
+  Notice that the {\rref} of $A$ is $I$. Hence $I = UA$ where
+  $U=E_3E_2E_1$. It follows that
+  $A = U^{-1} = E_1^{-1}E_2^{-1}E_3^{-1}$, and so we have succeeded in
+  writing $A$ as a product of elementary matrices
+  \begin{equation*}
+    A
+    ~=~ E_1^{-1}E_2^{-1}E_3^{-1}
+    ~=~
+    \startmat{rrr}
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      0 & 0 & 1
+    \stopmat
+    \startmat{rrr}
+      1 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \stopmat
+    \startmat{rrr}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1
+    \stopmat.
+  \end{equation*}
+  In particular, it follows that $A$ is invertible.
+\end{solution}
+
+\subsection{Elementary matrices and row operations}
+
+Recall from Definition~\ref{def:row-operations} that there are three
+kinds of elementary row operations%
+\index{matrix!row operation}%
+\index{matrix!elementary row operation}%
+\index{row operation}%
+\index{elementary row operation} on matrices:
+\begin{enumerate}
+\item Switch two rows.
+\item Multiply a row by a non-zero number.
+\item Add a multiple of one row to another row.
+\end{enumerate}
+The purpose of this section is to show that each of these row
+operations corresponds to a special type of invertible matrix called
+an \textbf{elementary matrix}%
+\index{elementary matrix}%
+\index{matrix!elementary matrix}.
+
+\begin{example}{Elementary matrix for switching two rows}{elementary-matrix-1}
+  Let
+  \begin{equation*}
+    E ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & 0 & 1 \\
+      0 & 1 & 0 \\
+    \stopmat.
+  \end{equation*}
+  What is the effect of multiplying $E$ by an arbitrary $3\times
+  n$-matrix $A$?
+\end{example}
+
+\begin{solution}
+  Consider an arbitrary $3\times n$-matrix
+  \begin{equation*}
+    A ~=~ \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+    \stopmat.
+  \end{equation*}
+  We compute the product $EA$ by the row method:
+  \begin{equation*}
+    EA ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & 0 & 1 \\
+      0 & 1 & 0 \\
+    \stopmat
+    \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+    \stopmat
+    ~=~
+    \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+    \stopmat.
+  \end{equation*}
+  So the effect of multiplying $A$ by $E$ on the left is exactly the
+  same as switching rows 2 and 3. We say that $E$ is the
+  \textbf{elementary matrix for switching rows 2 and 3}.
+\end{solution}
+
+\begin{example}{Elementary matrix for multiplying a row by a non-zero number}{elementary-matrix-2}
+  Let
+  \begin{equation*}
+    E ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & k & 0 \\
+      0 & 0 & 1 \\
+    \stopmat.
+  \end{equation*}
+  What is the effect of multiplying $E$ by an arbitrary $3\times
+  n$-matrix $A$?
+\end{example}
+
+\begin{solution}
+  We compute the product $EA$ by the row method:
+  \begin{equation*}
+    EA ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & k & 0 \\
+      0 & 0 & 1 \\
+    \stopmat
+    \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+    \stopmat
+    ~=~
+    \startmat{rrrr}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      ka_{21} & ka_{22} & \cdots & ka_{2n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+    \stopmat.
+  \end{equation*}
+  So the effect of multiplying $A$ by $E$ on the left is exactly the
+  same as multiplying row 2 by the scalar $k$. We say that $E$ is the
+  \textbf{elementary matrix for multiplying row 2 by $k$}.
+\end{solution}
+
+\begin{example}{Elementary matrix for adding a multiple of one row to another row}{elementary-matrix-3}
+  Let
+  \begin{equation*}
+    E ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & k & 1 \\
+    \stopmat.
+  \end{equation*}
+  What is the effect of multiplying $E$ by an arbitrary $3\times
+  n$-matrix $A$?
+\end{example}
+
+\begin{solution}
+  Once again we compute the product $EA$:
+  \begin{equation*}
+    EA ~=~ \startmat{lll}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & k & 1 \\
+    \stopmat
+    \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      a_{31} & a_{32} & \cdots & a_{3n} \\
+    \stopmat
+    ~=~
+    \startmat{cccc}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      a_{31}+ka_{21} & a_{32}+ka_{22} & \cdots & a_{3n}+ka_{2n} \\
+    \stopmat.
+  \end{equation*}
+  So the effect of multiplying $A$ by $E$ on the left is exactly the
+  same as adding $k$ times row 2 to row 3. We say that $E$ is the
+  \textbf{elementary matrix for adding $k$ times row 2 to row 3}.
+\end{solution}
+
+As these examples show, performing each type of elementary row
+operation is the same as multiplying (on the left) by a certain
+invertible matrix. Thesse matrices are called the \textbf{elementary
+  matrices}%
+\index{elementary matrix}%
+\index{matrix!elementary matrix}. In the
+above examples, we have only considered $3\times 3$-elementary
+matrices, but they exist for other sizes too. The following definition
+makes this precise. It also shows how to calculate the elementary
+matrix corresponding to any elementary row operation.
+
+\begin{definition}{Elementary matrices and row operations}{elementary-matrices-and-row-operations}
+  Let $E$ be an $n\times n$-matrix. Then $E$ is an \textbf{elementary
+    matrix}%
+  \index{elementary matrix}%
+  \index{matrix!elementary matrix}
+  if it is the result of applying one elementary row operation to the
+  $n\times n$ identity matrix.
+\end{definition}
+
+\begin{example}{Finding an elementary matrix}{finding-elementary-matrix}
+  Consider the elementary row operation of adding $5$ times row 3 to
+  row 1 of a $4\times n$-matrix. Find the elementary matrix $E$
+  corresponding to this row operation.
+\end{example}
+
+\begin{solution}
+  Following Definition~\ref{def:elementary-matrices-and-row-operations}, all
+  we have to do is apply the desired row operation to the
+  $4\times 4$-identity matrix:
+  \begin{equation*}
+    \startmat{rrrr}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 \\
+    \stopmat
+    \quad
+    \stackrel{R_1\rowop R_1+5R_3}{\roweq}
+    \quad
+    \startmat{rrrr}
+      1 & 0 & 5 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 \\
+    \stopmat
+    ~=~ E.
+  \end{equation*}
+\end{solution}
+
+We can double-check that multiplying $E$ by any $4\times n$-matrix
+does indeed have the desired effect:
+\begin{equation*}
+  \startmat{rrrr}
+    1 & 0 & 5 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+  \stopmat
+  \startmat{cccc}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    a_{31} & a_{32} & \cdots & a_{3n} \\
+    a_{41} & a_{42} & \cdots & a_{4n} \\
+  \stopmat
+  ~=~
+  \startmat{cccc}
+    a_{11}+5a_{31} & a_{12}+5a_{32} & \cdots & a_{1n}+5a_{3n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    a_{31} & a_{32} & \cdots & a_{3n} \\
+    a_{41} & a_{42} & \cdots & a_{4n} \\
+  \stopmat.
+\end{equation*}
+The fact that this always works is the content of the following
+theorem.
+
+\begin{theorem}{Multiplication by an elementary matrix and row operations}{multiplication-by-elementary-matrix}
+  Performing any of the three elementary row operations on a matrix $A$ is the
+  same as taking the product $EA$, where $E$ is the elementary matrix
+  obtained by applying the desired row operation to the identity
+  matrix.
+\end{theorem}
+
+
+
+\end{document}

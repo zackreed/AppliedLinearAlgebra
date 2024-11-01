@@ -43,7 +43,7 @@ linalg.smiley_show(smiley)
 You should see the following 21x21 image:
 %include a centered image of the smiley face
 \begin{center}
-\includegraphics[width=0.6\textwidth]{smiley_base.png}
+\includegraphics{smiley_base.png}
 \end{center}
 
 \item Now change the smiley's right eye (on your left) to a wink, aka a diagonal of black, filling in the blanks of the code as your final answer.
@@ -82,7 +82,7 @@ linalg.smiley_show(smiley_wink)
 It should look like this:
 %include a centered image of the wink
 \begin{center}
-\includegraphics[width=0.6\textwidth]{smiley_wink.png}
+\includegraphics{smiley_wink.png}
 \end{center}
 
 \item Now we want to swap which eye is winking, which will involve rotating the wink pixels. To do this, we'll want to multiply right\_wink by a matrix that swaps the first and third column vectors. 
@@ -107,7 +107,7 @@ linalg.smiley_show(smiley_wink)
 It should look like this:
 %include a centered image of the wink
 \begin{center}
-\includegraphics[width=0.6\textwidth]{left_wink.png}
+\includegraphics{left_wink.png}
 \end{center}
 
 \end{enumerate}
@@ -171,8 +171,8 @@ Notice that the center of the sliding box is often a different color than the or
 
 %Make a figure with two images side by side, centered, called conv_example_1 and conv_example_2
 \begin{center}
-\includegraphics[width=0.45\textwidth]{conv_example_1.png}
-\includegraphics[width=0.45\textwidth]{conv_example_2.png}
+\includegraphics{conv_example_1.png}
+\includegraphics{conv_example_2.png}
 \end{center}
 
 The $3\times 3$ grid centered on $smiley(3,7)$ is the sub-matrix

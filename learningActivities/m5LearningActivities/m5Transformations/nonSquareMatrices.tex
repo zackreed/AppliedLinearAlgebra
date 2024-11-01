@@ -1,0 +1,40 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+
+\author{Zack Reed}
+\title{Non-Square Matrix Transformations}
+\begin{document}
+\begin{abstract}
+
+In this activity, we will explore non-square matrices as linear transformations, revisiting some of our earlier discussion about linear transformations that map across dimensions. We'll re-visit the ideas of domain, range, rank, and matrix multiplication in this new context.
+
+\end{abstract}
+\maketitle
+
+%HIT THE DESCRIBED TOPICS, PARTICULARLY WHY WE HAVE THE RULES OF MATRIX MULTIPLCIATION, THEN MAYBE END WITH LIKE MULTIPLYING INTO THE IMAGE FROM LIKE AN LU FACTORIZATION OR SOMETHING LIKE THAT. 
+
+\begin{remark}
+
+    So far, we've been focusing on square matrices, which are linear transformations that map vectors in $\mathbb{R}^n$ to vectors in $\mathbb{R}^n$. Many, if not most, matrices that we deal with in practice, however, are not organized into an $n\times n$ array.
+
+    Images, for instance, are shaped to fit on various screen sizes. The following ai-generated image of Albert Einstein has dimensions $384\times 640$ pixels. As such, the matrix of pixel values that makes up the image is a $384\times 640$ matrix.
+
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{einstein_image.jpeg}
+        %from playground ai
+    \end{center}
+
+    So far, our discussion of matrices has foregrounded the idea of linear transformation. That is, the role that a matrix plays geometrically is to map vectors from one space to another. While we can't immediately see what would be advantageous to thinking of this image as describing a linear transformation, later down the road we will gain a lot of tools for understanding how to manipulate and analyze images by thinking of them as matrices.
+
+\end{remark}
+
+\begin{exploration}
+
+    How do we think about non-square matrices as linear transformations? 
+
+    Let's return to the ideas of domain, range, rank, and transformation composition. 
+
+\end{exploration}
+
+\end{document}

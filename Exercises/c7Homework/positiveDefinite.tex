@@ -1,0 +1,140 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\section*{Exercises}
+
+\begin{exercise}
+  Determine by direct calculation (i.e., without calculating the
+  characteristic polynomial or the eigenvalues) which of the following
+  matrices are positive definite, positive semidefinite, or neither.
+  \begin{equation*}
+    A = \startmat{rr}
+      1 & 1 \\
+      1 & 1 \\
+    \stopmat,\quad
+    B = \startmat{rr}
+      1  & -2 \\
+      -2 &  5 \\
+    \stopmat,\quad
+    C = \startmat{rr}
+      2 & 3 \\
+      1 & 3 \\
+    \stopmat,\quad
+    D = \startmat{rrr}
+      2 & 1 & 1 \\
+      1 & 1 & 0 \\
+      1 & 0 & 1 \\
+    \stopmat,\quad
+    E = \startmat{rrr}
+      1 & 0 &  0 \\
+      0 & 2 &  0 \\
+      0 & 0 & -1 \\
+    \stopmat.
+  \end{equation*}
+  \begin{solution}
+    (a) Positive semidefinite. (b) Positive definite. (c) Not
+    symmetric (therefore neither). (d) Positive semidefinite. (e)
+    Neither.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Calculate the eigenvalues of each symmetric matrix, then determine
+  for each matrix whether it is positive definite, positive
+  semidefinite, or neither.
+  \begin{equation*}
+    A = \startmat{rr}
+      2 & 2 \\
+      2 & 5 \\
+    \stopmat,\quad
+    B = \startmat{rr}
+      4  & -6 \\
+      -6 &  9 \\
+    \stopmat,\quad
+    C = \startmat{rrr}
+      2 &  1 &  0 \\
+      1 &  1 & -1 \\
+      0 & -1 &  2 \\
+    \stopmat,\quad
+    D = \startmat{rrr}
+      3 & -4 &  2 \\
+     -4 &  4 &  0 \\
+      2 &  0 &  4 \\
+    \stopmat.
+  \end{equation*}
+  is positive definite, positive semidefinite, or neither.
+  \begin{solution}
+    (a) Eigenvalues: $\set{1,6}$. Positive definite.
+    (b) Eigenvalues: $\set{0,13}$. Positive semidefinite.
+    (c) Eigenvalues: $\set{0,2,3}$. Positive semidefinite.
+    (d) Eigenvalues: $\set{-1,4,8}$. Neither.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Which of the following formulas define an inner product on $\R^3$?
+  Here, $\vect{u}=\startmat{c}u_1,u_2,u_3\stopmat^T$ and
+  $\vect{v}=\startmat{c}v_1,v_2,v_3\stopmat^T$.
+  \begin{enumerate}
+  \item $\iprod{\vect{u},\vect{v}} = u_1v_1 + 2u_1v_2 + 2u_2v_1 + 3u_2v_2
+    + 3u_3v_3$.
+  \item $\iprod{\vect{u},\vect{v}} = u_1v_1 - u_1v_2 - u_2v_1 + 2u_2v_2
+    + u_3v_3$.
+  \item $\iprod{\vect{u},\vect{v}} = u_1v_1 - u_1v_2 - u_2v_1 + u_2v_2
+    + 4u_3v_3$.
+  \item $\iprod{\vect{u},\vect{v}} = u_1v_1 - u_1v_2 - u_2v_1 + 3u_2v_2
+    - u_2v_3 - u_3v_2 + u_3v_3$.
+  \end{enumerate}
+  \begin{solution}
+    (a) No (neither positive definite nor semidefinite).
+    (b) Yes.
+    (c) No (positive semidefinite but not definite).
+    (d) Yes.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Use Descartes' rule of signs to determine which of the following
+  matrices are positive definite and/or positive semidefinite.
+  \begin{equation*}
+    A = \startmat{cc}
+      2 & 2 \\
+      2 & 1 \\
+    \stopmat,
+    \quad
+    B = \startmat{ccc}
+      2  & -1 & 0 \\
+      -1 &  1 & 0 \\
+      0  &  0 & 1 \\
+    \stopmat,
+    \quad
+    C = \startmat{cccc}
+      2  & 1 & -1 &  1 \\
+      1  & 1 &  0 &  0 \\
+      -1 & 0 &  2 & -1 \\
+      1  & 0 & -1 &  1 \\
+    \stopmat.
+  \end{equation*}
+  \begin{solution}
+    The characteristic polynomials are:
+    \begin{equation*}
+      \begin{array}{lcl}
+        \det(A-\eigenvar I) &=& \eigenvar^2 - 3\eigenvar - 2, \\
+        \det(B-\eigenvar I) &=& -\eigenvar^3 + 4\eigenvar^2 - 4\eigenvar + 1, \\
+        \det(C-\eigenvar I) &=& \eigenvar^4 - 6\eigenvar^3 + 9\eigenvar^2 - 3\eigenvar + 0.
+      \end{array}
+    \end{equation*}
+    For $A$, the coefficients are not weakly alternating, so $A$ is
+    not positive semidefinite. For $B$, the coefficients are strongly
+    alternating, so $B$ is positive definite. For $C$, the
+    coefficients are weakly, but not strongly alternating, so $C$ is
+    positive semidefinite, but not positive definite.
+  \end{solution}
+\end{exercise}
+
+
+\end{document}

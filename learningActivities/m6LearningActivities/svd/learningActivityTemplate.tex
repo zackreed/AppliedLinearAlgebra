@@ -1,0 +1,131 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\title{Learning Activity: Singular Value Decomposition (SVD)}
+\begin{document}
+\begin{abstract}
+
+    In this learning activity, you will be 
+\end{abstract}
+\maketitle
+
+\section*{Introduction}
+In machine learning (ML), some of the most important linear algebra concepts are the \textbf{singular value decomposition (SVD)} and \textbf{principal component analysis (PCA)}. With all the raw data collected, how can we discover structures? For example, with the interest rates of the last 6 days, can we understand its composition to spot trends?
+
+This becomes even harder for high-dimensional raw data. It is like finding a needle in a haystack. SVD allows us to extract and untangle information. In this article, we will detail SVD and PCA. We assume you have basic linear algebra knowledge, including rank and eigenvectors. If you experience difficulties in reading this article, I will suggest refreshing those concepts first. At the end of the article, we will answer some questions in the interest rate example above. This article also contains optional sections. Feel free to skip them according to your interest level.
+
+\section*{Misconceptions (optional for beginners)}
+Some common questions that non-beginners may ask include whether PCA is only for dimension reduction. PCA reduces dimension but is far more than that. As described in Wikipedia:
+
+\begin{quote}
+Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables (entities each of which takes on various numerical values) into a set of values of linearly uncorrelated variables called principal components.
+\end{quote}
+
+From a simplified perspective, PCA transforms data linearly into new properties that are uncorrelated. For ML, positioning PCA as feature extraction may allow us to explore its potential better than just dimension reduction.
+
+\section{SVD and PCA Differences}
+SVD decomposes a matrix into special matrices that are easy to manipulate and analyze. PCA focuses on the most significant components. SVD allows for finding PCA by truncating less important basis vectors in the original SVD matrix.
+
+\section{Matrix Diagonalization}
+In the article on eigenvalue and eigenvectors, we describe a method to decompose an \(n \times n\) square matrix \(A\) into:
+
+\[
+A = PDP^{-1}
+\]
+
+where \(D\) is a diagonal matrix containing eigenvalues of \(A\).
+
+\section{Singular Vectors \& Singular Values}
+For any \(m \times n\) matrix \(A\), consider \(AA^\top\) and \(A^\top A\):
+
+\begin{itemize}
+    \item symmetrical,
+    \item square,
+    \item at least positive semidefinite (eigenvalues are zero or positive),
+    \item both matrices have the same positive eigenvalues, and
+    \item both have the same rank \(r\) as \(A\).
+\end{itemize}
+
+These matrices, common in ML, allow us to find orthonormal eigenvectors.
+
+Let’s introduce some terms. The eigenvectors of \(AA^\top\) are denoted by \(u_i\) and of \(A^\top A\) by \(v_i\), known as the \textbf{singular vectors} of \(A\). Their square roots are called \textbf{singular values}.
+
+\section{SVD}
+Any matrix \(A\) can be factorized as:
+
+\[
+A = U \Sigma V^\top
+\]
+
+where \(U\) and \(V\) are orthogonal matrices and \(\Sigma\) is a diagonal matrix with elements equal to the square root of the positive eigenvalues of \(AA^\top\) or \(A^\top A\).
+
+\[
+A = U \begin{bmatrix} \sigma_1 & 0 & \cdots \\ 0 & \sigma_2 & \cdots \\ \vdots & \vdots & \ddots \end{bmatrix} V^\top
+\]
+
+The columns of \(U\) are called the left singular vectors, and those of \(V\) are the right singular vectors.
+
+\section{Example}
+Consider an example of a simple \(2 \times 2\) matrix. We calculate:
+
+\[
+A = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix}
+\]
+
+The singular values are \(\sigma_1 = 5\) and \(\sigma_2 = 3\). Thus, the SVD composition is:
+
+\[
+A = U \Sigma V^\top
+\]
+
+\section{Recap of SVD}
+The SVD decomposition of \(A\) can be summarized as:
+
+\[
+A = U \Sigma V^\top
+\]
+
+where
+
+\[
+U^\top U = I \quad \text{and} \quad V^\top V = I
+\]
+
+\section{Moore-Penrose Pseudoinverse}
+To find the best-fit solution, we compute a pseudoinverse of \(A\) that minimizes the least square error:
+
+\[
+A^+ = V \Sigma^+ U^\top
+\]
+
+\section{Variance \& Covariance}
+The sample variance is defined as:
+
+\[
+s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
+\]
+
+The covariance matrix \(\Sigma\) captures variance along the diagonal elements and covariance between variables in the non-diagonal elements.
+
+\section{Covariance Matrix \& SVD}
+The SVD decomposition of a covariance matrix reveals the principal components of data. The total variance of the data equals the trace of the covariance matrix, which is the sum of the squares of singular values.
+
+\section{Principal Component Analysis (PCA)}
+Technically, SVD extracts data in the directions with the highest variances. PCA uses SVD for mapping data to principal components, allowing dimensionality reduction by ignoring less significant terms.
+
+\section{Example with Interest Rates}
+Using interest rate data from the US Treasurer Department, we can factorize the covariance matrix using SVD to find the principal components.
+
+\section{Tips}
+Scale features before performing SVD. For example, to retain 99\% variance, choose \(k\) such that:
+
+\[
+\sum_{i=1}^k \sigma_i^2 \geq 0.99 \sum_{i=1}^n \sigma_i^2
+\]
+
+\end{document}
+
+
+\end{document}

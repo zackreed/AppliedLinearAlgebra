@@ -16,7 +16,7 @@ In this activity, we will explore the most important interpretation of matrices:
     Let's begin by looking at a plot of many vectors in the plane. This is a very simple example where collections of vectors give human-interpretable data. In this case, the vectors all form the outline of a smiley face, as seen in the figure below:
 
     \begin{center}
-        \includegraphics{smiley1.png}
+        \includegraphics[width=\textwidth]{smiley1.png}
     \end{center}
 
     \begin{remark}
@@ -26,7 +26,7 @@ In this activity, we will explore the most important interpretation of matrices:
         Recall that we can represent vectors by points or arrows. In this case we want to use points, as arrows can get crowded in plots such as the following, depicting the same smiley face:
 
         \begin{center}
-            \includegraphics{smiley2.png}
+            \includegraphics[width=\textwidth]{smiley2.png}
         \end{center}
 
     \end{remark}
@@ -35,7 +35,7 @@ In this activity, we will explore the most important interpretation of matrices:
         Let's suppose that we had instead been given this plot of the smiley face to begin with:
 
         \begin{center}
-            \includegraphics{smiley3.png}
+            \includegraphics[width=\textwidth]{smiley3.png}
         \end{center}
 
         We ca immediately see what's wrong with the picture, the smile part of the face has been rotated by 90 degrees. Our goal is to find a way to rotate the smile back, so that it makes the original image.
@@ -658,7 +658,7 @@ In this activity, we will explore the most important interpretation of matrices:
         That should yield a smiley face that is stretched vertically by a factor of $2$.
 
         \begin{center}
-            \includegraphics{face_stretch.png}
+            \includegraphics[width=\textwidth]{face_stretch.png}
         \end{center}
 
         Next, if we just re-load $\texttt{face\_points}$ and run the same code (but for a rotation matrix), we won't keep the stretching. We would just get a $60^\circ$ rotation of the original smiley face like below.
@@ -673,7 +673,7 @@ In this activity, we will explore the most important interpretation of matrices:
         \end{verbatim}
 
         \begin{center}
-            \includegraphics{face_rotate.png}
+            \includegraphics[width=\textwidth]{face_rotate.png}
         \end{center}
 
         Instead, we have to first apply the stretching, then keep the result and apply the rotation. 
@@ -704,11 +704,11 @@ In this activity, we will explore the most important interpretation of matrices:
         %do a side-by-side of the stretched and rotated smiley faces, within one single figure
 
         \begin{center}
-            \includegraphics{face_stretch.png}
+            \includegraphics[width=\textwidth]{face_stretch.png}
         \end{center}
 
         \begin{center}
-            \includegraphics{face_stretch_rotate.png}
+            \includegraphics[width=\textwidth]{face_stretch_rotate.png}
         \end{center}
 
         The final smiley face is the result of the two transformations in sequence.
@@ -914,7 +914,7 @@ In this activity, we will explore the most important interpretation of matrices:
         Hopefully both approaches got you the following:
 
         \begin{center}
-            \includegraphics{face_stretch_rotate_reflect.png}
+            \includegraphics[width=\textwidth]{face_stretch_rotate_reflect.png}
         \end{center}
 
     \end{example}
@@ -1142,7 +1142,7 @@ In this activity, we will explore the most important interpretation of matrices:
         % Include the FSR image
         \begin{figure}[ht!]
             \centering
-            \includegraphics{fsr.png}
+            \includegraphics[width=\textwidth]{fsr.png}
             \caption{(a)}
         \end{figure}
         
@@ -1158,7 +1158,7 @@ In this activity, we will explore the most important interpretation of matrices:
         % Include the SRF image
         \begin{figure}[ht!]
             \centering
-            \includegraphics{srf.png}
+            \includegraphics[width=\textwidth]{srf.png}
             \caption{(c)}
         \end{figure}
 
@@ -1174,7 +1174,7 @@ In this activity, we will explore the most important interpretation of matrices:
         % Include the RSF image
         \begin{figure}[ht!]
             \centering
-            \includegraphics{rsf.png}
+            \includegraphics[width=\textwidth]{rsf.png}
             \caption{(d)}
         \end{figure}
 

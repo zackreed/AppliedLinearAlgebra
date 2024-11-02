@@ -22,7 +22,7 @@ If you're coming from STEM, you've probably more accustomed to thinking about ve
 
 Velocity, acceleration, and forces naturally lend themselves to vector representation, and point us towards other properties of vectors that we care to measure, namely those of \textit{magnitude} and \textit{direction}. This example will emphasize the utility of \textit{addition} and \textit{scaling} as fundamental to vectors.
 
-\begin{exploration}
+\begin{example}
     
   Suppose an airplane is flying from Daytona Beach to a location roughly northeast of Daytona Beach at a speed of $300$ knots. If we were in a scalar context, $300$ would be the only necessary speed information, as we could distinguish $300$ from $-300$ as being "forward" or "backward" motion, and the value $300$ to give the speed. In the spatial world, however, objects move in directions, and so we need to know the direction of the airplane's velocity as well.
 
@@ -141,13 +141,13 @@ A vector's \textit{magnitude}, then, can be thought of as its distance from $\ve
   \end{remark}
 
 
-\end{exploration}
+\end{example}
 
 \section*{Blowing Off Course}
   
   Suppose that for the entire trip, the wind is blowing exactly in the northwestern direction at a speed of $100*\sqrt(2)$ knots ($\sqrt{2}$ in the applet). The wind (uniformly applied throughout the trip) is imposing another velocity on the plane. To determine the plane's new trajectory, we need the notion of \textit{vector addition}.
 
-  \begin{exploration}
+
 
   The plane's velocity vector is given in the GeoGebra environment below. You can always see its intended trajectory (and original velocity vector) in purple. Hit the ``Animate'' button to see the plane's path.
 
@@ -166,7 +166,6 @@ A vector's \textit{magnitude}, then, can be thought of as its distance from $\ve
     \geogebra{qytw4pbt}{801}{575}
   \end{center}
 
-  \begin{remark}
 
 This is how we geometrically interpret \emph{vector addition}. If $\vec{v}$ is the plane's velocity vector, and $\vec{w}$ is the wind vector, then the plane's new velocity vector is $\vec{v}+\vec{w}$. 
 
@@ -252,15 +251,13 @@ The geometry and the numerical interpretations together make sense, since you ca
 
 You can move horizontally below (or above) the first coordinate of $u+v$ by moving $u_1$ then $v_1$ (hence, $u_1+v_1$), and similarly for the second coordinate. This is the geometric interpretation of vector addition.
 
-  \end{remark}
 
-\end{exploration}
 
 \section*{Course Correction}
 
   By how much do you need to correct the plane to reach its destination in a straight shot? There are two immediately avaialable options, with one making more practical sense than the other. 
 
-\begin{exploration}
+\begin{problem}
   First, you can direct the plane against the wind, so that the wind velocity is canceled out and the plane can return to its original course. This adds the negative of $\vec{w}$ to $\vec{v}$, so that the plane's new velocity vector is $\vec{v}+\vec{w}-\vec{w}=\vec{v}$.
 
   Try this in the applet, by selecting the "Allow Correction" check box and entering $-\vec{w}=[-1,-1]$. Setting the wind and correction then shows the plan on its original course, with the velocity vectors first moving along the initial velocity, then along the wind, then back down reversing the velocity. 
@@ -329,7 +326,7 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
   When all is said and done, the plane's new velocity vector is $\vec{v}+\vec{w}+\vec{c}=[2.79, 1.12]+[1,1]+[0,\answer{-.61}]\approx [3.79,\answer{1.51}]$. With this velocity, the plane will travel along the same path but get to the destination in less time.
   
 
-\end{exploration}
+\end{problem}
 
 
 \end{document}

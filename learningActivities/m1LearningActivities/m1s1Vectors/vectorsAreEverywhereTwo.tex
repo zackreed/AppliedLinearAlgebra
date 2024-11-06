@@ -34,20 +34,22 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
 
   The vector $\vec{D}=[11.14,4.46]$ gives the airplane a direction, but we also need to factor in the ariplane's speed. We want the geometric length of the vector to be the plane's speed ($300$ knots), so we want the plane's velocity vector to be an arrow in the direction of $\vec{D}$, but only a length $3$. The vector length is called its \textit{magnitude}, and for our purposes its magnitude directly correlates to speed. As such, we need a way to geometrically determine the lengths of vectors, for which we'll use the Pythagorean theorem.
 
-  \begin{remark}
+\end{example}
 
-    Distance and length are two sides of the same coin for standard Euclidean space, and the Pythagorean theorem key.
+\begin{remark}
 
-    Consider two points $P=(p_1,p_2)$ and
-    $Q=(q_1,q_2)$ in the plane, as in the following picture.
-   
-      \begin{tikzpicture}[scale=1]
-        \draw[dashed] (0,0) -- (0,2) -- (3,2);
-        \draw[fill=blue!10] (0,0) -- (3,0) -- (3,2) -- cycle;
-        \draw[thick] (0,0) -- (3,2);
-        \draw[fill](0,0) circle [radius=1.8pt] node[left=1ex]{$Q=(q_1,q_2)$};
-        \draw[fill](3,2) circle [radius=1.8pt] node[right=1ex]{$P=(p_1,p_2)$};
-      \end{tikzpicture}
+  Distance and length are two sides of the same coin for standard Euclidean space, and the Pythagorean theorem key.
+
+  Consider two points $P=(p_1,p_2)$ and
+  $Q=(q_1,q_2)$ in the plane, as in the following picture.
+  
+    \begin{tikzpicture}[scale=1]
+      \draw[dashed] (0,0) -- (0,2) -- (3,2);
+      \draw[fill=blue!10] (0,0) -- (3,0) -- (3,2) -- cycle;
+      \draw[thick] (0,0) -- (3,2);
+      \draw[fill](0,0) circle [radius=1.8pt] node[left=1ex]{$Q=(q_1,q_2)$};
+      \draw[fill](3,2) circle [radius=1.8pt] node[right=1ex]{$P=(p_1,p_2)$};
+    \end{tikzpicture}
 
     The distance between $P$ and $Q$ is shown in the picture as a solid
     line, which is the hypotenuse of a right triangle.  The lengths of the
@@ -56,41 +58,42 @@ Velocity, acceleration, and forces naturally lend themselves to vector represent
     length of the hypotenuse (and thus the distance between $P$ and $Q$)
     equals
     \begin{equation*}
-      d(P,Q)
-      =\sqrt{(p_1-q_1)^2+(p_2-q_2)^2}.
+    d(P,Q)
+    =\sqrt{(p_1-q_1)^2+(p_2-q_2)^2}.
     \end{equation*}
 
     Similarly in 3 dimensions, points $P=(p_1,p_2,p_3)$ and
     $Q = (q_1,q_2,q_3)$ have a distance of $d(P,Q)=\sqrt{(p_1-q_1)^2+(p_2-q_2)^2+(p_3-q_3)^2}$.
 
-      %\begin{tikzpicture}[scale=1]
-      %  \draw[dashed] (3,0,-2) -- (0,0,-2) -- (0,0,0);
-      %  \draw[dashed] (0,0,0) -- (0,2,0);
-      %  \draw[dashed] (0,0,-2) -- (0,2,-2);
-      %  \draw[fill=blue!20] (0,0,0) -- (3,0,0) -- (3,0,-2) -- cycle;
-      %%  \draw[fill=blue!10] (0,0,0) -- (3,0,-2) -- (3,2,-2) -- cycle;
-       % \draw[dashed] (0,2,0) -- (3,2,0) -- (3,2,-2) -- (0,2,-2) -- cycle;
-       % \draw[dashed] (3,0,0) -- (3,2,0);
-       % \draw[thick] (0,0,0) -- (3,2,-2);
-       % \draw[fill](0,0,0) circle [radius=1.8pt] node[left=1ex]{$Q=(q_1,q_2,q_3)$};
-       % \draw[fill](3,2,-2) circle [radius=1.8pt] node[right=1ex]{$P=(p_1,p_2,p_3)$};
-        %\draw[fill](3,0,-2) circle [radius=1.8pt] node[right=1ex]{$R=(p_1,p_2,q_3)$};
-        %\draw[fill](3,0,0) circle [radius=1.8pt] node[right=1ex]{$S=(p_1,q_2,q_3)$};
-      %\end{tikzpicture}
+    %\begin{tikzpicture}[scale=1]
+    %  \draw[dashed] (3,0,-2) -- (0,0,-2) -- (0,0,0);
+    %  \draw[dashed] (0,0,0) -- (0,2,0);
+    %  \draw[dashed] (0,0,-2) -- (0,2,-2);
+    %  \draw[fill=blue!20] (0,0,0) -- (3,0,0) -- (3,0,-2) -- cycle;
+    %%  \draw[fill=blue!10] (0,0,0) -- (3,0,-2) -- (3,2,-2) -- cycle;
+      % \draw[dashed] (0,2,0) -- (3,2,0) -- (3,2,-2) -- (0,2,-2) -- cycle;
+      % \draw[dashed] (3,0,0) -- (3,2,0);
+      % \draw[thick] (0,0,0) -- (3,2,-2);
+      % \draw[fill](0,0,0) circle [radius=1.8pt] node[left=1ex]{$Q=(q_1,q_2,q_3)$};
+      % \draw[fill](3,2,-2) circle [radius=1.8pt] node[right=1ex]{$P=(p_1,p_2,p_3)$};
+      %\draw[fill](3,0,-2) circle [radius=1.8pt] node[right=1ex]{$R=(p_1,p_2,q_3)$};
+      %\draw[fill](3,0,0) circle [radius=1.8pt] node[right=1ex]{$S=(p_1,q_2,q_3)$};
+    %\end{tikzpicture}
+\end{remark}
 
   
 \begin{definition}\name{Distance between points}
   
-      Let $P=(p_1,\ldots,p_n)$ and $Q=(q_1,\ldots,q_n)$ be two points in
-      $\R^n$. Then the \textbf{distance}%
-      \index{distance!point to point} between these points is defined as
-      \begin{equation*}
-        d(P, Q) = \sqrt{(p_1-q_1)^2 + \ldots + (p_n-q_n)^2}.
-      \end{equation*}
-      This formula is also called the \textbf{distance formula}%
-      \index{distance formula}. We may also write $\left\|PQ\right\|$ for the
-      distance between $P$ and $Q$.
-    \end{definition}
+  Let $P=(p_1,\ldots,p_n)$ and $Q=(q_1,\ldots,q_n)$ be two points in
+  $\R^n$. Then the \textbf{distance}%
+  \index{distance!point to point} between these points is defined as
+  \begin{equation*}
+    d(P, Q) = \sqrt{(p_1-q_1)^2 + \ldots + (p_n-q_n)^2}.
+  \end{equation*}
+  This formula is also called the \textbf{distance formula}%
+  \index{distance formula}. We may also write $\left\|PQ\right\|$ for the
+  distance between $P$ and $Q$.
+\end{definition}
 
 A vector's \textit{magnitude}, then, can be thought of as its distance from $\vec{0}$. 
 
@@ -115,33 +118,29 @@ A vector's \textit{magnitude}, then, can be thought of as its distance from $\ve
   \index{vector!norm}.
 \end{definition}
 
-  \end{remark}
 
-  So, to describe our plane's velocity vector, it needs to be in the same direction as the vector $\vec{D}=[11.14,4.46]$, but with a length of $3$. Using the definition above, the length of the destination vector is $\left\|\vec{D}\right\|=\sqrt{11.14^2+4.46^2}\approx 12$. To get a vector of length $3$, to re-size its coordinates to match the right scale, so we divide each coordinate by $\left\|\vec{D}\right\|$ and multiply by $3$, yielding the vector $$\vec{v}=\left[11.14\cdot \frac{3}{12},4.46\cdot \frac{3}{12}\right]\approx \left[\frac{11.14}{4},\frac{4.46}{4}\right] = [2.79,1.12].$$
+So, to describe our plane's velocity vector, it needs to be in the same direction as the vector $\vec{D}=[11.14,4.46]$, but with a length of $3$. Using the definition above, the length of the destination vector is $\left\|\vec{D}\right\|=\sqrt{11.14^2+4.46^2}\approx 12$. To get a vector of length $3$, to re-size its coordinates to match the right scale, so we divide each coordinate by $\left\|\vec{D}\right\|$ and multiply by $3$, yielding the vector $$\vec{v}=\left[11.14\cdot \frac{3}{12},4.46\cdot \frac{3}{12}\right]\approx \left[\frac{11.14}{4},\frac{4.46}{4}\right] = [2.79,1.12].$$
 
-  Note that to re-size $\vec{v}$ so that it has a length of $3$, we also determined the amount by which we scaled the destination vector $\vec{D}$ to get $\vec{v}$. Knowing that each coordinate of $\vec{v}$ is $\frac{1}{4}$ of the corresponding coordinate of $\vec{D}$ (say, in ``knots-per-hour''), the plane will reach the destination in $\answer{4}$ hours.
+Note that to re-size $\vec{v}$ so that it has a length of $3$, we also determined the amount by which we scaled the destination vector $\vec{D}$ to get $\vec{v}$. Knowing that each coordinate of $\vec{v}$ is $\frac{1}{4}$ of the corresponding coordinate of $\vec{D}$ (say, in ``knots-per-hour''), the plane will reach the destination in $\answer{4}$ hours.
 
-  Hence, the geometric vector in the applet represents the plane's speed and direction. This is an example of \emph{scalar multiplication} of a vector, where we multiply each coordinate of the vector by a scalar.
+Hence, the geometric vector in the applet represents the plane's speed and direction. This is an example of \emph{scalar multiplication} of a vector, where we multiply each coordinate of the vector by a scalar.
 
-  \begin{remark}
+\begin{remark}
 
-    This leads to a definition.
+  This leads to a definition.
 
-    \begin{definition}\name{Scalar Multiplication of a Vector}
+  \begin{definition}\name{Scalar Multiplication of a Vector}
 
-      Let $\vec{v} = \startmat{c} v_1 \\ \vdots \\ v_n \stopmat$ be a vector in $\R^n$ and let $c$ be a scalar. The \textbf{scalar multiple} of $\vec{v}$ by $c$ is the vector
-      \begin{equation*}
-        c\vec{v} = \startmat{c} cv_1 \\ \vdots \\ cv_n \stopmat.
-      \end{equation*}
+    Let $\vec{v} = \startmat{c} v_1 \\ \vdots \\ v_n \stopmat$ be a vector in $\R^n$ and let $c$ be a scalar. The \textbf{scalar multiple} of $\vec{v}$ by $c$ is the vector
+    \begin{equation*}
+      c\vec{v} = \startmat{c} cv_1 \\ \vdots \\ cv_n \stopmat.
+    \end{equation*}
 
-    \end{definition}
+  \end{definition}
 
-    In other words, we multiply a vector by a scalar by multiplying each of its coordinates by the scalar. The vector represents velocity because the scale is with respect to time, so each coordinate gives how far in the coordinate directions the plane will travel in one hour.
+  In other words, we multiply a vector by a scalar by multiplying each of its coordinates by the scalar. The vector represents velocity because the scale is with respect to time, so each coordinate gives how far in the coordinate directions the plane will travel in one hour.
 
-  \end{remark}
-
-
-\end{example}
+\end{remark}
 
 \section*{Blowing Off Course}
   
@@ -252,12 +251,10 @@ The geometry and the numerical interpretations together make sense, since you ca
 You can move horizontally below (or above) the first coordinate of $u+v$ by moving $u_1$ then $v_1$ (hence, $u_1+v_1$), and similarly for the second coordinate. This is the geometric interpretation of vector addition.
 
 
-
 \section*{Course Correction}
 
   By how much do you need to correct the plane to reach its destination in a straight shot? There are two immediately avaialable options, with one making more practical sense than the other. 
 
-\begin{problem}
   First, you can direct the plane against the wind, so that the wind velocity is canceled out and the plane can return to its original course. This adds the negative of $\vec{w}$ to $\vec{v}$, so that the plane's new velocity vector is $\vec{v}+\vec{w}-\vec{w}=\vec{v}$.
 
   Try this in the applet, by selecting the "Allow Correction" check box and entering $-\vec{w}=[-1,-1]$. Setting the wind and correction then shows the plan on its original course, with the velocity vectors first moving along the initial velocity, then along the wind, then back down reversing the velocity. 
@@ -295,12 +292,12 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
 
   For instance, the steps to solving 
 
-  \[
+  $$
   \begin{array}{ccc}
     2x+y&=&3\\
     x-2y&=&-1
   \end{array}
-  \]
+  $$
 
   would be to first isolate $x$ in the second equation, so that $x=2y+1$, then substitute this into the first equation to get $2(2y+1)+y=3$, which simplifies to $5y+2=3$, so $y=1/5$. Substituting this back into $x=2y+1$ gives $x=7/5$.
 
@@ -324,9 +321,7 @@ You can move horizontally below (or above) the first coordinate of $u+v$ by movi
   \end{solution}
 
   When all is said and done, the plane's new velocity vector is $\vec{v}+\vec{w}+\vec{c}=[2.79, 1.12]+[1,1]+[0,\answer{-.61}]\approx [3.79,\answer{1.51}]$. With this velocity, the plane will travel along the same path but get to the destination in less time.
-  
 
-\end{problem}
 
 
 \end{document}

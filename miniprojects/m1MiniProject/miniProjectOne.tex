@@ -103,9 +103,9 @@
         %Write A as a matrix in MATLAB in a lstlisting environment
         %\begin{pdfOnly}
           %\begin{lstlisting}[style=Matlab]
-          \begin{verbatim}
-              load star_wars_ratings.mat
-          \end{verbatim}
+        %  \begin{verbatim}
+        %      load star_wars_ratings.mat
+        %  \end{verbatim}
           %\end{lstlisting}
         %\end{pdfOnly}
   \end{remark}
@@ -115,9 +115,9 @@
   \begin{remark}\name{MATLAB Code}
     %\begin{pdfOnly}
         %\begin{lstlisting}[style=Matlab]
-        \begin{verbatim}
-            linalg.plot_star_wars(star_wars_ratings)
-        \end{verbatim}
+        %\begin{verbatim}
+        %    linalg.plot_star_wars(star_wars_ratings)
+        %\end{verbatim}
         %\end{lstlisting}
       %\end{pdfOnly}
   \end{remark}
@@ -143,12 +143,12 @@
   \begin{remark}\name{MATLAB Code}
     %\begin{pdfOnly}
     %\begin{lstlisting}[style=Matlab]
-    \begin{verbatim}
-        best=[5,5,5];
-        worst=[3,1,2];
-        best_norm=norm(best);
-        worst_norm=norm(worst);
-    \end{verbatim}
+    %\begin{verbatim}
+    %    best=[5,5,5];
+    %    worst=[3,1,2];
+    %    best_norm=norm(best);
+    %    worst_norm=norm(worst);
+    %\end{verbatim}
     %\end{lstlisting}
     %\begin{pdfOnly}
   \end{remark}
@@ -180,37 +180,37 @@
       A for loop in MATLAB is a way to quickly do lots of calculations at once.
 
   For instance, if you wanted to quickly calculate the square of each nubmer from 1 to 10, you could use the following code:
-  \begin{verbatim}
+  %\begin{verbatim}
 
-        for i=1:10
-            i_squared=i^2
-        end
+  %      for i=1:10
+  %          i_squared=i^2
+  %      end
 
-  \end{verbatim}
+  %\end{verbatim}
 
   Try it out, you should get the following output:
 
-  \begin{verbatim}
-    i_squared=1
-    i_squared=4
-    i_squared=9
-    i_squared=16
-    i_squared=25
-    i_squared=36
-    i_squared=49
-    i_squared=64
-    i_squared=81
-    i_squared=100
-  \end{verbatim}
+  %\begin{verbatim}
+   % i_squared=1
+   % i_squared=4
+   % i_squared=9
+   % i_squared=16
+   % i_squared=25
+   % i_squared=36
+   % i_squared=49
+   % i_squared=64
+   % i_squared=81
+   % i_squared=100
+  %\end{verbatim}
 
   If you want to hide the output (which will be necessary when you're doing lots of calculations), you can put a semicolon at the end of the line, like so:
 
-  \begin{verbatim}
+  %\begin{verbatim}
 
-        for i=1:10
-            i_squared=i^2;
-        end
-  \end{verbatim}
+  %      for i=1:10
+  %          i_squared=i^2;
+  %      end
+  %\end{verbatim}
 
   With just three lines of code, you quickly get the computer to tell you all of the squares of the first 10 numbers. We'll be using for loops quite a bit in this course, as ways to quickly do lots of calculations. 
   \end{hint}
@@ -221,33 +221,33 @@
     
     For the comparison, we need to use what's called an "if statement" in MATLAB, which is a way to tell the computer to do something only if a certain condition is met. (See the HINT if you're unfamiliar with if statements.)
 
-    \begin{hint}
+   % \begin{hint}
 
       For instance, if we wanted to check which number(s) from 1 to 10 squared to 25, we could use an "if" statement in the following way:
 %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-          for i=1:10
-              i_squared=i^2;
-              if i_squared==25
-                  i
-              end
-          end
-      \end{verbatim}
+    %  \begin{verbatim}
+    %      for i=1:10
+    %          i_squared=i^2;
+    %          if i_squared==25
+    %              i
+    %          end
+    %      end
+    %  \end{verbatim}
       %\end{lstlisting}
    % \end{pdfOnly}
 
    This should output the following:
 
-    \begin{verbatim}
-      i=5
-    \end{verbatim}
+    %\begin{verbatim}
+    %  i=5
+    %\end{verbatim}
 
       This code only outputs the number 5, as 5 is the only number from 1 to 10 that squares to 25. For each other "i" from 1 to 10, the computer first defined ``i\_squared'' as $i^2$, and then checked if $i^2$ was equal to 25. If it was, the computer outputted the value of $i$.
 
       Note that we had to use ``=='' instead of just ``='', since ``='' is used to assign values to variables in MATLAB, and ``=='' is used to check if two values are equal.
 
-    \end{hint}
+    %\end{hint}
     
     We're going to start two numbers, best\_count and worst\_count, at 0, and then we're going to loop through each user's ratings. 
     
@@ -268,9 +268,9 @@
       Remember that ``star\_wars\_ratings'' is a matrix of row vectors, and that matrices' dimensions are organized first by rows and then by columns. You can access the ith user's ratings with 
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-        star_wars_ratings(i,:)
-      \end{verbatim}
+      %\begin{verbatim}
+      %  star_wars_ratings(i,:)
+      %\end{verbatim}
       %\end{lstlisting}
     %\end{pdfOnly}
       
@@ -283,24 +283,24 @@
       %\begin{lstlisting}[style=Matlab]
       Any place with "\%" is a comment, and the computer will ignore it. I want you to fill in the "\% your code here".
 
-      \begin{verbatim}
-          best=[5,5,5];
-          worst=[3,1,2];
-          best_norm=norm(best);
-          worst_norm=norm(worst);
-          best_count=0;
-          worst_count=0;
-          for i=1:125
-              %Check if the norm of the ith user's ratings is equal to the norm of the best ratings
-              if %your code here
-                  best_count=best_count+1;
-              end
-              %Check if the norm of the ith user's ratings is equal to the norm of the worst ratings
-              if %your code here
-                  worst_count=worst_count+1;
-              end
-          end
-      \end{verbatim}
+      %\begin{verbatim}
+      %    best=[5,5,5];
+      %    worst=[3,1,2];
+      %    best_norm=norm(best);
+      %%    worst_norm=norm(worst);
+       %   best_count=0;
+       %   worst_count=0;
+       %   for i=1:125
+       %       %Check if the norm of the ith user's ratings is equal to the norm of the best ratings
+       %       if %your code here
+       %           best_count=best_count+1;
+       %       end
+       %       %Check if the norm of the ith user's ratings is equal to the norm of the worst ratings
+       %       if %your code here
+       %           worst_count=worst_count+1;
+       %       end
+       %   end
+      %\end{verbatim}
       %\end{lstlisting}
    % \end{pdfOnly}
     \end{hint}
@@ -332,17 +332,17 @@
       For instance, if you wanted to find which elements of the list [1, 2, 3, 2, 3, 5, 1, 2] square to 4, you could use the following code:
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-        indices=[];
-        list=[1, 2, 3, 2, 3, 5, 1, 2];
-        for i=1:8
-            number=list(i);
-            squared=number^2;
-            if squared==4
-                indices=[indices,i];
-            end
-        end
-      \end{verbatim}
+      %\begin{verbatim}
+      %  indices=[];
+      %  list=[1, 2, 3, 2, 3, 5, 1, 2];
+      %  for i=1:8
+      %      number=list(i);
+      %      squared=number^2;
+      %      if squared==4
+      %          indices=[indices,i];
+      %      end
+      %  end
+      %\end{verbatim}
       %\end{lstlisting}
    % \end{pdfOnly}
       
@@ -351,9 +351,9 @@
       Then, you can get a smaller list of the elements that squared to 4 by using the list of indices:
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-        new_list=list(indices)
-      \end{verbatim}
+      %\begin{verbatim}
+      %  new_list=list(indices)
+      %\end{verbatim}
         
       %\end{lstlisting}
       %\end{pdfOnly}
@@ -365,10 +365,10 @@
 
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-        list=[1, 2, 3, 4, 5];
-        average=mean(list)        
-      \end{verbatim}
+      %\begin{verbatim}
+      %  list=[1, 2, 3, 4, 5];
+      %  average=mean(list)        
+      %\end{verbatim}
 
       %\end{lstlisting}
 
@@ -411,16 +411,16 @@
       As an example, if you wanted to find the index of the number with the minimum square value from the list [3, 3, 1, 2, 3, 4, 5, 2], you could do the following:
       %\begin{pdfOnly}
       %\begin{lstlisting}[style=Matlab]
-      \begin{verbatim}
-        list=[3, 3, 1, 2, 3, 4, 5, 2];
-        squared_list=[]
-        for i=1:8
-            number=list(i);
-            squared=number^2;
-            squared_list=[squared_list,squared];
-        end
-        [square, idx]=min(squared_list)
-      \end{verbatim}
+      %\begin{verbatim}
+      %  list=[3, 3, 1, 2, 3, 4, 5, 2];
+      %  squared_list=[]
+      %  for i=1:8
+      %      number=list(i);
+      %      squared=number^2;
+      %      squared_list=[squared_list,squared];
+      %  end
+      %  [square, idx]=min(squared_list)
+      %\end{verbatim}
       %\end{lstlisting}
     %\end{pdfOnly}
 

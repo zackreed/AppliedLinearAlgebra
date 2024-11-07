@@ -267,7 +267,7 @@
 
     \end{remark}
 
-    \begin{hint}{MATLAB Code}
+    \begin{remark}{MATLAB Code}
 
       Any place with \texttt{\%} is a comment, and the computer will ignore it. I want you to fill in the \texttt{\% your code here}.
 
@@ -290,15 +290,14 @@
           end
       \end{verbatim}
 
-    \end{hint}
+    \end{remark}
+
   \end{exploration}
 
 
     \begin{exploration}\name{Task Two: Predicting Recommendations}
 
     We don't just use data to make observations, but also to find patterns that allow us to predict unknown events. The strategy is to use our observed data to find patterns, and then to use those patterns for prediction. In this case, we're going to see if the users' ratings of the Star Wars Trilogy can predict their ratings of ``Star Wars Episode I - The Phantom Menace (1999)''. 
-
-    \begin{problem}
     
       Let's use you and two of your friends or family members as test cases in the following way: 
     
@@ -312,7 +311,7 @@
       \item Reflect on the following question: Is just using the norm of the ratings a good way to predict how users will rate movies? What users' ratings might we unintentionally catch in our predictions, and how might we avoid this?
     \end{enumerate}
 
-    \begin{hint}{Making an Average}
+    \begin{remark}{MATLAB: Making an Average}
 
       You'll want to isolate only the users who rated the Original Trilogy like you did, and then average their ratings of ``Star Wars Episode I - The Phantom Menace (1999)''. To just isolate the closest users and get their new rating, all you need are the index values of the users. So within the loop to find the closest users, you can just append each new index to a previous list of indices, and then use that list to find the new ratings.
 
@@ -352,9 +351,7 @@
 
       This will return the value 3, as the average of 1, 2, 3, 4, and 5 is 3.
 
-    \end{hint}
-
-    \end{problem}
+    \end{remark}
       
       \end{exploration}
 
@@ -366,7 +363,6 @@
 
     As we saw in Task Two, we should be more nuanced in our analysis than just using the norms of vectors for comparison. Instead, we'll find the users whose vectors are closest to the test users' vectors, and then average their ratings of the 20th movie to make our prediction. The importance of using distance instead of just norm comparison is that we're minimizing the difference between the test users and potentially close users, so that we only use the vectors that lie within very similar regions of our 19-dimensional space.
 
-    \begin{problem}
 
     Do the following to complete the activity:
 
@@ -380,7 +376,7 @@
       \item Describe your results in a final reflection. Think about what factors might be obscuring predictability by also getting a feel for the test users as well. For isntance, are they harsh raters? Easy raters? What other factors might be at play in the data that we're not considering?
     \end{enumerate}
 
-    \begin{hint}
+    \begin{remark}{Finding Indices}
 
       If you need to find the user with the single minimum distance from a test user, there are a few ways to do this, but one of the easiest ways is to first make a vector of the distances between the test user and all of the training users, and then find the index of the minimum value of that vector using the ``min'' function.
 
@@ -400,8 +396,8 @@
 
       The syntax [square,idx] means that the ``min'' function returns two numbers, first the minimum value and then second the index of that value in the original list. It should return square=1 and idx=3, as the 3rd element of the original list squared to 1.
 
-    \end{hint}
-  \end{problem}
+    \end{remark}
+
   \end{exploration}
 
 \end{document}

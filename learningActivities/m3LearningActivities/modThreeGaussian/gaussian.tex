@@ -298,8 +298,6 @@ Now, rather than having to rewrite the system each time along with each row oper
 
 \end{remark}
 
-\begin{exploration}
-
 Let's re-do these steps, but at each stage track the augmented matrix after multiplying by elementary matrices:
 
 Here's our starting matrix.
@@ -314,7 +312,7 @@ $$\left[\begin{array}{cccc|c}
  1&-1&0&0&0\\2&-2&1&2&4\\0&1&0&1&0\\0&0&2&1&5
  \end{array}\right]$$
 
- $$ E_{12}(-2)\rightarrow%{R_2-2R_1}\\
+ $$E_{12}(-2)\rightarrow%{R_2-2R_1}\\
  \left[\begin{array}{cccc|c} 
  1&-1&0&0&0\\0&0&1&2&4\\0&1&0&1&0\\0&0&2&1&5
  \end{array}\right]$$
@@ -323,32 +321,39 @@ $$\left[\begin{array}{cccc|c}
 \left[\begin{array}{cccc|c} 
  1&0&0&1&0\\2&-2&1&2&4\\0&1&0&1&0\\0&0&2&1&5
  \end{array}\right]$$
+
 $$E_{2,4}(-2)\rightarrow%{R_4-2R_2}\\
 \left[\begin{array}{cccc|c} 
  1&0&0&1&0\\0&0&1&2&4\\0&1&0&1&0\\0&0&0&-3&-3
  \end{array}\right]$$
+
 $$E_4(-1/3)\rightarrow%{(-1/3)R_4}\\
  \left[\begin{array}{cccc|c} 
  1&0&0&1&0\\0&0&1&2&4\\0&1&0&1&0\\0&0&0&1&1
  \end{array}\right]$$
+
 $$E_{4,1}(-1)\rightarrow%{R_1-R_4}\\
 E_{4,2}(-2)\rightarrow%{R_2-2R_4}\\
 E_{4,3}(-1)\rightarrow%{R_3-R_4}\\
 \left[\begin{array}{cccc|c} 
  1&0&0&0&-1\\0&0&1&0&2\\0&1&0&0&-1\\0&0&0&1&1
  \end{array}\right]$$
- $$E_{23}\rightarrow%{R_2\leftrightarrow R_3}\\
- \begin{equation}\label{eq:sys20rref}\left[\begin{array}{cccc|c} 
- 1&0&0&0&-1\\0&1&0&0&-1\\0&0&1&0&2\\0&0&0&1&1
- \end{array}\right]\end{equation}$$
 
-\end{exploration}
+ $$E_{23}\rightarrow%{R_2\leftrightarrow R_3}\\
+ \left[\begin{array}{cccc|c}
+  1&0&0&0&-1\\
+  0&1&0&0&-1\\
+  0&0&1&0&2\\
+  0&0&0&1&1
+\end{array}\right]$$ 
+
+
   
 The last augmented matrix corresponds to the solution system, so again we've found the solution, but arguably in a slightly easier representation.
 
 This utility compounds when we try to use technology to speed things up! In MATLAB, we can define functions to very quickly carry out these calculations, and ultimately we can have MATLAB do the entire process for us with one command, \texttt{rref}.
 
-\begin{problem}
+ 
 
 \begin{remark}{Formal Definitions}
 
@@ -370,18 +375,25 @@ We will sometimes use the following notation to represent an augmented matrix.
 $$\left[\begin{array}{c|c} 
  A & \vec{b}\\
  \end{array}\right]$$
+
 The same elementary row operations that we perform on a system of equations can be performed on the corresponding augmented matrix, or any matrix for that matter.  If a matrix can be obtained from another matrix by means of elementary row operations, we say that the two matrices are \dfn{row-equivalent}. 
 \end{remark}
 
 
 \begin{exploration}\label{init:backsub}
-Let's try it out with the help of MATLAB!
+Let's try out augmented matrices in a new system, with the help of MATLAB!
+
+First, consider the new system:
+
 $$\begin{array}{ccccccc}
       x_1 &- &x_2&-&3x_3&= &1 \\
    4x_1& -&2x_2&-&7x_3&=&1\\
    -x_1& +&x_2&+&4x_3&=&1
     \end{array}$$
-Recall that in Exploration \ref{init:augmentedmatrixex} we converted the given system to an augmented matrix form, then performed elementary row operations until we arrived at a ``convenient" form.  We then converted the ``convenient" augmented matrix back to a system of equations and identified the solution.  The term ``convenient" is open to interpretation.  In this problem we will explore two ``convenient" forms.  Each one will lead to a definition. 
+
+The corresponding augmented matrix is: 
+
+BEGIN HERE!
  
 \begin{align}&\left[\begin{array}{ccc|c} 
  1&-1&-3&1\\4&-2&-7&1\\-1&1&4&1
@@ -1467,5 +1479,4 @@ W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edi
 [Yuster] Thomas Yuster, The Reduced Row Echelon Form of a Matrix is Unique: a
 Simple Proof, Mathematics Magazine, vol. 57, no. 2 (Mar. 1984), pp. 93-94.
  
-  
 \end{document}

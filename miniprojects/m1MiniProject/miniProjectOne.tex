@@ -96,30 +96,26 @@
 
   First, to get an idea of how we'll approach the data, we'll start with some visualization.
 
-  To get things started, open up a MATLAB live script and load \texttt{star\_wars\_ratings.mat}.
+  To get things started, open up a MATLAB live script and load \texttt{star\_wars\_ratings.mat} from the \texttt{+linalg} folder.
+
+  You then name each data set from the .mat file to see what you're working with.
 
   \begin{remark}\name{MATLAB Code}
-    %\revealbutton{Click to see MATLAB code}
-        %Write A as a matrix in MATLAB in a lstlisting environment
-        %\begin{pdfOnly}
-          %\begin{lstlisting}[style=Matlab]
-        %  \begin{verbatim}
-        %      load star_wars_ratings.mat
-        %  \end{verbatim}
-          %\end{lstlisting}
-        %\end{pdfOnly}
+          \begin{verbatim}
+              load +linalg/star_wars_ratings.mat
+              star_wars
+              star_wars_ratings
+          \end{verbatim}
   \end{remark}
 
-  Let's visualize the differences and similarities in these 125 users' ratings of the Star Wars Trilogy. Either plot the points on your own, or use the course helper function ``plot\_star\_wars'', being sure to input the vector list ``star\_wars\_ratings'' as an argument.
+  You should see a $125\times 3$ matrix and a $3\times 1$ "cell", which is essentially a list of words or phrases for our purposes.
+
+  Let's visualize the differences and similarities in these 125 users' ratings of the Star Wars Trilogy. Either plot the points on your own, or use the course helper function \texttt{linalg.plot\_star\_wars}, being sure to input the vector list \texttt{star\_wars\_ratings} as an argument (i.e. an input).
 
   \begin{remark}\name{MATLAB Code}
-    %\begin{pdfOnly}
-        %\begin{lstlisting}[style=Matlab]
-        %\begin{verbatim}
-        %    linalg.plot_star_wars(star_wars_ratings)
-        %\end{verbatim}
-        %\end{lstlisting}
-      %\end{pdfOnly}
+        \begin{verbatim}
+            linalg.plot_star_wars(star_wars_ratings)
+        \end{verbatim}
   \end{remark}
 
   Your plot should look something like the Figure below, and you should be able to click and drag within the figure to rotate the plot and see the data from different angles.
@@ -141,16 +137,12 @@
   Let's try it out to find the norms of our two vectors in question. 
 
   \begin{remark}\name{MATLAB Code}
-    %\begin{pdfOnly}
-    %\begin{lstlisting}[style=Matlab]
-    %\begin{verbatim}
-    %    best=[5,5,5];
-    %    worst=[3,1,2];
-    %    best_norm=norm(best);
-    %    worst_norm=norm(worst);
-    %\end{verbatim}
-    %\end{lstlisting}
-    %\begin{pdfOnly}
+    \begin{verbatim}
+        best=[5,5,5];
+        worst=[3,1,2];
+        best_norm=norm(best);
+        worst_norm=norm(worst);
+    \end{verbatim}
   \end{remark}
 
   \begin{example}
@@ -168,7 +160,7 @@
   Here is the second half of the work-along video. If you want, watch as you work through the next exploration, pausing when you need to, and then filling in any missing code along the way.
 
   \begin{center}
-    \youtube{c-ZRacLk3jl}
+    \youtube{c-ZRacLk3hl}
   \end{center}
 
 \end{remark}
@@ -180,37 +172,38 @@
       A for loop in MATLAB is a way to quickly do lots of calculations at once.
 
   For instance, if you wanted to quickly calculate the square of each nubmer from 1 to 10, you could use the following code:
-  %\begin{verbatim}
 
-  %      for i=1:10
-  %          i_squared=i^2
-  %      end
+  \begin{verbatim}
 
-  %\end{verbatim}
+        for i=1:10
+            i_squared=i^2
+        end
+
+  \end{verbatim}
 
   Try it out, you should get the following output:
 
-  %\begin{verbatim}
-   % i_squared=1
-   % i_squared=4
-   % i_squared=9
-   % i_squared=16
-   % i_squared=25
-   % i_squared=36
-   % i_squared=49
-   % i_squared=64
-   % i_squared=81
-   % i_squared=100
-  %\end{verbatim}
+  \begin{verbatim}
+    i_squared=1
+    i_squared=4
+    i_squared=9
+    i_squared=16
+    i_squared=25
+    i_squared=36
+    i_squared=49
+    i_squared=64
+    i_squared=81
+    i_squared=100
+  \end{verbatim}
 
   If you want to hide the output (which will be necessary when you're doing lots of calculations), you can put a semicolon at the end of the line, like so:
 
-  %\begin{verbatim}
+  \begin{verbatim}
 
-  %      for i=1:10
-  %          i_squared=i^2;
-  %      end
-  %\end{verbatim}
+        for i=1:10
+            i_squared=i^2;
+        end
+  \end{verbatim}
 
   With just three lines of code, you quickly get the computer to tell you all of the squares of the first 10 numbers. We'll be using for loops quite a bit in this course, as ways to quickly do lots of calculations. 
   \end{hint}

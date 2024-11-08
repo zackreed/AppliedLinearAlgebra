@@ -19,9 +19,9 @@ In this activity, we will explore the rank and nullity of a matrix.
 
     Let's start with a little warm up exploration! We'll think in $\mathbb{R}^2$ for now.
     
-    Remember that linear transformations are completely determined by where they send the standard basis vectors ($\vec{i}$ and $\vec{j}$ for $\mathbb{R}^2$), and that it's possible to determine $\vec{i}$ and $\vec{j}$ such that you can't span all of $\mathbb{R}^2$ from the image of the transformation.
+    Remember that linear transformations are completely determined by where they send the standard basis vectors ($\vec{i}$ and $\vec{j}$ for $\mathbb{R}^2$), and that it's possible to determine $\vec{i}$ and $\vec{j}$ such that you can't span all of $\mathbb{R}^2$ from result of the transformation.
 
-    Go back to the 2D linear transformation GeoGebra applet from before and set $S(\vec{i})$ and $S(\vec{j})$ such that the image of $S$ is a 1-dimensional subspace of $\mathbb{R}^2$ (i.e. a line).
+    Go back to the 2D linear transformation GeoGebra applet from before and set $S(\vec{i})$ and $S(\vec{j})$ such that the transformation $S$ only gives you a 1-dimensional subspace of $\mathbb{R}^2$ (i.e. a line).
     
     \geogebra{uaua5mpa}{1156}{636}
 
@@ -33,7 +33,7 @@ In this activity, we will explore the rank and nullity of a matrix.
 
     \begin{solution}
 
-        One example is to set $S(\vec{i})=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$ and $S(\vec{j})=\begin{bmatrix} -1 \\ 1 \end{bmatrix}$. The image of $S$ is the line $y=-x$. Vectors $\vec{v}$ whose coordinates are the same, such as $\begin{bmatrix} .38 \\ .38 \end{bmatrix}$ in the figure below, get mapped to $\vec{0}$. Otherwise, vectors get mapped to points on the line $y=-x$. 
+        One example is to set $S(\vec{i})=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$ and $S(\vec{j})=\begin{bmatrix} -1 \\ 1 \end{bmatrix}$. The $S$ maps $\RR^2$ to the line $y=-x$. Vectors $\vec{v}$ whose coordinates are the same, such as $\begin{bmatrix} .38 \\ .38 \end{bmatrix}$ in the figure below, get mapped to $\vec{0}$. Otherwise, vectors get mapped to points on the line $y=-x$. 
 
         %insert figure
         \begin{center}
@@ -85,7 +85,7 @@ $$
 
     This gives us the exact same information! In fact, in cases like this, the \rref will tell us what linear combinations of the first two columns equals the third!
     
-    In other words, $A\vec{k}$ is in the span of $A\vec{i}$ and $A\vec{j}$. This is a hint that the image of $A$ is not all of $\mathbb{R}^3$. (Remember the \emph{image} of a function or transformation is the set of vectors mapped to by the transformation)
+    In other words, $A\vec{k}$ is in the span of $A\vec{i}$ and $A\vec{j}$. This is a hint that $A$ doesn't give you all of $\mathbb{R}^3$. 
 
     Let's view this in our handy GeoGebra applet to confirm where $A$ sends 3D vectors.
 
@@ -95,7 +95,7 @@ $$
 
     \end{center}
 
-    In fact, after setting up the matrix, it's clear that the image always stays on the plane spanned by $\begin{bmatrix}1\\0\\1\end{bmatrix}$ and $\begin{bmatrix}0\\1\\1\end{bmatrix}$. No matter where you place $\vec{v}$, $A\vec{v}$ always stays on the plane. 
+    In fact, after setting up the matrix, it's clear that the vector $A\vec{v}$ always stays on the plane spanned by $\begin{bmatrix}1\\0\\1\end{bmatrix}$ and $\begin{bmatrix}0\\1\\1\end{bmatrix}$. No matter where you place $\vec{v}$, $A\vec{v}$ always stays on the plane. 
 
 \end{remark}
 
@@ -129,6 +129,85 @@ $$
 %    \end{solution}
 
 %\end{problem}
+
+\subsection*{The Image of a Linear Transformation}
+
+\begin{remark}{Issues with Learning Math: Ambiguity, Many Names for the Same Thing, Many Meanings for the Same Word}
+
+  One of the things that you have to get used to in math is the hyper-contextual meanings of words. 
+
+  Often in math, depending on the context, many terms are used for what is more or less the same thing. This is exacerbated when you add in domains like physics, chemistry, and data science. 
+
+  Other times, very much depending on the context, the same word is used to mean many different things, sometimes within the same problem. ``Normal'' is the most eggregious offender of this. Off the top of my head I can think of at least four different meanings for ``normal'', depending on the context.
+
+  Such is the case when it comes to linear transformations and matrices. Expect to run into the ``many names for the same thing'' phenomenon here. 
+
+\end{remark}
+
+Remembering that any time we talk about \emph{linear transformations} in this class, we're also talking about \emph{matrices} that send vectors from one vector space $V$ to another vector space $W$, let's dig into the weeds of some terminology.
+
+It's becoming cumbersome to always say ``A maps vectors $\vec{v}$ to a line'', or ``the vector $\vec{v}$ gets mapped to the vector $A\vec{v}$'', so we come up with succinct terminology to describe mapping and being mapped. 
+
+\begin{definition}\label{def:imageofT}
+Let $V$ and $W$ be vector spaces, and let $T:V\rightarrow W$ be a linear transformation.  The \dfn{image} of $T$, denoted by $\mbox{im}(T)$, is the set
+$$\mbox{im}(T)=\{T(\vec{v}):\vec{v}\in V\}$$
+In other words, the image of $T$ consists of individual vectors $T(\vec{v})$ mapped to in $W$.
+\end{definition}
+ 
+\begin{example}\label{ex:image1}
+Consider the matrix
+$$A=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}.$$
+
+$A$ defines a linear transformation $T$, let's find and illustrate $\mbox(im)(T)$.
+ 
+
+First, let's see what $A$ does to an arbitrary vector $\vec{v}=\begin{bmatrix}a\\b\\c\end{bmatrix}$.
+ 
+$$A\vec{v}=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}\begin{bmatrix}a\\b\\c\end{bmatrix}=a\begin{bmatrix}1\\2\end{bmatrix}+b\begin{bmatrix}2\\4\end{bmatrix}+c\begin{bmatrix}3\\6\end{bmatrix}$$
+ 
+So far, we've re-stated little more than the definition of matrix-vector multiplication, but it's good to remember that matrix-vector multiplication gives us linear combinations of the column vectors of $A$. And now, in our new language, we state that $\mbox(im)(T)$ for any matrix $A$ is always a linear combination of the column vectors!
+
+Let's dig further to better describe this particular image. 
+
+If we take \texttt{rref(A)}, we get
+
+$$\text{rref}(A)=\begin{bmatrix}1&2&3\\0&0&0\end{bmatrix}.$$
+
+Like we just discussed, this means that the second two column vectors are actually linear combiantions of the first column vector!
+
+So really the entire image of $T$ is just linear combinations of the vector $\begin{bmatrix}1\\2\end{bmatrix}$, which we know as a line, depicted below.
+ 
+\begin{center}
+    \begin{tikzpicture}[scale=.7]
+     
+      % Left image
+      \node at (1.5, 3.5) {$\mathbb{R}^3$}; % Title for the left image
+      \draw[->] (0,0)--(3,0); % x-axis
+      \draw[->] (0,0)--(0,3); % y-axis
+      \draw[->] (0,0)--(-1.5,-1); % diagonal axis
+    
+      % Random multicolored points in the left image
+      \foreach \x/\y/\color in {0.5/1/red, 1/0.5/green, 1.5/2/blue, 2/1.5/orange, 0.8/0.8/purple, -1.5/.5/red, -.75/-.5/blue, -.2/1.25/red, .25/1.25/orange} {
+        \fill[\color] (\x, \y) circle (3pt);
+      }
+      
+      % Right image
+      \node at (6, 3.5) {$\mathbb{R}^2$}; % Title for the right image
+      \draw[<->] (4,0)--(8,0); % x-axis
+      \draw[<->] (5,-1)--(5,3); % y-axis
+      \draw[line width=2pt,blue] (4.5,-1)--(6.5,3); % diagonal line
+    
+      % Labels
+      \node[] at (3.25, 2) (b) {$T$};
+      \draw [->,line width=1pt,-stealth] (2,1) to[out=45] (4.5, 1);
+      \node[blue] at (7, 2.3) (b) {$\mbox{im}(T)$};
+     
+    \end{tikzpicture}
+\end{center}
+
+As we suspected, the matrix sends $3-$dimensional vectors to $2-$dimensional vectors, which happen to all live on the same line.
+
+\end{example}
 
 \begin{remark}{Images and Pre-Images}
 Up to this point we've been focusing mainly on the image of matrices and their properties, but we can actually say much about a matrix in terms of the \emph{pre-image} space. The pre-image space is the set of all vectors $\vec{v}$ that get mapped by $A$ into the image $A\vec{v}$. 
@@ -177,7 +256,7 @@ Let's go back to our simple diagram that conveys the basic concept of mapping ve
     
 \end{tikzpicture}
 
-Let's describe the null space of $A$.
+Now let's more formally define the \emph{null space} of $A$.
 
 \begin{definition}
 
@@ -194,6 +273,53 @@ Let's describe the null space of $A$.
 
 \end{definition}
 
+\begin{remark}{Terminology Alert!}
+
+    When we use the language of transformations $T$ instead of matrices $A$, we use the word \emph{kernel} instead of \emph{null space}.
+
+    So the \emph{kernel} of the linear transformation $T$ is the \emph{null space} of its associated matrix, $A$.
+
+    We also talk about the \emph{domain} as the space being mapped from (aka the pre-image) and then the \emph{co-domain} as the space being mapped \emph{to}. The co-domain and image distinction is more important, since the image is {\bf only} where the matrix sends vectors, whereas the co-domain is the ambient space in which the mapped vectors live. 
+
+    In our example of $A=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}$, the $\mbox{im}(A)$ was the line $\text{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$, whereas the co-domain was just $\RR^2$ since we were looking at $2-$dimensional vectors. 
+
+    In this next image, $V$ is the domain (or pre-image), $W$ is the co-domain, and the smaller ellipse within $W$ labeled $\mbox{im}(T)$ is the image. Then, note, a blue subset of $V$ gets all mapped to $\vec{0}$. This would be the kernel of $T$, which is the same as the \emph{null space} of $A$.
+
+    \begin{center}
+        \begin{tikzpicture}
+        \fill[gray!40] (0,0) ellipse (1.5cm and 2.5cm);
+        \fill[blue!40!white] (0,0) ellipse (1cm and 1cm)node[black]{$\mbox{ker}(T)$};
+         
+        \draw[blue] (3.5,2) rectangle (6.5,-2);
+        \node[] at (6.1, 1.8)   (b) {$W$};
+        \fill[gray!40] (5,0) ellipse (0.8cm and 1.2cm);
+        \fill[blue!40!white] (5,0) circle (0.1cm);
+         
+        \draw[gray!40,line width=1pt](0.3,2.4)--(5,1.1);
+        \node[] at (-0.2, 2)   (b) {$V$};
+        \node[] at (5, 0.5)   (b) {$\mbox{im}(T)$};
+        \draw[gray!40, line width=1pt](0.3,-2.4)--(5,-1.1);
+         
+        \draw[blue!40!white, line width=1pt](0.2,.9)--(5,0);
+        \draw[blue!40!white, line width=1pt](0.2,-0.9)--(5,0)node[below, right][black]{$\vec{0}$};
+         
+        \end{tikzpicture}
+    \end{center}
+
+\end{remark}
+
+
+We have the following similar definition for \emph{kernel}:
+
+\begin{definition}
+    Let $V$ and $W$ be vector spaces, and let $T:V\rightarrow W$ be a linear transformation.  The \dfn{kernel} of $T$, denoted by $\mbox{ker}(T)$, is the set
+    $$\mbox{ker}(T)=\{\vec{v}:T(\vec{v})=\vec{0}\}$$
+    In other words, the kernel of $T$ consists of all vectors of $V$ that map to $\vec{0}$ in $W$.
+\end{definition}
+
+We'll mostly use the terminology Null Space, instead of Kernel, but at times kernel may arise. 
+
+Now, armed with new terminology, let's see more how to find the null spaces of matrices. 
 
 \begin{exploration}{Finding the Null Space of $A$}
 

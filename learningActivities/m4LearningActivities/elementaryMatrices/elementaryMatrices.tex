@@ -16,15 +16,110 @@
 %ALSO SET UP AN RREF IN GEOGEBRA WITH "Reduced" function as part of it, just so they can 
 %See the full process, then use rref in maltab and stuff for higher dimensions.
 
-As we have seen, systems of equations are solved by applying row operations to generate equivalent systems that are progressively easier to solve. 
+\section*{Inverse Problems}
 
-We'll now return to our primary lense of vectors, matrices, and linear transformations. First, we'll re-cast systems of equations as matrix-vector products, and then re-cast finding a solution as solving an \emph{inverse} problem. That is, systems of equations give us a matrix $M$, and a known output $\vec{w}$, and we want to find the input $\vec{v}$ such that $M\vec{v} = \vec{w}$.
+We spent a lot of time last chapter finding solutions to systems of equations (when they existed).
+
+As we said, solving a system of equations was analogous to solving the matrix equation $A\vec{x}=\vec{b}$ for possible $\vec{x}$ vectors that satisfy the equation. 
+
+Let's press more into solving the equation $A\vec{x}=\vec{b}$, as this is an example of an \emph{inverse} question in mathematics. Inverse questions are very important, and give us many tools.
+
+\begin{example}
+
+  For nonzero scalars $s$, multiplication inverse problems amount to finding a number $r$ such that $r\cdot s=1$.
+
+  For instance, $2*.5=1$, $3\cdot .\overline{333}=1$, $\pi\cdot \frac{1}{\pi}=1$. 
+
+  In this simple case, we can explicitly find the inverse of any real number $s$ (multiplicatively) by taking $\frac{1}{s}$, and hence $s\cdot\frac{1}{s}=1$.
+
+\end{example}
+
+\begin{example}
+
+  For functions, in calculus, we concerned ourselves with finding the derivatives and integrals of inverse functions.
+
+  \emph{Inverse functions} compose with each other to make the identity function (e.g. $y=x$). 
+
+  \begin{enumerate}
+  
+    \item Exponential and Logarithms: $a^x$ and $\log_a(x)$ are inverses because $a^{\log_a(x)}=log_a(a^x)=x$
+    
+    \item Quadratic functions $q(x)=x^2$ don't fully have inverse functions because square root functions $sqrt(x)=\sqrt{x}$ are only defined for nonnegative numbers.
+    
+    So $\sqrt{x^2}$ and $\sqrt{x}^2$ don't equalt $y=x$, but instead $\sqrt{x^2}=\abs{x}$ and $\sqrt{x}^2=x$ only for $x\geq 0$.
+
+  \end{enumerate}
+
+\end{example}
+
+So, the conditions for mathematical objects to have inverses is quite stringent, and we'll see this stringency matter for matrices. 
+
+\begin{exploration}{For some $\vec{x}$? For all $\vec{x}$?}
+
+  You might be tempted to characterize the inverses of matrices in terms of the matrix equation $A\vec{x}=\vec{b}$. 
+  
+  This is somewhat intuitive, since inverse scalars help us solve problems like $3x=5\rightarrow x=5/3$. 
+
+  Let's explore this a little bit, and start with the matrix 
+
+  $$A=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}.$$
+
+  We know from before (take the \texttt{rref(A)}) that $\mbox{im}(A)=\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$. In essence, $A$ takes all of space to a line in $\RR^2$.
+
+  What inverse problems can we solve here? Specifically, for what vectors $\vec{b}$ can we find $\vec{x}$ to satisfy $A\vec{x}=\vec{b}$?
+
+  Use MATLAB to set up and quickly solve many matrix-vector equations $A\vec{x}=\vec{b}$, for different values of $\vec{b}$. You'll want to 
+
+
+
+\end{exploration}
+
  
-\section{A return to elementary matrices}
+\section*{A return to elementary matrices}
 
-Recall that in Section BLAH, we established that some matrices were intertible, namely a few simple square matrices, and that we could build new invertible matrices as a product of these elementary matrices. The central tension we left unresolved was how to determine whether a random matrix was invertible without knowing its construction ahead of time. Now that we've built up the idea of row operations from systems of equations, and have some understanding of what it means to solve such systems, we're ready to resolve the tension and develop a methodology for determining whether or not a matrix is invertible.
+We return once again to \emph{elementary matrices}, but now with an eye towards their reversibility, or rather their \emph{invertibility}.
 
-%% SO A PRE-SYSTEMS section will involve just building up a few matrices from elementary matrices, and then setting up the need to sovle the inverse problem. Then we'll return here. 
+\begin{itemize}
+
+  \item The \textbf{row swapping matrix} $E_{ij}$, the identity matrix with rows $i$ and $j$ swapped.
+  
+  $E_{12}$ performed on a $3\times 3$ matrix would be the matrix
+
+  \begin{equation*}
+    \begin{bmatrix}
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}
+  \end{equation*}
+
+  \item The \textbf{scaling matrix} $E_{i}(\lambda)$ is the matrix that results from multiplying row $i$ of the identity matrix by the scalar $c$.
+  
+  $E_{2}(3)$ performed on a $3\times 3$ matrix would be the matrix
+
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 3 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}.
+  \end{equation*}
+
+  \item The \textbf{row addition matrix} $E_{ij}(\lambda)$ is the matrix that results from adding $c$ times row $i$ to row $j$ of the identity matrix.
+  
+  $E_{3,2}(2)$ performed on a $3\times 3$ matrix would be the matrix
+
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 2 & 1
+    \end{bmatrix}.
+  \end{equation*}
+
+  This will add $2$ times the second row to the third row.
+
+\end{itemize}
 
 It turns out these row operations can be realized by left
 multiplication by a certain type of matrix, and these matrices have

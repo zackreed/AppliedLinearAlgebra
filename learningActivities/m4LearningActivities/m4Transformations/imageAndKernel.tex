@@ -2,7 +2,7 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed}
-%borrowed from selinger linear algebra
+%borrowed from Anna Davis and Gilbert Strang
 \title{Learning Activity: Investigating The Properties of Images and Kernels of Linear Transformations}\license{CC BY-NC-SA 4.0}
 
 \begin{document}
@@ -128,45 +128,162 @@ Also recall that we sometimes want to talk about a \emph{subspace}. That is, we 
 
 Importantly, all of the spaces we've discussed so far (images, kernels, null spaces) are all subspaces of the domain and co-domain of a transformation. 
 
-BEGIN HERE
+\end{definition}
+
+Much of our analysis so far has utilized $\mbox{span}$ to create the kernels and images of transformations, it's worth nailing down a fact about span to help us.
+
+\begin{theorem}
+
+  If $S=\lbrace v_1, \ldots, v_m\rbrace$ is a set of vectors in $\RR^n$, then $\mbox{span}(S)$ is a subspace of $\RR^n$
+
+\end{theorem}
+
+This immediately situates the kernel, nullspace, image, and column spaces that we've been discussing as subspaces of their ambient space. 
+
+\begin{example}
+
+  We saw  that the image of the transformation given by 
+
+  $$A=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}$$
+
+  is the line $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.7]
+     
+      % Left image
+      \node at (1.5, 3.5) {$\mathbb{R}^3$}; % Title for the left image
+      \draw[->] (0,0)--(3,0); % x-axis
+      \draw[->] (0,0)--(0,3); % y-axis
+      \draw[->] (0,0)--(-1.5,-1); % diagonal axis
+    
+      % Random multicolored points in the left image
+      \foreach \x/\y/\color in {0.5/1/red, 1/0.5/green, 1.5/2/blue, 2/1.5/orange, 0.8/0.8/purple, -1.5/.5/red, -.75/-.5/blue, -.2/1.25/red, .25/1.25/orange} {
+        \fill[\color] (\x, \y) circle (3pt);
+      }
+      
+      % Right image
+      \node at (6, 3.5) {$\mathbb{R}^2$}; % Title for the right image
+      \draw[<->] (4,0)--(8,0); % x-axis
+      \draw[<->] (5,-1)--(5,3); % y-axis
+      \draw[line width=2pt,blue] (4.5,-1)--(6.5,3); % diagonal line
+    
+      % Labels
+      \node[] at (3.25, 2) (b) {$T$};
+      \draw [->,line width=1pt,-stealth] (2,1) to[out=45] (4.5, 1);
+      \node[blue] at (7, 2.3) (b) {$\mbox{im}(T)$};
+     
+    \end{tikzpicture}
+\end{center}
+
+Hence, the line $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$ is a subspace of $\RR^2$, as is $\mbox{im}(T)$ and $\mbox{col}(A)$, where $T$ is the transformation associated with $A$.
+
+\end{example}
+
+\begin{example}
+
+  Also recall that the null space of the matrix 
+
+  $$B=\begin{bmatrix}
+        1 & 3 & 2 & 0 & 0  \\
+        0 & 1 & 5 & 2 & 1  \\
+        3 & 5 & -14 & -8 &-4  \\
+        0 & 0 & 0 & 1 & 1  \\
+        \end{bmatrix}$$
+
+  was the plane $Null(B)=\text{span}\left\{ \begin{bmatrix} 13 \\ -5 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} -3 \\ 1 \\ 0 \\ -1 \\ 1 \end{bmatrix} \right\}$.
+  
+  This planar null space is a subspace of $\RR^5$.
+
+\end{example}
+
+\begin{exploration}{Domain? Or Co-Domain?}
+
+  One detail that is important, but often confuses students until they've had enough experience with these distinctions, is whether you're looking at the domain or co-domain of a function (aka transformation).
+
+  The key is to remember whether you're thinking about \emph{input} vectors or \emph{output} vectors.
+
+  In the case of $Null(B)=\text{span}\left\{ \begin{bmatrix} 13 \\ -5 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} -3 \\ 1 \\ 0 \\ -1 \\ 1 \end{bmatrix} \right\}$, we are looking at \emph{input vectors}, since the question of a null space is ``Which vectors \emph{get mapped} to $\vec{0}$?''
+
+  In the case of transformation images, we're asking about the vectors that get \emph{mapped to}.
+
+  So the line in the image
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.7]
+     
+      % Left image
+      \node at (1.5, 3.5) {$\mathbb{R}^3$}; % Title for the left image
+      \draw[->] (0,0)--(3,0); % x-axis
+      \draw[->] (0,0)--(0,3); % y-axis
+      \draw[->] (0,0)--(-1.5,-1); % diagonal axis
+    
+      % Random multicolored points in the left image
+      \foreach \x/\y/\color in {0.5/1/red, 1/0.5/green, 1.5/2/blue, 2/1.5/orange, 0.8/0.8/purple, -1.5/.5/red, -.75/-.5/blue, -.2/1.25/red, .25/1.25/orange} {
+        \fill[\color] (\x, \y) circle (3pt);
+      }
+      
+      % Right image
+      \node at (6, 3.5) {$\mathbb{R}^2$}; % Title for the right image
+      \draw[<->] (4,0)--(8,0); % x-axis
+      \draw[<->] (5,-1)--(5,3); % y-axis
+      \draw[line width=2pt,blue] (4.5,-1)--(6.5,3); % diagonal line
+    
+      % Labels
+      \node[] at (3.25, 2) (b) {$T$};
+      \draw [->,line width=1pt,-stealth] (2,1) to[out=45] (4.5, 1);
+      \node[blue] at (7, 2.3) (b) {$\mbox{im}(T)$};
+     
+    \end{tikzpicture}
+\end{center}
+
+is the set of \emph{output} vectors.
+
+Hence, $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$ is a subspace of the co-domain. 
+
+\end{exploration}
+
+\begin{remark}
+
+  Images can be helpful for keeping ideas straight. 
+
+  Here is an image depicting the fundamental spaces of matrices we've been discussing. To my knowledge, this was popularized by Gilbert Strang from MIT.
+
+\begin{center}
+  \includegraphics[scale=.75]{fundamental_spaces_1.png}
+  %cite strang http://links.jstor.org/sici?sici=0002-9890%28199311%29100%3A9%3C848%3ATFTOLA%3E2.0.CO%3B2-A
+\end{center}
+
+\end{remark}
+
+You might notice some extra terms, and also some claims about the dimensions of the spaces in this image.
+
+We'll return to these in the next chapter. Fow now, we define the row space of a matrix and culminate in the Rank-Nullity Theorem.
+
+We've been focusing on the \emph{column space} of a matrix $M$ because it gives us the image of the associated linear transformation. We can also talk about the \emph{row space}, which deals more with the domain of the transformation (in this case, the vectors that don't get mapped to $\vec{0}$)
+
+\begin{definition}
+
+  The \emph{row space} of a matrix $A$ is the span of its rows. 
 
 \end{definition}
 
-We know that $\mbox{null}(A)$ of an $m\times n$ matrix is a subspace of $\RR^n$. (See Theorem \ref{th:nullsubspacern}.)  We conclude this section by showing that even when vector spaces other than $\RR^n$ are involved, the kernel of a linear transformation is a subspace of the domain of the transformation.
-\begin{theorem}\label{th:kersubspace} Let $T:V\rightarrow W$ be a linear transformation, then $\mbox{ker}(T)$ is a subspace of $V$.
-\end{theorem}
-\begin{proof}
-To show that $\mbox{ker}(T)$ is a subspace, we need to show that $\mbox{ker}(T)$ is closed under addition and scalar multiplication.
+\begin{remark}
+
+  You might notice in Strang's image that the vectors $x_r$ in the row space map to the column space of the matrix, and that the null space vectors $x_n$ map to $\vec{0}$. This is no coincidence, and the row space and null space only overlap at  $\vec{0}$. We'll unpack this more in the next chapter.
+
+\end{remark}
  
-Suppose that $\vec{v}_1$ and $\vec{v}_2$ are in $\mbox{ker}(T)$.  Then,
-$$T(\vec{v}_1+\vec{v}_2)=T(\vec{v}_1)+T(\vec{v}_2)=\vec{0}+\vec{0}=\vec{0}$$
-This shows that $\vec{v}_1+\vec{v}_2$ is in $\mbox{ker}(T)$.
- 
-For any scalar $a$ we have:
-$$T(a\vec{v}_1)=aT(\vec{v}_1)=a\vec{0}=\vec{0}$$
-This shows that $a\vec{v}_1$ is in $\mbox{ker}(T)$.
- 
-\end{proof}
- 
- 
+You'll also notice that, according to Strang's image, $dim(\mbox{row}(A))+dim(\mbox{null}(A))=n$, and $dim(\mbox{col}(A))+dim(\mbox{null}(A^T))=m$. This is because of the Rank-Nullity Theorem.
+
+\subsection*{Rank-Nullity Theorem for Linear Transformations}
  
 \begin{definition}\label{def:nullityT}
 The \dfn{nullity} of a linear transformation $T:V\rightarrow W$, is the dimension of the kernel of $T$.
 $$\mbox{nullity}(T)=\mbox{dim}(\mbox{ker}(T))$$
 \end{definition}
- 
-This definition gives us the following relationship between nullity of a linear transformation $T:\RR^n\rightarrow\RR^m$ and the nullity of the standard matrix $A$ associated with it.
- 
-\begin{formula}\label{form:nullTnullA}
-$$\mbox{nullity}(A) = \mbox{dim}(\mbox{null}(A))=\mbox{dim}(\mbox{ker}(T))=\mbox{nullity}(T)$$
-\end{formula}
- 
- 
-%Notice that since the nullity of a matrix $A$ was defined as $\mbox{nullity}(A) = \mbox{dim}(\mbox{null}(A))$ (Definition \ref{def:matrixnullity} of VSP-0040), and the kernel of a linear transformation $T:\RR^n\rightarrow \RR^m$ is the null space of its associated standard matrix, our definitions of nullity are in agreement.
- 
-\subsection*{Rank-Nullity Theorem for Linear Transformations}
- 
-In Examples \ref{ex:image2} and \ref{ex:kernel}, we found the image and the kernel of the linear transformation $T:\RR^5\rightarrow \RR^4$ with standard matrix
+
+Earlier, we found the image and the kernel of the linear transformation $T:\RR^5\rightarrow \RR^4$ with standard matrix
  
 $$A=\begin{bmatrix}1 & 2 & 2 &-1 & 0\\-1 & 3 & 1 & 0 & -1\\3 & 0 & 0 & 3 & 6\\ 1 & -1 & 1 & -2 & -1\end{bmatrix}$$
  
@@ -175,160 +292,73 @@ $$\mbox{rank}(T)=\mbox{dim}(\mbox{im}(T))=\mbox{dim}(\mbox{col}(A))=\mbox{rank}(
 and
 $$\mbox{nullity}(T)=\mbox{dim}(\mbox{ker}(T))=\mbox{dim}(\mbox{null}(A))=\mbox{nullity}(A)=2$$
  
-Because of Rank-Nullity Theorem for matrices (Theorem \ref{th:matrixranknullity}), it is not surprising that
-$$\mbox{rank}(T)+\mbox{nullity}(T)=3+2=5=\mbox{dim}(\RR^5)$$
+You might notice that
+$$\mbox{rank}(T)+\mbox{nullity}(T)=3+2=5=\mbox{dim}(\RR^5),$$
+
+the dimension of the domain space for $A$.
  
- 
-The following theorem is a generalization of this result.
+The following theorem confirms this property for all linear transformations.
  
 \begin{theorem}\label{th:ranknullityforT}
-Let $T:V\rightarrow W$ be a linear transformation.  Suppose $\mbox{dim}(V)=n$, then
+Let $T:V\rightarrow W$ be a linear transformation, and its associated $m\times n$ matrix $A$. This means that $\mbox{dim}(V)=m$.
+
+We can conclude that
 $$\mbox{rank}(T)+\mbox{nullity}(T)=n$$
 \end{theorem}
  
-\begin{proof}
-By Theorem \ref{th:imagesubspace}, $\mbox{im}(T)$ is a subspace of $W$.  There exists a basis for $\mbox{im}(T)$ of the form $\{T(\vec{v}_1), \ldots,T(\vec{v}_r)\}$.  By Theorem \ref{th:kersubspace}, $\mbox{ker}(T)$ is a subspace of $V$.  Let $\{\vec{u}_1,\ldots,\vec{u}_s\}$ be a basis for $\mbox{ker}(T)$.
- 
-We will show that $\{\vec{u}_1,\ldots ,\vec{u}_s, \vec{v}_1,\ldots ,\vec{v}_r\}$ is a basis for $V$.
- 
-For any vector $\vec{v}$ in $V$, we have:
-$$T(\vec{v})=c_1T(\vec{v}_1)+\ldots +c_rT(\vec{v}_r)$$
-for some scalars $c_i$ $(1\leq i\leq r)$.
-Thus,
-$$T(\vec{v})-\big(c_1T(\vec{v}_1)+\ldots +c_rT(\vec{v}_r)\big)=\vec{0}$$
-By linearity,
-$$T((\vec{v}-(c_1\vec{v}_1+\ldots +c_r\vec{v}_r))=\vec{0}$$
-Therefore $\vec{v}-(c_1\vec{v}_1+\ldots +c_r\vec{v}_r)$ is in $\mbox{ker}(T)$.
- 
-Hence there are scalars $a_i$ $(1\leq i\leq s)$ such that
-$$\vec{v}-(c_1\vec{v}_1+\ldots +c_r\vec{v}_r)=a_1\vec{u}_1+\ldots +a_s\vec{u}_s$$
-Thus,
-$$\vec{v}=(c_1\vec{v}_1+\ldots +c_r\vec{v}_r)+(a_1\vec{u}_1+\ldots +a_s\vec{u}_s)$$
- 
-We conclude that
-$$V=\mbox{span}(\vec{u}_1,\ldots ,\vec{u}_s, \vec{v}_1,\ldots ,\vec{v}_r)$$
- 
-Now we need to show that $\{\vec{u}_1,\ldots ,\vec{u}_s, \vec{v}_1,\ldots ,\vec{v}_r\}$ is linearly independent.
- 
-Suppose
-\begin{align}\label{eq:kerplusimproof} c_1\vec{v}_1+\ldots +c_r\vec{v}_r+a_1\vec{u}_1+\ldots +a_s\vec{u}_s=\vec{0}\end{align}
-Applying $T$ to both sides, we get
-$$T(c_1\vec{v}_1+\ldots +c_r\vec{v}_r+a_1\vec{u}_1+\ldots +a_s\vec{u}_s)=T(\vec{0})$$
-$$c_1T(\vec{v}_1)+\ldots +c_rT(\vec{v}_r)+a_1T(\vec{u}_1)+\ldots +a_sT(\vec{u}_s)=\vec{0}$$
- 
-But $T(\vec{u}_i)=\vec{0}$ for $1\leq i\leq s$, thus
-$$c_1T(\vec{v}_1)+\ldots +c_rT(\vec{v}_r)=\vec{0}$$
-Since $\{T(\vec{v}_1),\ldots ,T(\vec{v}_r)\}$ is linearly independent, it follows that each $c_i=0$. 
- 
-But then Equation (\ref{eq:kerplusimproof}) implies that $a_1\vec{u}_1+\ldots +a_s\vec{u}_s=\vec{0}$.  Because $\{\vec{u}_1, \ldots ,\vec{u}_s\}$ is linearly independent, it follows that each $a_i=0$. 
- 
-We conclude that $\{\vec{u}_1,\ldots ,\vec{u}_s,\vec{v}_1,\ldots ,\vec{v}_r\}$ is a basis for $V$.  Thus,
- 
-$$\mbox{dim}(\mbox{ker}(T))+\mbox{dim}(\mbox{im}(T))=s+r=n$$
-\end{proof}
- 
-\section*{Practice Problems}
-\begin{problem}
-Describe the image and find the rank for each linear transformation $T:\RR^n\rightarrow \RR^m$ with standard matrix $A$ given below.
-  \begin{problem}\label{prob:imagerankoflintrans1}
-  $T:\RR^5\rightarrow \RR^2$, $A=\begin{bmatrix}3&2&4&7&1\\-1&-9&7&6&8\end{bmatrix}$.
-   
-  \begin{multipleChoice}
-  \choice[correct]{$\mbox{im}(T)=\RR^2$}
-  \choice{$\mbox{im}(T)$ is a line in $\RR^2$}
-  \choice{$\mbox{im}(T)=\{\vec{0}\}$ }
-  \choice{$\mbox{im}(T)=\RR^5$}
-  \choice{$\mbox{im}(T)$ is a plane in $\RR^5$}
-\end{multipleChoice}
-   
-  $\mbox{rank}(T)=\answer{2}$
-  \end{problem}
-   
-  \begin{problem}\label{prob:imagerankoflintrans2}
-  $T:\RR^2\rightarrow\RR^3$, $A=\begin{bmatrix}1&1\\1&1\\1&1\end{bmatrix}$
-   
-  \begin{multipleChoice}
-  \choice{$\mbox{im}(T)=\RR^3$}
-  \choice{$\mbox{im}(T)$ is a line in $\RR^2$}
-  \choice[correct]{$\mbox{im}(T)$ is a line in $\RR^3$}
-  \choice{$\mbox{im}(T)=\{\vec{0}\}$ }
-  \choice{$\mbox{im}(T)$ is a plane in $\RR^3$}
-\end{multipleChoice}
-   
-  $\mbox{rank}(T)=\answer{1}$
-  \end{problem}
-\end{problem}
- 
- 
-\begin{problem}\label{prob:sametrans} Suppose linear transformations $T:\RR^2\rightarrow \RR^2$ and $S:\RR^2\rightarrow \RR^2$ are such that  $\mbox{im}(T)=\mbox{im}(S)=\mbox{span}\left(\begin{bmatrix}1\\-3\end{bmatrix}\right)$.  Does this mean that $T$ and $S$ are the same transformation?  Justify your claim.
-\end{problem}
- 
-\begin{problem}
-Describe the kernel and find the nullity for each linear transformation $T:\RR^n\rightarrow \RR^m$ with standard matrix $A$ given below.
- 
-\begin{problem}\label{prob:kerandnullityT1}
-$T:\RR^3\rightarrow \RR^2$, $A=\begin{bmatrix}2&1&0\\-1&1&-3\end{bmatrix}$.
- 
-\begin{multipleChoice}
-  \choice{$\mbox{ker}(T)=\RR^3$}
-  \choice{$\mbox{ker}(T)=\{\vec{0}\}$ }
-  \choice{$\mbox{ker}(T)=\RR^2$}
-  \choice{$\mbox{ker}(T)$ is a plane in $\RR^3$}
-   \choice[correct]{$\mbox{ker}(T)$ is a line in $\RR^3$}
-\end{multipleChoice}
- 
-$\mbox{nullity}(T)=\answer{1}$
-\end{problem}
- 
-\begin{problem}\label{prob:kerandnullityT2}
-$T:\RR^2\rightarrow \RR^2$, $A=\begin{bmatrix}2&-1\\3&0\end{bmatrix}$.
- 
-\begin{multipleChoice}
-  \choice{$\mbox{ker}(T)=\RR^2$}
-  \choice[correct]{$\mbox{ker}(T)=\{\vec{0}\}$ }
-   \choice{$\mbox{ker}(T)$ is a line in $\RR^2$}
-\end{multipleChoice}
- 
-$\mbox{nullity}(T)=\answer{0}$
-\end{problem}
- 
-\begin{problem}\label{prob:kerandnullityT3}
-$T:\RR^3\rightarrow \RR^5$, $A=\begin{bmatrix}1&2&-1\\1&2&-1\\1&2&-1\\1&2&-1\\1&2&-1\end{bmatrix}$
- 
-\begin{multipleChoice}
- \choice[correct]{$\mbox{ker}(T)$ is a plane in $\RR^3$}
- \choice{$\mbox{ker}(T)$ is a line in $\RR^3$}
-     \choice{$\mbox{ker}(T)$ is a line in $\RR^5$}
- \choice{$\mbox{ker}(T)=\RR^3$}
-  \choice{$\mbox{ker}(T)=\{\vec{0}\}$ }
-   
-\end{multipleChoice}
- 
-$\mbox{nullity}(T)=\answer{2}$
-\end{problem}
-\end{problem}
- 
-\begin{problem}\label{prob:ranknullityT4}
-Suppose a linear transformation $T:\RR^3\rightarrow \RR^3$ is such that $\mbox{im}(T)$ is a plane in $\RR^3$.  Then
-$$\mbox{rank}(T)=\answer{2}$$ $$\mbox{nullity}(T)=\answer{1}$$
-\end{problem}
- 
-\begin{problem}\label{prob:ranknullityT5}
-Suppose a linear transformation $T:\RR^5\rightarrow \RR^5$ is such that $T(\vec{v})=\vec{0}$ for all $\vec{v}$ in $\RR^5$.  Then
-$$\mbox{rank}(T)=\answer{0}$$ $$\mbox{nullity}(T)=\answer{5}$$
-\end{problem}
- 
-\begin{problem}\label{prob:findimkergivenrref} Let $T:\RR^6\rightarrow \RR^4$ be a linear transformation with standard matrix
-$$A=\begin{bmatrix}2&-1&1&-2&1&1\\1&2&3&6&-4&1\\0&2&2&4&-2&-1\\1&3&2&6&-3&2\end{bmatrix}$$
-Find $\mbox{im}(T)$ and $\mbox{ker}(T)$ if the reduced row-echelon form of $A$ is
-$$\text{rref}(A)=\begin{bmatrix}1&0&0&1&-1&0\\0&1&0&1&0&0\\0&0&1&1&-1&0\\0&0&0&0&0&1\end{bmatrix}$$
-\end{problem}
-\begin{problem}\label{prob:findimageandkernellintrans} Let $V=\mbox{span}\left(\begin{bmatrix}1\\1\end{bmatrix}\right)$, and let $T:V\rightarrow \RR^2$ be a linear transformation defined by
-$T(\vec{v})=2\vec{v}$.  Find $\mbox{im}(T)$ and $\mbox{ker}(T)$.
-\end{problem}
- 
-\begin{problem}\label{prob:ranknullitytrans}
-Suppose a linear transformation $T$ is induced by a $4\times 6$ matrix $A$.  Let $S$ be a linear transformation induced by $A^T$.  Find $\mbox{nullity}(S)$, if $\mbox{nullity}(T)=3$.  Prove your claim.
+One consequence of this is that once you find the dimension of one of the related spaces (e.g. $\mbox{im}(A), \mbox{null}(A), \mbox{row}(A), \mbox{null}(A^T)$), you immediately know the dimensions of the other spaces!
+
+Let's try it out.
+
+
+Describe the properties of the matrix $A$ below, and the associated transformation $T$,
+
+\begin{problem}\label{prob:imagerankoflintrans1}
+$T:\RR^5\rightarrow \RR^2$, $A=\begin{bmatrix}3&2&4&7&1\\-1&-9&7&6&8\end{bmatrix}$.
+  
+\begin{selectAll}
+\choice[correct]{$\mbox{im}(T)=\RR^2$}
+\choice{$\mbox{im}(T)$ is a line in $\RR^2$}
+\choice{$\mbox{null}(A)=\{\vec{0}\}$ }
+\choice{$\mbox{im}(T)=\RR^5$}
+\choice[correct]{$dim(\mbox{row}(A))=3$}
+\choice{$\mbox{im}(T)$ is a plane in $\RR^5$}
+\choice{$\mbox{rank}(A)=5$}
+\choice[correct]{$\mbox{rank}(A)=2$}
+\choice{$dim(\mbox{row}(A))=5$}
+\choice{$\mbox{row}(A)=\RR^5$}
+\choice[correct]{$\mbox{nullity}(A)=3$}
+\choice[correct]{$dim(\mbox{null}(A^T))=3$}
+\end{selectAll}
+  
+\begin{solution}
+
+  If we take \texttt{rref(A)}, we get
+
+  $$\begin{bmatrix}1&0&2&3&1\\0&1&-1&-1&-1\end{bmatrix}.$$
+
+  At most, the image of $A$ would be $\RR^2$. Since the rank of $A$ is $2$ (note the two pivot columns), we indeed know that $\mbox{im}(A)=\RR^2$, as opposed to some line in $\RR^2$ (or $\vec{0}$.)
+
+  This means that $\mbox{dim}(\mbox{ker}(T))=3$, so a $3$-dimensional subspace of $\RR^5$ maps to $\vec{0}$.
+
+\end{solution}
+
+Which vectors are in the kernel of $T$?
+
+\begin{selectAll}
+
+\choice{$\sigma\begin{bmatrix}7\\6\end{bmatrix}$}
+
+\choice[correct]{$\tau\begin{bmatrix}-2\\1\\1\\0\\0\end{bmatrix}$}
+
+\choice{$\tau\begin{bmatrix}-2\\1\\1\\0\\0\end{bmatrix}+\sigma\begin{bmatrix}0\\1\\0\\1\\0\end{bmatrix}+\rho\begin{bmatrix}-3\\1\\0\\1\\0\end{bmatrix}$}
+
+\choice[correct]{$\tau\begin{bmatrix}-1\\1\\0\\0\\1\end{bmatrix}+\sigma\begin{bmatrix}-2\\1\\1\\0\\0\end{bmatrix}+\rho\begin{bmatrix}-3\\1\\0\\1\\0\end{bmatrix}$}
+
+\choice{$\sigma\begin{bmatrix}3\\-1\end{bmatrix}+\sigma\begin{bmatrix}1\\8\end{bmatrix}+\sigma\begin{bmatrix}2\\-9\end{bmatrix}$}
+
+\end{selectAll}
+
 \end{problem}
  
  

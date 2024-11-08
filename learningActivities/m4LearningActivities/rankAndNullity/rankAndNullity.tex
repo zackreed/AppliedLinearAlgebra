@@ -13,6 +13,8 @@ In this activity, we will explore the rank and nullity of a matrix.
 \end{abstract}
 \maketitle
 
+\section*{Null Spaces: Mapping to $\vec{0}$}
+
 \begin{exploration}
 
     Let's start with a little warm up exploration! We'll think in $\mathbb{R}^2$ for now.
@@ -21,7 +23,7 @@ In this activity, we will explore the rank and nullity of a matrix.
 
     Go back to the 2D linear transformation GeoGebra applet from before and set $S(\vec{i})$ and $S(\vec{j})$ such that the image of $S$ is a 1-dimensional subspace of $\mathbb{R}^2$ (i.e. a line).
     
-    \geogebra{wypahbvn}{800}{600}
+    \geogebra{uaua5mpa}{1156}{636}
 
     Now, we're going to try to answer a very specific question in this section: What vectors get mapped to $\vec{0}$ by a matrix $A$? Remember that all linear transformations are matrices, so we can reprsent this in the applet by finding vectors $\vec{v}$ such that $S(\vec{v})=\vec{0}$.
 
@@ -35,7 +37,7 @@ In this activity, we will explore the rank and nullity of a matrix.
 
         %insert figure
         \begin{center}
-            \includegraphics[width=\textwidth]{null_space_1.png}
+            \includegraphics[scale=.25]{null_space_1.png}
         \end{center}
     
         In fact, all vectors whose coordinates agree lie along the line $y=x$, so we've found that only vectors within the 1-dimensional subspace spanned by $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ get mapped to $\vec{0}$. This is an example of what's called a \emph{null space} of a matrix, which we'll explore more in the next few problems.
@@ -60,52 +62,122 @@ $$
 
 \begin{remark}
 
-    Notice that the third column of $A$ is a linear combination of the first two columns. If we think about $A$ as a linear transformation $S$, that means that $3S(\vec{i})+5S(\vec{j})=S(\vec{k})$. 
+    Notice that the third column of $A$ is a linear combination of the first two columns!
+
+    While we can determine this by 
     
-    In other words, $S(\vec{k})$ is in the span of $S(\vec{i})$ and $S(\vec{j})$. This is a hint that the image of $A$ is not all of $\mathbb{R}^3$.
+    \[3\begin{bmatrix}1\\0\\1\end{bmatrix}+5\begin{bmatrix}0\\1\\1\end{bmatrix}=\begin{bmatrix}3\\5\\8\end{bmatrix},\]
+
+    let's also practice our echelon form skills. 
+
+    In MATLAB, if we take the \rref of $A$ by:
+
+    \begin{verbatim}
+        A=[1, 0, 3;
+            0, 1, 5;
+            1, 1, 8]
+        A=sym(A)
+
+        rref(A)
+    \end{verbatim}
+
+    We get $\text{rref}(A)=\begin{bmatrix}1&0&3\\0&1&5\\0&0&0\end{bmatrix}$
+
+    This gives us the exact same information! In fact, in cases like this, the \rref will tell us what linear combinations of the first two columns equals the third!
+    
+    In other words, $A\vec{k}$ is in the span of $A\vec{i}$ and $A\vec{j}$. This is a hint that the image of $A$ is not all of $\mathbb{R}^3$. (Remember the \emph{image} of a function or transformation is the set of vectors mapped to by the transformation)
 
     Let's view this in our handy GeoGebra applet to confirm where $A$ sends 3D vectors.
 
-    %Insert GeoGebra applet here
+    \begin{center}
+    
+        \geogebra{gseknqrg}{954}{599}
+
+    \end{center}
+
+    In fact, after setting up the matrix, it's clear that the image always stays on the plane spanned by $\begin{bmatrix}1\\0\\1\end{bmatrix}$ and $\begin{bmatrix}0\\1\\1\end{bmatrix}$. No matter where you place $\vec{v}$, $A\vec{v}$ always stays on the plane. 
 
 \end{remark}
 
 
-\begin{problem}{{\bf Warm Up:}}
-    What is the reduced row echelon form of $A^T$? This will tell you which vectors span the $Im(A)$ (i.e. ``the image of $A$").
-    \begin{solution}
-        Since reduced row echelon usually operates with rows, we take the transpose of $A$ to instead talk about its columns, which we've come to primarily associate with the $Im(A)$.
-        \[
-            A^T = 
-            \begin{bmatrix}
-            1 & 0 & 1 \\
-            0 & 1 & 1 \\
-            3 & 5 & 8
-            \end{bmatrix}
-            \]
+%\begin{problem}{{\bf Warm Up:}}
+%    What is the reduced row echelon form of $A^T$? This will tell you which %vectors span the $Im(A)$ (i.e. ``the image of $A$").
+%    \begin{solution}
+%        Since reduced row echelon usually operates with rows, we take the %transpose of $A$ to instead talk about its columns, which we've come to %primarily associate with the $Im(A)$.
+%        \[
+%            A^T = 
+%            \begin{bmatrix}
+%            1 & 0 & 1 \\
+%            0 & 1 & 1 \\
+%            3 & 5 & 8
+%            \end{bmatrix}
+%            \]
+%
+%        As we said, we can combine the first two rows to generate the third row, %so the reduced row echelon form of $A^T$ is%
+%
+%        \[
+%            \begin{bmatrix}
+%            1 & 0 & 1 \\
+%            0 & 1 & 1 \\
+%            0 & 0 & 0
+%            \end{bmatrix}
+%        \]
 
-        As we said, we can combine the first two rows to generate the third row, so the reduced row echelon form of $A^T$ is
+%        This confirms that $Im(A)$ is spanned by $\begin{bmatrix} 1 \\ 0 \\ 1 %\end{bmatrix}$ and $\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$.
+%
+%        In the next few examples, we'll provide some commands to help you find %the reduced row echelon form of more complicated matrices.
+%    \end{solution}
 
-        \[
-            \begin{bmatrix}
-            1 & 0 & 1 \\
-            0 & 1 & 1 \\
-            0 & 0 & 0
-            \end{bmatrix}
-        \]
+%\end{problem}
 
-        This confirms that $Im(A)$ is spanned by $\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$.
-
-        In the next few examples, we'll provide some commands to help you find the reduced row echelon form of more complicated matrices.
-    \end{solution}
-
-\end{problem}
-
+\begin{remark}{Images and Pre-Images}
 Up to this point we've been focusing mainly on the image of matrices and their properties, but we can actually say much about a matrix in terms of the \emph{pre-image} space. The pre-image space is the set of all vectors $\vec{v}$ that get mapped by $A$ into the image $A\vec{v}$. 
+
+\begin{definition}
+    The \emph{pre-image} of a function or transformation is the set of all vectors $\vec{v}$ such that $T(\vec{v})$ is defined.
+\end{definition}
+
+\begin{example}
+
+    The matrix 
+    
+    $$M=\begin{bmatrix}1,1,0\\0,1,1\\-1,1,1\end{bmatrix}$$
+    
+    is a $3\times 3$ matrix. So any $3-$dimensional vector $\vec{v}$ is in the pre-image of $M$, since $M\vec{v}$ is defined, however $2-$ or $4-$dimensional vectors $\vec{u}$ and $\vec{w}$ are not in the pre-image of $M$, since $A\vec{u}$ and $A\vec{w}$ would not be defined.
+
+\end{example}
 
 One way to describe why the $Im(A)$ is just a plane is to note that some pre-image vectors get mapped to $\vec{0}$. As it turns out, the set of all vectors that get mapped to $\vec{0}$ is a subspace of $\mathbb{R}^3$. We call it the \emph{null space} of $A$.
 
-Let's see if we can describe the null space of $A$.
+\end{remark}
+
+Let's go back to our simple diagram that conveys the basic concept of mapping vectors.
+
+\begin{tikzpicture}
+
+    % Draw sets A, B, C
+    \draw[fill=yellow!20!white, draw=black, thick] (-4,0) ellipse (1.5cm);
+    \draw[fill=green!20!white, draw=black, thick] (0,0) ellipse (1.5cm);
+    \draw[fill=blue!20!white, draw=black, thick] (.5,0) ellipse (.75cm);
+    
+    % Labels for sets A, B, C
+    \node at (-4,1.8) {\textbf{Pre-Image}};
+    \node at (.5,-.85) {\textbf{Image}};
+    %\node at (4,1.8) {\textbf{X''}};
+    
+    % Elements inside sets
+    \filldraw[red] (-3,0) circle (3pt) node[below] {\textbf{v}};
+    \filldraw[red] (.75,.25) circle (3pt) node[below] {\textbf{A(v)}};
+    %\filldraw[red] (3.5,-.5) circle (3pt) node[below] {\textbf{R(S(v))}};
+    
+    % Arrows for functions f, g, gof
+    \draw[->, thick, purple] (-3,0.2) .. controls (-1,1.2) .. (.75,.3) node[midway, below] {\textbf{A}};
+    %\draw[->, thick, purple] (1,.7) .. controls (2,1.5) .. (3.5,-.3) node[midway, above] {\textbf{R}};
+    %\draw[->, thick, purple] (-4,-1.7) .. controls (0,-2.5) .. (4,-1.7) node[midway, below] {\textbf{RoS}};
+    
+\end{tikzpicture}
+
+Let's describe the null space of $A$.
 
 \begin{definition}
 
@@ -140,29 +212,18 @@ This gives the systme of equations
 \end{aligned}
 \]
 
+and the augmented matrix
 
-\end{exploration}
+\[A_a=\left[\begin{array}{ccc|c}1&0&3&0\\
+    0&1&5&0\\
+    1&1&8&0
+\end{array}\right]\]
 
-\begin{problem}{Solving the System to Find the $Null(A)$}
+Using MATLAB as above, we get
 
-Solve the system of equations to find the null space of $A$. Start by finding the reduced row echelon form of $A$. Feel free to use TECH to help you out!
+$$A=\begin{bmatrix} 1 & 0 & 3 \\ 0 & 1 & 5 \\ 1 & 1 & 8 \end{bmatrix}$$
 
-\begin{solution}
-    We'll use MATALB to find the reduced row echelon form of $A$. First we enter $A$ and then use the command \begin{verbatim} rref(A) \end{verbatim} to find the reduced row echelon form.
-
-    %Write A as a matrix in MATLAB in a verbatim environment
-    \begin{verbatim}
-        A = [1 0 3; 0 1 5; 1 1 8]
-        reduced=rref(A)
-    \end{verbatim}
-
-    This generates the output
-
-    $$A=\begin{bmatrix} 1 & 0 & 3 \\ 0 & 1 & 5 \\ 1 & 1 & 8 \end{bmatrix}$$
-
-    $$\text{reduced}=\begin{bmatrix} 1 & 0 & 3 \\ 0 & 1 & 5 \\ 0 & 0 & 0 \end{bmatrix}$$
-
-\end{solution}
+$$\text{rref}(A)=\begin{bmatrix} 1 & 0 & 3 \\ 0 & 1 & 5 \\ 0 & 0 & 0 \end{bmatrix}$$
 
 This tells us that $v_3$ is a free variable. When $v_3=1$, we get the system 
 
@@ -179,7 +240,7 @@ In fact, any scalar multiple of this vector gets mapped to $\vec{0}$ as well, so
 
 We've found the null space! $Null(A)$ is the set of all vectors of the form $\tau \begin{bmatrix} -3 \\ -5 \\ 1 \end{bmatrix}$.
 
-\end{problem}
+\end{exploration}
 
 \begin{remark}
 
@@ -201,7 +262,9 @@ Let's make sure we're not off base! Pick a few scalars, say $\tau=\pi$ and $\tau
     %\revealbutton{Click to see MATLAB code}
         %Write A as a matrix in MATLAB in a verbatim environment
         \begin{verbatim}
-            A = [1 0 3; 0 1 5; 1 1 8]
+            A = [1 0 3; 
+                0 1 5; 
+                1 1 8]
             v=[-3; -5; 1]
             tau = pi;
             A_pi_v=A*(tau*v)
@@ -213,9 +276,9 @@ Let's make sure we're not off base! Pick a few scalars, say $\tau=\pi$ and $\tau
 
     Doing so yields
 
-    $$A\pi\vec{v}=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
+    $$A\left(\pi\vec{v}\right)=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
 
-    $$Ae\vec{v}=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
+    $$A\left(e\vec{v}\right)=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
 
     MATLAB can also handle general scalars, so with the code
 
@@ -227,7 +290,7 @@ Let's make sure we're not off base! Pick a few scalars, say $\tau=\pi$ and $\tau
 
     we get the output
 
-    $$A\tau\vec{v}=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
+    $$A\left(\tau\vec{v}\right)=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
     
 
 \end{solution}
@@ -250,11 +313,16 @@ As it turns out, this process will let you exactly determine the null space for 
 
     \begin{solution}
 
-        Let's start with the reduced row echelon form of $B$.
+        Let's start with the reduced row echelon form of $B$, but we're going to get a new output from \texttt{rref(B)}, which will tell us which columns are the pivot columns.
+
+        (REMEMBER: The pivot columns refer to Gaussian Elimination, where you have leading 1s)
 
        %Write B as a matrix in MATLAB in a verbatim environment
        \begin{verbatim}
-        B = [1 3 2 0 0; 0 1 5 2 1; 3 5 -14 -8 -4; 0 0 0 1 1]
+        B = [1 3 2 0 0; 
+            0 1 5 2 1; 
+            3 5 -14 -8 -4; 
+            0 0 0 1 1]
         [R_new, pivcol_new]=rref(B)
     \end{verbatim}
 
@@ -298,13 +366,41 @@ As it turns out, this process will let you exactly determine the null space for 
 
 \end{problem}
 
+\begin{problem}
+
+    Let's again test that we've found the right spanning vectors for the $Null(B)$.
+
+    Ideally, linear combinations of the two vectors $\vec{v}=\startmat{c}13\\-5\\1\\0\\0\stopmat$ and $\vec{u}=\startmat{c}-3\\1\\0\\-1\\1\stopmat$ would map to $\vec{0}$.
+
+    We can set this up by defining the matrix $A$, the vectors $\vec{v}$ and $\vec{w}$, and then arbitrary scalars $\tau$ and $\sigma$.
+
+    \begin{verbatim}
+        B = [1 3 2 0 0; 
+            0 1 5 2 1; 
+            3 5 -14 -8 -4; 
+            0 0 0 1 1]
+        B=sym(B)
+
+        v=[13;-5;1;0;0]
+        w=[-3;1;0;-1;1]
+
+        syms tau sigma
+        B*(tau*v+sigma*w)
+    \end{verbatim}
+
+    In fact, this yields $\vec{0}$, and so do the individual products $B\left(\tau \vec{v}\right)$ and $B\left(\sigma\vec{w}\right)$. Indeed, we've found our null space. 
+
+    Or have we? We'll later see conditions by which we can be sure we've exhaustively found our null space, so let's table our certainty and come back to that question. In math, you always want to make sure you've set up the problem so that you can be certain of the result!
+
+\end{problem}
+
 \begin{remark}
 
     You might notice that a quick way to find the null space basis vectors is to set each free variable to $1$ and to negate any other elements in the column. This is a quick way to play out the implications of setting each free variable to $1$ and the others to $0$, as we did in the last problem.
 
     For example, if the reduced row echelon form of $C=\begin{bmatrix} 1 & 2 & 3 & 5 \\ 2 & 1 & 4 &2 \\ 5 & 4 & 11 & 9 \end{bmatrix}$ is 
 
-    $$\begin{bmatrix} 1 & 0 & 5/3 & -1/3 \\ 0 & 1 & 2/3 & 8/3 \\ 0 & 0 & 0 & 0 \end{bmatrix}$$
+    $$\text{rref}(C)=\begin{bmatrix} 1 & 0 & 5/3 & -1/3 \\ 0 & 1 & 2/3 & 8/3 \\ 0 & 0 & 0 & 0 \end{bmatrix}$$
 
     then the null space basis vectors are $\begin{bmatrix} -5/3 \\ -2/3 \\ 1 \\ 0 \end{bmatrix}$ and $\begin{bmatrix} 1/3 \\ -8/3 \\ 0 \\ 1 \end{bmatrix}$.
 

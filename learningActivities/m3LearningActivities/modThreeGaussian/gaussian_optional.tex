@@ -2,7 +2,7 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed} %PEter Selinger
-\title{Bringing Everything Together: Gauss and Echelon Forms}
+\title{Optional: Extra Gauss-Jordan Practice}
 \begin{document}
 \begin{abstract}
 Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
@@ -11,8 +11,6 @@ Here we introduce one of the most prevalent applications of matrices and vectors
 
 \section*{Gaussian Elimination and Rank}
 \subsection*{Row Echelon and Reduced Row Echelon Forms}
- 
-In \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/SYS-0020/main}{Augmented Matrix Notation and Elementary Row Operations}, we learned to write linear systems in \dfn{augmented matrix} form and use elementary row operations to transform an augmented matrix to \dfn{row-echelon form} and the \dfn{reduced row-echelon form} in order to solve linear systems. 
  
 Recall that a matrix (or augmented matrix) is in \dfn{row-echelon form} if:
 \begin{itemize}
@@ -29,9 +27,6 @@ A matrix in row-echelon form is said to be in \dfn{reduced row-echelon form} if 
  
  
 Matrices in row-echelon form and reduced row-echelon form are ``convenient" because their corresponding systems of equations are easy to solve. 
- 
-In this module we turn to the question of existence and uniqueness of the two echelon forms.  Can every matrix (augmented matrix) be carried to a row-echelon form?  If so, is the row-echelon form unique?  Can every matrix be reduced to a reduced row-echelon form?  If so, is the reduced row-echelon form unique?  The answers we find will have long-lasting implications.
- 
  
 \begin{exploration}\label{init:gaussianelim1}
 Solve the following system of equations.
@@ -135,8 +130,6 @@ $$x=\answer{0},\quad y=\answer{-1},\quad z=\answer{-1}$$
 %We arrive at a different matrix in row-echelon form, but back-substitution yields the same solution to the system (you should check this):  $$x=0, y=-1, z=-1$$
 \end{exploration}
  
-It is clear from Exploration \ref{init:gaussianelim1} that a row-echelon form corresponding to a matrix is not unique.  But what about the reduced row-echelon form?
- 
 \begin{exploration}\label{init:gaussianelim2} In this problem we revisit the system
 $$\begin{array}{ccccccccc}
       x &+ &2y&-&3z&= &1 \\
@@ -191,7 +184,8 @@ $$\left[\begin{array}{ccc|c}
   \left[\begin{array}{ccc|c} 
  1&0&0&0\\0&1&0&-1\\0&0&1&-1
  \end{array}\right]\end{equation}
-Do you think it is possible to start with (\ref{eq:ref2}) and obtain the same reduced row-echelon form?  Try to justify your response.  If possible, find the elementary row operations that take (\ref{eq:ref2}) to the reduced row-echelon form in (\ref{eq:rref3}).
+
+If possible, find the elementary row operations that take (\ref{eq:ref2}) to the reduced row-echelon form in (\ref{eq:rref3}).
  
 $$\left[\begin{array}{ccc|c} 
  1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
@@ -232,43 +226,7 @@ $$
  1&0&0&0\\0&1&0&-1\\0&0&1&-1
  \end{array}\right]
 \end{equation*}
-You will be asked to fill in the elementary row operations in Practice Problem \ref{prob:same_rref}.
 \end{exploration}
- 
-Our observations in Exploration \ref{init:gaussianelim2} are summarized in the following diagram.
- 
-\begin{center}
-\begin{tikzpicture}
-  \node[] at (0, 0)  (o)    {$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
- \end{array}\right]$};
- \node[] at (-3, -2.5)  (left1)    {$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&12&-18&6\\0&0&-2&2
- \end{array}\right]$};
- \node[] at (3, -2.5)  (right1)    {$\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\0&-8&2&6\\0&0&-3&3
- \end{array}\right]$};
- \node[gray] at (0, -2.5)  (c1)    {\shortstack{Row-\\Echelon\\Forms}};
- \node[] at (0, -5)  (c2)    {$\left[\begin{array}{ccc|c}  1&0&0&0\\0&1&0&-1\\0&0&1&-1
- \end{array}\right]$};
- \node[gray] at (0, -6)  (c3)    {Reduced Row-Echelon Form};
-  
- \draw [->,line width=0.5pt,-stealth]  (o.west)to[out=180, in=90](left1.north);
-  \draw [->,line width=0.5pt,-stealth]  (o.south)to[out=270, in=90](c1.north west);
-  \draw [->,line width=0.5pt,-stealth]  (o.south)to[out=270, in=90](c1.north east);
-  \draw [->,line width=0.5pt,-stealth]  (o.south)to[out=270, in=90](c1.north);
- \draw [->,line width=0.5pt,-stealth]  (o.east)to[out=0, in=90](right1.north);
- \draw [->,line width=0.5pt,-stealth,blue]  (left1.south)to[out=270, in=180](c2.west);
- \draw [->,line width=0.5pt,-stealth,red]  (right1.south)to[out=270, in=0](c2.east);
- \end{tikzpicture}
- \end{center}
-We observed that a row-echelon form associated with a matrix is not unique.  In contrast, we also saw how different sequences of elementary row operations lead to the same solution set and the same reduced row-echelon form.  It turns out that the reduced row-echelon form of a matrix is unique. 
-
-
- 
-\begin{theorem}\label{th:uniquenessofrref} The reduced row-echelon form of a matrix is unique.
-\end{theorem}
-A proof of this result can be found in [Yuster].
  
 The reduced row-echelon form of a matrix is an instance of a row-echelon form of the matrix.  While a given matrix may have multiple row-echelon forms, all row-echelon forms will share one characteristic: the number of nonzero rows in a row-echelon form of the given matrix will be the same.
 We will prove this result in Theorem \ref{th:samenumberofnonzerorows}.
@@ -278,11 +236,10 @@ We will prove this result in Theorem \ref{th:samenumberofnonzerorows}.
 \begin{definition}[Gaussian Elimination]\label{def:GaussianElimination}
 The process of using the elementary row operations on a matrix to transform it into row-echelon form is called \dfn{Gaussian Elimination}.
 \end{definition}
- 
-As we saw in the previous section, it is possible to follow different sequences of row operations to arrive at various row-echelon forms.  However, it was not clear whether it is {\it always possible} to find a row-echelon form.  The following algorithm takes any matrix (or augmented matrix) and transforms it into row-echelon form:
+
+ The following algorithm takes any matrix (or augmented matrix) and transforms it into row-echelon form:
 \begin{algorithm}[Gaussian Algorithm] \label{alg:gaussian}
 Let $A$ be an $m\times n$ matrix.
-
  
 Set $i=1$ initially.
 \begin{itemize}
@@ -300,8 +257,6 @@ Repeat steps 1--4 on the matrix consisting of the remaining rows.
 When the process stops, $A$ will be in row echelon form.
 \end{algorithm}
 Gaussian Algorithm guarantees that every matrix will have a row-echelon form. 
-
-
  
 \begin{example}\label{ex:non-augmented}
  
@@ -382,8 +337,6 @@ When the Gaussian Algorithm terminates, subtract multiples of the rows containin
 \end{algorithm}
  
  
-
- 
 \begin{example}\label{ex:gaussjordanalg}
 Use the Gauss-Jordan Algorithm to solve the system
 $$\begin{array}{ccccccccc}
@@ -456,17 +409,5 @@ $$\begin{array}{ccccccccc}
 \end{example}
 The Gauss-Jordan Algorithm guarantees the existence of the reduced row-echelon form for all matrices. 
 When doing computations by hand, however, the algorithm may not always be the optimal method of finding a row-echelon form or the reduced row-echelon form because the procedure often leads to fractions early in the process.
-
-
- 
-\section*{Text Source}
-The section on Rank is an adaptation of Section 1.2 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}.
- 
-W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition, p 15-17.
- 
-\section*{Bibliography}
- 
-[Yuster] Thomas Yuster, The Reduced Row Echelon Form of a Matrix is Unique: a
-Simple Proof, Mathematics Magazine, vol. 57, no. 2 (Mar. 1984), pp. 93-94.
  
 \end{document}

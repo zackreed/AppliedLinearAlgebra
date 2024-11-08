@@ -1,0 +1,87 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+
+\author{Zack Reed}
+%borrowed from Dirk Colbry's msu python stuff
+\title{Rank and Nullity}
+\begin{document}
+\begin{abstract}
+
+In this activity, we will explore the rank and nullity of a matrix.
+
+\end{abstract}
+\maketitle
+
+\subsection*{Rank}
+ 
+As stated in Theorem \ref{th:uniquenessofrref}, the reduced row-echelon form of a matrix $A$ is uniquely determined by $A$. That is, no matter which series of row operations is used to transform $A$ to its reduced row-echelon matrix, the result will always be the same matrix. In contrast, this is not true for row-echelon matrices: different sequences of row operations can transform the same matrix $A$ to different row-echelon matrices. However, it is true that the number $r$ of nonzero rows must be the same in each of these row-echelon matrices, as we will see in Theorem \ref{th:dimofrowA}. Hence, the number $r$ depends only on $A$ and not on the way in which $A$ is carried to row-echelon form. 
+ 
+\begin{example}\label{ex:rowechofA}
+Matrices (\ref{eq:ref1}) and (\ref{eq:ref2}) of Exploration \ref{init:gaussianelim1} are both row-echelon forms of $A$.  Both matrices have three nonzero rows.  The same is true for $\mbox{rref}(A)$. 
+\end{example}
+ 
+\begin{definition}\label{def:rankofamatrix}
+The \dfn{rank} of matrix $A$, denoted by $\mbox{rank}(A)$, is the number of nonzero rows that remain after we reduce $A$ to row-echelon form by elementary row operations.
+\end{definition}
+ 
+\begin{example}\label{ex:rankofA1}
+Compute the rank of
+$$A = 
+\begin{bmatrix}
+    1 & 1 & -1 & 4 \\
+    2 & 1 &  3 & 0 \\
+    0 & 1 & -5 & 8
+\end{bmatrix}$$
+ 
+\begin{explanation}
+A reduction of $A$ to row-echelon form is
+$$
+A = 
+\begin{bmatrix}
+1 & 1 & -1 & 4 \\
+2 & 1 &  3 & 0 \\
+0 & 1 & -5 & 8
+\end{bmatrix} \rightsquigarrow\begin{bmatrix}
+1 & 1 & -1 & 4 \\
+0 & -1 &  5 & -8 \\
+0 &  0 & 0 & 0
+\end{bmatrix}
+$$
+Because the row-echelon form has two nonzero rows, $\mbox{rank}(A) = 2$.
+\end{explanation}
+\end{example}
+ 
+\begin{theorem}\label{th:rankandsolutions}
+Suppose a system of $m$ equations in $n$ variables is consistent, and that the rank of the {\it coefficient} matrix is $r$.
+ 
+\begin{enumerate}
+\item The set of solutions involves exactly $n - r$ parameters, corresponding to $n-r$ free variables.
+ 
+\item If $r < n$, the system has infinitely many solutions.
+ 
+\item If $r = n$, the system has a unique solution.
+ 
+\end{enumerate}
+\end{theorem}
+
+
+ 
+\begin{proof}
+The fact that the rank of the coefficient matrix is $r$ means that there are exactly $r$ leading variables in the coefficient matrix, and hence exactly $n - r$ nonleading variables. The nonleading variables are called free variables.  All free variables are assigned parameters, so the set of solutions involves exactly $n - r$ parameters. Hence if $r < n$, there is at least one parameter, and so infinitely many solutions. If $r = n$, there are no parameters and the resulting solution is unique.
+\end{proof}
+ 
+Theorem \ref{th:rankandsolutions} shows that, for any system of linear equations, exactly three possibilities exist:
+ 
+\begin{enumerate}
+ 
+\item Unique solution. This occurs when every variable is a leading variable.
+ 
+\item Infinitely many solutions. This occurs when the system is consistent and there is at least one nonleading variable, so at least one parameter is involved.
+ 
+\item No solution.  This occurs when a row $\left[\begin{array}{cccc|c}  0&0&\ldots &0&1
+ \end{array}\right]$ appears in the row-echelon form. Such a row corresponds to an equation with no solutions. (See Example \ref{ex:nosolutionssys}.)
+ 
+\end{enumerate}
+
+\end{document}

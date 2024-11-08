@@ -380,10 +380,14 @@ The same elementary row operations that we perform on a system of equations can 
 \end{remark}
 
 
+
+
 \begin{exploration}\label{init:backsub}
 Let's try out augmented matrices in a new system, with the help of MATLAB!
 
 First, consider the new system:
+
+
 
 $$\begin{array}{ccccccc}
       x_1 &- &x_2&-&3x_3&= &1 \\
@@ -393,72 +397,150 @@ $$\begin{array}{ccccccc}
 
 The corresponding augmented matrix is: 
 
-BEGIN HERE!
+
  
-\begin{align}&\left[\begin{array}{ccc|c} 
+\[\left[\begin{array}{ccc|c} 
  1&-1&-3&1\\4&-2&-7&1\\-1&1&4&1
- \end{array}\right]\nonumber\\
- \begin{array}{c}
-\\
-  \xrightarrow{R_2-4R_1}\\
-\xrightarrow{R_3+R_1}\\
- \end{array}
- &\left[\begin{array}{ccc|c} 
- 1&-1&-3&1\\0&2&5&-3\\0&0&1&2
- \end{array}\right]\label{eq:sys20rowechelon}\\
- \begin{array}{c}
- \\
- \xrightarrow{(1/2)R_2}\\
-\\
-\end{array}
-&\left[\begin{array}{ccc|c} 
- 1&-1&-3&1\\0&1&5/2&-3/2\\0&0&1&2
- \end{array}\right]\nonumber\\
- \begin{array}{c}
- \xrightarrow{R_1+R_2}\\
- \\
-\\
-\end{array}&\left[\begin{array}{ccc|c} 
- 1&0&-1/2&-1/2\\0&1&5/2&-3/2\\0&0&1&2
- \end{array}\right]\nonumber\\
- \begin{array}{c}
- \xrightarrow{R_1+ (1/2)R_3}\\
- \xrightarrow{R_2- (5/2)R_3}\\
-\\
-\end{array}
-&\left[\begin{array}{ccc|c} 
- 1&0&0&1/2\\0&1&0&-13/2\\0&0&1&2
- \end{array}\right]\label{eq:sys20reducedrowechelon}
- \end{align}
+ \end{array}\right]\]
+
  
-The augmented matrix in (\ref{eq:sys20reducedrowechelon}) has the same convenient form as the one in (\ref{eq:sys20rref}).  This augmented matrix corresponds to the system
-\begin{equation*}
-    \begin{array}{ccccccc}
-      x_1 & &&&&= &1/2 \\
-   & &x_2&&&=&-13/2\\
-   & &&&x_3&=&2
-        \end{array}
-    \end{equation*}
-This gives us the solution $(\frac{1}{2}, -\frac{13}{2}, 2)$.
+
+ We then add $-4$ times row 1 to row 2, and then add row 1 to row 3. 
  
-While the augmented matrix in (\ref{eq:sys20reducedrowechelon}) was certainly ``convenient", we could have converted back to the equation format a little earlier.  Let's take a look at the augmented matrix in (\ref{eq:sys20rowechelon}).  Converting (\ref{eq:sys20rowechelon}) to a system of equations gives us
-\begin{equation*}
-    \begin{array}{ccccccc}
-      x_1 &- &x_2&-&3x_3&= &1\\
-   & &2x_2&+&5x_3&=&-3\\
-   & &&&x_3&=&2
-        \end{array}
-    \end{equation*}
-Substituting $x_3=2$ into the second equation and solving for $x_2$ gives us $$x_2=\frac{-3-5(2)}{2}=-\frac{13}{2}$$  Now substituting $x_3=2$ and $x_2=-\frac{13}{2}$ into the first equation results in $$x_1=1+\left(-\frac{13}{2}\right)+3(2)=\frac{1}{2}$$  This process is called \dfn{back substitution} and it produces the same solution as we obtained earlier.
+ \begin{remark}{MATLAB Help with Elementary Matrices}
+ Rather than needing to rewrite the matrices each time, the course linalg folder has provided simple functions to make these elementary matrices.
+
+The functions are \texttt{row\_add}, \texttt{row\_scale}, and \texttt{row\_swap}, which match the names of the elementary matrices. The arguments to these functions are always: 1st - the row(s) in the $ij$ order of the elementary matrices $E_{ij}$, 2nd - any scalars as necessary, 3rd - the dimension of the matrix. 
+
+
+Adding $-4$ times row 1 to row 2 is 
+$E_{12}(-4)=\begin{bmatrix}
+1&0&0\\
+-4&1&0\\
+0&0&1
+\end{bmatrix}$
+
+The MATLAB function that will quickly give you this matrix is 
+
+\begin{verbatim}
+
+  linalg.row_add(1,2,-4,3)
+
+\end{verbatim}
+
+Notice that the order of the entries in \texttt{row\_add} are the same as you would write in the elementary matrix, just with the added need to put a dimension down as well.
+
+Then to add row 1 to row 3, you would input
+
+
+\begin{verbatim}
+
+  linalg.row_add{1,3,1,3}
+
+\end{verbatim}
+
+You would then multiply them together, and then by $M$, to make the new augmented matrix. For instance:
+
+\begin{verbatim}
+
+M=[1, -1, -3, 1;
+4, -2, -7, 1;
+-1, 1, 4, 1]
+
+aug=linalg.row_add(1,3,1,3)*linalg.row_add(1,2,-4,3)*M
+
+\end{verbatim}
+
+Which gives the same augmented matrix as you find below.
+
+\end{remark}
+
+
+
+ This yields
+
+ \[
+E_{1,2}(-4)\rightarrow%{R_2-4R_1}\\
+E_{1,3}(1)\rightarrow%{R_3+R_1}\\
+\left[\begin{array}{ccc|c} 
+  1&\answer{-1}&-3&1\\\answer{0}&2&5&\answer{-3}\\0&0&1&2
+  \end{array}\right]
+\]
+
+Now do the same (or go by hand) to carry out and verify the remaining row operations.
+
+\[
+E_{2}(1/2)\rightarrow
+\left[\begin{array}{ccc|c} 
+  1&-1&-3&1\\0&1&\answer{5/2}&\answer{-3/2}\\0&0&1&2
+  \end{array}\right]
+\]
+
+\[
+E_{2,1}(1)\rightarrow
+\left[\begin{array}{ccc|c} 
+  1&0&\answer{-1/2}&\answer{-1/2}\\0&1&5/2&-3/2\\0&0&1&2
+  \end{array}\right]
+\]
+
+
+\[
+E_{3,1}(1/2)\rightarrow E_{3,2}(-5/2)\rightarrow
+\left[\begin{array}{ccc|c} 
+  1&0&0&1/2\\0&1&0&-13/2\\0&0&1&2
+  \end{array}\right]
+\]
+
+ 
+\begin{remark}
+
+  You'll note that in each example, even when solving systems of equations, we've always ended with something as close to the identity matrix (on the left side of the augment) as possible. This is very intentional, and is called \emph{reduced row echelon form}.
+
+  In essence, the reduced row echelon form (\texttt{rref}) gets us as close to back-substitution in the system of equations as possible. 
+
+  This will become more formalized later, but for now note that there's actually a command in MATLAB that we can use to our advantage. 
+
+  If we started with our same $M$, and did the following:
+
+  \begin{verbatim}
+  
+    M=[1, -1, -3, 1;
+      4, -2, -7, 1;
+      -1, 1, 4, 1]
+
+    M=sym(M)
+
+    aug=rref(M)
+
+  \end{verbatim}
+
+  We would have arrived at the same final result, immediately. NOTE: I use sym(M) because it keeps fractions and other variables at play, which can help the MATLAB output better align with the mathematics, rather than dealing with compounding decimal errors. 
+  
+  Essentially, MATLAB is doing the steps for us, in a process called \emph{Gaussian Eliminiation}, or more specifically for matrices \emph{Gauss-Jordan Elimination}
+
+\end{remark}
+
 \end{exploration}
+
+
+This gives us the solution $(\frac{1}{2}, -\frac{13}{2}, 2)$.
+
+Next, we'll put some formal definitions for the techniques we used here.
  
-Observe that the coefficient matrices in (\ref{eq:sys20rref}) and (\ref{eq:sys20reducedrowechelon}) have the same format: 1's along the diagonal, zeros above and below the 1's.  The other ``convenient" format, exhibited by the coefficient matrix in (\ref{eq:sys20rowechelon}),  also has zeros below the diagonal, but not all of the diagonal entries are 1's and some of the entries above the diagonal are not zero.  Each of these formats gives rise to a definition.  These definitions are the topic of the next section.
- 
+
  
 \subsection*{Row-Echelon and Reduced Row-Echelon Forms}
+
+These definitions are here more for reference if needed, and it might help clear up some technicalities if you have trouble keeping the mechanics and interpretations of row operations and echelon forms straight. 
+
+You won't necessarily be tested on this terminology, but again it might help to know this for your own use. In general, if you think about reduced row echelon form as "as close to the identity matrix above the diagonal as possible", you'll get the main idea.
+
+
  
 \begin{definition}\label{def:leadentry} The first non-zero entry in a row of a matrix (when read from left to right) is called the \dfn{leading entry}.  When the leading entry is 1, we refer to it as a \dfn{leading 1}.
 \end{definition}
+
+
  
 \begin{definition}[Row-Echelon Form]\label{def:ref}
 A matrix is said to be in \dfn{row-echelon form} if:
@@ -478,8 +560,7 @@ $$\begin{bmatrix}
  \fbox{4}&2\\0&\fbox{1}\\0&0
  \end{bmatrix}$$
   
-  
- 
+
 The difference between the coefficient matrix in  (\ref{eq:sys20rowechelon}) and the coefficient matrix in (\ref{eq:sys20reducedrowechelon}) is that the leading entries of the  matrix in (\ref{eq:sys20reducedrowechelon}) are all 1's, and the matrix has zeros above each leading 1.  This motivates our next definition.
  
 \begin{definition}[Reduced Row-Echelon Form]\label{def:rref}
@@ -489,6 +570,7 @@ A matrix that is already in \dfn{row-echelon} form is said to be in \dfn{reduced
 \item All entries {\it above} and below each leading $1$ are $0$
 \end{enumerate}
 \end{definition}
+
 The following two matrices are in \dfn{reduced row-echelon form}.  Note that there are $0$'
 s below and above each leading $1$.
  
@@ -502,87 +584,81 @@ $$\begin{bmatrix}
 $\mbox{rref}(M)$.  As we transform the augmented matrix $M$ to its reduced row-echelon form, the coefficient matrix $A$ (the matrix to the left of the bar) also gets transformed to its reduced row-echelon form, $\mbox{rref}(A)$.
  
  
- 
 \begin{example}\label{ex:freevar1} Solve the system of equations or determine that the system is inconsistent.
 $$\begin{array}{ccccccccc}
       x &- &2y&+&z&&&= &2 \\
      -2x& +&y&-&z&+&w&=&0\\
      x& +&4y&&&+&w&=&1
     \end{array}$$
-\begin{explanation}
-We begin by rewriting the system in the augmented matrix form.
-$$\left[\begin{array}{cccc|c} 
- 1&-2&1&0&2\\-2&1&-1&1&0\\1&4&0&1&1
- \end{array}\right]$$
- Our goal is to convert this matrix to its reduced row-echelon form by means of elementary row operations.  To do this, we will proceed from left to right and use leading entries to wipe out all entries above and below them.
+
+
+
+We want to start foregounding the interpretation of the \rref, so we'll start using the \texttt{rref} command to cut to the chase, and leave some row operations practice for the homework.
+
+Use MATLAB to find the \rref of the augmented matrix associated with the system. 
+
+
+
+\[\left[\begin{array}{cccc|c} 
+ 1&0&0&\answer{-5/3}&-3\\0&1&\answer{0}&\answer{2/3}&1\\0&0&\answer{1}&\answer{3}&7
+ \end{array}\right]\]
+
+
+
+ \begin{feedback}
+ 
+  How'd it go? Don't forget to enter the system as a augmented matrix first. If you're having trouble, try
+
+  \begin{verbatim}
   
- $$\left[\begin{array}{cccc|c} 
- 1&-2&1&0&2\\-2&1&-1&1&0\\1&4&0&1&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_2+2R_1}\\
-\xrightarrow{R_3-R_1}\\
- \end{array}\left[\begin{array}{cccc|c} 
- 1&-2&1&0&2\\0&-3&1&1&4\\0&6&-1&1&-1
- \end{array}\right]\begin{array}{c}
- \\
- \\
-\xrightarrow{R_3+2R_2}\\
- \end{array}$$
+    M=[1, -2, 1, 0, 2;
+    -2, 1, -1, 1, 0;
+    1, 4, 0, 1, 1]
+
+    M=sym(M)
+
+    rref(M)
+
+  \end{verbatim}
+
+ \end{feedback}
   
- $$\left[\begin{array}{cccc|c} 
- 1&-2&1&0&2\\0&-3&1&1&4\\0&0&1&3&7
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{(-1/3)R_2}\\
-\\
- \end{array}\left[\begin{array}{cccc|c} 
- 1&-2&1&0&2\\0&1&-1/3&-1/3&-4/3\\0&0&1&3&7
- \end{array}\right]\begin{array}{c}
- \xrightarrow{R_1+2R_2}\\
- \\
-\\
- \end{array}$$
-  
- $$\left[\begin{array}{cccc|c} 
- 1&0&1/3&-2/3&-2/3\\0&1&-1/3&-1/3&-4/3\\0&0&1&3&7
- \end{array}\right]
- \begin{array}{c}
- \xrightarrow{R_1-(1/3)R_3}\\
- \xrightarrow{R_2+(1/3)R_3}\\
-\\
- \end{array}\left[\begin{array}{cccc|c} 
- 1&0&0&-5/3&-3\\0&1&0&2/3&1\\0&0&1&3&7
- \end{array}\right]$$
-  
- Our final matrix may not be quite as nice as the one in (\ref{eq:sys20reducedrowechelon}), but it is in reduced row-echelon form.  Our next step is to convert our augmented matrix back to a system of equations.  We have:
+This \rref matrix is not quite as nice as the our earlier matrices, and is more reminiscent of the balanced chemical equations that had many possible solutions. It is, however, in reduced row-echelon form.  
+
+Let's see if (and how many) solutions exist for the system!
+
+We have:
  $$\begin{array}{ccccccccc}
       x & &&&&-&(5/3)w&= &-3 \\
      & &y&&&+&(2/3)w&=&1\\
      & &&&z&+&3w&=&7
     \end{array}$$
- We will rewrite the system as follows:
+
+If we re-write the system similar to our solutions in the chemical equation balancing, then we can explicitly write the row variables $x, y, $ and $z$ in terms of $w$ for suitably chosen $w$.
+
  $$\begin{array}{ccccccccc}
       x & &&&&&&= &-3+(5/3)w \\
      & &y&&&&&=&1-(2/3)w\\
      & &&&z&&&=&7-3w
     \end{array}$$
- Now we see that we can assign any value to $w$, then compute $x$, $y$ and $z$ to obtain a solution to the system.  For example, let $w=0$, then $x=-3$, $y=1$ and $z=7$, so $(-3, 1, 7, 0)$ is a solution.  If we let $w=3$, then $x=2$, $y=-1$ and $z=-2$, so $(2, -1, -2, 3)$ is also a solution.   To capture all possibilities, we will let $w=t$, where $t$ is an arbitrary \dfn{parameter}.  
+
+For example, let $w=0$, then $x=-3$, $y=1$ and $z=7$, so $(-3, 1, 7, 0)$ is a solution.  If we let $w=3$, then $x=2$, $y=-1$ and $z=-2$, so $(2, -1, -2, 3)$ is also a solution.
+
+  We can think of the solution set in two different ways.  First, the solution set is the set of all points of the form$$\left(-3+\frac{5}{3}w, 1-\frac{2}{3}w, 7-3w, w\right)$$
   
-  We can think of the solution set in two different ways.  First, the solution set is the set of all points of the form$$\left(-3+\frac{5}{3}t, 1-\frac{2}{3}t, 7-3t, t\right)$$
-  
- We can also think of the solution set in geometric terms by observing that
+If we want to think in terms of the hyperplane geometry of the system, then we could write 
+
  \begin{align*}
  x&=-3+\frac{5}{3}t\\
  y&=1-\frac{2}{3}t\\
  z&=7-3t\\
- w&=t
+ w&=t.
  \end{align*}
- is a set of parametric equations that describes a line in $\RR^4$.  (See Formula \ref{form:paramlinend})  This means that the three hyperplanes given by the equations in the system intersect in a line, producing infinitely many solutions to the system.
+
+ In this case, since $w$ is a dimension of the hyperplane, we let it vary and assign what's called a \emph{parameter}. These are called \emph{parametric equations} of the system. These will come up from time to time, so you'll want to be accustom to seeing and interpreting parametric equations.
+
+To answer our original question, the system has infinitely many solutions, and is therefore consistent!
  
-\end{explanation}
 \end{example}
  
 Observe that in Example \ref{ex:freevar1}, variables $x$, $y$ and $z$ correspond to the leading $1's$ in the reduced row-echelon.  We say that $x$, $y$ and $z$ are the \dfn{leading variables}.  Variable $w$ is not a leading variable; we refer to it as a \dfn{free variable} and assign a \dfn{parameter} $t$ to it.
@@ -596,7 +672,9 @@ $$\begin{array}{ccccccc}
     \end{array}$$
      
     \begin{explanation}
-    We rewrite the system in augmented matrix form and transform it to reduced row-echelon form.  We leave the details of the elementary row operations to the reader and state the final result.
+    Rewrite the system in augmented matrix form, and use \texttt{rref} to put the augmented matrix into \rref.
+
+    You'll get the following:
      
    \begin{equation}\label{eq:sys20nosolutionsys} \left[\begin{array}{ccc|c} 
  2&-1&0&2\\1&1&-2&0\\-3&0&2&-1
@@ -605,17 +683,19 @@ $$\begin{array}{ccccccc}
  \rightsquigarrow\\
  \\
  \end{array}\left[\begin{array}{ccc|c} 
- 1&0&-2/3&0\\0&1&-4/3&0\\0&0&0&1
+ 1&0&\answer{-2/3}&\answer{0}\\0&1&\answer{-4/3}&\answer{0}\\0&0&\answer{0}&\answer{1}
  \end{array}\right]\end{equation}
      
  Converting back to a system of linear equations, we get
   
  \begin{equation}\label{eq:sys20nosolutions}\begin{array}{ccccccc}
-      0x &+ &0y&-&(2/3)z&= &0 \\
-     0x&+ &0y&-&(4/3)z&=&0\\
-     0x&+ &0y&+&0z&=&1
+      0x &+ &0y&-&\answer{(2/3)z}&= &\answer{0} \\
+     0x&+ &0y&-&\answer{(4/3)z}&=&\answer{0}\\
+     0x&+ &0y&+&\answer{0z}&=&\answer{1}
     \end{array}\end{equation}
+
     The last equation in this system clearly has no solutions.  We conclude that this system (and the original system) is inconsistent.
+
     \end{explanation}
      
 \end{example}
@@ -624,16 +704,21 @@ $$\begin{array}{ccccccc}
 $$\left[\begin{array}{ccc|c} 
  0&0&0&1
  \end{array}\right]$$
+
  This row corresponds to the equation
+
  $$\begin{array}{ccccccc}
      0x&+ &0y&+&0z&=&1
     \end{array}$$
+
  which clearly has no solutions. 
   
  In general, if the reduced row-echelon form of the augmented matrix contains a row
+
  $$\left[\begin{array}{ccc|c} 
  0&\ldots&0&1
  \end{array}\right]$$
+
  we can conclude that the system is inconsistent.
 \end{observation}
  
@@ -681,341 +766,11 @@ Variables $x$ and $y$ correspond to leading $1's$ in the reduced row-echelon for
   This line is the line of intersection of the three planes.
  \end{explanation}
  \end{example}
- 
-\section*{Practice Problems}
-\begin{problem}
-Determine whether each augmented matrix shown below is in reduced row-echelon form.
-  \begin{problem}\label{prob:rrefmultchoice1}
-  $$\left[\begin{array}{cccc|c} 
- 0&1&1&0&2\\1&-3&0&1&4\\0&0&1&0&-1
- \end{array}\right]$$
- \begin{multipleChoice}
- \choice{Yes}
- \choice[correct]{No}
- \end{multipleChoice}
-  \end{problem}
-   
-   \begin{problem}\label{prob:rrefmultchoice2}
-  $$\left[\begin{array}{cc|c} 
- 1&1&1\\0&1&0\\0&0&0
- \end{array}\right]$$
- \begin{multipleChoice}
- \choice{Yes}
- \choice[correct]{No}
- \end{multipleChoice}
-  \end{problem}
-   
-  \begin{problem}\label{prob:rrefmultchoice3}
-  $$\left[\begin{array}{cc|c} 
- 1&0&1\\0&1&0\\0&0&0
- \end{array}\right]$$
- \begin{multipleChoice}
- \choice[correct]{Yes}
- \choice{No}
- \end{multipleChoice}
-  \end{problem}
-   
-  \begin{problem}\label{prob:rrefmultchoice4}
-  $$\left[\begin{array}{ccc|c} 
- 1&0&1&0\\0&1&0&0\\0&0&0&1
- \end{array}\right]$$
- \begin{multipleChoice}
- \choice[correct]{Yes}
- \choice{No}
- \end{multipleChoice}
-  \end{problem}
-   
-   \begin{problem}\label{prob:rrefmultchoice5}
-  $$\left[\begin{array}{ccc|c} 
- 1&1&0&2\\0&1&0&9\\0&0&1&-1
- \end{array}\right]$$
- \begin{multipleChoice}
- \choice{Yes}
- \choice[correct]{No}
- \end{multipleChoice}
-  \end{problem}
-   
-\end{problem}
- 
-\begin{problem}\label{prob:rrefnosolutionssys}
-Fill in the steps that lead to the reduced row-echelon form in Example \ref{ex:nosolutionssys}.
-\end{problem}
- 
-\begin{problem}\label{prob:rreffinfmanysolutionsys}
-Fill in the steps that lead to the reduced row-echelon form in Example \ref{ex:rrefinfmanysolutionssys}.
-\end{problem}
- 
-\begin{problem} \label{prob:numberofsolutionsmultch}
-Suppose a system of equations has the following reduced row-echelon form
-  $$\left[\begin{array}{ccc|c} 
- 1&0&0&4\\0&1&-3&-6\\0&0&0&1
- \end{array}\right]$$
- What can you say about the system?
- \begin{multipleChoice}
- \choice[correct]{The system is inconsistent}
- \choice{The system has infinitely many solutions}
- \choice{The system has a unique solution}
- \choice{We would have to examine the original system to make the final determination}
- \end{multipleChoice}
-  \end{problem}
-\begin{problem}
-Solve each system of equations
-\begin{problem}\label{prob:sys20solvesys1}
-$$\begin{array}{ccccccc}
-      x & +&3y&-&2z&= &-11 \\
-     2x& +&y&+&4z&=&12\\
-     x& -&y&-&z&=&0
-    \end{array}$$
-     
-    Solution:
-    $$( \answer{1}, \answer{-2}, \answer{3})$$
-\end{problem}
- 
-\begin{problem}\label{prob:sys20solvesys2}
-$$\begin{array}{ccccccc}
-      3x & -&y&+&z&= &-5 \\
-     x& +&2y&-&z&=&-3\\
-     x& -&5y&+&3z&=&1
-    \end{array}$$
-     
-    Solution: (Enter your answers in fraction form)
-    $$\left(\answer{-13/7}-\answer{1/7}t, \answer{-4/7}+\answer{4/7}t, t\right)$$
-\end{problem}
-\end{problem}
- 
-\section*{Example Source}
- 
-Linear system in Exploration \ref{init:augmentedmatrixex} comes from Jim Hefferon's \href{http://joshua.smcvt.edu/linearalgebra/#current_version}{\it Linear Algebra}. (CC-BY-NC-SA)
- 
-Jim Hefferon, {\it Linear Algebra}, 3rd edition, page 6.
 
-\section*{Gaussian Elimination and Rank}
+\section*{Gaussian Elimination}
 \subsection*{Row Echelon and Reduced Row Echelon Forms}
  
-In \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/SYS-0020/main}{Augmented Matrix Notation and Elementary Row Operations}, we learned to write linear systems in \dfn{augmented matrix} form and use elementary row operations to transform an augmented matrix to \dfn{row-echelon form} and the \dfn{reduced row-echelon form} in order to solve linear systems. 
- 
-Recall that a matrix (or augmented matrix) is in \dfn{row-echelon form} if:
-\begin{itemize}
-\item All entries {\it below} each leading entry are $0$.
-\item Each leading entry is in a column to the right of the leading entries in the rows above it.
-\item All rows of zeros, if there are any, are located below non-zero rows.
-\end{itemize}
- 
-A matrix in row-echelon form is said to be in \dfn{reduced row-echelon form} if it has the following additional properties
-\begin{itemize}
-\item Each leading entry is a $1$
-\item All entries {\it above} each leading $1$ are $0$
-\end{itemize}
- 
- 
-Matrices in row-echelon form and reduced row-echelon form are ``convenient" because their corresponding systems of equations are easy to solve. 
- 
-In this module we turn to the question of existence and uniqueness of the two echelon forms.  Can every matrix (augmented matrix) be carried to a row-echelon form?  If so, is the row-echelon form unique?  Can every matrix be reduced to a reduced row-echelon form?  If so, is the reduced row-echelon form unique?  The answers we find will have long-lasting implications.
- 
- 
-\begin{exploration}\label{init:gaussianelim1}
-Solve the following system of equations.
-$$\begin{array}{ccccccccc}
-      x &+ &2y&-&3z&= &1 \\
-     -5x& +&2y&-&3z&=&1\\
-      x&- &2y&+&z&=&1
-    \end{array}$$
- 
-We create an augmented matrix corresponding to the system and apply row operations until the matrix is in row-echelon form. 
-$$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_2+5R_1}\\
- \xrightarrow{R_3-R_1}\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&12&-18&6\\0&-4&4&0
- \end{array}\right]
- \begin{array}{c}
- \\
- \\
- \xrightarrow{R_3+\frac{1}{3}R_2}\\
- \end{array}$$
- \begin{equation}\label{eq:ref1}
- \left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&12&-18&6\\0&0&-2&2
- \end{array}\right]
-\end{equation}
- 
-Note that the elementary row operations that lead to (\ref{eq:ref1}) were not prescribed.  We may employ row-operations in a different manner and obtain a different matrix in row-echelon form.  For example, suppose for some reason we had begun by switching the first and third rows.
- 
-$$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_1\leftrightarrow R_3}\\
-\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\-5&2&-3&1\\1&2&-3&1
- \end{array}\right]
- \begin{array}{c}
- \\
-\\
-\\
- \end{array}$$
- 
-Next we would reduce this matrix to row-echelon form, perhaps in this way:
- 
-$$\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\-5&2&-3&1\\1&2&-3&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_2+5R_1}\\
- \xrightarrow{R_3-R_1}\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\0&-8&2&6\\0&4&-4&0
- \end{array}\right]
- \begin{array}{c}
- \\
- \\
- \xrightarrow{R_3+\frac{1}{2}R_2}\\
- \end{array}
-$$
-\begin{equation}\label{eq:ref2}
- \left[\begin{array}{ccc|c} 
- 1&-2&1&1\\0&-8&2&6\\0&0&-3&3
- \end{array}\right]
-\end{equation}
- 
-The augmented matrices in (\ref{eq:ref1}) and (\ref{eq:ref2}) are clearly not the same, but both are in row-echelon form.
- 
-If we write the systems of equations corresponding to (\ref{eq:ref1}) and (\ref{eq:ref2}), we can employ back substitution to solve them.  The matrix in (\ref{eq:ref1}) corresponds to
-$$\begin{array}{ccccccccc}
-      x &+ &2y&-&3z&= &1 \\
-     & &12y&-&18z&=&6\\
-      &&&&-2z&=&2
-    \end{array}$$
-     
-The matrix in (\ref{eq:ref2}) corresponds to   
-$$\begin{array}{ccccccccc}
-      x &- &2y&+&z&= &1 \\
-     & &-8y&+&2z&=&6\\
-      &&&&-3z&=&3
-    \end{array}$$
-     
-Because both systems are equivalent to the original system, it is not surprising that back substitution yields the same solution for both systems.
- 
-$$x=\answer{0},\quad y=\answer{-1},\quad z=\answer{-1}$$
- 
-%From the last equation we get $z=-1$. 
-%Next, from the second equation we have $12y-18(-1)=6$, which yields $y=-1$.
-%Finally, the first equation gives us $x+2(-1)-3(-1)=1$.  Solving for $x$ we get $x=0$. 
-%Therefore, the solution to the system is $$x=0, y=-1, z=-1$$
-%We arrive at a different matrix in row-echelon form, but back-substitution yields the same solution to the system (you should check this):  $$x=0, y=-1, z=-1$$
-\end{exploration}
- 
-It is clear from Exploration \ref{init:gaussianelim1} that a row-echelon form corresponding to a matrix is not unique.  But what about the reduced row-echelon form?
- 
-\begin{exploration}\label{init:gaussianelim2} In this problem we revisit the system
-$$\begin{array}{ccccccccc}
-      x &+ &2y&-&3z&= &1 \\
-     -5x& +&2y&-&3z&=&1\\
-      x&- &2y&+&z&=&1
-    \end{array}$$
-     
-Following the steps we took to get (\ref{eq:ref1}), but taking the process a little further, we get the reduced row-echelon form.
-$$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_2+5R_1}\\
- \xrightarrow{R_3-R_1}\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&12&-18&6\\0&-4&4&0
- \end{array}\right]
- \begin{array}{c}
- \\
- \\
- \xrightarrow{R_3+\frac{1}{3}R_2}\\
- \end{array}$$
- $$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&12&-18&6\\0&0&-2&2
- \end{array}\right]
-  \color{blue}
- \begin{array}{c}
- \\
-  \xrightarrow{\frac{1}{12}R_2}\\
- \xrightarrow{-\frac{1}{2}R_3}\\
- \end{array}
- \left[\begin{array}{ccc|c} 
- 1&2&-3&1\\0&1&-\frac{3}{2}&\frac{1}{2}\\0&0&1&-1
- \end{array}\right]
-  \begin{array}{c}
-  \xrightarrow{R_1+3R_3}\\
- \xrightarrow{R_2+\frac{3}{2}R_3}\\
-\\
- \end{array}$$
-\begin{equation}\label{eq:rref3}  \color{blue}
- \left[\begin{array}{ccc|c} 
- 1&2&0&-2\\0&1&0&-1\\0&0&1&-1
- \end{array}\right]
-  \begin{array}{c}
-  \xrightarrow{R_1-2R_2}\\
- \\
-\\
- \end{array}
- \color{black}
-  \left[\begin{array}{ccc|c} 
- 1&0&0&0\\0&1&0&-1\\0&0&1&-1
- \end{array}\right]\end{equation}
-Do you think it is possible to start with (\ref{eq:ref2}) and obtain the same reduced row-echelon form?  Try to justify your response.  If possible, find the elementary row operations that take (\ref{eq:ref2}) to the reduced row-echelon form in (\ref{eq:rref3}).
- 
-$$\left[\begin{array}{ccc|c} 
- 1&2&-3&1\\-5&2&-3&1\\1&-2&1&1
- \end{array}\right]
- \begin{array}{c}
- \\
- \xrightarrow{R_1\leftrightarrow R_3}\\
-\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\-5&2&-3&1\\1&2&-3&1
- \end{array}\right]$$
-$$\begin{array}{c}
- \\
- \xrightarrow{R_2+5R_1}\\
- \xrightarrow{R_3-R_1}\\
- \end{array}
-\left[\begin{array}{ccc|c} 
- 1&-2&1&1\\0&-8&2&6\\0&4&-4&0
- \end{array}\right]
- \begin{array}{c}
- \\
- \\
- \xrightarrow{R_3+\frac{1}{2}R_2}\\
- \end{array}
-$$
-\begin{equation*}
-  \left[\begin{array}{ccc|c} 
- 1&-2&1&1\\0&-8&2&6\\0&0&-3&3
- \end{array}\right]
- \color{red}
- \begin{array}{c}
-\rightsquigarrow\text{Elementary}\rightsquigarrow\\
-\text{Row Ops.}
-\end{array}
- \color{black}
-  \left[\begin{array}{ccc|c} 
- 1&0&0&0\\0&1&0&-1\\0&0&1&-1
- \end{array}\right]
-\end{equation*}
-You will be asked to fill in the elementary row operations in Practice Problem \ref{prob:same_rref}.
-\end{exploration}
- 
-Our observations in Exploration \ref{init:gaussianelim2} are summarized in the following diagram.
+In general, there are many possible paths to reduced row echelon forms, however once the reduced row echelon form is reached, it's unique! This is summarized in the following diagram. (NOTE: We use the term "row echelon forms" when the leading entries are not 1. This creates many paths to an \rref)
  
 \begin{center}
 \begin{tikzpicture}
@@ -1042,16 +797,13 @@ Our observations in Exploration \ref{init:gaussianelim2} are summarized in the f
  \draw [->,line width=0.5pt,-stealth,red]  (right1.south)to[out=270, in=0](c2.east);
  \end{tikzpicture}
  \end{center}
-We observed that a row-echelon form associated with a matrix is not unique.  In contrast, we also saw how different sequences of elementary row operations lead to the same solution set and the same reduced row-echelon form.  It turns out that the reduced row-echelon form of a matrix is unique. 
 
+ We tend to state useful mathematical facts as theorems. Here we state the uniqueness of the \rref.
 
  
 \begin{theorem}\label{th:uniquenessofrref} The reduced row-echelon form of a matrix is unique.
 \end{theorem}
 A proof of this result can be found in [Yuster].
- 
-The reduced row-echelon form of a matrix is an instance of a row-echelon form of the matrix.  While a given matrix may have multiple row-echelon forms, all row-echelon forms will share one characteristic: the number of nonzero rows in a row-echelon form of the given matrix will be the same.
-We will prove this result in Theorem \ref{th:samenumberofnonzerorows}.
  
 \section*{Gaussian and Gauss-Jordan Elimination}
  
@@ -1059,7 +811,7 @@ We will prove this result in Theorem \ref{th:samenumberofnonzerorows}.
 The process of using the elementary row operations on a matrix to transform it into row-echelon form is called \dfn{Gaussian Elimination}.
 \end{definition}
  
-As we saw in the previous section, it is possible to follow different sequences of row operations to arrive at various row-echelon forms.  However, it was not clear whether it is {\it always possible} to find a row-echelon form.  The following algorithm takes any matrix (or augmented matrix) and transforms it into row-echelon form:
+As we saw, it is possible to follow different sequences of row operations to arrive at various row-echelon forms.  However, it was not clear whether it is {\it always possible} to find a row-echelon form.  The following algorithm takes any matrix (or augmented matrix) and transforms it into row-echelon form:
 \begin{algorithm}[Gaussian Algorithm] \label{alg:gaussian}
 Let $A$ be an $m\times n$ matrix.
 
@@ -1079,7 +831,32 @@ Set $i=1$ initially.
 Repeat steps 1--4 on the matrix consisting of the remaining rows.
 When the process stops, $A$ will be in row echelon form.
 \end{algorithm}
+
 Gaussian Algorithm guarantees that every matrix will have a row-echelon form. 
+
+\begin{definition}[Gauss-Jordan Elimination]\label{def:GaussJordanElimination}
+  The process of using the elementary row operations on a matrix to transform it into {\bf reduced} row-echelon form is called \dfn{Gauss-Jordan elimination}.
+  \end{definition}
+
+  \begin{algorithm}[Gauss-Jordan Algorithm] \label{alg:gauss-jordan}
+    Let $A$ be an $m\times n$ matrix.
+    Follow the steps of the Gaussian Algorithm but modify Step 2 to create leading $1's$ by multiplying the row containing $a$ by $\frac{1}{a}$.
+    %Set $i=1$ initially.
+    %\begin{itemize}
+    %\item[] Step 1. If $A$ consists entirely of zeros, stop.  $A$ is already in row-echelon form.
+     
+    %\item[] Step 2*. Otherwise, find the first column from the left containing a nonzero entry in row $i$ or below row $i$.  This column will be called a \dfn{pivot column}.  Scan the pivot column from top to bottom, starting with row $i$.  Pick the topmost nonzero entry and call it $a$.  Switch rows, if necessary, to move the row containing $a$ to row $i$.  Now $a$ is the \dfn{leading entry} in its row.  We will also refer to $a$ as a \dfn{pivot}.  Multiply the row containing $a$ by $\frac{1}{a}$ to create a leading $1$. 
+     
+    %\item[] Step 3*. By subtracting multiples of the row containing the leading $1$ from rows {\it above} and below it, make each entry above and below the leading $1$ zero.
+     
+    %\item[] Step 4.  Set $i=i+1$.  If $i&gt;m$ then stop, and $A$ will be in row-echelon form.
+     
+    %\end{itemize}
+     
+    %Repeat steps 1--4 on the matrix consisting of the remaining rows.
+    %When the process stops, $A$ will be in reduced row echelon form.
+    When the Gaussian Algorithm terminates, subtract multiples of the rows containing leading $1's$ from the rows above to make all entries above the pivots zero.
+    \end{algorithm}
 
 
  
@@ -1113,13 +890,6 @@ $$
 This time the algorithm terminates since row 3 and row 4 are zero rows.
 \end{explanation}
 \end{example}
-  
-
- 
- 
-\begin{definition}[Gauss-Jordan Elimination]\label{def:GaussJordanElimination}
-The process of using the elementary row operations on a matrix to transform it into reduced row-echelon form is called \dfn{Gauss-Jordan elimination}.
-\end{definition}
  
 Given a matrix in row-echelon form, it is easy to bring it the reduced row-echelon form.  For example, continuing with Example \ref{ex:non-augmented}, we can start where we left off and compute $\mbox{rref}(A)$.  From our earlier computations we have:
  
@@ -1143,28 +913,6 @@ $$\begin{bmatrix}2&4\\0&3\\0&0\\0&0\end{bmatrix}
 \begin{bmatrix}1&0\\0&1\\0&0\\0&0\end{bmatrix}=\mbox{rref}(A)$$
  
 The following modification to the Gaussian Algorithm produces the reduced row-echelon form of a matrix.  This algorithm guarantees the existence of the reduced row-echelon form.
- 
-\begin{algorithm}[Gauss-Jordan Algorithm] \label{alg:gauss-jordan}
-Let $A$ be an $m\times n$ matrix.
-Follow the steps of the Gaussian Algorithm but modify Step 2 to create leading $1's$ by multiplying the row containing $a$ by $\frac{1}{a}$.
-%Set $i=1$ initially.
-%\begin{itemize}
-%\item[] Step 1. If $A$ consists entirely of zeros, stop.  $A$ is already in row-echelon form.
- 
-%\item[] Step 2*. Otherwise, find the first column from the left containing a nonzero entry in row $i$ or below row $i$.  This column will be called a \dfn{pivot column}.  Scan the pivot column from top to bottom, starting with row $i$.  Pick the topmost nonzero entry and call it $a$.  Switch rows, if necessary, to move the row containing $a$ to row $i$.  Now $a$ is the \dfn{leading entry} in its row.  We will also refer to $a$ as a \dfn{pivot}.  Multiply the row containing $a$ by $\frac{1}{a}$ to create a leading $1$. 
- 
-%\item[] Step 3*. By subtracting multiples of the row containing the leading $1$ from rows {\it above} and below it, make each entry above and below the leading $1$ zero.
- 
-%\item[] Step 4.  Set $i=i+1$.  If $i&gt;m$ then stop, and $A$ will be in row-echelon form.
- 
-%\end{itemize}
- 
-%Repeat steps 1--4 on the matrix consisting of the remaining rows.
-%When the process stops, $A$ will be in reduced row echelon form.
-When the Gaussian Algorithm terminates, subtract multiples of the rows containing leading $1's$ from the rows above to make all entries above the pivots zero.
-\end{algorithm}
- 
- 
 
  
 \begin{example}\label{ex:gaussjordanalg}
@@ -1237,240 +985,20 @@ $$\begin{array}{ccccccccc}
     $$x=2-3t,\quad y=1+2t,\quad z=t$$
 \end{explanation}
 \end{example}
-The Gauss-Jordan Algorithm guarantees the existence of the reduced row-echelon form for all matrices. 
-When doing computations by hand, however, the algorithm may not always be the optimal method of finding a row-echelon form or the reduced row-echelon form because the procedure often leads to fractions early in the process.
-The following video shows how to arrive at the same reduced row-echelon form for the matrix in Example \ref{ex:gaussjordanalg} without doing any fraction arithmetic.  You will see that we still employ row operations, but in a different order.
- 
-\youtube{76Y41ncuLeQ}
- 
-The video highlights the fact that regardless of what sequence of elementary row operations we take to arrive at the reduced row-echelon form, the end result is the same. 
 
+The Gauss-Jordan Algorithm guarantees the existence of the reduced row-echelon form for all matrices. In practice, we will be using \texttt{rref} to apply a similar algorithm in MATLAB, and our task will be interpreting the results!
 
- 
-\subsection*{Rank}
- 
-As stated in Theorem \ref{th:uniquenessofrref}, the reduced row-echelon form of a matrix $A$ is uniquely determined by $A$. That is, no matter which series of row operations is used to transform $A$ to its reduced row-echelon matrix, the result will always be the same matrix. In contrast, this is not true for row-echelon matrices: different sequences of row operations can transform the same matrix $A$ to different row-echelon matrices. However, it is true that the number $r$ of nonzero rows must be the same in each of these row-echelon matrices, as we will see in Theorem \ref{th:dimofrowA}. Hence, the number $r$ depends only on $A$ and not on the way in which $A$ is carried to row-echelon form. 
- 
-\begin{example}\label{ex:rowechofA}
-Matrices (\ref{eq:ref1}) and (\ref{eq:ref2}) of Exploration \ref{init:gaussianelim1} are both row-echelon forms of $A$.  Both matrices have three nonzero rows.  The same is true for $\mbox{rref}(A)$. 
-\end{example}
- 
-\begin{definition}\label{def:rankofamatrix}
-The \dfn{rank} of matrix $A$, denoted by $\mbox{rank}(A)$, is the number of nonzero rows that remain after we reduce $A$ to row-echelon form by elementary row operations.
-\end{definition}
- 
-\begin{example}\label{ex:rankofA1}
-Compute the rank of
-$$A = 
-\begin{bmatrix}
-    1 & 1 & -1 & 4 \\
-    2 & 1 &  3 & 0 \\
-    0 & 1 & -5 & 8
-\end{bmatrix}$$
- 
-\begin{explanation}
-A reduction of $A$ to row-echelon form is
-$$
-A = 
-\begin{bmatrix}
-1 & 1 & -1 & 4 \\
-2 & 1 &  3 & 0 \\
-0 & 1 & -5 & 8
-\end{bmatrix} \rightsquigarrow\begin{bmatrix}
-1 & 1 & -1 & 4 \\
-0 & -1 &  5 & -8 \\
-0 &  0 & 0 & 0
-\end{bmatrix}
-$$
-Because the row-echelon form has two nonzero rows, $\mbox{rank}(A) = 2$.
-\end{explanation}
-\end{example}
- 
-\begin{theorem}\label{th:rankandsolutions}
-Suppose a system of $m$ equations in $n$ variables is consistent, and that the rank of the {\it coefficient} matrix is $r$.
- 
-\begin{enumerate}
-\item The set of solutions involves exactly $n - r$ parameters, corresponding to $n-r$ free variables.
- 
-\item If $r < n$, the system has infinitely many solutions.
- 
-\item If $r = n$, the system has a unique solution.
- 
-\end{enumerate}
-\end{theorem}
+\section*{Example Source}
 
+This section is an adaptation of Anna Davis' Ximera text %FOUND HERE!
 
+Davis' text was an adaptation pulling from the following open source texts:
  
-\begin{proof}
-The fact that the rank of the coefficient matrix is $r$ means that there are exactly $r$ leading variables in the coefficient matrix, and hence exactly $n - r$ nonleading variables. The nonleading variables are called free variables.  All free variables are assigned parameters, so the set of solutions involves exactly $n - r$ parameters. Hence if $r < n$, there is at least one parameter, and so infinitely many solutions. If $r = n$, there are no parameters and the resulting solution is unique.
-\end{proof}
+Linear system in Exploration \ref{init:augmentedmatrixex} comes from Jim Hefferon's \href{http://joshua.smcvt.edu/linearalgebra/#current_version}{\it Linear Algebra}. (CC-BY-NC-SA)
  
-Theorem \ref{th:rankandsolutions} shows that, for any system of linear equations, exactly three possibilities exist:
- 
-\begin{enumerate}
- 
-\item Unique solution. This occurs when every variable is a leading variable.
- 
-\item Infinitely many solutions. This occurs when the system is consistent and there is at least one nonleading variable, so at least one parameter is involved.
- 
-\item No solution.  This occurs when a row $\left[\begin{array}{cccc|c}  0&0&\ldots &0&1
- \end{array}\right]$ appears in the row-echelon form. Such a row corresponds to an equation with no solutions. (See Example \ref{ex:nosolutionssys}.)
- 
-\end{enumerate}
- 
+Jim Hefferon, {\it Linear Algebra}, 3rd edition, page 6.
 
- 
- 
-\section*{Practice Problems}
- 
-\begin{problem}\label{prob:same_rref}
-Show that applying Gauss-Jordan elimination to the matrix in Exploration \ref{init:gaussianelim2} yields the same reduced row-echelon form as the matrix we obtained in Exploration \ref{init:gaussianelim1}.
-\end{problem}
- 
-\begin{problem}\label{prob:twowaystorref1}
-Follow the indicated steps of the Gauss-Jordan algorithm to transform the matrix to its reduced row-echelon form.  Steps will unfold automatically as you enter correct answers.
- 
-$$\left[\begin{array}{ccc|c}  2&1&1&3\\-1&0&1&2\\1&1&-2&0
-  \end{array}\right]$$
- 
- \begin{prompt}  $\frac{1}{2}R_1\rightarrow R_1$.
-$$ \left[\begin{array}{ccc|c}   \answer{1}&\answer{1/2}&\answer{1/2}&\answer{3/2}\\-1&0&1&2\\1&1&-2&0
-  \end{array}\right]$$
- \end{prompt}
- 
- \begin{problem}
- \begin{prompt} $R_1+R_2\rightarrow R_2$.
-$$ \left[\begin{array}{ccc|c}  1&1/2&1/2&3/2\\\answer{0}&\answer{1/2}&\answer{3/2}&\answer{7/2}\\1&1&-2&0
-  \end{array}\right]$$
- \end{prompt}
- \begin{problem}
- \begin{prompt} $R_3-R_1\rightarrow R_3$.
-$$ \left[\begin{array}{ccc|c}   1&1/2&1/2&3/2\\0&1/2&3/2&7/2\\\answer{0}&\answer{1/2}&\answer{-5/2}&\answer{-3/2}
-  \end{array}\right]$$
- \end{prompt}
-  \begin{problem}
-  \begin{prompt} $2R_2\rightarrow R_2$.
-$$ \left[\begin{array}{ccc|c}   1&1/2&1/2&3/2\\\answer{0}&\answer{1}&\answer{3}&\answer{7}\\0&1/2&-5/2&-3/2
- \end{array}\right]$$
-\end{prompt}
- \begin{problem}
- \begin{prompt} $R_3-\frac{1}{2}R_2\rightarrow R_3$.
-$$ \left[\begin{array}{ccc|c} 
-1&1/2&1/2&3/2\\0&1&3&7\\\answer{0}&\answer{0}&\answer{-4}&\answer{-5}
-  \end{array}\right]$$
- \end{prompt}
- \begin{problem}
- \begin{prompt} $-\frac{1}{4}R_3\rightarrow R_3$.
-$$\left[\begin{array}{ccc|c}    1&1/2&1/2&3/2\\0&1&3&7\\\answer{0}&\answer{0}&\answer{1}&\answer{5/4}
-  \end{array}\right]$$
- \end{prompt}
- \begin{problem}
- \begin{prompt} $R_2-3R_3\rightarrow R_2$.
-$$ \left[\begin{array}{ccc|c} 
-1&1/2&1/2&3/2\\\answer{0}&\answer{1}&\answer{0}&\answer{13/4}\\0&0&1&5/4
-  \end{array}\right]$$
- \end{prompt}
- \begin{problem}
- \begin{prompt} $R_1-\frac{1}{2}R_3\rightarrow R_1$.
-$$ \left[\begin{array}{ccc|c} 
-\answer{1}&\answer{1/2}&\answer{0}&\answer{7/8}\\0&1&0&13/4\\0&0&1&5/4
- \end{array}\right]$$
-  \end{prompt}
-  \begin{problem}
- \begin{prompt} $R_1-\frac{1}{2}R_2\rightarrow R_1$.
-$$ \left[\begin{array}{ccc|c} 
- \answer{1}&\answer{0}&\answer{0}&\answer{-3/4}\\0&1&0&13/4\\0&0&1&5/4
-  \end{array}\right]$$
-  \end{prompt}
- \end{problem}
-  \end{problem}
-  \end{problem}
-  \end{problem}
-  \end{problem}
-  \end{problem}
-  \end{problem}
- \end{problem}
- \end{problem}
-  
- 
- 
- 
-\begin{problem}
-Find the rank of each matrix.
-\begin{problem}\label{prob:rankofmat1}
-$$A=\begin{bmatrix}4&3&-1\\-8&-6&2\end{bmatrix}$$
-Answer:
- 
-$$\mbox{rank}(A)=\answer{1}$$
-\end{problem}
- 
-\begin{problem}\label{prob:rankofmat2}
-$$B=\begin{bmatrix}1&1\\2&-2\\3&-1\end{bmatrix}$$
-Answer:
- 
-$$\mbox{rank}(B)=\answer{2}$$
-\end{problem}
- 
-\begin{problem}\label{prob:rankofmat3}
-$$C=\begin{bmatrix}1&0&1\\2&1&3\\0&1&-2\end{bmatrix}$$
-Answer:
- 
-$$\mbox{rank}(C)=\answer{3}$$
-\end{problem}
- 
-\begin{problem}\label{prob:rankofmat4}
-$$D=\begin{bmatrix}1&1&2\\-1&-2&1\\1&0&5\end{bmatrix}$$
-Answer:
- 
-$$\mbox{rank}(D)=\answer{2}$$
-\end{problem}
-\end{problem}
- 
-\begin{problem}\label{prob:rankofmat5}
-Suppose $A$ is a $5\times 7$ matrix.  Which of the following can be true?
-\begin{multipleChoice}
- \choice{$\mbox{rank}(A)=7$}
- \choice{$\mbox{rank}(A)=6$}
- \choice[correct]{$\mbox{rank}(A)=5$}
- \choice{All of the above}
- \end{multipleChoice}
-\end{problem}
- 
-\begin{problem}\label{prob:4eq5un}
-Suppose a linear system has $4$ equations and $5$ unknowns.  Which of the following is NOT a possibility?
-\begin{multipleChoice}
-  \choice[correct]{The system has a unique solution}
- \choice{The system has no solutions}
- \choice{The system has infinitely many solutions}
- \end{multipleChoice}
-\end{problem}
- 
-\begin{problem}\label{prob:leadones}
-Suppose $A$ is a matrix such that $\mbox{rref}(A)$ has $5$ leading $1's$.  What do we know to be true about $A$?  Select ALL that apply.
-\begin{selectAll}
- \choice[correct]{$\mbox{rank}(A)=5$}
- \choice[correct]{$A$ has at least $25$ entries}
- \choice[correct]{Any row-echelon form of $A$ will have exactly $5$ nonzero rows}
- \choice{Some row-echelon forms of $A$ may have more than $5$ nonzero rows}
- \choice{Some row-echelon forms of $A$ may have less than $5$ nonzero rows}
- \end{selectAll}
-\end{problem}
- 
-\begin{problem}\label{prob:rankaugvscoeff}
-In this problem we will discuss how the rank of the {\it coefficient matrix} associated with a linear system compares to the rank of the {\it augmented matrix} associated with the system. 
-\begin{enumerate}
-\item Explain why the rank of the augmented matrix has to be greater than or equal to the rank of the coefficient matrix.
-    \item Prove that for a {\it consistent} system the rank of the coefficient matrix will be the same as the rank of the {\it augmented} matrix.
-    \item Give an example of an inconsistent system for which the rank of the augmented matrix is greater than the rank of the coefficient matrix.
-    \item Can the rank of an augmented matrix be greater than the number of variables?
-    \item Is the following statement true?
-     
-    ``If the rank of the augmented matrix associated with a linear system is greater than the rank of the coefficient matrix, then the system is inconsistent."
-\end{enumerate}
-\end{problem}
- 
-\section*{Text Source}
-The section on Rank is an adaptation of Section 1.2 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}.
+ Section 1.2 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}.
  
 W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition, p 15-17.
  

@@ -23,7 +23,9 @@ In this activity, we will explore the rank and nullity of a matrix.
 
     Go back to the 2D linear transformation GeoGebra applet from before and set $S(\vec{i})$ and $S(\vec{j})$ such that the transformation $S$ only gives you a 1-dimensional subspace of $\mathbb{R}^2$ (i.e. a line).
     
+\begin{center}
     \geogebra{uaua5mpa}{1156}{636}
+\end{center}
 
     Now, we're going to try to answer a very specific question in this section: What vectors get mapped to $\vec{0}$ by a matrix $A$? Remember that all linear transformations are matrices, so we can reprsent this in the applet by finding vectors $\vec{v}$ such that $S(\vec{v})=\vec{0}$.
 
@@ -45,6 +47,7 @@ In this activity, we will explore the rank and nullity of a matrix.
     \end{solution}
 
 \end{exploration}
+
 
 Let's start to more systematically explore the idea of a null space in $\mathbb{R}^3$.
 
@@ -100,6 +103,7 @@ $$
 \end{remark}
 
 
+
 %\begin{problem}{{\bf Warm Up:}}
 %    What is the reduced row echelon form of $A^T$? This will tell you which %vectors span the $Im(A)$ (i.e. ``the image of $A$").
 %    \begin{solution}
@@ -144,6 +148,8 @@ $$
 
 \end{remark}
 
+
+
 Remembering that any time we talk about \emph{linear transformations} in this class, we're also talking about \emph{matrices} that send vectors from one vector space $V$ to another vector space $W$, let's dig into the weeds of some terminology.
 
 It's becoming cumbersome to always say ``A maps vectors $\vec{v}$ to a line'', or ``the vector $\vec{v}$ gets mapped to the vector $A\vec{v}$'', so we come up with succinct terminology to describe mapping and being mapped. 
@@ -168,6 +174,8 @@ $$A\vec{v}=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}\begin{bmatrix}a\\b\\c\end{bm
 So far, we've re-stated little more than the definition of matrix-vector multiplication, but it's good to remember that matrix-vector multiplication gives us linear combinations of the column vectors of $A$. And now, in our new language, we state that $\mbox(im)(T)$ for any matrix $A$ is always a linear combination of the column vectors!
 
 Let's dig further to better describe this particular image. 
+
+
 
 If we take \texttt{rref(A)}, we get
 
@@ -273,6 +281,8 @@ Now let's more formally define the \emph{null space} of $A$.
 
 \end{definition}
 
+
+
 \begin{remark}{Terminology Alert!}
 
     When we use the language of transformations $T$ instead of matrices $A$, we use the word \emph{kernel} instead of \emph{null space}.
@@ -368,6 +378,8 @@ We've found the null space! $Null(A)$ is the set of all vectors of the form $\ta
 
 \end{exploration}
 
+
+
 \begin{remark}
 
     The collection of the form $\tau \begin{bmatrix} -3 \\ -5 \\ 1 \end{bmatrix}$ is exactly the span of the vector $\begin{bmatrix} -3 \\ -5 \\ 1 \end{bmatrix}$, so we haven't just found the null space of $A$, we've also explicitly described $Null(A)$ as the span of a single vector.
@@ -422,6 +434,8 @@ Let's make sure we're not off base! Pick a few scalars, say $\tau=\pi$ and $\tau
 \end{solution}
 
 \end{problem}
+
+
 
 As it turns out, this process will let you exactly determine the null space for any given matrix, no matter how nice or complex. Let's try it out with a more complicated matrix, $B$, but we'll shortcut the interlude with systems of equations and instead only work with the reduced row echelon form and the known pivots.
 
@@ -482,6 +496,8 @@ As it turns out, this process will let you exactly determine the null space for 
     \end{aligned}
     \]
 
+
+
     So one basis vector for the nullspace is $\begin{bmatrix} 13 \\ -5 \\ 1 \\ 0 \\ 0 \end{bmatrix}$.
 
     If we set $v_3=0$ and $v_5=1$, we get the null space basis vector $\begin{bmatrix} -3 \\ 1 \\ 0 \\ -1 \\ 1 \end{bmatrix}$.
@@ -519,6 +535,7 @@ As it turns out, this process will let you exactly determine the null space for 
     Or have we? We'll later see conditions by which we can be sure we've exhaustively found our null space, so let's table our certainty and come back to that question. In math, you always want to make sure you've set up the problem so that you can be certain of the result!
 
 \end{problem}
+
 
 \begin{remark}
 

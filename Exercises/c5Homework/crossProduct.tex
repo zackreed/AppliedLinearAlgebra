@@ -1,0 +1,375 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\begin{example}
+    Is
+    $\vect{u}\times (\vect{v}\times\vect{w}) = (\vect{u}\times
+      \vect{v})\times\vect{w}$? What is the meaning of
+    $\vect{u}\times \vect{v}\times\vect{w}$? Explain.  \textbf{Hint:}
+    Try $(\vect{i}\times\vect{j})\times\vect{j}$.
+    \begin{solution}
+      $(\vect{i}\times\vect{j})\times\vect{j} = \vect{k}\times
+      \vect{j}=-\vect{i}$. However,
+      $\vect{i}\times(\vect{j}\times\vect{j}) = \vect{0}$ and so
+      the cross product is not associative. The expression
+      $\vect{u}\times\vect{v}\times\vect{w}$ has no meaning.
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Verify directly from the coordinate description of the cross product
+    that $\vect{u}\times \vect{v}$ is orthogonal to both $\vect{u}$ and
+    $\vect{v}$. Then show by direct computation that this coordinate
+    description satisfies
+    \begin{align*}
+      \norm{\vect{u}\times \vect{v}}^2
+      & =\norm{\vect{u}
+        }^2\norm{\vect{v}}^2-(\vect{u}\cdot \vect{v})^2 \\
+      & =\norm{\vect{u}}^2\norm{\vect{v}}^2(1-\cos^2(\theta)),
+    \end{align*}
+    where $\theta$ is the angle included between the two
+    vectors. Explain why $\norm{\vect{u}\times\vect{v}}$ has the
+    correct magnitude.
+  \end{example}
+
+  
+  \begin{example}\label{ex:triple-cross-product}
+    Prove the following formula by direct calculation:
+    $\vect{u}\times(\vect{v}\times\vect{w}) ~=~
+    (\vect{u}\cdot\vect{w})\,\vect{v} -
+    (\vect{u}\cdot\vect{v})\,\vect{w}$.
+
+
+    \begin{solution}
+      Let $\vect{u}=\startmat{c}u_1,u_2,u_3\stopmat^T$,
+      $\vect{v}=\startmat{c}v_1,v_2,v_3\stopmat^T$, and
+      $\vect{w}=\startmat{c}w_1,w_2,w_3\stopmat^T$.
+      Then
+
+      \begin{eqnarray*}
+        \vect{u}\times(\vect{v}\times\vect{w})
+        &=&
+        \startmat{c}u_1\\u_2\\u_3\stopmat
+        \times
+        \startmat{c}
+          v_2w_3 - v_3w_2 \\
+          v_3w_1 - v_1w_3 \\
+          v_1w_2 - v_2w_1 \\
+        \stopmat
+        ~=~
+        \startmat{c}
+          u_2(v_1w_2 - v_2w_1) - u_3(v_3w_1 - v_1w_3) \\
+          u_3(v_2w_3 - v_3w_2) - u_1(v_1w_2 - v_2w_1) \\
+          u_1(v_3w_1 - v_1w_3) - u_2(v_2w_3 - v_3w_2) \\
+        \stopmat \\
+        &=&
+        \startmat{c}
+          u_2v_1w_2 - u_2v_2w_1 - u_3v_3w_1 + u_3v_1w_3 \\
+          u_3v_2w_3 - u_3v_3w_2 - u_1v_1w_2 + u_1v_2w_1 \\
+          u_1v_3w_1 - u_1v_1w_3 - u_2v_2w_3 + u_2v_3w_2 \\
+        \stopmat
+      \end{eqnarray*}
+
+      and
+      \begin{eqnarray*}
+        (\vect{u}\cdot\vect{w})\,\vect{v} -
+        (\vect{u}\cdot\vect{v})\,\vect{w}
+        &=& (u_1w_1+u_2w_2+u_3w_3)
+            \startmat{c} v_1\\v_2\\v_3 \stopmat
+        - (u_1v_1+u_2v_2+u_3v_3)
+        \startmat{c} w_1\\w_2\\w_3 \stopmat
+        \\
+        &=& \startmat{c}
+          u_1w_1v_1+u_2w_2v_1+u_3w_3v_1 - u_1v_1w_1-u_2v_2w_1-u_3v_3w_1 \\
+          u_1w_1v_2+u_2w_2v_2+u_3w_3v_2 - u_1v_1w_2-u_2v_2w_2-u_3v_3w_2 \\
+          u_1w_1v_3+u_2w_2v_3+u_3w_3v_3 - u_1v_1w_3-u_2v_2w_3-u_3v_3w_3 \\
+        \stopmat.
+      \end{eqnarray*}
+      We can see by careful inspection that these are equal.
+
+    \end{solution}
+\end{example}
+
+
+
+
+
+  
+  \begin{example}
+    Use the formula from Exercise~\ref{ex:triple-cross-product} to prove
+    that the cross product satisfies the so-called \textbf{Jacobi
+      identity}%
+    \index{Jacobi identity}%
+    \index{cross product!Jacobi identity}:
+    \begin{equation*}
+      \vect{u}\times(\vect{v}\times\vect{w})
+      + \vect{v}\times(\vect{w}\times\vect{u})
+      + \vect{w}\times(\vect{u}\times\vect{v})
+      = \vect{0}.
+    \end{equation*}
+    \begin{solution}
+      \begin{equation*}
+        \begin{array}{l}
+          \vect{u}\times(\vect{v}\times\vect{w})
+          ~+~ \vect{v}\times(\vect{w}\times\vect{u})
+          ~+~ \vect{w}\times(\vect{u}\times\vect{v}) \\
+          {} = ((\vect{u}\cdot\vect{w})\,\vect{v}
+          - (\vect{u}\cdot\vect{v})\,\vect{w})
+          ~+~ ((\vect{v}\cdot\vect{u})\,\vect{w}
+          - (\vect{v}\cdot\vect{w})\,\vect{u})
+          ~+~ ((\vect{w}\cdot\vect{v})\,\vect{u}
+          - (\vect{w}\cdot\vect{u})\,\vect{v}) \\
+          {} = ((\vect{u}\cdot\vect{w})\,\vect{v}
+          - (\vect{w}\cdot\vect{u})\,\vect{v})
+          ~+~ ((\vect{v}\cdot\vect{u})\,\vect{w}
+          - (\vect{u}\cdot\vect{v})\,\vect{w})
+          ~+~ ((\vect{w}\cdot\vect{v})\,\vect{u}
+          - (\vect{v}\cdot\vect{w})\,\vect{u}) \\
+          {} = \vect{0}.
+        \end{array}
+      \end{equation*}
+    \end{solution}
+    \vspace{-4ex}
+  \end{example}
+
+
+
+  \begin{example}
+    Find the volume of the parallelepiped determined by the vectors
+    $\startmat{r}
+      1 \\
+      -7 \\
+      -5
+    \stopmat$,
+    $\startmat{r}
+      1 \\
+      -2 \\
+      -6
+    \stopmat$, and $\startmat{r}
+      3 \\
+      2 \\
+      3
+    \stopmat$.
+    \begin{solution}
+      $\startmat{r}1\\1\\3\stopmat
+        \times \startmat{r}-7\\-2\\2\stopmat 
+      \cdot \startmat{r}-5\\-6\\3\stopmat =
+      \startmat{r}8\\-23\\5\stopmat
+      \cdot \startmat{r}-5\\-6\\3\stopmat =
+      113$.
+    \end{solution}
+  \end{example}
+
+
+  
+  \begin{example}
+    Which of the following systems of vectors
+    $\vect{u},\vect{v},\vect{w}$ are right-handed? Which are
+    left-handed? Which are coplanar?
+    \begin{enumerate}
+    \item $\vect{u}=\startmat{c}1\\0\\1\stopmat$, $\vect{v}=\startmat{c}1\\2\\0\stopmat$, $\vect{w}=\startmat{c}0\\0\\1\stopmat$.
+    \item $\vect{u}=\startmat{c}0\\1\\1\stopmat$, $\vect{v}=\startmat{c}-1\\2\\0\stopmat$, $\vect{w}=\startmat{c}1\\1\\2\stopmat$.
+    \item $\vect{u}=\startmat{c}1\\-1\\0\stopmat$, $\vect{v}=\startmat{c}1\\0\\1\stopmat$, $\vect{w}=\startmat{c}3\\1\\4\stopmat$.
+    \item $\vect{u}=\startmat{c}1\\0\\0\stopmat$, $\vect{v}=\startmat{c}1\\2\\0\stopmat$, $\vect{w}=\startmat{c}2\\0\\-1\stopmat$.
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}
+      \item We have
+        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
+        \cdot \vect{w} = \startmat{c}-2\\1\\2\stopmat\cdot\startmat{c}0\\0\\1\stopmat=2$, so
+        the box product is positive. This means that the system of vectors
+        $\vect{u},\vect{v},\vect{w}$ is right-handed.
+      \item We have
+        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
+        \cdot \vect{w} = \startmat{c}-2\\-1\\1\stopmat\cdot\startmat{c}1\\1\\2\stopmat=-1$, so
+        the box product is negative and the system is left-handed.
+      \item We have
+        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
+        \cdot \vect{w} = \startmat{c}-1\\-1\\1\stopmat\cdot\startmat{c}3\\1\\4\stopmat=0$, so
+        the box product is zero. This means that the volume of the
+        parallelepiped spanned by $\vect{u},\vect{v},\vect{w}$ is empty,
+        i.e., the vectors are coplanar.
+      \item We have
+        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
+        \cdot \vect{w} = \startmat{c}0\\0\\2\stopmat\cdot\startmat{c}2\\0\\-1\stopmat=-2$, so
+        the box product is negative and the system is left-handed.
+      \end{enumerate}
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Suppose $\vect{u},\vect{v}$, and $\vect{w}$ are three vectors whose
+    components are all integers. Can you conclude the volume of the
+    parallelepiped determined from these three vectors will always be an
+    integer?
+    \begin{solution}
+      Yes. It will involve the sum of a product of integers and so it will
+      be an integer.
+    \end{solution}
+  \end{example}
+  
+  \begin{example} \label{exer-box-product-zero}
+    What does it mean geometrically if the box product of three vectors
+    equals zero?
+    \begin{solution}
+      It means that if you place them so that they all have their tails
+      at the same point, the three will lie in the same plane.
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Simplify
+    $\norm{\vect{u}\times \vect{v}}^2+(\vect{u}\cdot
+      \vect{v})^2-\norm{\vect{u}}^2\norm{\vect{v}}^2$.
+    \begin{solution}
+      We have
+      \begin{eqnarray*}
+        \norm{\vect{u}\times \vect{v}}^2
+        &=&\norm{\vect{u}
+            }^2\norm{\vect{v}}^2\sin^2\theta \\
+        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2(1-\cos^2\theta) \\
+        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2
+            -\norm{\vect{u}}^2\norm{\vect{v}}^2\cos^2\theta \\
+        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2
+            -(\vect{u}\cdot \vect{v})^2,
+      \end{eqnarray*}
+      which implies the expression equals $0$.
+    \end{solution}
+  \end{example}
+
+  \begin{example}
+    Show that if $\vect{a}\times \vect{u}=\vect{0}$ for every unit
+    vector $\vect{u}$, then $\vect{a}=\vect{0}$.
+    \begin{solution}
+      If $\vect{a}\neq \vect{0}$, then the condition says that
+      $\norm{\vect{a}\times \vect{u}} = \norm{\vect{a}} \sin \theta =0$
+      for all angles $\theta$. Hence $\vect{a} = \vect{0}$.
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Find the area of the parallelogram determined by the vectors
+    $\startmat{r}
+      1 \\
+      2 \\
+      3
+    \stopmat$, $\startmat{r}
+      3 \\
+      -2 \\
+      1
+    \stopmat$.
+    \begin{solution}
+      $\startmat{r}
+        1 \\
+        2 \\
+        3
+      \stopmat \times
+      \startmat{r}
+        3 \\
+        -2 \\
+        1
+      \stopmat = \startmat{r}
+        8 \\
+        8 \\
+        -8
+      \stopmat$. The area of the parallelogram is $8\sqrt{3}$.
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Find the area of the parallelogram determined by the vectors
+    $\startmat{r}
+      1 \\
+      0 \\
+      3
+    \stopmat$, $\startmat{r}
+      4 \\
+      -2 \\
+      1
+    \stopmat$.
+    \begin{solution}
+      $\startmat{r}
+        1 \\
+        0 \\
+        3
+      \stopmat \times
+      \startmat{r}
+        4 \\
+        -2 \\
+        1
+      \stopmat = \startmat{r}
+        6 \\
+        11 \\
+        -2
+      \stopmat$. The area of the parallelogram is
+      $\sqrt{36+121+4}=\sqrt{161}$. 
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Find the area of the parallelogram with vertices $(-2,3,1)$,
+    $(2,1,1)$, $(1,2,-1)$, and $(5,0,-1)$.
+    \begin{solution}
+      Let $P=(-2,3,1)$, $Q=(2,1,1)$, $R=(1,2,-1)$, and $S=(5,0,-1)$.
+      We have
+      $\longvect{PQ}\times\longvect{PR}
+      =
+      \startmat{r} 4 \\ -2 \\ 0 \stopmat
+      \times
+      \startmat{r} 3 \\ -1 \\ -2 \stopmat
+      =
+      \startmat{r} 5 \\ 8 \\ 2 \stopmat$.
+      The area of the parallelogram is
+      $\norm{\longvect{PQ}\times\longvect{PR}} = \sqrt{5^2+8^2+2^2} =
+      \sqrt{93}$.
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Find the area of the triangle determined by the three points,
+    $(1,0,3),(4,1,0)$ and $(-3,1,1)$.
+    \begin{solution}
+      Let $P=(1,0,3)$, $Q=(4,1,0)$, and $R=(-3,1,1)$. 
+      $\longvect{PQ}\times\longvect{PR}
+      = \startmat{r}
+        3 \\
+        1 \\
+        -3
+      \stopmat \times \startmat{r}
+        -4 \\
+        1 \\
+        -2
+      \stopmat = \startmat{r}
+        1 \\
+        18 \\
+        7
+      \stopmat$. The area of the triangle is
+      $\displaystyle\frac{1}{2}\norm{\longvect{PQ}\times\longvect{PR}} =
+      \frac{1}{2}\sqrt{1+18^2+7^2}=\frac{1}{2}\sqrt{374}$. 
+    \end{solution}
+  \end{example}
+  
+  \begin{example}
+    Find the area of the triangle determined by the three points,
+    $(1,2,3),(2,3,4)$ and $(3,4,5)$. Did something
+    interesting happen here? What does it mean geometrically?
+    \begin{solution}
+      Let $P=(1,2,3)$, $Q=(2,3,4)$, and $R=(3,4,5)$. 
+      $\longvect{PQ}\times\longvect{PR}
+      = \startmat{r}
+        1 \\ 1 \\ 1
+      \stopmat \times \startmat{r}
+        2 \\ 2 \\ 2
+      \stopmat = \startmat{r}
+        0 \\ 0 \\ 0
+      \stopmat$.
+      The area of the triangle is 0. It means the three points are on
+      a line.
+    \end{solution}
+  \end{example}
+
+\end{document}

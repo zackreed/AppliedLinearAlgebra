@@ -1,0 +1,173 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+    
+\begin{problem}\label{prob:findQR}
+In each case find the QR-factorization of $A$.
+    
+\begin{enumerate}
+\item $A = \left[ \begin{array}{rr}
+1 & -1 \\
+-1 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rr}
+2 & 1 \\
+1 &1
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rrr}
+1 & 1 & 1 \\
+1 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rrr}
+1 & 1 & 0 \\
+-1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & -1 & 0
+\end{array}\right]$
+\end{enumerate}
+Click the arrow to see answer.
+
+\begin{enumerate}
+\item  $Q = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+2 & -1 \\
+1 & 2
+\end{array}\right]$,
+    $R = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+5 & 3 \\
+0 & 1
+\end{array}\right]$
+    
+\item  $Q = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
+1 & 1 & 0 \\
+-1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & -1 & 1
+\end{array}\right]$, \\
+$R = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
+3 & 0 & -1 \\
+0 & 3 & 1 \\
+0 & 0 & 2
+\end{array}\right]$
+    
+\end{enumerate}
+
+\end{problem}
+
+
+    
+%\begin{problem}\label{prob:indcolumns}
+%Let $A$ and $B$ denote matrices.
+    
+    
+%\begin{enumerate}
+%\item If $A$ and $B$ have independent columns, show that $AB$ has independent columns. %[\textit{Hint}: Theorem~\ref{thm:015672}.]
+    
+%\item Show that $A$ has a QR-factorization if and only if $A$ has independent columns.
+%\begin{hint}
+%If $A$ has a QR-factorization, use (a). For the converse use Theorem~\ref{thm:025133}.
+%\end{hint}
+    
+%\item If $AB$ has a QR-factorization, show that the same is true of $B$ but not necessarily $A$.
+%\end{enumerate}
+%\begin{hint}
+%Consider $AA^{T}$ where $A = \left[ \begin{array}{rrr}
+%1 & 0 & 0 \\
+%1 & 1 & 1
+%\end{array}\right]$.
+%\end{hint}
+    
+%\end{problem}
+    
+\begin{problem}\label{prob:take_diag_positive}
+If $R$ is upper triangular and invertible, show that there exists a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $R_{1} = DR$ is invertible, upper triangular, and has positive diagonal entries.
+\end{problem}
+    
+\begin{problem}\label{prob:fullQR}
+If $A$ has independent columns, let \\ $A = QR$ where $Q$ has orthonormal columns and $R$ is invertible and upper triangular. (Some authors do not require a $QR$-factorization to have positive diagonal entries.) Show that there is a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $A = (QD)(DR)$ is the QR-factorization of $A$.
+\begin{hint}
+See Practice Problem \ref{prob:take_diag_positive}
+\end{hint}
+\end{problem}
+    
+\begin{problem}
+In each case, find the exact eigenvalues and then approximate them using the QR-algorithm.
+    
+    
+\begin{enumerate}
+\item $A = \left[ \begin{array}{rr}
+1 & 1 \\
+1 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rr}
+3 & 1 \\
+1 & 0
+\end{array}\right]$
+\end{enumerate}
+    
+Click the arrow to see answer.
+
+\begin{enumerate}
+\item  Eigenvalues $\lambda_{1} = \frac{1}{2}(3 + \sqrt{13}) = 3.302776$, $\lambda_{2} = \frac{1}{2}(3 - \sqrt{13}) = -0.302776$
+    
+$A_{1} = \left[ \begin{array}{rr}
+3 & 1 \\
+1 & 0
+\end{array}\right]$, $Q_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
+3 & -1 \\
+1 & 3
+\end{array}\right]$, $R_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
+10 & 3 \\
+0 & -1
+\end{array}\right]$ \\
+$A_{2} = \frac{1}{10}\left[ \begin{array}{rr}
+33 & -1 \\
+-1 & -3
+\end{array}\right]$, \\ $Q_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
+33 & 1 \\
+-1 & 33
+\end{array}\right]$, \\ $R_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
+109 & -3 \\
+0 & -10
+\end{array}\right]$ \\
+$A_{3} = \frac{1}{109}\left[ \begin{array}{rr}
+360 & 1 \\
+1 & -33
+\end{array}\right]$ \\ ${} = \left[ \begin{array}{rr}
+3.302775 & 0.009174 \\
+0.009174 & -0.302775
+\end{array}\right]$
+    
+\end{enumerate}
+
+\end{problem}
+    
+\begin{problem}\label{prob:QR-symmetric}
+If $A$ is symmetric, show that each matrix $A_{k}$ in the QR-algorithm is also symmetric. Deduce that they converge to a diagonal matrix.
+    
+Click the arrow to see answer.
+
+Use induction on $k$. If $k = 1$, $A_{1} = A$. In general $A_{k+1} = Q_{k}^{-1}A_{k}Q_{k} = Q_{k}^{T}A_{k}Q_{k}$, so the fact that $A_{k}^{T} = A_{k}$ implies $A_{k+1}^{T} = A_{k+1}$. The eigenvalues of $A$ are all real (Theorem \ref{cor:ews_symmetric_real}), so the $A_{k}$ converge to an upper triangular matrix $T$. But $T$ must also be symmetric (it is the limit of symmetric matrices), so it is diagonal.
+
+\end{problem}
+    
+\begin{problem}\label{QR-special-2x2}
+Apply the QR-algorithm to \\ $A = \left[ \begin{array}{rr}
+2 & -3 \\
+1 & -2
+\end{array}\right]$. Explain.
+\end{problem}
+    
+\begin{problem}\label{prob:analyzeQRalgorithm}
+Given a matrix $A$, let $A_{k}$, $Q_{k}$, and $R_{k}$, $k \geq 1$, be the matrices constructed in the QR-algorithm. Show that $A_{k} = (Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ for each $k \geq 1$ and hence that this is a QR-factorization of $A_{k}$.
+\begin{hint}
+Show that $Q_{k}R_{k} = R_{k-1}Q_{k-1}$ for each $k \geq 2$, and use this equality to compute $(Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ ``from the centre out.'' Use the fact that $(AB)^{n+1} = A(BA)^{n}B$ for any square matrices $A$ and $B$.
+\end{hint}
+\end{problem}
+
+\end{document}

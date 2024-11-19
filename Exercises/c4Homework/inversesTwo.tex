@@ -1,0 +1,227 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\section*{Exercises}
+
+\begin{example}
+  For each of the following matrices, find the inverse if possible. If
+  the inverse does not exist, explain why.
+  \begin{equation*}
+    A=\startmat{rr}
+      2 & 1 \\
+      -1 & 3
+    \stopmat,
+    \quad
+    B=\startmat{rr}
+      0 & 1 \\
+      5 & 3
+    \stopmat,
+    \quad
+    C=\startmat{rr}
+      2 & 1 \\
+      3 & 0
+    \stopmat,
+    \quad
+    D=\startmat{rr}
+      2 & 1 \\
+      4 & 2
+    \stopmat,
+    \quad
+    E=\startmat{rrr}
+      0 & 1 & 2 \\
+      1 & 2 & 5 \\
+    \stopmat.
+  \end{equation*}
+  \begin{solution}
+    \def\arraystretch{1.2}
+    $A^{-1} =
+    \startmat{rr}
+      \frac{3}{7} & -\frac{1}{7} \\
+      \frac{1}{7} & \frac{2}{7}
+    \stopmat$,
+    $B^{-1} =
+    \startmat{rr}
+      -\frac{3}{5} & \frac{1}{5} \\
+      1 & 0
+    \stopmat$,
+    $C^{-1} =
+    \startmat{rr}
+      0 & \frac{1}{3} \\
+      1 & -\frac{2}{3}
+    \stopmat$.
+    $D^{-1}$ does not exist because the {\rref} of $D$ is
+    $\startmat{rr}
+      1 & \frac{1}{2} \\
+      0 & 0
+    \stopmat$, which has a row of zeros. $E^{-1}$ does not exist
+    because $E$ is not a square matrix.
+  \end{solution}
+\end{example}
+
+\begin{example}
+  For each of the following matrices, find the inverse if possible. If
+  the inverse does not exist, explain why.
+  \begin{equation*}
+    A=\startmat{rrr}
+      1 & 2 & 3 \\
+      2 & 1 & 4 \\
+      1 & 0 & 2
+    \stopmat,
+    \quad
+    B=\startmat{rrr}
+      1 & 0 & 3 \\
+      2 & 3 & 4 \\
+      1 & 0 & 2
+    \stopmat,
+    \quad
+    C=\startmat{rrr}
+      1 & 2 & 3 \\
+      2 & 1 & 4 \\
+      4 & 5 & 10
+    \stopmat,
+    \quad
+    D=\startmat{rrrr}
+      1 & 2 & 0 & 2 \\
+      1 & 1 & 2 & 0 \\
+      2 & 1 & -3 & 2 \\
+      1 & 2 & 1 & 2
+    \stopmat.
+  \end{equation*}
+
+  \begin{solution}
+    \def\arraystretch{1.2}
+    $A^{-1} =
+    \startmat{rrr}
+      -2 & 4 & -5 \\
+      0 & 1 & -2 \\
+      1 & -2 & 3
+    \stopmat$,
+    $B^{-1} =
+    \startmat{rrr}
+      -2 & 0 & 3 \\
+      0 & \frac{1}{3} & -\frac{2}{3} \\
+      1 & 0 & -1
+    \stopmat$.
+    $C^{-1}$ does not exist because the {\rref} of $C$ is
+    $\startmat{rrr}
+      1 & 0 & \frac{5}{3} \\
+      0 & 1 & \frac{2}{3} \\
+      0 & 0 & 0
+    \stopmat$, which has a row of zeros.
+    $D^{-1} =
+    \startmat{rrrr}
+      -1 & \frac{1}{2} &  \frac{1}{2} &  \frac{1}{2} \\
+      3 &  \frac{1}{2} & - \frac{1}{2} & - \frac{5}{2} \\
+      -1 & 0 & 0 & 1 \\
+      -2 & - \frac{3}{4} &  \frac{1}{4} &  \frac{9}{4}
+    \stopmat$.
+  \end{solution}
+\end{example}
+
+\begin{example}
+  Let $A$ be a $2\times 2$ invertible matrix, with
+  $A=\startmat{rr}
+    a & b \\
+    c & d
+  \stopmat$. Find a formula for $A^{-1}$ in terms of $a,b,c,d$.
+  \begin{solution}
+    $\def\arraystretch{1.3}
+    \startmat{rr}
+      a & b \\
+      c & d
+    \stopmat^{-1}= \startmat{rr}
+      \frac{d}{ad-bc} & -\frac{b}{ad-bc} \\
+      -\frac{c}{ad-bc} & \frac{a}{ad-bc}
+    \stopmat$.
+  \end{solution}
+\end{example}
+
+\begin{example}
+  Which of the following matrices is right invertible? Find a right
+  inverse if one exists. If possible, find two different right
+  inverses.
+  \begin{equation*}
+    A=\startmat{ccc}
+      1 & 2 & 3 \\
+      0 & 1 & 0 \\
+    \stopmat
+    \qquad
+    B=\startmat{ccc}
+      1 & 1 & 2 \\
+      2 & 2 & 4 \\
+    \stopmat
+    \qquad
+    C=\startmat{cc}
+      1 & 2 \\
+      1 & 0 \\
+      0 & 1 \\
+    \stopmat
+    \qquad
+    D=\startmat{cc}
+      1 & 2 \\
+      2 & 3 \\
+    \stopmat
+  \end{equation*}
+  \begin{solution}
+    The matrix $A$ is right invertible. Two possible right inverses
+    are
+    \begin{equation*}
+      \startmat{cc}
+        1 & -2 \\
+        0 & 1 \\
+        0 & 0 \\
+      \stopmat
+      \quad\mbox{and}\quad
+      \startmat{cc}
+        -2 & 1 \\
+        0 & 1 \\
+        1 & -1 \\
+      \stopmat.
+    \end{equation*}
+    The matrices $B$ and $C$ are not right invertible. The matrix $D$
+    is right invertible with inverse
+    \begin{equation*}
+      \startmat{cc}
+        -3 & 2 \\
+        2 & -1 \\
+      \stopmat.
+    \end{equation*}
+    Since $D$ is square, its right inverse is actually an inverse, and
+    therefore unique.
+  \end{solution}
+\end{example}
+
+\begin{example}
+  Which of the following matrices is left invertible? Find a left
+  inverse if one exists. If possible, find two different left
+  inverses.
+  \begin{equation*}
+    A=\startmat{ccc}
+      1 & 2 & 1 \\
+      0 & 1 & 0 \\
+    \stopmat
+    \qquad
+    B=\startmat{cc}
+      1 & 1 \\
+      2 & 3 \\
+    \stopmat
+    \qquad
+    C=\startmat{cc}
+      1 & 0 \\
+      0 & 1 \\
+      2 & 1 \\
+    \stopmat
+    \qquad
+    D=\startmat{cc}
+      1 & 0 \\
+      2 & 0 \\
+      3 & 0 \\
+    \stopmat
+  \end{equation*}
+\end{example}
+
+\end{document}

@@ -2,638 +2,781 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed}
-%borrowed from selinger linear algebra
-\title{Learning Activity: }
+%borrowed from anna davis
+\title{Learning Activity: Useful Factorizations} \license{CC BY-NC-SA 4.0}
 \begin{document}
 \begin{abstract}
 
     In this learning activity, you will be 
 \end{abstract}
 \maketitle
+ 
 
-\section*{SVD Decomposition}
-We begin this section with an important definition.
+\section*{$LU$ factorization}
+
  
-\begin{definition}\label{singularvalues}
-Let $A$ be an $m\times n$ matrix. The \dfn{singular values} of $A$ are the square roots of the positive
-eigenvalues of $A^TA.$
-\end{definition}
- 
-Singular Value Decomposition (SVD) can be thought of as
-a generalization of orthogonal diagonalization of a symmetric matrix
-to an arbitrary $m\times n$ matrix. This decomposition is the focus of this section.
- 
-The following is a useful result that will help when computing the SVD of matrices.
- 
-\begin{lemma}\label{lem:samenonzeroeigenvalues}
-Let $A$ be an $m \times n$ matrix. Then $A^TA$ and $AA^T$ have the same \textbf{nonzero eigenvalues}.
-\end{lemma}
- 
-\begin{proof}
-Suppose $A$ is an $m\times n$ matrix, and suppose that  $\lambda$ is a nonzero eigenvalue of $A^TA$.
-Then there exists a nonzero vector $\vec{x} \in \RR^n$ such that
-\begin{equation}\label{nonzero}
-(A^TA)\vec{x}=\lambda \vec{x}
-\end{equation}
-Multiplying both sides of this equation by $A$ yields:
-\begin{eqnarray*}
-A(A^TA)\vec{x} & = & A\lambda \vec{x}\\
-(AA^T)(A\vec{x}) & = & \lambda (A\vec{x})
-\end{eqnarray*}
-Since $\lambda\neq 0$ and $\vec{x}\neq 0_n$, $\lambda \vec{x}\neq 0_n$,
-and thus by equation~(\ref{nonzero}),
-$(A^TA)\vec{x}\neq 0_m$; thus $A^T(A\vec{x})\neq 0_m$,
-implying that $A\vec{x}\neq 0_m$.
- 
-Therefore $A\vec{x}$ is an eigenvector of $AA^T$ corresponding to eigenvalue
-$\lambda$.  An analogous argument can be used to show that every
-nonzero eigenvalue of $AA^T$ is an eigenvalue of $A^TA$, thus
-completing the proof.
-\end{proof}
- 
-Given an $m\times n$ matrix $A$, we will see how to express $A$ as a product
-\[ A=U\Sigma V^T\]
-where
-\begin{itemize}
-\item $U$ is an $m\times m$ orthogonal matrix whose columns are
-eigenvectors of $AA^T$.
-\item $V$ is an $n\times n$ orthogonal matrix whose columns are
-eigenvectors of $A^TA$.
-\item $\Sigma$ is an $m\times n$ matrix whose only nonzero values
-lie on its main diagonal, and are the singular values of $A$.
-\end{itemize}
-How can we find such a decomposition? We are aiming to decompose $A$ in the following form:
-\begin{equation*}
-A=U\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right] V^T
-\end{equation*}
-where $\sigma $ is a block matrix of the form
-\[
-\sigma =\left[
-\begin{array}{ccc}
-\sigma _{1} &  & 0 \\
-& \ddots &  \\
-0 &  & \sigma _{k}
-\end{array}
-\right]
-\]
-Thus $A^T=V\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right] U^T$ and it follows that
-\begin{equation*}
-A^TA=V\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right] U^TU\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right] V^T=V\left[
-\begin{array}{cc}
-\sigma ^{2} & 0 \\
-0 & 0
-\end{array}
-\right] V^T
-\end{equation*}
-and so $A^TAV=V\left[
-\begin{array}{cc}
-\sigma ^{2} & 0 \\
-0 & 0
-\end{array}
-\right] .$ Similarly, $AA^TU=U\left[
-\begin{array}{cc}
-\sigma ^{2} & 0 \\
-0 & 0
-\end{array}
-\right] .$ Therefore, you would find an orthonormal basis of eigenvectors
-for $AA^T$ make them the columns of a matrix such that the
-corresponding eigenvalues are decreasing. This gives $U.$ You could then do
-the same for $A^TA$ to get $V$.
- 
-We formalize this discussion in the following theorem.
- 
-\begin{theorem}[Singular Value Decomposition]\label{th:singvaldecomp}
-Let $A$ be an $m\times n$ matrix. Then there exist
-orthogonal matrices $U$ and $V$ of the appropriate size such that $A= U \Sigma V^T$ where $\Sigma$ is of the form
-\[
-\Sigma =
-\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right]
-\]
-and $\sigma $ is a block matrix of the form
-\[
-\sigma =\left[
-\begin{array}{ccc}
-\sigma _{1} &  & 0 \\
-& \ddots &  \\
-0 &  & \sigma _{k}
-\end{array}
-\right]
-\]
-for the $\sigma _{i}$ the singular values of $A.$
-\end{theorem}
- 
-\begin{proof}
-There exists an orthonormal basis, $\left\{ \vec{v}_{1}, \dots, \vec{v}_n\right\}$ such that $
-A^TA\vec{v}_{i}=\sigma _{i}^{2}\vec{v}_{i}$ where $\sigma
-_{i}^{2}>0$ for $i=1,\dots ,k,\left( \sigma _{i}>0\right) $ and equals zero
-if $i>k.$ Thus for $i>k,$ $A\vec{v}_{i}=\vec{0}$ because
-\begin{equation*}
- A\vec{v}_{i}\dotp A\vec{v}_{i} = (A\vec{v}_i)^T(A\vec{v}_i)=\vec{v}_i^T(A^TA\vec{v}_i)=\vec{0}
- %A^TA\vec{v}_{i} \dotp \vec{v}_{i}  = \vec{0} \dotp \vec{v}_{i} =0
-\end{equation*}
-For $i=1,\dots ,k,$ define $\vec{u}_{i}\in \RR^{m}$ by
-\begin{equation*}
-\vec{u}_{i}= \sigma _{i}^{-1}A\vec{v}_{i}
-\end{equation*}
-Thus $A\vec{v}_{i}=\sigma _{i}\vec{u}_{i}.$ Now
-\begin{eqnarray*}
-\vec{u}_{i} \dotp \vec{u}_{j} &=&  \sigma _{i}^{-1}A
-\vec{v}_{i} \dotp \sigma _{j}^{-1}A\vec{v}_{j}  = \sigma_{i}^{-1}\vec{v}_{i}^T \sigma _{j}^{-1}A^TA\vec{v}_{j} \\
-&=& \sigma _{i}^{-1}\vec{v}_{i} \dotp \sigma _{j}^{-1}\sigma _{j}^{2} \vec{v}_{j} =
-\frac{\sigma _{j}}{\sigma _{i}}\left( \vec{v}_{i} \dotp \vec{v}_{j}\right)%=\delta _{ij}
-\end{eqnarray*}
-This means that $\vec{u}_{i} \dotp \vec{u}_{j}=1$ when $i=j$ and $\vec{u}_{i} \dotp \vec{u}_{j}=0$ when $i\neq j$.
-Thus $\left\{ \vec{u}_{1}, \dots, \vec{u}_{k}\right\}$ is an orthonormal set of
-vectors in $\RR^{m}.$ Also,
-\begin{equation*}
-AA^T\vec{u}_{i}=AA^T\sigma _{i}^{-1}A\vec{v}_{i}=\sigma
-_{i}^{-1}AA^TA\vec{v}_{i}=\sigma _{i}^{-1}A\sigma _{i}^{2}\vec{v}
-_{i}=\sigma _{i}^{2}\vec{u}_{i}
-\end{equation*}
-Now, using Gram-Schmidt, extend $\left\{ \vec{u}_{1}, \dots, \vec{u}_{k}\right\}$ to an orthonormal
-basis for all of $\RR^{m},\left\{ \vec{u}_{1},\dots,\vec{u}_{m}\right\}$
-and let
-\begin{equation*}
-U= \left[
-\begin{array}{ccc}
-\vec{u}_{1} & \cdots & \vec{u}_{m}
-\end{array}
-\right]
-\end{equation*}
-while $V= \left[ \begin{array}{ccc} \vec{v}_{1} & \cdots & \vec{v}_{n}\end{array}\right] .$ Thus $U$
-is the matrix which has the $\vec{u}_{i}$ as columns and $V$ is defined
-as the matrix which has the $\vec{v}_{i}$ as columns. Then
-\begin{equation*}
-U^TAV=\left[
-\begin{array}{c}
-\vec{u}_{1}^T \\
-\vdots \\
-\vec{u}_{k}^T \\
-\vdots \\
-\vec{u}_{m}^T
-\end{array}
-\right] A  \left[ \begin{array}{ccc} \vec{v}_{1} & \cdots & \vec{v}_{n}\end{array}\right]
-\end{equation*}
-\begin{equation*}
-=\left[
-\begin{array}{c}
-\vec{u}_{1}^T \\
-\vdots \\
-\vec{u}_{k}^T \\
-\vdots \\
-\vec{u}_{m}^T
-\end{array}
-\right] \left[
-\begin{array}{cccccc}
-\sigma _{1}\vec{u}_{1} & \cdots & \sigma _{k}\vec{u}_{k} & \vec{0}
-& \cdots & \vec{0}
-\end{array}
-\right] =\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right]
-\end{equation*}
-where $\sigma $ is given in the statement of the theorem.
-\end{proof}
- 
-The SVD has as an immediate corollary which is given in the following interesting result.
- 
-\begin{corollary}\label{cor:ranksingularvalues}
-Let $A$ be an $m\times n$ matrix. Then the rank of $A$ (or of $A^T$) equals
-the number of singular values.
-\end{corollary}
- 
-%%\begin{proof}
-%%Since $V$ and $U$ are unitary, it follows that
-%%\begin{eqnarray*}
-%%\limfunc{rank}\left( A\right) &=&\limfunc{rank}\left( U^TAV\right) =
-%%\limfunc{rank}\left[
-%%\begin{array}{cc}
-%%\sigma & 0 \\
-%%0 & 0
-%%\end{array}
-%%\right] \\
-%%&=&\text{number of singular values.}
-%%\end{eqnarray*}
-%%Also since $U,V$ are unitary,
-%%\begin{equation*}
-%%\func{rank}\left( A^T\right) =\func{rank}\left( V^TA^{\ast
-%%}U\right) =\func{rank}\left( \left( U^TAV\right) ^T\right)
-%%\end{equation*}
-%%\begin{equation*}
-%%=\func{rank}\left( \left[
-%%\begin{array}{cc}
-%%\sigma & 0 \\
-%%0 & 0
-%%\end{array}
-%%\right] ^T\right) =\text{number of singular values.}
-%%\end{equation*}
-%%\end{proof}
-%%
-%%\medskip
- 
-Let's compute the SVD of a simple matrix.
- 
-\begin{example}\label{ex:SVD2x3}
-Let
-$A=\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]$.
-Find the SVD of $A$.
- 
-\begin{explanation}
-To begin, we compute $AA^T$ and $A^TA$.
-\[ AA^T = \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-\left[\begin{array}{rr} 1 & 3 \\ -1 & 1 \\ 3 & 1  \end{array}\right]
-= \left[\begin{array}{rr} 11 & 5 \\ 5 & 11  \end{array}\right]\]
- 
-\[ A^TA = \left[\begin{array}{rr} 1 & 3 \\ -1 & 1 \\ 3 & 1  \end{array}\right]
-\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-= \left[\begin{array}{rrr} 10 & 2 & 6 \\ 2 & 2 & -2\\
-6 & -2 & 10 \end{array}\right]\]
-Since $AA^T$ is $2\times 2$ while $A^T A$ is $3\times 3$, and $AA^T$
-and $A^TA$ have the same {\em nonzero} eigenvalues (by Lemma
-\ref{lem:samenonzeroeigenvalues}), we compute the characteristic polynomial  $c_{AA^T}(x)$ (because it is
-easier to compute than $c_{A^TA}(x)$).
-\begin{eqnarray*}
-c_{AA^T}(z)& = &\det(zI-AA^T)=  \det \left[\begin{array}{cc}
-z-11 & -5 \\ -5 & z-11 \end{array}\right]\\
-& = &(z-11)^2 - 25 \\
-& = & z^2-22z+121-25\\
-& = & z^2-22z+96\\
-& = & (z-16)(z-6)
-\end{eqnarray*}
-Therefore, the eigenvalues of $AA^T$ are $\lambda_1=16$ and $\lambda_2=6$.
- 
-The eigenvalues of $A^TA$ are $\lambda_1=16$, $\lambda_2=6$, and
-$\lambda_3=0$, and the singular values of $A$ are $\sigma_1=\sqrt{16}=4$ and
-$\sigma_2=\sqrt{6}$.
-By convention, we list the eigenvalues (and corresponding singular values)
-in non increasing order (i.e., from largest to smallest).
- 
-\textbf{To find the matrix $V$}:
- 
-To construct the matrix $V$ we need to find eigenvectors for $A^TA$.
-Since the eigenvalues of $AA^T$ are distinct, the corresponding
-eigenvectors are orthogonal, and we need only normalize them.
- 
-$\lambda_1=16$: solve $(16I-A^TA)\vec{x}_1= \vec{0}$.
- 
-\[ \left[\begin{array}{rrr|r}
-6 & -2 & -6 & 0 \\ -2 & 14 & 2 & 0 \\ -6 & 2 & 6 & 0
+\begin{exploration}\label{init:LUfactorization}
+Consider the equation:
+$$\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}\vec{x}=\begin{bmatrix}1\\8\\5\end{bmatrix}$$
+This equation is unusual in that it involves two matrices on the left-hand side.  If we multiply the matrices together, we get
+$$\begin{bmatrix}2&-1&2\\6&1&5\\-4&10&-3\end{bmatrix}\vec{x}=\begin{bmatrix}1\\8\\5\end{bmatrix}$$
+Gaussian elimination yields:
+$$\left[\begin{array}{ccc|c}
+2&-1&2&1\\6&1&5&8\\-4&10&-3&5
 \end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_1 =\left[\begin{array}{r} t \\ 0 \\ t \end{array}\right]
-=t\left[\begin{array}{r} 1 \\ 0 \\ 1 \end{array}\right],
-t\in \RR. \]
- 
-$\lambda_2=6$: solve $(6I-A^TA)\vec{x}_2= \vec{0}$.
- 
-\[ \left[\begin{array}{rrr|r}
--4 & -2 & -6 & 0 \\ -2 & 4 & 2 & 0 \\ -6 & 2 & -4 & 0
+\quad\rightsquigarrow\quad
+\left[\begin{array}{ccc|c}
+ 1&0&0&2\\0&1&0&1\\0&0&1&-1
 \end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & 1 & 0 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_2=\left[\begin{array}{r} -s \\ -s \\ s \end{array}\right]
-=s\left[\begin{array}{r} -1 \\ -1 \\ 1 \end{array}\right],
-s\in \RR. \]
+$$
+We conclude that
+$$\vec{x}=\begin{bmatrix}2\\1\\-1\end{bmatrix}.$$
  
-$\lambda_3=0$: solve $(-A^TA)\vec{x}_3= \vec{0}$.
-\[ \left[\begin{array}{rrr|r}
--10 & -2 & -6 & 0 \\ -2 & -2 & 2 & 0 \\ -6 & 2 & -10 & 0
-\end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & 1 & 0 \\ 0 & 1 & -2 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_3=\left[\begin{array}{r} -r \\ 2r \\ r \end{array}\right]
-=r\left[\begin{array}{r} -1 \\ 2 \\ 1 \end{array}\right],
-r\in \RR. \]
-Let
-\[ \vec{v}_1=\frac{1}{\sqrt{2}}\left[\begin{array}{r} 1\\ 0\\ 1 \end{array}\right],
-\vec{v}_2=\frac{1}{\sqrt{3}}\left[\begin{array}{r} -1\\ -1\\ 1 \end{array}\right],
-\vec{v}_3=\frac{1}{\sqrt{6}}\left[\begin{array}{r} -1\\ 2\\ 1 \end{array}\right]\]
-Then
-\[ V=\frac{1}{\sqrt{6}}\left[\begin{array}{rrr}
-\sqrt 3 & -\sqrt 2 & -1  \\
-0 & -\sqrt 2 & 2 \\
-\sqrt 3 & \sqrt 2 & 1 \end{array}\right]\]
-Also,
-\[ \Sigma = \left[\begin{array}{rrr} 4 & 0 & 0 \\
-0 & \sqrt 6 & 0 \end{array}\right]\]
-and we use $A$, $V^T$, and $\Sigma$ to find $U$. Since $V$ is orthogonal and $A=U\Sigma V^T$, it follows that $AV=U\Sigma$.
-Let $V=\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]$, and
-let $U=\left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]$, where
-$\vec{u}_1$ and $\vec{u}_2$ are the two columns of $U$. Then we have
-\begin{eqnarray*}
-A\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]
-&=& \left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]\Sigma\\
-\left[\begin{array}{ccc} A\vec{v}_1 & A\vec{v}_2 & A\vec{v}_3 \end{array}\right]
-&=& \left[\begin{array}{ccc} \sigma_1\vec{u}_1 + 0\vec{u}_2 &
-0\vec{u}_1 + \sigma_2 \vec{u}_2 & 0 \vec{u}_1 + 0\vec{u}_2 \end{array}\right] \\
-&=& \left[\begin{array}{ccc} \sigma_1\vec{u}_1 & \sigma_2 \vec{u}_2 &
-0 \end{array}\right]
-\end{eqnarray*}
-which implies that $A\vec{v}_1=\sigma_1\vec{u}_1 = 4\vec{u}_1$ and
-$A\vec{v}_2=\sigma_2\vec{u}_2 = \sqrt 6 \vec{u}_2$. Thus,
-\[ \vec{u}_1 = \frac{1}{4}A\vec{v}_1
-= \frac{1}{4}
-\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-\frac{1}{\sqrt{2}}\left[\begin{array}{r} 1\\ 0\\ 1 \end{array}\right]
-= \frac{1}{4\sqrt 2}\left[\begin{array}{r} 4\\ 4 \end{array}\right]
-= \frac{1}{\sqrt 2}\left[\begin{array}{r} 1\\ 1 \end{array}\right]\]
-and
-\[ \vec{u}_2 = \frac{1}{\sqrt 6}A\vec{v}_2
-= \frac{1}{\sqrt 6}
-\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-\frac{1}{\sqrt{3}}\left[\begin{array}{r} -1\\ -1\\ 1 \end{array}\right]
-=\frac{1}{3\sqrt 2}\left[\begin{array}{r} 3\\ -3 \end{array}\right]
-=\frac{1}{\sqrt 2}\left[\begin{array}{r} 1\\ -1 \end{array}\right]
-\]
-Therefore,
-\[ U=\frac{1}{\sqrt{2}}\left[\begin{array}{rr} 1 & 1 \\
-1 & -1 \end{array}\right]\]
-and
-\begin{eqnarray*}
-A & = & \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]\\
-& = & \left(\frac{1}{\sqrt{2}}\left[\begin{array}{rr} 1 & 1 \\
-1 & -1 \end{array}\right]\right)
-\left[\begin{array}{rrr} 4 & 0 & 0 \\
-0 & \sqrt 6 & 0 \end{array}\right]
-\left(\frac{1}{\sqrt{6}}\left[\begin{array}{rrr}
-\sqrt 3 & 0 & \sqrt 3  \\
--\sqrt 2 & -\sqrt 2 & \sqrt2 \\
--1 & 2 & 1 \end{array}\right]\right)
-\end{eqnarray*}
-\end{explanation}
-\end{example}
+Now that we know the answer, we will turn to the original question and consider the advantages of the format of the original problem.  Observe that the two matrices have a distinct pattern.  The matrix on the left has zeros above the main diagonal, while the matrix on the right has zeros below the main diagonal.  Matrices that follow such a pattern are called \dfn{lower triangular} and \dfn{upper triangular} matrices, respectively.
  
+Let $\vec{y}=\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}\vec{x}$.  Then we can write the original equation as
+$$\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\left(\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}\vec{x}\right)=\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\vec{y}=\begin{bmatrix}1\\8\\5\end{bmatrix}$$
+The equation
+$$\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\vec{y}=\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\begin{bmatrix}y_1\\y_2\\y_3\end{bmatrix}=\begin{bmatrix}1\\8\\5\end{bmatrix}$$
+corresponds to the system
+$$\begin{matrix}
+     y_1&&&=&1\\
+       3y_1 & +y_2&&= &8 \\
+      -2y_1&+2y_2&+y_3&=&5
+    \end{matrix}$$
+     
+This system can be easily solved by substitution, giving us
+$$y_1=1$$
+$$3(1)+y_2=8 \rightsquigarrow y_2=5$$
+$$-2(1)+2(5)+y_3=5 \rightsquigarrow y_3=-3$$
+So,
+$$\vec{y}=\begin{bmatrix}y_1\\y_2\\y_3\end{bmatrix}=\begin{bmatrix}1\\5\\-3\end{bmatrix}$$
+     
+Recall that we let $\vec{y}=\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}\vec{x}$. 
+The equation
+$$\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}\vec{x}=\begin{bmatrix}1\\5\\-3\end{bmatrix}$$
+corresponds to the system
+$$\begin{matrix}
+     2x_1& -&x_2&+&2x_3&=&1\\
+       & &4x_2&-&x_3&= &5 \\
+      & &&&3x_3&=&-3
+    \end{matrix}$$
+    which can be easily solved by back-substitution:
+    $$x_3=\answer{-1}$$
+    $$x_2=\answer{1}$$
+    $$x_1=\answer{2}$$
+     
+    Thus, $\vec{x}=\begin{bmatrix}2\\1\\-1\end{bmatrix}$.  Observe that this is the same answer that we obtained in the beginning of the problem using Gaussian elimination. 
+\end{exploration}
+
  
-Here is another example.
+Given a matrix equation such as
+$$\begin{bmatrix}2&-1&2\\6&1&5\\-4&10&-3\end{bmatrix}\vec{x}=\begin{bmatrix}1\\8\\5\end{bmatrix}$$
+of Exploration \ref{init:LUfactorization}, often in practice we express the matrix on the left as a product of an upper triangular matrix $U$ and a lower triangular matrix $L$ and use substitution to solve the equation instead of using Gaussian elimination to find the solution.  In Exploration \ref{init:LUfactorization},
  
-\begin{example}\label{ex:SVD3x1}
-Find an SVD for
-$A=\left[\begin{array}{r} -1 \\ 2\\ 2 \end{array}\right]$.
+$$\begin{bmatrix}2&-1&2\\6&1&5\\-4&10&-3\end{bmatrix}=LU=\begin{bmatrix}1&0&0\\3&1&0\\-2&2&1\end{bmatrix}\begin{bmatrix}2&-1&2\\0&4&-1\\0&0&3\end{bmatrix}$$
  
-\begin{explanation}
-Since $A$ is $3\times 1$, $A^T A$ is a $1\times 1$ matrix
-whose eigenvalues are easier to find than the eigenvalues of
-the $3\times 3$ matrix $AA^T$.
+The process of taking a matrix $A$ and expressing it as a product $A=LU$ of a lower triangular matrix $L$ and an upper triangular matrix $U$ is called \dfn{$LU$ factorization}.
+%An $LU$ factorization of a matrix $A$ is when we express the given matrix as the
+%product
+%$$A=LU$$
+%where  $L$ is a lower triangular square matrix and $U$ is an upper triangular matrix. 
+We also adopt the (common) convention that $L$ is a matrix with a diagonal consisting entirely of $1$'s, which is often called a \dfn{lower unit triangular} matrix.
  
-\[ A^TA=\left[\begin{array}{ccc} -1 & 2 & 2 \end{array}\right]
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
-=\left[\begin{array}{r} 9 \end{array}\right]\]
-Thus $A^TA$ has eigenvalue $\lambda_1=9$, and
-the eigenvalues of $AA^T$ are $\lambda_1=9$, $\lambda_2=0$, and
-$\lambda_3=0$.
-Furthermore, $A$ has only one singular value, $\sigma_1=3$.
+Not every matrix has an $LU$ factorization, but we will see that we can correct for that.
  
-\textbf{To find the matrix $V$}:
-To do so we find an eigenvector for $A^TA$ and
-normalize it.
-In this case, finding a unit eigenvector is trivial:
-$\vec{v}_1=\left[\begin{array}{r} 1 \end{array}\right]$, and
-\[ V=\left[\begin{array}{r} 1 \end{array}\right]\]
-Also,
-$\Sigma =\left[\begin{array}{r} 3 \\ 0\\ 0 \end{array}\right]$,
-and we use $A$, $V^T$, and $\Sigma$ to find $U$.
+\begin{example}\label{ex:usingLU}
+Consider the system
+$$\begin{array}{ccccccccc}
+        & &12x_2&-&18x_3&= &6 \\
+     x_1 &+ &2x_2&-&3x_3&= &1\\
+      x_1&- &2x_2&+&x_3&=&1
+    \end{array}.$$
+We can express this system as the matrix equation $A\vec{x}=\vec{b}$, and we get $$\begin{bmatrix}0&12&-18\\1&2&-3\\1&-2&1\end{bmatrix}\vec{x}=\begin{bmatrix}6\\1\\1\end{bmatrix}.$$
+
+
+
  
-\noindent Now $AV=U\Sigma$, with
-$V=\left[\begin{array}{r}\vec{v}_1 \end{array}\right]$,
-and $U=\left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]$,
-where $\vec{u}_1$, $\vec{u}_2$, and $\vec{u}_3$ are the columns of $U$.
-Thus
-\begin{eqnarray*}
-A\left[\begin{array}{r} \vec{v}_1 \end{array}\right]
-&=& \left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]\Sigma\\
-\left[\begin{array}{r} A\vec{v}_1 \end{array}\right]
-&=& \left[\begin{array}{r} \sigma_1 \vec{u}_1+0\vec{u}_2+0\vec{u}_3 \end{array}\right]\\
-&=& \left[\begin{array}{r} \sigma_1 \vec{u}_1 \end{array}\right]
-\end{eqnarray*}
-This gives us $A\vec{v}_1=\sigma_1 \vec{u}_1= 3\vec{u}_1$, so
- 
-\[ \vec{u}_1 = \frac{1}{3}A\vec{v}_1
-= \frac{1}{3}
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
-\left[\begin{array}{r} 1 \end{array}\right]
-= \frac{1}{3}
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]\]
-The vectors $\vec{u}_2$ and $\vec{u}_3$ are eigenvectors of $AA^T$ corresponding
-to the eigenvalue $\lambda_2=\lambda_3=0$.
-Instead of solving the system $(0I-AA^T)\vec{x}= 0$ and then using the
-Gram-Schmidt process on the resulting set of
-two basic eigenvectors, the following approach may be used.
- 
- 
-Find vectors $\vec{u}_2$ and $\vec{u}_3$ by first extending $\{ \vec{u}_1\}$ to a basis of
-$\RR^3$, then using the Gram-Schmidt algorithm to orthogonalize the basis,
-and finally normalizing the vectors.
- 
-Starting with $\{ 3\vec{u}_1 \}$ instead of $\{ \vec{u}_1 \}$ makes the
-arithmetic a bit easier.
-It is easy to verify that
- 
-\[ \left\{ \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
-\left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
-\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\right\}\]
-is a basis of $\RR^3$.  Set
- 
-\[ \vec{x}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
-\vec{x}_2 = \left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
-\vec{x}_3 =\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\]
-and apply the Gram-Schmidt algorithm to
-$\{ \vec{x}_1, \vec{x}_2, \vec{x}_3\}$. This gives us
- 
-\[ \vec{f}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right], \vec{f}_2 = \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right]
-\mbox{ and }
-\vec{f}_3 = \left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
-Therefore,
-\[ \vec{u}_2 = \frac{1}{\sqrt{18}}
- \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right],
-\vec{u}_3 = \frac{1}{\sqrt 2}
-\left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
-and
-\[ U = \left[  \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]\]
-Finally,
-\[ A =
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
+Unfortunately, for reasons we will explain below, it is not possible to find an $LU$ factorization of this coefficient matrix.  However, if we simply swap the first two equations:
+$$\begin{array}{ccccccccc}
+     x_1 &+ &2x_2&-&3x_3&= &1\\
+      & &12x_2&-&18x_3&= &6 \\
+      x_1&- &2x_2&+&x_3&=&1
+    \end{array},$$
+we are able to find an $LU$ factorization of the coefficient matrix.
+\[
+\begin{bmatrix}
+1 & 2 & -3 \\
+0 & 12 & -18 \\
+1 & -2 & 1\end{bmatrix}
 =
-\left[ \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]
-\left[\begin{array}{r} 3 \\ 0 \\ 0 \end{array}\right]
-\left[\begin{array}{r} 1 \end{array}\right]\]
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1  & -1/3  & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 & -3 \\
+0 & 12  & -18 \\
+0 & 0 & -2
+\end{bmatrix}
+\]
+(How we actually come up with an  $LU$ factorization of $A$ will be discussed after this example.)
  
-\end{explanation}
-\end{example}
+To understand how an $LU$ factorization can be used, it is helpful to think of this system of equations as a matrix equation.
+$$A\vec{x}=\vec{b}$$
+$$(LU)\vec{x}=\vec{b}$$
+$$L(U\vec{x})=\vec{b}$$
+So if we let $\vec{y}=U\vec{x}$ and also write $\vec{y}=\begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix}$, then we are able to solve for $ y_1, y_2, \text{ and } y_3$ using \emph{forward-substitution}.
+$$L\vec{y}=\vec{b}$$
+\[
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1  & -1/3  & 1
+\end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix}
+=
+\begin{bmatrix} 1 \\ 6 \\ 1 \end{bmatrix}
+\]
+See if you can do it!
+$$y_1=\answer{1},\quad y_2=\answer{6},\quad y_3=\answer{2}$$
+Once we have the values of $\vec{y}$, since $\vec{y}=U\vec{x}$, all that remains is to solve the following matrix equation using back-substitution.
+$$U\vec{x}=\vec{y}$$
  
-Consider another example.
- 
-\begin{example}\label{SVDanother2x3}
-Find an SVD for the matrix
-\begin{equation*}
-A= \left[
-\begin{array}{ccc}
-\frac{2}{5}\sqrt{2}\sqrt{5} & \frac{4}{5}\sqrt{2}\sqrt{5} & 0 \\
-\frac{2}{5}\sqrt{2}\sqrt{5} & \frac{4}{5}\sqrt{2}\sqrt{5} & 0
-\end{array}
-\right]
-\end{equation*}
- 
-\begin{explanation}
-First consider $A^TA$
-\begin{equation*}
-\left[
-\begin{array}{ccc}
-\frac{16}{5} & \frac{32}{5} & 0 \\
-\frac{32}{5} & \frac{64}{5} & 0 \\
-0 & 0 & 0
-\end{array}
-\right]
-\end{equation*}
-What are some eigenvalues and eigenvectors? Some computing shows that the eigenvalues are $0$ and $16$.  Furthermore, we can find a basis for each eigenspace.
- 
-\begin{equation*}
-\mathcal{S}_0=\mbox{span}\left( \left[
-\begin{array}{c}
-0 \\
-0 \\
-1
-\end{array}
-\right] ,\left[ 
-\begin{array}{c}
--\frac{2}{5}\sqrt{5} \\
-\frac{1}{5}\sqrt{5} \\
-0
-\end{array}
-\right] \right),
-\quad\mathcal{S}_{16}=\mbox{span}\left( \left[ 
-\begin{array}{c}
-\frac{1}{5}\sqrt{5} \\
-\frac{2}{5}\sqrt{5} \\
-0
-\end{array}
-\right] \right)
-\end{equation*}
-Thus the matrix $V$ is given by
-\begin{equation*}
-V=\left[
-\begin{array}{ccc}
-\frac{1}{5}\sqrt{5} & -\frac{2}{5}\sqrt{5} & 0 \\
-\frac{2}{5}\sqrt{5} & \frac{1}{5}\sqrt{5} & 0 \\
-0 & 0 & 1
-\end{array}
-\right]
-\end{equation*}
-Next consider $AA^T$
-\begin{equation*}
-\left[
-\begin{array}{cc}
-8 & 8 \\
-8 & 8
-\end{array}
-\right]
-\end{equation*}
-Eigenvalues are $0$ and $16$, and eigenspaces are
- 
-\begin{equation*}
-\mathcal{S}_0=\mbox{span}\left(\left[ 
-\begin{array}{c}
--\frac{1}{2}\sqrt{2} \\
-\frac{1}{2}\sqrt{2}
-\end{array}
-\right] \right),\quad\mathcal{S}_{16}=\mbox{span}\left( \left[ 
-\begin{array}{c}
-\frac{1}{2}\sqrt{2} \\
-\frac{1}{2}\sqrt{2}
-\end{array}
-\right] \right)
-\end{equation*}
-Thus you can let $U$ be given by
-\begin{equation*}
-U=\left[ 
-\begin{array}{cc}
-\frac{1}{2}\sqrt{2} & -\frac{1}{2}\sqrt{2} \\
-\frac{1}{2}\sqrt{2} & \frac{1}{2}\sqrt{2}
-\end{array}
-\right]
-\end{equation*}
-Let's check this. $U^TAV=$
-\begin{equation*}
-\left[ 
-\begin{array}{cc}
-\frac{1}{2}\sqrt{2} & \frac{1}{2}\sqrt{2} \\
--\frac{1}{2}\sqrt{2} & \frac{1}{2}\sqrt{2}
-\end{array}
-\right] \left[  
-\begin{array}{ccc}
-\frac{2}{5}\sqrt{2}\sqrt{5} & \frac{4}{5}\sqrt{2}\sqrt{5} & 0 \\
-\frac{2}{5}\sqrt{2}\sqrt{5} & \frac{4}{5}\sqrt{2}\sqrt{5} & 0
-\end{array}
-\right] \left[
-\begin{array}{ccc}
-\frac{1}{5}\sqrt{5} & -\frac{2}{5}\sqrt{5} & 0 \\
-\frac{2}{5}\sqrt{5} & \frac{1}{5}\sqrt{5} & 0 \\
-0 & 0 & 1
-\end{array}
-\right]
-\end{equation*}
-\begin{equation*}
-=\left[
-\begin{array}{ccc}
-4 & 0 & 0 \\
-0 & 0 & 0
-\end{array}
-\right]
-\end{equation*}
-\end{explanation}
-\end{example}
- 
-This illustrates that if you have a good way to find the eigenvectors and
-eigenvalues for a Hermitian matrix which has nonnegative eigenvalues, then
-you also have a good way to find the SVD of an
-arbitrary matrix.
- 
- 
- 
-\section*{Text Source} This section was adapted from Section 8.11 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}. (CC-BY-NC-SA)
- 
-W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition.
 
+$$\begin{bmatrix}
+1 & 2 & -3 \\
+0 & 12  & -18 \\
+0 & 0 & -2
+\end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+=
+\begin{bmatrix} 1 \\ 6 \\ 2 \end{bmatrix}$$
+ 
+
+ 
+By now you are quite used to solving this kind of problem...
+$$x_1=\answer{0},\quad x_2=\answer{-1},\quad x_3=\answer{-1}$$
+
+\end{example}
+
+
+
+ 
+ 
+\subsection*{Finding an $LU$ factorization by Inspection}
+ 
+\begin{example}\label{ex:LU1}
+Find an $LU$ factorization of $A=
+\begin{bmatrix}
+1 & 2 & 0 & 2 \\
+1 & 3 & 2 & 1 \\
+2 & 3 & 4 & 0
+\end{bmatrix}
+.$
+\end{example}
+ 
+One way to find the $LU$ factorization%
+ is to simply look for it directly.
+We need
+\[
+\begin{bmatrix}
+1 & 2 & 0 & 2 \\
+1 & 3 & 2 & 1 \\
+2 & 3 & 4 & 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+x & 1 & 0 \\
+y & z & 1
+\end{bmatrix}
+\begin{bmatrix}
+a & d & h & j \\
+0 & b & e & i \\
+0 & 0 & c & f
+\end{bmatrix}
+\]
+By multiplying the latter matrices we get
+\[
+\begin{bmatrix}
+a & d & h & j \\
+xa & xd+b & xh+e & xj+i \\
+ya & yd+zb & yh+ze+c & yj+iz+f
+\end{bmatrix}
+\]
+and from this, it is a simple exercise to determine each of the unknowns. For example, from the first
+column, we get $a=1$ and then $x=1,y=2.$
+ 
+% Now go to the second column. You need $
+% d=2,xd+b=3$ so $b=1,yd+zb=3$ so $z=-1.$ From the third column, $h=0,e=2,c=6.$
+% Now from the fourth column, $j=2,i=-1,f=-5.$
+ 
+See if you can continue to determine the entire $LU$
+factorization of $A$.
+\[
+\begin{bmatrix}
+1 & 2 & 0 & 2 \\
+1 & 3 & 2 & 1 \\
+2 & 3 & 4 & 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+2 & \answer{-1} & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & \answer{2} & \answer{0} & \answer{2} \\
+0 & \answer{1} & \answer{2} & \answer{-1} \\
+0 & 0 & \answer{6} & \answer{-5}
+\end{bmatrix}
+\]
+
+\section*{Practice Problems}
+ 
+\begin{problem}\label{prob:LU1}
+Use the given $LU$ factorization of the coefficient matrix to solve the system of equations.
+$$\begin{array}{ccccccc}
+      x & +&2y&+&3z&= &5 \\
+     2x&+&3y&+&z&=&6\\
+     3x& +&5y&+&4z&=&11
+    \end{array}$$
+Observe that an $LU$ factorization of the coefficient matrix is
+\[
+\begin{bmatrix}
+1 & 2 & 3 \\
+2 & 3 & 1 \\
+3 & 5 & 4\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+3 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 & 3 \\
+0 & -1 & -5 \\
+0 & 0 & 0
+\end{bmatrix}
+\]
+\end{problem}
+ 
+\emph{Problems \ref{prob:LU2a}-\ref{prob:LU2b}}
+Find the $LU$ factorization of the coefficient matrix and use it to solve the system of equations.
+ 
+\begin{problem}\label{prob:LU2a}
+ 
+$$
+\begin{array}{ccccc}
+      x& +&2y&=&5\\
+      2x & +&3y&= &6
+    \end{array}
+$$
+$$L=\begin{bmatrix}\answer{1}&0\\\answer{2}&\answer{1}\end{bmatrix},\quad U=\begin{bmatrix}\answer{1}&\answer{2}\\0&\answer{-1}\end{bmatrix}$$
+$$x=\answer{-3}, y=\answer{4}$$
+\end{problem}
+ 
+\begin{problem}\label{prob:LU2b}
+$$\begin{array}{ccccccc}
+      x & +&2y&+&z&= &1 \\
+     & &y&+&3z&=&2\\
+     2x& +&3y&&&=&6
+    \end{array}$$
+    $$L=\begin{bmatrix}\answer{1}&0&0\\\answer{0}&\answer{1}&0\\\answer{2}&\answer{-1}&\answer{1}\end{bmatrix},\quad U=\begin{bmatrix} \answer{1}&\answer{2}&\answer{1}\\0&\answer{1}&\answer{3}\\0&0&\answer{1}\end{bmatrix}$$
+    $$x=\answer{27},y=\answer{-16}, z=\answer{6}$$
+\end{problem}
+ 
+%\begin{problem}
+%\begin{equation*}
+%\begin{array}{c}
+%x+2y+3z=5 \\
+%2x+3y+z=6 \\
+%x-y+z=2
+%\end{array}
+%\end{equation*}
+%\end{problem}
+ 
+ 
+\begin{problem}\label{prob:LU4}
+Is there only one $LU$ factorization for a given matrix?
+ 
+\begin{hint}Consider the equation
+$$
+\begin{bmatrix}0 & 1 \\0 & 1\end{bmatrix}=\begin{bmatrix}1& 0 \\1 & 1\end{bmatrix} \begin{bmatrix}0 & 1 \\0 & 0\end{bmatrix}
+$$
+ 
+Look for all possible $LU$ factorizations.
+\end{hint}
+\end{problem}
+ 
+\begin{problem}\label{prob:LU5}
+Can you show that every permutation matrix is invertible?  If so, What does the inverse of a permutation matrix look like? (Recall that a permutation matrix is matrix $P$ of Theorem \ref{th:LUPA}.)
+\end{problem}
+
+
+
+\section*{QR Factorization}
+
+    
+One of the main virtues of orthogonal
+matrices is that they can be easily inverted---the transpose is the
+inverse. This fact, combined with the factorization theorem in this
+section, provides a useful way to simplify many matrix calculations (for
+    example, in \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/RTH-0030/main}{least squares approximation}).
+    
+    
+\begin{definition}\label{def:QR-factorization}
+Let $A$ be an $m \times n$ matrix with independent columns. A \dfn{QR-factorization} of $A$ expresses it as $A = QR$ where $Q$ is $m \times n$ with orthonormal columns and $R$ is an invertible and upper triangular matrix with positive diagonal entries.
+\end{definition}
+    
+The importance of the factorization
+lies in the fact that there are computer algorithms that accomplish it
+with good control over round-off error, making it particularly useful in
+matrix calculations. The factorization is a matrix version of the Gram-Schmidt process.
+    
+    
+Suppose $A = \left[ \begin{array}{cccc}
+|&|& &| \\
+\vec{c}_{1} & \vec{c}_{2} & \cdots &  \vec{c}_{n}\\
+|&|& &|
+\end{array}\right]$ is an $m \times n$ matrix with linearly independent columns $\vec{c}_{1}, \vec{c}_{2}, \dots, \vec{c}_{n}$. The Gram-Schmidt algorithm can be applied to these columns to provide orthogonal columns $\vec{f}_{1}, \vec{f}_{2}, \dots, \vec{f}_{n}$ where $\vec{f}_{1} = \vec{c}_{1}$ and
+\begin{equation*}
+\vec{f}_{k} = \vec{c}_{k} - \frac{\vec{c}_{k} \dotp \vec{f}_{1}}{\norm{ \vec{f}_{1} }^2}\vec{f}_{1} + \frac{\vec{c}_{k} \dotp \vec{f}_{2}}{\norm{ \vec{f}_{2} }^2}\vec{f}_{2} - \dots - \frac{\vec{c}_{k} \dotp \vec{f}_{k-1}}{\norm{ \vec{f}_{k-1} }^2}\vec{f}_{k-1}
+\end{equation*}
+for each $k = 2, 3, \dots, n$. Now write $\vec{q}_{k} = \frac{1}{\norm{ \vec{f}_{k} }}\vec{f}_{k}$ for each $k$. Then $\vec{q}_{1}, \vec{q}_{2}, \dots, \vec{q}_{n}$ are orthonormal columns, and the above equation becomes
+\begin{equation*}
+\norm{ \vec{f}_{k} } \vec{q}_{k} = \vec{c}_{k} - (\vec{c}_{k} \dotp \vec{q}_{1})\vec{q}_{1} - (\vec{c}_{k} \dotp \vec{q}_{2})\vec{q}_{2} - \dots - (\vec{c}_{k} \dotp \vec{q}_{k-1})\vec{q}_{k-1}
+\end{equation*}
+Using these equations, express each $\vec{c}_{k}$ as a linear combination of the $\vec{q}_{i}$:
+\begin{equation*}
+\begin{array}{ccl}
+\vec{c}_{1} &=& \norm{ \vec{f}_{1} } \vec{q}_{1} \\
+\vec{c}_{2} &=& (\vec{c}_{2} \dotp \vec{q}_{1})\vec{q}_{1} + \norm{ \vec{f}_{2} } \vec{q}_{2} \\
+\vec{c}_{3} &=& (\vec{c}_{3} \dotp \vec{q}_{1})\vec{q}_{1} + (\vec{c}_{3} \dotp \vec{q}_{2})\vec{q}_{2} + \norm{ \vec{f}_{3} } \vec{q}_{3} \\
+\vdots && \vdots \\
+\vec{c}_{n} &=& (\vec{c}_{n} \dotp \vec{q}_{1})\vec{q}_{1} + (\vec{c}_{n} \dotp \vec{q}_{2})\vec{q}_{2} + (\vec{c}_{n} \dotp \vec{q}_{3})\vec{q}_{3} + \dots + \norm{ \vec{f}_{n} } \vec{q}_{n}
+\end{array}
+\end{equation*}
+These equations have a matrix form that gives the required factorization:
+\begin{align}
+A & = \left[ \begin{array}{ccccc}
+|&|&|& &| \\
+\vec{c}_{1} & \vec{c}_{2} & \vec{c}_{3} &\cdots &  \vec{c}_{n}\\
+|&|&|& &|
+\end{array}\right] \nonumber \\
+&= \left[ \begin{array}{ccccc}
+|&|&|& &| \\
+\vec{q}_{1} & \vec{q}_{2} & \vec{q}_{3} & \cdots &  \vec{q}_{n}\\
+|&|&|& &|
+\end{array}\right] \left[ \begin{array}{ccccc}
+\norm{ \vec{f}_{1} } & \vec{c}_{2} \dotp \vec{q}_{1} & \vec{c}_{3} \dotp \vec{q}_{1} & \cdots & \vec{c}_{n} \dotp \vec{q}_{1} \\
+0 & \norm{ \vec{f}_{2} } & \vec{c}_{3} \dotp \vec{q}_{2} & \cdots & \vec{c}_{n} \dotp \vec{q}_{2} \\
+0 & 0 & \norm{ \vec{f}_{3} } & \cdots & \vec{c}_{n} \dotp \vec{q}_{3} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \norm{ \vec{f}_{n} }
+\end{array} \right] \label{matrixFactEq}
+\end{align}
+Here the first factor $Q = \left[ \begin{array}{ccccc}
+|&|&|& &| \\
+\vec{q}_{1} & \vec{q}_{2} & \vec{q}_{3} & \cdots &  \vec{q}_{n}\\
+|&|&|& &|
+\end{array}\right]$ has orthonormal columns, and the second factor is an $n \times n$ upper triangular matrix $R$ with positive diagonal entries (and so is invertible). We record this in the following theorem.
+
+
+\begin{theorem}[QR-Factorization]\label{th:QR-025133}
+Every $m \times n$ matrix $A$ with linearly independent columns has a QR-factorization $A = QR$ where $Q$ has orthonormal columns and $R$ is upper triangular with positive diagonal entries.
+\end{theorem}
+    
+The matrices $Q$ and $R$ in Theorem~\ref{th:QR-025133} are uniquely determined by $A$; we return to this below.
+    
+\begin{example}\label{ex:QR4x3-025139}
+Find the QR-factorization of $A = \left[ \begin{array}{rrr}
+1 & 1 & 0 \\
+-1 & 0 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{array}\right]$.
+    
+\begin{explanation}
+    Denote the columns of $A$ as $\vec{c}_{1}$, $\vec{c}_{2}$, and $\vec{c}_{3}$, and observe that $\{\vec{c}_{1}, \vec{c}_{2}, \vec{c}_{3}\}$ is independent. If we apply the Gram-Schmidt algorithm to these columns, the result is:
+\begin{equation*}
+\vec{f}_{1} = \vec{c}_{1} = \left[ \begin{array}{r}
+1  \\
+-1  \\
+0  \\
+0
+\end{array}\right], \quad \vec{f}_{2} = \vec{c}_{2} - \frac{1}{2}\vec{f}_{1} = \left[ \def\arraystretch{1.2} \begin{array}{r}
+\frac{1}{2}  \\
+\frac{1}{2}  \\
+1  \\
+0
+\end{array}\right], \mbox{ and } \quad \vec{f}_{3} = \vec{c}_{3} + \frac{1}{2}\vec{f}_{1} - \vec{f}_{2} = \left[ \begin{array}{r}
+0  \\
+0  \\
+0  \\
+1
+\end{array}\right].
+\end{equation*}
+Write $\vec{q}_{j} = \frac{1}{\norm{ \vec{f}_{j} }^2}\vec{f}_{j}$
+    for each $j$, so $\{\vec{q}_{1}, \vec{q}_{2}, \vec{q}_{3}\}$ is orthonormal. Then equation (\ref{matrixFactEq}) preceding Theorem~\ref{th:QR-025133} gives $A = QR$ where
+\begin{align*}
+Q &= \left[ \begin{array}{ccc} | & | & | \\
+\vec{q}_{1} & \vec{q}_{2} & \vec{q}_{3} \\
+| & | & |
+\end{array}\right] = \left[ \def\arraystretch{1.3}\begin{array}{ccc}
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & 0 \\
+\frac{-1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & 0 \\
+0 & \frac{2}{\sqrt{6}} & 0 \\
+0 & 0 & 1
+\end{array}\right]  = \frac{1}{\sqrt{6}} \left[ \begin{array}{ccc}
+\sqrt{3} & 1 & 0 \\
+-\sqrt{3} & 1 & 0 \\
+0 & 2 & 0 \\
+0 & 0 & \sqrt{6}
+\end{array} \right]
+\\
+R &= \left[ \begin{array}{ccc}
+\norm{ \vec{f}_{1} } & \vec{c}_{2} \dotp \vec{q}_{1} & \vec{c}_{3} \dotp \vec{q}_{1} \\
+0 & \norm{ \vec{f}_{2} } & \vec{c}_{3} \dotp \vec{q}_{2} \\
+0 & 0 & \norm{ \vec{f}_{3} } \\
+\end{array} \right] = \left[ \def\arraystretch{1.5} \begin{array}{ccc}
+\sqrt{2} & \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\
+0 & \frac{\sqrt{3}}{\sqrt{2}} & \frac{\sqrt{3}}{\sqrt{2}} \\
+0 & 0 & 1
+\end{array} \right] = \frac{1}{\sqrt{2}}\left[ \begin{array}{ccc}
+2 & 1 & -1 \\
+0 & \sqrt{3} & \sqrt{3} \\
+0 & 0 & \sqrt{2}
+\end{array} \right]
+\end{align*}
+    
+The reader can verify that indeed $A = QR$.
+\end{explanation}
+\end{example}
+    
+If a matrix $A$ has independent rows and we apply QR-factorization to $A^{T}$, the result is:
+    
+\begin{corollary}\label{cor:QR-transpose-025162}
+If $A$ has independent rows, then $A$ factors uniquely as $A = LP$ where $P$ has orthonormal rows and $L$ is an invertible lower triangular matrix with positive main diagonal entries.
+\end{corollary}
+    
+Since a square matrix with orthonormal columns is orthogonal, we have
+    
+\begin{theorem}\label{th:025166}
+Every square invertible matrix $A$ has factorizations $A = QR$ and $A = LP$ where $Q$ and $P$ are orthogonal, $R$ is upper triangular with positive diagonal entries, and $L$ is lower triangular with positive diagonal entries.
+\end{theorem}
+    
+We now take the time to prove the uniqueness of the QR-factorization.
+    
+\begin{theorem}\label{th:QR-unique-025187}
+Let $A$ be an $m \times n$ matrix with independent columns. If $A = QR$ and $A = Q_{1}R_{1}$ are QR-factorizations of $A$, then $Q_{1} = Q$ and $R_{1} = R$.
+\end{theorem}
+    
+\begin{proof}
+Write $Q = \left[ \begin{array}{cccc}
+|&|& &| \\
+\vec{c}_{1} & \vec{c}_{2} & \cdots &  \vec{c}_{n}\\
+|&|& &|
+\end{array}\right]$  and $Q_{1} =  \left[ \begin{array}{cccc}
+|&|& &| \\
+\vec{d}_{1} & \vec{d}_{2} & \cdots &  \vec{d}_{n}\\
+|&|& &|
+\end{array}\right]$ in terms of their columns, and observe first that $Q^TQ = I_{n} = Q_{1}^TQ_{1}$ because $Q$ and $Q_{1}$ have orthonormal columns. Hence it suffices to show that $Q_{1} = Q$ (then $R_{1} = Q_{1}^TA = Q^TA = R$). Since $Q_{1}^TQ_{1} = I_{n}$, the equation $QR = Q_{1}R_{1}$ gives $Q_{1}^TQ = R_{1}R^{-1}$; for convenience we write this matrix as
+\begin{equation*}
+Q_{1}^TQ = R_{1}R^{-1} = \left[ \begin{array}{c} t_{ij} \end{array}\right]
+\end{equation*}
+This matrix is upper triangular with positive diagonal elements (since this is true for $R$ and $R_{1}$), so $t_{ii} > 0$ for each $i$ and $t_{ij} = 0$ if $i > j$. On the other hand, the $(i, j)$-entry of $Q_{1}^TQ$ is $\vec{d}_{i}^T\vec{c}_{j} = \vec{d}_{i} \dotp \vec{c}_{j}$, so we have $\vec{d}_{i} \dotp \vec{c}_{j} = t_{ij}$ for all $i$ and $j$. But each $\vec{c}_{j}$ is in $\mbox{span}\{\vec{d}_{1}, \vec{d}_{2}, \dots, \vec{d}_{n}\}$ because $Q = Q_{1}(R_{1}R^{-1})$. We know how to write a vector as a linear combination of an orthonormal basis (using Corollary~\ref{cor:orthonormal} from \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/RTH-0010/main}{Orthogonality and Projections}):
+\begin{equation*}
+\vec{c}_{j} = (\vec{d}_{1} \dotp \vec{c}_{j})\vec{d}_{1} + (\vec{d}_{2} \dotp \vec{c}_{j})\vec{d}_{2} + \dots + (\vec{d}_{n} \dotp \vec{c}_{j})\vec{d}_{n} = t_{1j}\vec{d}_{1} + t_{2j}\vec{d}_{2} + \dots + t_{jj}\vec{d}_{i},
+\end{equation*}
+because $\vec{d}_{i} \dotp \vec{c}_{j} = t_{ij} = 0$ if $i > j$. The first few equations here are
+\begin{equation*}
+\begin{array}{ccl}
+\vec{c}_{1} &=& t_{11}\vec{d}_{1} \\
+\vec{c}_{2} &=& t_{12}\vec{d}_{1} + t_{22}\vec{d}_{2} \\
+\vec{c}_{3} &=& t_{13}\vec{d}_{1} + t_{23}\vec{d}_{2} + t_{33}\vec{d}_{3} \\
+\vec{c}_{4} &=& t_{14}\vec{d}_{1} + t_{24}\vec{d}_{2} + t_{34}\vec{d}_{3} + t_{44}\vec{d}_{4} \\
+\vdots && \vdots
+\end{array}
+\end{equation*}
+The first of these equations gives $1 = \norm{ \vec{c}_{1} } = \norm{ t_{11}\vec{d}_{1} } = | t_{11} | \norm{ \vec{d}_{1} } = t_{11}$, whence $\vec{c}_{1} = \vec{d}_{1}$. But then we have $t_{12} = \vec{d}_{1} \dotp \vec{c}_{2} = \vec{c}_{1} \dotp \vec{c}_{2} = 0$, so the second equation becomes $\vec{c}_{2} = t_{22}\vec{d}_{2}$. Now a similar argument gives $\vec{c}_{2} = \vec{d}_{2}$, and then $t_{13} = 0$ and $t_{23} = 0$ follows in the same way. Hence $\vec{c}_{3} = t_{33}\vec{d}_{3}$ and $\vec{c}_{3} = \vec{d}_{3}$. Continue in this way to get $\vec{c}_{i} = \vec{d}_{i}$ for all $i$. This proves that $Q_{1} = Q$.
+\end{proof}
+
+    
+\section*{QR-Algorithm for approximating eigenvalues}\label{sec:QRalgorithm}
+    
+In \href{}{The Power Method and the Dominant Eigenvalue}, we learned about an iterative method for computing eigenvalues.  We also mentioned that a better method for approximating the eigenvalues of an invertible matrix $A$ depends on the QR-factorization of $A$.  While it is beyond the scope of this book to pursue a detailed discussion of this method, we give an example and conclude with some remarks on the QR-algorithm. The interested reader is referred to
+    J. M. Wilkinson, \textit{The Algebraic Eigenvalue Problem} (Oxford, England: Oxford University Press, 1965)\index{\textit{The Algebraic Eigenvalue Problem} (Wilkinson)} or G. W. Stewart, \textit{Introduction to Matrix Computations} (New York: Academic Press, 1973)\index{\textit{Introduction to Matrix Computations} (Stewart)}.
+    
+The \dfn{QR-algorithm} uses QR-factorization repeatedly to create a sequence of matrices $A_{1} =A, A_{2}, A_{3}, \dots,$ as follows:
+    
+\begin{enumerate}
+\item Define $A_{1} = A$ and factor it as $A_{1} = Q_{1}R_{1}$.
+    
+\item Define $A_{2} = R_{1}Q_{1}$ and factor it as $A_{2} = Q_{2}R_{2}$.
+    
+\item Define $A_{3} = R_{2}Q_{2}$ and factor it as $A_{3} = Q_{3}R_{3}$.
+\\ \hspace*{4em} $\vdots$
+    
+    
+\end{enumerate}
+    
+In general, $A_{k}$ is factored as $A_{k} = Q_{k}R_{k}$ and we define $A_{k + 1} = R_{k}Q_{k}$. Then $A_{k + 1}$ is similar to $A_{k}$ [in fact, $A_{k+1} = R_{k}Q_{k} = (Q_{k}^{-1}A_{k})Q_{k}$], and hence each $A_{k}$ has the same eigenvalues as $A$. If the eigenvalues of $A$ are real and have distinct absolute values, the remarkable thing is that the sequence of matrices $A_{1}, A_{2}, A_{3}, \dots$ converges to an upper triangular matrix with these eigenvalues on the main diagonal. [See below for the case of complex eigenvalues.]
+    
+\begin{example}\label{QR-algortihm-2x2-025425}
+If $A = \left[ \begin{array}{rr}
+1 & 1 \\
+2 & 0
+\end{array}\right]$ as in Example~\ref{ex:2x2PowerMethod025326} of \href{}{The Power Method and the Dominant Eigenvalue}, use the QR-algorithm to approximate the eigenvalues.
+    
+\begin{explanation}
+    The matrices $A_{1}$, $A_{2}$, and $A_{3}$ are as follows:
+\begin{align*}
+A_{1} = & \left[ \begin{array}{rr}
+1 & 1 \\
+2 & 0
+\end{array}\right] = Q_{1}R_{1} \quad \mbox{ where } Q_{1} = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+1 & 2 \\
+2 & -1
+\end{array}\right] \mbox{ and } R_{1} =  \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+5 & 1 \\
+0 & 2
+\end{array}\right] \\
+A_{2} = & \frac{1}{5}\left[ \begin{array}{rr}
+7 & 9 \\
+4 & -2
+\end{array}\right] = \left[ \begin{array}{rr}
+1.4 & -1.8 \\
+-0.8 & -0.4
+\end{array}\right]= Q_{2}R_{2} \\
+&\mbox{ where } Q_{2} = \frac{1}{\sqrt{65}}\left[ \begin{array}{rr}
+7 & 4 \\
+4 & -7
+\end{array}\right] \mbox{ and } R_{2} =  \frac{1}{\sqrt{65}}\left[ \begin{array}{rr}
+13 & 11 \\
+0 & 10
+\end{array}\right] \\
+A_{3} = &\frac{1}{13}\left[ \begin{array}{rr}
+27 & -5 \\
+8 & -14
+\end{array}\right] = \left[ \begin{array}{rr}
+2.08 & -0.38 \\
+0.62 & -1.08
+\end{array}\right]
+\end{align*}
+This is converging to $\left[ \begin{array}{rr}
+2 & \ast \\
+0 & -1
+\end{array}\right]$ and so is approximating the eigenvalues $2$ and $-1$ on the main diagonal.
+\end{explanation}
+\end{example}
+    
+    
+\subsubsection*{Shifting.} We first learned about the concept of \dfn{shifting} in \href{}{The Power Method and the Dominant Eigenvalue}.  Convergence is accelerated if, at stage $k$ of the algorithm, a number $\tau_{k}$ is chosen and $A_{k} - \tau_{k}I$ is factored in the form $Q_{k}R_{k}$ rather than $A_{k}$ itself. Then
+\begin{equation*}
+Q_{k}^{-1}A_{k}Q_{k} = Q_{k}^{-1}(Q_{k}R_{k} + \tau_{k}I)Q_{k} = R_{k}Q_{k} + \tau_{k}I
+\end{equation*}
+so we take $A_{k+1} = R_{k}Q_{k} + \tau_{k}I$. If the shifts $\tau_{k}$ are carefully chosen, convergence can be greatly improved.
+    
+\subsubsection*{Preliminary Preparation.} A matrix such as
+\begin{equation*}
+\left[ \begin{array}{rrrrr}
+\ast  & \ast & \ast & \ast & \ast  \\
+\ast  & \ast & \ast & \ast & \ast  \\
+0  & \ast & \ast & \ast & \ast  \\
+0  & 0 & \ast & \ast & \ast  \\
+0  & 0 & 0 & \ast & \ast  \\
+\end{array}\right]
+\end{equation*}
+is said to be in \dfn{upper Hessenberg} form, and the QR-factorizations of such matrices are greatly simplified. Given an $n \times n$ matrix $A$, a series of orthogonal matrices $H_{1}, H_{2}, \dots, H_{m}$ (called \dfn{Householder matrices} can be easily constructed such that
+\begin{equation*}
+B = H_{m}^T \cdots H_{1}^TAH_{1} \cdots H_{m}
+\end{equation*}
+is in upper Hessenberg form. Then the QR-algorithm can be efficiently applied to $B$ and, because $B$ is similar to $A$, it produces the eigenvalues of $A$.
+    
+\subsubsection*{Complex Eigenvalues.} If some of the eigenvalues of a real matrix $A$ are not real, the QR-algorithm converges to a block upper triangular matrix where the diagonal blocks are either $1 \times 1$ (the real eigenvalues) or $2 \times 2$ (each providing a pair of conjugate complex eigenvalues of $A$).
+
+
+    
+\section*{Practice Problems}
+    
+\begin{problem}\label{prob:findQR}
+In each case find the QR-factorization of $A$.
+    
+\begin{enumerate}
+\item $A = \left[ \begin{array}{rr}
+1 & -1 \\
+-1 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rr}
+2 & 1 \\
+1 &1
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rrr}
+1 & 1 & 1 \\
+1 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rrr}
+1 & 1 & 0 \\
+-1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & -1 & 0
+\end{array}\right]$
+\end{enumerate}
+Click the arrow to see answer.
+
+\begin{enumerate}
+\item  $Q = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+2 & -1 \\
+1 & 2
+\end{array}\right]$,
+    $R = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
+5 & 3 \\
+0 & 1
+\end{array}\right]$
+    
+\item  $Q = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
+1 & 1 & 0 \\
+-1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & -1 & 1
+\end{array}\right]$, \\
+$R = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
+3 & 0 & -1 \\
+0 & 3 & 1 \\
+0 & 0 & 2
+\end{array}\right]$
+    
+\end{enumerate}
+
+\end{problem}
+
+
+    
+%\begin{problem}\label{prob:indcolumns}
+%Let $A$ and $B$ denote matrices.
+    
+    
+%\begin{enumerate}
+%\item If $A$ and $B$ have independent columns, show that $AB$ has independent columns. %[\textit{Hint}: Theorem~\ref{thm:015672}.]
+    
+%\item Show that $A$ has a QR-factorization if and only if $A$ has independent columns.
+%\begin{hint}
+%If $A$ has a QR-factorization, use (a). For the converse use Theorem~\ref{thm:025133}.
+%\end{hint}
+    
+%\item If $AB$ has a QR-factorization, show that the same is true of $B$ but not necessarily $A$.
+%\end{enumerate}
+%\begin{hint}
+%Consider $AA^{T}$ where $A = \left[ \begin{array}{rrr}
+%1 & 0 & 0 \\
+%1 & 1 & 1
+%\end{array}\right]$.
+%\end{hint}
+    
+%\end{problem}
+    
+\begin{problem}\label{prob:take_diag_positive}
+If $R$ is upper triangular and invertible, show that there exists a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $R_{1} = DR$ is invertible, upper triangular, and has positive diagonal entries.
+\end{problem}
+    
+\begin{problem}\label{prob:fullQR}
+If $A$ has independent columns, let \\ $A = QR$ where $Q$ has orthonormal columns and $R$ is invertible and upper triangular. (Some authors do not require a $QR$-factorization to have positive diagonal entries.) Show that there is a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $A = (QD)(DR)$ is the QR-factorization of $A$.
+\begin{hint}
+See Practice Problem \ref{prob:take_diag_positive}
+\end{hint}
+\end{problem}
+    
+\begin{problem}
+In each case, find the exact eigenvalues and then approximate them using the QR-algorithm.
+    
+    
+\begin{enumerate}
+\item $A = \left[ \begin{array}{rr}
+1 & 1 \\
+1 & 0
+\end{array}\right]$
+\item $A = \left[ \begin{array}{rr}
+3 & 1 \\
+1 & 0
+\end{array}\right]$
+\end{enumerate}
+    
+Click the arrow to see answer.
+
+\begin{enumerate}
+\item  Eigenvalues $\lambda_{1} = \frac{1}{2}(3 + \sqrt{13}) = 3.302776$, $\lambda_{2} = \frac{1}{2}(3 - \sqrt{13}) = -0.302776$
+    
+$A_{1} = \left[ \begin{array}{rr}
+3 & 1 \\
+1 & 0
+\end{array}\right]$, $Q_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
+3 & -1 \\
+1 & 3
+\end{array}\right]$, $R_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
+10 & 3 \\
+0 & -1
+\end{array}\right]$ \\
+$A_{2} = \frac{1}{10}\left[ \begin{array}{rr}
+33 & -1 \\
+-1 & -3
+\end{array}\right]$, \\ $Q_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
+33 & 1 \\
+-1 & 33
+\end{array}\right]$, \\ $R_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
+109 & -3 \\
+0 & -10
+\end{array}\right]$ \\
+$A_{3} = \frac{1}{109}\left[ \begin{array}{rr}
+360 & 1 \\
+1 & -33
+\end{array}\right]$ \\ ${} = \left[ \begin{array}{rr}
+3.302775 & 0.009174 \\
+0.009174 & -0.302775
+\end{array}\right]$
+    
+\end{enumerate}
+
+\end{problem}
+    
+\begin{problem}\label{prob:QR-symmetric}
+If $A$ is symmetric, show that each matrix $A_{k}$ in the QR-algorithm is also symmetric. Deduce that they converge to a diagonal matrix.
+    
+Click the arrow to see answer.
+
+Use induction on $k$. If $k = 1$, $A_{1} = A$. In general $A_{k+1} = Q_{k}^{-1}A_{k}Q_{k} = Q_{k}^{T}A_{k}Q_{k}$, so the fact that $A_{k}^{T} = A_{k}$ implies $A_{k+1}^{T} = A_{k+1}$. The eigenvalues of $A$ are all real (Theorem \ref{cor:ews_symmetric_real}), so the $A_{k}$ converge to an upper triangular matrix $T$. But $T$ must also be symmetric (it is the limit of symmetric matrices), so it is diagonal.
+
+\end{problem}
+    
+\begin{problem}\label{QR-special-2x2}
+Apply the QR-algorithm to \\ $A = \left[ \begin{array}{rr}
+2 & -3 \\
+1 & -2
+\end{array}\right]$. Explain.
+\end{problem}
+    
+\begin{problem}\label{prob:analyzeQRalgorithm}
+Given a matrix $A$, let $A_{k}$, $Q_{k}$, and $R_{k}$, $k \geq 1$, be the matrices constructed in the QR-algorithm. Show that $A_{k} = (Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ for each $k \geq 1$ and hence that this is a QR-factorization of $A_{k}$.
+\begin{hint}
+Show that $Q_{k}R_{k} = R_{k-1}Q_{k-1}$ for each $k \geq 2$, and use this equality to compute $(Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ ``from the centre out.'' Use the fact that $(AB)^{n+1} = A(BA)^{n}B$ for any square matrices $A$ and $B$.
+\end{hint}
+\end{problem}
+    
+\section*{Text Source} This section was adapted from Sections 8.4 and 8.5 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}. (CC-BY-NC-SA)
+    
+W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition, pp. 437--445.
+
+ 
+The text in this section is an adaptation of Section 2.2 of Ken Kuttler's \href{https://open.umn.edu/opentextbooks/textbooks/a-first-course-in-linear-algebra-2017}{\it A First Course in Linear Algebra}. (CC-BY)
+ 
+Ken Kuttler, {\it  A First Course in Linear Algebra}, Lyryx 2017, Open Edition, p. 99-106.
+ 
+\section*{Bibliography}
+ 
+[Nicholson] W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition, pp. 123--127.
 
 \end{document}

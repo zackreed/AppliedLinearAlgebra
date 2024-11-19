@@ -1,0 +1,204 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\section*{Exercises}
+
+\begin{example}
+  Find the cofactor matrix and the adjugate of each of the following
+  matrices.
+  \begin{equation*}
+    A =
+    \startmat{rr}
+      1 & 0 \\
+      3 & 2 \\
+    \stopmat,
+    \quad
+    B =
+    \startmat{rrr}
+      1  & 0  & 1  \\
+      -1 & 1  & -2 \\
+      2  & -1 & 3  \\
+    \stopmat,
+    \quad
+    C =
+    \startmat{rrr}
+      1 &  1 & 3 \\
+      2 &  3 & 1 \\
+      1 & -1 & 1 \\
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  For each of the following matrices, determine whether it is
+  invertible by checking whether the determinant is non-zero. If the
+  determinant is non-zero, use the adjugate formula to find the
+  inverse.
+  \begin{equation*}
+    A =
+    \startmat{rrr}
+      1 & 2 & 3 \\
+      0 & 2 & 1 \\
+      3 & 1 & 0 \\
+    \stopmat,
+    \quad
+    B =
+    \startmat{rrr}
+      1 & 2 & 0 \\
+      0 & 2 & 1 \\
+      3 & 1 & 1 \\
+    \stopmat,
+    \quad
+    C =
+    \startmat{rrr}
+      1 & 3 & 3 \\
+      2 & 4 & 1 \\
+      0 & 1 & 1 \\
+    \stopmat,
+    \quad
+    D =
+    \startmat{rrr}
+      1 & 2 & 3 \\
+      0 & 2 & 1 \\
+      2 & 6 & 7 \\
+    \stopmat,
+    \quad
+    E =
+    \startmat{rrr}
+      1 & 0 & 3 \\
+      1 & 0 & 1 \\
+      3 & 1 & 0 \\
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Determine whether each of the following matrices is invertible. If
+  so, use the adjugate formula to find the inverse. If the inverse
+  does not exist, explain why.
+  \begin{equation*}
+    A = \startmat{rr}
+      1 & 1 \\
+      1 & 2 \\
+    \stopmat,
+    \quad
+    B = \startmat{rrr}
+      1 & 2 & 3 \\
+      0 & 2 & 1 \\
+      4 & 1 & 1 \\
+    \stopmat,
+    \quad
+    C = \startmat{rrr}
+      1 & 2 & 1 \\
+      2 & 3 & 0 \\
+      0 & 1 & 2 \\
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Use the adjugate formula to find the inverse of the matrix
+  \begin{equation*}
+    A=\startmat{rrr}
+      3 & 0 & 3 \\
+      -1 & 2 & -3 \\
+      -5 & 4 & -3
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Use the adjugate formula to find the inverse of the matrix
+  \begin{equation*}
+    A=\startmat{rrr}
+      1 &  1 & 0 \\
+      3 &  1 & 2 \\
+      2 & -2 & 5 \\
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Consider the matrix
+  \begin{equation*}
+    A =
+    \startmat{ccc}
+      1 & 0 & 0 \\
+      0 & \cos t & -\sin t \\
+      0 & \sin t & \cos t \\
+    \stopmat.
+  \end{equation*}
+  Does there exist a value of $t$ for which this matrix fails to be
+  invertible? Explain.
+\end{example}
+
+\begin{example}
+  Consider the matrix
+  \begin{equation*}
+    A =
+    \startmat{rrr}
+      1 & t & t^2 \\
+      0 & 1 & 2t \\
+      t & 0 & 2
+    \stopmat.
+  \end{equation*}
+  Does there exist a value of $t$ for which this matrix fails to be
+  invertible? Explain.
+\end{example}
+
+\begin{example}
+  Consider the matrix
+  \begin{equation*}
+    A =
+    \startmat{ccc}
+      e^{t} & \cosh t & \sinh t \\
+      e^{t} & \sinh t & \cosh t \\
+      e^{t} & \cosh t & \sinh t
+    \stopmat.
+  \end{equation*}
+  Does there exist a value of $t$ for which this matrix fails to be
+  invertible? Explain.
+\end{example}
+
+\begin{example}
+  Consider the matrix
+  \begin{equation*}
+    A =
+    \startmat{ccc}
+      e^{t} & e^{-t}\cos t & e^{-t}\sin t \\
+      e^{t} & -e^{-t}\cos t-e^{-t}\sin t & -e^{-t}\sin t+e^{-t}\cos t \\
+      e^{t} & 2e^{-t}\sin t & -2e^{-t}\cos t
+    \stopmat.
+  \end{equation*}
+  Does there exist a value of $t$ for which this matrix fails to be
+  invertible? Explain.
+\end{example}
+
+\begin{example}
+  Use the adjugate formula to find the inverse of the matrix
+  \begin{equation*}
+    A=\startmat{ccc}
+      e^{t} & 0 & 0 \\
+      0 & \cos t & \sin t \\
+      0 & \cos t-\sin t & \cos t+\sin t
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the inverse, if it exists, of the matrix
+  \begin{equation*}
+    A =
+    \startmat{ccc}
+      e^{t} & \cos t & \sin t \\
+      e^{t} & -\sin t & \cos t \\
+      e^{t} & -\cos t & -\sin t
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\end{document}

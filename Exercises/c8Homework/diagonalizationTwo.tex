@@ -1,0 +1,184 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\section*{Exercises}
+
+\begin{example}
+  Let $D=\startmat{rrr}
+    -2 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 2 \\
+  \stopmat$ and
+  $E=\startmat{rrr}
+    1 & 0 & 0 \\
+    0 & -1 & 0 \\
+    0 & 0 & 3 \\
+  \stopmat$.
+  Find $D+E$, $DE$, and $D^7$.
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      -13 & -28 & 28 \\
+      4 & 9 & -8 \\
+      -4 & -8 & 9
+    \stopmat.
+  \end{equation*}
+  One eigenvalue is $3$. Diagonalize if possible.
+  The eigenvectors and eigenvalues are:
+  \begin{equation*}
+    \set{\startmat{c}
+        2 \\
+        0 \\
+        1
+      \stopmat,
+      \startmat{c}
+        -2 \\
+        1 \\
+        0
+      \stopmat} ~\mbox{for eigenvalue}~ {1},
+    \quad
+    \set{\startmat{c}
+        7 \\
+        -2 \\
+        2
+      \stopmat} ~\mbox{for eigenvalue}~ {3}.
+  \end{equation*}
+  The matrix $P$ needed to diagonalize the above matrix is
+  \begin{equation*}
+    \startmat{rrr}
+      2 & -2 & 7 \\
+      0 & 1 & -2 \\
+      1 & 0 & 2
+    \stopmat
+  \end{equation*}
+  and the diagonal matrix $D$ is
+  \begin{equation*}
+    \startmat{rrr}
+      1 & 0 & 0  \\
+      0 & 1 & 0 \\
+      0 & 0 & 3
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      5 & -18 & -32 \\
+      0 & 5 & 4 \\
+      2 & -5 & -11
+    \stopmat.
+  \end{equation*}
+  One eigenvalue is $1$. Diagonalize if possible.
+  The eigenvalues are $-1$ and $1$. The eigenvectors corresponding to
+  the eigenvalues are:
+  \begin{equation*}
+    \set{\startmat{c}
+        10 \\
+        -2 \\
+        3
+      \stopmat} ~\mbox{for eigenvalue}~ {-1},
+    \quad
+    \set{\startmat{c}
+        7 \\
+        -2 \\
+        2
+      \stopmat} ~\mbox{for eigenvalue}~ {1}.
+  \end{equation*}
+  Since there are only 2 linearly independent eigenvectors, this
+  matrix is not diagonalizable.
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      8 &   0 &  10 \\
+      -6 &  -3 &  -6 \\
+      -5 &   0 &  -7 \\
+    \stopmat.
+  \end{equation*}
+  One eigenvalue is $-3$. Diagonalize if possible.
+  The eigenvectors and eigenvalues are:
+  \begin{equation*}
+    \set{\startmat{c}
+        0 \\
+        1 \\
+        0
+      \stopmat} ~\mbox{for eigenvalue}~ {-3},
+    \quad
+    \set{\startmat{c}
+        -2 \\
+        1 \\
+        1
+      \stopmat} ~\mbox{for eigenvalue}~ {3},
+    \quad
+    \set{\startmat{c}
+        -1 \\
+        0 \\
+        1
+      \stopmat} ~\mbox{for eigenvalue}~ {-2}.
+  \end{equation*}
+  The matrix $P$ needed to diagonalize the above matrix is
+  \begin{equation*}
+    \startmat{rrr}
+      0 &  -2 &  -1 \\
+      1 &   1 &   0 \\
+      0 &   1 &   1 \\
+    \stopmat
+  \end{equation*}
+  and the diagonal matrix $D$ is
+  \begin{equation*}
+    \startmat{rrr}
+      -3 &   0 &   0 \\
+      0 &   3 &   0 \\
+      0 &   0 &  -2 \\
+    \stopmat.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      -1 & -2 & 2 \\
+      0 & 5 & -8 \\
+      0 & 4 & -7 \\
+    \stopmat.
+  \end{equation*}
+  One eigenvalue is $1$. Diagonalize if possible.
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      2 &  -1 &   6 \\
+      -4 &  -1 &  -6 \\
+      -2 &   1 &  -6 \\
+    \stopmat.
+  \end{equation*}
+  One eigenvalue is $0$. Diagonalize if possible.
+\end{example}
+
+\begin{example}
+  Find the eigenvalues and eigenvectors of the matrix
+  \begin{equation*}
+    \startmat{rrr}
+      3 &  -1 &   0 \\
+      1 &   4 &  -1 \\
+      -1 & -1 &   4 \\
+    \stopmat
+  \end{equation*}
+  One eigenvalue is $3$. Diagonalize if possible.
+\end{example}
+
+\end{document}

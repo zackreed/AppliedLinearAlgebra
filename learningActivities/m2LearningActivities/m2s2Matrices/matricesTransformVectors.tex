@@ -206,7 +206,7 @@ In this activity, we will explore the most important interpretation of matrices:
 
             Since the rotation matrix $R$ has columns taken from the rotation function, we can write $R=\left[r(\vec{e}_1), r(\vec{e}_2)\right]=\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$.
 
-            Let's first do a quick check with MATLAB, which already has a built-in matrix-vector multiplication using the $\texttt{A*v}$ command. We'll use the rotation matrix $R$ for a $60^\circ$ rotation, and the vector $\vec{v}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ from the previous example. 
+            Let's first do a quick check with MATLAB, which already has a built-in matrix-vector multiplication using the \texttt{A*v} command. We'll use the rotation matrix $R$ for a $60^\circ$ rotation, and the vector $\vec{v}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ from the previous example. 
 
             Running the code
 
@@ -234,7 +234,7 @@ In this activity, we will explore the most important interpretation of matrices:
 
             \begin{hint}
             
-                If you want to try out basic rotations from both definitions in a MATLAB file, find the $\texttt{mod\textunderscore 2\textunderscore matrix\textunderscore trans.mlx}$ live script in the course files.
+                If you want to try out basic rotations from both definitions in a MATLAB file, find the \texttt{mod\textunderscore 2\textunderscore matrix\textunderscore trans.mlx} live script in the course files.
 
             \end{hint}
 
@@ -251,14 +251,14 @@ In this activity, we will explore the most important interpretation of matrices:
         Try it for yourself in the \texttt{mod\textunderscore2\textunderscore matrix\textunderscore trans.mlx} live script. The code is as follows:
         \begin{enumerate}
 
-            \item Load the smiley face with the rotated smile and view the matrices $\texttt{face\textunderscore points}$ and $\texttt{smile\textunderscore points}$. (Remember that a matrix is an array of vectors, which is how we interpret both of these matrices).
+            \item Load the smiley face with the rotated smile and view the matrices \texttt{face\textunderscore points} and \texttt{smile\textunderscore points}. (Remember that a matrix is an array of vectors, which is how we interpret both of these matrices).
             \begin{verbatim}
                 load +linalg/separate_face_points.mat
                 face_points
                 smile_points
             \end{verbatim}
 
-            \item Re-write each vector (row) $\vec{v}$ in $\texttt{smile\textunderscore points}$ as the rotated vector $R*\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
+            \item Re-write each vector (row) $\vec{v}$ in \texttt{smile\textunderscore points} as the rotated vector $R*\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
             
             \begin{verbatim}
 
@@ -641,7 +641,7 @@ In this activity, we will explore the most important interpretation of matrices:
 
         Doing the two transformations in tandem means first applying the stretch, then applying the rotation \emph{on the stretched smiley face}.
 
-        Let's first do each transformation in MATLAB, first the vertical stretch. For ease, we'll first load a separate file called $\texttt{face\textunderscore points.mat}$ that contains the smiley face points as a single matrix.
+        Let's first do each transformation in MATLAB, first the vertical stretch. For ease, we'll first load a separate file called \texttt{face\textunderscore points.mat} that contains the smiley face points as a single matrix.
 
         \begin{verbatim}
 
@@ -661,7 +661,7 @@ In this activity, we will explore the most important interpretation of matrices:
             \includegraphics[width=\textwidth]{face_stretch.png}
         \end{center}
 
-        Next, if we just re-load $\texttt{face\textunderscore points}$ and run the same code (but for a rotation matrix), we won't keep the stretching. We would just get a $60^\circ$ rotation of the original smiley face like below.
+        Next, if we just re-load \texttt{face\textunderscore points} and run the same code (but for a rotation matrix), we won't keep the stretching. We would just get a $60^\circ$ rotation of the original smiley face like below.
 
         \begin{verbatim}
 
@@ -828,7 +828,7 @@ In this activity, we will explore the most important interpretation of matrices:
 
     \end{remark}
 
-    As usual, MATLAB has a built-in function for matrix multiplication, $\texttt{A*B}$, which will give you the same result as the column-wise definition of matrix multiplication. Let's check it on the previous example.
+    As usual, MATLAB has a built-in function for matrix multiplication, \texttt{A*B}, which will give you the same result as the column-wise definition of matrix multiplication. Let's check it on the previous example.
 
     \begin{example}
 
@@ -867,47 +867,47 @@ In this activity, we will explore the most important interpretation of matrices:
 
 
 
-            $\texttt{load +linalg/face\textunderscore points.mat}$
+            \texttt{load +linalg/face\textunderscore points.mat}
 
-            $\texttt{S = [1 0; 0 2]}$
+            \texttt{S = [1 0; 0 2]}
 
-            $\texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}$
+            \texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}
 
-            $\texttt{F = [-1 0; 0 1]}$
+            \texttt{F = [-1 0; 0 1]}
 
-            $\texttt{for i=1:length(face\textunderscore points)}$
+            \texttt{for i=1:length(face\textunderscore points)}
 
-            $\texttt{    face\textunderscore points(i,:)=}\answer[format=string]{S}\texttt{*face\textunderscore points(i,:)';}$
+            \texttt{    face\textunderscore points(i,:)=}$\answer[format=string]{S}$\texttt{*face\textunderscore points(i,:)';}
 
-            $\texttt{        face\textunderscore points(i,:)=}\answer[format=string]{R}\texttt{*face\textunderscore points(i,:)';}$
+            \texttt{        face\textunderscore points(i,:)=}$\answer[format=string]{R}$\texttt{*face\textunderscore points(i,:)';}
 
-            $\texttt{        face\textunderscore points(i,:)=}\answer[format=string]{F}\texttt{*face\textunderscore points(i,:)';}$
+            \texttt{        face\textunderscore points(i,:)=}$\answer[format=string]{F}$\texttt{*face\textunderscore points(i,:)';}
 
-            $\texttt{end}$
+            \texttt{end}
 
-            $\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}$
+            \texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
 
             \item Now we can do the same thing, but as one transformation. We'll call the composite matrix $M$.
             
             \vspace{1cm}
             
-            $\texttt{load +linalg/face\textunderscore points.mat}$
+            \texttt{load +linalg/face\textunderscore points.mat}
 
-            $\texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}$
+            \texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}
 
-            $\texttt{S = [1 0; 0 2]}$
+            \texttt{S = [1 0; 0 2]}
 
-            $\texttt{F = [-1 0; 0 1]}$
+            \texttt{F = [-1 0; 0 1]}
 
-            $\texttt{M = }\answer[format=string]{F}*\answer[format=string]{R}*\answer[format=string]{S}$
+            \texttt{M = }$\answer[format=string]{F}*\answer[format=string]{R}*\answer[format=string]{S}$
 
-            $\texttt{for i=1:length(face\textunderscore points)}$
+            \texttt{for i=1:length(face\textunderscore points)}
 
-            $\qquad \texttt{face\textunderscore points(i,:) = }\answer[format=string]{M}\texttt{*face\textunderscore points(i,:)';}$
+            $\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[format=string]{M}$\texttt{*face\textunderscore points(i,:)';}
 
-            $\texttt{end}$
+            \texttt{end}
 
-            $\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}$
+            \texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
 
         \end{enumerate}
 
@@ -1204,27 +1204,27 @@ In this activity, we will explore the most important interpretation of matrices:
         \vspace{1cm}
 
 
-$\texttt{load +linalg/face\textunderscore points.mat}$
+\texttt{load +linalg/face\textunderscore points.mat}
 
-$\texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}$
+\texttt{R = [cosd(60) -sind(60); sind(60) cosd(60)]}
 
-$\texttt{S = [1 0; 0 2]}$
+\texttt{S = [1 0; 0 2]}
 
-$\texttt{F = [-1 0; 0 1]}$
+\texttt{F = [-1 0; 0 1]}
 
-$\texttt{RS = }\answer[given,format=string]{R}*\answer[format=string]{S}$
+\texttt{RS = }$\answer[given,format=string]{R}*\answer[format=string]{S}$
 
-$\texttt{FR = }\answer[given,format=string]{F}*\answer[format=string]{R}$
+\texttt{FR = }$\answer[given,format=string]{F}*\answer[format=string]{R}$
 
-$\texttt{for i=1:length(face\textunderscore points)}$
+\texttt{for i=1:length(face\textunderscore points)}
 
-$\qquad \texttt{face\textunderscore points(i,:) = }\answer[given,format=string]{RS}\texttt{*face\textunderscore points(i,:)';}$
+$\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[given,format=string]{RS}$\texttt{*face\textunderscore points(i,:)';}
 
-$\qquad \texttt{face\textunderscore points(i,:) = }\answer[format=string]{F}\texttt{*face\textunderscore points(i,:)';}$
+$\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[format=string]{F}$\texttt{*face\textunderscore points(i,:)';}
 
-$\texttt{end}$
+\texttt{end}
 
-$\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}$
+\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
 
 \vspace{1cm}
 
@@ -1232,15 +1232,15 @@ $\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscor
 
         \vspace{1cm}
 
-$\texttt{for i=1:length(face\textunderscore points)}$
+\texttt{for i=1:length(face\textunderscore points)}
 
-$\qquad \texttt{face\textunderscore points(i,:) = }\answer[given,format=string]{S}\texttt{*face\textunderscore points(i,:)';}$
+$\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[given,format=string]{S}$\texttt{*face\textunderscore points(i,:)';}
 
-$\qquad \texttt{face\textunderscore points(i,:) = }\answer[format=string]{FR}\texttt{*face\textunderscore points(i,:)';}$
+$\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[format=string]{FR}$\texttt{*face\textunderscore points(i,:)';}
 
 $\texttt{end}$
 
-$\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}$
+\texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
 
 \vspace{1cm}
 

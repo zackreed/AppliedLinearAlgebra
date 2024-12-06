@@ -12,9 +12,9 @@
 \maketitle
 
 \section*{Cross Product and its Properties}
-In \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/VEC-0050/main}{Dot Product and its Properties} we introduced the \dfn{dot product}, one of two important products for vectors.  We will now introduce the second type of product, called the \dfn{cross product}.  There are several important distinctions to keep in mind.  First, the dot product is defined for two vectors of $\RR^n$, for any  natural number $n$; the cross-product will only be defined for vectors of $\RR^3$.  Second, the dot product is a scalar; the cross product of two vectors will be a vector.  Finally, we will find that unlike the dot product, the cross product is not commutative. 
+In \href{https://ximera.osu.edu/appliedlinearalgebra/c5ChapterFive/learningActivities/m5LearningActivities/m5DotProduct/dotProduct}{Dot Product and its Properties} we introduced the \dfn{dot product}, one of two important products for vectors.  We will now introduce the second type of product, called the \dfn{cross product}.  There are several important distinctions to keep in mind.  First, the dot product is defined for two vectors of $\RR^n$, for any  natural number $n$; the cross-product will only be defined for vectors of $\RR^3$.  Second, the dot product is a scalar; the cross product of two vectors will be a vector.  Finally, we will find that unlike the dot product, the cross product is not commutative. 
  
-The cross product has many applications in physics and engineering.  It also has important geometric properties which will be addressed in this section and in \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/DET-0070/main}{Determinants as Areas and Volumes}.
+The cross product has many applications in physics and engineering.  It also has important geometric properties.
  
 \subsection*{Preliminaries}
 In order to define the cross product in a convenient way we need to define $2\times 2$ and $3\times 3$ determinants.  If you know how to find such determinants you may skip this section and proceed directly to the definition.
@@ -90,8 +90,6 @@ $$
 &=-35
 \end{align*}
 \end{example}
- 
-For more help on $3 \times 3$ determinants, see Example \ref{ex:threebythreedet1} and the video located there.
  
 \subsection*{Definition of the Cross Product}
  
@@ -177,9 +175,7 @@ This computation shows that the cross product is an operation that is not commut
 Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$, then
 $$\vec{u}\times\vec{v}=-(\vec{v}\times\vec{u})$$
 \end{theorem}
-\begin{proof}
-The proof is left to the reader.  (See Practice Problem \ref{prob:corssuvnegcrossvu})
-\end{proof}
+
 The next theorem lists two additional properties of the cross product.  Proofs of these properties are routine and are left to the reader.  (See Practice Problems \ref{prob:scalarassocofcrossprod} and \ref{prob:distofrossprod})
 \begin{theorem}\label{th:crossproductproperties}
 Let $\vec{u}$, $\vec{v}$ and $\vec{w}$ be vectors in $\mathbb{R}^3$, and $k$ be a scalar, then\\
@@ -214,7 +210,7 @@ $$\vec{u}\times\vec{v}=\begin{bmatrix}-78\\-25\\-8\end{bmatrix}\quad\text{and}\q
 We will now compute the dot product of $\vec{v}\times\vec{u}$ with each of the original vectors $\vec{u}$ and $\vec{v}$.
 $$\vec{u}\dotp(\vec{v}\times\vec{u})=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}\dotp\begin{bmatrix}78\\25\\8\end{bmatrix}=0$$
 $$\vec{v}\dotp(\vec{v}\times\vec{u})=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}\dotp\begin{bmatrix}78\\25\\8\end{bmatrix}=0$$
-It is also easy to verify that $\vec{u}\dotp(\vec{u}\times\vec{v})=0$ and $\vec{v}\dotp(\vec{u}\times\vec{v})=0$.  Recall that the dot product of two vectors is $0$ if and only if the two vectors are orthogonal. (Theorem \ref{th:orth})
+It is also easy to verify that $\vec{u}\dotp(\vec{u}\times\vec{v})=0$ and $\vec{v}\dotp(\vec{u}\times\vec{v})=0$.  Recall that the dot product of two vectors is $0$ if and only if the two vectors are orthogonal.
 We conclude that, at least in this case, the cross product of two vectors is orthogonal to each of the vectors. 
  
 \end{exploration}
@@ -224,8 +220,7 @@ It turns out that the orthogonality property illustrated by Exploration Problems
 \begin{theorem}\label{th:crossproductorthtouandv}
 Let $\vec{u}$ and $\vec{v}$ be vectors of $\RR^3$, then $\vec{u}\times\vec{v}$ is orthogonal to both $\vec{u}$ and $\vec{v}$.
 \end{theorem}
-\begin{proof}This proof can be done by direct computation and is left to the reader.  (See Practice Problem \ref{prob:crossproductorthtouandv})
-\end{proof}
+
  
 \subsubsection*{Cross Product and the Angle between Vectors}
 Recall that the dot product of $\vec{u}$ and $\vec{v}$ is related to the angle $\theta$ between $\vec{u}$ and $\vec{v}$ by the following formula
@@ -236,8 +231,7 @@ We will derive an analogous result for the cross product.  To do so, we will nee
 Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$.  Then
 $$\norm{\vec{u}\times\vec{v}}^2=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\vec{u}\dotp\vec{v})^2$$
 \end{lemma}
-\begin{proof} The proof is left to the reader.  (See Practice Problem \ref{prob:corssprodmagnitude})
-\end{proof}
+
  
 The following theorem establishes a relationship between the magnitude of the cross product, the magnitudes of the two vectors involved in the cross product and the angle between the two vectors.  It is important to note that  the identity in this theorem involves the magnitude of the cross product, not the cross product itself.
  
@@ -246,7 +240,7 @@ Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$. Let $\theta$ be the angle bet
 $$\norm{\vec{u}\times\vec{v}}=\norm{\vec{u}}\norm{\vec{v}}\sin\theta$$
 \end{theorem}
 \begin{proof}
-By Lemma \ref{lemma:crossprodmagnitude} and (\ref{eq:dotproductformula}) we have
+We have
 \begin{align*}
 \norm{\vec{u}\times\vec{v}}^2&=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\vec{u}\dotp\vec{v})^2\\
 &=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\norm{\vec{u}}\norm{\vec{v}}\cos \theta)^2\\
@@ -293,42 +287,5 @@ $$\vec{u}\times\vec{v}=\begin{bmatrix}\answer{-23}\\\answer{-10}\\\answer{-9}\en
 \end{problem}
 \end{problem}
  
-\begin{problem}\label{prob:corssuvnegcrossvu}
-Prove Theorem \ref{th:corssuvnegcrossvu}.
-\end{problem}
- 
-\begin{problem}\label{prob:scalarassocofcrossprod}
-Prove Theorem \ref{th:crossproductproperties}\ref{item:scalarassocofcrossprod} in two different ways:
-  \begin{enumerate}
-  \item By direct computation.
-  \item (Optional) By using Theorem \ref{th:elemrowopsanddet}\ref{item:rowconstantmultanddet}.
-  \end{enumerate}
-\end{problem}
- 
-\begin{problem}\label{prob:distofrossprod}
-Prove Theorem \ref{th:crossproductproperties}\ref{item:distofrossprod}.
-\end{problem}
- 
-\begin{problem}\label{prob:crossproductorthtouandv}
-Prove Theorem \ref{th:crossproductorthtouandv}.
-\end{problem}
- 
-\begin{problem}\label{prob:crossself}
-Prove that the cross product of any vector with itself is the zero vector.
-\end{problem}
- 
-\begin{problem}\label{prob:crossprodzero}
-Suppose that $\vec{u}$ is a non-zero vector.  Let $\vec{v}=k\vec{u}$ for $k\neq 0$.  Argue that $\vec{u}\times \vec{v}=\vec{0}$ in two different ways:
-\begin{enumerate}
-\item
-By using Theorem \ref{th:crossproductsin}.
-\item (Optional) By using Theorem \ref{th:detofsingularmatrix}.
-\end{enumerate}
-\end{problem}
- 
-\begin{problem}\label{prob:corssprodmagnitude} Prove the following identity for vectors $\vec{u}$ and $\vec{v}$ of $\RR^3$.
-$$\norm{\vec{u}\times\vec{v}}^2=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\vec{u}\dotp\vec{v})^2$$
-(Lemma \ref{lemma:crossprodmagnitude})
-\end{problem}
 
 \end{document}

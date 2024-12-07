@@ -142,7 +142,7 @@ the subspace to be the quantity
 \end{equation*}
 Then the problem we would like to solve can be stated as follows:
 
-\begin{problem}{Subspace fitting problem}{subspace-fitting}
+\begin{problem}\name{Subspace fitting problem}\label{prop:subspace-fitting}
   Given vectors $\vect{v}_1,\ldots,\vect{v}_m\in\R^n$ and given an
   integer $k\leq n$, find the $k$-dimensional subspace
   $W\subseteq\R^n$ that minimizes the total squared distance, i.e.,
@@ -366,13 +366,8 @@ $\vect{u}_2$, and so on.
 
 In the particular case where $n=2$ and $k=1$, we are looking for a
 1-dimensional subspace, i.e., a line through the origin, which best
-fits the given 2-dimensional data, as in the illustration
-{\eqref{eqn:subspace-fitting}} above or as in
-Example~\ref{exa:subspace-fitting-r2}. On its face, the subspace
-fitting problem in this case seems similar to the linear curve
-fitting%
-\index{curve fitting} problem we solved in
-Section~\ref{sec:least-squares}. However, there is a subtle but
+fits the given 2-dimensional data, as in the illustration and example above. On its face, the subspace
+fitting problem in this case seems similar to other curve-fitting methods you'll have encountered before. However, there is a subtle but
 important difference: in linear curve fitting, we were seeking to
 minimize the distances of the points from the line in the
 $y$-direction, whereas in subspace fitting, we are seeking to minimize
@@ -509,11 +504,10 @@ the origin does not make much sense. Instead, we should be looking for
 an \textbf{affine subspace}. An affine subspace is similar to a
 subspace, except it does not necessarily contain the origin.
 
-\begin{definition}{Affine subspace}{affine-subspace}
+\begin{definition}\name{Affine subspace}\label{def:affine-subspace}
+
   Let $V$ be a vector space. A subset $A\subseteq V$ is called an
-  \textbf{affine subspace}%
-  \index{affine subspace}%
-  \index{subspace!affine} of $V$ if $A$ is either empty, or else of
+  \textbf{affine subspace} of $V$ if $A$ is either empty, or else of
   the form
   \begin{equation*}
     A = \vect{v} + W = \set{\vect{v}+\vect{w} \mid \vect{w}\in W},
@@ -521,20 +515,16 @@ subspace, except it does not necessarily contain the origin.
   where $\vect{v}\in V$ and $W$ is a subspace of\/ $V$.
 \end{definition}
 
-For example, in Chapter~\ref{cha:lines-and-planes}, we considered
-lines and planes in $\R^n$ that pass through a given point (not
+Recall that lines and planes in $\R^n$ can pass through a given point (not
 necessarily the origin). These are examples of affine subspaces of
 $\R^n$. The affine subspace fitting problem is analogous to the
 subspace fitting problem:
 
-\begin{problem}{Affine subspace fitting problem}{affine-subspace-fitting}
+\begin{problem}\name{Affine subspace fitting problem}\label{prob:affine-subspace-fitting}
   Given the position vectors $\vect{v}_1,\ldots,\vect{v}_m$ of $m$
   points in $\R^n$, and given an integer $k\leq n$, find the
   $k$-dimensional affine subspace $A\subseteq\R^n$ that minimizes the
-  total squared distance from the points to $A$%
-  \index{affine subspace fitting}%
-  \index{subspace fitting!affine}%
-  \index{fitting!affine subspace fitting}.
+  total squared distance from the points to $A$.
 \end{problem}
 
 It turns out that the optimal solution to the affine subspace fitting
@@ -542,19 +532,16 @@ problem can be computed by first computing the \textbf{centroid} of
 the points, shifting the whole problem so that the centroid is at the
 origin, and then solving an ordinary subspace fitting problem.
 
-\begin{definition}{Centroid}{centroid}
+\begin{definition}\name{Centroid}\label{def:centroid}
   Given $m$ vectors $\vect{v}_1,\ldots,\vect{v}_m$, their
-  \textbf{centroid}%
-  \index{centroid} is the vector
+  \textbf{centroid}is the vector
   \begin{equation*}
     \centroid{\vect{v}} = \frac{1}{m}(\vect{v}_1+\ldots+\vect{v}_m).
   \end{equation*}
-  It is also sometimes called the \textbf{average}%
-  \index{average!of vectors} or the \textbf{center of mass}%
-  \index{center of mass} of the vectors.
+  It is also sometimes called the \textbf{average} or the \textbf{center of mass} of the vectors.
 \end{definition}
 
-\begin{proposition}{Solution of the affine subspace fitting problem}{affine-subspace-fitting}
+\begin{proposition}\name{Solution of the affine subspace fitting problem}\label{prop:affine-subspace-fitting}
   Given vectors $\vect{v}_1,\ldots,\vect{v}_m\in\R^n$ and $k\leq n$,
   the optimal solution to the affine subspace fitting problem can be
   computed as follows:
@@ -571,7 +558,7 @@ origin, and then solving an ordinary subspace fitting problem.
   $\centroid{\vect{v}} + W$.
 \end{proposition}
 
-\begin{example}{Affine subspace fitting problem}{affine-subspace-fitting}
+\begin{example}\name{Affine subspace fitting problem}\label{ex:affine-subspace-fitting}
   Consider the following collection of points in $\R^2$:
   \begin{equation*}
     \set{

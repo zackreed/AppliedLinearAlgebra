@@ -237,7 +237,7 @@ discovered by Gale Young%
   \end{enumerate}
   The space $W$ is shown in the following illustration, along with the
   original points:
-  \begin{equation*}
+  \begin{center}
     \begin{tikzpicture}[scale=0.15]
       \draw[thin,->] (-12,0) -- (12,0);
       \draw[thin,->] (0,-12) -- (0,12);
@@ -254,7 +254,7 @@ discovered by Gale Young%
       \fill[color=red] (-2, -3) circle (0.4);
       \fill[color=red] (-7, -6) circle (0.4);
     \end{tikzpicture}
-  \end{equation*}
+  \end{center}
   Of course, the example was rigged to ensure that the eigenvalues are
   integers. In real life, the entries of $A$ and $B$, as well as the
   eigenvalues and components of the eigenvectors are usually arbitrary
@@ -379,7 +379,7 @@ $y$-direction, whereas in subspace fitting, we are seeking to minimize
 the distances of the points from the subspace in the direction
 perpendicular to the subspace. The following pair of pictures
 illustrates the difference:
-\begin{equation*}
+\begin{center}
   \begin{tikzpicture}[scale=0.8]
     \draw[thin,->] (-3,0) -- (3,0);
     \draw[thin,->] (0,-3) -- (0,3);
@@ -413,7 +413,7 @@ illustrates the difference:
     \path (0,-3.5) node[below] {Subspace fitting};
     \path[black!70] (2,-2) node {\begin{tabular}{c}minimize\\distances\\perpendicular\\to subspace\end{tabular}};
   \end{tikzpicture}
-\end{equation*}
+\end{center}
 
 % ----------------------------------------------------------------------
 \subsection*{Affine fitting}
@@ -422,7 +422,7 @@ So far, we have been looking to approximate a given collection of
 points by a {\em subspace}, which necessarily passes through the
 origin. But sometimes the points may not be near the origin, as in
 this example:
-\begin{equation*}
+\begin{center}
   \begin{tikzpicture}[baseline=-0.5ex, scale=0.8]
     \draw[thin,->] (-4,0) -- (4,0);
     \draw[thin,->] (0,-4) -- (0,4);
@@ -503,7 +503,7 @@ this example:
     \fill[color=red] (2.16,1.16) circle (0.075);
     \fill[color=red] (-0.15,2.11) circle (0.075);
   \end{tikzpicture}
-\end{equation*}
+\end{center}
 In this case, approximating the points by a subspace passing through
 the origin does not make much sense. Instead, we should be looking for
 an \textbf{affine subspace}. An affine subspace is similar to a
@@ -667,7 +667,7 @@ origin, and then solving an ordinary subspace fitting problem.
   $\vect{u}_1$. The points $\vect{v}_1,\ldots,\vect{v}_9$, their
   centroid, and the affine subspace $\centroid{\vect{v}} + W$ are
   shown in the following illustration:
-  \begin{equation*}
+  \begin{center}
     \begin{tikzpicture}[scale=0.2]
       \draw[thin,->] (-12,0) -- (12,0);
       \draw[thin,->] (0,-12) -- (0,12);
@@ -686,7 +686,7 @@ origin, and then solving an ordinary subspace fitting problem.
       \fill[color=red] (4, 11) circle (0.3);
       \fill[color=red] (1, 12) circle (0.3);
     \end{tikzpicture}
-  \end{equation*}
+  \end{center}
   \vspace{-4ex}\par  
 \end{solution}
 

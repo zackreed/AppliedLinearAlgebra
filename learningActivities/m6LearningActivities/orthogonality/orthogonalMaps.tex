@@ -7,7 +7,6 @@
 \begin{document}
 \begin{abstract}
 
-    This covers the properties of Orthogonal Maps
 
 \end{abstract}
 \maketitle
@@ -15,17 +14,9 @@
 
 
 \section{Orthogonal functions and orthogonal matrices}
-\label{sec:orthogonal-matrices}
 
-%\begin{outcome}
-  \begin{enumerate}
-  \item Determine whether a linear transformation is an isometry
-    and/or orthogonal.
-  \item Determine whether a matrix is orthogonal.
-  \end{enumerate}
-%\end{outcome}
 
-\begin{definition}{Isometries and orthogonal maps}{isometry-orthogonal-map}
+\begin{definition}\name{Isometries and orthogonal maps}\label{def:isometry-orthogonal-map}
   Let $V,W$ be real inner product spaces, and let $T:V\to W$ be a
   linear transformation. We say that $T$ is an \textbf{isometry}%
   \index{isometry}%
@@ -48,7 +39,7 @@ from: from Greek ``isos'', meaning ``equal'', and ``metron'', meaning
 ``measure''). Conversely, any norm-preserving linear function is an
 isometry, as the following proposition shows.
 
-\begin{proposition}{Norm-preserving linear maps are isometries}{norm-isometry}
+\begin{proposition}\name{Norm-preserving linear maps are isometries}\label{prop:norm-isometry}
   Let $T:V\to W$ be a linear function such that for all
   $\vect{v}\in V$, $\norm{T\vect{v}} = \norm{\vect{v}}$. Then $T$ is
   an isometry.
@@ -89,7 +80,8 @@ $\cos\theta =
 \frac{\iprod{T(\vect{u}),T(\vect{v})}}
 {\norm{T(\vect{u})}\,\norm{T(\vect{v})}}$.
 
-\begin{example}{Orthogonal transformations on $R^n$}{orthogonal-transformation-rn}
+\begin{example}\name{Orthogonal transformations on $R^n$}\label{ex:orthogonal-transformation-rn}
+
   Let $T_1,T_2,T_3:\R^2\to\R^2$ be the linear transformations with matrices
   \begin{equation*}
     \coord{T_1} = \startmat{cc} 0 & -1 \\ 1 & 0 \stopmat,
@@ -194,7 +186,7 @@ $\cos\theta =
   \end{center}
 \end{example}
 
-\begin{proposition}{The matrix of an orthogonal transformation}{matrix-orthogonal}
+\begin{proposition}\name{The matrix of an orthogonal transformation}\label{prop:matrix-orthogonal}
   Let $V,W$ be finite-dimensional real inner product spaces and let
   $T:V\to W$ be a linear transformation. Let $B$ and $C$ be
   orthonormal bases of $V$ and $W$, respectively, and let
@@ -250,7 +242,7 @@ $\cos\theta =
   $T$ is orthogonal.
 \end{proof}
 
-\begin{example}{Orthogonal transformations}{orthogonal-transformations}
+\begin{example}\name{Orthogonal transformations}\label{ex:orthogonal-transformations}
   Which of the following matrices define orthogonal transformations?
   Which ones define isometries?
   \begin{equation*}
@@ -312,7 +304,7 @@ $\cos\theta =
 In light of Proposition~\ref{prop:matrix-orthogonal}, we say that an
 $n\times n$-matrix $P$ is orthogonal if $P^TP=I$.
 
-\begin{definition}{Orthogonal matrix}{orthogonal-matrix}
+\begin{definition}\name{Orthogonal matrix}\label{def:orthogonal-matrix}
   An $n\times n$-matrix $P$ is called \textbf{orthogonal}%
   \index{orthogonal matrix}%
   \index{matrix!orthogonal} if $P^TP=I$.
@@ -321,7 +313,7 @@ $n\times n$-matrix $P$ is orthogonal if $P^TP=I$.
 The following proposition gives several equivalent ways of checking
 whether an $n\times n$-matrix $P$ is orthogonal.
 
-\begin{proposition}{Conditions for orthogonal matrices}{conditions-orthogonal-matrix}
+\begin{proposition}\name{Conditions for orthogonal matrices}\label{prop:conditions-orthogonal-matrix}
   The following are equivalent for an $n\times n$-matrix $P$:
 
     \begin{enumerate}
@@ -365,7 +357,7 @@ whether an $n\times n$-matrix $P$ is orthogonal.
   instead of columns.
 \end{proof}
 
-\begin{example}{Orthogonal matrices}{conditions-orthogonal-matrix}
+\begin{example}\name{Orthogonal matrices}\label{ex:conditions-orthogonal-matrix}
   Determine which of the following matrices are orthogonal by checking
   whether the columns form an orthonormal set.
   \begin{equation*}
@@ -458,7 +450,7 @@ whether an $n\times n$-matrix $P$ is orthogonal.
   $D$ is not an orthogonal matrix either.
 \end{solution}
 
-\begin{proposition}{Properties of orthogonal matrices}{properties-orthogonal}
+\begin{proposition}\name{Properties of orthogonal matrices}\label{prop:properties-orthogonal}
 
   \begin{enumerate}
   \item\label{item:properties-orthogonal-a}

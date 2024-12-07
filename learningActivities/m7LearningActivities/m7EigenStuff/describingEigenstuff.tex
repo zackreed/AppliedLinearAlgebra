@@ -17,27 +17,21 @@
     
 At several places in this course it has been valuable to restrict ourselves to square matrices, and we do so again when discussing eigenvalues and eigenvectors. 
     
-In Theorem \ref{th:matrixtran}, we proved that any $n \times n$  matrix induces a linear transformation from $\RR^n$ to itself.  For our first few examples, let us consider the case $n = 2$.
+Recall that any $n \times n$  matrix induces a linear transformation from $\RR^n$ to itself.  For our first few examples, let us consider the case $n = 2$.
     
 \begin{exploration}\label{init:eignintro}
 Let $A=\begin{bmatrix} 2& 1\\ 1&2
-\end{bmatrix}$.  The following animation helps us to visualize the matrix transformation associated with $A$.  Given a vector $\vec{x}$ in $\RR^2$, its image, $A\vec{x}$, is also in $\RR^2$.  Advance the slider to see the images of the given vectors.
-    
-\pdfOnly{
-Access GeoGebra interactives through the online version of this text at
-    
-\href{https://ximera.osu.edu/oerlinalg}{https://ximera.osu.edu/oerlinalg}.
-}
-    
-\begin{onlineOnly}
+\end{bmatrix}$. Re-familirize yourself with the \emph{linear transformation} interpretation of a matrix by using the following GeoGebra applet to visualize the transformation of space onset by a matrix as well as the image of any selected vector. 
+
 \begin{center}
-    \geogebra{ub4kqvmz}{800}{600}
-    \end{center}
-    \end{onlineOnly}
+    \geogebra{fxktu8e2}{1073}{592}
+\end{center}
     
-    For many vectors, $A\vec{x}$ does not point in the same direction as $\vec{x}$.  This is the case for all of the gray vectors in the animation, as we can see that $A\vec{x}$ points in a different direction than $\vec{x}$.  But if we look at the red vectors (vectors parallel to $\begin{bmatrix}-1\\1\end{bmatrix}$), we notice that they appear unchanged in magnitude and direction.  Such vectors are sometimes called \dfn{fixed vectors} of $A$.
+    For many vectors, $A\vec{x}$ does not point in the same direction as $\vec{x}$. If you slowly rotate $\vec{v}$ around the origin, however, you will find that four vectors point in the exact same direction as their image vector $A\vec{v}$.
+
+    Try it out for other matrices as well and ask yourself: in addition to pointing in the same (or opposite) direction as $\vec{v}$, does $A\vec{v}$ grow, or shrink, or flip orientation? These are the questions that specifically involve a special collection of vectors called \emph{eigenvectors}.
     
-Looking next at the blue vectors (vectors parallel to $\begin{bmatrix}1\\1\end{bmatrix}$), we observe that the magnitudes of the vectors are changed, but the direction in which the blue vectors point is unchanged by this linear transformation. 
+
 \end{exploration}
     
 In Exploration \ref{init:eignintro} we found that certain vectors do not change direction under the linear transformation induced by matrix $A$.  Such vectors are examples of \dfn{eigenvectors} of $A$.
@@ -88,7 +82,7 @@ The above discussion leads us to the following result.
     and $\lambda$ is the corresponding eigenvalue.
 \end{theorem}
 \begin{proof}
-See Practice Problem \ref{prob:eigenScalarMult}
+
 \end{proof}
     
 \begin{observation}\label{obs:finerPointsOfEigDef}
@@ -148,19 +142,12 @@ So each of the blue vectors is an eigenvector of $P$ with the corresponding eige
 \end{example}
     
 \begin{exploration}\label{exp:eigenvectors}
-Let $A=\begin{bmatrix}1&6\\1&0\end{bmatrix}$.  The GeoGebra interactive below shows the action of $A$ on several vectors.  (Move the slider to $s=1$ to see the result of the transformation induced by $A$.) 
+Let $A=\begin{bmatrix}1&6\\1&0\end{bmatrix}$.  Again interact with the GeoGebra Applet, for this matrix, to view the scaling of its eigenvectors according to eigenvalues. Return to Standard Basis as needed to set vectors $\vec{v}$ to integer values.
     
-\pdfOnly{
-Access GeoGebra interactives through the online version of this text at
     
-\href{https://ximera.osu.edu/oerlinalg}{https://ximera.osu.edu/oerlinalg}.
-}
-    
-\begin{onlineOnly}
 \begin{center}
-    \geogebra{vd3fydmg}{900}{600}
+    \geogebra{fxktu8e2}{1073}{592}
 \end{center}
-\end{onlineOnly}
     
 \begin{question}
 Note that vectors $\vec{x}_1=\begin{bmatrix}3\\1\end{bmatrix}$ and $\vec{x}_2=\begin{bmatrix}-2\\1\end{bmatrix}$ (and their scalar multiples) remain positioned along the same lines even as they change magnitude and direction.  This indicates that $\vec{x}_1$ and $\vec{x}_2$, along with all of their scalar multiples, are eigenvectors of $A$.  What are the eigenvalues associated with these eigenvectors?
@@ -177,7 +164,7 @@ Eigenvalue associated with $\vec{x}_2$ is $\lambda_2=\answer{-2}$.
 \end{exploration}
     
     
-A natural question is this: does every square matrix have eigenvalues and eigenvectors?  We will see in \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/EIG-0020/main}{Finding Eigenvalues and Eigenvectors} that the answer to this question is ``yes", provided that we permit eigenvalues and entries of eigenvectors to be complex numbers.  The next example is one that requires complex numbers.
+A natural question is this: does every square matrix have eigenvalues and eigenvectors?  We will see later that the answer to this question is ``yes", provided that we permit eigenvalues and entries of eigenvectors to be complex numbers.  The next example is one that requires complex numbers.
     
 \begin{example}\label{ex:eigsrotation}
 Let $M=\begin{bmatrix}
@@ -248,7 +235,7 @@ Let $M=\begin{bmatrix}
     
 Since $M$ rotates every vector in $\RR^2$, \emph{every} nonzero vector changes direction, so there are no eigenvectors in the plane.  It turns out that $M$ does have eigenvectors and eigenvalues, but in order to find them we need to work with vectors whose entries are complex numbers.  Since these vectors are not in $\RR^2$, we cannot see them. 
     
-To follow the computation below, you need to recall that the imaginary unit $i$ is defined to by $i^2=-1$.  Please refer to \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/APX-0020/main}{Complex Numbers} for more information.
+To follow the computation below, you need to recall that the imaginary unit $i$ is defined to by $i^2=-1$.  
     
     
 %\begin{center}[3in]
@@ -285,7 +272,6 @@ The most famous modern example of a large-scale eigenvalue problem is the Google
     
 \section*{Practice Problems}
     
-\emph{Problems \ref{prob:checkeig1}-\ref{prob:checkeig3}}
 Let $C=\begin{bmatrix} 2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{bmatrix}$. 
     
 \begin{problem}\label{prob:checkeig1}
@@ -305,7 +291,7 @@ $\answer{1}$
     
     
 \begin{problem}\label{prob:eigprojmatrix}
-Let $Q=\begin{bmatrix} 0& 0\\ 0&1\end{bmatrix}$.  Note that $Q$ takes any vector in $\RR^2$ and projects it onto the $y$-axis, as we learned in Practice Problem \ref{prob:standardmatrix4}.  Which vectors in $\RR^2$ would be eigenvectors, and what are the corresponding eigenvalues?
+Let $Q=\begin{bmatrix} 0& 0\\ 0&1\end{bmatrix}$.  Note that $Q$ takes any vector in $\RR^2$ and projects it onto the $y$-axis.  Which vectors in $\RR^2$ would be eigenvectors, and what are the corresponding eigenvalues?
 \end{problem}
     
     
@@ -354,10 +340,6 @@ Can an eigenvalue have multiple eigenvectors associated with it?
     \choice{Yes}
     \choice[correct]{No}
     \end{multipleChoice}
-\end{problem}
-    
-\begin{problem}\label{prob:eigenScalarMult}
-    Prove Theorem \ref{th:eigenScalarMult}.
 \end{problem}
     
 \section*{Bibliography}

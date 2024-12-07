@@ -18,7 +18,7 @@ We'll start with some intuition and basics for now, and then next chapter we'll 
 
 First, a very basic definition or two:
 
-
+%added to defs thms
 \begin{definition}
 
 A \emph{matrix} is just a big rectangular array of numbers
@@ -56,7 +56,8 @@ M =
 \boldsymbol{4}\textbf{rows}
 \]
 
-\begin{definition}
+%added to defs thms
+\begin{definition}\name{Matrix (as an Array)}\label{def:matrixasarray}
 
     We might also say that a matrix is an \emph{array of vectors}. 
     
@@ -168,8 +169,8 @@ Either way, the matrix $M$ has $4$ rows and $5$ columns, and so we say that $M$ 
         horizontal. On the other hand, column vectors take up less horizontal
         space, and are more convenient when you have vectors with many entries.
         
-        
-        \begin{definition}
+        %added to defs thms
+        \begin{definition}\name{Transpose}\label{def:transpose}
           To switch a row vector into a column vector and vice versa, we use what is called the \emph{transpose} operation:
           \[
           \begin{pmatrix} 1 &  2 & 3 \end{pmatrix}^\transpose =

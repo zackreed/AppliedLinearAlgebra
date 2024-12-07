@@ -46,34 +46,6 @@
 \end{exercise}
 
 \begin{exercise}
-  Consider the inner product space $\Poly_3$ of polynomials of degree
-  at most $3$, with the inner product defined by
-  \begin{equation*}
-    \iprod{f,g} = \int_{-1}^{1} f(x)g(x)\,dx.
-  \end{equation*}
-  \begin{enumerate}
-  \item Find the orthogonal complement of $\set{x^2,x}$.
-  \item Find the orthogonal complement of $\set{x+1}$.
-  \end{enumerate}
-  \begin{solution}
-    \begin{enumerate}
-    \item Let $p(x)=ax^3+bx^2+cx+d$. Then
-      $\iprod{p(x), x^2} = \frac{2}{5}b + \frac{2}{3}d$ and
-      $\iprod{p(x), x} = \frac{2}{5}a + \frac{2}{3}c$.  Therefore,
-      $p(x)$ is in the orthogonal complement of $\set{x^2,x}$ if and
-      only if $\frac{2}{5}b + \frac{2}{3}d=0$ and
-      $\frac{2}{5}a + \frac{2}{3}c=0$. It follows that
-      $b=-\frac{5}{3}d$ and $a=-\frac{5}{3}c$. The general solution is
-      $p(x) = -\frac{5}{3}cx^3 - \frac{5}{3}dx^2 + cx + d$. A basis
-      for the orthogonal complement is
-      $\set{-\frac{5}{3} x^3 + x, -\frac{5}{3} x^2 + 1}$.
-    \item A basis for the orthogonal complement of $\set{x+1}$ is
-      $\set{5x^3-1, 3x^2-1, 3x-1}$.      
-    \end{enumerate}
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}
   Consider $\R^3$ as an inner product space with the usual dot
   product.  For each of the following bases of $\R^3$, state whether
   it is orthonormal, orthogonal, or neither.

@@ -32,25 +32,7 @@
     \end{solution}
   \end{example}
   
-  \begin{example}
-    Let $\vect{a},\vect{b}$ be vectors. Show that
-    $(\vect{a}\dotprod \vect{b})
-    = \frac{1}{4}(\norm{\vect{a}+\vect{b}}^2
-    - \norm{\vect{a}-\vect{b}}^2)$.
-    % \begin{solution}
-    % \end{solution}
-  \end{example}
-  
-  \begin{example}
-    Using the properties of the dot product, prove the parallelogram
-    identity:
-    \begin{equation*}
-      \norm{\vect{a}+\vect{b}}^2+\norm{\vect{a}-\vect{b}}^2
-      = 2\norm{\vect{a}}^2+2\norm{\vect{b}}^2
-    \end{equation*}
-    % \begin{solution}
-    % \end{solution}
-  \end{example}
+
   
   \begin{example}
     Find $\cos \theta$ where $\theta$ is the angle between the vectors
@@ -122,48 +104,6 @@
         \vect{a} ~=~ \startmat{c} -3/2\\3/2\\-3 \stopmat,\quad
         \vect{b} ~=~ \startmat{c} 9/2\\1/2\\-2 \stopmat.
       \end{equation*}
-    \end{solution}
-  \end{example}
-  
-  \begin{example}\label{perp-linear}
-    Let $\vect{v},\vect{w},\vect{u}$ be vectors. Show that
-    $(\vect{w}+\vect{u})_{\perp}=\vect{w}_{\perp}+\vect{u}_{\perp}$,
-    where $\vect{w}_{\perp}=\vect{w}-\proj_{\vect{v}}(\vect{w})$.
-    \begin{solution}
-      \begin{eqnarray*}
-        \vect{w}-\proj_{\vect{v}}(\vect{w})+\vect{u}-\proj_{\vect{v}}(\vect{u})
-        &=& \vect{w}+\vect{u}-(\proj_{\vect{v}}(\vect{w})+\proj_{\vect{v}}(\vect{u})) \\
-        &=&\vect{w}+\vect{u}-\proj_{\vect{v}}(\vect{w}+\vect{u}).
-      \end{eqnarray*}
-      This follows because
-      \begin{eqnarray*}
-        \proj_{\vect{v}}(\vect{w})+\proj_{\vect{v}}(\vect{u})
-        &=& \frac{\vect{v}\dotprod\vect{w}}{\norm{\vect{v}}^2}\vect{v}
-            + \frac{\vect{v}\dotprod\vect{u}}{\norm{\vect{v}}^2}\vect{v} \\
-        &=& \frac{\vect{v}\dotprod(\vect{w}+\vect{u})}{\norm{\vect{v}}^2}\vect{v} \\
-        &=& \proj_{\vect{v}}(\vect{w}+\vect{u}).
-      \end{eqnarray*}
-    \end{solution}
-  \end{example}
-  
-  \begin{example}
-    Show that
-    \begin{equation*}
-      \vect{u}\dotprod(\vect{v}-\proj_{\vect{u}}(\vect{v}))=0
-    \end{equation*}
-    and conclude every vector in $\R^n$ can be written as the sum of
-    two vectors, one which is orthogonal and one which is parallel to
-    the given vector.
-    \begin{solution}
-      $\displaystyle\vect{u}\dotprod(\vect{v}-\proj_{\vect{u}}(\vect{v}))
-      = \vect{u} \dotprod \vect{v}-\frac{\vect{u}\cdot\vect{v}}{\norm{\vect{u}}^2}\vect{u}\dotprod\vect{u}
-      = \vect{u} \dotprod \vect{v}
-      - \vect{u} \dotprod \vect{v}
-      =0$. Therefore, we can write
-      $\vect{v} = (\vect{v} - \proj_{\vect{u}}(\vect{v})) +
-      \proj_{\vect{u}}(\vect{v})$. The first is orthogonal to
-      $\vect{u}$ and the second is a multiple of $\vect{u}$ so is
-      parallel to $\vect{u}$.
     \end{solution}
   \end{example}
 

@@ -80,11 +80,6 @@
   to $Q$.
 \end{exercise}
 
-\begin{exercise} Suppose a triangle in $\R^n$ has vertices at $P$, $Q$,
-  and $R$.  Consider the lines which are drawn from a vertex to the
-  mid point of the opposite side. Show these three lines intersect in
-  a point and find the coordinates of this point.
-\end{exercise}
 
 \begin{exercise}
   Determine whether the lines
@@ -135,43 +130,6 @@
 \end{exercise}
 
 \begin{exercise} Let $P = (0,2,1)$ be a point in $\R^3$. Let $L$ be the line through the points $P_0 = (1, 1, 1)$ and $P_1 = (4, 1, 2)$. Find the shortest distance from $P$ to $L$, and find the point $Q$ on $L$ that is closest to $P$.
-\end{exercise}
-
-\begin{exercise}\label{ex:angle-lines}
-  When we computed the angle between two lines in
-  Example~\ref{exa:angle-between-two-lines}, we calculated two
-  different angles and took the smaller of the two. Show that one can
-  get the same answer by taking the absolute value of the dot product,
-  i.e., by solving
-  \begin{equation*}
-    \cos\theta =
-    \frac{\abs{\vect{u}\dotprod\vect{v}}}{\norm{\vect{u}}\norm{\vect{v}}}.
-  \end{equation*}
-  \begin{solution}
-    From trigonometry, we have the following properties of the cosine
-    function:
-    \begin{itemize}
-    \item $\cos\theta$ is positive for $0\leq\theta\leq\frac{\pi}{2}$,
-      and negative for $\frac{\pi}{2}\leq\theta\leq\pi$.
-    \item $\cos(\pi-\theta) = -\cos\theta$.
-    \end{itemize}
-    By the method in Example~\ref{exa:angle-between-two-lines}, we
-    calculated $\theta$ such that
-    \begin{equation*}
-      \cos\theta =
-      \frac{\vect{u}\dotprod\vect{v}}{\norm{\vect{u}}\norm{\vect{v}}}.
-    \end{equation*}
-    If $0\leq\theta\leq\frac{\pi}{2}$, the answer is $\theta$. If
-    $\frac{\pi}{2}\leq\theta\leq\pi$, the answer is $\phi=\pi-\theta$.
-    But in the last case, the dot product is negative and we have
-    \begin{equation*}
-      \cos\phi = \cos(\pi-\theta) = -\cos\theta = \frac{-\vect{u}\dotprod\vect{v}~~}{\norm{\vect{u}}\norm{\vect{v}}}
-      =
-      \frac{\abs{\vect{u}\dotprod\vect{v}}}{\norm{\vect{u}}\norm{\vect{v}}}.
-    \end{equation*}
-    So in either case we get the correct answer by taking the absolute
-    value.
-  \end{solution}
 \end{exercise}
 
 

@@ -5,139 +5,6 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
-\begin{example}
-    Is
-    $\vect{u}\times (\vect{v}\times\vect{w}) = (\vect{u}\times
-      \vect{v})\times\vect{w}$? What is the meaning of
-    $\vect{u}\times \vect{v}\times\vect{w}$? Explain.  \textbf{Hint:}
-    Try $(\vect{i}\times\vect{j})\times\vect{j}$.
-    \begin{solution}
-      $(\vect{i}\times\vect{j})\times\vect{j} = \vect{k}\times
-      \vect{j}=-\vect{i}$. However,
-      $\vect{i}\times(\vect{j}\times\vect{j}) = \vect{0}$ and so
-      the cross product is not associative. The expression
-      $\vect{u}\times\vect{v}\times\vect{w}$ has no meaning.
-    \end{solution}
-  \end{example}
-  
-  \begin{example}
-    Verify directly from the coordinate description of the cross product
-    that $\vect{u}\times \vect{v}$ is orthogonal to both $\vect{u}$ and
-    $\vect{v}$. Then show by direct computation that this coordinate
-    description satisfies
-    \begin{align*}
-      \norm{\vect{u}\times \vect{v}}^2
-      & =\norm{\vect{u}
-        }^2\norm{\vect{v}}^2-(\vect{u}\cdot \vect{v})^2 \\
-      & =\norm{\vect{u}}^2\norm{\vect{v}}^2(1-\cos^2(\theta)),
-    \end{align*}
-    where $\theta$ is the angle included between the two
-    vectors. Explain why $\norm{\vect{u}\times\vect{v}}$ has the
-    correct magnitude.
-  \end{example}
-
-  
-  \begin{example}\label{ex:triple-cross-product}
-    Prove the following formula by direct calculation:
-    $\vect{u}\times(\vect{v}\times\vect{w}) ~=~
-    (\vect{u}\cdot\vect{w})\,\vect{v} -
-    (\vect{u}\cdot\vect{v})\,\vect{w}$.
-
-
-    \begin{solution}
-      Let $\vect{u}=\startmat{c}u_1,u_2,u_3\stopmat^T$,
-      $\vect{v}=\startmat{c}v_1,v_2,v_3\stopmat^T$, and
-      $\vect{w}=\startmat{c}w_1,w_2,w_3\stopmat^T$.
-      Then
-
-      \begin{eqnarray*}
-        \vect{u}\times(\vect{v}\times\vect{w})
-        &=&
-        \startmat{c}u_1\\u_2\\u_3\stopmat
-        \times
-        \startmat{c}
-          v_2w_3 - v_3w_2 \\
-          v_3w_1 - v_1w_3 \\
-          v_1w_2 - v_2w_1 \\
-        \stopmat
-        ~=~
-        \startmat{c}
-          u_2(v_1w_2 - v_2w_1) - u_3(v_3w_1 - v_1w_3) \\
-          u_3(v_2w_3 - v_3w_2) - u_1(v_1w_2 - v_2w_1) \\
-          u_1(v_3w_1 - v_1w_3) - u_2(v_2w_3 - v_3w_2) \\
-        \stopmat \\
-        &=&
-        \startmat{c}
-          u_2v_1w_2 - u_2v_2w_1 - u_3v_3w_1 + u_3v_1w_3 \\
-          u_3v_2w_3 - u_3v_3w_2 - u_1v_1w_2 + u_1v_2w_1 \\
-          u_1v_3w_1 - u_1v_1w_3 - u_2v_2w_3 + u_2v_3w_2 \\
-        \stopmat
-      \end{eqnarray*}
-
-      and
-      \begin{eqnarray*}
-        (\vect{u}\cdot\vect{w})\,\vect{v} -
-        (\vect{u}\cdot\vect{v})\,\vect{w}
-        &=& (u_1w_1+u_2w_2+u_3w_3)
-            \startmat{c} v_1\\v_2\\v_3 \stopmat
-        - (u_1v_1+u_2v_2+u_3v_3)
-        \startmat{c} w_1\\w_2\\w_3 \stopmat
-        \\
-        &=& \startmat{c}
-          u_1w_1v_1+u_2w_2v_1+u_3w_3v_1 - u_1v_1w_1-u_2v_2w_1-u_3v_3w_1 \\
-          u_1w_1v_2+u_2w_2v_2+u_3w_3v_2 - u_1v_1w_2-u_2v_2w_2-u_3v_3w_2 \\
-          u_1w_1v_3+u_2w_2v_3+u_3w_3v_3 - u_1v_1w_3-u_2v_2w_3-u_3v_3w_3 \\
-        \stopmat.
-      \end{eqnarray*}
-      We can see by careful inspection that these are equal.
-
-    \end{solution}
-\end{example}
-
-
-
-
-
-  
-  \begin{example}
-    Use the formula from Exercise~\ref{ex:triple-cross-product} to prove
-    that the cross product satisfies the so-called \textbf{Jacobi
-      identity}%
-    \index{Jacobi identity}%
-    \index{cross product!Jacobi identity}:
-    \begin{equation*}
-      \vect{u}\times(\vect{v}\times\vect{w})
-      + \vect{v}\times(\vect{w}\times\vect{u})
-      + \vect{w}\times(\vect{u}\times\vect{v})
-      = \vect{0}.
-    \end{equation*}
-    \begin{solution}
-      \begin{equation*}
-        \begin{array}{l}
-          \vect{u}\times(\vect{v}\times\vect{w})
-          ~+~ \vect{v}\times(\vect{w}\times\vect{u})
-          ~+~ \vect{w}\times(\vect{u}\times\vect{v}) \\
-          {} = ((\vect{u}\cdot\vect{w})\,\vect{v}
-          - (\vect{u}\cdot\vect{v})\,\vect{w})
-          ~+~ ((\vect{v}\cdot\vect{u})\,\vect{w}
-          - (\vect{v}\cdot\vect{w})\,\vect{u})
-          ~+~ ((\vect{w}\cdot\vect{v})\,\vect{u}
-          - (\vect{w}\cdot\vect{u})\,\vect{v}) \\
-          {} = ((\vect{u}\cdot\vect{w})\,\vect{v}
-          - (\vect{w}\cdot\vect{u})\,\vect{v})
-          ~+~ ((\vect{v}\cdot\vect{u})\,\vect{w}
-          - (\vect{u}\cdot\vect{v})\,\vect{w})
-          ~+~ ((\vect{w}\cdot\vect{v})\,\vect{u}
-          - (\vect{v}\cdot\vect{w})\,\vect{u}) \\
-          {} = \vect{0}.
-        \end{array}
-      \end{equation*}
-    \end{solution}
-    \vspace{-4ex}
-  \end{example}
-
-
-
   \begin{example}
     Find the volume of the parallelepiped determined by the vectors
     $\startmat{r}
@@ -201,16 +68,6 @@
     \end{solution}
   \end{example}
   
-  \begin{example}
-    Suppose $\vect{u},\vect{v}$, and $\vect{w}$ are three vectors whose
-    components are all integers. Can you conclude the volume of the
-    parallelepiped determined from these three vectors will always be an
-    integer?
-    \begin{solution}
-      Yes. It will involve the sum of a product of integers and so it will
-      be an integer.
-    \end{solution}
-  \end{example}
   
   \begin{example} \label{exer-box-product-zero}
     What does it mean geometrically if the box product of three vectors
@@ -221,35 +78,6 @@
     \end{solution}
   \end{example}
   
-  \begin{example}
-    Simplify
-    $\norm{\vect{u}\times \vect{v}}^2+(\vect{u}\cdot
-      \vect{v})^2-\norm{\vect{u}}^2\norm{\vect{v}}^2$.
-    \begin{solution}
-      We have
-      \begin{eqnarray*}
-        \norm{\vect{u}\times \vect{v}}^2
-        &=&\norm{\vect{u}
-            }^2\norm{\vect{v}}^2\sin^2\theta \\
-        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2(1-\cos^2\theta) \\
-        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2
-            -\norm{\vect{u}}^2\norm{\vect{v}}^2\cos^2\theta \\
-        &=&\norm{\vect{u}}^2\norm{\vect{v}}^2
-            -(\vect{u}\cdot \vect{v})^2,
-      \end{eqnarray*}
-      which implies the expression equals $0$.
-    \end{solution}
-  \end{example}
-
-  \begin{example}
-    Show that if $\vect{a}\times \vect{u}=\vect{0}$ for every unit
-    vector $\vect{u}$, then $\vect{a}=\vect{0}$.
-    \begin{solution}
-      If $\vect{a}\neq \vect{0}$, then the condition says that
-      $\norm{\vect{a}\times \vect{u}} = \norm{\vect{a}} \sin \theta =0$
-      for all angles $\theta$. Hence $\vect{a} = \vect{0}$.
-    \end{solution}
-  \end{example}
   
   \begin{example}
     Find the area of the parallelogram determined by the vectors

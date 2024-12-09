@@ -8,7 +8,7 @@
 %apple_pear_classify
 \begin{exercise}
 
-The data that comprises the apple and pear fruit clusters in the GeoGebra applet have been collected into two matrices, $A$ and $P$, where each column of $A$ and $P$ is a vector representing a fruit measurement. Each row, therefore, must represent
+The data that comprises the apple and pear fruit clusters in \href{https://ximera.osu.edu/appliedlinearalgebra/c1ChapterOne/Exercises/c1Homework/apple_pear_vect}{the previous problem} have been collected into two matrices, $A$ and $P$, where each column of $A$ and $P$ is a vector representing a fruit measurement. Each row, therefore, must represent
 
 \begin{multipleChoice}
   \choice{the measurement of a feature.}
@@ -77,10 +77,10 @@ is more likely to be a $\answer[format=string]{pear}$, with a distance of $\answ
 
 \begin{hint}
 
-  Make sure you're working in a folder that includes the +mod1 course folder, then load the matrices.
+  Make sure you're working in a folder that includes the +linalg course folder, then load the matrices.
   \begin{verbatim}
-    load +mod1/Apple.mat
-    load +mod1/Pear.mat
+    load +linalg/Apple.mat
+    load +linalg/Pear.mat
   \end{verbatim}
 
   To find the average column of a matrix in MATLAB, use the \texttt{mean} function. The second argument of mean specifies whether you want to average along the rows or columns. For example, to find the average column of matrix $A$, use the command \texttt{mean(A,2)}. For example, to find the average row of matrix $P$, use the command \texttt{mean(P,1)}.

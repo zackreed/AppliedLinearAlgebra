@@ -21,8 +21,7 @@
   \end{enumerate}
 %\end{outcome}
 
-In Chapter~\ref{cha:eigenvalues}, we saw that some matrices are
-diagonalizable, and others are not. In this section, we will see that
+We have seen that some matrices are diagonalizable, and others are not. In this section, we will see that
 the theory of diagonalization is much nicer when the matrix to be
 diagonalized is symmetric. Recall that a matrix $A$ is
 \textbf{symmetric}%
@@ -30,7 +29,7 @@ diagonalized is symmetric. Recall that a matrix $A$ is
 \index{matrix!symmetric} if $A=A^T$. We begin with some observations
 about the eigenvalues and eigenvectors of a real symmetric matrix.
 
-\begin{proposition}{Eigenvalues and eigenvectors of real symmetric matrices}{eigenvalues-symmetric}
+\begin{proposition}\name{Eigenvalues and eigenvectors of real symmetric matrices}\labe{prop:eigenvalues-symmetric}
   Let $A$ be a symmetric matrix with real entries. Then
 
     \begin{enumerate}
@@ -100,23 +99,15 @@ about the eigenvalues and eigenvectors of a real symmetric matrix.
   have $\vect{v}^T\vect{w} = 0$, i.e., $\vect{v}\orth\vect{w}$.
 \end{proof}
 
-Recall that an $n\times n$-matrix $A$ is \textbf{diagonalizable}%
-\index{diagonalizable matrix}%
-\index{matrix!diagonalizable} if there exists an invertible matrix $P$
-and a diagonal matrix $D$ such that $D = P^{-1}AP$. We say that $A$ is
-\textbf{orthogonally diagonalizable}%
-\index{orthogonally diagonalizable matrix}%
-\index{diagonalizable matrix!orthogonally diagonalizable}%
-\index{diagonalization!orthogonal diagonalization}%
-\index{matrix!orthogonally diagonalizable}%
-\index{matrix!diagonalizable!orthogonally} if $P$ can, moreover, be
+Recall that an $n\times n$-matrix $A$ is \textbf{diagonalizable} if there exists an invertible matrix $P$
+and a diagonal matrix $D$ such that $D = P^{-1}AP$. We say that $A$ is \textbf{orthogonally diagonalizable} if $P$ can, moreover, be
 chosen to be orthogonal. Orthogonal diagonalizability is a convenient
 property, because when $P$ is orthogonal, then $P^{-1}=P^T$, and we
 can interchangeably write $D = P^{-1}AP$ or $D = P^TAP$.  The
 following is the main theorem about the diagonalization of real
 symmetric matrices.
 
-\begin{theorem}{Diagonalization of real symmetric matrices}{diagonalization-symmetric}
+\begin{theorem}\name{Diagonalization of real symmetric matrices}\label{th:diagonalization-symmetric}
   Every real symmetric matrix $A$ is orthogonally diagonalizable.
 \end{theorem}
 
@@ -200,7 +191,7 @@ symmetric matrices.
   Therefore, $A$ is orthogonally diagonalizable.
 \end{proof}
 
-\begin{example}{Diagonalization of real symmetric matrices}{diagonalization-symmetric}
+\begin{example}\name{Diagonalization of real symmetric matrices}\label{ex:diagonalization-symmetric}
   Orthogonally diagonalize the matrix
   \begin{equation*}
     A = \startmat{rr}
@@ -276,7 +267,7 @@ symmetric matrices.
   \end{equation*}
 \end{solution}
 
-\begin{example}{Diagonalization of real symmetric matrices}{diagonalization-symmetric2}
+\begin{example}\name{Diagonalization of real symmetric matrices}\label{ex:diagonalization-symmetric2}
   Find an orthogonal matrix $P$ and a diagonal matrix $D$ such that $D =
   P^{-1}AP$, where
   \begin{equation*}

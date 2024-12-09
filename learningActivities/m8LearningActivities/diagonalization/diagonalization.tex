@@ -117,7 +117,7 @@ symmetric matrices.
   real symmetric $n\times n$-matrix $A$ with $n\geq 2$. By the
   fundamental theorem of algebra, the characteristic polynomial has at
   least one root, so that $A$ has at least one (possibly complex)
-  eigenvalue $\eigenvar$. By Proposition~\ref{prop:eigenvalues-symmetric}(a),
+  eigenvalue $\eigenvar$. Because of this,
   $\eigenvar$ is real. Since we can solve the system of equations
   $(A-\eigenvar I)\vect{v}=\vect{0}$ over the real numbers, there
   exists a real eigenvector $\vect{v}$ for the eigenvalue
@@ -161,8 +161,7 @@ symmetric matrices.
       0 &  & & \\
     \stopmat.
   \end{equation*}
-  Then $S$ is orthogonal by
-  Proposition~\ref{prop:properties-orthogonal}(\ref{item:properties-orthogonal-d}).
+  Hence, $S$ is orthogonal.
   Let $E = S^{-1}BS$. Then
   \begin{equation*}
     E =
@@ -181,9 +180,7 @@ symmetric matrices.
       0 &  & & \\
     \stopmat.
   \end{equation*}
-  Therefore, $E$ is diagonal. Let $P=QS$. Then $P$ is orthogonal
-  by
-  Proposition~\ref{prop:properties-orthogonal}(\ref{item:properties-orthogonal-a}). Moreover,
+  Therefore, $E$ is diagonal. Let $P=QS$. Then $P$ is orthogonal. Moreover,
   we have
   \begin{equation*}
     P^{-1}AP = S^{-1}Q^{-1}AQS = S^{-1}BS = E.
@@ -204,7 +201,7 @@ symmetric matrices.
 \end{example}
 
 \begin{solution}
-  We proceed in much the same way as in Chapter~\ref{cha:eigenvalues},
+  We proceed in much the same way as with prior diagonalization work,
   except that at a crucial moment, we ensure that $P$ is orthogonal.
   We start by calculating the characteristic polynomial of $A$:
   \begin{equation*}
@@ -228,7 +225,7 @@ symmetric matrices.
     \vect{w} = \startmat{r} -2 \\ 1 \stopmat.
   \end{equation*}
   We note that these two eigenvectors are orthogonal to each other,
-  exactly as predicted by Proposition~\ref{prop:eigenvalues-symmetric}. So
+  as we would expect. So
   the vectors $\set{\vect{v},\vect{w}}$ form an orthogonal set. We
   turn this into an orthonormal set by normalizing each eigenvector,
   i.e., the normalized eigenvectors are
@@ -247,8 +244,7 @@ symmetric matrices.
     P = \frac{1}{\sqrt{5}} \startmat{rr} 1 & -2 \\ 2 & 1 \stopmat.
   \end{equation*}
   Note that since $\vect{u}_1$ and $\vect{u}_2$ are orthonormal, $P$
-  is automatically orthogonal by
-  Proposition~\ref{prop:conditions-orthogonal-matrix}. Moreover, we
+  is automatically orthogonal. Moreover, we
   have
   \begin{equation*}
     P^{-1}
@@ -325,7 +321,7 @@ symmetric matrices.
     \vect{v}_3 = \startmat{r} 1 \\ -1 \\ 2 \stopmat.
   \end{equation*}
 
-  As predicted by Proposition~\ref{prop:eigenvalues-symmetric},
+  As we would expect,
   $\vect{v}_3$ is orthogonal to $\vect{v}_1$ and
   $\vect{v}_2$. However, there is a slight complication: $\vect{v}_1$
   and $\vect{v}_2$ are not orthogonal to each other. This is because

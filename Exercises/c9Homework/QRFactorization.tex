@@ -84,17 +84,6 @@ $R = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
     
 %\end{problem}
     
-\begin{problem}\label{prob:take_diag_positive}
-If $R$ is upper triangular and invertible, show that there exists a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $R_{1} = DR$ is invertible, upper triangular, and has positive diagonal entries.
-\end{problem}
-    
-\begin{problem}\label{prob:fullQR}
-If $A$ has independent columns, let \\ $A = QR$ where $Q$ has orthonormal columns and $R$ is invertible and upper triangular. (Some authors do not require a $QR$-factorization to have positive diagonal entries.) Show that there is a diagonal matrix $D$ with diagonal entries $\pm 1$ such that $A = (QD)(DR)$ is the QR-factorization of $A$.
-\begin{hint}
-See Practice Problem \ref{prob:take_diag_positive}
-\end{hint}
-\end{problem}
-    
 \begin{problem}
 In each case, find the exact eigenvalues and then approximate them using the QR-algorithm.
     
@@ -147,27 +136,11 @@ $A_{3} = \frac{1}{109}\left[ \begin{array}{rr}
 
 \end{problem}
     
-\begin{problem}\label{prob:QR-symmetric}
-If $A$ is symmetric, show that each matrix $A_{k}$ in the QR-algorithm is also symmetric. Deduce that they converge to a diagonal matrix.
-    
-Click the arrow to see answer.
-
-Use induction on $k$. If $k = 1$, $A_{1} = A$. In general $A_{k+1} = Q_{k}^{-1}A_{k}Q_{k} = Q_{k}^{T}A_{k}Q_{k}$, so the fact that $A_{k}^{T} = A_{k}$ implies $A_{k+1}^{T} = A_{k+1}$. The eigenvalues of $A$ are all real (Theorem \ref{cor:ews_symmetric_real}), so the $A_{k}$ converge to an upper triangular matrix $T$. But $T$ must also be symmetric (it is the limit of symmetric matrices), so it is diagonal.
-
-\end{problem}
-    
 \begin{problem}\label{QR-special-2x2}
 Apply the QR-algorithm to \\ $A = \left[ \begin{array}{rr}
 2 & -3 \\
 1 & -2
-\end{array}\right]$. Explain.
-\end{problem}
-    
-\begin{problem}\label{prob:analyzeQRalgorithm}
-Given a matrix $A$, let $A_{k}$, $Q_{k}$, and $R_{k}$, $k \geq 1$, be the matrices constructed in the QR-algorithm. Show that $A_{k} = (Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ for each $k \geq 1$ and hence that this is a QR-factorization of $A_{k}$.
-\begin{hint}
-Show that $Q_{k}R_{k} = R_{k-1}Q_{k-1}$ for each $k \geq 2$, and use this equality to compute $(Q_{1}Q_{2} \cdots Q_{k})(R_{k} \cdots R_{2}R_{1})$ ``from the centre out.'' Use the fact that $(AB)^{n+1} = A(BA)^{n}B$ for any square matrices $A$ and $B$.
-\end{hint}
+\end{array}\right]$.
 \end{problem}
 
 \end{document}

@@ -59,7 +59,7 @@ proposition summarizes what we have found so far. For consistency with
 our later notation, we also rename the first basis vector $\vect{v}_1$
 to $\vect{u}_1$.
 
-\begin{proposition}{Gram-Schmidt orthogonalization procedure for 2 vectors}{gram-schmidt-2}
+\begin{proposition}\name{Gram-Schmidt orthogonalization procedure for 2 vectors}\label{prop:gram-schmidt-2}
   Let $\set{\vect{v}_1,\vect{v}_2}$ be a basis for some subspace $W$
   of an inner product space $V$. Define vectors
   $\vect{u}_1,\vect{u}_2$ as follows:
@@ -70,7 +70,7 @@ to $\vect{u}_1$.
   Then $\set{\vect{u}_1,\vect{u}_2}$ is an orthogonal basis of $W$.
 \end{proposition}
 
-\begin{example}{Gram-Schmidt orthogonalization procedure for 2 vectors}{gram-schmidt-2}
+\begin{example}\name{Gram-Schmidt orthogonalization procedure for 2 vectors}\label{ex:gram-schmidt-2}
   In $\R^3$ with the usual dot product, find an orthogonal basis for
   \begin{equation*}
     \sspan\set{
@@ -104,7 +104,7 @@ space is very similar. We adjust each basis vector $\vect{v}_i$ by
 subtracting a suitable linear combination of previous orthogonal basis
 vectors.
 
-\begin{proposition}{Gram-Schmidt orthogonalization procedure for $k$ vectors}{gram-schmidt-k}
+\begin{proposition}\name{Gram-Schmidt orthogonalization procedure for $k$ vectors}\label{prop:gram-schmidt-k}
   Let $\set{\vect{v}_1,\ldots,\vect{v}_k}$ be a basis for some subspace $W$
   of an inner product space $V$.%
   \index{Gram-Schmidt procedure}%
@@ -184,7 +184,7 @@ vectors.
   orthogonal, as desired.
 \end{proof}
 
-\begin{example}{Gram-Schmidt orthogonalization procedure}{gram-schmidt-r4}
+\begin{example}\name{Gram-Schmidt orthogonalization procedure}\label{ex:gram-schmidt-r4}
   In $\R^4$, find an orthogonal basis for
   \begin{equation*}
     \sspan\set{
@@ -238,7 +238,7 @@ Example~\ref{exa:gram-schmidt-r4} in the opposite order, we end up
 with a different orthogonal basis at the end. Sometimes this can
 simplify the calculations, as the following example shows.
 
-\begin{example}{Gram-Schmidt orthogonalization procedure: reordering the vectors}{gram-schmidt-r4-b}
+\begin{example}\name{Gram-Schmidt orthogonalization procedure: reordering the vectors}\label{ex:gram-schmidt-r4-b}
   In $\R^4$, find an orthogonal basis for
   \begin{equation*}
     \sspan\set{
@@ -291,7 +291,7 @@ simplify the calculations, as the following example shows.
 In the next example, we will consider $\R^n$, but with a non-standard
 inner product.
 
-\begin{example}{Gram-Schmidt orthogonalization procedure, non-standard inner product}{gram-schmidt-non-standard}
+\begin{example}\name{Gram-Schmidt orthogonalization procedure, non-standard inner product}\label{ex:gram-schmidt-non-standard}
   Let
   \begin{equation*}
     A = \startmat{ccc}
@@ -365,140 +365,6 @@ inner product.
   with respect to the inner product defined above.
 \end{solution}
 
-\begin{example}{Legendre polynomials}{legendre-polynomials}
-  Consider the vector space $\Poly$ of polynomials, with the inner product
-  \begin{equation*}
-    \iprod{p,q} = \int_{-1}^{1} p(x)q(x)\,dx.
-  \end{equation*}
-  Use the Gram-Schmidt procedure to find an orthogonal basis for
-  $\sspan\set{1,x,x^2,x^3}$.%
-  \index{Legendre polynomial}%
-  \index{polynomial!Legendre polynomial}
-\end{example}
-
-\begin{solution}
-  Let $\vect{v}_1=1$, $\vect{v}_2=x$, $\vect{v}_3=x^2$, and
-  $\vect{v}_4=x^3$. We follow the Gram-Schmidt procedure:
-  \begin{eqnarray*}
-    \vect{u}_1
-    &=& \vect{v}_1
-        ~=~ 1.
-  \end{eqnarray*}
-  Before we calculate $\vect{u}_2$, we have to evaluate two integrals:
-  \begin{eqnarray*}
-    \iprod{\vect{u}_1,\vect{v}_2}
-    &=& \int_{-1}^{1} 1\cdot x\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{2}x^2}_{-1}^{1}
-    ~=~ 0,
-    \\
-    \iprod{\vect{u}_1,\vect{u}_1}
-    &=& \int_{-1}^{1} 1\cdot 1\,dx
-    ~=~ \bigbracket{x}_{-1}^{1}
-    ~=~ 2.
-  \end{eqnarray*}
-  Then
-  \begin{eqnarray*}
-    \vect{u}_2
-    &=& \vect{v}_2 ~-~ \frac{\iprod{\vect{u}_1,\vect{v}_2}}{\iprod{\vect{u}_1,\vect{u}_1}}\vect{u}_1
-    ~=~ x ~-~ \frac{0}{2}\cdot 1 ~=~ x.
-  \end{eqnarray*}
-  To calculate $\vect{u}_3$, we first evaluate three integrals:
-  \begin{eqnarray*}
-    \iprod{\vect{u}_1,\vect{v}_3}
-    &=& \int_{-1}^{1} 1\cdot x^2\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{3}x^3}_{-1}^{1}
-    ~=~ \frac{2}{3},
-    \\
-    \iprod{\vect{u}_2,\vect{v}_3}
-    &=& \int_{-1}^{1} x\cdot x^2\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{4}x^4}_{-1}^{1}
-    ~=~ 0,
-    \\
-    \iprod{\vect{u}_2,\vect{u}_2}
-    &=& \int_{-1}^{1} x\cdot x\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{3}x^3}_{-1}^{1}
-    ~=~ \frac{2}{3}.
-  \end{eqnarray*}
-  Then
-  \begin{eqnarray*}
-    \vect{u}_3
-    &=& \vect{v}_3
-        ~-~ \frac{\iprod{\vect{u}_1,\vect{v}_3}}{\iprod{\vect{u}_1,\vect{u}_1}}\vect{u}_1
-        ~-~ \frac{\iprod{\vect{u}_2,\vect{v}_3}}{\iprod{\vect{u}_2,\vect{u}_2}}\vect{u}_2
-        ~=~ x^2 ~-~ \frac{2/3}{2}\cdot 1 ~-~ \frac{0}{2/3}\cdot x
-        ~=~ x^2 - \frac{1}{3}.
-  \end{eqnarray*}
-  To calculate $\vect{u}_4$, we first evaluate four integrals:
-  \begin{eqnarray*}
-    \iprod{\vect{u}_1,\vect{v}_4}
-    &=& \int_{-1}^{1} 1\cdot x^3\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{4}x^4}_{-1}^{1}
-    ~=~ 0,
-    \\
-    \iprod{\vect{u}_2,\vect{v}_4}
-    &=& \int_{-1}^{1} x\cdot x^3\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{5}x^5}_{-1}^{1}
-    ~=~ \frac{2}{5},
-    \\
-    \iprod{\vect{u}_3,\vect{v}_4}
-    &=& \int_{-1}^{1}\textstyle (x^2-\frac{1}{3})\cdot x^3\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{6}x^6 - \frac{1}{12}x^4}_{-1}^{1}
-    ~=~ 0,
-    \\
-    \iprod{\vect{u}_3,\vect{u}_3}
-    &=& \int_{-1}^{1}\textstyle (x^2-\frac{1}{3})^2\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{5}x^5-\frac{2}{9}x^3+\frac{1}{9}x}_{-1}^{1}
-    ~=~ \frac{8}{45}.
-  \end{eqnarray*}
-  Then
-  \begin{eqnarray*}
-    \vect{u}_4
-    &=& \vect{v}_4
-        ~-~ \frac{\iprod{\vect{u}_1,\vect{v}_4}}{\iprod{\vect{u}_1,\vect{u}_1}}\vect{u}_1
-        ~-~ \frac{\iprod{\vect{u}_2,\vect{v}_4}}{\iprod{\vect{u}_2,\vect{u}_2}}\vect{u}_2
-        ~-~ \frac{\iprod{\vect{u}_3,\vect{v}_4}}{\iprod{\vect{u}_3,\vect{u}_3}}\vect{u}_3
-    \\
-    &=& x^3 ~-~ \frac{0}{2}\cdot 1 ~-~ \frac{2/5}{2/3}\cdot x ~-~ \frac{0}{8/45}\cdot(x^2-\frac{1}{3})
-        ~=~ x^3 - \frac{3}{5}x.
-  \end{eqnarray*}
-  Thus, we obtain the orthogonal basis $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3,\vect{u}_4} =
-  \set{1,~ x,~ x^2-\frac{1}{3},~ x^3 - \frac{3}{5}x}$.
-\end{solution}
-
-The orthogonal polynomials from Example~\ref{exa:legendre-polynomials}
-are known (up to scalar multiples) as \textbf{Legendre polynomials}%
-\index{Legendre polynomial}%
-\index{polynomial!Legendre polynomial}.  We can continue in the same
-fashion applying the Gram-Schmidt procedure to the polynomials
-$1, x, x^2, x^3, x^4, x^5, x^6, \ldots$ to get an infinite sequence of
-orthogonal polynomials. The first few elements of this sequence are:
-\begin{eqnarray*}
-  p_0(x) &=& 1, \\
-  p_1(x) &=& x, \\
-  p_2(x) &=& x^2 - \frac{1}{3}, \\
-  p_3(x) &=& x^3 - \frac{3}{5}x, \\
-  p_4(x) &=& x^4 - \frac{6}{7}x^2 + \frac{3}{35}, \\
-  p_5(x) &=& x^5 - \frac{10}{9}x^3 + \frac{5}{21}x, \\
-  p_6(x) &=& x^6 - \frac{15}{11}x^4 + \frac{5}{11}x^2 - \frac{5}{231}, \\
-  p_7(x) &=& x^7 - \frac{21}{13}x^5 + \frac{105}{143}x^3 - \frac{35}{429}x, \\
-  p_8(x) &=& x^8 - \frac{28}{15}x^6 + \frac{14}{13}x^4 - \frac{28}{143}x^2 + \frac{7}{1287}.
-\end{eqnarray*}
-\begin{center}
-  \begin{tikzpicture}[domain=1:-1, scale=4]
-    \draw[thick,color=maroon,samples=50] plot (\x,{abs(\x^6)-15/11*abs(\x^4)+5/11*abs(\x^2)-5/231}) node[left=2ex,color=maroon] {$x^6 - \frac{15}{11}x^4 + \frac{5}{11}x^2 - \frac{5}{231}$};
-    \draw[thick,color=red,samples=50] plot (\x,{\x^5 - 10/9*\x^3+5/21*\x}) node[left=2ex,color=red] {$x^5 - \frac{10}{9}x^3 + \frac{5}{21}x$};
-    \draw[thick,color=orange,samples=50] plot (\x,{abs(\x^4)-6/7*abs(\x^2)+3/35}) node[left=2ex,color=orange] {$x^4 - \frac{6}{7}x^2 + \frac{3}{35}$};
-    \draw[thick,color=yellow,samples=50] plot (\x,\x^3-3/5*\x) node[left=2ex,color=yellow] {$x^3 - \frac{3}{5}x$};
-    \draw[thick,color=blue,samples=50] plot (\x,{abs(\x^2)-1/3}) node[left=2ex,,color=blue] {$x^2-\frac{1}{3}$};
-    \draw[thick,color=green] plot (\x,\x) node[left=2ex,color=green] {$x$};
-    \draw[thick,color=darkblue] plot (\x,1) node[left=2ex,color=darkblue] {$1$};
-    \draw[->] (-1.2,0) -- (1.2,0) node[right] {$x$};
-    \draw[->] (0,-1.2) -- (0,1.2) node[above] {$p(x)$};
-    \draw (1,0) -- (1,-0.05) node[below] {$1$};
-    \draw (-1,0) -- (-1,-0.05) node[below] {$-1$};
-  \end{tikzpicture}
-\end{center}
-
 The Gram-Schmidt procedure yields an {\em orthogonal} basis. If we
 want to compute an {\em orthonormal} basis, we also have to normalize
 each basis vector. Since normalization usually involves dividing by a
@@ -507,7 +373,7 @@ Gram-Schmidt procedure is complete, rather than normalizing each
 $\vect{u}_i$ immediately after it is found. Note that the Gram-Schmidt
 procedure itself does not involve computing any square roots.
 
-\begin{example}{Finding an orthonormal basis}{finding-orthonormal-basis-r4}
+\begin{example}\name{Finding an orthonormal basis}\label{ex:finding-orthonormal-basis-r4}
   In $\R^4$, find an orthogonal basis for
   \begin{equation*}
     \sspan\set{
@@ -552,46 +418,6 @@ procedure itself does not involve computing any square roots.
       \startmat{c} 1 \\ 1 \\ 0 \\ 0 \stopmat,~
       \startmat{c} 0 \\ 0 \\ 1 \\ 0 \stopmat,~
       \startmat{c} 0 \\ 0 \\ 0 \\ 1 \stopmat
-    }.
-  \end{equation*}
-\end{solution}
-
-\begin{example}{Orthonormal basis of polynomials}{legendre-polynomials2}
-  Find an orthonormal basis for the space of
-  Example~\ref{exa:legendre-polynomials}.
-\end{example}
-
-\begin{solution}
-  In Example~\ref{exa:legendre-polynomials}, we found the orthogonal
-  basis
-  $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3,\vect{u}_4} = \set{1,~ x,~
-    x^2-\frac{1}{3},~ x^3 - \frac{3}{5}x}$.  We also computed
-  \begin{equation*}
-    \iprod{\vect{u}_1,\vect{u}_1} = 2,\quad
-    \iprod{\vect{u}_2,\vect{u}_2} = \frac{2}{3},\quad\mbox{and}\quad
-    \iprod{\vect{u}_3,\vect{u}_3} = \frac{8}{45}.
-  \end{equation*}
-  We also need to compute $\iprod{\vect{u}_4,\vect{u}_4}$:
-  \begin{equation*}
-    \iprod{\vect{u}_4,\vect{u}_4}
-    ~=~ \int_{-1}^{1}{\textstyle (x^3 - \frac{3}{5}x)^2}\,dx
-    ~=~ \int_{-1}^{1}{\textstyle x^6 - \frac{6}{5}x^4 + \frac{9}{25}x^2}\,dx
-    ~=~ \bigbracket{\textstyle\frac{1}{7}x^7-\frac{6}{25}x^5+\frac{3}{25}x^3}_{-1}^{1}
-    ~=~ \frac{8}{175}.
-  \end{equation*}
-  Therefore, the orthonormal basis is:
-  \begin{equation*}
-    \set{
-      \frac{\vect{u}_1}{\norm{\vect{u}_1}},
-      \frac{\vect{u}_2}{\norm{\vect{u}_2}},
-      \frac{\vect{u}_3}{\norm{\vect{u}_3}},
-      \frac{\vect{u}_4}{\norm{\vect{u}_4}}
-    }
-    = \set{
-      \frac{1}{\sqrt{2}},~
-      \sqrt{\frac{3}{2}} x,~
-      \sqrt{\frac{45}{8}} (x^2-\frac{1}{3}),~
-      \sqrt{\frac{175}{8}} (x^3 - \frac{3}{5}x)
     }.
   \end{equation*}
 \end{solution}

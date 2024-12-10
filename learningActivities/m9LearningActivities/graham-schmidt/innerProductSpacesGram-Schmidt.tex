@@ -33,14 +33,14 @@ The basic idea is very simple: if two vectors $\vect{v}_1,\vect{v}_2$
 are not orthogonal, then we can make them orthogonal by replacing
 $\vect{v}_2$ by a vector of the form $\vect{u}_2 = \vect{v}_2 -
 t\vect{v}_1$, for a suitable parameter $t$.
-\begin{equation*}
+\begin{center}
   \begin{tikzpicture}[scale=1.25]
     \draw[thick,red] (1.5,0) -- (1.5,2) -- (0,2);
     \draw[thick,blue,->] (0,0) -- node[left]{$\vect{v}_1$} (0,2.7);
     \draw[thick,blue,->] (0,0) -- node[left, pos=0.6]{$\vect{v}_2$} (1.5,2);
     \draw[thick,green!50!black,->] (0,0) -- node[below right, pos=0.3]{$\vect{u}_2 = \vect{v}_2 - t\vect{v}_1$} (1.5,0);
   \end{tikzpicture}
-\end{equation*}
+\end{center}
 But what is the correct value of $t$? It turns out that this value is
 uniquely determined by the requirement that $\vect{v}_1$ and
 $\vect{u}_2$ must be orthogonal. We calculate

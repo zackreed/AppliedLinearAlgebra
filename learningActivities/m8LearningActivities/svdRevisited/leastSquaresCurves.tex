@@ -79,7 +79,7 @@ a system of equations
   \begin{array}{c@{~}c@{~}c@{~}c@{~}c@{~}c@{~}c}
     a_{11}x_1 &+& \cdots &+& a_{1n}x_n &=& b_1, \\
     a_{21}x_1 &+& \cdots &+& a_{2n}x_n &=& b_2, \\
-    \multicolumn{7}{c}{\cdots} \\
+    \cdots  \\
     a_{m1}x_1 &+& \cdots &+& a_{mn}x_n &=& b_m. \\
   \end{array}
 \end{equation*}
@@ -100,7 +100,7 @@ Then
   A\vect{v} - \vect{b} ~=~
   \startmat{c@{~}c@{~}c@{~}c@{~}c@{~}c@{~}c}
     a_{11}x_1 &+& \cdots &+& a_{1n}x_n &-& b_1 \\
-    \multicolumn{7}{c}{\cdots} \\
+    \cdots \\
     a_{m1}x_1 &+& \cdots &+& a_{mn}x_n &-& b_m \\
   \stopmat,
 \end{equation*}
@@ -165,7 +165,7 @@ provided by the following proposition.
       \fill (2,1.5,0) circle [radius=2.2pt];
     \end{tikzpicture}
   \end{center}
-  From Proposition~\ref{prop:projection-subspace}, we know that this
+  We know that this
   happens when $A\vect{v}-\vect{b}$ is orthogonal to $\col(A)$. Since
   $\col(A)=\sspan\set{\vect{a}_1,\ldots\vect{a}_n}$, this is
   equivalent to saying that $A\vect{v}-\vect{b}$ is orthogonal to each of
@@ -209,7 +209,7 @@ provided by the following proposition.
     \quad\mbox{and}\quad
     \vect{b} = \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat.
   \end{equation*}
-  By Proposition~\ref{prop:least-squares-approximation}, the least
+  The least
   squares approximation is given by the solution of the system of
   equations $A^TA\vect{v} = A^T\vect{b}$. We calculate:
   \begin{equation*}
@@ -358,7 +358,7 @@ solve curve fitting problems.
       680 \\
     \stopmat.
 \end{equation*}
-By Proposition~\ref{prop:least-squares-approximation}, we must solve
+We must solve
 the equation $A^TA\vect{v} = A^T\vect{b}$. We calculate
 \begin{equation*}
     A^TA = \startmat{cc}

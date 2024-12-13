@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from mooculus calculus 2 https://ximera.osu.edu/mooculus/calculus2/differentialEquations/digInDifferentialEquations.tex
-\title{Learning Activity: }
+\title{Simulating Poisson's Equation}
 \begin{document}
 \begin{abstract}
 
@@ -100,9 +100,15 @@ Let's specify some boundary conditions
     \end{axis}
 \end{tikzpicture}
 
-Here, the boundary conditions are that $f=0$ at $x=\frac{-\pi}{2}$ and $x=\frac{\pi}{2}$. As you can see, there are many functions that satisfy these boundary conditions, but fewer functions that also have the differential equation property $\frac{d^4f}{dx^4} = f$.
+Here, the boundary conditions are that $f=0$ at $x=\frac{-\pi}{2}$ and $x=\frac{\pi}{2}$. We call the points $x=\frac{-\pi}{2}$ and $x=\frac{\pi}{2}$ the \emph{boundary points} since they are at the edge of the interval $[\frac{-\pi}{2},\frac{\pi}{2}]$, every other $x$-values in on the interior of the interval.
 
-The unique group of functions satisfying both the boundary conditions and the differential equations are the functions $c\sin(x)$, constant multiples of the sine function.
+As you can see, there are many functions that satisfy these boundary conditions. In fact, all functions in the figure above, (but also an infinite amount of different functions) satisfy the boundary conditions. Fewer functions satisfy both the boundary conditions and the differential equation $\frac{d^4f}{dx^4} = f$.
+
+The unique group of functions satisfying both the boundary conditions and the differential equations are the functions $\ell\cos(x)$, constant multiples of the cosine function. This is because 
+
+$$\frac{d^4}{dx^4}\left(\ell\cos(x)\right)=\ell\frac{d^4}{dx^4}\cos(x)=\ell\cos(x),$$
+
+and $\cos(\pi/2)=0$ and $\cos(-\pi/2)=0$ (as do constant multiples).
 
 \section{Approximating Derviatives}
 
@@ -264,7 +270,7 @@ The Heat Equation is an example of a multi-variable differential equation (i.e. 
 A very simple example is given below, where heat is distributed throughout a flat plate. 
 
 \begin{center}
-    \includegraphics[scale=.5]{heat_equation_plate.png}
+    \includegraphics{heat_equation_plate.png}
 \end{center}
 
 On this plate, the left side (blue) is cold, the right side (red) is hot, and any black regions are evened out at $0^\circ$.
@@ -272,7 +278,7 @@ On this plate, the left side (blue) is cold, the right side (red) is hot, and an
 The boundary conditions are that the top and left sides of the plate remain hot, the bottom and left sides of the plate remain cool, and the differential equation is concerned with how the interior temperatures change under these conditions.
 
 \begin{center}
-    \includegraphics[scale=.5]{heat_boundary.png}
+    \includegraphics{heat_boundary.png}
 \end{center}
 
 If the cold and hot parts of the plates are instantly fused together, and the only heat sources are the set boundary conditions, then the interior will reach what is called a ``steady state'' where changes to the heat distribution in the plate cease, and the temperatures persist as time progresses. 
@@ -298,7 +304,7 @@ That is, the 2nd derivative in the $x$ and $y$ directions at any one point on th
 If we break apart the plate into a grid of $(x,y)$ values, as below:
 
 \begin{center}
-    \includegraphics[scale=.5]{heat_grid.png}
+    \includegraphics{heat_grid.png}
 \end{center}
 
 Then the $(x,y)$ would give the location on the grid, and the function value $f$ would give the heat (positive for hot, or red and negative for cold, or blue).
@@ -310,7 +316,7 @@ $$\frac{d^2f}{dx^2}+\frac{d^2f}{dy^2}=0$$
 states that at any $(x,y)$, if we start at the location $(x,y)$, which has a heat value $f$, and take the 2nd derivative in the $x$ direction and add it to the 2nd derivative in the $y$ direction, they sum to zero, as depicted below:
 
 \begin{center}
-    \includegraphics[scale=.5]{heat_grad.png}
+    \includegraphics{heat_grad.png}
 \end{center}
 
 \section{Simulating the Heat Equation}
@@ -319,8 +325,57 @@ Solving this in its full generality requires some high-level mathematics, typica
 
 First, we break the grid into points $x_{i,j}$, as seen below:
 
+\begin{center}
+    \includegraphics{heat_grid_breakdown.png}
+\end{center}
+
+We can break the grid down into rows and columns, which will come in handy later when we use matrices to simulate the change in state over time.
+
+Then, we use our Taylor Series approximations of the 2nd derivative from earlier 
+
+$$\frac{d^2f}{dx^2}\approx \frac{f(x_{n+1})-2f(x_n)+f(x_{n-1})}{\left(\Delta x\right)^2}$$
+
+to approximate $\frac{d^2f}{dx^2}$ and $\frac{d^2f}{dx^2}$ so that we can state the heat equation approximately along our grid. 
+
+First, note a few things, $\Delta w$ and $\Delta h$ (height and width) are the physical distances between grid points. So they depend on the size of the plate, and if we have a rectangular plate but an even grid, we would expect different values of $\Delta w$ and $\Delta h$. In this case, let's say we're working with an 26x24 inch plate, so 11 rows and 10 columns in the middle (plus a row and column on the boundary makes $\Delta w=2$ and $\Delta h=2$.
+
+With this in mind, vertical difference means changing rows, so going from $x_{1,1}$ to $x_{2,1}$ is a vertical change of $\Delta h=2$. Similarly, horizontal changes move along columns, so $x_{1,1}\rightarrow x_{1,2}$ is a change of $\Delta w=2$.
+
+We care about the temperature, $f$ at each location $x_{i,j}$, so using the Taylor approximation horizontally away from $x_{i,j}$ yields
+
+$$\frac{d^2f}{dw^2}\approx \frac{f(x_{i,j+1})-2f(x_{i,j})+f(x_{i,j-1})}{\left(\Delta w\right)^2}$$
+
+and the Taylor approximation vertically away from $x_{i,j}$ yields
+
+$$\frac{d^2f}{dh^2}\approx \frac{f(x_{i+1,j})-2f(x_{i,j})+f(x_{i-1,j})}{\left(\Delta h\right)^2}.$$
+
+Putting this together into Poisson's equation, we get
+
+$$\frac{f(x_{i,j+1})-2f(x_{i,j})+f(x_{i,j-1})}{\left(\Delta w\right)^2}+\frac{f(x_{i+1,j})-2f(x_{i,j})+f(x_{i-1,j})}{\left(\Delta h\right)^2}=0.$$
+
+Why all of this work? Well this has been all leading up to an ability to simulate the Heat Equation on this plate, which means we need to find a way to figure out what the heat values in a location $x_{i,j}$ are. If we can do this, we can use a computer to update the temperature values as time evolves, and we can also set up a system of equations to solve for what the steady state should be. 
+
+With a little algebra, we can solve for $f(x_{i,j})$ to be
+
+$$f(x_{i,j})=\frac{\left(\Delta h\right)^2(f(x_{i,j+1})+f(x_{i,j-1}))+\left(\Delta w\right)^2(f(x_{i+1,j})+f(x_{i-1,j}))}{4(\left(\Delta w\right)^2+\left(\Delta h\right)^2)},$$
+
+and if we have unit spacing then this reduces to 
+
+$$f(x_{i,j})=\frac{(f(x_{i,j+1})+f(x_{i,j-1}))+(f(x_{i+1,j})+f(x_{i-1,j}))}{4},$$
+
+which is where the original loose heuristic of ``the heat at any location is the average of its neighbors'' comes from.
+
 \section{Poisson's Equation and Electrostatics}
 
+Next, we apply the same process to Poisson's Equation where we also have some internal sources of heat, or of charge in the case of electro statics. Rather than the simple equation 
+
+$$\frac{d^2f}{dx^2}+\frac{d^2f}{dy^2}=0,$$
+
+we add a function that tells us locations of a source within the plate itself, states As
+
+$$\frac{d^2f}{dx^2}+\frac{d^2f}{dy^2}=S.$$
+
+Imagine a heat source underneath the plate in specific locations, or electric charges located at the specified regions. 
 
 
 

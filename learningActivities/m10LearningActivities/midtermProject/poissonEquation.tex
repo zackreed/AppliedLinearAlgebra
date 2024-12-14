@@ -1,6 +1,11 @@
 \documentclass{ximera}
 \input{../../../preamble.tex}
 
+\definecolor{darkbluishgreen}{RGB}{0, 100, 180}
+\definecolor{crimsonred}{RGB}{150, 0, 60}
+\definecolor{burntorange}{RGB}{204, 85, 0}
+\definecolor{darkpurple}{RGB}{75, 0, 130}
+
 \author{Zack Reed}
 %borrowed from mooculus calculus 2 https://ximera.osu.edu/mooculus/calculus2/differentialEquations/digInDifferentialEquations.tex
 \title{Simulating Poisson's Equation}
@@ -319,7 +324,7 @@ states that at any $(x,y)$, if we start at the location $(x,y)$, which has a hea
     \includegraphics{heat_grad.png}
 \end{center}
 
-\section{Simulating the Heat Equation}
+\section{Simulating the Heat Equation Pt 1}
 
 Solving this in its full generality requires some high-level mathematics, typically called  ``Boundary Value Problems'' or ``Partial Differential Equations'', but we can put all of our work so far together and use Linear Algebra to approximate a steady-state solution.
 
@@ -357,13 +362,15 @@ Why all of this work? Well this has been all leading up to an ability to simulat
 
 With a little algebra, we can solve for $f(x_{i,j})$ to be
 
-$$f(x_{i,j})=\frac{\left(\Delta h\right)^2(f(x_{i,j+1})+f(x_{i,j-1}))+\left(\Delta w\right)^2(f(x_{i+1,j})+f(x_{i-1,j}))}{4(\left(\Delta w\right)^2+\left(\Delta h\right)^2)},$$
+$$f(x_{i,j})=\frac{\left(\Delta h\right)^2(f(x_{i,j+1})+f(x_{i,j-1}))+\left(\Delta w\right)^2(f(x_{i+1,j})+f(x_{i-1,j}))}{2(\left(\Delta w\right)^2+\left(\Delta h\right)^2)},$$
 
 and if we have unit spacing then this reduces to 
 
 $$f(x_{i,j})=\frac{(f(x_{i,j+1})+f(x_{i,j-1}))+(f(x_{i+1,j})+f(x_{i-1,j}))}{4},$$
 
 which is where the original loose heuristic of ``the heat at any location is the average of its neighbors'' comes from.
+
+\section{Simulating the Heat Equation Pt 2}
 
 We can use this information about $f(x_{i,j})$ in two ways, which you will do in your project:
 
@@ -383,6 +390,20 @@ We can use this information about $f(x_{i,j})$ in two ways, which you will do in
     \item Solve the system of equations using matrix techniques.
 
 \end{enumerate}
+
+Again within the grid breakdown, we can update $f(x_{1,1})$ and $f(x_{2,2})$ as below. For simplicity, let's assume the top boundary is fixed at $10^\circ$ and the left boundary is fixed at $-10^\circ$, we'll also assume that, as in the initial conditions, the entire grid in this region was also initially cold at $-10^\circ$. Finally, let's start simply by saying that $\Delta w=\Delta h=1$
+
+\begin{center}
+    \includegraphics{heat_grid_breakdown.png}
+\end{center}
+
+So for $f(\textcolor{darkpurple}{x_{1,1}})$, we get
+
+$$f(\textcolor{darkpurple}{x_{1,1}})=\frac{\left(\Delta h\right)^2(f(x_{1,2})+f(\textcolor{darkbluishgreen}{x_L}))+\left(\Delta w\right)^2(f(x_{2,1})+f(\textcolor{crimsonred}{x_T}))}{2(\left(\Delta w\right)^2+\left(\Delta h\right)^2)}=\frac{-10\textcolor{darkbluishgreen}{-10}-10\textcolor{crimsonred}{+10}}{4}=-5,$$
+
+so after one iteration $f(\textcolor{darkpurple}{x_{1,1}})$ became half as cold. 
+
+Similarly, we could run calculations to see that after one iteration, $f(\textcolor{burntorange}{x_{2,2}})$ would not change (all of its neighbors were initially $-10^\circ$), however after more iterations the heat from the top layer would permeate to $f(\textcolor{burntorange}{x_{2,2}})$
 
 \section{Poisson's Equation and Electrostatics}
 

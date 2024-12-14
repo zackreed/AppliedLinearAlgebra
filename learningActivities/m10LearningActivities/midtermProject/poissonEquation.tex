@@ -365,6 +365,25 @@ $$f(x_{i,j})=\frac{(f(x_{i,j+1})+f(x_{i,j-1}))+(f(x_{i+1,j})+f(x_{i-1,j}))}{4},$
 
 which is where the original loose heuristic of ``the heat at any location is the average of its neighbors'' comes from.
 
+We can use this information about $f(x_{i,j})$ in two ways, which you will do in your project:
+
+\begin{enumerate}
+
+    \item Simulate the evolution of the heat on the plate as time goes on under the rules. 
+    
+    \begin{itemize}
+        
+        \item Use a matrix to represent the grid, use the top, bottom, left and right edges of the matrix (i.e. row 1, column 1, row N, column N) to be the boundary that has fixed values. 
+        \item Use the rest of the matrix to take the heat values $f(x_{i,j})$ at location $x_{i,j}$ (aka row $i$, column $j$).
+        \item Start with the initial heat values of the plate (i.e. the initial conditions) and use the approximate equation for $f(x_{i,j})$ to update the heat at each iteration.
+    \end{itemize}
+
+    \item Use each interior heat value $f(x_{i,j})$ as a variable, which makes each approximation of the Heat Equation a linear equation involving 5 variables.
+    \item Set up a system of equations, one equation for each interior location on the grid.
+    \item Solve the system of equations using matrix techniques.
+
+\end{enumerate}
+
 \section{Poisson's Equation and Electrostatics}
 
 Next, we apply the same process to Poisson's Equation where we also have some internal sources of heat, or of charge in the case of electro statics. Rather than the simple equation 
@@ -376,6 +395,8 @@ we add a function that tells us locations of a source within the plate itself, s
 $$\frac{d^2f}{dx^2}+\frac{d^2f}{dy^2}=S.$$
 
 Imagine a heat source underneath the plate in specific locations, or electric charges located at the specified regions. 
+
+The strategy for simulation and equation-solving doesn't change, we just have more information to incorporate into our update matrix and system of equations. $S$ will be given to you, and will essentially be a grid just like the simulation grid but will have fixed values at specified locations. 
 
 
 

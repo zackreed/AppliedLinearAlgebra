@@ -274,16 +274,18 @@ The Heat Equation is an example of a multi-variable differential equation (i.e. 
 
 A very simple example is given below, where heat is distributed throughout a flat plate. 
 
+%854.2x855.41
 \begin{center}
-    \includegraphics{heat_equation_plate.png}
+    \includegraphics[width=22.6cm, height=22.63cm]{heat_equation_plate.png}
 \end{center}
 
 On this plate, the left side (blue) is cold, the right side (red) is hot, and any black regions are evened out at $0^\circ$.
 
 The boundary conditions are that the top and left sides of the plate remain hot, the bottom and left sides of the plate remain cool, and the differential equation is concerned with how the interior temperatures change under these conditions.
 
+%854.2x577
 \begin{center}
-    \includegraphics{heat_boundary.png}
+    \includegraphics[width=22.6cm, height=15.27cm]{heat_boundary.png}
 \end{center}
 
 If the cold and hot parts of the plates are instantly fused together, and the only heat sources are the set boundary conditions, then the interior will reach what is called a ``steady state'' where changes to the heat distribution in the plate cease, and the temperatures persist as time progresses. 
@@ -321,8 +323,9 @@ $$\frac{d^2f}{dx^2}+\frac{d^2f}{dy^2}=0$$
 
 states that at any $(x,y)$, if we start at the location $(x,y)$, which has a heat value $f$, and take the 2nd derivative in the $x$ direction and add it to the 2nd derivative in the $y$ direction, they sum to zero, as depicted below:
 
+%same as grid
 \begin{center}
-    \includegraphics{heat_grad.png}
+    \includegraphics[width=22.6cm,height=22.44cm]{heat_grad.png}
 \end{center}
 
 \section{Simulating the Heat Equation Pt 1}
@@ -331,8 +334,9 @@ Solving this in its full generality requires some high-level mathematics, typica
 
 First, we break the grid into points $x_{i,j}$, as seen below:
 
+
 \begin{center}
-    \includegraphics{heat_grid_breakdown.png}
+    \includegraphics[width=22.6cm, height=16.97cm]{heat_grid_breakdown.png}
 \end{center}
 
 We can break the grid down into rows and columns, which will come in handy later when we use matrices to simulate the change in state over time.
@@ -395,7 +399,7 @@ We can use this information about $f(x_{i,j})$ in two ways, which you will do in
 Again within the grid breakdown, we can update $f(x_{1,1})$ and $f(x_{2,2})$ as below. For simplicity, let's assume the top boundary is fixed at $10^\circ$ and the left boundary is fixed at $-10^\circ$, we'll also assume that, as in the initial conditions, the entire grid in this region was also initially cold at $-10^\circ$. Finally, let's start simply by saying that $\Delta w=\Delta h=1$
 
 \begin{center}
-    \includegraphics{heat_grid_breakdown.png}
+    \includegraphics[width=22.6cm, height=16.97cm]{heat_grid_breakdown.png}
 \end{center}
 
 So for $f(\textcolor{darkpurple}{x_{1,1}})$, we get

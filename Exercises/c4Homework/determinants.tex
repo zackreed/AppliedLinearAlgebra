@@ -8,231 +8,149 @@
 \section*{Exercises}
 
 
-  Let
-  \begin{equation*}
-    A = \startmat{cc}
-      a & b \\
-      c & d \\
-    \stopmat.
-  \end{equation*}
-  An operation is done to get from $A$ to a matrix $B$. In each case,
-  identify which operation was done and explain how it will affect the
-  value of the determinant.
-  \begin{enumerate}
-  \item
-    \begin{equation*}
-      B = \startmat{cc}
-        a & c \\
-        b & d \\
-      \stopmat
-    \end{equation*}
-  \item
-    \begin{equation*}
-      B = \startmat{cc}
-        c & d \\
-        a & b \\
-      \stopmat
-    \end{equation*}
-  \item
-    \begin{equation*}
-      B = \startmat{cc}
-        a   & b   \\
-        a+c & b+d \\
-      \stopmat
-    \end{equation*}
-  \item
-    \begin{equation*}
-      B = \startmat{cc}
-        a  & b  \\
-        2c & 2d \\
-      \stopmat
-    \end{equation*}
-  \item
-    \begin{equation*}
-      B = \startmat{cc}
-        b & a \\
-        d & c \\
-      \stopmat
-    \end{equation*}
-  \end{enumerate}
+  %Let
+  %\begin{equation*}
+  %  A = \startmat{cc}
+  %    a & b \\
+  %    c & d \\
+  %  \stopmat.
+  %\end{equation*}
+  %An operation is done to get from $A$ to a matrix $B$. In each case,
+  %identify which operation was done and explain how it will affect the
+  %value of the determinant.
+  %\begin{enumerate}
+  %\item
+  %  \begin{equation*}
+  %    B = \startmat{cc}
+  %      a & c \\
+  %%      b & d \\
+   %   \stopmat
+   % \end{equation*}
+  %\item
+  %  \begin{equation*}
+  %    B = \startmat{cc}
+  %      c & d \\
+  %      a & b \\
+  %    \stopmat
+  %  \end{equation*}
+  %\item
+  %  \begin{equation*}
+  %    B = \startmat{cc}
+  %      a   & b   \\
+  %      a+c & b+d \\
+  %    \stopmat
+  %  \end{equation*}
+  %\item
+  %  \begin{equation*}
+  %    B = \startmat{cc}
+  %      a  & b  \\
+  %      2c & 2d \\
+  %    \stopmat
+  %  \end{equation*}
+  %\item
+  %  \begin{equation*}
+  %    B = \startmat{cc}
+  %      b & a \\
+  %      d & c \\
+  %    \stopmat
+  %  \end{equation*}
+  %\end{enumerate}
 
 
-\begin{example}
+\begin{problem}
   Let $A$ be an $n\times n$-matrix and suppose there are $n-1$ rows
   such that the remaining row is a linear combination of these $n-1$
-  rows. Show $\det(A) = 0$.
-\end{example}
+  rows. 
+  
+  It must be that $\det(A) = \answer{0}$.
+\end{problem}
 
-\begin{example}
-  \label{ex:determinant3}
-  Let $A$ be an $n\times n$-matrix. Show that if $\det(A) \neq 0$ and
-  $A\vect{x}=\vect{0}$, then $\vect{x}=\vect{0}$.
-\end{example}
+\begin{problem}
 
-\begin{example}
-  Using only Theorems~\ref{thm:determinant-of-triangular-matrix} and
-  {\ref{thm:determinant-of-product}}, show that
-  $\det(kA) = k^n\det(A)$ for an $n\times n$-matrix $A$ and scalar
-  $k$.
-\end{example}
+  Let $A$ be an $n\times n$-matrix. If $\det(A) \neq 0$ and
+  $A\vect{x}=\vect{0}$, then $\vect{x}=\answer{0}$.
 
-\begin{example}
-  Construct two random $2\times 2$-matrices $A$ and $B$ and verify
-  that $\det(A)\det(B) = \det(AB)$.
-\end{example}
+\end{problem}
 
 
-\begin{example}
-  Is it true that $\det(A+B) = \det(A) + \det(B)$? If this is so,
-  explain why. If it is not so, give a counterexample.
-\end{example}
-
-\begin{example}
+\begin{problem}
   An $n\times n$-matrix is called \textbf{nilpotent}%
   \index{nilpotent matrix}%
   \index{matrix!nilpotent} if there exists some positive integer $k$
-  such that $A^k = 0$. If $A$ is a nilpotent matrix, what are the
-  possible values of $\det(A)$?
-\end{example}
+  such that $A^k = 0$. If $A$ is a nilpotent matrix, then $\det(A)=\answer{0}$.
+\end{problem}
 
-\begin{example}
+\begin{problem}
   A square matrix is said to be \textbf{orthogonal}%
   \index{matrix!orthogonal}%
   \index{orthogonal matrix} if $A^TA = I$. Thus the inverse of an
-  orthogonal matrix is its transpose. What are the possible values of
-  $\det(A)$ if $A$ is an orthogonal matrix?
-\end{example}
+  orthogonal matrix is its transpose. 
+  
+  If $A$ is orthogonal, then $\det(A)$ can only be either $\answer{1}$ or $\answer{-1}$ (your first answer must be greater than your second).
+\end{problem}
 
 
 
-\begin{example}
+\begin{problem}
   Let $A$ and $B$ be two $n\times n$-matrices. We say that $A$ is
   \textbf{similar}%
   \index{matrix!similar}%
   \index{similar matrices} to $B$, in symbols $A$ is similar to $B$, if there
   exists an invertible matrix $P$ such that $A = P^{-1}BP$. Show that
   if $A$ is similar to $B$, then $\det(A) = \det(B)$.
-\end{example}
+\end{problem}
 
 
-\begin{example}
+\begin{problem}
   Find the determinant of
   \begin{equation*}
     A = \startmat{ccc}
-      1 & 1 & 1 \\
-      1 & a & a^2 \\
-      1 & b & b^2 \\
+      1 & 1 & 1 & 1\\
+      1 & a & a^2 & a^3\\
+      1 & b & b^2 & b^3\\
+      1 & c & c^2 & c^3\\
     \stopmat.
   \end{equation*}
-  For which values of $a$ and $b$ is this matrix invertible? Hint:
-  after you compute the determinant, you can factor out $(a-1)$ and
-  $(b-1)$ from it.
-\end{example}
+  For which values of $a$, $b$ and $c$ (and the relationships between these variables) is this matrix not invertible? Hint:
+  the \texttt{simplify} command in MATLAB can help make sense of complicated polynomials. 
 
+  Answer: $a-b=\answer{0}$, $a-c=\answer{0}$, $b-c=\answer{0}$, $a=\answer{1}$, $b=\answer{1}$, $c=\answer{1}$.
+\end{problem}
 
-
-\begin{example}
-  Assume $A$, $B$, and $C$ are $n\times n$-matrices and $ABC$ is
-  invertible. Use determinants to show that each of $A,B$, and $C$ is
-  invertible.
-\end{example}
-
-\begin{example}
-  Suppose $A$ is an upper triangular matrix. Show that $A^{-1}$ exists
-  if and only if all elements of the main diagonal are non-zero. Is it
-  true that $A^{-1}$ will also be upper triangular? Explain. Could the
-  same be concluded for lower triangular matrices?
-\end{example}
-
-\begin{example}
-  Specify whether each statement is true or false. If true, provide a
-  proof. If false, provide a counterexample.
-  \begin{enumerate}
-  \item If $A$ is a $3\times 3$-matrix with determinant zero, then one
-    column must be a multiple of some other column.
-
-  \item If any two columns of a square matrix are equal, then the
-    determinant of the matrix equals zero.
-
-  \item For two $n\times n$-matrices $A$ and $B$,
-    $\det(A+B) = \det(A) + \det(B)$.
-
-  \item For an $n\times n$-matrix $A$, $\det(3A) = 3\det(A)$.
-
-  \item If $A^{-1}$ exists, then $\det(A^{-1}) = \det(A)^{-1}$.
-
-  \item If $B$ is obtained by multiplying a single row of $A$ by $4$,
-    then $\det(B) = 4\det(A)$.
-
-  \item For an $n\times n$-matrix $A$, we have
-    $\det(-A) = (-1)^n\det(A)$.
-
-  \item If $A$ is a real $n\times n$-matrix, then
-    $\det(A^TA) \geq 0$.
-
-  \item If $A^k = 0$ for some positive integer $k$, then
-    $\det(A) = 0$.
-
-  \item If $A\vect{x} = 0$ for some $\vect{x} \neq 0$, then
-    $\det(A) = 0$.
-  \end{enumerate}
-\end{example}
-
-
-
-\begin{example} 
-Find the determinants of the following matrices.
-  \begin{equation*}
-    (a)~\startmat{rr}
-      1 & 3 \\
-      0 & 2
-    \stopmat
-    \quad
-    (b)~\startmat{rr}
-      0 & 3 \\
-      0 & 2
-    \stopmat
-    \quad
-    (c)~\startmat{rr}
-      4 & 3 \\
-      6 & 2
-    \stopmat
-    \quad
-    (d)~\startmat{rr}
-      -3 & 4 \\
-      -1 & 2
-    \stopmat
-  \end{equation*}
-\end{example}
-
-
-\begin{example}
+\begin{problem}
   Find the following determinants.
   \begin{equation*}
-    (a)~\startmat{rrr}
+    A=\startmat{rrr}
       1 & 2 & 3 \\
       4 & 5 & 6 \\
       7 & 8 & 9 \\
     \stopmat
     \quad
-    (b)~\startmat{rrr}
+    B=\startmat{rrr}
       1  & 0 & 2 \\
       2  & 5 & 3 \\
       -1 & 0 & 0 \\
     \stopmat
     \quad
-    (c)~\startmat{rrr}
+    C=\startmat{rrr}
       3 &  4 & 1 \\
       0 & -1 & 1 \\
       1 &  2 & 1 \\
     \stopmat
     \quad
-    (d)~\startmat{rrr}
+    D=\startmat{rrr}
       0  & -2 &  1 \\
       4  & 1  & -3 \\
       -1 & 3  &  1 \\
     \stopmat
   \end{equation*}
-\end{example}
+
+  \begin{enumerate}
+    \item $det(A)=\answer{0}$
+    \item $det(B)=\answer{10}$
+    \item $det(C)=\answer{-4}$
+    \item $det(D)=\answer{15}$
+  \end{enumerate}
+\end{problem}
 
 \end{document}

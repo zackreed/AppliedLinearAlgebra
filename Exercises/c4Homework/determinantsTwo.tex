@@ -1,0 +1,77 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\begin{problem}
+  Determine whether the given matrices are singular.
+  \begin{enumerate}
+    
+    \item $$A=\begin{bmatrix}0&0&-3\\2&3&-1\\0&0&10\end{bmatrix}$$
+      \begin{multipleChoice}
+     \choice[correct]{$A$ is singular}
+     \choice{$A$ is nonsingular}
+      \end{multipleChoice}
+
+     
+    \item $$A=\begin{bmatrix}2&-3&-1\\0&4&5\\0&0&-3\\\end{bmatrix}$$
+      \begin{multipleChoice}
+     \choice{$A$ is singular}
+     \choice[correct]{$A$ is nonsingular}
+      \end{multipleChoice}
+      \end{enumerate}
+
+\end{problem}
+
+\begin{problem}\label{prob:singmatrixdet2} Determine whether all matrices of the form
+  $$\begin{bmatrix}x&x+1&x+2\\x+3&x+4&x+5\\x+6&x+7&x+8\end{bmatrix}$$
+  are singular, and select appropriate reasoning.
+
+  Such matrices \begin{multipleChoice}
+    \choice[correct]{are singular}
+    \choice{are nonsingular}
+     \end{multipleChoice}
+
+     because \begin{selectAll}
+     \choice{the determinant is always nonzero}
+     \choice[correct]{the determinant is always zero}
+     \choice{the reduced row echelon form is always the identity}
+     \choice[correct]{the reduced row echelon form always has two pivot columns}
+     \end{selectAll}
+  \end{problem}
+
+  \begin{problem}\label{prob:singmatrixdet3}
+    Find values of $x$ for which the given matrix is singular.
+    $$\begin{bmatrix}2-x&1\\5&6-x\end{bmatrix}$$
+    List values of $x$ in an increasing order.
+     
+    Answer:
+    $$x=\answer{1}\quad x=\answer{7}$$
+    \end{problem}
+
+    \begin{problem}
+      Suppose $A$ and $B$ are $2\times 2$ matrices such that $\det{A}=2$ and $\det{B}=\frac{1}{3}$.  Find each of the following.
+        \begin{problem}\label{prob:detproduct1a}
+        $\det{AB^{-1}}=\answer{6}$
+        \end{problem}
+         
+         \begin{problem}\label{prob:detproduct1b}
+        $\det{(AB)^{-1}}=\answer{3/2}$
+        \end{problem}
+         
+         \begin{problem}\label{prob:detproduct1c}
+        $\det{2AB}=\answer{8/3}$
+        \end{problem}
+      \end{problem}
+
+   
+  \begin{problem}\label{prob:detinvertible1}
+  Suppose $A$ is an invertible matrix such that $$A^{-1}=A^T$$
+  Find $\det{A}$ if we know that $\det{A}\neq 0$.
+   
+  Answer: $\det{A}=\answer{-1}$
+  \end{problem}
+
+\end{document}

@@ -8,74 +8,74 @@
 
 \section*{Exercises}
 
-\begin{example}
-  Let $A = \startmat{rr}
-    1 & 2 \\
-    2 & 1
-  \stopmat$. Find $A^{10}$ by diagonalization.
-  First we write $A = PDP^{-1}$.
-  \begin{equation*}
-    \def\arraystretch{1.3}
-    \startmat{rr}
-      1 & 2 \\
-      2 & 1
-    \stopmat
-    =
-    \startmat{rr}
-      -1 & 1 \\
-      1 & 1
-    \stopmat
-    \startmat{rr}
-      -1 & 0 \\
-      0 & 3
-    \stopmat
-    \startmat{rr}
-      -\frac{1}{2} & \frac{1}{2} \\
-      \frac{1}{2} & \frac{1}{2}
-    \stopmat
-  \end{equation*}
-  Therefore $A^{10} = PD^{10}P^{-1}$.
-  \begin{equation*}
-    \def\arraystretch{1.3}
-    \startmat{rr}
-      1 & 2 \\
-      2 & 1
-    \stopmat^{10}
-    ~=~
-    \startmat{rr}
-      -1 & 1 \\
-      1 & 1
-    \stopmat
-    \startmat{rr}
-      (-1)^{10} & 0 \\
-      0 & 3^{10}
-    \stopmat
-    \startmat{rr}
-      -\frac{1}{2} & \frac{1}{2} \\
-      \frac{1}{2} & \frac{1}{2}
-    \stopmat \\
-    ~=~
-    \frac{1}{2}\startmat{cc}
-      3^{10}+1 & 3^{10}-1 \\
-      3^{10}-1 & 3^{10}+1
-    \stopmat.
-  \end{equation*}
-\end{example}
-
-\begin{example}
-  Let $A = \startmat{rrr}
-    1 & 4 & 1 \\
-    0 & 2 & 5 \\
-    0 & 0 & 5
-  \stopmat$. Find $A^{50}$ by diagonalization.
-\end{example}
+%\begin{example}
+%  Let $A = \startmat{rr}
+%    1 & 2 \\
+%    2 & 1
+%  \stopmat$. Find $A^{10}$ by diagonalization.
+%  First we write $A = PDP^{-1}$.
+%  \begin{equation*}
+%    \def\arraystretch{1.3}
+%    \startmat{rr}
+%      1 & 2 \\
+%      2 & 1
+%    \stopmat
+%    =
+%    \startmat{rr}
+%      -1 & 1 \\
+%      1 & 1
+%    \stopmat
+%    \startmat{rr}
+%      -1 & 0 \\
+%      0 & 3
+%    \stopmat
+%    \startmat{rr}
+%      -\frac{1}{2} & \frac{1}{2} \\
+%      \frac{1}{2} & \frac{1}{2}
+%    \stopmat
+%  \end{equation*}
+%  Therefore $A^{10} = PD^{10}P^{-1}$.
+%  \begin{equation*}
+%    \def\arraystretch{1.3}
+%    \startmat{rr}
+%      1 & 2 \\
+%      2 & 1
+%    \stopmat^{10}
+%    ~=~
+%    \startmat{rr}
+%      -1 & 1 \\
+%      1 & 1
+%    \stopmat
+%    \startmat{rr}
+%      (-1)^{10} & 0 \\
+%      0 & 3^{10}
+%    \stopmat
+%    \startmat{rr}
+%      -\frac{1}{2} & \frac{1}{2} \\
+%      \frac{1}{2} & \frac{1}{2}
+%    \stopmat \\
+%    ~=~
+%    \frac{1}{2}\startmat{cc}
+%      3^{10}+1 & 3^{10}-1 \\
+%      3^{10}-1 & 3^{10}+1
+%    \stopmat.
+%  \end{equation*}
+%\end{example}
 
 \begin{example}
   Let $A = \startmat{rrr}
     1 & -2 & -1 \\
     2 & -1 & 1 \\
     -2 & 3 & 1
-  \stopmat$. Find $A^{100}$ by diagonalization.
+  \stopmat$. Find $A^{1/3}$ by diagonalization. (Hint: You'll want to use the command \texttt{nthroot(n,3)} for the cubic root of a number $n$.)
+
+  Answer (round to 2 decimal places, but you should actually verify that your cubic root actually multiplies to $A$):
+
+  $A^{1/3}=\begin{bmatrix}
+    \answer{1} & \answer[tolerance=.1]{-1.38} & \answer[tolerance=.1]{-.38}\\
+    \answer{2} & \answer[tolerance=.1]{-.88} & \answer[tolerance=.1]{1.12}\\
+    \answer{-2} & \answer[tolerance=.1]{2.14} & \answer[tolerance=.1]{.14}
+  \end{bmatrix}$
 \end{example}
 
 \begin{example}
@@ -84,9 +84,12 @@
     9 & 10 \\
   \stopmat$. Find a square root of $A$, i.e., find a matrix $B$
   such that $B^2=A$.
+  
+  Answer:
+
   $B=\startmat{rr}
-    -1 & -2 \\
-    3  & 4 \\
+    \answer{-1} & \answer{-2} \\
+    \answer{3}  & \answer{4} \\
   \stopmat$.
 \end{example}
 
@@ -95,11 +98,17 @@
     -2 & 0 & 6 \\
     -3 & 1 & 6 \\
     -3 & 0 & 7 \\
-  \stopmat$. Find a square root of $A$.
+  \stopmat$. 
+  
+  Find a square root of $A$.
+  
+  
+  Answer:
+  
   $A = \startmat{rrr}
-    0  &  0 & 2 \\
-    -1 &  1 & 2 \\
-    -1 &  0 & 3 \\
+    \answer{0}  &  \answer{0} & \answer{2} \\
+    \answer{-1} &  \answer{1} & \answer{2} \\
+    \answer{-1} &  \answer{0} & \answer{3} \\
   \stopmat$.
 \end{example}
 

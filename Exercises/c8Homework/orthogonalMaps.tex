@@ -5,24 +5,29 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
-
-\section*{Exercises}
-
-\begin{exercise}
+\begin{problem}
   Which of the following linear transformations $T:\R^3\to\R^3$ are
   orthogonal?
   \begin{enumerate}
-  \item A rotation by 30 degrees about the $z$-axis.
-  \item A reflection about the plane $x=y$.
-  \item A scaling by a factor of $2$.
-  \item A scaling by a factor of $-1$.
+  \item $R_{30}$, A rotation by 30 degrees about the $z$-axis.
+  \item $R_{xy}$, A reflection about the plane $x=y$.
+  \item $S_2$, A scaling by a factor of $2$.
+  \item $S_{-1}$, A scaling by a factor of $-1$.
   \end{enumerate}
-  \begin{solution}
-    (a) Yes. (b) Yes. (c) No. (d) Yes.
-  \end{solution}
-\end{exercise}
+  
+  
+  Select all that are orthogonal.
 
-\begin{exercise}
+  \begin{selectAll}
+    \choice[correct]{$R_30$}
+    \choice[correct]{$R_{xy}$}
+    \choice{$S_2$}
+    \choice[correct]{$S_{-1}$}
+  \end{selectAll}
+  
+\end{problem}
+
+\begin{problem}
   Which of the following matrices define orthogonal transformations?
   Which ones define isometries?
   \begin{equation*}
@@ -44,13 +49,26 @@
       2 & -1 \\
     \stopmat.
   \end{equation*}
-  \begin{solution}
-    $A$ and $C$ are orthogonal (and therefore isometries). $D$ is an
-    isometry but not orthogonal. $B$ is neither orthogonal nor an isometry.
-  \end{solution}
-\end{exercise}
+    \begin{enumerate}
+      \item Which matrices are orthogonal?
+      \begin{selectAll}
+          \choice[correct]{A}
+          \choice{B}
+          \choice[correct]{C}
+          \choice{D}
+      \end{selectAll}
+      
+      \item Which matrices are isometries?
+      \begin{selectAll}
+          \choice[correct]{A}
+          \choice{B}
+          \choice[correct]{C}
+          \choice[correct]{D}
+      \end{selectAll}
+  \end{enumerate}
+\end{problem}
 
-\begin{exercise}
+\begin{problem}
   Determine which of the following matrices are orthogonal by checking
   whether the columns form an orthonormal set.
   \begin{equation*}
@@ -82,10 +100,16 @@
       0 &  0 & 5 \\
     \stopmat.
   \end{equation*}
-  \begin{solution}
-    $A$ and $D$ are orthogonal, but $B$ and $C$ are not.
-  \end{solution}
-\end{exercise}
+  
+  Which matrices are orthogonal?
+  \begin{selectAll}
+      \choice[correct]{A}
+      \choice{B}
+      \choice{C}
+      \choice[correct]{D}
+  \end{selectAll}
+  
+\end{problem}
 
 
 \end{document}

@@ -12,8 +12,9 @@
 
 
 % ----------------------------------------------------------------------
-\subsection*{Application to U.S. Senate voting data}
+\section*{Application to U.S. Senate voting data}
 
+\subsection*{Setting up the problem: High-Dimensional Data}
 The United States Senate%
 \index{senate}%
 \index{U.S. Senate}%
@@ -27,12 +28,10 @@ outcome is recorded). Roll call data for the last 3 decades is
 publicly available and can be downloaded from the U.S. Senate website
 at \url{https://www.senate.gov/legislative/votes.htm}.
 
-We will now explore how to use linear algebra, and in particular
-principal component analysis, to gain some useful information from the
-voting records.\footnote{This example was inspired by Examples~11.2.13
-  and 11.3.15 of {\em ``Coding the Matrix: Linear Algebra through
-    Computer Science Applications''} by Philip N. Klein.} I have made
-a spreadsheet containing the votes of 99 senators for the first 200
+We will now explore how to use linear algebra to gain some useful information from the
+voting records. The method of analysis that we will employ is central to this chapter, called {\bf \emph{principal component analysis}}.
+
+The spreadsheet linked at the bottom of this page contains the votes of 99 senators for the first 200
 roll call votes of 2007. Each row in the spreadsheet corresponds to a
 senator, listed in alphabetical order from Daniel Akaka of Hawaii to
 Ron Wyden of Oregon. I omitted one senator who died during 2007. Each
@@ -41,10 +40,7 @@ first roll call vote of 2007 was on a resolution to honour President
 Gerald Ford (it passed 88 to 0). Each cell of the spreadsheet contains
 the number $1$ if the senator voted ``yes'', the number $-1$ if the
 senator voted ``no'', and the number $0$ if the senator did not
-vote. The spreadsheet is available from
-\url{https://www.mathstat.dal.ca/~selinger/linear-algebra/} under
-``Supplementary materials''. Here are the first few rows and columns
-of the spreadsheet.
+vote. 
 \begin{equation*}
   \begin{array}{|l|r|r|r|r|r|r|r|r}
     \hline
@@ -61,10 +57,10 @@ The human mind is not very well equipped to deal with such massive
 amounts of data. Rather than listing 122 motions that Senator X
 supported and 78 motions that she opposed, we like to come up with
 abstractions, such as Senator X is ``conservative'', ``pro choice'',
-``pro business'', ``hawkish'', etc. However, the problem with
-abstractions is that they do not necessarily mean anything in the real
-world. In the real world, a senator's record is just a sequence of
-votes.
+``pro business'', ``hawkish'', etc. 
+
+However, the problem with
+abstractions is that they at best sometimes account for observed patterns in small subsets of data, or perhaps subsets that have value or meaning to the human experience, but can often fall very short of actually capturing true patterns in high-dimensional data. Luckily, we can use linear algebra to extract true patterns, separations, and variance in high-dimensional data. Moreover, we can explain these patterns using subspaces of impressively low dimension compared to the dimensionality of the data. 
 
 We will represent each senator by a vector in $\R^{200}$, which
 corresponds to a row of the above table. For example, to Senator
@@ -77,49 +73,150 @@ Thus, we can represent each senator (or more precisely, each senator's
 voting record) as a point in 200-dimensional space. In this way, the
 voting data can be interpreted as $99$ points in $\R^{200}$.
 
-Unfortunately, 200 dimensions are impossible to visualize. But what if
+Unfortunately, 200 dimensions are impossible to visualize. But, as is thankfully the case with many real-world datasets, we actually need far fewer dimensions to make sense of our data. 
+
+\subsection*{The Solution: Low-Dimensional Patterns}
+
+Let's explore the solution to this issue with data that we can visualize. 
+
+Open up MATLAB and load the \texttt{.mat} file called $\texttt{noise\_line.mat}$. Then take a look at the plot.
+
+\begin{verbatim}
+
+  load("+linalg/noisy_line.mat")
+linalg.simple_plot_cloud(line_data);
+
+\end{verbatim}
+
+You should see an image like the following:
+
+\begin{center}
+  \includegraphics{noisy_line_1.png}
+\end{center}
+
+The data is technically 3-dimensional, and it would be messy to try and make sense of the data from a table or from a single matrix, such as the following matrix showing the first 9 data vectors in 3D:
+
+\[
+\texttt{data\_matrix}=\begin{bmatrix}
+-1.0201 & 3.0132  & -0.6987 \\
+-0.3617 & 1.3268  & -0.3374 \\
+2.0980  & -5.3478 & 1.2988  \\
+-2.2879 & 6.4009  & -2.3206 \\
+0.8898  & -1.9752 & 0.3144  \\
+2.8387  & -7.7427 & 2.5059  \\
+0.9423  & -2.5160 & 0.5328  \\
+-2.5682 & 8.2888  & -2.5877 \\
+1.3599  & -3.5429 & 1.1710\\
+\ldots
+\end{bmatrix}
+\]
+
+looking closely at the data, however, you might notice that the data is localized with a pseudo-linear relationship, generally moving up and to the right in 3D space. In fact, if you plot a line through the data, you notice that the datapoints don't stray too far from the line, as seen here:
+
+\begin{center}
+  \includegraphics{noisy_line_2.png}
+\end{center}
+
+Lines are $1$-dimensional vector spaces that can be described just by a point and a direction vector, which you can find from the loaded data as $\texttt{line\_point}$ and $\texttt{line\_direction}$. 
+
+In some sense, this means that it is not too far off to describe the entire data set with just two vectors, $\texttt{line\_point}=\begin{bmatrix}0\\0\\0\end{bmatrix}$ and $\texttt{line\_direction}=\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. You might say that the data is comprised of points within the cube $[-4,4]\times[-10,10]\times[-3,3]$ that are ``close to'' the line $t\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. This is a much simpler description than the original data matrix. 
+
+You might also gain information about regions or individual data points by determining the directions of data points along the line in relation to the center point, in this case $\vec{0}$. For instance, if you project the data points onto the line, you can separate the data into two groups determined by their location relative to the center point. 
+
+Try the following:
+
+\begin{verbatim}
+
+  projection_magnitudes=line_data'*line_direction
+  projections=projection_magnitudes*line_direction'
+  linalg.simple_plot_cloud(projections');
+
+\end{verbatim}
+
+You should see the following line, which is the projections of the data points along the line.
+
+\begin{center}
+  \includegraphics{noisy_line_projections.png}
+\end{center}
+
+You can then separate the points along the center, by creating "left" and "right" sets and plotting them individually.
+
+\begin{verbatim}
+
+  greater=find(projection_magnitudes>=0)
+  less=find(projection_magnitudes<0)
+  right=projections(greater,:)
+  left=projections(less,:)
+  linalg.simple_plot_cloud(left',right');
+
+\end{verbatim}
+
+You should see a color-separated plot like this:
+
+\begin{center}
+  \includegraphics{noisy_line_separated.png}
+\end{center}
+
+This brief (and somewhat simplistic) analysis relied on the fact that the $3$-dimensional data was pretty close to a $1$-dimensional subspace, a line, which we could then exploit to reduce the complexity of the data while preserving the important characteristics of the data. 
+
+This is an example of what is called {\bf \emph{principle component analysis}}. In the sections that follow, we will examine what it means to be ``close'' to these smaller-dimensional hyperplanes of high-dimensional space, and how we find these useful lower-dimensional subspaces. 
+
+Now, we'll perform a similar analysis and breakdown of the Senate Voting data.
+
+\subsection*{Applying PCA to Voting Data}
+
+What if, like the ``noisy-line'' data,
 the voting records of all the senators lie on (or at least close to) a
-much-smaller-dimensional affine subspace? This is actually not an
+much-smaller-dimensional subspace (after centering)? This is actually not an
 unreasonable expectation; after all, there are probably only a handful
 of issues most senators care about. For example, if a certain senator
 supports gun control, he will be likely to vote a certain way on
 measures that affect gun control. If another senator supports the gun
 lobby, she is likely to vote the opposite way.
 
-We can thus consider this as an instance of the affine subspace
-problem: we are looking for a low-dimensional affine subspace that is
-close to all $99$ points. Following the method of
-Proposition~\ref{prop:affine-subspace-fitting}, we first find the
-centroid of the points, and then we compute a certain
-$99\times 200$-matrix $A$ and a positive semidefinite
-$200\times 200$-matrix $B=A^TA$. Using software, we can find the
-eigenvalues and -vectors of $B$. The first few eigenvalues (in
-decreasing order) are:
-\begin{equation*}
-  \eigenvar_1 = 7255.65,\quad
-  \eigenvar_2 = 519.16,\quad
-  \eigenvar_3 = 430.60,\quad
-  \eigenvar_4 = 278.05,\quad\mbox{and}\quad
-  \eigenvar_5 = 230.56.
-\end{equation*}
-All of the remaining eigenvalues are less than $200$, and the sum of
-the remaining eigenvalues is
-$\eigenvar_6+\ldots+\eigenvar_{200}=3913.46$. This means that the vast
+We can thus analyze the 
+problem as follows: we are looking for a low-dimensional subspace, centered around an average location, that is
+close to all $99$ points. 
+
+We call this ``centering location" of our subspace the \emph{centroid} of the data. If you think about data as a cloud in 3-dimensional space, this is akin to finding the center of mass. In practice, the centroid is the average of the data vectors. 
+
+Then, using software, we can find the directions within our 200-dimensional space that best describe our voting data.
+
+%find the
+%eigenvalues and -vectors of $B$. The first few eigenvalues (in
+%decreasing order) are:
+%\begin{equation*}
+%  \eigenvar_1 = 7255.65,\quad
+%  \eigenvar_2 = 519.16,\quad
+%  \eigenvar_3 = 430.60,\quad
+%  \eigenvar_4 = 278.05,\quad\mbox{and}\quad
+%  \eigenvar_5 = 230.56.
+%\end{equation*}
+%All of the remaining eigenvalues are less than $200$, and the sum of
+%the remaining eigenvalues is
+%$\eigenvar_6+\ldots+\eigenvar_{200}=3913.46$. 
+
+For reasons that we will explore later, the vast
 majority of the voting behavior of each senator is determined by a
-single dimension, given by the eigenvector corresponding to the
-eigenvalue $\eigenvar_1$. In other words, there is a $1$-dimensional
-affine subspace that all $99$ points are pretty close to. If we
-project each senator to this affine subspace, we get the following
-picture:
+single dimension %given by the eigenvector corresponding to the
+%eigenvalue $\eigenvar_1$. In other words, there is a $1$-dimensional
+%affine subspace that all $99$ points are pretty close to. If we
+%project each senator to this affine subspace, we get the following
+%picture:
 
 %111.76x44.17
+
+If we plot along the line given by this direction vector (taken from the centroid), we get the following separation of senators:
+
 \begin{center}
   \includegraphics[width=31.93cm, height=12.62cm]{pca_senate_1.png}
 \end{center}
 
 For convenience, Republican senators have been shown in red and
 Democratic and independent senators in blue. Not all senators have
-been named, because in some areas they are clustered very densely. An
+been named, because in some areas they are clustered very densely. 
+
+An
 interpretation of the principal component then immediately suggests
 itself: it appears to be the ``conservative'' vs. ``liberal'' axis. We
 can use this picture to assist in answering questions such as: {\em
@@ -138,8 +235,7 @@ picture:
 We can use this to help answer questions such as {\em ``Has the senate
   become more partisan between 2007 and 2017?''}.
 
-If we instead project the data onto the first two principal
-components, we get the following picture for the 2007 data:
+If we instead project the data onto a $2$-dimensional subspace that best explains the data variety, we get the following picture for the 2007 data:
 
 %115.71x75.21
 \begin{center}
@@ -153,13 +249,18 @@ although the 2-dimensional picture seems to reveal more detail, its
 interpretation is less clear. While it seems obvious that the
 horizontal axis corresponds to a conservative vs.\ liberal world view,
 it is much less obvious what the political meaning of the vertical
-axis is. Maybe it is related to some issue that does not typically
+axis is. 
+
+Maybe it is related to some issue that does not typically
 follow party lines, such as North vs. South, rich states vs. poor
 states, pro-immigration vs. anti-immigration, and so on.  To find a
 convincing interpretation of the vertical axis, further investigation
 of the data would be required (such as, looking at the actual content
 of the votes in question).
 
+The rest of the chapter will be devoted to examining how we find these useful low-dimensional subspaces that help explain data that we come across. By doing so, we'll further explore important concepts such as best-fitting subspaces, projecting onto subspaces, data spread (i.e. variance), and more.
+
+\subsection*{Use at your own risk}
 Finally, a word of caution. Whenever we use mathematics to try to draw
 real-world conclusions from data, these conclusions should be taken
 with an extra-large grain of salt. People have an outsized tendency to
@@ -186,6 +287,21 @@ additional such details will emerge. In summary, while principal
 component analysis is a useful tool, it is just one tool among many,
 and we always need to exercise our best judgement in drawing
 conclusions from data.
+
+\section*{Text Source}
+
+This application exposition has been added to and minorly adapted from Peter Selinger's {\it Matrix Theory and Linear Algebra}, Lyrix 2018, Creative Commons License (CC-BY 4.0).
+    
+https://www.mathstat.dal.ca/~selinger/linear-algebra/
+
+The referenced spreadsheet is available from
+\url{https://www.mathstat.dal.ca/~selinger/linear-algebra/} under
+``Supplementary materials''. Here are the first few rows and columns
+of the spreadsheet.
+
+Selinger's exposition was originally inspired by Examples~11.2.13
+and 11.3.15 of {\em ``Coding the Matrix: Linear Algebra through
+  Computer Science Applications''} by Philip N. Klein.
 
 
 \end{document}

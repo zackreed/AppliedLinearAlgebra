@@ -15,7 +15,8 @@
 
     
 Let $A$ be an $n \times n$ matrix.  In \href{https://ximera.osu.edu/appliedlinearalgebra/c7ChapterSeven/learningActivities/m7LearningActivities/m7EigenStuff/describingEigenstuff}{the previous section} we learned that the eigenvectors and eigenvalues of $A$ are vectors $\vec{x}$ and scalars $\lambda$ that satisfy the equation 
-\begin{definition}\label{def:eigen} A \vec{x} = \lambda \vec{x}\end{definition}
+$A \vec{v} = \lambda \vec{v}$
+
 We listed a few reasons why we are interested in finding eigenvalues and eigenvectors, but we did not give any process for finding them.  In this section we will focus on a process which can be used for small matrices.  For larger matrices, the best methods we have are iterative methods, and we will explore some of these in \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/EIG-0070/main}{The Power Method and the Dominant Eigenvalue}.
     
 For an $n \times n$ matrix, we will see that the eigenvalues are the roots of a polynomial called the \dfn{characteristic polynomial}.  So finding eigenvalues is equivalent to solving a polynomial equation of degree $n$.  Finding the corresponding eigenvectors turns out to be a matter of computing the null space of a matrix, as the following exploration demonstrates.
@@ -243,156 +244,7 @@ A square matrix has an eigenvalue of zero if and only if it is singular.
 \begin{proof}
 A square matrix $A$ is singular if and only if $\det{A}=0$.  But $\det{A}=0$ if and only if $\det{A-0I}=0$, which is true if and only if zero is an eigenvalue of $A$.
 \end{proof}
-    
-\section*{Practice Problems}
-    
-\emph{Problems \ref{prob:eigenspace1}-\ref{prob:eigenspace2}}
-In this exercise we will prove that the eigenvectors associated with an eigenvalue $\lambda$ of an $n \times n$ matrix $A$ form a subspace of $\RR^n$.
-    
-\begin{problem}\label{prob:eigenspace1}
-Let $\vec{x}$ and $\vec{y}$ be eigenvectors of $A$ associated with $\lambda$.  Show that $\vec{x}+\vec{y}$ is also an eigenvector of $A$ associated with $\lambda$.  (This shows that the set of eigenvectors of $A$ associated with $\lambda$ is closed under addition).
-\end{problem}
-    
-\begin{problem}\label{prob:eigenspace2}
-Show that the set of eigenvectors of $A$ associated with $\lambda$ is closed under scalar multiplication.
-\end{problem}
-    
-    
-\emph{Problems \ref{prob:eigenspace3}-\ref{prob:eigenspace4}}
-Compute the eigenvalues of the given matrix and find the corresponding eigenspaces.
-    
-\begin{problem}\label{prob:eigenspace3}
-$$\begin{bmatrix}4&1\\8&-3\end{bmatrix}$$
-Answer:
-(List the eigenvalues in an increasing order.)
-$$\lambda_1=\answer{-4},\quad\lambda_2=\answer{5}$$
-    
-A basis for $\lambda_1$ is $\left\{\begin{bmatrix}\answer{-1/8}\\1\end{bmatrix}\right\}$.  A basis for $\lambda_2$ is $\left\{\begin{bmatrix}\answer{1}\\1\end{bmatrix}\right\}$.
-\end{problem}
-    
-\begin{problem}\label{prob:eigenspace4}
-$$\begin{bmatrix}1&-2\\2&1\end{bmatrix}$$
-Answer:
-    
-$$\lambda_1=\answer{1}+\answer{2}i,\quad\lambda_2=\answer{1}-\answer{2}i$$
-    
-A basis for $\lambda_1$ is $\left\{\begin{bmatrix}i\\\answer{1}\end{bmatrix}\right\}$.  A basis for $\lambda_2$ is $\left\{\begin{bmatrix}-i\\\answer{1}\end{bmatrix}\right\}$.
-\end{problem}
-    
-    
-\begin{problem}\label{prob:3x3tri_ev}
-Let $T=\begin{bmatrix} 1 & 2 & 3\\ 0 & 5 & 6\\ 0 & 0 & 9\end{bmatrix}$.  Compute a basis for each of the eigenspaces of this matrix, $\mathcal{S}_1$, $\mathcal{S}_5$, and $\mathcal{S}_9$.
-\end{problem}
-    
-\emph{Problems \ref{prob:3x3fromKuttler1}-\ref{prob:3x3fromKuttler2}}
-Let $A=\begin{bmatrix} 9 & 2 & 8\\ 2 & -6 & -2\\ -8 & 2 & -5\end{bmatrix}$. 
-    
-\begin{problem}\label{prob:3x3fromKuttler1}
-Compute the eigenvalues of this matrix.
-\begin{hint}
-One of the eigenvalues of $A$ is -3.
-\end{hint}
-    
-Answer:
-    
-(List your answers in an increasing order.)
-$$\lambda_1 = \answer{-3},\quad \lambda_2 = \answer{-1},\quad \lambda_3 = \answer{2}$$
-\end{problem}
-    
-\begin{problem}\label{prob:3x3fromKuttler2}
-Compute a basis for each of the eigenspaces of this matrix,  $\mathcal{S}_{\lambda_1}$, $\mathcal{S}_{\lambda_2}$, and $\mathcal{S}_{\lambda_3}$.
-    
-Answer:
-A basis for $\mathcal{S}_{\lambda_1}$ is $\left\{\begin{bmatrix}1\\\answer{2}\\\answer{-2}\end{bmatrix}\right\}$,
-a basis for $\mathcal{S}_{\lambda_2}$ is $\left\{\begin{bmatrix}-2\\\answer{-2}\\\answer{3}\end{bmatrix}\right\}$,
-    
-and a basis for $\mathcal{S}_{\lambda_3}$ is $\left\{\begin{bmatrix}2\\\answer{1}\\\answer{-2}\end{bmatrix}\right\}$.
-\end{problem}
-    
-    
-\begin{problem}\label{prob:3x3_complex_ev}
-Complete Example \ref{ex:3x3_complex_ev} by showing that a basis for $\mathcal{S}_{1-i}$ is given by $\left\{\begin{bmatrix}0\\-i\\1\end{bmatrix}\right\}$, where  $\mathcal{S}_{1-i}$ is the eigenspace associated with the eigenvalue $\lambda=1-i$ of the matrix $D=\begin{bmatrix} 0&0&0\\ 0 &1&1\\ 0 & -1&1\end{bmatrix}$.
-\end{problem}
-    
 
     
-\begin{problem}\label{prob:eigvectorstransfr2_1}
-Recall that a vertical stretch/compression of the plane is a linear transformation whose standard matrix is $$M_v=\begin{bmatrix}1&0\\0&k\end{bmatrix}$$
-Find the eigenvalues of $M_v$.  Find a basis for the eigenspace corresponding to each eigenvalue.
-    
-Answer:  A basis for $\mathcal{S}_1$ is $\left\{\begin{bmatrix}1\\\answer{0}\end{bmatrix}\right\}$
-and a basis for $\mathcal{S}_k$ is $\left\{\begin{bmatrix}\answer{0}\\1\end{bmatrix}\right\}$
-    
-Sketch several vectors in each eigenspace and use geometry to explain why the eigenvectors you sketched make sense.
-\end{problem}
-    
-\begin{problem}\label{prob:eigvectorstransfr2_2}
-Recall that a horizontal shear of the plane is a linear transformation whose standard matrix is $$M_{hs}=\begin{bmatrix}1&k\\0&1\end{bmatrix}$$
-Find the eigenvalue of $M_{hs}$. 
-    
-Answer: $\lambda=\answer{1}$
-    
-Find a basis for the eigenspace corresponding to $\lambda$.
-    
-Answer:  A basis for $\mathcal{S}$ is $\left\{\begin{bmatrix}1\\\answer{0}\end{bmatrix}\right\}$
-    
-Sketch several vectors in the eigenspace and use geometry to explain why the eigenvectors you sketched make sense.
-\end{problem}
-    
-\begin{problem}\label{prob:rotmatrixrealeig2}
-Recall that a counterclockwise rotation of the plane through angle $\theta$ is a linear transformation whose standard matrix is $$M_{\theta}=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix}$$
-Verify that the eigenvalues of $M_{\theta}$ are
-$$\lambda=\cos\theta\pm\sqrt{\cos^2\theta-1}$$
-
-    
-Suppose $\theta$ is a muliple of $\pi$.  Then the eigenspaces corresponding to the two eigenvalues are the same.  Which of the following describes the eigenspace?
-\begin{multipleChoice}
-    \choice[correct]{All vectors in $\RR^2$.}
-    \choice{All vectors along the $x$-axis.}
-    \choice{All vectors along the $y$-axis.}
-    \choice{All vectors along the line $y=x$.}
-\end{multipleChoice}
-    
-\end{problem}
-    
-\begin{problem}\label{prob:eigvectorstransfr2_3}
-Recall that a reflection of the plane about the line $y=mx$ is a linear transformation whose standard matrix is
-$$M_{y=mx}=\frac{1}{1+m^2}\begin{bmatrix}
-1-m^2 & 2m \\
-2m & m^2-1
-\end{bmatrix}$$
-Verify that the eigenvalues of $M_{y=mx}$ are
-$1$ and $-1$.
-    
-Find a basis for eigenspaces $\mathcal{S}_{1}$ and $\mathcal{S}_{-1}$.  (For simplicity, assume that $m\neq 0$.)
-    
-Answer:  A basis for $\mathcal{S}_{1}$ is $\left\{\begin{bmatrix}1\\\answer{m}\end{bmatrix}\right\}$
-and a basis for $\mathcal{S}_{-1}$ is $\left\{\begin{bmatrix}m\\\answer{-1}\end{bmatrix}\right\}$
-    
-Choose the best description of $\mathcal{S}_{1}$.
-\begin{multipleChoice}
-    \choice{All vectors in $\RR^2$.}
-    \choice[correct]{All vectors with ``slope" $m$.}
-    \choice{All vectors with ``slope" $1/m$.}
-    \choice{All vectors with ``slope" $-1/m$.}
-\end{multipleChoice}
-    
-Choose the best description of $\mathcal{S}_{-1}$.
-\begin{multipleChoice}
-    \choice{All vectors along the line $y=mx$.}
-    \choice{All vectors parallel to the $x$-axis.}
-    \choice{All vectors parallel to the $y$-axis.}
-    \choice[correct]{All vectors perpendicular to the line $y=mx$.}
-\end{multipleChoice}
-    
-Use geometry to explain why the eigenspaces you found make sense.
-    
-\end{problem}
-    
-    
-\section*{Exercise Source}
-Practice Problem \ref{prob:3x3fromKuttler1} is adopted from Problem 7.1.11 of Ken Kuttler's \href{https://open.umn.edu/opentextbooks/textbooks/a-first-course-in-linear-algebra-2017}{\it A First Course in Linear Algebra}. (CC-BY)
-    
-Ken Kuttler, {\it  A First Course in Linear Algebra}, Lyryx 2017, Open Edition, p. 361.
 
 \end{document}

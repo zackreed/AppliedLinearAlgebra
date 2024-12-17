@@ -1,0 +1,143 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\begin{problem}
+  
+Compute the eigenvalues of the given matrix and find the corresponding eigenspaces.
+    
+\begin{enumerate}
+
+\item $$\begin{bmatrix}4&1\\8&-3\end{bmatrix}$$
+
+Answer:
+(List the eigenvalues in an increasing order.)
+$$\lambda_1=\answer{-4},\quad\lambda_2=\answer{5}$$
+    
+A basis for $\lambda_1$ is $\left\{\begin{bmatrix}\answer{-1/8}\\1\end{bmatrix}\right\}$.  A basis for $\lambda_2$ is $\left\{\begin{bmatrix}\answer{1}\\1\end{bmatrix}\right\}$.
+
+    
+\item $$\begin{bmatrix}1&-2\\2&1\end{bmatrix}$$
+Answer:
+    
+$$\lambda_1=\answer{1}+\answer{2}i,\quad\lambda_2=\answer{1}-\answer{2}i$$
+    
+A basis for $\lambda_1$ is $\left\{\begin{bmatrix}i\\\answer{1}\end{bmatrix}\right\}$.  A basis for $\lambda_2$ is $\left\{\begin{bmatrix}-i\\\answer{1}\end{bmatrix}\right\}$.
+\end{enumerate}
+\end{problem}
+    
+    
+\begin{problem}\label{prob:3x3tri_ev}
+Let $T=\begin{bmatrix} 1 & 2 & 3\\ 0 & 5 & 6\\ 0 & 0 & 9\end{bmatrix}$.  Compute a basis for each of the eigenspaces of this matrix, $\mathcal{S}_1$, $\mathcal{S}_5$, and $\mathcal{S}_9$.
+\end{problem}
+    
+\begin{problem}
+Let $A=\begin{bmatrix} 9 & 2 & 8\\ 2 & -6 & -2\\ -8 & 2 & -5\end{bmatrix}$. 
+
+\begin{enumerate}
+
+    
+\item Compute the eigenvalues of this matrix.
+\begin{hint}
+One of the eigenvalues of $A$ is -3.
+\end{hint}
+    
+Answer:
+    
+(List your answers in an increasing order.)
+$$\lambda_1 = \answer{-3},\quad \lambda_2 = \answer{-1},\quad \lambda_3 = \answer{2}$$
+
+\item Compute a basis for each of the eigenspaces of this matrix,  $\mathcal{S}_{\lambda_1}$, $\mathcal{S}_{\lambda_2}$, and $\mathcal{S}_{\lambda_3}$.
+    
+Answer:
+A basis for $\mathcal{S}_{\lambda_1}$ is $\left\{\begin{bmatrix}1\\\answer{2}\\\answer{-2}\end{bmatrix}\right\}$,
+a basis for $\mathcal{S}_{\lambda_2}$ is $\left\{\begin{bmatrix}-2\\\answer{-2}\\\answer{3}\end{bmatrix}\right\}$,
+    
+and a basis for $\mathcal{S}_{\lambda_3}$ is $\left\{\begin{bmatrix}2\\\answer{1}\\\answer{-2}\end{bmatrix}\right\}$.
+
+\end{enumerate}
+\end{problem}
+    
+
+    
+\begin{problem}\label{prob:eigvectorstransfr2_1}
+Recall that a vertical stretch/compression of the plane is a linear transformation whose standard matrix is $$M_v=\begin{bmatrix}1&0\\0&k\end{bmatrix}$$
+Find the eigenvalues of $M_v$.  Find a basis for the eigenspace corresponding to each eigenvalue.
+    
+Answer:  A basis for $\mathcal{S}_1$ is $\left\{\begin{bmatrix}1\\\answer{0}\end{bmatrix}\right\}$
+and a basis for $\mathcal{S}_k$ is $\left\{\begin{bmatrix}\answer{0}\\1\end{bmatrix}\right\}$
+    
+Sketch several vectors in each eigenspace and use geometry to explain why the eigenvectors you sketched make sense.
+\end{problem}
+    
+\begin{problem}\label{prob:eigvectorstransfr2_2}
+Recall that a horizontal shear of the plane is a linear transformation whose standard matrix is $$M_{hs}=\begin{bmatrix}1&k\\0&1\end{bmatrix}$$
+Find the eigenvalue of $M_{hs}$. 
+    
+Answer: $\lambda=\answer{1}$
+    
+Find a basis for the eigenspace corresponding to $\lambda$.
+    
+Answer:  A basis for $\mathcal{S}$ is $\left\{\begin{bmatrix}1\\\answer{0}\end{bmatrix}\right\}$
+    
+Sketch several vectors in the eigenspace and use geometry to explain why the eigenvectors you sketched make sense.
+\end{problem}
+    
+\begin{problem}\label{prob:rotmatrixrealeig2}
+Recall that a counterclockwise rotation of the plane through angle $\theta$ is a linear transformation whose standard matrix is $$M_{\theta}=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix}$$
+Verify that the eigenvalues of $M_{\theta}$ are
+$$\lambda=\cos\theta\pm\sqrt{\cos^2\theta-1}$$
+
+    
+Suppose $\theta$ is a muliple of $\pi$.  Then the eigenspaces corresponding to the two eigenvalues are the same.  Which of the following describes the eigenspace?
+\begin{multipleChoice}
+    \choice[correct]{All vectors in $\RR^2$.}
+    \choice{All vectors along the $x$-axis.}
+    \choice{All vectors along the $y$-axis.}
+    \choice{All vectors along the line $y=x$.}
+\end{multipleChoice}
+    
+\end{problem}
+    
+\begin{problem}\label{prob:eigvectorstransfr2_3}
+A reflection of the plane about the line $y=mx$ is a linear transformation whose standard matrix is
+$$M_{y=mx}=\frac{1}{1+m^2}\begin{bmatrix}
+1-m^2 & 2m \\
+2m & m^2-1
+\end{bmatrix}$$
+Verify that the eigenvalues of $M_{y=mx}$ are
+$1$ and $-1$.
+    
+Find a basis for eigenspaces $\mathcal{S}_{1}$ and $\mathcal{S}_{-1}$.  (For simplicity, assume that $m\neq 0$.)
+    
+Answer:  A basis for $\mathcal{S}_{1}$ is $\left\{\begin{bmatrix}1\\\answer{m}\end{bmatrix}\right\}$
+and a basis for $\mathcal{S}_{-1}$ is $\left\{\begin{bmatrix}m\\\answer{-1}\end{bmatrix}\right\}$
+    
+Choose the best description of $\mathcal{S}_{1}$.
+\begin{multipleChoice}
+    \choice{All vectors in $\RR^2$.}
+    \choice[correct]{All vectors with ``slope" $m$.}
+    \choice{All vectors with ``slope" $1/m$.}
+    \choice{All vectors with ``slope" $-1/m$.}
+\end{multipleChoice}
+    
+Choose the best description of $\mathcal{S}_{-1}$.
+\begin{multipleChoice}
+    \choice{All vectors along the line $y=mx$.}
+    \choice{All vectors parallel to the $x$-axis.}
+    \choice{All vectors parallel to the $y$-axis.}
+    \choice[correct]{All vectors perpendicular to the line $y=mx$.}
+\end{multipleChoice}
+    
+Use geometry to explain why the eigenspaces you found make sense.
+    
+\end{problem}
+    
+    
+
+
+
+\end{document}

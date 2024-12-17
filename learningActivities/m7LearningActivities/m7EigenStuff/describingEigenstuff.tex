@@ -7,7 +7,6 @@
 \begin{document}
 \begin{abstract}
 
-    In this learning activity, you will be 
 \end{abstract}
 \maketitle
 
@@ -269,78 +268,7 @@ The first in-depth study of eigenvalues can probably be attributed to Fourier as
     
 The most famous modern example of a large-scale eigenvalue problem is the Google PageRank algorithm, which helped set Google apart from its competitors as a search engine.  Some of the relevant mathematics can be learned by working through the paper, \href{https://doi.org/10.1137/050623280}{``The \$25,000,000,000 Eigenvector, The Linear Algebra Behind Google''}, by Kurt Bryan and Tanya Leise. 
 \end{remark}
-    
-\section*{Practice Problems}
-    
-Let $C=\begin{bmatrix} 2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{bmatrix}$. 
-    
-\begin{problem}\label{prob:checkeig1}
-Show that $\begin{bmatrix} 1\\1\\1 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
-$\answer{4}$
-\end{problem}
-    
-    \begin{problem}\label{prob:checkeig2}
-Show that $\begin{bmatrix} 1\\-1\\0 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
-$\answer{1}$
-\end{problem}
-    
-    \begin{problem}\label{prob:checkeig3}
-Show that $\begin{bmatrix} 1\\1\\-2 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
-$\answer{1}$
-\end{problem}
-    
-    
-\begin{problem}\label{prob:eigprojmatrix}
-Let $Q=\begin{bmatrix} 0& 0\\ 0&1\end{bmatrix}$.  Note that $Q$ takes any vector in $\RR^2$ and projects it onto the $y$-axis.  Which vectors in $\RR^2$ would be eigenvectors, and what are the corresponding eigenvalues?
-\end{problem}
-    
-    
-\begin{problem}\label{ex:eigsrotation2}
-Returning to Example \ref{ex:eigsrotation}, let $M=\begin{bmatrix}
-\frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}\\
-\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}
-\end{bmatrix}$.  Show that $\begin{bmatrix} \frac{\sqrt{2}}{2}\\ -\frac{\sqrt{2}}{2} i \end{bmatrix}$ is an eigenvector of $M$.  What is its corresponding eigenvalue?
-    
-Please enter an exact answer; no decimal approximations.  To enter square roots, click inside the answer box, then use the ``Math Editor" button that appears at the top of your XIMERA window.
-$$\answer{\frac{\sqrt{2}}{2}}+\answer{\frac{\sqrt{2}}{2}}i$$
-\end{problem}
-    
-    
-\begin{problem}\label{prob:eigenvalgeometry}
-Arguing geometrically, identify the linear transformation whose standard matrix has eigenvalues $\lambda_1=1$ and $\lambda_2=-1$.
-\begin{multipleChoice}
-\choice{Vertical Shear}
-    \choice{Horizontal Shear}
-    \choice{Counterclockwise Rotation through a $90^\circ$ angle}
-    \choice[correct]{Reflection About the line $y=mx$}
-    \choice{Horizontal Stretch}
-    \choice{Vertical Stretch}
-    \end{multipleChoice}
-\end{problem}
-    
-\begin{problem}\label{prob:eigvalvectorsofdiagmat} Let $A=\begin{bmatrix} 3&0&0\\0&3&0\\0&0&3\end{bmatrix}$.  Can you find an eigenvector and its corresponding eigenvalue?  Can you find another ``eigenpair''?  Can you find all of the eigenvectors of $A$?
-\end{problem}
-    
-\begin{problem}\label{prob:rotmatrixrealeig1}The rotation matrix in Example \ref{ex:eigsrotation} has complex eigenvectors and eigenvalues.  Think geometrically to find an example of a (non-identity) rotation matrix with real eigenvectors and eigenvalues. 
-    
-Enter degree measure between 0 and 360.
-    
-Answer:  Rotation through $\answer{180}$ degrees.
-\end{problem}
-    
-\begin{problem}\label{prob:eigenmultchoice}
-Can an eigenvalue have multiple eigenvectors associated with it?
-\begin{multipleChoice}
-    \choice[correct]{Yes}
-    \choice{No}
-    \end{multipleChoice}
-        
-    Can an eigenvector have multiple eigenvalues associated with it?
-    \begin{multipleChoice}
-    \choice{Yes}
-    \choice[correct]{No}
-    \end{multipleChoice}
-\end{problem}
+
     
 \section*{Bibliography}
 [Trefethen and  Embree] Trefethen, Lloyd and Embree, Mark, {\it Spectra and Pseudospectra}, Princeton University Press, 2005, p. 5-6

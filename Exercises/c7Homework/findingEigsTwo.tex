@@ -1,0 +1,116 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+\begin{problem}
+
+Let $C=\begin{bmatrix} 2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{bmatrix}$.
+
+\begin{enumerate}
+    
+\item Show that $\begin{bmatrix} 1\\1\\1 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
+$\answer{4}$
+
+    
+\item Show that $\begin{bmatrix} 1\\-1\\0 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
+$\answer{1}$
+
+    
+\item Show that $\begin{bmatrix} 1\\1\\-2 \end{bmatrix}$ is an eigenvector of $C$.  What is its corresponding eigenvalue?
+$\answer{1}$
+\end{enumerate}
+\end{problem}
+    
+    
+%\begin{problem}\label{prob:eigprojmatrix}
+%Let $Q=\begin{bmatrix} 0& 0\\ 0&1\end{bmatrix}$.  Note that $Q$ takes any vector in $\RR^2$ and projects it onto the $y$-axis.  Which vectors in $\RR^2$ would be eigenvectors, and what are the corresponding eigenvalues?
+%\end{problem}
+    
+    
+\begin{problem}\label{ex:eigsrotation2}
+Returning to Example \ref{ex:eigsrotation}, let $M=\begin{bmatrix}
+\frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}\\
+\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}
+\end{bmatrix}$.  Show that $\begin{bmatrix} \frac{\sqrt{2}}{2}\\ -\frac{\sqrt{2}}{2} i \end{bmatrix}$ is an eigenvector of $M$.  What is its corresponding eigenvalue?
+    
+$$\answer[tolerance=.5]{\frac{\sqrt{2}}{2}}+\answer[tolerance=.5]{\frac{\sqrt{2}}{2}}i$$
+\end{problem}
+    
+    
+\begin{problem}\label{prob:eigenvalgeometry}
+Arguing geometrically, identify the linear transformation whose standard matrix has eigenvalues $\lambda_1=1$ and $\lambda_2=-1$.
+\begin{multipleChoice}
+\choice{Vertical Shear}
+    \choice{Horizontal Shear}
+    \choice{Counterclockwise Rotation through a $90^\circ$ angle}
+    \choice[correct]{Reflection About the line $y=mx$}
+    \choice{Horizontal Stretch}
+    \choice{Vertical Stretch}
+    \end{multipleChoice}
+\end{problem}
+    
+\begin{problem}\label{prob:eigvalvectorsofdiagmat} Let $A=\begin{bmatrix} 3&0&0\\0&3&0\\0&0&3\end{bmatrix}$.  
+  
+\begin{enumerate}
+  \item What is the single eigenvalue for this matrix? $\lambda=\answer{3}$.
+  \item What is the orthonormal basis for the eigenspace of $\lambda$? (Write the vectors ordered first by the first component, then by the second component. So if you were ordering the vectors $\vec{u}=\begin{bmatrix}
+  1\\
+  5\\
+  5
+  \end{bmatrix}$, $\vec{v}=\begin{bmatrix}
+    2\\
+    0\\
+    1
+  \end{bmatrix}$, and $\vec{w}=\begin{bmatrix}
+    2\\
+    5\\
+    5
+  \end{bmatrix}$, the order would be $\vec{w},\vec{v},\vec{u}$).
+
+
+  Answer:
+
+  The orthonormal basis for the eigenspace of $\lambda$ is $\begin{bmatrix}
+    \answer{1}\\
+    \answer{0}\\
+    \answer{0}
+  \end{bmatrix}$, $\begin{bmatrix}
+    \answer{0}\\
+    \answer{1}\\
+    \answer{0}
+  \end{bmatrix}$, $\begin{bmatrix}
+    \answer{0}\\
+    \answer{0}\\
+    \answer{1}
+  \end{bmatrix}$
+
+\end{enumerate}
+
+
+\end{problem}
+    
+\begin{problem}\label{prob:rotmatrixrealeig1}The rotation matrix in Example \ref{ex:eigsrotation} has complex eigenvectors and eigenvalues.  Think geometrically to find an example of a (non-identity) rotation matrix with real eigenvectors and eigenvalues. 
+    
+Enter degree measure between 0 and 360.
+    
+Answer:  Rotation through $\answer{180}$ degrees.
+\end{problem}
+    
+\begin{problem}\label{prob:eigenmultchoice}
+Can an eigenvalue have multiple eigenvectors associated with it?
+\begin{multipleChoice}
+    \choice[correct]{Yes}
+    \choice{No}
+    \end{multipleChoice}
+        
+    Can an eigenvector have multiple eigenvalues associated with it?
+    \begin{multipleChoice}
+    \choice{Yes}
+    \choice[correct]{No}
+    \end{multipleChoice}
+\end{problem}
+
+\end{document}

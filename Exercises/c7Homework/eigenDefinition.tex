@@ -6,7 +6,7 @@
 \begin{document}
 
 
-\begin{exercise}
+\begin{problem}
   Consider the matrix
   \begin{equation*}
     A = \startmat{rrr}
@@ -15,41 +15,33 @@
       -2 & 2 &  1 \\
     \stopmat.
   \end{equation*}
-  Which of the following vectors are eigenvectors of $A$? Find the
-  corresponding eigenvalues.
+  Consider the following vectors. 
   \begin{equation*}
     \vect{v}_1 = \startmat{r} 1 \\ 1 \\ -1 \stopmat,\quad
     \vect{v}_2 = \startmat{r} 1 \\ 1 \\ 0 \stopmat,\quad
     \vect{v}_3 = \startmat{r} 2 \\ 2 \\ -1 \stopmat,\quad
     \vect{v}_4 = \startmat{r} 0 \\ -1 \\ 1 \stopmat.
   \end{equation*}
-\end{exercise}
 
-\begin{exercise}
-  Let
-  \begin{equation*}
-    A = \startmat{rrr}
-      1  &  0 & 0 \\
-      -5 & -1 & 5 \\
-      -3 &  0 & 4 \\
-    \stopmat.
-  \end{equation*}
-  Find the eigenvectors corresponding to the eigenvalue $\eigenvar=4$.
-\end{exercise}
+  Which are eigenvectors of $A$? Find the
+  corresponding eigenvalues.
 
-\begin{exercise}
-  Let
-  \begin{equation*}
-    A = \startmat{rrr}
-      7 &  -4 &   8 \\
-      -1 &  4 &  -2 \\
-      -2 &  2 &  -1 \\
-    \stopmat.
-  \end{equation*}
-  Find the eigenvectors corresponding to the eigenvalue $\eigenvar=3$.
-\end{exercise}
+  \begin{selectAll}
+  
+    \choice[correct]{\vec{v}_1}
+    \choice[correct]{\vec{v}_2}
+    \choice{\vec{v}_3}
+    \choice[correct]{\vec{v}_4}
 
-\begin{exercise}
+  \end{selectAll}
+
+  Fill in the following equations. If the vector is not an eigenvalue, enter inf.
+
+  $A\vec{v}_1=\answer{1}\vec{v}_1$, $A\vec{v}_2=\answer{-1}\vec{v}_2$, $A\vec{v}_3=\answer{inf}\vec{v}_3$, $A\vec{v}_4=\answer{-1}\vec{v}_4$.
+
+\end{problem}
+
+\begin{problem}
   Let
   \begin{equation*}
     A = \startmat{rrr}
@@ -60,56 +52,42 @@
   \end{equation*}
   This matrix has eigenvalues $\eigenvar=1$ and $\eigenvar=4$. Find a
   basis for each eigenspace.
-\end{exercise}
 
-\begin{exercise}
-  Let
-  \begin{equation*}
-    A = \startmat{rrr}
-      2 &   4 &  -4 \\
-      -1 &  6 &  -9 \\
-      0 &   0 &  -3 \\
-    \stopmat.
-  \end{equation*}
-  This matrix has eigenvalues $\eigenvar=-3$ and $\eigenvar=4$. Find a
-  basis for each eigenspace.
-\end{exercise}
+  First find the eigenbasis for $\lambda=4$ and then for $\lambda=1$. Order the basis vectors by the absolute value of the first coordinate, the first coordinate of the eigenvectors is provided.
 
-\begin{exercise}
-  Suppose $A$ is a $3\times 3$-matrix with eigenvalues
-  $\eigenvar_1=1$, $\eigenvar_2=0$, and $\eigenvar_3=2$ and
-  corresponding eigenvectors
-  \begin{equation*}
-    \vect{v}_1 = \startmat{r}
-      -1 \\
-      -2 \\
-      -2
-    \stopmat,
-    \quad
-    \vect{v}_2 = \startmat{r}
-      1 \\
-      1 \\
-      1
-    \stopmat,
-    \quad\mbox{and}\quad
-    \vect{v}_3 = \startmat{r}
-      -1 \\
-      -4 \\
-      -3
-    \stopmat.
-  \end{equation*}
-  (By ``corresponding'', we mean that $\vect{v}_1$ corresponds to
-  $\eigenvar_1$, $\vect{v}_2$ corresponds to $\eigenvar_2$, and so
-  on).  Find
-  \begin{equation*}
-    A\startmat{r}
-      3 \\
-      -4 \\
-      3
-    \stopmat.
-  \end{equation*}
-  % \begin{solution}
-  % \end{solution}
-\end{exercise}
+  Answer:
+
+  $\lambda=4$ has basis vector $\begin{bmatrix}
+    -1\\
+    \answer{1}\\
+    \answer{0}
+  \end{bmatrix}$.
+
+  $\lambda=\answer{1}$ has basis vector $\begin{bmatrix}
+    -1\\
+    \answer{0}\\
+    \answer{1}
+  \end{bmatrix}$.
+
+  $\lambda=\answer{1}$ has basis vector $\begin{bmatrix}
+    0\\
+    \answer{1}\\
+    \answer{0}
+  \end{bmatrix}$.
+
+\end{problem}
+
+%\begin{problem}
+%  Let
+%  \begin{equation*}
+%    A = \startmat{rrr}
+%      2 &   4 &  -4 \\
+%      -1 &  6 &  -9 \\
+%      0 &   0 &  -3 \\
+%    \stopmat.
+%  \end{equation*}
+%  This matrix has eigenvalues $\eigenvar=-3$ and $\eigenvar=4$. Find a
+%  basis for each eigenspace.
+%\end{problem}
 
 \end{document}

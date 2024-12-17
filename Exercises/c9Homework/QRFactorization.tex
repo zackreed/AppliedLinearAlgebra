@@ -18,43 +18,42 @@ In each case find the QR-factorization of $A$.
 2 & 1 \\
 1 &1
 \end{array}\right]$
-\item $A = \left[ \begin{array}{rrr}
-1 & 1 & 1 \\
-1 & 1 & 0 \\
-1 & 0 & 0 \\
-0 & 0 & 0
-\end{array}\right]$
-\item $A = \left[ \begin{array}{rrr}
-1 & 1 & 0 \\
--1 & 0 & 1 \\
-0 & 1 & 1 \\
-1 & -1 & 0
-\end{array}\right]$
+%\item $A = \left[ \begin{array}{rrr}
+%1 & 1 & 1 \\
+%1 & 1 & 0 \\
+%1 & 0 & 0 \\
+%0 & 0 & 0
+%\end{array}\right]$
+%\item $A = \left[ \begin{array}{rrr}
+%1 & 1 & 0 \\
+%-1 & 0 & 1 \\
+%0 & 1 & 1 \\
+%1 & -1 & 0
+%\end{array}\right]$
 \end{enumerate}
-Click the arrow to see answer.
+
 
 \begin{enumerate}
-\item  $Q = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
-2 & -1 \\
-1 & 2
-\end{array}\right]$,
-    $R = \frac{1}{\sqrt{5}}\left[ \begin{array}{rr}
-5 & 3 \\
-0 & 1
-\end{array}\right]$
-    
-\item  $Q = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
-1 & 1 & 0 \\
--1 & 0 & 1 \\
-0 & 1 & 1 \\
-1 & -1 & 1
-\end{array}\right]$, \\
-$R = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
-3 & 0 & -1 \\
-0 & 3 & 1 \\
-0 & 0 & 2
-\end{array}\right]$
-    
+    \item  $Q = \answer{1/\sqrt{5}}\left[ \begin{array}{rr}
+    \answer{2} & \answer{-1} \\
+    \answer{1} & \answer{2}
+    \end{array}\right]$,
+        $R = \answer{1/\sqrt{5}}\left[ \begin{array}{rr}
+    \answer{5} & \answer{3} \\
+    \answer{0} & \answer{1}
+    \end{array}\right]$
+        
+    \item  $Q = \answer{1/\sqrt{3}}\left[ \begin{array}{rrr}
+    \answer{1} & \answer{1} & \answer{0} \\
+    \answer{-1} & \answer{0} & \answer{1} \\
+    \answer{0} & \answer{1} & \answer{1} \\
+    \answer{1} & \answer{-1} & \answer{1}
+    \end{array}\right]$, \\
+    $R = \answer{1/\sqrt{3}}\left[ \begin{array}{rrr}
+    \answer{3} & \answer{0} & \answer{-1} \\
+    \answer{0} & \answer{3} & \answer{1} \\
+    \answer{0} & \answer{0} & \answer{2}
+    \end{array}\right]$
 \end{enumerate}
 
 \end{problem}
@@ -84,63 +83,21 @@ $R = \frac{1}{\sqrt{3}}\left[ \begin{array}{rrr}
     
 %\end{problem}
     
-\begin{problem}
-In each case, find the exact eigenvalues and then approximate them using the QR-algorithm.
+%\begin{problem}
+%In each case, find the exact eigenvalues and then approximate them using the QR-algorithm.
     
     
-\begin{enumerate}
-\item $A = \left[ \begin{array}{rr}
-1 & 1 \\
-1 & 0
-\end{array}\right]$
-\item $A = \left[ \begin{array}{rr}
-3 & 1 \\
-1 & 0
-\end{array}\right]$
-\end{enumerate}
+%\begin{enumerate}
+%\item $A = \left[ \begin{array}{rr}
+%1 & 1 \\
+%1 & 0
+%\end{array}\right]$
+%\item $A = \left[ \begin{array}{rr}
+%3 & 1 \\
+%1 & 0
+%\end{array}\right]$
+%\end{enumerate}
     
-Click the arrow to see answer.
 
-\begin{enumerate}
-\item  Eigenvalues $\lambda_{1} = \frac{1}{2}(3 + \sqrt{13}) = 3.302776$, $\lambda_{2} = \frac{1}{2}(3 - \sqrt{13}) = -0.302776$
-    
-$A_{1} = \left[ \begin{array}{rr}
-3 & 1 \\
-1 & 0
-\end{array}\right]$, $Q_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
-3 & -1 \\
-1 & 3
-\end{array}\right]$, $R_{1} = \frac{1}{\sqrt{10}}\left[ \begin{array}{rr}
-10 & 3 \\
-0 & -1
-\end{array}\right]$ \\
-$A_{2} = \frac{1}{10}\left[ \begin{array}{rr}
-33 & -1 \\
--1 & -3
-\end{array}\right]$, \\ $Q_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
-33 & 1 \\
--1 & 33
-\end{array}\right]$, \\ $R_{2} = \frac{1}{\sqrt{1090}}\left[ \begin{array}{rr}
-109 & -3 \\
-0 & -10
-\end{array}\right]$ \\
-$A_{3} = \frac{1}{109}\left[ \begin{array}{rr}
-360 & 1 \\
-1 & -33
-\end{array}\right]$ \\ ${} = \left[ \begin{array}{rr}
-3.302775 & 0.009174 \\
-0.009174 & -0.302775
-\end{array}\right]$
-    
-\end{enumerate}
-
-\end{problem}
-    
-\begin{problem}\label{QR-special-2x2}
-Apply the QR-algorithm to \\ $A = \left[ \begin{array}{rr}
-2 & -3 \\
-1 & -2
-\end{array}\right]$.
-\end{problem}
 
 \end{document}

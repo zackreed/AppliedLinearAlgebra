@@ -5,7 +5,7 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
-\begin{example}
+\begin{problem}
     Find $\startmat{r}
       1 \\
       2 \\
@@ -17,7 +17,9 @@
       1 \\
       3
     \stopmat$.
-    \begin{solution}
+    
+    Answer:
+
       $\startmat{r}
         1 \\
         2 \\
@@ -28,13 +30,13 @@
         0 \\
         1 \\
         3
-      \stopmat = 17$.
-    \end{solution}
-  \end{example}
+      \stopmat = \answer{17}$.
+    
+  \end{problem}
   
 
   
-  \begin{example}
+  \begin{problem}
     Find $\cos \theta$ where $\theta$ is the angle between the vectors
     \begin{equation*}
       \vect{u}
@@ -52,18 +54,14 @@
         2
       \stopmat
     \end{equation*}
-    \begin{solution}
-      $\displaystyle\cos\theta=\frac{\startmat{ccc}
-          3 & -1 & -1
-        \stopmat^T \dotprod
-        \startmat{ccc}
-          1 & 4 & 2
-        \stopmat^T}
-      {\sqrt{9+1+1}\sqrt{1+16+4}}= \frac{-3}{\sqrt{11}\sqrt{21}}$.
-    \end{solution}
-  \end{example}
+    
+    Answer:
+    
+      $\displaystyle\cos\theta=\answer[tolerance=.5]{-3/\sqrt{11}/\sqrt{21}}$.
+
+  \end{problem}
   
-  \begin{example}
+  \begin{problem}
     Find $\proj_{\vect{v}}(\vect{w})$ where
     $\vect{w}=\startmat{r}
       1 \\
@@ -74,23 +72,21 @@
       2 \\
       3
     \stopmat$.
-    \begin{solution}
+    
+    Answer:
+
       $\displaystyle
       \def\arraystretch{1.2}
       \frac{\vect{v}\dotprod \vect{w}}{\vect{v}\dotprod
-        \vect{v}}\,\vect{v}=\frac{-5}{14}\startmat{r}
-        1 \\
-        2 \\
-        3
-      \stopmat =\startmat{c}
-        -\frac{5}{14} \\
-        -\frac{5}{7} \\
-        -\frac{15}{14}
+        \vect{v}}\,\vect{v}=\startmat{c}
+        \answer{-5/14} \\
+        \answer{-5/7} \\
+        \answer{-15/14}
       \stopmat$.
-    \end{solution}
-  \end{example}
+    
+  \end{problem}
   
-  \begin{example}
+  \begin{problem}
     Decompose the vector $\vect{v}$ into $\vect{v}=\vect{a}+\vect{b}$
     where $\vect{a}$ is parallel to $\vect{u}$ and $\vect{b}$ is
     orthogonal to $\vect{u}$.
@@ -99,12 +95,13 @@
       \vect{u} = \startmat{r} 1\\-1\\2 \stopmat.
     \end{equation*}
   
-    \begin{solution}
+    Answer:
+
       \begin{equation*}
-        \vect{a} ~=~ \startmat{c} -3/2\\3/2\\-3 \stopmat,\quad
-        \vect{b} ~=~ \startmat{c} 9/2\\1/2\\-2 \stopmat.
+        \vect{a} ~=~ \startmat{c} \answer{-3/2}\\\answer{3/2}\\\answer{-3} \stopmat,\quad
+        \vect{b} ~=~ \startmat{c} \answer{9/2}\\\answer{1/2}\\\answer{-2} \stopmat.
       \end{equation*}
-    \end{solution}
-  \end{example}
+
+  \end{problem}
 
 \end{document}

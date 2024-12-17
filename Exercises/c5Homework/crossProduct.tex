@@ -5,7 +5,7 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
-  \begin{example}
+  \begin{problem}
     Find the volume of the parallelepiped determined by the vectors
     $\startmat{r}
       1 \\
@@ -21,65 +21,29 @@
       2 \\
       3
     \stopmat$.
-    \begin{solution}
-      $\startmat{r}1\\1\\3\stopmat
-        \times \startmat{r}-7\\-2\\2\stopmat 
-      \cdot \startmat{r}-5\\-6\\3\stopmat =
-      \startmat{r}8\\-23\\5\stopmat
-      \cdot \startmat{r}-5\\-6\\3\stopmat =
-      113$.
-    \end{solution}
-  \end{example}
+    
+    %$\startmat{r}1\\1\\3\stopmat
+    %    \times \startmat{r}-7\\-2\\2\stopmat 
+    %  \cdot \startmat{r}-5\\-6\\3\stopmat =
+    %  \startmat{r}8\\-23\\5\stopmat
+    %  \cdot \startmat{r}-5\\-6\\3\stopmat =
+    The volume is $\answer{113}$.
+    
+  \end{problem}
 
-
-  
-  \begin{example}
-    Which of the following systems of vectors
-    $\vect{u},\vect{v},\vect{w}$ are right-handed? Which are
-    left-handed? Which are coplanar?
-    \begin{enumerate}
-    \item $\vect{u}=\startmat{c}1\\0\\1\stopmat$, $\vect{v}=\startmat{c}1\\2\\0\stopmat$, $\vect{w}=\startmat{c}0\\0\\1\stopmat$.
-    \item $\vect{u}=\startmat{c}0\\1\\1\stopmat$, $\vect{v}=\startmat{c}-1\\2\\0\stopmat$, $\vect{w}=\startmat{c}1\\1\\2\stopmat$.
-    \item $\vect{u}=\startmat{c}1\\-1\\0\stopmat$, $\vect{v}=\startmat{c}1\\0\\1\stopmat$, $\vect{w}=\startmat{c}3\\1\\4\stopmat$.
-    \item $\vect{u}=\startmat{c}1\\0\\0\stopmat$, $\vect{v}=\startmat{c}1\\2\\0\stopmat$, $\vect{w}=\startmat{c}2\\0\\-1\stopmat$.
-    \end{enumerate}
-    \begin{solution}
-      \begin{enumerate}
-      \item We have
-        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
-        \cdot \vect{w} = \startmat{c}-2\\1\\2\stopmat\cdot\startmat{c}0\\0\\1\stopmat=2$, so
-        the box product is positive. This means that the system of vectors
-        $\vect{u},\vect{v},\vect{w}$ is right-handed.
-      \item We have
-        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
-        \cdot \vect{w} = \startmat{c}-2\\-1\\1\stopmat\cdot\startmat{c}1\\1\\2\stopmat=-1$, so
-        the box product is negative and the system is left-handed.
-      \item We have
-        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
-        \cdot \vect{w} = \startmat{c}-1\\-1\\1\stopmat\cdot\startmat{c}3\\1\\4\stopmat=0$, so
-        the box product is zero. This means that the volume of the
-        parallelepiped spanned by $\vect{u},\vect{v},\vect{w}$ is empty,
-        i.e., the vectors are coplanar.
-      \item We have
-        $\boxprod{\vect{u},\vect{v},\vect{w}} = (\vect{u}\times\vect{v})
-        \cdot \vect{w} = \startmat{c}0\\0\\2\stopmat\cdot\startmat{c}2\\0\\-1\stopmat=-2$, so
-        the box product is negative and the system is left-handed.
-      \end{enumerate}
-    \end{solution}
-  \end{example}
   
   
-  \begin{example} \label{exer-box-product-zero}
-    What does it mean geometrically if the box product of three vectors
-    equals zero?
-    \begin{solution}
-      It means that if you place them so that they all have their tails
-      at the same point, the three will lie in the same plane.
-    \end{solution}
-  \end{example}
+  %\begin{problem} \label{exer-box-product-zero}
+  %  What does it mean geometrically if the box product of three vectors
+  %  equals zero?
+  %  \begin{solution}
+  %    It means that if you place them so that they all have their tails
+  %    at the same point, the three will lie in the same plane.
+  %  \end{solution}
+  %\end{problem}
   
   
-  \begin{example}
+  \begin{problem}
     Find the area of the parallelogram determined by the vectors
     $\startmat{r}
       1 \\
@@ -90,7 +54,7 @@
       -2 \\
       1
     \stopmat$.
-    \begin{solution}
+
       $\startmat{r}
         1 \\
         2 \\
@@ -101,103 +65,80 @@
         -2 \\
         1
       \stopmat = \startmat{r}
-        8 \\
-        8 \\
-        -8
-      \stopmat$. The area of the parallelogram is $8\sqrt{3}$.
-    \end{solution}
-  \end{example}
+        \answer{8} \\
+        \answer{8} \\
+        \answer{-8}
+      \stopmat$. 
+      
+      The area of the parallelogram is $\answer[tolerance=.5]{8\sqrt{3}}$.
+    
+  \end{problem}
   
-  \begin{example}
-    Find the area of the parallelogram determined by the vectors
-    $\startmat{r}
-      1 \\
-      0 \\
-      3
-    \stopmat$, $\startmat{r}
-      4 \\
-      -2 \\
-      1
-    \stopmat$.
-    \begin{solution}
-      $\startmat{r}
-        1 \\
-        0 \\
-        3
-      \stopmat \times
-      \startmat{r}
-        4 \\
-        -2 \\
-        1
-      \stopmat = \startmat{r}
-        6 \\
-        11 \\
-        -2
-      \stopmat$. The area of the parallelogram is
-      $\sqrt{36+121+4}=\sqrt{161}$. 
-    \end{solution}
-  \end{example}
   
-  \begin{example}
+  \begin{problem}
     Find the area of the parallelogram with vertices $(-2,3,1)$,
     $(2,1,1)$, $(1,2,-1)$, and $(5,0,-1)$.
-    \begin{solution}
-      Let $P=(-2,3,1)$, $Q=(2,1,1)$, $R=(1,2,-1)$, and $S=(5,0,-1)$.
-      We have
-      $\longvect{PQ}\times\longvect{PR}
-      =
-      \startmat{r} 4 \\ -2 \\ 0 \stopmat
-      \times
-      \startmat{r} 3 \\ -1 \\ -2 \stopmat
-      =
-      \startmat{r} 5 \\ 8 \\ 2 \stopmat$.
-      The area of the parallelogram is
-      $\norm{\longvect{PQ}\times\longvect{PR}} = \sqrt{5^2+8^2+2^2} =
-      \sqrt{93}$.
-    \end{solution}
-  \end{example}
+
+    %\begin{solution}
+    %  Let $P=(-2,3,1)$, $Q=(2,1,1)$, $R=(1,2,-1)$, and $S=(5,0,-1)$.
+    %  We have
+    %  $\longvect{PQ}\times\longvect{PR}
+    %  =
+    %  \startmat{r} 4 \\ -2 \\ 0 \stopmat
+    %  \times
+    %  \startmat{r} 3 \\ -1 \\ -2 \stopmat
+    %  =
+    %  \startmat{r} 5 \\ 8 \\ 2 \stopmat$.
+    %  The area of the parallelogram is
+    %  $\norm{\longvect{PQ}\times\longvect{PR}} = \sqrt{5^2+8^2+2^2} =
+    The area is $\answer[tolerance=.5]{\sqrt{93}}$.
+    %\end{solution}
+  \end{problem}
   
-  \begin{example}
+  \begin{problem}
     Find the area of the triangle determined by the three points,
     $(1,0,3),(4,1,0)$ and $(-3,1,1)$.
-    \begin{solution}
-      Let $P=(1,0,3)$, $Q=(4,1,0)$, and $R=(-3,1,1)$. 
-      $\longvect{PQ}\times\longvect{PR}
-      = \startmat{r}
-        3 \\
-        1 \\
-        -3
-      \stopmat \times \startmat{r}
-        -4 \\
-        1 \\
-        -2
-      \stopmat = \startmat{r}
-        1 \\
-        18 \\
-        7
-      \stopmat$. The area of the triangle is
-      $\displaystyle\frac{1}{2}\norm{\longvect{PQ}\times\longvect{PR}} =
-      \frac{1}{2}\sqrt{1+18^2+7^2}=\frac{1}{2}\sqrt{374}$. 
-    \end{solution}
-  \end{example}
+    
+    %  Let $P=(1,0,3)$, $Q=(4,1,0)$, and $R=(-3,1,1)$. 
+    %  $\longvect{PQ}\times\longvect{PR}
+    %  = \startmat{r}
+    %    3 \\
+    %    1 \\
+    %    -3
+    %  \stopmat \times \startmat{r}
+    %    -4 \\
+    %    1 \\
+    %    -2
+    %  \stopmat = \startmat{r}
+    %    1 \\
+    %    18 \\
+    %    7
+    %  \stopmat$. 
+    
+    The area of the triangle is
+     % $\displaystyle\frac{1}{2}\norm{\longvect{PQ}\times\longvect{PR}} =
+     % \frac{1}{2}\sqrt{1+18^2+7^2}=\frac{1}{2}
+     $\answer[tolerance=1]{\sqrt{374}}$. 
+    %\end{solution}
+  \end{problem}
   
-  \begin{example}
-    Find the area of the triangle determined by the three points,
-    $(1,2,3),(2,3,4)$ and $(3,4,5)$. Did something
-    interesting happen here? What does it mean geometrically?
-    \begin{solution}
-      Let $P=(1,2,3)$, $Q=(2,3,4)$, and $R=(3,4,5)$. 
-      $\longvect{PQ}\times\longvect{PR}
-      = \startmat{r}
-        1 \\ 1 \\ 1
-      \stopmat \times \startmat{r}
-        2 \\ 2 \\ 2
-      \stopmat = \startmat{r}
-        0 \\ 0 \\ 0
-      \stopmat$.
-      The area of the triangle is 0. It means the three points are on
-      a line.
-    \end{solution}
-  \end{example}
+  %\begin{problem}
+  %  Find the area of the triangle determined by the three points,
+  %  $(1,2,3),(2,3,4)$ and $(3,4,5)$. Did something
+  %  interesting happen here? What does it mean geometrically?
+  %  \begin{solution}
+  %    Let $P=(1,2,3)$, $Q=(2,3,4)$, and $R=(3,4,5)$. 
+  %    $\longvect{PQ}\times\longvect{PR}
+  %    = \startmat{r}
+  %      1 \\ 1 \\ 1
+  %    \stopmat \times \startmat{r}
+  %      2 \\ 2 \\ 2
+  %    \stopmat = \startmat{r}
+  %      0 \\ 0 \\ 0
+  %    \stopmat$.
+  %    The area of the triangle is 0. It means the three points are on
+  %    a line.
+  %  \end{solution}
+  %\end{problem}
 
 \end{document}

@@ -5,42 +5,20 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
-
-\section*{Exercises}
-
-\begin{exercise}
-  Find vector and parametric equations for the plane through the
+\begin{problem}
+  Complete the normal vector and point listed below that describes the plane through the
   points $P = (0,1,1)$, $Q = (-1,2,1)$, and $R = (1,1,2)$.
-\end{exercise}
 
-\begin{exercise}
-  Consider the following vector equation for a plane in $\R^4$:
-  \begin{equation*}
-    \startmat{c} x\\y\\z\\w \stopmat
-    = \startmat{r} 1\\2\\0\\0 \stopmat
-    + t\,\startmat{r} 1\\0\\0\\1 \stopmat
-    + s\,\startmat{r} -1\\-1\\1\\0 \stopmat.
-  \end{equation*}
-  Find a new vector equation for the same plane by doing the change of
-  parameters%
-  \index{plane!change of parameters}%
-  \index{change of parameters!plane}
-  $t=1-r_1$, $s=r_1+r_2$.
-  \begin{solution}
-    We have
-    \begin{equation*}
-      \startmat{c} x\\y\\z\\w \stopmat
-      = \startmat{r} 1\\2\\0\\0 \stopmat
-      + (1-r_1)\,\startmat{r} 1\\0\\0\\1 \stopmat
-      + (r_1+r_2)\,\startmat{r} -1\\-1\\1\\0 \stopmat
-      = \startmat{r} 2\\2\\0\\1 \stopmat
-      + r_1\,\startmat{r} -2\\-1\\1\\-1 \stopmat
-      + r_2\,\startmat{r} -1\\-1\\1\\0 \stopmat.
-    \end{equation*}
-  \end{solution}
-\end{exercise}
+  Answer:
 
-\begin{exercise}
+  The plane can be described by the point $P$ and the normal vector $\vec{n}=\begin{bmatrix}
+    -1\\
+    \answer{1}\\
+    \answer{1}
+  \end{bmatrix}$.
+\end{problem}
+
+\begin{problem}
   Determine which of the following points lie on the plane through the
   points $P = (2,6,1)$, $R = (1,4,1)$, and $Q = (1,2,-1)$.
   \begin{enumerate}
@@ -48,73 +26,53 @@
   \item $S_2=(1,5,2)$.
   \item $S_3=(0,0,0)$.
   \end{enumerate}
-\end{exercise}
 
-\begin{exercise}
-  Use cross products to find the normal vector to the plane going
-  through the points $P=(1,2,3)$, $Q=(-2,1,8)$ and $R=(2,2,2)$.
-\end{exercise}
+  Select all points that lie on the plane.
+  \begin{selectAll}
+  \choice{$S_1$}
+  \choice{$S_2$}
+  \choice{$S_3$}
+  \end{selectAll}
+\end{problem}
 
-\begin{exercise}
-  Find normal and standard equations of the plane through the
-  point $P=(1,1,2)$ and orthogonal to $\vect{n}=\startmat{c} 1 \\ 0 \\ -1 \stopmat$.
-\end{exercise}
+\begin{problem}
+  The intersection between the planes $x+3y+4z=3$ and $2x+5y-z=2$
+  Is \begin{multipleChoice}
+    \choice[correct]{a line}
+    \choice{a plane} 
+    \choice{empty}
+  \end{multipleChoice}.
+\end{problem}
 
-\begin{exercise}
-  Find normal and standard equations for the plane through the points
-  $P = (2,1,0)$, $Q=(1,-1,0)$, and $R=(1,1,-1)$.
-\end{exercise}
-
-\begin{exercise}
-  Find a vector equation for the plane $2x+y-z=1$.
-\end{exercise}
-
-\begin{exercise}
-  Find the intersection between the planes $x+3y+4z=3$ and $2x+5y-z=2$.
-  Is the intersection a line, a plane, or empty?
-\end{exercise}
-
-\begin{exercise}
-  Find the intersection of the line
+\begin{problem}
+  The intersection of the line
   \begin{equation*}
     \startmat{r} x \\ y \\ z \stopmat
     = \startmat{r} 1 \\ 1 \\ 1 \stopmat
     + t \startmat{r} 2 \\ -1 \\ 2 \stopmat
   \end{equation*}
-  and the plane $x+3y+z = 6$.
-  Is the intersection a point, a line, or empty?
-\end{exercise}
+  and the plane $x+3y+z = 6$ is \begin{multipleChoice}
+    \choice{a line}
+    \choice[correct]{a plane} 
+    \choice{empty}
+  \end{multipleChoice}.
+\end{problem}
 
-\begin{exercise}
-  Find the angle between the planes $x+y=5$ and $2x+y-z=4$.
-\end{exercise}
+%\begin{problem}
+%  Find the angle between the planes $x+y=5$ and $2x+y-z=4$.
+%\end{problem}
 
-\begin{exercise}
-  Find the angle between the line
-  \begin{equation*}
-    \startmat{r} x \\ y \\ z \stopmat
-    = \startmat{r} 0 \\ 3 \\ 7 \stopmat
-    + t \startmat{r} 1 \\ 1 \\ 4 \stopmat
-  \end{equation*}
-  and the plane $4x+7y+4z = 6$.
-\end{exercise}
+%\begin{problem}
+%  Find the angle between the line
+%  \begin{equation*}
+%    \startmat{r} x \\ y \\ z \stopmat
+%    = \startmat{r} 0 \\ 3 \\ 7 \stopmat
+%    + t \startmat{r} 1 \\ 1 \\ 4 \stopmat
+%  \end{equation*}
+%  and the plane $4x+7y+4z = 6$.
+%\end{problem}
 
-\begin{exercise}
-  Find the shortest distance from the point $P = (1,1,-1)$ to the plane
-  given by $x + 2y + 2z = 6$, and find the point $Q$ on the plane
-  that is closest to $P$.
-\end{exercise}
 
-\begin{exercise}
-  Use Exercise~\ref{exer-box-product-zero} to find an equation of a
-  plane containing the two vectors $\vect{p}$ and $\vect{q}$ and the
-  point $0$. \textbf{Hint:} If $(x,y,z)$ is a point in this
-  plane, the volume of the parallelepiped determined by $(x,y,z)$
-  and the vectors $\vect{p}$, $\vect{q}$ equals 0.
-  \begin{solution}
-    $\vect{x}\dotprod (\vect{a}\times \vect{b}) =0$.
-  \end{solution}
-\end{exercise}
 
 
 \end{document}

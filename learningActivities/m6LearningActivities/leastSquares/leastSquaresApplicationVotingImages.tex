@@ -114,8 +114,9 @@ The data is technically 3-dimensional, and it would be messy to try and make sen
 
 looking closely at the data, however, you might notice that the data is localized with a pseudo-linear relationship, generally moving up and to the right in 3D space. In fact, if you plot a line through the data, you notice that the datapoints don't stray too far from the line, as seen here:
 
+
 \begin{center}
-  \includegraphics{noisy_line_2.png}
+  \includegraphics[width=22.62cm, height=17cm]{noisy_line_2.png}
 \end{center}
 
 Lines are $1$-dimensional vector spaces that can be described just by a point and a direction vector, which you can find from the loaded data as $\texttt{line\_point}$ and $\texttt{line\_direction}$. 
@@ -137,7 +138,7 @@ Try the following:
 You should see the following line, which is the projections of the data points along the line.
 
 \begin{center}
-  \includegraphics{noisy_line_projections.png}
+  \includegraphics[width=22.62cm, height=17cm]{noisy_line_projections.png}
 \end{center}
 
 You can then separate the points along the center, by creating "left" and "right" sets and plotting them individually.
@@ -155,7 +156,7 @@ You can then separate the points along the center, by creating "left" and "right
 You should see a color-separated plot like this:
 
 \begin{center}
-  \includegraphics{noisy_line_separated.png}
+  \includegraphics[width=22.62cm, height=17cm]{noisy_line_separated.png}
 \end{center}
 
 This brief (and somewhat simplistic) analysis relied on the fact that the $3$-dimensional data was pretty close to a $1$-dimensional subspace, a line, which we could then exploit to reduce the complexity of the data while preserving the important characteristics of the data. 

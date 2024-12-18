@@ -7,50 +7,194 @@
 \begin{document}
 \begin{abstract}
 
-    In this learning activity, you will be 
 \end{abstract}
 \maketitle
 
-\section*{Introduction}
-In machine learning (ML), some of the most important linear algebra concepts are the \textbf{singular value decomposition (SVD)} and \textbf{principal component analysis (PCA)}. With all the raw data collected, how can we discover structures? For example, with the interest rates of the last 6 days, can we understand its composition to spot trends?
+\section*{Introduction: Matrix Decompositions}
+In previous sections we've spent much time multiplying matrices together to form single matrices representing the emalgumation of the transformations from each matrix in the product. 
 
-This becomes even harder for high-dimensional raw data. It is like finding a needle in a haystack. SVD allows us to extract and untangle information. In this article, we will detail SVD and PCA. We assume you have basic linear algebra knowledge, including rank and eigenvectors. If you experience difficulties in reading this article, I will suggest refreshing those concepts first. At the end of the article, we will answer some questions in the interest rate example above. This article also contains optional sections. Feel free to skip them according to your interest level.
+For instance, the matrix $A=\begin{bmatrix} 2 & -1 \\ 3 & 0\end{bmatrix}$ is the product of a $90^\circ$ rotation matrix $\begin{bmatrix}0 & -1\\ 1 & 0\end{bmatrix}$, a shear $\begin{bmatrix} 1 & 2 \\ 0 & 1\end{bmatrix}$ and a vertical stretch $\begin{bmatrix} 1 & 0 \\ 0 & 3\end{bmatrix}$. We're cheating a little bit since we know how $A$ was built, but we could say that $A$ can be \emph{decomposed} into three matrices via the product 
 
-\section*{Misconceptions (optional for beginners)}
-Some common questions that non-beginners may ask include whether PCA is only for dimension reduction. PCA reduces dimension but is far more than that. As described in Wikipedia:
+$$\begin{bmatrix} 2 & -1 \\ 3 & 0\end{bmatrix}=\begin{bmatrix} 1 & 0 \\ 0 & 3\end{bmatrix}*\begin{bmatrix} 1 & 2 \\ 0 & 1\end{bmatrix}*\begin{bmatrix}0 & -1\\ 1 & 0\end{bmatrix}.$$
 
-\begin{quote}
-Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables (entities each of which takes on various numerical values) into a set of values of linearly uncorrelated variables called principal components.
-\end{quote}
+You can check this effect by transforming points by the matrix $A$, such as the points in $\texttt{+linalg/face\_points.mat}$ via
 
-From a simplified perspective, PCA transforms data linearly into new properties that are uncorrelated. For ML, positioning PCA as feature extraction may allow us to explore its potential better than just dimension reduction.
+\begin{verbatim}
 
-\section{SVD and PCA Differences}
-SVD decomposes a matrix into special matrices that are easy to manipulate and analyze. PCA focuses on the most significant components. SVD allows for finding PCA by truncating less important basis vectors in the original SVD matrix.
+  load +linalg/face_points.mat
+  rotate_1=[cos(pi/2) -sin(pi/2);
+    sin(pi/2) cos(pi/2)]
+  shear_1=[1 2;
+      0 1]
+  stretch_y=[1 0;
+      0 3]
+  A=stretch_y*shear_1*rotate_1
+  trans_face=A*face_points
+  linalg.simple_plot_cloud(trans_face);
 
-\section{Matrix Diagonalization}
-In the article on eigenvalue and eigenvectors, we describe a method to decompose an \(n \times n\) square matrix \(A\) into:
+\end{verbatim}
 
-\[
-A = PDP^{-1}
-\]
+which yields the following figure 
 
-where \(D\) is a diagonal matrix containing eigenvalues of \(A\).
+%1120x840
+\begin{center}
+  \includegraphics[width=29.63cm, height=22.22cm]{face_svd_intro_A.png}
+\end{center}
 
-\section{Singular Vectors \& Singular Values}
-For any \(m \times n\) matrix \(A\), consider \(AA^\top\) and \(A^\top A\):
+If you then individually apply the transformations to $\texttt{face\_points}$, you should yeild the same figure. 
 
-\begin{itemize}
-    \item symmetrical,
-    \item square,
-    \item at least positive semidefinite (eigenvalues are zero or positive),
-    \item both matrices have the same positive eigenvalues, and
-    \item both have the same rank \(r\) as \(A\).
-\end{itemize}
+We also spent a considerable amount of time finding inverse matrices as products of elementary matrices via Gaussian Elimination. For instance, if we reverse the transformations (i.e. find the inverse of each transformation) we then get the inverse matrix $A^{-1}$.
 
-These matrices, common in ML, allow us to find orthonormal eigenvectors.
+Reversing a vertical stretch is the vertical compression $\begin{bmatrix}1 &0\\
+  0 &1/3\end{bmatrix}$ which yields
 
-Let’s introduce some terms. The eigenvectors of \(AA^\top\) are denoted by \(u_i\) and of \(A^\top A\) by \(v_i\), known as the \textbf{singular vectors} of \(A\). Their square roots are called \textbf{singular values}.
+  \begin{verbatim}
+
+    reverse_face=[1 0;0 1/3]*trans_face
+    linalg.simple_plot_cloud(reverse_face)
+
+  \end{verbatim}
+
+  %1120x840
+\begin{center}
+  \includegraphics[width=29.63cm, height=22.22cm]{face_svd_intro_A_reverse_1.png}
+\end{center}
+
+then you un-do the shear by shearing in the reverse direction $\begin{bmatrix}1 &-2\\
+  0 &1\end{bmatrix}$ which yields 
+
+  \begin{verbatim}
+
+    reverse_face=[1 -2;0 1]*reverse_face
+    linalg.simple_plot_cloud(reverse_face)
+
+  \end{verbatim}
+
+  %1120x840
+\begin{center}
+  \includegraphics[width=29.63cm, height=22.22cm]{face_svd_intro_A_reverse_2.png}
+\end{center}
+
+and then you un-do the rotation by rotating in the reverse direction $\begin{bmatrix}\cos(-\pi/2) & -\sin(-\pi/2)\\
+  \sin(-\pi/2) & \cos(-\pi/2)\end{bmatrix}$,
+
+  \begin{verbatim}
+
+    reverse_face=[0 -1;-1 0]*reverse_face
+    linalg.simple_plot_cloud(reverse_face)
+
+  \end{verbatim}
+
+which yields the original face.
+
+This means that we have a decomposition of $A^{-1}$ as 
+$$\begin{bmatrix}\cos(-\pi/2) & -\sin(-\pi/2)\\\sin(-\pi/2) & \cos(-\pi/2)\end{bmatrix}*\begin{bmatrix}1 &-2\\0 &1\end{bmatrix}*\begin{bmatrix}1 &0\\0 &1/3\end{bmatrix}=\begin{bmatrix}0 & 1/3\\-1 & 2/3\end{bmatrix}.$$
+
+Important data analysis techniques arising from Linear Algebra recreate this process of \emph{decomposition}, but start with a matrix for which we don't know the decomposition and end with the product of two or more matrices that make up the matrix. This would be akin to starting with $A$, performing some Linear Algebra manipulations on $A$, and ending up with the otherwise unknown matrices $\begin{bmatrix} 1 & 0 \\ 0 & 3\end{bmatrix}$, $\begin{bmatrix} 1 & 2 \\ 0 & 1\end{bmatrix}$, and $\begin{bmatrix}0 & -1\\ 1 & 0\end{bmatrix}$. 
+
+
+The analysis on voting records in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{the previous section} can be performed through a special matrix decomposition called the \emph{singular value decomposition}. This particular decomposition forms the backbone of many modern data analysis techniques, and is at times the first step one takes when buildling machine learlning models today. The \emph{singular value decomposition} (SVD) is also useful in engineering, the sciences, and many software-based applications. We will be using the SVD as a context in which to unpack many important ideas in Linear Algebra.
+
+n many mathematics texts, you spend the majority of your time learning how to \emph{compute} something, often by hand, and then only later do you learn \emph{why} you might make a computation or \emph{how} a computation can be used for various tasks. Hopefully this process accompanies some intuition about why the computation works the way it does. 
+
+As you move beyond this course, however, and especially once you progress into your specific domains of study (engineering, data science, etc.), you will increasingly rely on technology to perform computations for you and your primary job is to know \emph{when} to make a computation, to \emph{interpret} the result of that computation, and to know \emph{what went wrong or right} when a computation yielded an unexpected result. 
+
+We will foreground this latter approach to learning the SVD. In many respects, we have already been employing these emphases already, but this focus will be especially true for the SVD as we will gain a general understanding of one method of SVD computation at the very end of this chapter, and then gain other more employable computations in later chapters, but will largely spend our time: learning \emph{what} the SVD is, learning \emph{how} to use it in various situations, and using technology to calculate it for us.
+
+\section{SVD Part 1: Rotations and Stretches}
+
+The first important aspect of the SVD is that it decomposes \emph{any} matrix $M$ into three matrices, often called $U$, $S$, and $V$ (though you can label these matrices whatever you want). This is a very important utility of the SVD, that it works on any matrix. Many other useful decompositions only work on certain matrices with special conditions.
+
+Let's explore the properties of these $U$, $S$, and $V$ matrices by re-examining our original matrix $A=\begin{bmatrix} 2 & -1 \\ 3 & 0\end{bmatrix}$.
+
+To find the SVD in MATLAB, use the syntax $\texttt{[U, S, V]=svd(A)}$. $\texttt{svd()}$ is one of those functions that gives multiple outputs, so if you don't list and name each output it will only return the first output (in this case the $U$ matrix). (Note: Sometimes you'll see $V$ denoted as $V^\dagger$ and $S$ denoted as $\Sigma$ we will just use $S$ and $V$)
+
+The decomposition is that $A=U*S*V^{T}$. 
+
+\begin{problem}
+Use MATLAB to explore the properties of $U, S$, and $V$ below, selecting all that are true. Use $\texttt{face\_points}$ as a test subject for the transformations associated with $U$, $S$, and $V$.
+
+\begin{selectAll}
+
+  \choice[correct]{$V$ is a rotation matrix.}
+  \choice{$U$ represents a shear transformation.}
+  \choice[correct]{$S$ is a diagonal matrix.}
+  \choice{$S$ swaps the coordinate axes.}
+  \choice[correct]{The columns of $U$ are all unit vectors.}
+  \choice{$U$ maps vectors into the null space of $A$.}
+  \choice{$V$ maps vectors into the column space of $A$.}
+  \choice{$V$ translates the rows of $A$ to a new origin.}
+  \choice[correct]{$U$ is a rotation matrix.}
+  \choice{$U$ scales the columns of $A$ by the diagonal of $S$ values.}
+  \choice{$V$ is an upper triangular matrix.}
+  \choice[correct]{The columns of $V$ are all unit vectors.}
+  \choice[correct]{$S$ stretches and compresses along the coordinate axes.}
+  \choice{$S$ represents a projection onto the row space of $A$.}
+  \choice{$U$ permutes the rows of $A$.}
+  \choice{$U*S*V$ also equals $A$.}
+  \choice{$V$ flips the sign of all elements in $A$.}
+
+\end{selectAll}
+
+\begin{feedback}
+
+  Let's explore the transformational interpretations of the SVD first. In short, the SVD lets you write any matrix as the product of \emph{two rotations} and a \emph{stretching}. This is much simpler than breaking down a matrix into elementary transformations, and even will work on matrices representing many transformations.
+
+  Trying this out on our $A$ matrix, we get $V^T=\begin{bmatrix}
+    -.9871 & .1602 \\ .1602 & .9871
+  \end{bmatrix}$. If we apply this to \facepoints with
+
+  \begin{verbatim}
+    new_face=V'*face_points
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the image
+
+    %1120x840
+    \begin{center}
+      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_V_A.png}
+    \end{center}
+
+  Notice that this is a rotation of \facepoints, but a different rotation than the construction rotation from the introduction.
+  
+  If we then apply $S$ to $V^T*face\_points$, we get 
+
+  \begin{verbatim}
+    new_face=S*new_face
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the image
+
+    %1120x840
+    \begin{center}
+      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_S_A.png}
+    \end{center}
+
+  Checking the dimensions of the new figure window, we notice that the face has compressed vertically inward and stretched horizontally outward, according to the diagonal values of $S$.
+
+  Finally, if we apply $U$ to $S*V'*face\_points$, we get 
+
+  \begin{verbatim}
+    new_face=U*new_face
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the same figure as when we apply $A$ to \facepoints. 
+
+  Keeping in mind the dimensions of the face image after multiplication by $S$, you'll note that $U$ applied another rotation. 
+
+  Finally, with a couple of quick for loops you'll note that teh columns of both $U$ and $V$ are unit vectors. 
+
+\end{feedback}
+
+\end{[problem]}
+
+As we said before, the SVD can be applied to \emph{any} matrix, unlike many decompositions that require square matrices. Let's again explore the SVD, but on two $3\times 3$ matrices.
+
+START HERE
+
 
 \section{SVD}
 Any matrix \(A\) can be factorized as:

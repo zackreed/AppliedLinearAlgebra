@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from selinger linear algebra
-\title{Finding Directions of Maximum Spread: PCA}
+\title{Finding Directions of Maximum Spread: SVD}
 \begin{document}
 \begin{abstract}
 
@@ -11,7 +11,7 @@
 \maketitle
 
 
-\section{Principal component analysis}
+\section{Subspace Fitting and the SVD}
 
 %\begin{outcome}
 %  \begin{enumerate}
@@ -26,10 +26,10 @@
 %  \end{enumerate}
 %\end{outcome}
 
-In this section, we will explore an application of the diagonalization
-of symmetric matrices called \textbf{principal component analysis}.
-Imagine we are given a collection of data points such as the
-following:
+In this section, we will more closely examine the geometric properties of the SVD that allow for analyses such as seen in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{the Voting Records Application}.
+
+Whereas in the previous section we considered the columns of a matrix from the standard transformational perspective, we now consider the $n$ columns of a matrix to be data points in $\RR^m$, where the matrix $A$ is $m\times n$. 
+
 \begin{center}
   \begin{tikzpicture}[baseline=-0.5ex]
     \draw[thin,->] (-4,0) -- (4,0);
@@ -111,10 +111,13 @@ following:
     \fill[color=red] (-0.24,-0.29) circle (0.06);
   \end{tikzpicture}
 \end{center}
+
+You can manipulate and work with this data by loading $\texttt{+linalg/subspace_fitting_data.mat}$ in MATLAB.
+
 Although these points are spread out in two dimensions, they seem to
 be located pretty close to a 1-dimensional subspace. Probably the best
 way to interpret this particular data set is to think of the points as
-being ``essentially'' on a line, up to some small random errors.
+being ``essentially'' on a line, up to some small random errors. Note that this is the same principle we applied in the case of the voting application.
 
 More generally, suppose we are given a collection of data points in
 $n$-dimensional space, and we are looking for a $k$-dimensional
@@ -140,9 +143,21 @@ the subspace to be the quantity
 \begin{equation*}
   D = d(\vect{v}_1,W)^2 + \ldots + d(\vect{v}_m,W)^2.
 \end{equation*}
-Then the problem we would like to solve can be stated as follows:
 
+You can visualize this phenomenon in $2$-dimensions with the following GeoGebra application:
+
+\begin{center}
+  \geogebra{tfds5q4w}{630}{631}
+\end{center}
+
+You can enter and alter points in Vector Lists 1 and 2 to change the data points you want to visualize with green dots. A line through the origin is visualzied in blue, and can be rotated by clicking and dragging the blue dot at the end of the direction vector $\vec{v}$. If you keep ``Emphasize Distances to Line" checked, you will see the distances $d(\vec{v}_i,L)$ from the points to the line visualized, and will also see a calculation ``Distance Square Sum='' which automatically calculates the sum of square distances \begin{equation*}
+  D = d(\vect{v}_1,L)^2 + \ldots + d(\vect{v}_m,L)^2
+\end{equation*} for you.
+
+The goal of describing high-dimensional data using low-dimensional subspaces that ``closely approximate'' the data is akin to finding subspaces that minimize the sum of square distances from the data to the subspace, and can be generally stated as follows:
+ 
 \begin{problem}\name{Subspace fitting problem}\label{prop:subspace-fitting}
+
   Given vectors $\vect{v}_1,\ldots,\vect{v}_m\in\R^n$ and given an
   integer $k\leq n$, find the $k$-dimensional subspace
   $W\subseteq\R^n$ that minimizes the total squared distance, i.e.,
@@ -150,40 +165,6 @@ Then the problem we would like to solve can be stated as follows:
   \index{subspace fitting}%
   \index{fitting!subspace fitting}.
 \end{problem}
-
-The following proposition gives us a method for solving the subspace
-fitting problem. It turns out that the key ingredient in solving this
-problem is the diagonalization of symmetric matrices. The method was
-discovered by Gale Young%
-\index{Young, Gale}%
-\index{Gale Young} in 1937.
-
-\begin{proposition}{Solution of the subspace fitting problem}{subspace-fitting}
-  Given vectors $\vect{v}_1,\ldots,\vect{v}_m\in\R^n$ and $k\leq n$,
-  the optimal solution to the subspace fitting problem can be computed
-  as follows:
-  \begin{enumerate}
-  \item Let $A$ be the $m\times n$-matrix whose rows are
-    $\vect{v}_1^T,\ldots,\vect{v}_m^T$. (Or equivalently, $A^T$ is the
-    $n\times m$-matrix whose columns are
-    $\vect{v}_1,\ldots,\vect{v}_m$.)
-  \item Let $B=A^TA$. Then $B$ is a positive semidefinite
-    $n\times n$-matrix.
-  \item By Proposition~\ref{prop:characterize-positive}, all
-    eigenvalues of $B$ are real and non-negative. Let
-    $\eigenvar_1,\ldots,\eigenvar_n$ be the eigenvalues of $B$, listed
-    according to their multiplicity and in decreasing order, i.e., so
-    that $\eigenvar_1\geq\eigenvar_2\geq\ldots\geq\eigenvar_n\geq
-    0$. Let $\vect{u}_1,\ldots,\vect{u}_n$ be the corresponding
-    eigenvectors.
-  \item Then $W=\sspan\set{\vect{u}_1,\ldots,\vect{u}_k}$ is the
-    solution to the subspace fitting problem.  Moreover, the total
-    squared distance of the points to this subspace is
-    \begin{equation*}
-      D = \eigenvar_{k+1} + \ldots + \eigenvar_n.
-    \end{equation*}
-  \end{enumerate}
-\end{proposition}
 
 \begin{example}{Subspace fitting in $\R^2$}{subspace-fitting-r2}
   Consider the following collection of points in $\R^2$:
@@ -205,36 +186,7 @@ discovered by Gale Young%
   points to the subspace?
 \end{example}
 
-\begin{solution}
-  We follow the steps outlined in
-  Proposition~\ref{prop:subspace-fitting}.
-  \begin{enumerate}
-  \item We have
-    \begin{equation*}
-      A^T = \startmat{rrrrrrrrr}
-        2 & -1 & 2 & -6 & 6 & 0 & 1 & -2 & -7 \\
-        -3 & 0 & 3 & -7 & 11 & -1 & 6 & -3 & -6
-      \stopmat.
-    \end{equation*}
-  \item We calculate
-    \begin{equation*}
-      B = A^TA = \startmat{rr}
-        135 & 162 \\
-        162 & 270
-      \stopmat.
-    \end{equation*}
-  \item The eigenvalues of $B$ are $\eigenvar_1 = 378$ and
-    $\eigenvar_2 = 27$, with corresponding eigenvectors
-    \begin{equation*}
-      \vect{u}_1 = \startmat{r} 2 \\ 3 \stopmat
-      \quad\mbox{and}\quad
-      \vect{u}_2 = \startmat{r} 3 \\ -2 \stopmat.
-    \end{equation*}
-  \item The desired subspace $W$ is spanned by the eigenvector
-    corresponding to the largest eigenvalue, i.e.,
-    $W=\sspan\set{\vect{u}_1}$. The total squared distance is
-    $\eigenvar_2 = 27$.
-  \end{enumerate}
+
   The space $W$ is shown in the following illustration, along with the
   original points:
   \begin{center}
@@ -255,13 +207,10 @@ discovered by Gale Young%
       \fill[color=red] (-7, -6) circle (0.4);
     \end{tikzpicture}
   \end{center}
-  Of course, the example was rigged to ensure that the eigenvalues are
-  integers. In real life, the entries of $A$ and $B$, as well as the
-  eigenvalues and components of the eigenvectors are usually arbitrary
-  real numbers.
+  Of course, in real life the data is much more complex than in this example
 \end{solution}
 
-\begin{example}{Subspace fitting in $\R^3$}{subspace-fitting-r3}
+\begin{example}\name{Subspace fitting in $\R^3$}\label{ex:subspace-fitting-r3}
   Consider the following collection of points in $\R^3$:
   \begin{equation*}
     \set{
@@ -291,67 +240,17 @@ discovered by Gale Young%
   the subspace?
 \end{example}
 
-\begin{solution}
-  Again, we follow the steps from
-  Proposition~\ref{prop:subspace-fitting}. We can do the calculations
-  for parts (a), (b), and (c) at the same time.
-  \begin{enumerate}
-  \item We have
-    \begin{equation*}
-      A^T = \startmat{rrrrrrrrrr}
-        -7 & 0 & 2 & 10 & -2 & -8 & 5 & -6 & 9 & -2 \\
-        4 & 3 & -5 & -4 & 5 & -1 & 4 & 9 & -6 & -7 \\
-        5 & 3 & -4 & 1 & 4 & -5 & 2 & 6 & 3 & -8 \\
-      \stopmat.
-    \end{equation*}
-  \item We calculate
-    \begin{equation*}
-      B = A^TA = \startmat{rrr}
-        367 & -154 & 16 \\
-        -154 & 274 & 170 \\
-        16 & 170 & 205 \\
-      \stopmat.
-    \end{equation*}
-  \item The eigenvalues of $B$ are $\eigenvar_1 = 513$,
-    $\eigenvar_2 = 306$, and $\eigenvar_3 = 27$, with corresponding
-    eigenvectors
-    \begin{equation*}
-      \vect{u}_1 = \startmat{r} -2 \\ 2 \\ 1 \stopmat,
-      \quad
-      \vect{u}_2 = \startmat{r} 2 \\ 1 \\ 2 \stopmat
-      \quad\mbox{and}\quad
-      \vect{u}_3 = \startmat{r} -1 \\ -2 \\ 2 \stopmat.
-    \end{equation*}
-  \end{enumerate}
-
-  For part (a), the desired 1-dimensional subspace is spanned by the
-  eigenvector corresponding to the largest eigenvalue, i.e., it is
-  $\sspan\set{\vect{u}_1}$. The total squared distance is
-  $\eigenvar_2+\eigenvar_3 = 306 + 27 = 333$.
-
-  For part (b), the desired 2-dimensional subspace is spanned by the
-  eigenvectors corresponding to the two largest eigenvalues, i.e., it
-  is $\sspan\set{\vect{u}_1,\vect{u}_2}$. The total squared distance is
-  $\eigenvar_3 = 27$.
-
-  Finally, in part (c), the desired 3-dimensional subspace is spanned
-  by all three eigenvectors; it is of course $\R^3$ itself, since it
-  is the only 3-dimensional subspace. The total squared distance is
-  $0$, since all points lie in the subspace.
-\end{solution}
-
 The vectors $\vect{u}_1,\ldots,\vect{u}_n$ that appear in the solution
 of the subspace fitting problem are called the \textbf{principal
   components} of the matrix $A$.
 
 \begin{definition}\name{Principal components}\label{def:principal-components}
-  Let $A$ be an $m\times n$-matrix. The \textbf{principal components}%
-  \index{principal component}%
-  \index{component!principal component} of $A$ are the (normalized,
-  orthogonal) eigenvectors $\vect{u}_1,\ldots,\vect{u}_n$ of the
-  positive semidefinite $n\times n$-matrix $A^TA$. They are usually
-  listed in order of decreasing eigenvalues.
+  Let $A$ be an $m\times n$-matrix. The \textbf{principal components} of $A$ are the directions specified by the left and right singular vectors of $A$.
+
+  If taken from a Singular Value Decomposition, the singular vectors are ordered according to the singular values in decreasing order.
 \end{definition}
+
+UPDATE HERE WITH SPREAD TALK
 
 The first principal component $\vect{u}_1$ gives the direction in
 which the rows of $A$ show the most variability. The second principal
@@ -503,6 +402,10 @@ In this case, approximating the points by a subspace passing through
 the origin does not make much sense. Instead, we should be looking for
 an \textbf{affine subspace}. An affine subspace is similar to a
 subspace, except it does not necessarily contain the origin.
+
+You can analyze this data by loading $\texttt{+linalg/subspace_fitting_affine_data.mat}$ in MATLAB.
+
+START HERE
 
 \begin{definition}\name{Affine subspace}\label{def:affine-subspace}
 

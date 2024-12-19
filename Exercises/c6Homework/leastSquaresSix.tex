@@ -1,0 +1,44 @@
+\documentclass{ximera}
+\input{../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from selinger linear algebra
+\begin{document}
+
+
+\begin{exercise}
+  Find the least squares approximation for the system of equations
+  \begin{equation*}
+    \begin{array}{r@{~}c@{~}r@{~}c@{~}r@{~}c@{~}r}
+       x &+& 2y &+& 2z &=&   5, \\
+       x &+&  y &-&  z &=&  11, \\
+       x &+& 2y &-&  z &=& -18, \\
+      2x &-&  y &+& 2z &=&  0. \\
+    \end{array}
+  \end{equation*}
+  \begin{solution}
+    $(x,y,z) = (\answer{-1},\answer{-1},\answer{2})$.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Find the least squares approximation for the system of equations
+  \begin{equation*}
+    \startmat{rrr}
+      -1 & 2 & 1 \\
+      -1 & 0 & -1 \\
+      2 & 0 & 2 \\
+      0 & 0 & 2 \\
+      1 & 2 & 2 \\
+    \stopmat
+    \startmat{c} x \\ y \\ z \stopmat
+    =
+    \startmat{r} 1 \\ 1 \\ 3 \\ -2 \\ 4 \stopmat.
+  \end{equation*}
+  \begin{solution}
+    $(x,y,z) = (\answer{2},\answer{2},\answer{-1})$.
+  \end{solution}
+\end{exercise}
+
+
+\end{document}

@@ -240,25 +240,95 @@ The goal of describing high-dimensional data using low-dimensional subspaces tha
   the subspace?
 \end{example}
 
-The vectors $\vect{u}_1,\ldots,\vect{u}_n$ that appear in the solution
-of the subspace fitting problem are called the \textbf{principal
-  components} of the matrix $A$.
+\section*{Maximizing Spread, Minimizing Distance, Computing the SVD}
 
-\begin{definition}\name{Principal components}\label{def:principal-components}
-  Let $A$ be an $m\times n$-matrix. The \textbf{principal components} of $A$ are the directions specified by the left and right singular vectors of $A$.
+We now hone in on how the way that the SVD is constructed, which brings together a few key ideas including why the SVD gives us the best-fitting (in the sense of distance minimization) subspaces. 
 
-  If taken from a Singular Value Decomposition, the singular vectors are ordered according to the singular values in decreasing order.
+The key is the interplay between \emph{minimizing square distances} and \emph{maximizing projection spread}. These are crucially linked together, which allows us to leverage an algorithm that finds direction of maximum projection spread to construct the SVD. 
+
+\subsection*{Maximizing Spread and Minimizing Square Distances}
+
+Let's return to the GeoGebra applet, but ask more targeted questions. First, consider the applet with just the first vector in list 1, $\begin{bmatrix}
+  1\\.5
+\end{bmatrix}$ (set Vector List 2 to just the zero vector).
+
+\begin{center}
+  \geogebra{tfds5q4w}{552}{576}
+\end{center}
+
+As you rotate the unit direction vector $\vec{v}$, if you select ``Emphasize Distances to Line", the applet will show the orthogonal projection of the data point to the line. If you select ``Emphasize Projection Vectors", the applet will de-emphasize the distance to the line and instead emphasize the length of the projection vector along the line. 
+
+Which of the following statements is true of the relationship between the distances to and projections along the possible lines?
+
+\begin{problem}
+
+  \begin{selectAll}
+  
+    \choice{The $\vec{v}$ whose line minimizes the data distance is orthogonal to the vector $\vec{w}$ that maximizes the projection length of the data.}
+    \choice{There is only one $\vec{v}$ that minimizes the distance of the data to the line.}
+    \choice[correct]{The $\vec{v}$ whose line minimizes the data distance is parallel to the vector $\vec{w}$ that maximizes the projection length of the data.}
+
+  \end{selectAll}
+
+  \begin{feedback}
+  
+    With one data point, the distance-minimizing line crosses through the data point itself, and there are two vectors that acheive this (or rather, one vector and its negative). In this case $\pm \begin{bmatrix}
+      .893\\.45
+    \end{bmatrix}$. All other directions increase the distance from the data to the line. If you switch to ``Emphasize Projeciton Vectors'', you'll note that the length of the projection vector equals $1.25$ when the data point is on the line, and then only decreases when the data point is off of the line, being zero when the projection distance vector is orthogonal to the line. 
+
+    As such, the line that minimizes the projection distance is also the line that maximizes the length of the projection vector.
+
+    In fact, this is due to the Pythagorean Theorem. The norm of the data point vector is fixed, and so the data point vector, the distance to the projection, and the length of the projection make a right triangle.
+
+    \begin{center}
+      \begin{tikzpicture}
+       \draw[line width=2pt,red,-stealth](3.6, 0.8)--(2,4);
+       \node[red] at (3.5, 2.2)   (a) {$\vec{v}_{\text{distance}}$};
+      \node[red] at (1.5, -0.95)   (b) {$\vec{v}_{\text{projection}}$};
+       \node[] at (5, 1)   (c) {$l$};
+       \node[blue] at (-0.8, 1.9)   (d) {$\vec{v}=\vec{v}_{\text{distance}}+\vec{v}_{\text{projection}}$};
+        \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
+     \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+     \draw[line width=2pt,red,-stealth](-2, -2)--(3.6, 0.8);
+     \end{tikzpicture}
+       
+     \end{center}
+
+     Because the projection is orthogonal, we always have this right triangle, so 
+
+     $$\left\|\vec{v}\right\|=\left\|\vec{v}_{\text{distance}}\right\|+\left\|\vec{v}_{\text{projection}}\right\|,$$
+
+     meaning increasing the proejction or distance length will necessarily decrease the other.
+
+  \end{feedback}
+
+\end{problem}
+
+In fact, this dynamic between the projection lengths and the projection distances is true for any number of data points, not just one data point, since each data point makes a right triangle via orthogonal projection along any line (unless the point lies on the line).
+
+So, if \begin{equation*}
+  D = d(\vect{v}_1,W)^2 + \ldots + d(\vect{v}_m,W)^2
+\end{equation*} represents the sum of square projection distances, then we use the shorthand $p(\vect{v},W)^2$ for the square projection length of a vector onto a subspace and can say that the sum of square projection lengths \begin{equation*}
+  P = p(\vect{v}_1,W)^2 + \ldots + p(\vect{v}_m,W)^2
+\end{equation*} increases as $D$ decreases and vice versa. We'll call $P$ the \emph{spread} of the data along the subspace $W$.
+
+More pointedly, we can turn this into a useful theorem for finding the SVD.
+
+\begin{theorem}\name{Maximizing Spread and Minimizing Distance}
+  If $A$ is an $m\times n$ matrix, then a subspace $W$ of $\RR^m$ that maximizes the spread of the columns of $A$ also minimizes the distances of the columns of $A$ to $W$ in $\RR^m$.
+\end{theorem}
+
+$P$ actually relates very closely to an important norm on {\bf matrices}, called the \emph{Frobenius Norm}.
+
+\begin{definition}
+  Let $A$ be an $m\times n$ matrix with columns denoted $a_i$. Then $\sqrt{P}$ is the Frobenius Norm of $A$, denoted $\left\|A\right\|_F$. 
+
+  In other words, $\left\|A\right\|_F=\sqrt{\sum_{i=1}^n\left\|a_i\right\|}$.
 \end{definition}
 
-UPDATE HERE WITH SPREAD TALK
+\subsection*{An algorithm for computing the SVD}
 
-The first principal component $\vect{u}_1$ gives the direction in
-which the rows of $A$ show the most variability. The second principal
-component $\vect{u}_2$ gives the direction in which the rows of $A$
-show the most remaining variability that is orthogonal to
-$\vect{u}_1$. The third principal component $\vect{u}_3$ gives the
-direction of most variability that is orthogonal to $\vect{u}_1$ and
-$\vect{u}_2$, and so on.
+START HERE
 
 % ----------------------------------------------------------------------
 \subsection*{Subspace fitting vs. curve fitting}
@@ -405,7 +475,6 @@ subspace, except it does not necessarily contain the origin.
 
 You can analyze this data by loading $\texttt{+linalg/subspace_fitting_affine_data.mat}$ in MATLAB.
 
-START HERE
 
 \begin{definition}\name{Affine subspace}\label{def:affine-subspace}
 

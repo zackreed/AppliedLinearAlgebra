@@ -463,5 +463,105 @@ more succinctly as follows.
   \end{array}
 \end{equation*}
 
+Finally, let's use this to compute the SVD of a matrix that is slightly more complicated than the examples from previous chapters.
+
+\begin{example}\label{ex:SVD3x1}
+Find an SVD for
+$A=\left[\begin{array}{r} -1 \\ 2\\ 2 \end{array}\right]$.
+ 
+\begin{explanation}
+Since $A$ is $3\times 1$, $A^T A$ is a $1\times 1$ matrix
+whose eigenvalues are easier to find than the eigenvalues of
+the $3\times 3$ matrix $AA^T$.
+ 
+\[ A^TA=\left[\begin{array}{ccc} -1 & 2 & 2 \end{array}\right]
+\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
+=\left[\begin{array}{r} 9 \end{array}\right]\]
+Thus $A^TA$ has eigenvalue $\lambda_1=9$, and
+the eigenvalues of $AA^T$ are $\lambda_1=9$, $\lambda_2=0$, and
+$\lambda_3=0$.
+Furthermore, $A$ has only one singular value, $S_1=3$.
+ 
+\textbf{To find the matrix $V$}:
+To do so we find an eigenvector for $A^TA$ and
+normalize it.
+In this case, finding a unit eigenvector is trivial:
+$\vec{v}_1=\left[\begin{array}{r} 1 \end{array}\right]$, and
+\[ V=\left[\begin{array}{r} 1 \end{array}\right]\]
+Also,
+$S =\left[\begin{array}{r} 3 \\ 0\\ 0 \end{array}\right]$,
+and we use $A$, $V^T$, and $S$ to find $U$.
+ 
+\noindent Now $AV=US$, with
+$V=\left[\begin{array}{r}\vec{v}_1 \end{array}\right]$,
+and $U=\left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]$,
+where $\vec{u}_1$, $\vec{u}_2$, and $\vec{u}_3$ are the columns of $U$.
+Thus
+\begin{eqnarray*}
+A\left[\begin{array}{r} \vec{v}_1 \end{array}\right]
+&=& \left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]S\\
+\left[\begin{array}{r} A\vec{v}_1 \end{array}\right]
+&=& \left[\begin{array}{r} S_1 \vec{u}_1+0\vec{u}_2+0\vec{u}_3 \end{array}\right]\\
+&=& \left[\begin{array}{r} S_1 \vec{u}_1 \end{array}\right]
+\end{eqnarray*}
+This gives us $A\vec{v}_1=S_1 \vec{u}_1= 3\vec{u}_1$, so
+ 
+\[ \vec{u}_1 = \frac{1}{3}A\vec{v}_1
+= \frac{1}{3}
+\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
+\left[\begin{array}{r} 1 \end{array}\right]
+= \frac{1}{3}
+\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]\]
+The vectors $\vec{u}_2$ and $\vec{u}_3$ are eigenvectors of $AA^T$ corresponding
+to the eigenvalue $\lambda_2=\lambda_3=0$.
+Instead of solving the system $(0I-AA^T)\vec{x}= 0$ and then using the
+Gram-Schmidt process on the resulting set of
+two basic eigenvectors, the following approach may be used.
+ 
+ 
+Find vectors $\vec{u}_2$ and $\vec{u}_3$ by first extending $\{ \vec{u}_1\}$ to a basis of
+$\RR^3$, then using the Gram-Schmidt algorithm to orthogonalize the basis,
+and finally normalizing the vectors.
+ 
+Starting with $\{ 3\vec{u}_1 \}$ instead of $\{ \vec{u}_1 \}$ makes the
+arithmetic a bit easier.
+It is easy to verify that
+ 
+\[ \left\{ \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
+\left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
+\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\right\}\]
+is a basis of $\RR^3$.  Set
+ 
+\[ \vec{x}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
+\vec{x}_2 = \left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
+\vec{x}_3 =\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\]
+and apply the Gram-Schmidt algorithm to
+$\{ \vec{x}_1, \vec{x}_2, \vec{x}_3\}$. This gives us
+ 
+\[ \vec{f}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right], \vec{f}_2 = \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right]
+\mbox{ and }
+\vec{f}_3 = \left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
+Therefore,
+\[ \vec{u}_2 = \frac{1}{\sqrt{18}}
+ \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right],
+\vec{u}_3 = \frac{1}{\sqrt 2}
+\left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
+and
+\[ U = \left[  \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
+\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
+\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]\]
+Finally,
+\[ A =
+\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
+=
+\left[ \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
+\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
+\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]
+\left[\begin{array}{r} 3 \\ 0 \\ 0 \end{array}\right]
+\left[\begin{array}{r} 1 \end{array}\right]\]
+ 
+\end{explanation}
+\end{example}
+
 
 \end{document}

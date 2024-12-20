@@ -18,17 +18,16 @@ Let $A$ be an $m\times n$ matrix. The \dfn{singular values} of $A$ are the squar
 eigenvalues of $A^TA.$
 \end{definition}
  
-Singular Value Decomposition (SVD) can be thought of as
+Noting that $A^TA$ is always a real symmetric matrix, hopefully the last two sections have primed you to anticipate all of the nice properties that $A^TA$ will have.
+
+The Singular Value Decomposition (SVD) can be thought of as
 a generalization of orthogonal diagonalization of a symmetric matrix
-to an arbitrary $m\times n$ matrix. This decomposition is the focus of this section.
- 
-The following is a useful result that will help when computing the SVD of matrices.
+to an arbitrary $m\times n$ matrix.
  
 \begin{lemma}\label{lem:samenonzeroeigenvalues}
 Let $A$ be an $m \times n$ matrix. Then $A^TA$ and $AA^T$ have the same \textbf{nonzero eigenvalues}.
 \end{lemma}
  
-\begin{proof}
 Suppose $A$ is an $m\times n$ matrix, and suppose that  $\lambda$ is a nonzero eigenvalue of $A^TA$.
 Then there exists a nonzero vector $\vec{x} \in \RR^n$ such that
 \begin{equation}\label{nonzero}
@@ -46,72 +45,74 @@ implying that $A\vec{x}\neq 0_m$.
  
 Therefore $A\vec{x}$ is an eigenvector of $AA^T$ corresponding to eigenvalue
 $\lambda$.  An analogous argument can be used to show that every
-nonzero eigenvalue of $AA^T$ is an eigenvalue of $A^TA$, thus
-completing the proof.
-\end{proof}
+nonzero eigenvalue of $AA^T$ is an eigenvalue of $A^TA$.
+
  
-Given an $m\times n$ matrix $A$, we will see how to express $A$ as a product
-\[ A=U\Sigma V^T\]
-where
+Given an $m\times n$ matrix $A$, recall that the SVD of a matrix $A$ is the product
+\[ A=US V^T.\]
+
+We will see that in addition to all of the nice properties of $U$, $S$, and $V$ noted in Chapter 6, we have the additional properties that
+
 \begin{itemize}
 \item $U$ is an $m\times m$ orthogonal matrix whose columns are
 eigenvectors of $AA^T$.
 \item $V$ is an $n\times n$ orthogonal matrix whose columns are
 eigenvectors of $A^TA$.
-\item $\Sigma$ is an $m\times n$ matrix whose only nonzero values
-lie on its main diagonal, and are the singular values of $A$.
+\item $S$ is an $m\times n$ matrix whose only nonzero values
+lie on its main diagonal, and are the singular values of $A$ (i.e. the square root of the eigenvalues of $A^TA$).
 \end{itemize}
+
 How can we find such a decomposition? We are aiming to decompose $A$ in the following form:
 \begin{equation*}
 A=U\left[
 \begin{array}{cc}
-\sigma & 0 \\
+S & 0 \\
 0 & 0
 \end{array}
 \right] V^T
 \end{equation*}
-where $\sigma $ is a block matrix of the form
+where $S $ is a block matrix of the form
 \[
-\sigma =\left[
+S =\left[
 \begin{array}{ccc}
-\sigma _{1} &  & 0 \\
+S _{1} &  & 0 \\
 & \ddots &  \\
-0 &  & \sigma _{k}
+0 &  & S _{k}
 \end{array}
 \right]
 \]
 Thus $A^T=V\left[
 \begin{array}{cc}
-\sigma & 0 \\
+S & 0 \\
 0 & 0
 \end{array}
 \right] U^T$ and it follows that
 \begin{equation*}
 A^TA=V\left[
 \begin{array}{cc}
-\sigma & 0 \\
+S & 0 \\
 0 & 0
 \end{array}
 \right] U^TU\left[
 \begin{array}{cc}
-\sigma & 0 \\
+S & 0 \\
 0 & 0
 \end{array}
 \right] V^T=V\left[
 \begin{array}{cc}
-\sigma ^{2} & 0 \\
+S ^{2} & 0 \\
 0 & 0
 \end{array}
 \right] V^T
 \end{equation*}
 and so $A^TAV=V\left[
 \begin{array}{cc}
-\sigma ^{2} & 0 \\
+S ^{2} & 0 \\
 0 & 0
 \end{array}
 \right] .$ Similarly, $AA^TU=U\left[
 \begin{array}{cc}
-\sigma ^{2} & 0 \\
+S ^{2} & 0 \\
 0 & 0
 \end{array}
 \right] .$ Therefore, you would find an orthonormal basis of eigenvectors
@@ -122,141 +123,20 @@ the same for $A^TA$ to get $V$.
 We formalize this discussion in the following theorem.
  
 \begin{theorem}[Singular Value Decomposition]\label{th:singvaldecomp}
-Let $A$ be an $m\times n$ matrix. Then there exist
-orthogonal matrices $U$ and $V$ of the appropriate size such that $A= U \Sigma V^T$ where $\Sigma$ is of the form
-\[
-\Sigma =
-\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right]
-\]
-and $\sigma $ is a block matrix of the form
-\[
-\sigma =\left[
-\begin{array}{ccc}
-\sigma _{1} &  & 0 \\
-& \ddots &  \\
-0 &  & \sigma _{k}
-\end{array}
-\right]
-\]
-for the $\sigma _{i}$ the singular values of $A.$
+Let $A$ be an $m\times n$ matrix. Then the following are true: 
+
+\begin{enumerate}
+\item $A^TA$ is diagonalizable with an orthogonal eigenvector matrix $V$ and an eigenvalue matrix $S=\begin{bmatrix}
+    \sigma^2&0\\0&0\end{bmatrix}$. 
+\item $AA^T$ diagonalizable with an orthogonal eigenvector matrix $U$ and an eigenvalue matrix $S=\begin{bmatrix}
+    \sigma^2&0\\0&0\end{bmatrix}$. 
+\item The eigenvector matrices $U$ and $V$ are the left and right (respectively) singular vector matrices of the SVD, and the block matrix $S=\begin{bmatrix}
+    \sigma&0\\0&0\end{bmatrix}$ give the singular values of $A$.
+\end{enumerate}
+
 \end{theorem}
- 
-\begin{proof}
-There exists an orthonormal basis, $\left\{ \vec{v}_{1}, \dots, \vec{v}_n\right\}$ such that $
-A^TA\vec{v}_{i}=\sigma _{i}^{2}\vec{v}_{i}$ where $\sigma
-_{i}^{2}>0$ for $i=1,\dots ,k,\left( \sigma _{i}>0\right) $ and equals zero
-if $i>k.$ Thus for $i>k,$ $A\vec{v}_{i}=\vec{0}$ because
-\begin{equation*}
- A\vec{v}_{i}\dotp A\vec{v}_{i} = (A\vec{v}_i)^T(A\vec{v}_i)=\vec{v}_i^T(A^TA\vec{v}_i)=\vec{0}
- %A^TA\vec{v}_{i} \dotp \vec{v}_{i}  = \vec{0} \dotp \vec{v}_{i} =0
-\end{equation*}
-For $i=1,\dots ,k,$ define $\vec{u}_{i}\in \RR^{m}$ by
-\begin{equation*}
-\vec{u}_{i}= \sigma _{i}^{-1}A\vec{v}_{i}
-\end{equation*}
-Thus $A\vec{v}_{i}=\sigma _{i}\vec{u}_{i}.$ Now
-\begin{eqnarray*}
-\vec{u}_{i} \dotp \vec{u}_{j} &=&  \sigma _{i}^{-1}A
-\vec{v}_{i} \dotp \sigma _{j}^{-1}A\vec{v}_{j}  = \sigma_{i}^{-1}\vec{v}_{i}^T \sigma _{j}^{-1}A^TA\vec{v}_{j} \\
-&=& \sigma _{i}^{-1}\vec{v}_{i} \dotp \sigma _{j}^{-1}\sigma _{j}^{2} \vec{v}_{j} =
-\frac{\sigma _{j}}{\sigma _{i}}\left( \vec{v}_{i} \dotp \vec{v}_{j}\right)%=\delta _{ij}
-\end{eqnarray*}
-This means that $\vec{u}_{i} \dotp \vec{u}_{j}=1$ when $i=j$ and $\vec{u}_{i} \dotp \vec{u}_{j}=0$ when $i\neq j$.
-Thus $\left\{ \vec{u}_{1}, \dots, \vec{u}_{k}\right\}$ is an orthonormal set of
-vectors in $\RR^{m}.$ Also,
-\begin{equation*}
-AA^T\vec{u}_{i}=AA^T\sigma _{i}^{-1}A\vec{v}_{i}=\sigma
-_{i}^{-1}AA^TA\vec{v}_{i}=\sigma _{i}^{-1}A\sigma _{i}^{2}\vec{v}
-_{i}=\sigma _{i}^{2}\vec{u}_{i}
-\end{equation*}
-Now, using Gram-Schmidt, extend $\left\{ \vec{u}_{1}, \dots, \vec{u}_{k}\right\}$ to an orthonormal
-basis for all of $\RR^{m},\left\{ \vec{u}_{1},\dots,\vec{u}_{m}\right\}$
-and let
-\begin{equation*}
-U= \left[
-\begin{array}{ccc}
-\vec{u}_{1} & \cdots & \vec{u}_{m}
-\end{array}
-\right]
-\end{equation*}
-while $V= \left[ \begin{array}{ccc} \vec{v}_{1} & \cdots & \vec{v}_{n}\end{array}\right] .$ Thus $U$
-is the matrix which has the $\vec{u}_{i}$ as columns and $V$ is defined
-as the matrix which has the $\vec{v}_{i}$ as columns. Then
-\begin{equation*}
-U^TAV=\left[
-\begin{array}{c}
-\vec{u}_{1}^T \\
-\vdots \\
-\vec{u}_{k}^T \\
-\vdots \\
-\vec{u}_{m}^T
-\end{array}
-\right] A  \left[ \begin{array}{ccc} \vec{v}_{1} & \cdots & \vec{v}_{n}\end{array}\right]
-\end{equation*}
-\begin{equation*}
-=\left[
-\begin{array}{c}
-\vec{u}_{1}^T \\
-\vdots \\
-\vec{u}_{k}^T \\
-\vdots \\
-\vec{u}_{m}^T
-\end{array}
-\right] \left[
-\begin{array}{cccccc}
-\sigma _{1}\vec{u}_{1} & \cdots & \sigma _{k}\vec{u}_{k} & \vec{0}
-& \cdots & \vec{0}
-\end{array}
-\right] =\left[
-\begin{array}{cc}
-\sigma & 0 \\
-0 & 0
-\end{array}
-\right]
-\end{equation*}
-where $\sigma $ is given in the statement of the theorem.
-\end{proof}
- 
-The SVD has as an immediate corollary which is given in the following interesting result.
- 
-\begin{corollary}\label{cor:ranksingularvalues}
-Let $A$ be an $m\times n$ matrix. Then the rank of $A$ (or of $A^T$) equals
-the number of singular values.
-\end{corollary}
- 
-%%\begin{proof}
-%%Since $V$ and $U$ are unitary, it follows that
-%%\begin{eqnarray*}
-%%\limfunc{rank}\left( A\right) &=&\limfunc{rank}\left( U^TAV\right) =
-%%\limfunc{rank}\left[
-%%\begin{array}{cc}
-%%\sigma & 0 \\
-%%0 & 0
-%%\end{array}
-%%\right] \\
-%%&=&\text{number of singular values.}
-%%\end{eqnarray*}
-%%Also since $U,V$ are unitary,
-%%\begin{equation*}
-%%\func{rank}\left( A^T\right) =\func{rank}\left( V^TA^{\ast
-%%}U\right) =\func{rank}\left( \left( U^TAV\right) ^T\right)
-%%\end{equation*}
-%%\begin{equation*}
-%%=\func{rank}\left( \left[
-%%\begin{array}{cc}
-%%\sigma & 0 \\
-%%0 & 0
-%%\end{array}
-%%\right] ^T\right) =\text{number of singular values.}
-%%\end{equation*}
-%%\end{proof}
-%%
-%%\medskip
+
+This gives us a more readiliy accessible means of finding the SVD of a matrix $A$ than was discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. Rather than iteratively maximizing $\norm{A\vec{v}}$ over orthogonal unit vectors $\vec{v}$, we simply compute $A^TA$ and find the guaranteed eigenvalues and eigenvectors. This also further clarifies why the SVD exists for \emph{any} matrix $A$, which was perhaps unclear from the algorithm discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. That is, we didn't quite discuss whether or why the algorithm guaranteed a full set of singular values and singular vectors. We now, however, know for certain that $A^TA$ is orthogonally diagonalizable, which guarantees the existence and orthogonal properties of the SVD.
  
 Let's compute the SVD of a simple matrix.
  
@@ -290,8 +170,8 @@ z-11 & -5 \\ -5 & z-11 \end{array}\right]\\
 Therefore, the eigenvalues of $AA^T$ are $\lambda_1=16$ and $\lambda_2=6$.
  
 The eigenvalues of $A^TA$ are $\lambda_1=16$, $\lambda_2=6$, and
-$\lambda_3=0$, and the singular values of $A$ are $\sigma_1=\sqrt{16}=4$ and
-$\sigma_2=\sqrt{6}$.
+$\lambda_3=0$, and the singular values of $A$ are $S_1=\sqrt{16}=4$ and
+$S_2=\sqrt{6}$.
 By convention, we list the eigenvalues (and corresponding singular values)
 in non increasing order (i.e., from largest to smallest).
  
@@ -351,23 +231,23 @@ Then
 0 & -\sqrt 2 & 2 \\
 \sqrt 3 & \sqrt 2 & 1 \end{array}\right]\]
 Also,
-\[ \Sigma = \left[\begin{array}{rrr} 4 & 0 & 0 \\
+\[ S = \left[\begin{array}{rrr} 4 & 0 & 0 \\
 0 & \sqrt 6 & 0 \end{array}\right]\]
-and we use $A$, $V^T$, and $\Sigma$ to find $U$. Since $V$ is orthogonal and $A=U\Sigma V^T$, it follows that $AV=U\Sigma$.
+and we use $A$, $V^T$, and $S$ to find $U$. Since $V$ is orthogonal and $A=US V^T$, it follows that $AV=US$.
 Let $V=\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]$, and
 let $U=\left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]$, where
 $\vec{u}_1$ and $\vec{u}_2$ are the two columns of $U$. Then we have
 \begin{eqnarray*}
 A\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]
-&=& \left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]\Sigma\\
+&=& \left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]S\\
 \left[\begin{array}{ccc} A\vec{v}_1 & A\vec{v}_2 & A\vec{v}_3 \end{array}\right]
-&=& \left[\begin{array}{ccc} \sigma_1\vec{u}_1 + 0\vec{u}_2 &
-0\vec{u}_1 + \sigma_2 \vec{u}_2 & 0 \vec{u}_1 + 0\vec{u}_2 \end{array}\right] \\
-&=& \left[\begin{array}{ccc} \sigma_1\vec{u}_1 & \sigma_2 \vec{u}_2 &
+&=& \left[\begin{array}{ccc} S_1\vec{u}_1 + 0\vec{u}_2 &
+0\vec{u}_1 + S_2 \vec{u}_2 & 0 \vec{u}_1 + 0\vec{u}_2 \end{array}\right] \\
+&=& \left[\begin{array}{ccc} S_1\vec{u}_1 & S_2 \vec{u}_2 &
 0 \end{array}\right]
 \end{eqnarray*}
-which implies that $A\vec{v}_1=\sigma_1\vec{u}_1 = 4\vec{u}_1$ and
-$A\vec{v}_2=\sigma_2\vec{u}_2 = \sqrt 6 \vec{u}_2$. Thus,
+which implies that $A\vec{v}_1=S_1\vec{u}_1 = 4\vec{u}_1$ and
+$A\vec{v}_2=S_2\vec{u}_2 = \sqrt 6 \vec{u}_2$. Thus,
 \[ \vec{u}_1 = \frac{1}{4}A\vec{v}_1
 = \frac{1}{4}
 \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
@@ -397,107 +277,6 @@ A & = & \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]\\
 -\sqrt 2 & -\sqrt 2 & \sqrt2 \\
 -1 & 2 & 1 \end{array}\right]\right)
 \end{eqnarray*}
-\end{explanation}
-\end{example}
- 
- 
-Here is another example.
- 
-\begin{example}\label{ex:SVD3x1}
-Find an SVD for
-$A=\left[\begin{array}{r} -1 \\ 2\\ 2 \end{array}\right]$.
- 
-\begin{explanation}
-Since $A$ is $3\times 1$, $A^T A$ is a $1\times 1$ matrix
-whose eigenvalues are easier to find than the eigenvalues of
-the $3\times 3$ matrix $AA^T$.
- 
-\[ A^TA=\left[\begin{array}{ccc} -1 & 2 & 2 \end{array}\right]
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
-=\left[\begin{array}{r} 9 \end{array}\right]\]
-Thus $A^TA$ has eigenvalue $\lambda_1=9$, and
-the eigenvalues of $AA^T$ are $\lambda_1=9$, $\lambda_2=0$, and
-$\lambda_3=0$.
-Furthermore, $A$ has only one singular value, $\sigma_1=3$.
- 
-\textbf{To find the matrix $V$}:
-To do so we find an eigenvector for $A^TA$ and
-normalize it.
-In this case, finding a unit eigenvector is trivial:
-$\vec{v}_1=\left[\begin{array}{r} 1 \end{array}\right]$, and
-\[ V=\left[\begin{array}{r} 1 \end{array}\right]\]
-Also,
-$\Sigma =\left[\begin{array}{r} 3 \\ 0\\ 0 \end{array}\right]$,
-and we use $A$, $V^T$, and $\Sigma$ to find $U$.
- 
-\noindent Now $AV=U\Sigma$, with
-$V=\left[\begin{array}{r}\vec{v}_1 \end{array}\right]$,
-and $U=\left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]$,
-where $\vec{u}_1$, $\vec{u}_2$, and $\vec{u}_3$ are the columns of $U$.
-Thus
-\begin{eqnarray*}
-A\left[\begin{array}{r} \vec{v}_1 \end{array}\right]
-&=& \left[\begin{array}{rrr} \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \end{array}\right]\Sigma\\
-\left[\begin{array}{r} A\vec{v}_1 \end{array}\right]
-&=& \left[\begin{array}{r} \sigma_1 \vec{u}_1+0\vec{u}_2+0\vec{u}_3 \end{array}\right]\\
-&=& \left[\begin{array}{r} \sigma_1 \vec{u}_1 \end{array}\right]
-\end{eqnarray*}
-This gives us $A\vec{v}_1=\sigma_1 \vec{u}_1= 3\vec{u}_1$, so
- 
-\[ \vec{u}_1 = \frac{1}{3}A\vec{v}_1
-= \frac{1}{3}
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
-\left[\begin{array}{r} 1 \end{array}\right]
-= \frac{1}{3}
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]\]
-The vectors $\vec{u}_2$ and $\vec{u}_3$ are eigenvectors of $AA^T$ corresponding
-to the eigenvalue $\lambda_2=\lambda_3=0$.
-Instead of solving the system $(0I-AA^T)\vec{x}= 0$ and then using the
-Gram-Schmidt process on the resulting set of
-two basic eigenvectors, the following approach may be used.
- 
- 
-Find vectors $\vec{u}_2$ and $\vec{u}_3$ by first extending $\{ \vec{u}_1\}$ to a basis of
-$\RR^3$, then using the Gram-Schmidt algorithm to orthogonalize the basis,
-and finally normalizing the vectors.
- 
-Starting with $\{ 3\vec{u}_1 \}$ instead of $\{ \vec{u}_1 \}$ makes the
-arithmetic a bit easier.
-It is easy to verify that
- 
-\[ \left\{ \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
-\left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
-\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\right\}\]
-is a basis of $\RR^3$.  Set
- 
-\[ \vec{x}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right],
-\vec{x}_2 = \left[\begin{array}{r} 1 \\ 0 \\ 0 \end{array}\right],
-\vec{x}_3 =\left[\begin{array}{r} 0 \\ 1 \\ 0 \end{array}\right]\]
-and apply the Gram-Schmidt algorithm to
-$\{ \vec{x}_1, \vec{x}_2, \vec{x}_3\}$. This gives us
- 
-\[ \vec{f}_1 = \left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right], \vec{f}_2 = \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right]
-\mbox{ and }
-\vec{f}_3 = \left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
-Therefore,
-\[ \vec{u}_2 = \frac{1}{\sqrt{18}}
- \left[\begin{array}{r} 4 \\ 1 \\ 1 \end{array}\right],
-\vec{u}_3 = \frac{1}{\sqrt 2}
-\left[\begin{array}{r} 0 \\ 1 \\ -1 \end{array}\right]\]
-and
-\[ U = \left[  \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]\]
-Finally,
-\[ A =
-\left[\begin{array}{r} -1 \\ 2 \\ 2 \end{array}\right]
-=
-\left[ \begin{array}{rrr} -\frac{1}{3} & \frac{4}{\sqrt{18}} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & \frac{1}{\sqrt 2} \\
-\frac{2}{3} & \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt 2} \end{array}\right]
-\left[\begin{array}{r} 3 \\ 0 \\ 0 \end{array}\right]
-\left[\begin{array}{r} 1 \end{array}\right]\]
- 
 \end{explanation}
 \end{example}
  
@@ -623,16 +402,131 @@ Let's check this. $U^TAV=$
 \end{explanation}
 \end{example}
  
-This illustrates that if you have a good way to find the eigenvectors and
-eigenvalues for a Hermitian matrix which has nonnegative eigenvalues, then
-you also have a good way to find the SVD of an
-arbitrary matrix.
- 
- 
- 
-\section*{Text Source} This section was adapted from Section 8.11 of Keith Nicholson's \href{https://open.umn.edu/opentextbooks/textbooks/linear-algebra-with-applications}{\it Linear Algebra with Applications}. (CC-BY-NC-SA)
- 
-W. Keith Nicholson, {\it Linear Algebra with Applications}, Lyryx 2018, Open Edition.
+ You will do one more example in Chapter 9, after learning about standard processes for finding orthonormal bases from a list of linearly independent vectors. 
+
+ Finally, let's re-visit the use of SVD to find the best-fitting subspaces for the data given in $\texttt{+linalg/subspace\_fitting\_affine\_data.mat}$, depicted here:
+
+ \begin{example}\name{Affine subspace fitting problem}\label{ex:affine-subspace-fitting}
+    Consider the following collection of points in $\R^2$:
+    \begin{equation*}
+      \set{
+        \startmat{r} 10 \\ -6 \stopmat,
+        \startmat{r} 2 \\ 10 \stopmat,
+        \startmat{r} 5 \\ -1 \stopmat,
+        \startmat{r} 8 \\ 3 \stopmat,
+        \startmat{r} 2 \\ 5 \stopmat,
+        \startmat{r} 3 \\ 3 \stopmat,
+        \startmat{r} 4 \\ 11 \stopmat,
+        \startmat{r} 10 \\ -1 \stopmat,
+        \startmat{r} 1 \\ 12 \stopmat
+      }.
+    \end{equation*}
+    Find the 1-dimensional affine subspace that best approximates this
+    collection of points. What is the total squared distance of the
+    points to the subspace?
+  \end{example}
+  
+  \begin{solution}
+    We start by computing the centroid:
+    \begin{equation*}
+      \centroid{\vect{v}} =
+      \frac{1}{9}(\vect{v}_1+\ldots+\vect{v}_9)
+      = \frac{1}{9}\startmat{r} 45 \\ 36 \stopmat
+      = \startmat{r} 5 \\ 4 \stopmat.
+    \end{equation*}
+    Next, we shift all vectors by $-\centroid{\vect{v}}$ to get a new
+    collection of vectors $\vect{w}_1,\ldots,\vect{w}_9$ centered at the
+    origin.
+    For example,
+    \begin{eqnarray*}
+      \vect{w}_1 ~~=~~ \vect{v}_1 - \centroid{\vect{v}}
+      &=& \startmat{r} 10 \\ -6 \stopmat
+      - \startmat{r} 5 \\ 4 \stopmat
+      ~~=~~ \startmat{r} 5 \\ -10 \stopmat,
+      \\
+      \vect{w}_2 ~~=~~ \vect{v}_2 - \centroid{\vect{v}}
+      &=& \startmat{r} 2 \\ 10 \stopmat
+      - \startmat{r} 5 \\ 4 \stopmat
+      ~~=~~ \startmat{r} -3 \\ 6 \stopmat,
+    \end{eqnarray*}
+    and so on. We get
+    \begin{equation*}
+      \set{\vect{w}_1,\ldots,\vect{w}_9} =
+      \set{
+        \startmat{r} 5 \\ -10 \stopmat,
+        \startmat{r} -3 \\ 6 \stopmat,
+        \startmat{r} 0 \\ -5 \stopmat,
+        \startmat{r} 3 \\ -1 \stopmat,
+        \startmat{r} -3 \\ 1 \stopmat,
+        \startmat{r} -2 \\ -1 \stopmat,
+        \startmat{r} -1 \\ 7 \stopmat,
+        \startmat{r} 5 \\ -5 \stopmat,
+        \startmat{r} -4 \\ 8 \stopmat
+      }.
+    \end{equation*}
+    Next we, we proceed by finding $A^T$. We have
+
+    \begin{equation*}
+      A^T = \startmat{rrrrrrrrr}
+        5 & -3 & 0 & 3 & -3 & -2 & -1 & 5 & -4 \\
+        -10 & 6 & -5 & -1 & 1 & -1 & 7 & -5 & 8 \\
+      \stopmat
+    \end{equation*}
+    and
+    \begin{equation*}
+      B = A^TA = \startmat{rr}
+        98 & -136 \\
+        -136 & 302 \\
+      \stopmat.
+    \end{equation*}
+
+    The eigenvalues of $B$ are $\eigenvar_1 = 370$ and $\eigenvar_2 =
+    30$, with corresponding eigenvectors
+    \begin{equation*}
+      \vect{u}_1 = \startmat{r} 1 \\ -2 \stopmat
+      \quad\mbox{and}\quad
+      \vect{u}_2 = \startmat{r} 2 \\ 1 \stopmat
+    \end{equation*}
+
+    For simplicity in this example, we won't proceed to normalize the singular vectors and will simply maintain the squared singular values (the first of which gives the total square spread of the data on the subspace). 
+    
+    Thus, the best-fitting 1-dimensional subspace for
+    $\vect{w}_1,\ldots,\vect{w}_9$ is $W = \sspan\set{\vect{u}_1}$, and
+    the best-fitting 1-dimensional affine subspace for
+    $\vect{v}_1,\ldots,\vect{v}_9$ is
+    \begin{equation*}
+      \centroid{\vect{v}} + W
+      = \set{\centroid{\vect{v}} + \vect{w} \mid \vect{w}\in W}
+      = \set{\left.\startmat{r} 5 \\ 4 \stopmat +
+          t\startmat{r} 1 \\ -2 \stopmat ~\right\vert~ t\in\R}.
+    \end{equation*}
+    Note that this is the equation of a line passing through the
+    centroid $\centroid{\vect{v}}$, and with direction vector
+    $\vect{u}_1$. The points $\vect{v}_1,\ldots,\vect{v}_9$, their
+    centroid, and the affine subspace $\centroid{\vect{v}} + W$ are
+    shown in the following illustration:
+    \begin{center}
+      \begin{tikzpicture}[scale=0.2]
+        \draw[thin,->] (-12,0) -- (12,0);
+        \draw[thin,->] (0,-12) -- (0,12);
+        \draw[thin] (0,10) -- (-1,10) node[left] {$10$};
+        \draw[thin] (10,0) -- (10,-1) node[below] {$10$};
+        \draw[thick,blue] (5,4) +(-6,12) -- +(6,-12);
+        \fill[color=blue] (5,4) circle (0.6);
+        \draw[blue, ->] (5,4) +(8,4) node[right,yshift=4] {centroid} -- +(0.4,0.2);
+        \fill[color=red] (10, -6) circle (0.3);
+        \fill[color=red] (10, -1) circle (0.3);
+        \fill[color=red] (5, -1) circle (0.3);
+        \fill[color=red] (8, 3) circle (0.3);
+        \fill[color=red] (3, 3) circle (0.3);
+        \fill[color=red] (2, 5) circle (0.3);
+        \fill[color=red] (2, 10) circle (0.3);
+        \fill[color=red] (4, 11) circle (0.3);
+        \fill[color=red] (1, 12) circle (0.3);
+      \end{tikzpicture}
+    \end{center}
+    \vspace{-4ex}\par  
+  \end{solution}
 
 
 \end{document}

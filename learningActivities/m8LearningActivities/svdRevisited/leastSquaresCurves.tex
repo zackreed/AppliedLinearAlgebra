@@ -8,13 +8,11 @@
 \begin{document}
 \begin{abstract}
 
-    One application of IPSs is least squares.
-
 \end{abstract}
 \maketitle
 
 
-\section{Least squares approximations and curve fitting}
+\section*{Least squares approximations and curve fitting}
 \label{sec:least-squares}
 
 %\begin{outcome}
@@ -24,10 +22,12 @@
 %  \end{enumerate}
 %\end{outcome}
 
-In this section, we consider the problem of finding approximate
-solutions to a system of linear equations $A\vect{v}=\vect{b}$. This
-can be useful when the system is inconsistent, but we would still like
-to find a ``best'' answer. For example, consider the following system
+In this section, we also revisit the idea of least squares approximations, such as the problem of finding approximate
+solutions to a system of linear equations $A\vect{v}=\vect{b}$, or later on finding least squares approximations of curves.
+
+Before, we leveraged the least squares approximation inherent to the SVD to our advantage. Now, we examine a separate approach to least squares approximation that is at times more broadly applicable than just SVD approximation.
+
+Consider again the following system
 of equations.
 \begin{equation*}
   \begin{array}{rcrcl}
@@ -36,12 +36,14 @@ of equations.
     0.7 x &+& 0.2 y &=& 0.9. \\
   \end{array}
 \end{equation*}
+
 This system has the solution $(x,y)=(1,1)$, so it is clearly
 consistent. Now imagine that we introduce some small inaccuracies into
 the equations. The inaccuracies might perhaps be due to round-off
 errors, or due to measurement errors if the coefficients are obtained
 from experimental data. We might end up with the following system of
 equations:
+
 \begin{equation*}
   \begin{array}{rcrcl}
     0.1000001 x &+& 0.2 y &=& 0.3, \\
@@ -49,6 +51,7 @@ equations:
     0.7 x &+& 0.2 y &=& 0.9. \\
   \end{array}
 \end{equation*}
+
 Except for a tiny error in one of the coefficients, this is the same
 system of equations as before. We would expect that such a small error
 does not affect the result much. However, this last system of
@@ -61,7 +64,8 @@ solution'', i.e., numbers $x$ and $y$ such that each of the three
 equations ``almost'' holds. We can formulate the problem more
 precisely as follows:
 
-\begin{problem}{Least squares approximation problem}{least squares-approximation}
+\begin{problem}\name{Least squares approximation problem}\label{pr:least squares-approximation}
+
   Given a (possibly inconsistent) system of equations
   $A\vect{v}=\vect{b}$, find $\vect{v}$ such that
   \begin{equation*}
@@ -73,7 +77,7 @@ precisely as follows:
   \index{approximation!least squares} for the system of equations.
 \end{problem}
 
-To see why this is called a ``least squares'' approximation, consider
+Let's review the important dynamic of ``least squares'' approximations, and the interplay between minimizing error and maximizing spread. Consider
 a system of equations
 \begin{equation*}
   \begin{array}{c@{~}c@{~}c@{~}c@{~}c@{~}c@{~}c}
@@ -110,6 +114,7 @@ and therefore
   (a_{11}x_1 + \cdots + a_{1n}x_n - b_1)^2 + \ldots
   + (a_{m1}x_1 + \cdots + a_{mn}x_n - b_m)^2.
 \end{equation*}
+
 Therefore, minimizing $\norm{A\vect{v}-\vect{b}}$ is the same as
 minimizing the sum of the squares of the errors of all the equations,
 where the error of each equation is defined to be the difference
@@ -121,10 +126,10 @@ $A\vect{v}=\vect{b}$ is consistent, then its least squares
 approximations are exactly the solutions of the system of equations in
 the usual sense.
 
-The least squares approximation problem has a very elegant solution,
+The alternative least squares approximation problem has a very elegant solution,
 provided by the following proposition.
 
-\begin{proposition}{Solution of the least squares approximation problem}{least-squares-approximation}
+\begin{proposition}\name{Solution of the least squares approximation problem}\label{prop:least-squares-approximation}
   A vector $\vect{v}$ is a least squares approximation of the system
   of equations $A\vect{v}=\vect{b}$ if and only if
   \begin{equation*}
@@ -132,7 +137,7 @@ provided by the following proposition.
   \end{equation*}
 \end{proposition}
 
-\begin{proof}
+
   Let $\vect{a}_1,\ldots\vect{a}_n$ be the columns of the matrix
   $A$. Recall that $\sspan\set{\vect{a}_1,\ldots\vect{a}_n}$ is called
   the \textbf{column space}%
@@ -183,9 +188,9 @@ provided by the following proposition.
   \begin{equation*}
     A^TA\vect{v} = A^T\vect{b}.
   \end{equation*}
-\end{proof}
 
-\begin{example}{Least squares approximation}{least-squares-approximation}
+
+\begin{example}\name{Least squares approximation}\label{ex:least-squares-approximation}
   Find the least squares approximation for the system of equations
   \begin{equation*}
     \begin{array}{r@{~}c@{~}r@{~}c@{~}r@{~}c@{~}r}
@@ -285,7 +290,7 @@ An important application of least squares approximations is
 The next two examples show how to use least square approximations to
 solve curve fitting problems.
 
-\begin{example}{Least squares line}{least-squares-line}
+\begin{example}\name{Least squares line}\label{ex:least-squares-line}
   A company has collected daily data on temperature and ice cream
   sales over a period of one week. The data is as follows:
   \begin{equation*}
@@ -429,7 +434,7 @@ So the system of equations we must solve is
   The sum of the squares of the errors is $20^2 + 10^2 + 30^2 + 40^2 + 20^2 + 30^2 + 10^2 = 4400$.
 \end{solution}
 
-\begin{example}{Least squares parabola}{least-squares-parabola}
+\begin{example}\name{Least squares parabola}\label{ex:least-squares-parabola}
   \index{least squares parabola}%
   \index{curve fitting!least squares parabola}
   Find a quadratic polynomial that is the best fit for the following
@@ -561,6 +566,52 @@ and solve the system of equations $A^TA\vect{v} = A^T\vect{b}$, i.e.,
   \end{equation*}
   The sum of the squares of the errors is $0^2 + 1.5^2 + 3^2 + 1.5^2 + 1.5^2 + 3^2 + 1.5^2 = 27$.
 \end{solution}
+
+\subsection*{Subspace fitting vs. curve fitting}
+
+We end by comparing curve fitting to subspace-fitting. On its face, the subspace
+fitting problem in this case seems similar to other curve-fitting methods you'll have encountered before. However, there is a subtle but
+important difference: in linear curve fitting, we were seeking to
+minimize the distances of the points from the line in the
+$y$-direction, whereas in subspace fitting, we are seeking to minimize
+the distances of the points from the subspace in the direction
+perpendicular to the subspace. The following pair of pictures
+illustrates the difference:
+\begin{center}
+  \begin{tikzpicture}[scale=0.8]
+    \draw[thin,->] (-3,0) -- (3,0);
+    \draw[thin,->] (0,-3) -- (0,3);
+    \draw[thick,blue] (-3,-3*0.75) -- (3,3*0.75);
+    \fill[color=red] (0,0) circle (0.12);
+    \fill[color=red] (2,0) circle (0.12);
+    \fill[color=red] (2,3) circle (0.12);
+    \fill[color=red] (-2,0) circle (0.12);
+    \fill[color=red] (-2,-3) circle (0.12);
+    \draw[<->,black!50] (2,0) -- (2,1.5);
+    \draw[<->,black!50] (2,3) -- (2,1.5);
+    \draw[<->,black!50] (-2,0) -- (-2,-1.5);
+    \draw[<->,black!50] (-2,-3) -- (-2,-1.5);
+    \path (0,-3.5) node[below] {Linear curve fitting};
+    \path[black!70] (2,-2) node {\begin{tabular}{c}minimize\\vertical\\distances\end{tabular}};
+  \end{tikzpicture}
+  \hspace{1in}
+  \begin{tikzpicture}[scale=0.8]
+    \draw[thin,->] (-3,0) -- (3,0);
+    \draw[thin,->] (0,-3) -- (0,3);
+    \draw[thick,blue] (-3*0.92,-3) -- (3*0.92, 3);
+    \fill[color=red] (0,0) circle (0.12);
+    \fill[color=red] (2,0) circle (0.12);
+    \fill[color=red] (2,3) circle (0.12);
+    \fill[color=red] (-2,0) circle (0.12);
+    \fill[color=red] (-2,-3) circle (0.12);
+    \draw[<->,black!50] (2,0) -- (0.997*0.92,0.997);
+    \draw[<->,black!50] (2,3) -- (2.621*0.92,2.621);
+    \draw[<->,black!50] (-2,0) -- (-0.997*0.92,-0.997);
+    \draw[<->,black!50] (-2,-3) -- (-2.621*0.92,-2.621);
+    \path (0,-3.5) node[below] {Subspace fitting};
+    \path[black!70] (2,-2) node {\begin{tabular}{c}minimize\\distances\\perpendicular\\to subspace\end{tabular}};
+  \end{tikzpicture}
+\end{center}
 
 
 \end{document}

@@ -361,7 +361,7 @@ With these features in mind, the SVD production algorithm is as follows.
   Given a $m\times n$ matrix $A$, one can find the SVD of $A$ by taking the following steps:
 
   \begin{enumerate}
-    \item Find a direction vector $\vec{v}_1$ that maximizes $\left\|A\vec{v}\right\|$ over all unit vectors $\vec{v}$. $\vec{v}_1$ is the first right singular vector, and call $\sigma_1=\left\|A\vec{v}_1\right\|^2$ the first singular value. 
+    \item Find a direction vector $\vec{v}_1$ that maximizes $\left\|A\vec{v}\right\|$ over all unit vectors $\vec{v}$. $\vec{v}_1$ is the first right singular vector, and call $\sigma_1=\left\|A\vec{v}_1\right\|$ the first singular value. 
     \item Find the second right singular vector $\vec{v}_2$ by maximizing $\left\|A\vec{v}\right\|$ over all unit vectors $\vec{v}$ that are orthogonal to $\vec{v}_1$. The second singular value is $\sigma_2=\left\|A\vec{v}_2\right\|$. 
     \item Repeat until you have found a sufficient number of right singular vectors and singular values.
     \item Form the left singular vectors from the matrix products $\vec{u}_i=\frac{A\vec{v}_i}{\sigma_i}$.

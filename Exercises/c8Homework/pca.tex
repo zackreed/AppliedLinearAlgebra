@@ -6,7 +6,7 @@
 \begin{document}
 
 
-\begin{exercise}
+\begin{problem}
   Consider the following collection of points in $\R^2$:
   \begin{equation*}
     \set{
@@ -23,12 +23,26 @@
     }.
   \end{equation*}
   Find the 1-dimensional subspace that best approximates this
-  collection of points. What is the total squared distance of the
-  points to the subspace? Sketch the subspace and the points.
-\end{exercise}
+  collection of points. What is the total squared lengths of the projections onto this subspace? What is the total squared distance of the
+  points to the subspace? 
 
-\begin{exercise}
-  Consider the following collection of points in $\R^3$:
+  \begin{solution}
+  
+    The best-fitting $1D$ subspace is $\span\left(\begin{bmatrix}
+      \answer[tolerance=.01]{-.832}\\\answer[tolerance=.01]{.554}
+    \end{bmatrix}\right)$. (Note: the vector should be a unit vector with a negative first coordinate rounded to four decimal places.)
+
+    The total squared lengths of the projections onto the subspace is $\answer[tolerance=.5]{52}$. (Hint: Remember that the singular values $\sigma$ capture the norm $\norm{A\vec{v}_1}$, the square root of the dot product of the data with the right singular vector $\vec{v}_1$.)
+
+    The total squared distance of the points to the subspace is $\answer[tolerance=.5]{13}$ (Hint: The singular vectors not spanning the best-fit subspace form basis vectors for $\RR^m$ outside of the best-fit subspace, and the remaining singular values account for the spread along those directions.)
+
+  \end{solution}
+
+
+\end{problem}
+
+\begin{problem}
+  Consider the following collection of points in $\R^3$. Do not assume this has been centered on the origin, plot the points to determine this.
   \begin{equation*}
     \set{
       \startmat{r} 0 \\ 0 \\ 9 \stopmat,
@@ -50,64 +64,87 @@
     collection of points.
   \item Find the 2-dimensional subspace that best approximates this
     collection of points.
-  \item What is the 3-dimensional subspace that best approximates this
-    collection of points?
   \end{enumerate}
   In each case, what is the total squared distance of the points to
-  the subspace?
-\end{exercise}
+  the subspace? What is the total length of the projections of the points onto the subspace.
 
-\begin{exercise}
-  Find the principal components of the matrix
-  \begin{equation*}
-    A = \startmat{ccccccccc}
-      0 & 0 & 0 & 0 & -1 & 0 & 3 & 0 & 1 \\
-      0 & 1 & 0 & 0 & 2 & 3 & 0 & 2 & -1 \\
-      1 & -1 & -3 & 3 & -1 & 0 & 0 & -2 & 2 \\
-    \stopmat.
-  \end{equation*}
-\end{exercise}
+  \begin{solution}
+    
+    \begin{enumerate}
+      \item The best-fitting $1D$ subspace is $\span\left(\begin{bmatrix}
+        \answer[tolerance=.005]{.2120}\\\answer[tolerance=.005]{-.2192}\\\answer[tolerance=.005]{.9524}
+      \end{bmatrix}\right)$ (The direction vector is a unit vector, the first coordinate is positive. Round to four decimal places.)
 
-\begin{exercise}
-  Compute the centroid of the following collection of points:
-  \begin{equation*}
-    \set{
-      \startmat{r} 2 \\ -1 \stopmat,
-      \startmat{r} 0 \\ 1 \stopmat,
-      \startmat{r} 4 \\ -3 \stopmat,
-      \startmat{r} -4 \\ -4 \stopmat,
-      \startmat{r} 0 \\ -2 \stopmat,
-      \startmat{r} -2 \\ -1 \stopmat,
-      \startmat{r} 0 \\ -2 \stopmat,
-      \startmat{r} -2 \\ -4 \stopmat,
-      \startmat{r} 3 \\ -1 \stopmat,
-      \startmat{r} -5 \\ -5 \stopmat
-    }.
-  \end{equation*}
-\end{exercise}
+      The total squared distance of the points to the subspace is $\answer{60}$ (Round to the nearest integer).
 
-\begin{exercise}
-  Consider the following collection of points in $\R^2$:
-  \begin{equation*}
-    \set{
-      \startmat{r} 4 \\ -3 \stopmat,
-      \startmat{r} 10 \\ -9 \stopmat,
-      \startmat{r} 4 \\ -7 \stopmat,
-      \startmat{r} -2 \\ 3 \stopmat,
-      \startmat{r} 10 \\ -3 \stopmat,
-      \startmat{r} 4 \\ -3 \stopmat,
-      \startmat{r} 5 \\ -3 \stopmat,
-      \startmat{r} 4 \\ 1 \stopmat,
-      \startmat{r} -2 \\ -3 \stopmat,
-      \startmat{r} 3 \\ -3 \stopmat
-    }.
-  \end{equation*}
-  Compute the centroid, and then find the 1-dimensional affine
-  subspace that best approximates this collection of points. What is
-  the total squared distance of the points to the subspace?
-\end{exercise}
+      The total spread (i.e. the total squared proejction lengths) is $\answer[tolerance=1]{279}$ (Round to the nearest integer).
 
-\begin{exercise}
+      \item The best-fitting $2D$ subspace is $\span\left(\begin{bmatrix}
+        \answer[tolerance=.005]{.2120}\\\answer[tolerance=.005]{-.2192}\\\answer[tolerance=.005]{.9524}
+      \end{bmatrix},\begin{bmatrix}
+        \answer[tolerance=.005]{.6434}\\\answer[tolerance=.005]{-.7022}\\\answer[tolerance=.005]{-.3049}
+      \end{bmatrix}\right)$ (The direction vectors are unit vectors, the first coordinate of both vectors is positive. Round to four decimal places.)
+
+      The total squared distance of the points to the subspace is $\answer{22}$ (Round to the nearest integer).
+
+      The total spread (i.e. the total squared proejction lengths) is $\answer[tolerance=1]{316}$ (Round to the nearest integer).
+    \end{enumerate}
+
+  \end{solution}
+
+\end{problem}
+
+%\begin{problem}
+%  Find the principal components of the matrix
+%  \begin{equation*}
+%    A = \startmat{ccccccccc}
+%      0 & 0 & 0 & 0 & -1 & 0 & 3 & 0 & 1 \\
+%      0 & 1 & 0 & 0 & 2 & 3 & 0 & 2 & -1 \\
+%      1 & -1 & -3 & 3 & -1 & 0 & 0 & -2 & 2 \\
+%    \stopmat.
+%  \end{equation*}
+%\end{problem}
+
+%\begin{problem}
+ % Compute the centroid of the following collection of points:
+ % \begin{equation*}
+ %   \set{
+ %     \startmat{r} 2 \\ -1 \stopmat,
+ %     \startmat{r} 0 \\ 1 \stopmat,
+ %     \startmat{r} 4 \\ -3 \stopmat,
+ %     \startmat{r} -4 \\ -4 \stopmat,
+ %     \startmat{r} 0 \\ -2 \stopmat,
+ %     \startmat{r} -2 \\ -1 \stopmat,
+ %     \startmat{r} 0 \\ -2 \stopmat,
+ %     \startmat{r} -2 \\ -4 \stopmat,
+ %     \startmat{r} 3 \\ -1 \stopmat,
+ %     \startmat{r} -5 \\ -5 \stopmat
+ %   }.
+ % \end{equation*}
+%\end{problem}
+
+%\begin{problem}
+%  Consider the following collection of points in $\R^2$:
+%  \begin{equation*}
+%    \set{
+%      \startmat{r} 4 \\ -3 \stopmat,
+%      \startmat{r} 10 \\ -9 \stopmat,
+%      \startmat{r} 4 \\ -7 \stopmat,
+%      \startmat{r} -2 \\ 3 \stopmat,
+%      \startmat{r} 10 \\ -3 \stopmat,
+%      \startmat{r} 4 \\ -3 \stopmat,
+%      \startmat{r} 5 \\ -3 \stopmat,
+%      \startmat{r} 4 \\ 1 \stopmat,
+%      \startmat{r} -2 \\ -3 \stopmat,
+%      \startmat{r} 3 \\ -3 \stopmat
+%    }.
+%  \end{equation*}
+%  Compute the centroid, and then find the 1-dimensional affine
+%  subspace that best approximates this collection of points. What is
+%  the total squared distance of the points to the subspace?
+%\end{problem}
+
+\begin{problem}
   Consider the following collection of points in $\R^3$:
   \begin{equation*}\scriptstyle
     \set{
@@ -130,7 +167,7 @@
   Find the 1- and 2-dimensional affine subspaces that best approximate
   this collection of points. What is the total squared
   distance of the points to each subspace?
-\end{exercise}
+\end{problem}
 
 
 \end{document}

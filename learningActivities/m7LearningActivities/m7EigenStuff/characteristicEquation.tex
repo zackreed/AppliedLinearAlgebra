@@ -86,8 +86,27 @@ Matrix $C$ has eigenvalues $\lambda_1=1$ and $\lambda_2=4$.
 \end{example}
     
 In Example \ref{ex:3x3eig}, the factor  $(\lambda-1)$ appears twice.  This repeated factor gives rise to the eigenvalue $\lambda_1=1$.  We say that the eigenvalue $\lambda_1=1$ has \dfn{algebraic multiplicity} $2$.
+
+There are actually two kinds of multiplicities associated with eigenvalues that we want to consider, particulalry in the next chapter. 
+
+\begin{definition}\name{Eigenvalue multiplicities}\label{def:geommulteig}
+
+The \emph{algebraic multiplicity} of an eigenvalue $\lambda$ is the number of times that it occurs as a root of the characteristic polynomial.
+
+The \dfn{geometric multiplicity} of an eigenvalue $\lambda$ is the dimension of the corresponding eigenspace $\mathcal{S}_\lambda$.
+\end{definition}
+
+Consider now the following lemma.
+
+\begin{lemma}\label{lemma:dimeigenspace}
+Let $A$ be an $n\times n$ matrix, and let $\mathcal{S}_{\lambda_1}$ be the eigenspace corresponding to the eigenvalue $\lambda_1$ which has algebraic multiplicity $m$.  Then
+$$\mbox{dim}(\mathcal{S}_{\lambda_1})\leq m$$
+\end{lemma}
+
+In other words, the geometric multiplicity of an eigenvalue is less than or equal to the algebraic multiplicity of that same eigenvalue.
+
     
-The three examples above are a bit contrived.  It is not always possible to completely factor the characteristic polynomial using only real numbers.  However, a fundamental fact from algebra is that every degree $n$ polynomial has $n$ roots (counting multiplicity) provided that we allow complex numbers.  This is why sometimes eigenvalues and their corresponding eigenvectors involve complex numbers.  The next example illustrates this point.
+The three examples above are a bit contrived.  It is not always possible to completely factor the characteristic polynomial using only real numbers.  However, a fundamental fact from algebra is that every degree $n$ polynomial has $n$ roots (counting multiplicity) provided that we allow complex numbers.
     
 \begin{example}\label{ex:3x3_complex_eig}
 Let $D=\begin{bmatrix} 0&0&0\\ 0 &1&1\\ 0 & -1&1\end{bmatrix}$.  Compute the eigenvalues of this matrix.

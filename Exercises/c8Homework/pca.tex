@@ -173,7 +173,47 @@
 
   The following is an AI-generated image of a lion:
 
-  
+  \begin{center}
+
+      \includegraphics[width=22.62cm, height=20.76cm]{realistic_lion.png}
+
+  \end{center}
+
+  Load $\texttt{lion\_realistic.png}$ into MATLAB as a $1024x1024$ matrix using the following code:
+
+  \begin{verbatim}
+    lion=imread("+linalg/lion_realistic.png")
+    lion=double(rgb2gray(lion))
+    linalg.show_img(lion)
+  \end{verbatim}
+
+  Recall that grayscale images are stored as matrices where each matrix entry is a value between $0$ and $255$, and represents the darkness of the pixel at that location.
+
+  Consider the matrix to be a collection of $1024$ vectors each with $1024$ dimensions, where the columns are the vectors and the rows are the dimensions. Essentially, each vertical strip of the image is a $1024$-dimensional vector (you could also do this by rows, but we'll stay with columns as usual).
+
+  After centering, the lion image should look like the following:
+
+  \begin{center}
+
+    \includegraphics[width=22.62cm, height=20.76cm]{realistic_lion_centered.png}
+
+\end{center}
+
+The SVD of the centered lion gives $U$, $S$, and $V$ as $1024\times 1024$ matrices, meaning we have $1024$ possible principal components to work wtih. 
+
+Reconstructing only on the $100$-dimensional best-fit subspace yields the following:
+
+\begin{center}
+
+  \includegraphics[width=22.62cm, height=20.76cm]{realistic_lion_100_vals.png}
+
+\end{center}
+
+What is the difference between the total squared spread on the $100$-dimensional approximation and the total squared spread of the data on the remaining $924$ principal components? 
+
+Answer in scientific notation:
+
+$\answer{2.9}\times 10^{\answer{9}}$ (Round the coefficient to one decimal place.)
 
 \end{problem}
 

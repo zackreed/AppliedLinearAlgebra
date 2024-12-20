@@ -5,6 +5,40 @@
 %borrowed from selinger linear algebra
 \begin{document}
 
+A key utility of diagonalization was that matrix powers $A^k$ could be computed easily if $A$ was diagonalizable.
+
+This was because if $A$ was diagonalizable, then $A=PDP^{-1}$ for an invertible matrix $P$ and diagonal matrix $D$. Then, by cancellation of $P$ and $P^{-1}$ through repeated multiplication, $A^k=PD^kP^{-1}$.
+
+Now, we extend this to analytic functions of matrices. 
+
+From calculus, recall that a function is called \textbf{analytic} if it can be defined by a power series. For example:
+\begin{eqnarray*}
+  e^{x} &=& 1 + x + \frac{1}{2}x^2 + \frac{1}{3!}x^3 + \frac{1}{4!}x^4 + \ldots \\
+  \sin x &=& x - \frac{1}{3!}x^3 + \frac{1}{5!}x^5 - \frac{1}{7!}x^7 \pm \ldots \\
+  \cos x &=& 1 - \frac{1}{2}x^2 + \frac{1}{4!}x^4 - \frac{1}{6!}x^6 \pm \ldots
+\end{eqnarray*}
+
+We know from calculus that the above power series converge for all
+real numbers $x$. Since it makes sense to compute the $n\th$ power of
+a square matrix, in principle it also makes sense to plug a matrix
+into a power series. For a square matrix $A$, we can define
+
+\begin{eqnarray*}
+  e^{A} &=& I + A + \frac{1}{2}A^2 + \frac{1}{3!}A^3 + \frac{1}{4!}A^4 + \ldots \\
+  \sin A &=& A - \frac{1}{3!}A^3 + \frac{1}{5!}A^5 - \frac{1}{7!}A^7 \pm \ldots \\
+  \cos A &=& I - \frac{1}{2}A^2 + \frac{1}{4!}A^4 - \frac{1}{6!}A^6 \pm \ldots
+\end{eqnarray*}
+
+In fact, if we apply reasoning very simlar to the matrix-powers argument above, we can indeed accurately define analytic functions on diagonalizable matrices as the following:
+
+If $f$ is an analytic function and $A$ is a diagonalizable matrix with eigen decomposition $PDP^{-1}$, then the matrix 
+
+$$f(A)=P*f(D)*P^{-1}$$
+
+is well-defined, where if $\lambda_i$ are the diagonal elements of $D$, then $f(D)$ is a diagonal matrix with diagonal entries $f(\lambda_i)$.
+
+Use this result to find $e^A$ and $\cos(A)$ for the following matrices. 
+
 \begin{problem}
   
   \begin{enumerate}

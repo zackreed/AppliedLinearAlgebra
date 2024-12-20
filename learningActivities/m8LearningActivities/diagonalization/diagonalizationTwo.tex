@@ -12,53 +12,9 @@
 
 \section*{Diagonalization and Real Symmetric Matrices}
 
-\subsection*{Diagonalization}
-
-We ended last chapter by discussing matrix similarity and its connections to eigenvectors and eigenvalues. Specifically, two matrices $A$ and $B$ are similar if for some invertible matrix, $B=P^{-1}*A*P$. We also learned that similar matrices share the same eigenvalues. We now further examine similarity and its connection to eigentheory, specifically for matrices that are similar to a diagonal matrix. 
-
-\begin{definition}\name{Diagonalizability}
-  A matrix $A$ is \emph{diagonalizable} if it is similar to a diagonal matrix, $D$. 
-
-  That is, $A$ is said to be \dfn{diagonalizable} if there exists an invertible matrix $P$ such that
-\begin{equation*}
-P^{-1}AP=D
-\end{equation*}
-where $D$ is a diagonal matrix.
-\end{definition}
-
-Similarity of matrices in and of itself is not necessarily always useful, but similarity with diagonal matrices in particular come with some nice properties, and exploring these properties has important implications for various other concepts, such as the SVD.
-
-\begin{exploration}
-
-    Since $P^{-1}AP=D$, we can left-multiply by $P$ to get $AP=PD$. Let's call the columns of $P$ $\vec{x}_i$ and the diagonal entries of $D$ $\lambda_i$. Thinking about this multiplication column-wise, we get
-
-    $$A\vec{x}_i=\lambda_i\vec{x}_i.$$
-
-    This should look familiar! If $A$ is diagonalizable, then $\vec{x}_i$ are eigenvectors of $A$ and $\lambda_i$ are eigenvalues of $A$! Moreoer, since $P$ is invertible, it has full rank, and so we get a complete reconstruction of $A$ entirely in terms of eigenvectors and eigenvalues. In fact, some simple right-multiplication by $P^{-1}$ re-states diagonalizability as
-
-    $$A=PDP^{-1}.$$
-
-
-\end{exploration}
-
-This is another decomposition, in fact very similar to the SVD, where $A$ is factored into matrices formed by its eigenvalues and eigenvectors. This is actually a very restrictive theorem:
-
-\begin{theorem}
-
-  An $n\times n$ matrix $A$ is diagonalizable only when its eigenvectors form an $n\times n$ invertible matrix. When this happens, $A$ is similar by $P$ to a diagonal matrix $D$ whose entries are its eigenvalues.
-
-  Said differently, a matrix $A$ is only diagonalizable when it has $n$ linearly independent eigenvectors.
-
-\end{theorem}
-
-Note, diagonalizability is much more restrictive than the SVD in that it only applies to square matrices with $n$ linearly independent eigenvectors. This is a trade off and both decompositions are useful. The broad applicability of the SVD (and its numerous applications) are very useful, but often we utilize the very nice properties of diagonalizable matrices for other purposes. We will see this in the next section. 
-
 We have seen that some matrices are diagonalizable, and others are not. In this section, we will see that
-the theory of diagonalization is much nicer when the matrix to be
-diagonalized is symmetric. Recall that a matrix $A$ is
-\textbf{symmetric}%
-\index{symmetric matrix}%
-\index{matrix!symmetric} if $A=A^T$. We begin with some observations
+symmetric matrices have very nice properties related to diagonalization. Recall that a matrix $A$ is
+\textbf{symmetric} if $A=A^T$. We begin with some observations
 about the eigenvalues and eigenvectors of a real symmetric matrix.
 
 \begin{proposition}\name{Eigenvalues and eigenvectors of real symmetric matrices}\labe{prop:eigenvalues-symmetric}

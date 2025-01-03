@@ -1,0 +1,222 @@
+\documentclass{ximera}
+\input{../../../preamble.tex}
+
+\author{Zack Reed}
+%borrowed from chrichton ogle Linear
+\title{Elementary Matrices: Row Reduction, Matrix Decomposition, and Finding the Inverse of a Matrix}
+\begin{document}
+\begin{abstract}
+
+
+
+\end{abstract}
+\maketitle
+
+%THE MAIN IDEA IS THAT WE CONSTRUCT THE INVERSE OF A MATRIX BY USING ELEMENTARY MATRICES, AND SO THAT'S THE POINT OF REDUCED ROW ECHELON FORM AND STUFF. 
+%ALSO SET UP AN RREF IN GEOGEBRA WITH "Reduced" function as part of it, just so they can 
+%See the full process, then use rref in maltab and stuff for higher dimensions.
+
+\section*{Inverse Problems}
+
+We spent a lot of time last chapter finding solutions to systems of equations (when they existed).
+
+As we said, solving a system of equations was analogous to solving the matrix equation $A\vec{x}=\vec{b}$ for possible $\vec{x}$ vectors that satisfy the equation. 
+
+Let's press more into solving the equation $A\vec{x}=\vec{b}$, as this is an example of an \emph{inverse} question in mathematics. Inverse questions are very important, and give us many tools.
+
+\begin{example}
+
+  For nonzero scalars $s$, multiplication inverse problems amount to finding a number $r$ such that $r\cdot s=1$.
+
+  For instance, $2*.5=1$, $3\cdot .\overline{333}=1$, $\pi\cdot \frac{1}{\pi}=1$. 
+
+  In this simple case, we can explicitly find the inverse of any real number $s$ (multiplicatively) by taking $\frac{1}{s}$, and hence $s\cdot\frac{1}{s}=1$.
+
+\end{example}
+
+\begin{example}
+
+  For functions, in calculus, we concerned ourselves with finding the derivatives and integrals of inverse functions.
+
+  \emph{Inverse functions} compose with each other to make the identity function (e.g. $y=x$). 
+
+  \begin{enumerate}
+  
+    \item Exponential and Logarithms: $a^x$ and $\log_a(x)$ are inverses because $a^{\log_a(x)}=log_a(a^x)=x$
+    
+    \item Quadratic functions $q(x)=x^2$ don't fully have inverse functions because square root functions $sqrt(x)=\sqrt{x}$ are only defined for nonnegative numbers.
+    
+    So $\sqrt{x^2}$ and $\sqrt{x}^2$ don't equalt $y=x$, but instead $\sqrt{x^2}=\abs{x}$ and $\sqrt{x}^2=x$ only for $x\geq 0$.
+
+  \end{enumerate}
+
+\end{example}
+
+So, the conditions for mathematical objects to have inverses is quite stringent, and we'll see this stringency matter for matrices. 
+
+\begin{exploration}{For some $\vec{x}$? For all $\vec{x}$?}
+
+  You might be tempted to characterize the inverses of matrices in terms of the matrix equation $A\vec{x}=\vec{b}$. 
+  
+  This is somewhat intuitive, since inverse scalars help us solve problems like $3x=5\rightarrow x=5/3$. 
+
+  Let's explore this a little bit, and start with the matrix 
+
+  $$A=\begin{bmatrix}1&2&3\\2&4&6\end{bmatrix}.$$
+
+  We know from before (take the \texttt{rref(A)}) that $\mbox{im}(A)=\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$. In essence, $A$ takes all of space to a line in $\RR^2$.
+
+  What inverse problems can we solve here? Specifically, for what vectors $\vec{b}$ can we find $\vec{x}$ to satisfy $A\vec{x}=\vec{b}$?
+
+  From the following list, determine which vectors $\vec{b}$ come with a solution vector $\vec{x}$
+
+  \begin{selectAll}
+  
+    \choice[correct]{$\vec{b}=\begin{bmatrix}
+    1\\2
+    \end{bmatrix}$}
+
+    \choice{$\vec{b}=\begin{bmatrix}
+      3\\1
+      \end{bmatrix}$}
+
+    \choice{$\vec{b}=\begin{bmatrix}
+      4\\-1
+      \end{bmatrix}$}
+
+    \choice[correct]{$\vec{b}=\begin{bmatrix}
+      -5\\-10
+      \end{bmatrix}$}
+
+    \choice{$\vec{b}=\begin{bmatrix}
+      -2\\3
+      \end{bmatrix}$}
+
+  \end{selectAll}
+
+  \begin{feedback}
+  
+    Since the image of the transformation is $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$, only vectors that start in the span can be mapped to by $A$. So for $\vec{b}=\begin{bmatrix}
+    1\\2
+    \end{bmatrix}$, we just take the first column of $A$ to make $\vec{b}$, which means our solution vector is $\vec{x}=\begin{bmatrix}
+      \answer{1}\\0\\0
+    \end{bmatrix}$. 
+
+    Similarly, for $\vec{b}=\begin{bmatrix}
+      -5\\-10
+    \end{bmatrix}$, we only need $-5$ times the first column of $A$ to make $\vec{b}$, which means our solution vector is $\vec{b}=\begin{bmatrix}
+      \answer{-5}\\0\\0
+    \end{bmatrix}$
+
+    In all other cases, $\vec{b}$ is out of the span of $A$, and so we cannot have a solution. This can be verified with $\texttt{rref([A,b)}$, which contains a pivot in the final column.
+
+  \end{feedback}
+
+\end{exploration}
+
+This last exploration highlights that, much like the stringent requirement that inverse functions exist for \emph{all} possible $x$-values, inverse matrices must enable us to solve the equation $A\vec{x}=\vec{b}$ for \emph{all} possible vectors $\vec{b}$.
+
+\section*{Invertibility}
+
+In order to satisfy the stringency of inverting matrices, we have the following definition:
+
+\begin{definition}
+  A matrix $A$ is invertible exactly when there is another matrix $M$ such that $A*M=I$ and $M*A=I$.
+
+  When $M$ exists, we call it the \emph{inverse matrix} of $A$ and use the notation $M=A^{-1}$.
+\end{definition}
+
+\begin{remark}
+  Note, this is analogous to inverse functions! Inverse functions compose to make the identity, inverse matrices multiply to make the identity. This is not an accident, since matrices are also linear transformations, and matrix multiplication composes the linear transformations.
+\end{remark}
+
+\begin{exploration}
+  Many of the linear transformations we've already encountered have fairly easily-discernible inverses if we think about the geometry of the transformation.
+
+  Consider the following linear transformations:
+
+  \begin{enumerate}
+    \item The matrix $A=\begin{bmatrix}
+      0&1&0\\0&0&1\\1&0&0
+    \end{bmatrix}$, which changes the ordering of the basis vectors.
+    \item The matrix $R=\begin{bmatrix}
+      \cos(\pi/4) & -\sin(\pi/4) & 0\\
+      \sin(\pi/4) & \cos(\pi/4) & 0\\
+      0&0&1
+    \end{bmatrix}$, which rotates space around the $z$-axis by $\pi/4$.
+    \item The elementary scaling matrix $E_{2}(3)=\begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 3 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}$ which scales the $y$-axis by a factor of $3$.
+    \item The elementary row addition matrix $E_{3,2}(2)=\begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 2 & 1
+    \end{bmatrix}$ which adds 2 times the second row to the third row. This also geometrically shears space along the $z$-axis in the direction of the $y$-axis.
+  \end{enumerate}
+
+  Each of the following matrices are inverses of $A, R$, $E_{2}(3)$ or $E_{3,2}(2)$. Thinking about reversing the geometry of the original transformation, match each inverse matrix with the correct paired original matrix.
+
+  \begin{enumerate}
+    \item The matrix $B=\begin{bmatrix}
+      0&0&1\\1&0&0\\0&1&0
+    \end{bmatrix}$ is inverse to \begin{multipleChoice}
+    \choice[correct]{$A$}
+    \choice{$R$}
+    \choice{$E_{2}(3)$}
+    \choice{$E_{3,2}(2)$}
+    \end{multipleChoice}.
+    
+    \item The matrix $C=\begin{bmatrix}
+    1&0&0\\0&1/3&0\\0&0&1
+    \end{bmatrix}$ is inverse to \begin{multipleChoice}
+      \choice{$A$}
+      \choice{$R$}
+      \choice[correct]{$E_{2}(3)$}
+      \choice{$E_{3,2}(2)$}
+      \end{multipleChoice}
+
+    \item The matrix $D=\begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & -2 & 1
+    \end{bmatrix}$ is inverse to \begin{multipleChoice}
+      \choice{$A$}
+      \choice{$R$}
+      \choice{$E_{2}(3)$}
+      \choice[correct]{$E_{3,2}(2)$}
+      \end{multipleChoice}.
+
+    \item The matrix $E=\begin{bmatrix}
+      \cos(-\pi/4) & -\sin(-\pi/4) & 0\\
+      \sin(-\pi/4) & \cos(-\pi/4) & 0\\
+      0&0&1
+    \end{bmatrix}$ is inverse to \begin{multipleChoice}
+      \choice{$A$}
+      \choice[correct]{$R$}
+      \choice{$E_{2}(3)$}
+      \choice{$E_{3,2}(2)$}
+      \end{multipleChoice}.
+  \end{enumerate}
+
+  \begin{feedback}
+    \begin{enumerate}
+      \item The matrix $B$ returns the re-ordered basis vectors to their original order from the matrix $A$. For instance, $A\vec{i}$ becomes the third basis vector, and $B$ sends the third basis vector back to the first position. Similarly $\vec{j}$ goes to the first position under $A$ and then back to the second position under $B$. Finally, $\vec{k}$ goes to position $2$ and then back to position $3$.
+      \item The matrix $C$ compresses the $y$-direction to $1/3$ of its size. This reverses the $y$-direction scaling done by $E_{2}(3)$. 
+      \item The matrix $D$ shears the $z$-axis by $-2$ in the direction of the $y$-axis. This reverses the shearing of $2$ in the $z$-axis in the direction of the $y$-axis done by $E_{3,2}(2)$. You can also think of this as subtracting $2$ times the second row from the third row, which undoes the row addition of $E_{3,2}(2)$.
+      \item The matrix $E$ rotates about the $z$-axis in the direction of $-\pi/4$. A simple way to un-do a rotation is to rotate the same amount in the other direction.
+    \end{enumerate}
+  \end{feedback}
+
+\end{exploration}
+
+As the previous exploration showed, some matrices $A$ have relatively easiliy-discernible inverse matrices $A^{-1}$, particularly if we think about reversing the geometric transformation of $A$ to return vectors to their original state so that $A*A^{-1}=I$. 
+
+Not all invertible matrices have easily-discernible inverses, however. It is not immediately clear, for instance, that the matrix $A=\begin{bmatrix}
+  1&0&3\\0&2&1\\-1&1&0
+\end{bmatrix}$ has an inverse, much less what it would be. In the next sections, we explore ways to find inverse matrices and ways to determine whether matrices even have inverses.
+
+
+
+\end{document}

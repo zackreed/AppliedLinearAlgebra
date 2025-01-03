@@ -158,7 +158,7 @@ This also gives us a quick way of determining the inverse matrix itself, using r
 
 This gives us the following algorithm. 
 
-\begin{theorem}
+\begin{theorem}\label{thm:prod-elementary}
   The following algorithm will determine whether a matrix $A$ is invertible, and if it is then it will also yield the inverse matrix $A^{-1}$.
   \begin{enumerate}
     \item Augment $A$ with the identity matrix, $A|I$.
@@ -167,15 +167,15 @@ This gives us the following algorithm.
   \end{enumerate}
 \end{theorem}
 
-START HERE!
+Let's try this process a few times and verify that this gives us inverse matrices! We'll also verify that if we don't get the identity matrix from row operations, then the matrix $A$ is not invertible.
 
-\begin{example}{Product of elementary matrices}{prod-elementary}
+\begin{example}\name{Product of elementary matrices}\label{ex:prod-elementary}
   Let $A = \startmat{rrr}
     0 &  1 & 0 \\
     1 &  1 & 0 \\
     0 & -2 & 1
   \stopmat$.
-  Write $A$ as a product of elementary matrices.
+  Write $A^{-1}$ as a product of elementary matrices.
 \end{example}
 
 \begin{solution}
@@ -188,17 +188,11 @@ START HERE!
       1 & 1 & 0 \\
       0 & -2 & 1 \\
     \stopmat
-    \quad\stackrel{R_1\rowswap R_2}{\roweq}\quad
+    \quad\stackrel{E_{12}}{\rightarrow}\quad
     \startmat{rrr}
       1 & 1 & 0 \\
       0 & 1 & 0 \\
       0 & -2 & 1 \\
-    \stopmat
-    \quad\mbox{with elementary matrix}\quad
-    E_1 ~=~ \startmat{rrr}
-      0 & 1 & 0 \\
-      1 & 0 & 0 \\
-      0 & 0 & 1
     \stopmat,
   \end{equation*}
   \begin{equation*}
@@ -207,17 +201,11 @@ START HERE!
       0 & 1 & 0 \\
       0 & -2 & 1 \\
     \stopmat
-    \quad\stackrel{R_1\rowop R_1-R_2}{\roweq}\quad
+    \quad\stackrel{E_{12}(-1)}{\rightarrow}\quad
     \startmat{rrr}
       1 & 0 & 0 \\
       0 & 1 & 0 \\
       0 & -2 & 1 \\
-    \stopmat
-    \quad\mbox{with elementary matrix}\quad
-    E_2 ~=~  \startmat{rrr}
-      1 & -1 & 0 \\
-      0 & 1 & 0 \\
-      0 & 0 & 1
     \stopmat,
   \end{equation*}
   \begin{equation*}
@@ -226,270 +214,123 @@ START HERE!
       0 & 1 & 0 \\
       0 & -2 & 1 \\
     \stopmat
-    \quad\stackrel{R_3\rowop R_3+2R_2}{\roweq}\quad
+    \quad\stackrel{E_{32}(2)}{\roweq}\quad
     \startmat{rrr}
       1 & 0 & 0 \\
       0 & 1 & 0 \\
       0 & 0 & 1 \\
-    \stopmat
-    \quad\mbox{with elementary matrix}\quad
-    E_3 ~=~ \startmat{rrr}
-      1 & 0 & 0 \\
-      0 & 1 & 0 \\
-      0 & 2 & 1 \\
     \stopmat.
   \end{equation*}
-  Notice that the {\rref} of $A$ is $I$. Hence $I = UA$ where
+  Notice that the {\rref} of $A$ is $I$. Hence $E_{32}(2)*E_{12}(-1)*E_{12}*A=I$ where
   $U=E_3E_2E_1$. It follows that
-  $A = U^{-1} = E_1^{-1}E_2^{-1}E_3^{-1}$, and so we have succeeded in
-  writing $A$ as a product of elementary matrices
+  $A^{-1} = E_{32}(2)*E_{12}(-1)*E_{12}$, and so we have succeeded in
+  writing $A^{-1}$ as a product of elementary matrices
   \begin{equation*}
-    A
-    ~=~ E_1^{-1}E_2^{-1}E_3^{-1}
+    A^{-1}
+    ~=~ E_{32}(2)*E_{12}(-1)*E_{12}
     ~=~
     \startmat{rrr}
-      0 & 1 & 0 \\
-      1 & 0 & 0 \\
-      0 & 0 & 1
-    \stopmat
-    \startmat{rrr}
-      1 & 1 & 0 \\
-      0 & 1 & 0 \\
-      0 & 0 & 1
-    \stopmat
-    \startmat{rrr}
-      1 & 0 & 0 \\
-      0 & 1 & 0 \\
-      0 & -2 & 1
+      \answer{-1}&\answer{1}&0\\
+      1&\answer{0}&\answer{0}\\
+      \answer{2}&\answer{0}&\answer{1}
     \stopmat.
   \end{equation*}
-  In particular, it follows that $A$ is invertible.
 \end{solution}
 
-\subsection*{Elementary matrices and row operations}
 
-Recall from Definition~\ref{def:row-operations} that there are three
-kinds of elementary row operations%
-\index{matrix!row operation}%
-\index{matrix!elementary row operation}%
-\index{row operation}%
-\index{elementary row operation} on matrices:
-\begin{enumerate}
-\item Switch two rows.
-\item Multiply a row by a non-zero number.
-\item Add a multiple of one row to another row.
-\end{enumerate}
-The purpose of this section is to show that each of these row
-operations corresponds to a special type of invertible matrix called
-an \textbf{elementary matrix}%
-\index{elementary matrix}%
-\index{matrix!elementary matrix}.
 
-\begin{example}{Elementary matrix for switching two rows}{elementary-matrix-1}
-  Let
-  \begin{equation*}
-    E ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & 0 & 1 \\
-      0 & 1 & 0 \\
-    \stopmat.
-  \end{equation*}
-  What is the effect of multiplying $E$ by an arbitrary $3\times
-  n$-matrix $A$?
-\end{example}
+\begin{exploration}
+  For the following matrices $A_i$, use $\texttt{rref(A\_i|I)}$ to determine whether they are invertible. In each case, verify the invertibility (or lack of invertibility) by the product $M*A$, where $M$ is the right side of $\texttt{rref(A\_i|I)}$.
 
-\begin{solution}
-  Consider an arbitrary $3\times n$-matrix
-  \begin{equation*}
-    A ~=~ \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-    \stopmat.
-  \end{equation*}
-  We compute the product $EA$ by the row method:
-  \begin{equation*}
-    EA ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & 0 & 1 \\
-      0 & 1 & 0 \\
-    \stopmat
-    \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-    \stopmat
-    ~=~
-    \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-    \stopmat.
-  \end{equation*}
-  So the effect of multiplying $A$ by $E$ on the left is exactly the
-  same as switching rows 2 and 3. We say that $E$ is the
-  \textbf{elementary matrix for switching rows 2 and 3}.
-\end{solution}
+  \begin{enumerate}
+  \item $A_1=
+    \begin{bmatrix} 
+      2 & 1 & 3 \\ 
+      0 & 1 & 4 \\ 
+      5 & 6 & 0 
+      \end{bmatrix}$
 
-\begin{example}{Elementary matrix for multiplying a row by a non-zero number}{elementary-matrix-2}
-  Let
-  \begin{equation*}
-    E ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & k & 0 \\
-      0 & 0 & 1 \\
-    \stopmat.
-  \end{equation*}
-  What is the effect of multiplying $E$ by an arbitrary $3\times
-  n$-matrix $A$?
-\end{example}
+  \item $A_2=\begin{bmatrix} 
+    1 & 2 & 3 \\ 
+    4 & 5 & 6 \\ 
+    7 & 8 & 9 
+    \end{bmatrix}$
+  \item $A_3=\begin{bmatrix} 
+    2 & 5 \\ 
+    3 & 1 \\ 
+    4 & 0 \\ 
+    -1 & 7 \end{bmatrix}$
+  \end{enumerate}
+  
+  \begin{enumerate}
+    \item The right side of $\texttt{rref(A\_1|I)}$ is the $3x3$ matrix $M = \begin{bmatrix} 
+      \answer{0.5581} & \answer{-0.4186} & \answer{-0.0233} \\ 
+      \answer{-0.4651} & \answer{0.3488} & \answer{0.1860} \\ 
+      \answer{0.1163} & \answer{0.1628} & \answer{-0.0465} 
+      \end{bmatrix}$ (rounded to four decimals).
 
-\begin{solution}
-  We compute the product $EA$ by the row method:
-  \begin{equation*}
-    EA ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & k & 0 \\
-      0 & 0 & 1 \\
-    \stopmat
-    \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-    \stopmat
-    ~=~
-    \startmat{rrrr}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      ka_{21} & ka_{22} & \cdots & ka_{2n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-    \stopmat.
-  \end{equation*}
-  So the effect of multiplying $A$ by $E$ on the left is exactly the
-  same as multiplying row 2 by the scalar $k$. We say that $E$ is the
-  \textbf{elementary matrix for multiplying row 2 by $k$}.
-\end{solution}
+    The product $M*A_1=   \startmat{rrr}
+    \answer{1} & \answer{0} & \answer{0} \\ 
+    \answer{0} & \answer{1} & \answer{0} \\ 
+    \answer{0} & \answer{0} & \answer{1} 
+  \stopmat$. Hence, $A$  \wordChoice{
+    \choice[correct]{is}
+    \choice{is not}
+    } invertible.
+    \item The right side of $\texttt{rref(A\_2|I)}$ is the $3x3$ matrix $M = \begin{bmatrix} 
+      \answer{0} & \answer{-2.6667} & \answer{1.6667} \\ 
+      \answer{0} & \answer{2.3333} & \answer{-1.3333} \\ 
+      \answer{1} & \answer{-2} & \answer{1} 
+      \end{bmatrix}$ (rounded to four decimals).
+      
+    The product $M*A_2=   \startmat{rrr}
+    \answer{1} & \answer{0} & \answer{-1} \\ 
+    \answer{0} & \answer{1} & \answer{2} \\ 
+    \answer{0} & \answer{0} & \answer{0} 
+  \stopmat$. Hence, $A$  \wordChoice{
+    \choice{is}
+    \choice[correct]{is not}
+    } invertible.
+    \item $A_3$ becomes more tricky. Because of the dimension of $A_3$, we need to agument $A_3$ with a $4x4$ identity matrix even though there are only two vectors in the columns of $A_3$. 
+    
+    Doing so and then taking $\texttt{rref(A\_3|I)}$ gives $M = \begin{bmatrix} 
+      0 & 0 & 0.2500 & 0 \\ 
+      0 & 0 & 0.0357 & 0.1429 \\ 
+      1 & 0 & -0.6786 & -0.7143 \\ 
+      0 & 1 & -0.7857 & -0.1429 
+      \end{bmatrix}$ (rounded to four decimals).
+      
+    The product $M*A_3=   \startmat{rrr}
+    \answer{1} & \answer{0}  \\ 
+    \answer{0} & \answer{1}  \\ 
+    \answer{0} & \answer{0} \\
+    \answer{0} & \answer{0}
+  \stopmat$, which is not quite the identity matrix. Hence, $A$  \wordChoice{
+    \choice{is}
+    \choice[correct]{is not}
+    } invertible.
+  \end{enumerate}
 
-\begin{example}{Elementary matrix for adding a multiple of one row to another row}{elementary-matrix-3}
-  Let
-  \begin{equation*}
-    E ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & 1 & 0 \\
-      0 & k & 1 \\
-    \stopmat.
-  \end{equation*}
-  What is the effect of multiplying $E$ by an arbitrary $3\times
-  n$-matrix $A$?
-\end{example}
+\end{exploration}
 
-\begin{solution}
-  Once again we compute the product $EA$:
-  \begin{equation*}
-    EA ~=~ \startmat{lll}
-      1 & 0 & 0 \\
-      0 & 1 & 0 \\
-      0 & k & 1 \\
-    \stopmat
-    \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-      a_{31} & a_{32} & \cdots & a_{3n} \\
-    \stopmat
-    ~=~
-    \startmat{cccc}
-      a_{11} & a_{12} & \cdots & a_{1n} \\
-      a_{21} & a_{22} & \cdots & a_{2n} \\
-      a_{31}+ka_{21} & a_{32}+ka_{22} & \cdots & a_{3n}+ka_{2n} \\
-    \stopmat.
-  \end{equation*}
-  So the effect of multiplying $A$ by $E$ on the left is exactly the
-  same as adding $k$ times row 2 to row 3. We say that $E$ is the
-  \textbf{elementary matrix for adding $k$ times row 2 to row 3}.
-\end{solution}
+\begin{remark}
+  The example $A_3$ speaks of a more general fact. Because we require that both $A*A^{-1}=I$ and $A^{-1}*A=I$, this can only be satisfied if $A$ and $A^{-1}$ are square matrices, since the dimensions of matrix multiplication will not allow both left and right multiplication if $A$ and $A^{-1}$ are not square. 
 
-As these examples show, performing each type of elementary row
-operation is the same as multiplying (on the left) by a certain
-invertible matrix. Thesse matrices are called the \textbf{elementary
-  matrices}%
-\index{elementary matrix}%
-\index{matrix!elementary matrix}. In the
-above examples, we have only considered $3\times 3$-elementary
-matrices, but they exist for other sizes too. The following definition
-makes this precise. It also shows how to calculate the elementary
-matrix corresponding to any elementary row operation.
+  This leads to a notion of \emph{left} and \emph{right} invertibility, which we will not dwell on beyond this point.
+\end{remark}
 
-\begin{definition}{Elementary matrices and row operations}{elementary-matrices-and-row-operations}
-  Let $E$ be an $n\times n$-matrix. Then $E$ is an \textbf{elementary
-    matrix}%
-  \index{elementary matrix}%
-  \index{matrix!elementary matrix}
-  if it is the result of applying one elementary row operation to the
-  $n\times n$ identity matrix.
+\begin{definition}\name{Left and Right Invertibility}
+  A matrix $A$ is left invertible if there is a matrix $M$ such that $M*A=I$, and is right invertible if there is a matrix $N$ such that $A*N=I$. 
+  
+  A matrix is invertible if and only if it is both left and right invertible and $M=N$. This is only possible if $A$ is square.
 \end{definition}
 
-\begin{example}{Finding an elementary matrix}{finding-elementary-matrix}
-  Consider the elementary row operation of adding $5$ times row 3 to
-  row 1 of a $4\times n$-matrix. Find the elementary matrix $E$
-  corresponding to this row operation.
-\end{example}
+\begin{remark}
+  You also might have noticed that in both examples $A_1$ and $A_2$, the products $M*A_1$ and $M*A_2$ were equal to the left side of the reduced row echelon augmented matrix. 
 
-\begin{solution}
-  Following Definition~\ref{def:elementary-matrices-and-row-operations}, all
-  we have to do is apply the desired row operation to the
-  $4\times 4$-identity matrix:
-  \begin{equation*}
-    \startmat{rrrr}
-      1 & 0 & 0 & 0 \\
-      0 & 1 & 0 & 0 \\
-      0 & 0 & 1 & 0 \\
-      0 & 0 & 0 & 1 \\
-    \stopmat
-    \quad
-    \stackrel{R_1\rowop R_1+5R_3}{\roweq}
-    \quad
-    \startmat{rrrr}
-      1 & 0 & 5 & 0 \\
-      0 & 1 & 0 & 0 \\
-      0 & 0 & 1 & 0 \\
-      0 & 0 & 0 & 1 \\
-    \stopmat
-    ~=~ E.
-  \end{equation*}
-\end{solution}
+  This is a necessary consequence of how we built the matrices $M$ by row operations on the identity matrix, and the connections between augmented matrices and matrix equality, however it should be stated nonetheless and these connections are not always obvious by a first glance.
+\end{remark}
 
-We can double-check that multiplying $E$ by any $4\times n$-matrix
-does indeed have the desired effect:
-\begin{equation*}
-  \startmat{rrrr}
-    1 & 0 & 5 & 0 \\
-    0 & 1 & 0 & 0 \\
-    0 & 0 & 1 & 0 \\
-    0 & 0 & 0 & 1 \\
-  \stopmat
-  \startmat{cccc}
-    a_{11} & a_{12} & \cdots & a_{1n} \\
-    a_{21} & a_{22} & \cdots & a_{2n} \\
-    a_{31} & a_{32} & \cdots & a_{3n} \\
-    a_{41} & a_{42} & \cdots & a_{4n} \\
-  \stopmat
-  ~=~
-  \startmat{cccc}
-    a_{11}+5a_{31} & a_{12}+5a_{32} & \cdots & a_{1n}+5a_{3n} \\
-    a_{21} & a_{22} & \cdots & a_{2n} \\
-    a_{31} & a_{32} & \cdots & a_{3n} \\
-    a_{41} & a_{42} & \cdots & a_{4n} \\
-  \stopmat.
-\end{equation*}
-The fact that this always works is the content of the following
-theorem.
-
-\begin{theorem}{Multiplication by an elementary matrix and row operations}{multiplication-by-elementary-matrix}
-  Performing any of the three elementary row operations on a matrix $A$ is the
-  same as taking the product $EA$, where $E$ is the elementary matrix
-  obtained by applying the desired row operation to the identity
-  matrix.
-\end{theorem}
-
-
+We'll now continue to find new ways of determining whether matrices are invertible, and will find new ways of calculating the inverses of matrices.
 
 \end{document}

@@ -170,6 +170,7 @@ This gives us the following algorithm.
 Let's try this process a few times and verify that this gives us inverse matrices! We'll also verify that if we don't get the identity matrix from row operations, then the matrix $A$ is not invertible.
 
 \begin{example}\name{Product of elementary matrices}\label{ex:prod-elementary}
+
   Let $A = \startmat{rrr}
     0 &  1 & 0 \\
     1 &  1 & 0 \\
@@ -240,7 +241,7 @@ Let's try this process a few times and verify that this gives us inverse matrice
 
 
 \begin{exploration}
-  For the following matrices $A_i$, use $\texttt{rref(A\_i|I)}$ to determine whether they are invertible. In each case, verify the invertibility (or lack of invertibility) by the product $M*A$, where $M$ is the right side of $\texttt{rref(A\_i|I)}$.
+  For the following matrices $A_i$, use $rref(A_i|I)$ to determine whether they are invertible. In each case, verify the invertibility (or lack of invertibility) by the product $M*A$, where $M$ is the right side of $rref(A_i|I)$.
 
   \begin{enumerate}
   \item $A_1=
@@ -263,7 +264,7 @@ Let's try this process a few times and verify that this gives us inverse matrice
   \end{enumerate}
   
   \begin{enumerate}
-    \item The right side of $\texttt{rref(A\_1|I)}$ is the $3x3$ matrix $M = \begin{bmatrix} 
+    \item The right side of $rref(A_1|I)$ is the $3x3$ matrix $M = \begin{bmatrix} 
       \answer{0.5581} & \answer{-0.4186} & \answer{-0.0233} \\ 
       \answer{-0.4651} & \answer{0.3488} & \answer{0.1860} \\ 
       \answer{0.1163} & \answer{0.1628} & \answer{-0.0465} 
@@ -277,7 +278,7 @@ Let's try this process a few times and verify that this gives us inverse matrice
     \choice[correct]{is}
     \choice{is not}
     } invertible.
-    \item The right side of $\texttt{rref(A\_2|I)}$ is the $3x3$ matrix $M = \begin{bmatrix} 
+    \item The right side of $rref(A_2|I)$ is the $3x3$ matrix $M = \begin{bmatrix} 
       \answer{0} & \answer{-2.6667} & \answer{1.6667} \\ 
       \answer{0} & \answer{2.3333} & \answer{-1.3333} \\ 
       \answer{1} & \answer{-2} & \answer{1} 
@@ -293,7 +294,7 @@ Let's try this process a few times and verify that this gives us inverse matrice
     } invertible.
     \item $A_3$ becomes more tricky. Because of the dimension of $A_3$, we need to agument $A_3$ with a $4x4$ identity matrix even though there are only two vectors in the columns of $A_3$. 
     
-    Doing so and then taking $\texttt{rref(A\_3|I)}$ gives $M = \begin{bmatrix} 
+    Doing so and then taking $rref(A_3|I)$ gives $M = \begin{bmatrix} 
       0 & 0 & 0.2500 & 0 \\ 
       0 & 0 & 0.0357 & 0.1429 \\ 
       1 & 0 & -0.6786 & -0.7143 \\ 

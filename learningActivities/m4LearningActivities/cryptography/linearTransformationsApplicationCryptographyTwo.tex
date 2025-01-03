@@ -13,9 +13,12 @@
 
 \section*{A Return to Cryptography}
 
-Now that we've been introduced to matrices and have obtained some initial means of finding them, we can return to the application of cryptography and see why the Hill cipher is not a secure means of encripting messages.
+Now that we've been introduced to matrix inverses and have obtained some initial means of finding them, we can return to the application of cryptography and see why the Hill cipher is not a secure means of encripting messages.
+
+The way that one decrypts an encrypted message in the case of Hill ciphers is by applying the inverse transformation to the ciphertext. From a linear algebra perspective this makes sense. The cipher enacts a transformation the plaintext vectors, and so doing the reverse transformation (i.e. applying the inverse matrix) to the ciphertext should return the plaintext.
 
 \begin{example}\name{Hill cipher: decryption}\label{ex:hill-cipher-decryption}
+
   Decrypt the message $\q{RNOLFPHHCIGH DE}$ using the Hill cipher with
   block size $3$ and encryption matrix
   \begin{equation*}
@@ -30,9 +33,8 @@ Now that we've been introduced to matrices and have obtained some initial means 
 \begin{solution}
   The process is analogous to encryption, except that we need to use
   the decryption matrix $A^{-1}$ instead of $A$. We first calculate
-  $A^{-1}$, keeping in mind that scalars are from the field $\Z_{29}$.
-  The method is the same as in Example~\ref{exa:matrix-inverse-z7}; we
-  skip the individual steps in the interest of brevity.
+  $A^{-1}$.
+  The method is the same as in the previous section. We first find the $rref(A|I)$
   \begin{equation*}
     \startmat{c}A\mid I\stopmat
     ~=~
@@ -43,13 +45,24 @@ Now that we've been introduced to matrices and have obtained some initial means 
     \stopmat
     ~\simeq~\ldots~\simeq~
     \startmat{ccc|ccc}
+    1 & 0 & 0  & \answer{0.5909} & \answer{0.2273} & \answer{-0.8636} \\
+    0 & 1 & 0  &   \answer{0.0455} & \answer{-0.1364} & \answer{0.3182} \\
+    0 & 0 & 1  \answer{-0.3636} & \answer{0.0909} & \answer{0.4545}
+    \stopmat
+  \end{equation*}
+
+  Using the course function $\texttt{linalg.mod\_p(M,29)}$, (where $M$ is the augmented matrix), we get the following augmented matrix that converts the inverse to the numbers $0$ to $28$ (needed for the cipher).
+
+  This yields:
+
+  $\startmat{ccc|ccc}
       1 & 0 & 0  &  23 & 20 & 11 \\
       0 & 1 & 0  &   4 & 17 & 28 \\
       0 & 0 & 1  &  26 &  8 & 11 \\
     \stopmat
     ~=~
-    \startmat{c}I\mid A^{-1}\stopmat.
-  \end{equation*}
+    \startmat{c}I\mid A^{-1}\stopmat.$
+
   Next, we convert the 15 ciphertext symbols $\q{RNOLFPHHCIGH DE}$ to
   scalars and divide them into blocks of length 3:
   \begin{equation*}
@@ -61,60 +74,81 @@ Now that we've been introduced to matrices and have obtained some initial means 
     (0,4,5).
   \end{equation*}
   Now we decrypt each ciphertext block by a matrix multiplication
-  with $A^{-1}$.
+  with $A^{-1}$. The symbol $\stackrel{29}{=}$ before the final vector in each calculation indicates that we have converted the vector back to be between $0$ and $28$ (i.e. mod 29).
+
+  \begin{hint}
+    For efficient decryption, just write out one matrix $C$ with columns as the ciphertext and then multiply $C$ by $A^{-1}$. 
+  \end{hint}
+
   \begin{align*}
     &A^{-1} \startmat{c} 18 \\ 14 \\ 15 \stopmat
-    = \startmat{c} 18 \\ 5 \\ 20 \stopmat,
+    = \begin{bmatrix}
+      \answer{859} \\
+      \answer{730} \\
+      \answer{745}
+      \end{bmatrix}\stackrel{29}{=}\startmat{c} 18 \\ 5 \\ 20 \stopmat,
     \quad
     A^{-1} \startmat{c} 12 \\ 6 \\ 16 \stopmat
-    = \startmat{c} 21 \\ 18 \\ 14 \stopmat,
+    = \begin{bmatrix}
+      572 \\
+      598 \\
+      536
+      \end{bmatrix}\stackrel{29}{=}\startmat{c} 21 \\ 18 \\ 14 \stopmat,
     \quad
     A^{-1} \startmat{c} 8 \\ 8 \\ 3 \stopmat
-    = \startmat{c} 0 \\ 20 \\ 15 \stopmat,
+    = \begin{bmatrix}
+      \answer{377} \\
+      \answer{252} \\
+      \answer{305}
+      \end{bmatrix}\stackrel{29}{=}\startmat{c} 0 \\ 20 \\ 15 \stopmat,
     \\\\[-2ex]
     &A^{-1} \startmat{c} 9 \\ 7 \\ 8 \stopmat
-    = \startmat{c} 0 \\ 2 \\ 1 \stopmat,
+    = \begin{bmatrix}
+      435 \\
+      379 \\
+      378
+      \end{bmatrix}\stackrel{29}{=}\startmat{c} 0 \\ 2 \\ 1 \stopmat,
     \quad
     A^{-1} \startmat{c} 0 \\ 4 \\ 5 \stopmat
-    = \startmat{c} 19 \\ 5 \\ 0 \stopmat.
+    = \begin{bmatrix}
+      \answer{135} \\
+      \answer{208} \\
+      \answer{87}
+      \end{bmatrix}\stackrel{29}{=}\startmat{c} 19 \\ 5 \\ 0 \stopmat.
   \end{align*}
-  This yields the following plaintext blocks:
-    \begin{equation*}
-    \mbox{Plaintext blocks:}\quad
-    (18,5,20),\
-    (21,18,14),\
-    (0,20,15),\
-    (0,2,1),\
-    (19,5,0).
-  \end{equation*}
-  Converting these back to letters, and omitting the trailing space,
-  we find that the plaintext is ``return to base''.
+
+  Converting these plaintext blocks to letters, and omitting the trailing space (using the course function $\texttt{linalg.vectors\_to\_string})$,
+  we find that the plaintext (in all caps) is ``$\answer[format=string]{RETURN TO BASE}$''.
 \end{solution}
 
-It is important to note that, despite its good diffusion properties,
-the Hill cipher is not secure. The cipher has many weaknesses. For
-one, because $A\vect{0}=\vect{0}$, a block of spaces in the plaintext
-will always be encrypted as a block of spaces in the ciphertext,
-regardless of the encryption matrix $A$. More importantly, the cipher
-is subject to a so-called \textbf{known plaintext attack}%
-\index{known plaintext attack}%
-\index{cipher!known plaintext attack}.  If an eavesdropper intercepts
-some ciphertext for which a small amount of the corresponding
-plaintext happens to be known, it is immediately possible to recover
-the key and therefore decrypt the rest of the ciphertext. Carrying out
-this attack only requires some basic knowledge of linear algebra. The
-following example illustrates how this is done.
+\section*{Breaking Hill Ciphers}
 
-\begin{example}{Cryptanalysis of the Hill cipher: known plaintext attack}{hill-cipher-cryptanalysis}
+Despite its complexity, Hill ciphers can be easily broken with relatively little information. 
+
+For
+instance, because $A\vect{0}=\vect{0}$, a block of spaces in the plaintext
+will always be encrypted as a block of spaces in the ciphertext,
+regardless of the encryption matrix $A$. 
+
+More importantly, if an eavesdropper intercepts
+some ciphertext for which a small amount of the corresponding
+plaintext happens to be known, it is possible to recover
+the key and therefore decrypt the rest of the ciphertext. 
+
+\begin{example}\name{Cryptanalysis of the Hill cipher: known plaintext attack}\label{ex:hill-cipher-cryptanalysis}
   Eve intercepts the following encrypted message sent by Alice:%
   \index{cryptanalysis}
   \begin{center}
     \q{EFNOR.AHIFNEPL.TSZS,RSKT.ZBBRFVUPFVZLFHNTV}.
   \end{center}
   Eve knows that Alice uses a Hill cipher with block length 3, but she
-  does not know the secret encryption matrix. Eve also knows that
+  does not know the secret encryption matrix. 
+  
+  Eve also knows that
   Alice begins all of her correspondence with ``My dear
-  love''. Decrypt the message.
+  love''. 
+  
+  Decrypt the message.
 \end{example}
 
 \begin{solution}
@@ -125,14 +159,17 @@ following example illustrates how this is done.
     (15,18,28),\
     (1,8,9).
   \end{equation*}
+
   Eve also knows that the first three blocks of the plaintext are
   $\q{MY DEAR L}$, i.e.,
+
   \begin{equation*}
     \mbox{Plaintext blocks:}\quad
     (13,25,0),\
     (4,5,1),\
     (18,0,12).
   \end{equation*}
+
   These facts allow Eve to deduce the following information about the
   unknown decryption matrix $A^{-1}$:
   \begin{equation*}
@@ -143,9 +180,19 @@ following example illustrates how this is done.
     A^{-1} \startmat{c} 1 \\ 8 \\ 9 \stopmat
     = \startmat{c} 18 \\ 0 \\ 12 \stopmat.
   \end{equation*}
-  Since Eve remembers the column method of matrix multiplication, she
-  knows that these three equations can be written as a single equation
-  in matrix form:
+
+  Because multiplication of $A^{-1}$ by the matrix 
+  
+  \begin{equation*}
+    \startmat{ccc}
+      5 & 15 & 1 \\
+      6 & 18 & 8 \\
+      14 & 28 & 9 \\
+    \stopmat
+  \end{equation*}
+
+  is the same as multiplication of each column vector by $A^{-1}$, we now have a matrix equation with two known matrices and one unkown matrix:
+  
   \begin{equation*}
     A^{-1} \startmat{ccc}
       5 & 15 & 1 \\
@@ -158,11 +205,18 @@ following example illustrates how this is done.
       0 & 1 & 12 \\
     \stopmat.\quad
   \end{equation*}
-  Note that this equation is of the form $A^{-1}C=P$. (Here, $C$
-  stands for ``ciphertext'' and $P$ for ``plaintext''). Multiplying
-  both sides of the equation by $C^{-1}$ on the right, we get
+
+  We can write this more succinctly as $A^{-1}C=P$. ($C$
+ for ``ciphertext'' and $P$ for ``plaintext''). 
+ 
+  So long as $C$ is invertible, we can right-multiply 
+  both sides of the equation by $C^{-1}$. This solves for $A^{-1}$ to get
   $A^{-1} = PC^{-1}$. Thus, assuming that $C$ is invertible, Eve can
-  easily compute the decryption matrix $A^{-1}$. Eve computes:
+  easily compute the decryption matrix $A^{-1}$. 
+
+  START HERE
+  
+  Eve computes:
   \begin{equation*}
     C^{-1}
     =

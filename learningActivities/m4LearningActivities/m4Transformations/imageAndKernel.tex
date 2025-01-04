@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from Anna Davis and Gilbert Strang
-\title{Properties and Subspaces of Transformations}\license{CC BY-NC-SA 4.0}
+\title{Fundamental Subspaces}\license{CC BY-NC-SA 4.0}
 
 \begin{document}
 \begin{abstract}
@@ -11,11 +11,13 @@
 \end{abstract}
 \maketitle
 
-\section*{Image and Kernel of a Linear Transformation}
+\section*{Column and Null Space of a Matrix}
 
 In the previous activity we observed that the image of the linear transformation $T$ is the same as the span of the columns of the associated matrix $A$. We also saw that we could exactly describe the images of linear transformations, as well as their kernels (aka the null space of the associated matrix).
 
 We're going to press further into exploring the spaces related to linear transformations' domains and co-domains, and get some simply stated and at times useful results.
+
+This will involve re-stating some results from the previous sections but in formal definitions, and making more explicit that these sets are actual vector spaces in their own right, called \emph{subspaces}.
 
 First, let's formally talk about the image of a transformation as the span of the column vectors from the associated matrix. This is called the \emph{column space} of the matrix.
 
@@ -83,7 +85,7 @@ Find $\mbox{dim}(\mbox{ker}(T))$.
 \end{enumerate}
 \begin{explanation}
 
-\ref{item:kernelT} We did this before, in the previous section, however it's always good to practice. To find the kernel of $T$, we need to find all vectors of $\RR^5$ that map to $\vec{0}$ in $\RR^4$.  This amounts to solving the equation $A\vec{x}=\vec{0}$.
+\ref{item:kernelT} We did this before, in the previous section, however it's always good to practice.
  
 \texttt{rref(A)} yields:
  
@@ -247,7 +249,7 @@ Hence, $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$ is a subspace 
   Here is an image depicting the fundamental spaces of matrices we've been discussing. To my knowledge, this was popularized by Gilbert Strang from MIT.
 
 \begin{center}
-  \includegraphics[scale=.75]{fundamental_spaces_1.png}
+  \includegraphics[width=22.46, height=13.18]{fundamental_spaces_1.png}
   %cite strang http://links.jstor.org/sici?sici=0002-9890%28199311%29100%3A9%3C848%3ATFTOLA%3E2.0.CO%3B2-A
 \end{center}
 

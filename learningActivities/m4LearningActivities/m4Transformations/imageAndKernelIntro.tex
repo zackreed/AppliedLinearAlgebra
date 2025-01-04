@@ -19,6 +19,8 @@ In a previous activity we observed that the image of the linear transformation $
  
 Before, we discussed how the \emph{kernel} of a linear transformation is all vectors that map to $\vec{0}$, that is, $\vec{v}$ such that $T(\vec{v})=\vec{0}$. For the sake of again using different verbiage for the same thing, it is worth stating that the kernel of a transformation is the null space of its matrix.
 
+
+
 $$\mbox{ker}(T)=\mbox{null}(A).$$
  
 \begin{example}\label{ex:kernel} Let $T:\RR^5\rightarrow \RR^4$ be a linear transformation with standard matrix $$A=\begin{bmatrix}1 & 2 & 2 &-1 & 0\\-1 & 3 & 1 & 0 & -1\\3 & 0 & 0 & 3 & 6\\ 1 & -1 & 1 & -2 & -1\end{bmatrix}$$
@@ -66,13 +68,17 @@ A few times throughout the course so far, we've encountered a phenomenon in whic
   linalg.plot_cloud_with_vectors(A*mug);
 \end{verbatim}
 
+
+
 \begin{center}
-  includegraphics{og_mug.png}
+  \includegraphics{og_mug.png}
 \end{center}
 
 \begin{center}
-  includegraphics{squished_mug.png}
+  \includegraphics{squished_mug.png}
 \end{center}
+
+
 
 Many matrices have this same effect, where the space to which vectors are sent via transformation differs from the original space of the mapping. This phenomenon is very important for the idea of invertibility (and more ideas later in the course), and deals with sets of vectors related to linear transformations called the \emph{image} and \emph{kernel} of a transformation.
 

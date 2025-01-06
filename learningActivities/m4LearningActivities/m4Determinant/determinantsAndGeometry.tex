@@ -10,12 +10,34 @@
 \end{abstract}
 \maketitle
 
-MAKE PART OF THIS JUST STATING CONDITIONS FOR INVERTIBILITY, SUCH AS RANK
 
-\begin{onlineOnly}
-    \section*{Determinants, Areas, and Volumes}
-    \end{onlineOnly}
-     
+\section*{Determinants, Areas, and Volumes}
+
+So far, we've focused much of this chapter on determining properties of matrices and specifically whether or not they are invertible. 
+
+We now introduce a very related topic that also has farther reaching implications for matrices as well, beyond invertibility, and is an important measure for Chapters 7, 8, and 9.
+
+An intuition we've been discussing for whether matrices are invertibile is that when linear transformations ``squish'' space down to a smaller dimension, they are not invertible. One way to determine whether this ``squishing'' occurs is to measure by how much units of volume are stretched or compressed through the transformation. 
+
+Consider, for instance, the matrix $\begin{bmatrix}
+  3&0&0\\0&2&0\\0&0&1
+\end{bmatrix}$. This stretches the $x$-axis by a factor of $3$ and the $y$-axis by a factor of $2$, as you can see in the following GeoGebra applet. Check the ``Adjust Matrix'' box and enter the columns of the matrix accordingly (note that the column vectors are listed as rows when being entered, so really you're entering the transpose of the matrix).
+
+\begin{center}
+  \geogebra{mdes5d4h}{858}{509}
+\end{center}
+
+As you can see, $A$ stretches out vectors in both the $x$ and $y$ directions while preserving the height. More importantly, the original $1\times1\times1$ cube becomes a stretched out rectangle, and the ``Transformed Volume'' measure reads as $6$. This means that the transformation stretches out space by a factor of $6$. 
+
+If instead you enter the mug-squishing matrix $A=\begin{bmatrix}
+  1&0&1\\0&2&2\\1&2&3
+\end{bmatrix}$, you see the original cube squished down into a plane. 
+
+The transformed volume of the unit square is thus $\answer{0}$.
+
+This gives us a clear way to determine whether linear transformations are invertible! Measuring this transformed volume is called finding \emph{the determinant}. The determinant arises from systematically extending the notions of areas and volumes to give clear ways of measuring volume-stretching and volume-compressing for any matrix transformation.
+
+
     \subsection*{$2\times 2$ Determinant and the Area of a Parallelogram}
      
     Consider the parallelogram determined by vectors $\vec{u}$ and $\vec{v}$ in $\RR^3$.

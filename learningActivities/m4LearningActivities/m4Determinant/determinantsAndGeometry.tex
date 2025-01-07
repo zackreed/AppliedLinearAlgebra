@@ -37,175 +37,164 @@ The transformed volume of the unit cube is thus $\answer{0}$.
 
 This gives us a clear way to determine whether linear transformations are invertible! Measuring this transformed volume is called finding \emph{the determinant}. The determinant arises from systematically extending the notions of areas and volumes to give clear ways of measuring volume-stretching and volume-compressing for any matrix transformation.
 
+We will start with a $2$-dimensional approach to finding the area shifted by a transformation, and then build up to a $3$-dimensional volume shift. Higher-dimensional hypervolume shifts are just generlizations of what is done in $2$ and $3$ dimensions, and beyond $2$-dimensions the computations become rather cumbersome, so we will largely use MATLAB to compute determinants in practice. 
+
 
     \subsection*{$2\times 2$ Determinant and the Area of a Parallelogram}
      
-    Consider the parallelogram determined by vectors $\vec{u}$ and $\vec{v}$ in $\RR^3$.
+    Consider the parallelogram determined by vectors $\vec{u}$ and $\vec{v}$.
      
     \begin{center}
     \begin{tikzpicture}[scale=1.4]
      
-      \filldraw[blue, opacity=0.3](0,0)--(4,2)--(5,4)--(1,2)--cycle;
+      \filldraw[blue, opacity=0.3](0,0)--(-2,2)--(2,4)--(4,2)--cycle;
      
     \draw[line width=2pt,red,-stealth](0,0)--(4,2) node[below right]{$\vec{u}$};
       
-      \draw[line width=2pt,blue, -stealth](0,0)--(1,2) node[above left]{$\vec{v}$};
+      \draw[line width=2pt,blue, -stealth](0,0)--(-2,2) node[above left]{$\vec{v}$};
     \end{tikzpicture}
     \end{center}
-     
-    Recall that the area of a parallelogram is given by the product of the length of the base and the height.
-    As shown in the diagram below, the length of the base is the magnitude of $\vec{u}$. The height, $h$, can be found using trigonometry $$h=\norm{\vec{v}}\sin\theta$$
-    \begin{center}
-    \begin{tikzpicture}[scale=1.4]
-     
-      \filldraw[blue, opacity=0.3](0,0)--(4,2)--(5,4)--(1,2)--cycle;
-     
-    \draw[line width=0.5pt, dashed](1,2)--(1.6,0.8);
-    \node[] at (2, 1.6)   (b) {$h=\norm{\vec{v}}\sin\theta$};
-    \draw[line width=2pt,red](0,0)--(4,2);
-     \node[red] at (2, 0.6)   (b) {$\norm{\vec{u}}$};
-     \node[blue] at (0.2, 1.2)   (b) {$\norm{\vec{v}}$};
-     \node[] at (0.3, 0.3)   (b) {$\theta$};
-      \draw[line width=2pt,blue](0,0)--(1,2);
-    \end{tikzpicture}
-    \end{center}
-    Using the area of a parallelogram formula together with Theorem \ref{th:crossproductsin} we get
-    $$\mbox{Area}=(\text{base})(\text{height})=\norm{\vec{u}}h=\norm{\vec{u}}\norm{\vec{v}}\sin\theta=\norm{\vec{u}\times\vec{v}}$$
-    We have established the following formula.
-     
-    \begin{formula}\label{form:areaofparallelogram} The area of a parallelogram determined by vectors $\vec{u}$ and $\vec{v}$ in $\RR^3$ is given by
-    $$\mbox{Area}=\norm{\vec{u}\times\vec{v}}$$
-    \end{formula}
-     
-    \begin{example}\label{ex:areaOfParFormula}
-        Use Formula \ref{form:areaofparallelogram} to find the area of a parallelogram determined by vectors
-        $$\vec{u}=\begin{bmatrix}-2\\1\\3\end{bmatrix},\quad \vec{v}=\begin{bmatrix}1\\6\\2\end{bmatrix}$$
-    \begin{explanation}
-        We can start by visualizeing the parallelogram in GeoGebra.  RIGHT-CLICK and DRAG to rotate the image below.  The area of the parallelogram, rounded to two decimal places, is displayed inside the parallelogram.
-     
-    \pdfOnly{
-    Access GeoGebra interactives through the online version of this text at
-     
-    \href{https://ximera.osu.edu/oerlinalg}{https://ximera.osu.edu/oerlinalg}.
-    }
-     
-     
-    \begin{onlineOnly}   
-    \begin{center}
-    \geogebra{g7g6kjqm}{600}{400}
-    \end{center}
-    \end{onlineOnly}
-     
-        To find the exact area we compute
-        $$\vec{u}\times \vec{v}=\begin{bmatrix}-2\\1\\3\end{bmatrix}\times \begin{bmatrix}1\\6\\2\end{bmatrix}=\begin{vmatrix}\vec{i} &\vec{j} &\vec{k}\\-2 & 1 & 3\\1 & 6 & 2\end{vmatrix}=\begin{bmatrix}\answer{-16}\\\answer{7}\\\answer{-13}\end{bmatrix}$$
-     
-        $$\mbox{Area}=\norm{\vec{u}\times\vec{v}}=\sqrt{\answer{474}}$$
-    \end{explanation}
-    \end{example}
-     
-     
-     
-     
-    Formula \ref{form:areaofparallelogram} can be easily adapted to parallelograms determined by vectors in $\RR^2$, as illustrated by the following example.
-     
+
+    $\vec{u}$ and $\vec{v}$ do not form a simple rectangle, and their orientation makes it initially cumbersome to get a parallelogram height and width for an area determination. 
+
+    We can, however, cleverly set up a rectangular area from which we can use the coordinates of the vectors to determine the parallelogram area. This at first will be a bit laborious, but this process will work for any vector-spanning parallelogram and will also give us a means of defining the determinant!
+
     \begin{example}\label{ex:areaofparallelogram}
-    Find the area of the parallelogram in the diagram.
-    \begin{center}
-    \begin{tikzpicture}[scale=1]
-    \draw[thin,gray!40] (-3,-1) grid (4,4);
-      \draw[<->] (-3,0)--(4,0);
-      \draw[<->] (0,-1)--(0,4);
-       
-      \filldraw[blue, opacity=0.3](0,0)--(-2,2)--(2,4)--(4,2)--cycle;
-     
-    \draw[line width=2pt,red,-stealth](0,0)--(4,2);
-     
-     
-     \draw[line width=2pt,blue,-stealth](0,0)--(-2,2);
-      
-    \end{tikzpicture}
-    \end{center}
-    \begin{explanation}
-    The vectors that determine the parallelogram are
-    $$\begin{bmatrix}4\\2\end{bmatrix}\quad\text{and}\quad\begin{bmatrix}-2\\2\end{bmatrix}$$
-    The problem we run into is that these vectors are in $\RR^2$, whereas the cross product is defined only for vectors in $\RR^3$.  We will get around this difficulty by ``padding" our vectors with zeros on the bottom.  In other words, we will consider them as vectors sitting in the $xy$-coordinate plane in $\RR^3$.  This allows us to compute the cross product
-    $$\begin{bmatrix}4\\2\\0\end{bmatrix}\times\begin{bmatrix}-2\\2\\0\end{bmatrix}=\begin{vmatrix}\vec{i}&\vec{j}&\vec{k}\\4&2&0\\-2&2&0\end{vmatrix}=\vec{k}\Big((4)(2)-(2)(-2)\Big)=12\vec{k}=\begin{bmatrix}0\\0\\12\end{bmatrix}$$
-    The area of the parallelogram is then given by
-    $$\mbox{Area}=\norm{\begin{bmatrix}0\\0\\12\end{bmatrix}}=12$$
-    \end{explanation}
-    \end{example}
-     
-    Example \ref{ex:areaofparallelogram} illustrates an important phenomenon.  Observe that the zeros in the last column of the determinant ensure that the $\vec{i}$ and $\vec{j}$ components of the cross product are zero, while the last component is the determinant of the $2\times 2$ matrix whose rows (or columns) are the two vectors that determine the parallelogram in $\RR^2$.  In general, if the parallelogram is determined by vectors
-    $$\begin{bmatrix}a\\b\end{bmatrix}\quad\text{and}\quad\begin{bmatrix}c\\d\end{bmatrix}$$
-    then the area of the parallelogram can be computed as follows:
-    $$\begin{bmatrix}a\\b\\0\end{bmatrix}\times\begin{bmatrix}c\\d\\0\end{bmatrix}=\begin{vmatrix}\vec{i}&\vec{j}&\vec{k}\\a&b&0\\c&d&0\end{vmatrix}=\vec{k}\begin{vmatrix}a&b\\c&d\end{vmatrix}=\vec{k}\Big((a)(d)-(b)(c)\Big)=\begin{bmatrix}0\\0\\ad-bc\end{bmatrix}$$
-     
-    $$\mbox{Area}=\norm{\begin{bmatrix}0\\0\\ad-bc\end{bmatrix}}=|ad-bc|=\Big|\det\begin{bmatrix}a&b\\c&d\end{bmatrix}\Big|=\Big|\det\begin{bmatrix}a&c\\b&d\end{bmatrix}\Big|$$
-     
-    So the area of the parallelogram turns out to be the absolute value of the determinant of the matrix whose rows (or columns) are the two vectors that determine the parallelogram.
-    The following formula summarizes our discussion.
-     
-    \begin{formula}\label{form:areaofparallelogramdeterminant} Let $\vec{u}=\begin{bmatrix}a\\b\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}c\\d\end{bmatrix}$ be vectors of $\RR^2$.  The area of the parallelogram determined by $\vec{u}$ and $\vec{v}$ is given by
-    $$\mbox{Area}=\Big|{\det\begin{bmatrix}a&b\\c&d\end{bmatrix}}\Big|=\Big|\det\begin{bmatrix}a&c\\b&d\end{bmatrix}\Big|$$
-    \end{formula}
-     
-    \begin{example}\label{exp:polyArea}
-        Use Formula \ref{form:areaofparallelogramdeterminant} to find the area of the polygon shown below.
+      First, let's draw the parallelogram within a grid.
+
       \begin{center}
-    \begin{tikzpicture}[scale=1]
-    \draw[thin,gray!40] (-3,-2) grid (3,4);
-      \draw[<->] (-3,0)--(3,0);
-      \draw[<->] (0,-2)--(0,4);
-      \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
-    %\draw[line width=2pt,red,-stealth](0,0)--(4,2);
-    % \draw[line width=2pt,blue,-stealth](0,0)--(-2,2);
-     \end{tikzpicture}
-    \end{center} 
-    \begin{explanation}
-        We will start by splitting this region into triangles.
+      \begin{tikzpicture}[scale=1]
+      \draw[thin,gray!40] (-3,-1) grid (4,4);
+        \draw[<->] (-3,0)--(4,0);
+        \draw[<->] (0,-1)--(0,4);
+          
+        \filldraw[blue, opacity=0.3](0,0)--(-2,2)--(2,4)--(4,2)--cycle;
+        
+      \draw[line width=2pt,red,-stealth](0,0)--(4,2);
+        
+        
+       \draw[line width=2pt,blue,-stealth](0,0)--(-2,2);
+         
+      \end{tikzpicture}
+      \end{center}
+
+      \begin{explanation}
+
+      The vectors that determine the parallelogram are
+      $$\begin{bmatrix}4\\2\end{bmatrix}\quad\text{and}\quad\begin{bmatrix}-2\\2\end{bmatrix}$$
+
+      The goal is to figure out the area of the parallelogram using just information from the two vectors. 
+
+      As said earlier, we're going to put the parallelogram within a larger rectangle (using the vector coordinates), which will conveniently give us other geometric quantities from which we extract the paralellogram area!
+
+      Let's create a rectangle that fully encompasses the parallelogram. The base of the rectangle will be the sum of the $x$-coordiantes, and the height will be the sum of the $y$-coordinates. This is true for any pair of vectors, and the key is that the vector $\vec{u}+\vec{v}$ determines the coordinates of the far tip. 
+
+      Because this will generalize to any pair of vectors, let's use $\vec{u}=\begin{bmatrix}
+        a\\c
+      \end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+        b\\d
+      \end{bmatrix}$ as general stand-ins, and then at the end fill in our specific numbers.
+
+      \begin{center}
+        \begin{tikzpicture}[scale=1]
+        \draw[thin,gray!40] (-3,-1) grid (4,4);
+          \draw[<->] (-3,0)--(4,0);
+          \draw[<->] (0,-1)--(0,4);
+            
+          \filldraw[blue, opacity=0.3](0,0)--(-2,2)--(2,4)--(4,2)--cycle;
+
+              % Add the orange rectangle inscribing the parallelogram
+          \filldraw[orange, opacity=.3] (-2,0) rectangle (4,4);
+          
+        \draw[line width=2pt,red,-stealth](0,0)--(4,2)node[below right]{$\vec{u}$};
+          
+         \draw[line width=2pt,blue,-stealth](0,0)--(-2,2)node[above right]{$\vec{v}$};
+
+             % Add thick orange lines for base and height
+        \draw[orange, ultra thick] (-2,0) -- (4,0); % Base of the rectangle
+        \draw[orange, ultra thick] (-2,0) -- (-2,4); % Height of the rectangle
+
+
+        % Add labels
+        \node[anchor=north] at (1,0) {\(a+b\)}; % Label for the x-axis
+        \node[anchor=east] at (-2,2) {\(c+d\)}; % Label for the y-axis
+           
+        \end{tikzpicture}
+        \end{center}
+
+        Now, surrounding our parallelogram are four triangles, which actually break down quite nicely in terms of $a, b, c$, and $d$.
+
+        The top left and bottom right triangles move along the vector $\vec{u}$, and so their dimensions come from the base $a$ and height $c$.
+
+        START HERE
+      
+      \end{explanation}
+      \end{example}
+        
+
+        
+      \begin{formula}\label{form:areaofparallelogramdeterminant} Let $\vec{u}=\begin{bmatrix}a\\b\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}c\\d\end{bmatrix}$ be vectors of $\RR^2$.  The area of the parallelogram determined by $\vec{u}$ and $\vec{v}$ is given by
+      $$\mbox{Area}=\Big|{\det\begin{bmatrix}a&b\\c&d\end{bmatrix}}\Big|=\Big|\det\begin{bmatrix}a&c\\b&d\end{bmatrix}\Big|$$
+      \end{formula}
+        
+      \begin{example}\label{exp:polyArea}
+          Use Formula \ref{form:areaofparallelogramdeterminant} to find the area of the polygon shown below.
         \begin{center}
-    \begin{tikzpicture}[scale=1]
-    \draw[thin,gray!40] (-3,-2) grid (3,4);
-      \draw[<->] (-3,0)--(3,0);
-      \draw[<->] (0,-2)--(0,4);
-      \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
-    \draw[line width=1pt,red,-stealth](0,0)--(-1,-1);
-    \draw[line width=1pt,red,-stealth](0,0)--(-2,2);
-    \draw[line width=1pt,red,-stealth](0,0)--(-1,3);
-    \draw[line width=1pt,red,-stealth](0,0)--(1,2);
-    \draw[line width=1pt,red,-stealth](0,0)--(2,0);
-    \node[] at (1, 0.6)   (b) {$A_1$};
-    \node[] at (0.2, 1.9)   (b) {$A_2$};
-    \node[] at (-1, 1.5)   (b) {$A_3$};
-    \node[] at (-1, 0.2)   (b) {$A_4$};
-    \node[] at (0.5, -0.4)   (b) {$A_5$};
-     \end{tikzpicture}
-    \end{center}
-        We can find the total area of the polygon by finding the area of each triangle.  The area of each triangle is half of the area of the corresponding parallelogram.  For instance, $A_1$ is half of the area of the parallelogram depicted below.
-    \begin{center}
-    \begin{tikzpicture}[scale=1]
-    \draw[thin,gray!40] (-3,-2) grid (3,4);
-      \draw[<->] (-3,0)--(3,0);
-      \draw[<->] (0,-2)--(0,4);
-      \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
-    \draw[line width=1pt,red,-stealth](0,0)--(-1,-1);
-    \draw[line width=1pt,red,-stealth](0,0)--(-2,2);
-    \draw[line width=1pt,red,-stealth](0,0)--(-1,3);
-    \draw[line width=1pt,red,-stealth](0,0)--(1,2);
-    \draw[line width=1pt,red,-stealth](0,0)--(2,0);
-    \filldraw[orange, opacity=0.3](2,0)--(0,0)--(1,2)--(3,2)--cycle;
-     \end{tikzpicture}
-    \end{center}
-    We compute
-    $$A_1=\frac{1}{2}\left|\det\begin{bmatrix}2 & 1\\0 & 2\end{bmatrix}\right |=\answer{2}$$
-    $$A_2=\frac{1}{2}\left|\det\begin{bmatrix}1 & -1\\2 & 3\end{bmatrix}\right |=\answer{2.5}$$
-    $$A_3=\frac{1}{2}\left|\det\begin{bmatrix}-1 & -2\\3 & 2\end{bmatrix}\right |=\answer{2}$$
-    $$A_4=\frac{1}{2}\left|\det\begin{bmatrix}-2 & -1\\2 & -1\end{bmatrix}\right |=\answer{2}$$
-    $$A_5=\frac{1}{2}\left|\det\begin{bmatrix}-1 & 2\\-1 & 0\end{bmatrix}\right |=\answer{1}$$
-    The total area of the polygon is $\answer{9.5}$.
-    \end{explanation}
-    \end{example}
-     
+      \begin{tikzpicture}[scale=1]
+      \draw[thin,gray!40] (-3,-2) grid (3,4);
+        \draw[<->] (-3,0)--(3,0);
+        \draw[<->] (0,-2)--(0,4);
+        \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
+      %\draw[line width=2pt,red,-stealth](0,0)--(4,2);
+      % \draw[line width=2pt,blue,-stealth](0,0)--(-2,2);
+       \end{tikzpicture}
+      \end{center}
+      \begin{explanation}
+          We will start by splitting this region into triangles.
+          \begin{center}
+      \begin{tikzpicture}[scale=1]
+      \draw[thin,gray!40] (-3,-2) grid (3,4);
+        \draw[<->] (-3,0)--(3,0);
+        \draw[<->] (0,-2)--(0,4);
+        \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
+      \draw[line width=1pt,red,-stealth](0,0)--(-1,-1);
+      \draw[line width=1pt,red,-stealth](0,0)--(-2,2);
+      \draw[line width=1pt,red,-stealth](0,0)--(-1,3);
+      \draw[line width=1pt,red,-stealth](0,0)--(1,2);
+      \draw[line width=1pt,red,-stealth](0,0)--(2,0);
+      \node[] at (1, 0.6)   (b) {$A_1$};
+      \node[] at (0.2, 1.9)   (b) {$A_2$};
+      \node[] at (-1, 1.5)   (b) {$A_3$};
+      \node[] at (-1, 0.2)   (b) {$A_4$};
+      \node[] at (0.5, -0.4)   (b) {$A_5$};
+       \end{tikzpicture}
+      \end{center}
+          We can find the total area of the polygon by finding the area of each triangle.  The area of each triangle is half of the area of the corresponding parallelogram.  For instance, $A_1$ is half of the area of the parallelogram depicted below.
+      \begin{center}
+      \begin{tikzpicture}[scale=1]
+      \draw[thin,gray!40] (-3,-2) grid (3,4);
+        \draw[<->] (-3,0)--(3,0);
+        \draw[<->] (0,-2)--(0,4);
+        \filldraw[blue, opacity=0.3](-1,-1)--(-2,2)--(-1,3)--(1,2)--(2,0)--cycle;
+      \draw[line width=1pt,red,-stealth](0,0)--(-1,-1);
+      \draw[line width=1pt,red,-stealth](0,0)--(-2,2);
+      \draw[line width=1pt,red,-stealth](0,0)--(-1,3);
+      \draw[line width=1pt,red,-stealth](0,0)--(1,2);
+      \draw[line width=1pt,red,-stealth](0,0)--(2,0);
+      \filldraw[orange, opacity=0.3](2,0)--(0,0)--(1,2)--(3,2)--cycle;
+       \end{tikzpicture}
+      \end{center}
+      We compute
+      $$A_1=\frac{1}{2}\left|\det\begin{bmatrix}2 & 1\\0 & 2\end{bmatrix}\right |=\answer{2}$$
+      $$A_2=\frac{1}{2}\left|\det\begin{bmatrix}1 & -1\\2 & 3\end{bmatrix}\right |=\answer{2.5}$$
+      $$A_3=\frac{1}{2}\left|\det\begin{bmatrix}-1 & -2\\3 & 2\end{bmatrix}\right |=\answer{2}$$
+      $$A_4=\frac{1}{2}\left|\det\begin{bmatrix}-2 & -1\\2 & -1\end{bmatrix}\right |=\answer{2}$$
+      $$A_5=\frac{1}{2}\left|\det\begin{bmatrix}-1 & 2\\-1 & 0\end{bmatrix}\right |=\answer{1}$$
+      The total area of the polygon is $\answer{9.5}$.
+      \end{explanation}
+      \end{example}
+
+  \end{document}
      
     \subsection*{$3\times 3$ Determinant and the Volume of a Parallelepiped}
      

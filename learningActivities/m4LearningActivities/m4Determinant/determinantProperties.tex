@@ -62,7 +62,7 @@ Similarly, the sign of the determinant tells us information about relative orien
         \geogebra{uc5xg9qj}{549}{388}
     \end{center}
     
-    From a perspective of relative orientation in space,we might colloquially say $\vec{i}$ is ``below'' $\vec{j}$ in the sense that rotating from $\vec{i}$ to $\vec{j}$ creates an angle measure less than $180^\circ$.
+    From a perspective of relative orientation in space,we might colloquially say $\vec{i}$ is ``before'' $\vec{j}$ in the sense that rotating from $\vec{i}$ to $\vec{j}$ creates an angle measure less than $180^\circ$.
 
     So, the identity matrix $I=\begin{bmatrix}
         1&0\\0&1
@@ -150,37 +150,37 @@ See the following entry-minor pairings for $A$:
         e&f\\i&h
     \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
 
-    \[
+    $$
     \begin{bmatrix}
     a & \textcolor{red}{\cancel{b}} & \textcolor{red}{\cancel{c}} \\
     \textcolor{red}{\cancel{d}} & e & f \\
     \textcolor{red}{\cancel{g}} & h & i
     \end{bmatrix}
-    \]
+    $$
 
     \item Then, we pair the entry $b$ with the $2\times 2$ matrix $\begin{bmatrix}
         d&f\\g&h
     \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
 
-    \[
+    $$
     \begin{bmatrix}
     \textcolor{red}{\cancel{a}} & b & \textcolor{red}{\cancel{c}} \\
     d & \textcolor{red}{\cancel{e}} & f \\
     g & \textcolor{red}{\cancel{i}} & h
     \end{bmatrix}
-    \]
+    $$
 
     \item Finally, we pair the entry $c$ with the $2\times 2$ matrix $\begin{bmatrix}
         d&e\\g&i
     \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
 
-    \[
+    $$
     \begin{bmatrix}
     \textcolor{red}{\cancel{a}} & \textcolor{red}{\cancel{b}} & c \\
     d & e & \textcolor{red}{\cancel{f}} \\
     g & h & \textcolor{red}{\cancel{i}}
     \end{bmatrix}
-    \]
+    $$
 
 \end{enumerate}
 
@@ -234,7 +234,7 @@ In higher dimensions, the process is the same, but the determinants cascade. For
 
 Here is a general representation of one minor expansion in a general matrix:
 
-\[
+$$
 \begin{bmatrix}
     \textcolor{red}{\cancel{a_{1,1}}} & \textcolor{red}{\cancel{a_{1,2}}} & \ldots & \textcolor{red}{\cancel{a_{1,k-1}}} & a_{1,k} & \textcolor{red}{\cancel{a_{1,k+1}}} & \ldots & \textcolor{red}{\cancel{a_{1,n}}} \\
     a_{2,1} & a_{2,2} & \ldots & a_{2,k-1} & \textcolor{red}{\cancel{a_{2,k}}} & a_{2,k+1} & \ldots & a_{2,n} \\
@@ -242,7 +242,7 @@ Here is a general representation of one minor expansion in a general matrix:
     \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
     a_{n,1} & a_{n,2} & \ldots & a_{n,k-1} & \textcolor{red}{\cancel{a_{n,k}}} & a_{n,k+1} & \ldots & a_{n,n} \\
 \end{bmatrix}
-\]
+$$
 
 If we undertake the task of finding the determinant of this matrix, for each column we do a minor expansion such as represented above. In each $k$-th column, you get the entry in the top row $a_{1,k}$ and then the minor matrix from the sub-matrix excluding the top row and the $k$-th column. This portion of the determinant is then the product
 

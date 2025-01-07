@@ -10,175 +10,262 @@
 \end{abstract}
 \maketitle
 
+\section*{Interpreting the Sign of the Determinant}
 
-\section*{Properties of the Determinant}
-We begin by summarizing the properties of determinants we introduced in previous sections.
- 
-\begin{summary}
-\begin{itemize}
-\item The determinant of the identity matrix is equal to 1. (Lemma \ref{lemma:detofid})
-\item The determinant of a triangular matrix is equal to the product of the main diagonal entries. (Lemma \ref{lemma:triangulardet})
-\item The determinant of the transpose is equal to the determinant of the matrix. (Theorem \ref{th:detoftrans})
-\item If a matrix contains a row of zeros, then its determinant is equal to 0. (Lemma \ref{lemma:det0lemma})
-\item If two rows of a matrix are the same, then the determinant of the matrix is equal to 0.  (Lemma \ref{lemma:det0lemma})
-\item If one row of a matrix is a scalar multiple of another row, then the determinant of the matrix is equal to 0. (Lemma \ref{lemma:det0lemma})
- 
-\item
-If $B$ is obtained from $A$ by interchanging two different rows, then $$\det{B}=-\det{A}$$
-\item
-If $B$ is obtained from $A$ by multiplying one of the rows of $A$ by a non-zero constant $k$.  Then $$\det{B}=k\det{A}$$
-\item
-If $B$ is obtained from $A$ by adding a multiple of one row of $A$ to another row, then
-$$\det{B}=\det{A}$$
-\end{itemize}
-(The last three properties comprise Theorem \ref{th:elemrowopsanddet})
-\end{summary}
+The sign of an integral tells us the relative height orientation of a function's graph to the $x$-axis. 
+
+Consider the function $f(x)=\cos(x)$ between $\pi/2$ and $3\pi/2$.
+
+\begin{tikzpicture}[scale=1.5]
+    % Draw axes
+    \draw[<->] (-0.5,0) -- (5,0) node[below] {\(x\)};
+    \draw[<->] (0,-1.5) -- (0,1.5) node[left] {\(y\)};
+    
+    % Draw the cosine function
+    \draw[thick,blue,samples=100,domain=1.57:4.71] 
+        plot (\x,{cos(\x r)}); %node[right] {\(\cos(x)\)};
+    
+    \node[anchor=north, blue] at (3.14,-1) {\(\cos(x)\)};
+    %\node[anchor=north, blue] at (3.14,-1) {\(cos(x)\)};
+    
+    % Label important points on the x-axis
+    \node[below] at (1.57,0) {\(\frac{\pi}{2}\)};
+    \node[below] at (3.14,0) {\(\pi\)};
+    \node[below] at (4.71,0) {\(\frac{3\pi}{2}\)};
+    
+    % Add dashed lines for bounds
+    \draw[dashed] (1.57,0) -- (1.57,{cos(1.57 r)});
+    \draw[dashed] (4.71,0) -- (4.71,{cos(4.71 r)});
+
+    % Shade the area under the curve
+    \begin{scope}
+        \clip (1.57,-1.5) rectangle (4.71,1.5); % Clip the shading to the bounds
+        \fill[orange,opacity=0.3] plot[smooth,samples=100,domain=1.57:4.71] (\x,{cos(\x r)}) -- (4.71,0) -- (1.57,0) -- cycle;
+    \end{scope}
+    
+    % Label y-axis
+    \node[left] at (0,1) {\(1\)};
+    \node[left] at (0,-1) {\(-1\)};
+\end{tikzpicture}
+
+The integral $\int_{\pi/2}^{3\pi/2}\cos(x)\cdot\ dx=-2$. We know that the area measure here is $2$ units, but the $-$ sign tells us that the region is located below the $x$-axis.
+
+Similarly, the sign of the determinant tells us information about relative orientation. Though fundamentally they are connected, we are not measuring relative orientation to an axis, but relative orientation of the transformed unit vectors. 
+
+\begin{example}
+    Utilizing the following GeoGebra applet, explore the transformed area measure for the following matrices, attending to the relative orientation of the unit vectors under the transformation.
+
+    Specifically, if we consider the ``order'' of the unit vectors $\vec{i}$ and $\vec{j}$, we tend to put $\vec{i}$ before $\vec{j}$. 
 
 
- 
-In this section we will prove the following important results:
-\begin{enumerate}
-\item A square matrix is singular if and only if its determinant is equal to 0.
-\item The determinant of a product is the product of the determinants.
-\end{enumerate}
-To get us started, we need the following lemma.
-\begin{lemma}\label{lemma:detelemproduct} Let $A$ be a square matrix, and let $E$ be an elementary matrix, then
-$$\det{EA}=\det{E}\det{A}$$
-\end{lemma}
-\begin{proof} Recall that if $E$ is obtained from $I$ using an elementary row operation, then the same elementary row operation carries $A$ to $EA$.  There are three types of elementary row operations and three types of elementary matrices, so we will have to consider three cases.
- 
-Case 1.  Suppose $E$ is obtained from $I$ by interchanging two rows, then
-$$\det{E}=-1\quad\text{and}\quad \det{EA}=-\det{A}$$
-so
-$$\det{EA}=\det{E}\det{A}$$
- 
-Case 2.  Suppose $E$ is obtained from $I$ by multiplying one of the rows of $I$ by a non-zero constant $k$, then
-$$\det{E}=k\quad\text{and}\quad \det{EA}=k\det{A}$$
-so
-$$\det{EA}=\det{E}\det{A}$$
- 
-Case 3.  Suppose $E$ is obtained from $I$ by adding a scalar multiple of one row to another row, then
-$$\det{E}=1\quad\text{and}\quad \det{EA}=\det{A}$$
-so
-$$\det{EA}=\det{E}\det{A}$$
-\end{proof}
-\subsection*{Invertibility and the Determinant}
-Recall that we first introduced determinants in the context of invertibility of $2\times 2$ matrices. Specifically, we found that $A=\begin{bmatrix}a&b\\c&d\end{bmatrix}$ is invertible if and only if $\det{A}\neq 0$.  (A logically equivalent statement is: $A$ is singular if and only if $\det{A}=0$.)   We are now in the position to prove this result for all square matrices.
- 
-\begin{theorem}\label{th:detofsingularmatrix}
-A square matrix $A$ is singular if and only if $\det{A}=0$.
-\end{theorem}
-\begin{proof}
-Let $A$ be a square matrix.  To determine whether $A$ is singular we need to find $\mbox{rref}(A)$.  In \href{https://ximera.osu.edu/oerlinalg/LinearAlgebra/MAT-0060/main}{Elementary Matrices} we found that there exist elementary matrices $E_1,\ldots ,E_k$ such that
-$$E_k\ldots E_2E_1A=\mbox{rref}(A)$$
-so
-$$\det{(E_k\ldots E_2E_1A)}=\det{\big(\mbox{rref}(A)\big)}$$
-By repeated application of Lemma \ref{lemma:detelemproduct}, we find that
-$$\det{E_k}\ldots \det{E_2}\det{E_1}\det{A}=\det{\big(\mbox{rref}(A)\big)}$$
-Suppose that $A$ is singular, then $\mbox{rref}(A)\neq I$.  But then $\mbox{rref}(A)$ contains a row of zeros, and $\det{\big(\mbox{rref}(A)\big)}=0$. (Lemma \ref{lemma:det0lemma})  Since determinants of elementary matrices are non-zero, we conclude that $\det{A}=0$.
- 
-Conversely, suppose $\det{A}=0$, then
-$$\det{\big(\mbox{rref}(A)\big)}=\det{E_k}\ldots \det{E_2}\det{E_1}\det{A}=0$$
-But then $\mbox{rref}(A)\neq I$, so $A$ is singular.
-\end{proof}
-\begin{example}\label{ex:invanddet} Determine whether $A$ is an invertible matrix without using elementary row operations.
- 
-$$A=\begin{bmatrix}3&4&-8\\1&8&-10\\1&-2&1\end{bmatrix}$$
-\begin{explanation}
-Compute the determinant of $A$.  You will find that $\det{A}=0$.  By Theorem \ref{th:detofsingularmatrix} we conclude that $A$ is not invertible.
-\end{explanation}
+    \begin{center}
+        \geogebra{uc5xg9qj}{549}{388}
+    \end{center}
+    
+    From a perspective of relative orientation in space,we might colloquially say $\vec{i}$ is ``below'' $\vec{j}$ in the sense that rotating from $\vec{i}$ to $\vec{j}$ creates an angle measure less than $180^\circ$.
+
+    So, the identity matrix $I=\begin{bmatrix}
+        1&0\\0&1
+    \end{bmatrix}$, encodes a transformation of preserving the original area of space, and preserving the relative orientation of the unit vectors. 
+
+    In the applet, alter the matrix so that it changes the order of the unit vectors, and view the resulting determinant:
+
+    In the matrix $A=\begin{bmatrix}
+        0&1\\1&0
+    \end{bmatrix}$, the vector $\vec{i}$ is \wordChoice{
+        \choice{before}
+        \choice[correct]{after}
+    }
+    the vector $\vec{j}$, and the determinant is $\answer{-1}$.
+
+    This is an example of the information gained by the sign of the determinant.
+
 \end{example}
 
- 
-\subsection*{Determinant of a Product}
-\begin{theorem}\label{th:detofproduct}
-Let $A$ and $B$ be square matrices, then
-$$\det{AB}=\det{A}\det{B}$$
-\end{theorem}
-\begin{proof}
-Suppose $A$ is invertible, then $A$ can be written as a product of elementary matrices. (Theorem \ref{th:elemmatrices})
-$$A=E_1E_2\ldots E_k$$
-Then, by repeated application of Lemma \ref{lemma:detelemproduct}, we get
-\begin{align*}\det{AB}&=\det{(E_1E_2\ldots E_kB)}\\
-&=\det{E_1}\det{E_2}\ldots \det{E_k}\det{B}\\
-&=\det{(E_1E_2\ldots E_k)}\det{B}\\
-&=\det{A}\det{B}
-\end{align*}
-Now suppose that $A$ is not invertible.  Then $AB$ is also not invertible. %Needs proof
-So, $\det{A}=0$ and $\det{AB}=0$.  Thus  $\det{AB}=0=\det{A}\det{B}$.
-\end{proof}
-The following theorem is a nice consequence of Theorem \ref{th:detofproduct}.  We leave the proof to the reader. (Practice Problem \ref{prob:proofdetofinverse})
-\begin{theorem}\label{th:detofinverse} Let $A$ be a nonsingular matrix, then
-$$\det{A^{-1}}=\frac{1}{\det{A}}$$
-\end{theorem}
- 
+Let's do some more examples to further illustrate this phenomenon. 
 
-% \subsection*{Determinant of the Transpose}
-% In Practice Problem \ref{prob:dettranspose} you proved that $\det{A^T}=\det{A}$.  Your proof most likely relied on the fact that cofactor expansion along the first row produces the same result as cofactor expansion along the first column.  (Theorem \ref{th:rowcolexpequivalence}).  We will now take another look at this result and prove it without the assumption that the two cofactor expansions produce the same outcome.
-% \begin{exploration}\label{init:detoftranspose}
-% In this problem we will take a look at the determinants of transposes of elementary matrices.  Recall that an elementary matrix is obtained from the identity matrix by means of one elementary row operation.  Consider the following examples of elementary matrices.
-% $$E_1=\begin{bmatrix}1&0&0&0\\0&0&0&1\\0&0&1&0\\0&1&0&0\end{bmatrix}\quad E_2=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&5&0\\0&0&0&1\end{bmatrix}\quad E_3=\begin{bmatrix}1&0&4&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}$$
-% On your own, write out the transpose of each matrix.  You should observe that $E_1^T=E_1$ and $E_2^T=E_2$. 
- 
-% Now consider $E_3^T$
-% $$E_3^T=\begin{bmatrix}1&0&0&0\\0&1&0&0\\4&0&1&0\\0&0&0&1\end{bmatrix}$$
-% Clearly $E_3^T\neq E_3$, but what is really important is that $E_3^T$ is also an elementary matrix.  While $E_3$ was obtained from the identity by adding 4 times the third row to the first row, $E_3^T$ was obtained from the identity by adding 4 times the first row to the third row.  By Theorem \ref{th:elemrowopsanddet}\ref{item:addmultotherrowdet}, we know that $\det{E_3^T}=\det{I}=\det{E_3}$.
- 
-% So, for all three matrices we have $\det{E_i^T}=\det{E_i}$.
-% \end{exploration}
- 
-%  We can generalize our observations in Exploration \ref{init:detoftranspose} as follows:
-% \begin{enumerate}
-% \item If $E$ is an elementary matrix obtained from the identity by switching of two rows, then $E^T=E$.
-% \item If $E$ is an elementary matrix obtained from the identity by multiplying one row by a non-zero constant, then $E^T=E$.
-% \item If $E$ is an elementary matrix obtained from the identity by adding a multiple of one row to another row, then $\det{E^T}=\det{E}$.
-% \end{enumerate}
- 
- 
-% We will now combine the three parts of our generalization into a lemma.
-% %The discussion above proves the following Lemma, which, in turn, is a step toward proving Theorem \ref{th:detoftrans}.
- 
-% \begin{lemma}\label{lemma:detofelementarymat}
-% Let $E$ be an elementary matrix, then
-% $$\det{E^T}=\det{E}$$
-% \end{lemma}
- 
-% \begin{proof}
-% We will need to consider three cases.
- 
-% Case 1.  Suppose $E$ is obtained from the identity by switching rows $p$ and $q$.  Then $E$ is the same as the identity matrix, except that $(p,p)$ and $(q, q)$ entries of $E$ are zero, and $E$ has a 1 in $(q, p)$ and $(p, q)$ spots.  When the transpose is taken, 1's and 0's along the diagonal stay in place, while the $(p,q)$-entry becomes the $(q, p)$-entry and the $(q,p)$-entry becomes the $(p,q)$-entry.  This shows that $E=E^T$, and $\det{E^T}=\det{E}$.
- 
-% Case 2.  Suppose $E$ is obtained from the identity by multiplying one of the rows by a non-zero constant.  Observe that $E$ is a diagonal matrix, so $E^T=E$ and $\det{E^T}=\det{E}$.
- 
-% Case 3.  Suppose $E$ is obtained from the identity by adding a $k$ times row $q$ to row $p$.  Then $E$ is the same as the identity matrix, except that the $(p,q)$-entry of $E$ is $k$.  If we take the transpose of $E$, then $k$ will become the $(q,p)$-entry of the transpose.  This means that $E^T$ can be obtained from the identity by adding $k$ times row $p$ to row $q$.  This means that $\det{E^T}=\det{I}=\det{E}$.
-% \end{proof}
- 
-% We are now ready to prove the main result of this section.
- 
-% \begin{theorem}\label{th:detoftrans}
-% Let $A$ be a square matrix, then
-% $$\det{A^T}=\det{A}$$
-% \end{theorem}
- 
-% \begin{proof}
-% Suppose that $A$ is singular, then $A^T$ is also singular. (Theorem \ref{th:invprop} and Theorem \ref{th:transposeproperties}) Thus, $\det{A}=0=\det{A^T}$.
- 
-% Suppose $A$ is nonsingular.  Then $A$ is can be written as a product of elementary matrices (Theorem \ref{th:elemmatrices})
-% $$A=E_1E_2\ldots E_k$$
-% By Theorem \ref{th:transposeproperties}
-% $$A^T=E_k^T\ldots E_2^TE_1^T$$
-% By Lemma \ref{lemma:detofelementarymat}, $\det{E_i^T}=\det{E_i}$ for $1\leq i\leq k$.
- 
-% \begin{align*}
-% \det{A^T}&=\det{(E_k^T\ldots E_2^TE_1^T)}\\
-% &=\det{E_k^T}\ldots \det{E_2^T}\det{E_1^T}\\
-% &=\det{E_k}\ldots \det{E_2}\det{E_1}\\
-% &=\det{E_1}\det{E_2}\ldots\det{E_k}\\
-% &=\det{(E_1E_2\ldots E_k)}\\
-% &=\det{A}
-% \end{align*}
-% \end{proof}
+\begin{example}
+    For the following matrices, determine the amount of stretching or compressing of the transformation, and the relative orientation of the unit vectors $\vec{i}$ and $\vec{j}$. 
 
+    \begin{enumerate}
+        \item The rotation matrix $R=\begin{bmatrix}
+            \cos(\pi/4)& -\sin(\pi/4)\\ \sin(\pi/4) & \cos(\pi/4)
+        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{1}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+            \choice[correct]{before}
+            \choice{after}
+        } $A\vec{j}$.
+        \item The scaling matrix $S=\begin{bmatrix}
+            4& 0\\ 0 & -3
+        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{12}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+            \choice{before}
+            \choice[correct]{after}
+        } $A\vec{j}$.
+        \item The matrix $A=\begin{bmatrix}
+            -2& 4\\ 3 & -3
+        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{6}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+            \choice{before}
+            \choice[correct]{after}
+        } $A\vec{j}$.
+        \item The matrix $B=\begin{bmatrix}
+            4& -4\\ 4 & 0
+        \end{bmatrix}$ scales spatial area by a factor of $\answer{16}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+            \choice[correct]{before}
+            \choice{after}
+        } $A\vec{j}$.
+    \end{enumerate}
+\end{example}
+
+As we upscale the determinant to higher dimensions, these are the primary properties that we want to maintain:
+
+\begin{enumerate}
+    \item The determinant should give a measure of the transformed `volume' of space (e.g. area ($2D$), volume ($3D$), hypervolume (higher dimension)).
+    \item The determinant should give some indication of the relative re-ordering of unit vectors under the transformation.
+\end{enumerate}
+
+The second point will still rely on the sign of the determinant, but it will tell us whether an odd number of unit vectors were re-ordered (negative sign) or an even number of unit vectors were re-ordered (positive sign).
+
+
+\section*{The Determinant in Higher Dimensions}
+
+We will give the general idea of how the determinant is calculated in higher dimensions, but will not dwell on this method and will instead rely on technology to compute determinants for us. 
+
+Having a rough idea of possible algorithms but not being concerned with the details should be your main goal for this section.
+
+\subsection*{The Determinant in 3D}
+
+$3D$ determinants will provide us with simple examples of the method of \emph{expansion by minors}, which is how determinants can be calculated for higher dimensions, though we will not dwell on this method.
+
+The main idea is to algorithmically break down the determinant calculations into many $2\times 2$ determinant calculations so that we acheive the goals for the determinant discussed in the previous section. This is achieved by creating multiple determinant calculations on a column-by-column (or row-by-row) basis. 
+
+Take the $3\times 3$ matrix 
+
+$$A=\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix}.$$
+
+We expand along the top row, forming three ``\emph{entry}-\emph{minor}'' pairings, where the entry is the row-column entry of the matrix (e.g. $a$, $b$, $c$) and the ``minor'' is the rest of the matrix except for the rest of the entry's column. 
+
+See the following entry-minor pairings for $A$:
+
+\begin{enumerate}
+    \item First, we pair the entry $a$ with the $2\times 2$ matrix $\begin{bmatrix}
+        e&f\\i&h
+    \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
+
+    \[
+    \begin{bmatrix}
+    a & \textcolor{red}{\cancel{b}} & \textcolor{red}{\cancel{c}} \\
+    \textcolor{red}{\cancel{d}} & e & f \\
+    \textcolor{red}{\cancel{g}} & h & i
+    \end{bmatrix}
+    \]
+
+    \item Then, we pair the entry $b$ with the $2\times 2$ matrix $\begin{bmatrix}
+        d&f\\g&h
+    \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
+
+    \[
+    \begin{bmatrix}
+    \textcolor{red}{\cancel{a}} & b & \textcolor{red}{\cancel{c}} \\
+    d & \textcolor{red}{\cancel{e}} & f \\
+    g & \textcolor{red}{\cancel{i}} & h
+    \end{bmatrix}
+    \]
+
+    \item Finally, we pair the entry $c$ with the $2\times 2$ matrix $\begin{bmatrix}
+        d&e\\g&i
+    \end{bmatrix}$, from excluding the matrix entries in the row and column of $a$
+
+    \[
+    \begin{bmatrix}
+    \textcolor{red}{\cancel{a}} & \textcolor{red}{\cancel{b}} & c \\
+    d & e & \textcolor{red}{\cancel{f}} \\
+    g & h & \textcolor{red}{\cancel{i}}
+    \end{bmatrix}
+    \]
+
+\end{enumerate}
+
+With these three entry-minor pairs, we then multiply the entry and the determinant of the minor. So we get the three products
+
+$a\cdot\mbox{det}\left(\begin{bmatrix}
+    e&f\\i&h
+\end{bmatrix}\right)$, $b\cdot \mbox{det}\left(\begin{bmatrix}
+    d&f\\g&i
+\end{bmatrix}\right)$, and $c\cdot \mbox{det}\left(\begin{bmatrix}
+    d&e\\g&h
+\end{bmatrix}\right)$.
+
+To then preserve the orientation-ordering of the matrix, we subtract the $b$-pairing and add the others to make a final sum 
+
+$$\mbox{det}(A)=a\cdot\mbox{det}\left(\begin{bmatrix}
+    e&f\\i&h
+\end{bmatrix}\right)-b\cdot \mbox{det}\left(\begin{bmatrix}
+    d&f\\g&i
+\end{bmatrix}\right)+c\cdot \mbox{det}\left(\begin{bmatrix}
+    d&e\\g&h
+\end{bmatrix}\right).$$
+
+\begin{example}
+    Using the GeoGebra applet that follows, verify that this expansion-by-minors algorithm does compute the transformed volume of the matrix 
+    
+    $$A=\begin{bmatrix}
+        1&2&3\\-1&1&2\\1&1&0
+    \end{bmatrix}.$$
+
+    Remember that the applet has you enter the columns as row vectors. 
+
+    Expansion by minors yields the three calculations $\answer{1}\cdot\mbox{det}\left(\begin{bmatrix}
+        \answer{1} & \answer{2}\\\answer{1}&\answer{0}
+    \end{bmatrix}\right)$, $\answer{2}\cdot\mbox{det}\left(\begin{bmatrix}
+        \answer{-1} & \answer{2}\\\answer{1}&\answer{0}
+    \end{bmatrix}\right)$, and $\answer{3}\cdot\mbox{det}\left(\begin{bmatrix}
+        \answer{-1} & \answer{1}\\\answer{1}&\answer{1}
+    \end{bmatrix}\right)$.
+
+    Putting these determinants and products together yields
+
+    $$\mbox{det}(A)=\answer{-2}-\answer{-4}+\answer{-6}=\answer{-4}.$$
+
+    The final result should match the transformed volume in the applet.
+\end{example}
+
+As you can see, this process is tedious by hand, so from here on out we will use technology to calculate the determinant for us. The command in MATLAB is $\texttt{det(A)}$, where $A$ is the defined matrix. 
+
+In higher dimensions, the process is the same, but the determinants cascade. For instance, in a $4\times 4$ matrix, the first minor expansion across the top row yields four entry-minor pairs, but the minors are $3\times 3$ matrices, so the minor determinants each require further expansion by minors, yielding $12$ calculations overall, plus the final summation and tracking of when to add and subtract to preserve the relative coordinate vector orientations.
+
+Here is a general representation of one minor expansion in a general matrix:
+
+\[
+\begin{bmatrix}
+    \textcolor{red}{\cancel{a_{1,1}}} & \textcolor{red}{\cancel{a_{1,2}}} & \ldots & \textcolor{red}{\cancel{a_{1,k-1}}} & a_{1,k} & \textcolor{red}{\cancel{a_{1,k+1}}} & \ldots & \textcolor{red}{\cancel{a_{1,n}}} \\
+    a_{2,1} & a_{2,2} & \ldots & a_{2,k-1} & \textcolor{red}{\cancel{a_{2,k}}} & a_{2,k+1} & \ldots & a_{2,n} \\
+    a_{3,1} & a_{3,2} & \ldots & a_{3,k-1} & \textcolor{red}{\cancel{a_{3,k}}} & a_{3,k+1} & \ldots & a_{3,n} \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{n,1} & a_{n,2} & \ldots & a_{n,k-1} & \textcolor{red}{\cancel{a_{n,k}}} & a_{n,k+1} & \ldots & a_{n,n} \\
+\end{bmatrix}
+\]
+
+If we undertake the task of finding the determinant of this matrix, for each column we do a minor expansion such as represented above. In each $k$-th column, you get the entry in the top row $a_{1,k}$ and then the minor matrix from the sub-matrix excluding the top row and the $k$-th column. This portion of the determinant is then the product
+
+$$a_{1,k}\cdot\mbox{det}\left(
+\begin{bmatrix}
+    a_{2,1} & a_{2,2} & \ldots & a_{2,k-1} & a_{2,k+1} & \ldots & a_{2,n} \\
+    a_{3,1} & a_{3,2} & \ldots & a_{3,k-1} & a_{3,k+1} & \ldots & a_{3,n} \\
+    \vdots & \vdots & \ddots & \vdots & \vdots  & \ddots & \vdots \\
+    a_{n,1} & a_{n,2} & \ldots & a_{n,k-1} & a_{n,k+1} & \ldots & a_{n,n} \\
+\end{bmatrix}
+\right).$$
+
+You then do this for each entry in the first row, and then proceed in a similar fashion for each subsequent minor matrix until the process reduces to $2\times 2$ matrices. 
+
+There are various numerical ways of speeding up this algorithm, but this is the formal construction that preserves the two important properties of the determinant: 1) the measuring of volume for the transformation, and 2) the use of the determinant sign to convey whether an even or odd number of unit vectors have changed relative orientation. 
+
+\section*{Summative Video}
+
+As a recap of the important aspects and uses of the determinant for invertibility, watch the following video by Grant Sanderson:
+
+\begin{center}
+    \youtube{Ip3X9LOh2dk}
+\end{center}
 
 
 \end{document}

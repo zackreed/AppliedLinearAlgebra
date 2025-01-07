@@ -105,10 +105,10 @@ We will start with a $2$-dimensional approach to finding the area shifted by a t
 
               % Add the orange rectangle inscribing the parallelogram
           \filldraw[orange, opacity=.3] (-2,0) rectangle (4,4);
-          
-        \draw[line width=2pt,red,-stealth](0,0)--(4,2)node[below right]{$\vec{u}$};
-          
-         \draw[line width=2pt,blue,-stealth](0,0)--(-2,2)node[above right]{$\vec{v}$};
+
+          \draw[line width=2pt,black,-stealth](0,0)--(4,2)node[below right]{$\vec{u}$};
+            
+           \draw[line width=2pt,black,-stealth](0,0)--(-2,2)node[above right]{$\vec{v}$};
 
              % Add thick orange lines for base and height
         \draw[orange, ultra thick] (-2,0) -- (4,0); % Base of the rectangle
@@ -116,8 +116,8 @@ We will start with a $2$-dimensional approach to finding the area shifted by a t
 
 
         % Add labels
-        \node[anchor=north] at (1,0) {\(a+b\)}; % Label for the x-axis
-        \node[anchor=east] at (-2,2) {\(c+d\)}; % Label for the y-axis
+        \node[anchor=north, orange] at (1,0) {\(a+b\)}; % Label for the x-axis
+        \node[anchor=east, orange] at (-2,2) {\(c+d\)}; % Label for the y-axis
            
         \end{tikzpicture}
         \end{center}
@@ -126,19 +126,182 @@ We will start with a $2$-dimensional approach to finding the area shifted by a t
 
         The top left and bottom right triangles move along the vector $\vec{u}$, and so their dimensions come from the base $a$ and height $c$.
 
-        START HERE
+        \begin{center}
+          \begin{tikzpicture}[scale=1]
+          \draw[thin,gray!40] (-3,-1) grid (4,4);
+            \draw[<->] (-3,0)--(4,0);
+            \draw[<->] (0,-1)--(0,4);
+              
+            \filldraw[blue, opacity=0.3](0,0)--(-2,2)--(2,4)--(4,2)--cycle;
+  
+                % Add the orange rectangle inscribing the parallelogram
+            %\filldraw[orange, opacity=.3] (-2,0) rectangle (4,4);
+            
+          \draw[line width=2pt,black,-stealth](0,0)--(4,2)node[below right]{$\vec{u}$};
+            
+           \draw[line width=2pt,black,-stealth](0,0)--(-2,2)node[above left]{$\vec{v}$};
+  
+               % Add thick orange lines for base and height
+          %\draw[orange, ultra thick] (-2,0) -- (4,0); % Base of the rectangle
+          %\draw[orange, ultra thick] (-2,0) -- (-2,4); % Height of the rectangle
+
+          % Add triangles to top-left and bottom-right corners
+          \filldraw[purple, opacity=0.5] 
+              (-2,4) -- (-2,2) -- (2,4) -- cycle; % Top-left triangle
+          \draw[purple, ultra thick] (-2,4) -- (-2,2); % Thick edge for rectangle intersection
+          \draw[purple, ultra thick] (-2,4) -- (2,4); % Thick edge for rectangle intersection
+
+          \filldraw[purple, opacity=0.5] 
+              (4,0) -- (4,2) -- (0,0) -- cycle; % Bottom-right triangle
+          \draw[purple, ultra thick] (4,0) -- (4,2); % Thick edge for rectangle intersection
+          \draw[purple, ultra thick] (4,0) -- (0,0); % Thick edge for rectangle intersection
+  
+  
+          % Add labels
+          \node[anchor=south, purple] at (0,4) {\(a\)}; % Label for the x-axis
+          \node[anchor=north, purple] at (2,0) {\(a\)}; % Label for the x-axis
+          \node[anchor=west, purple] at (4,1) {\(c\)}; % Label for the y-axis
+          \node[anchor=east, purple] at (-2,3) {\(c\)}; % Label for the y-axis
+             
+          \end{tikzpicture}
+          \end{center}
+
+      Together, these triangles make a single rectangle of area $a\cdot c$. 
+
+      Similarly, the top right and bottom left triangles of the orange rectangle make a rectangle of lencth $b\cdot d$, following the coordinates of $\vec{v}$. 
+
+        \begin{center}
+          \begin{tikzpicture}[scale=1]
+            % Draw grid and axes
+            \draw[thin,gray!40] (-3,-1) grid (4,4);
+            \draw[<->] (-3,0)--(4,0);
+            \draw[<->] (0,-1)--(0,4);
+            
+            % Draw the parallelogram
+            \filldraw[blue, opacity=0.3](0,0) -- (-2,2) -- (2,4) -- (4,2) -- cycle;
+        
+            % Draw vectors
+            \draw[line width=2pt,black,-stealth](0,0) -- (4,2) node[below right] {\(\vec{u}\)};
+            \draw[line width=2pt,black,-stealth](0,0) -- (-2,2) node[above left] {\(\vec{v}\)};
+        
+            % Add triangles to top-left and bottom-right corners
+            \filldraw[purple, opacity=0.5] 
+                (-2,4) -- (-2,2) -- (2,4) -- cycle; % Top-left triangle
+            \draw[purple, ultra thick] (-2,4) -- (-2,2); % Thick edge for rectangle intersection
+            \draw[purple, ultra thick] (-2,4) -- (2,4); % Thick edge for rectangle intersection
+        
+            \filldraw[purple, opacity=0.5] 
+                (4,0) -- (4,2) -- (0,0) -- cycle; % Bottom-right triangle
+            \draw[purple, ultra thick] (4,0) -- (4,2); % Thick edge for rectangle intersection
+            \draw[purple, ultra thick] (4,0) -- (0,0); % Thick edge for rectangle intersection
+        
+            % Add triangles to top-right and bottom-left corners
+            \filldraw[teal, opacity=0.5] 
+                (4,4) -- (4,2) -- (2,4) -- cycle; % Top-right triangle
+            \draw[teal, ultra thick] (4,4) -- (4,2); % Thick edge for rectangle intersection
+            \draw[teal, ultra thick] (4,4) -- (2,4); % Thick edge for rectangle intersection
+        
+            \filldraw[teal, opacity=0.5] 
+                (-2,0) -- (0,0) -- (-2,2) -- cycle; % Bottom-left triangle
+            \draw[teal, ultra thick] (-2,0) -- (0,0); % Thick edge for rectangle intersection
+            \draw[teal, ultra thick] (-2,0) -- (-2,2); % Thick edge for rectangle intersection
+        
+            % Add labels for purple triangles
+            \node[anchor=south, purple] at (0,4) {\(a\)}; % Label for the top edge of the rectangle
+            \node[anchor=north, purple] at (2,0) {\(a\)}; % Label for the bottom edge of the rectangle
+            \node[anchor=west, purple] at (4,1) {\(c\)}; % Label for the right edge of the rectangle
+            \node[anchor=east, purple] at (-2,3) {\(c\)}; % Label for the left edge of the rectangle
+        
+            % Add labels for teal triangles
+            \node[anchor=west, teal] at (4,3) {\(d\)}; % Label for the top-right triangle edge
+            \node[anchor=east, teal] at (-2,1) {\(d\)}; % Label for the bottom-left triangle edge
+            \node[anchor=north, teal] at (-1,0) {\(b\)}; % Label for the bottom-left triangle edge
+            \node[anchor=south, teal] at (3,4) {\(b\)}; % Label for the top-right triangle edge
+          \end{tikzpicture}
+        \end{center}
+
+      Putting these areas together, we get the area of the parallelogram as the area of the large organge rectangle of base $b+a$ and height $c+d$, minus the two exterior rectangles (from the purple and teal triangles) of dimensions $a\times c$ and $b\times d$, respectively, to make:
+
+      \begin{center}
+        \begin{tikzpicture}[scale=1, every node/.style={font=\large}]
+        
+            % Draw the parallelogram
+            \filldraw[blue, opacity=0.3](0,0) -- (-2,2) -- (2,4) -- (4,2) -- cycle;
+            \node at (1,2) {\(\text{Area}\)};
+            
+            % Equal sign
+            \node at (4.5,1) {\(=\)};
+        
+            % Yellow orange (a+b)(c+d)
+            \filldraw[orange, thick] (5,0) rectangle (7,2);
+            \node[font=\mdseries] at (6,1) {\((a+b)(c+d)\)};
+            
+            % Minus sign after yellow rectangle
+            \node at (7.5,1) {\(-\)};
+            
+            % Green rectangle (ac)
+            \filldraw[teal, thick] (8,0.7) rectangle (9,1.3);
+            \node at (8.5,1) {\(ac\)};
+            
+            % Minus sign after green rectangle
+            \node at (9.5,1) {\(-\)};
+            
+            % Blue rectangle (bd)
+            \filldraw[purple, thick] (10,0.5) rectangle (11,1.5);
+            \node at (10.5,1) {\(bd\)};
+        
+        \end{tikzpicture}
+        \end{center}
+
+      With one very important caveat, this means the area of the parallelogram is 
+
+      $$\text{Area}=\abs{(a+b)(c+d)}-\abs{ac}-\abs{bd}=\abs{ad}+\abs{bc}$$
+
+      As you can hopefully see, the caveat is that we need to put absolute value around each product to get the actual area. 
+
+      If we look back at the particular diagram we're using, $b$ is a negative number, and lengths themselves cannot be negative. 
+
+      If we were to write out the area accounting for the negative $b$ value, we would have
+
+      $$\text{Area}=ad-bc.$$
+
+      This is the determinant! Note that if both vectors are in the same quadrant, the geometric breakdown is a little more complicated but it works out to the same calculation.
       
+      If we consider $\vec{u}$ and $\vec{v}$ as the columns of a matrix 
+
+      $$A=\begin{bmatrix}
+      a&c\\b&d
+      \end{bmatrix},$$
+      
+      and want to ask ourselves the change in area under the transformation, we want the area of the resulting parallelogram from $\vec{u}$ and $\vec{v}$. 
+  
+
       \end{explanation}
       \end{example}
-        
 
+      We use the notation $\mbox{det}(A)$ for ``the determinant of $A$'', as in the following definition:
+
+      \begin{definition}
+        The \emph{determinant} of a $2\times 2$ matrix $A=\begin{bmatrix}
+          a&c\\b&d
+        \end{bmatrix}$ is the computation 
+
+        $$\mbox{det}(A)=ad-bc.$$
+
+        This gives the \emph{signed} area of the paralellogram created by teh columns of $A$. The \emph{unsigned} area of the paralellogram is $\abs{\mbox{det}(A)}$.
+      \end{definition}
+
+      \begin{remark}
+        The reason that we clarify that $\mbox{det}(A)$ gives the signed area is the same as our need to clarify that we consider only lengths when dealing with areas. 
+
+        The signs of the coordinates $a, b, c$, and $d$ are integral to the sign of the determinant $\mbox{det}(A)$, however the area measure itself remains the same.
+
+        Getting a signed area is actually {\bf very} useful, however, as the sign of the determinant can tell us many things, much like how we also consider the sign of an integral to be an important bit of information beyond just giving us area.
+      \end{remark}
         
-      \begin{formula}\label{form:areaofparallelogramdeterminant} Let $\vec{u}=\begin{bmatrix}a\\b\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}c\\d\end{bmatrix}$ be vectors of $\RR^2$.  The area of the parallelogram determined by $\vec{u}$ and $\vec{v}$ is given by
-      $$\mbox{Area}=\Big|{\det\begin{bmatrix}a&b\\c&d\end{bmatrix}}\Big|=\Big|\det\begin{bmatrix}a&c\\b&d\end{bmatrix}\Big|$$
-      \end{formula}
         
       \begin{example}\label{exp:polyArea}
-          Use Formula \ref{form:areaofparallelogramdeterminant} to find the area of the polygon shown below.
+          Find the area of the polygon shown below. Do this by creating vectors to each of the polygon vertices, hence creating 5 triangles. Then use the determinant to find the areas of the resulting paralellograms (and then half that area for the triangles).
         \begin{center}
       \begin{tikzpicture}[scale=1]
       \draw[thin,gray!40] (-3,-2) grid (3,4);
@@ -194,180 +357,44 @@ We will start with a $2$-dimensional approach to finding the area shifted by a t
       \end{explanation}
       \end{example}
 
-  \end{document}
-     
-    \subsection*{$3\times 3$ Determinant and the Volume of a Parallelepiped}
-     
-    Our next goal is to find the volume of a three-dimensional figure called a \dfn{parallelepiped}.  A parallelepiped is a six-faced figure whose opposite faces are congruent parallelograms located in parallel planes.  A parallelepiped is a three-dimensional counterpart of a parallelogram, and is determined by three non-coplanar vectors in $\RR^3$.  The figure below shows a parallelepiped determined by three vectors.
-     
-    \begin{center}
-    \tdplotsetmaincoords{70}{130}
-    \begin{tikzpicture}
-        \draw[->](-2,0,0)--(5,0,0) node[below left]{$y$};
-        \draw[->](0,-2,0)--(0,6,0) node[below left]{$z$};
-        \draw[->](0,0,-2)--(0,0,5) node[below left]{$x$};
-         
-        \draw[line width=0.5pt, dashed](3,5,1)--(5,1,-2);
-        \draw[line width=0.5pt, dashed](3,5,1)--(-2,4,3);
-        \draw[line width=0.5pt, dashed](3,5,1)--(7,9,6);
-         
-        \filldraw[blue, opacity=0.4] (0,0,0)--(-2, 4, 3)--(2,8,8)--(4,4,5)--cycle;
-        \filldraw[blue, opacity=0.5] (2,8,8)--(4,4,5)--(9,5,3)--(7,9,6)--cycle;
-        \filldraw[blue, opacity=0.6] (0,0,0)--(4,4,5)--(9,5,3)--(5,1,-2)--cycle;
-         
-        \draw[->, line width=2pt,blue, -stealth](0,0,0)--(-2,4,3);
-        \draw[->, line width=2pt,red, -stealth](0,0,0)--(4,4,5);
-        \draw[->, line width=2pt, -stealth](0,0,0)--(5,1,-2);
-         
-    \end{tikzpicture}
-    \end{center}
-     
-    Consider a parallelepiped determined by vectors $\vec{u}$, $\vec{v}$ and $\vec{w}$, as shown below. 
-     
-    \begin{center}
-    \tdplotsetmaincoords{70}{130}
-    \begin{tikzpicture}
-        \draw[->, line width=2pt, -stealth,orange,dashed](0,0,0)--(4,0,1)node[above left]{$\vec{v}$};
-         
-        \draw[line width=0.5pt, dashed](4,0,1)--(5,0,6);
-        \draw[line width=0.5pt, dashed](4,0,1)--(9,5,2);
-         
-        \draw[line width=2pt, gray](1,0,5)--(6,5,6);
-        \draw[line width=2pt, gray](10,5,7)--(6,5,6);
-        \draw[line width=2pt, gray](10,5,7)--(5,0,6);
-        \draw[line width=2pt, gray](1,0,5)--(5,0,6);
-        \draw[line width=2pt, gray](6,5,6)--(5,5,1);
-        \draw[line width=2pt, gray](9,5,2)--(5,5,1);
-        \draw[line width=2pt, gray](10,5,7)--(9,5,2);
-         
-        \draw[->, line width=2pt,red, -stealth](0,0,0)--(1,0,5)node[below left]{$\vec{u}$};
-        \draw[->, line width=2pt, blue, -stealth](0,0,0)--(5,5,1)node[above left]{$\vec{w}$} ;
-       
-    \end{tikzpicture}
-    \end{center}
-     
-    The volume of a parallelepiped is given by
-    $$\mbox{Volume}=(\text{area of base})(\text{height})$$
-    We will consider the parallelogram determined by $\vec{u}$ and $\vec{v}$ to be the base of the parallelepiped.  Thus, the area of the base is given by
-    $$\mbox{Area of Base}=\norm{\vec{u}\times\vec{v}}$$
-    \begin{center}
-    \tdplotsetmaincoords{70}{130}
-    \begin{tikzpicture}
-        \draw[->, line width=2pt, -stealth,orange,dashed](0,0,0)--(4,0,1)node[above left]{$\vec{v}$};
-         
-        \draw[line width=0.5pt, dashed](4,0,1)--(5,0,6);
-        \draw[line width=0.5pt, dashed](4,0,1)--(9,5,2);
-         
-        \draw[line width=0.5pt, dashed](5,5,1)--(0,5,0);
-         
-        \draw[line width=2pt, gray](1,0,5)--(6,5,6);
-        \draw[line width=2pt, gray](10,5,7)--(6,5,6);
-        \draw[line width=2pt, gray](10,5,7)--(5,0,6);
-        \draw[line width=2pt, gray](1,0,5)--(5,0,6);
-        \draw[line width=2pt, gray](6,5,6)--(5,5,1);
-        \draw[line width=2pt, gray](9,5,2)--(5,5,1);
-        \draw[line width=2pt, gray](10,5,7)--(9,5,2);
-         
-        \draw[->, line width=2pt,red, -stealth](0,0,0)--(1,0,5)node[below left]{$\vec{u}$};
-        \draw[->, line width=2pt, blue, -stealth](0,0,0)--(5,5,1)node[above left]{$\vec{w}$} ;
-        \node[blue] at (0.4, 1.1)   (b) {$\theta$};
-        \draw[->, line width=1pt, -stealth](0,0,0)--(0,6,0) node[above]{$\vec{u}\times\vec{v}$};
-        \draw[->, gray, line width=0.5pt, -stealth](-0.25,2.5,0)node[left, black]{$h$}--(-0.25,0,0);
-        \draw[->, gray, line width=0.5pt, -stealth](-0.25,2.5,0)--(-0.25,5,0);
-    \end{tikzpicture}
-    \end{center}
-     
-    The height of the parallelepiped is measured along a line perpendicular to the base.  By Theorem \ref{th:crossproductorthtouandv}, $\vec{u}\times\vec{v}$ lies on such a line.  Let $\theta$ be the angle between $\vec{w}$ and $\vec{u}\times\vec{v}$, $0\leq \theta\leq\pi$.  Then the height, $h$, of the parallelepiped is given by
-    $$h=\norm{\vec{w}}|\cos\theta |$$
-     
-    It may be difficult to visualize this in two dimensions.  Below is a replica of of the above diagram in GeoGebra.  RIGHT-CLICK and DRAG to rotate the image.
-     
-    \pdfOnly{
-    Access GeoGebra interactives through the online version of this text at
-     
-    \href{https://ximera.osu.edu/oerlinalg}{https://ximera.osu.edu/oerlinalg}.
-    }
-     
-    \begin{onlineOnly}
-    \begin{center}
-    \geogebra{tfuzeqwr}{900}{700}
-    \end{center}
-    \end{onlineOnly}
-     
-    This gives us the following formula for the volume of the parallelepiped
-    $$\mbox{Volume}=\norm{\vec{u}\times\vec{v}}\norm{\vec{w}}|\cos\theta |=|(\vec{u}\times\vec{v})\dotp\vec{w}|$$
-     
-    We have established the following formula.
-     
-    \begin{formula}\label{form:volumeparallelepiped}
-    The volume of a parallelepiped determined by vectors $\vec{u}$, $\vec{v}$ and $\vec{w}$ in $\RR^3$ is given by\\
-    $$\mbox{Volume}=|(\vec{u}\times\vec{v})\dotp\vec{w}|$$
-    \end{formula}
-     
-    Our next goal is to show that this expression for the volume is equal to the determinant of a $3\times 3$ matrix whose rows are the vectors that determine the parallelepiped.
-     
-    Let
-    $$\vec{u}=\begin{bmatrix}u_1\\u_2\\u_3\end{bmatrix},\quad\vec{v}=\begin{bmatrix}v_1\\v_2\\v_3\end{bmatrix},\quad\vec{w}=\begin{bmatrix}w_1\\w_2\\w_3\end{bmatrix}$$
-    then
-    \begin{align}\label{eq:boxproduct}(\vec{u}\times\vec{v})\dotp\vec{w}=\begin{vmatrix}\vec{i}&\vec{j}&\vec{k}\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}\dotp\begin{bmatrix}w_1\\w_2\\w_3\end{bmatrix}=\begin{vmatrix}w_1&w_2&w_3\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}
-    \end{align}
-    The expression in (\ref{eq:boxproduct}) is sometimes referred to as the \dfn{box product} or the \dfn{scalar triple product}.
-     
-    Recall that $\det(A)=\det(A^T)$ (Theorem \ref{th:detoftrans}).  Therefore, the three vectors that determine the parallelogram can be used to form rows or columns of the determinant on the right side of (\ref{eq:boxproduct}).  This gives us the following formula.
-     
-    \begin{formula}\label{form:boxproduct}
-    Let $\vec{u}=\begin{bmatrix}u_1\\u_2\\u_3\end{bmatrix},\quad\vec{v}=\begin{bmatrix}v_1\\v_2\\v_3\end{bmatrix},\quad\vec{w}=\begin{bmatrix}w_1\\w_2\\w_3\end{bmatrix}$ be vectors in $\RR^3$.  Then the volume of the parallelepiped determined by $\vec{u}$, $\vec{v}$ and $\vec{w}$ is given by
-    $$\mbox{Volume}=\Big|\det\begin{bmatrix}w_1&w_2&w_3\\u_1&u_2&u_3\\v_1&v_2&v_3\end{bmatrix}\Big|=\Big|\det\begin{bmatrix}w_1&u_1&v_1\\w_2&u_2&v_2\\w_3&u_3&v_3\end{bmatrix}\Big|$$
-    \end{formula}
-     
-    \subsection*{Determinants and Linear Transformations}
-    We will now turn our attention to the determinant of a matrix of a linear transformation. 
-     
-    \begin{exploration}\label{exp:LinTransAreaDet}
-    The following GeoGebra interactive shows a polygon $P$ located in the domain of a linear transformation $T$ induced by the matrix $M$.  The right-hand side shows the image of $P$ under $T$.  The number inside each polygon indicates its area.
-     
-    \pdfOnly{
-    Access GeoGebra interactives through the online version of this text at
-     
-    \href{https://ximera.osu.edu/oerlinalg}{https://ximera.osu.edu/oerlinalg}.
-    }
-     
-    \begin{onlineOnly}
-    \begin{center}
-    \geogebra{nr8jsz4w}{950}{700}
-    \end{center}
-    \end{onlineOnly}
-     
-    \begin{question}
-    Let $M=\begin{bmatrix}1&1\\-1&2\end{bmatrix}$.  Find the determinant of $M$.
-    $$\det{M}=\answer{3}$$
-    Drag the vertices of $P$ to change the polygon.  Make a note of how the area of $P$ and the area of the image change.  How are the areas related to each other?
-    $$\mbox{Area}(T(P))=\answer{3}\mbox{Area}(P)$$
-    \end{question}
-    \begin{question}
-    Change the matrix $M$ to a matrix whose determinant is 1.  Compare the areas of $P$ and $T(P)$.  Try matrices whose determinant is 0 or negative.  What do you observe about the areas?
-     
-    Formulate a conjecture about the relationship between the area of the polygon and the area of its image under a linear transformation.
-    \end{question}
-    \end{exploration}
-    We will not prove your conjecture in Exploration \ref{exp:LinTransAreaDet} for arbitrary figures as it is beyond the scope of this text.  However, we can tackle the problem of how linear transformations affect areas of parallelograms.  This is the topic of our next example.
-     
-    \begin{example}\label{ex:detLinTransArea}
-        Let $T:\RR^2\longrightarrow\RR^2$ be a linear transformation induced by matrix $M$.  Suppose $\vec{u}$ and $\vec{v}$ are vectors in $\RR^2$.  Let $P$ be a parallelogram determined by $\vec{u}$ and $\vec{v}$.  Show that
-        $$\mbox{Area}(T(P))=\left|\det{M}\right|\mbox{Area}(P)$$
-        \begin{explanation}
-            Let $\vec{u}=\begin{bmatrix}a\\b\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}c\\d\end{bmatrix}$, and let $M=\begin{bmatrix}m & n\\p & q\end{bmatrix}$.  By Formula \ref{form:areaofparallelogramdeterminant}, $\mbox{Area}(P)=ad-bc$.  Applying $M$ to $\vec{u}$ and $\vec{v}$ we get
-            $$T(\vec{u})=\begin{bmatrix}am+bn\\ap+bq\end{bmatrix}\quad\mbox{and}\quad T(\vec{v})=\begin{bmatrix}cm+dn\\cp+dq\end{bmatrix}$$
-            Using Formula \ref{form:areaofparallelogramdeterminant}, we compute
-            \begin{align*}
-            \mbox{Area}(T(P))=&|(am+bn)(cp+dq)-(ap+bq)(cm+dn)|\\
-            =&|(mq-np)(ad-bc)|\\
-            =&|\det{M}|\mbox{Area}(P)
-            \end{align*}
-        \end{explanation}
-    \end{example}
-     
+  As a final exploration before generalizing into higher dimensions, let's explore two connections between inverses and the determinant. 
 
+  First, we've discussed already that matrices which squish space down to a lower dimension are not invertible. In terms of the $2\times 2$ determinant, squishing down from area to lower dimensions means changing space into a line or just into a single dot at the origin. Either way, the resulting area is $0$ (a line or point has no area)! So, the determinant is $0$. Let's explore this.
 
+  \begin{example}
+    Find the determinant of the transformation represented by $A=\begin{bmatrix}
+      1 &3\\2&6
+    \end{bmatrix}$. 
+
+    We can see that this squishes $\RR^2$ into the line with direction $\begin{bmatrix}
+      1\\2
+    \end{bmatrix}$, and is hence not invertible. 
+
+    In terms of area, let's use the determinant to measure the area representing this transformation. 
+
+    $$\mbox{det}(A)=\mbox{det}\left(\begin{bmatrix}
+      1&3\\2&6
+    \end{bmatrix}\right)=\answer{1}\cdot \answer{6}-\answer{3}\cdot \answer{2}=0.$$
+
+    As we hoped, and as follows our geometric intuition, the determinant of $A$ is $0$, following the non-area of the resulting line.
+  \end{example}
+
+  This generally follows for any $n\times n$ matrix $A$, that a $0$ determinant is an indication of dimension-reduction in the transformation and hence $A$ is not invertible. Thus, even though we haven't defined the determinant for more than $2\times 2$ matrices yet, we will state the following theorem:
+
+  \begin{theorem}
+    An $n\times n$ matrix $A$ is invertible if and only if $\mbox{det}(A)\neq 0$. 
+  \end{theorem}
+
+  Finally, we also have an explicit way to calculate the inverse of a $2\times 2$ matrix using the determinant, though we will not go into its derivation.
+
+  \begin{theorem}
+    Let $A$ be a $2\times 2$ matrix $\begin{bmatrix}
+    a&c\\b&d
+    \end{bmatrix}$. If $\mbox{det}(A)\neq 0$, then $A^{-1}$ exists and is calculated as 
+
+    $$A^{-1}=\frac{1}{\mbox{det}(A)}\begin{bmatrix}
+      d &-b \\-c&a
+    \end{bmatrix}.$$
+  \end{theorem}
 
 \end{document}

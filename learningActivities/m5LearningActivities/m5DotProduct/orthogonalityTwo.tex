@@ -23,9 +23,93 @@ First and foremost, the dot product provides us with means of relating the two v
    \begin{center}
       \geogebra{sm8ucyfw}{519}{330}
    \end{center}
+
+
+
+   \begin{enumerate}
+      \item If the projection vector $\vec{v}_\parallel$ is pointing in the same direction as $\vec{u}$, $\vec{u}\cdot\vec{v}$ is \wordChoice{
+         \choice[correct]{positive}
+         \choice{negative}
+      }
+
+      \item If the projection vector $\vec{v}_\parallel$ is pointing away from $\vec{u}$, $\vec{u}\cdot\vec{v}$ is \wordChoice{
+         \choice{positive}
+         \choice[correct]{negative}
+      }
+
+      \item Keeping in mind that the applet rounds to two decimal places, if $\vec{v}$ and $\vec{u}$ are perpendicular, then $\left\|\vec{v}_\parallel\right\|=\answer{0}$ and hence $\vec{u}\cdot\vec{v}$ is $\answer{0}$
+
+      \item If $\vec{v}$ and $\vec{u}$ are perpendicular, then \begin{selectAll}
+         \choice{$\vec{v}_\perp=\vec{u}$}
+         \choice{$\vec{v}_\parallel=\vec{v}$}
+         \choice[correct]{$\vec{v}_\perp=\vec{v}$}
+         \choice{$\vec{v}_\parallel=\vec{u}$}
+         \choice[correct]{$\vec{v}_\parallel=\vec{0}$}
+      \end{selectAll}
+
+      \item Select all that are true \begin{selectAll}
+         \choice[correct]{If $\norm{\vec{u}}>\norm{\vec{v}}$, then $\norm{\vec{v}_\parallel}<\norm{\vec{u}}$.}
+
+      \choice{If $\norm{\vec{u}}<\norm{\vec{v}}$, then $\norm{\vec{v}_\parallel}>\norm{\vec{u}}$.}
+      \choice[correct]{If $\norm{\vec{u}}<\norm{\vec{v}_\parallel}$, then $\norm{\vec{v}}>\norm{\vec{u}}$.}
+      \choice{If $\abs{\vec{u}\cdot\vec{v}}>1$, then neither of the vectors are unit vectors}
+      \choice{If $\abs{\vec{u}\cdot\vec{v}}=1$, then $\vec{u}=\vec{v}$}
+      \choice[correct]{If $\vec{u}$ and $\vec{v}$ are unit vectors and $\abs{\vec{u}\cdot\vec{v}}=-1$, then $\vec{u}=-\vec{v}$ }
+      \end{selectAll}
+   \end{enumerate}
+
+\end{exploration}
+\end{document}
+
+
+As indicated by these exercises, $\vec{u}\cdot\vec{v}$ tells us information about the directional alignment of $\vec{u}$ and $\vec{v}$, for instance if both vectors are generally pointed in the same direction, in opposite directions, or more specifically if they are \emph{orthogonal}, that is, perpendicular.
+
+Orthogonality of collections of vectors is a very very nice property, and will feature heavily in many of the applications we will consider moving forward. 
+
+Also, you've gained some idea about the potential vagueness of information gained from the magnitude of the dot product. The scaling itself is more a feature of the magnitudes of the vectors, and so we gain the most information from the dot product if we know that the two vectors are unit vectors. If both are unit vectors, then we can ascertain how close or far apart the vectors are just by inspecting the dot product (e.g. is $\vec{u}\cdot\vec{v}$ close to $1$? $-1$? $0$?)
+
+\begin{exploration}
+   Let's look at our first nice consequence of utilizing the dot product for orthogonal projection: Orthogonal decomposition.
+
+   This brings full circle our original motivation for determining the dot product, breaking up a vector $\vec{v}$ into the sum of two vectors $\vec{v}_\parallel$ and $\vec{v}_\perp$, where $\vec{v}_\parallel$ is in the span of $\vec{u}$ and $\vec{v}_\perp$ is orthogonal to $\vec{u}$.
+
+   \begin{example}\label{ex:projection1}
+      Find the orthogonal decomposition of $\vec{v}=\begin{bmatrix}
+      4\\6
+      \end{bmatrix}$, shown in the following figure, in reference to the vector $\vec{u}=\begin{bmatrix}
+         6\\3
+      \end{bmatrix}$. Then find the distance from the vector $\vec{v}$ to the subspace $\mbox{span}(\vec{u})$.
+       
+      \begin{center}
+      \begin{tikzpicture}
+       
+      \draw[thin,gray!40] (-3,-3) grid (5,5);
+        \draw[<->] (-3,0)--(5,0);
+        \draw[<->] (0,-3)--(0,5);
+        \draw[red, dashed] (2,4)--(3.6, 0.8);
+        \draw [line width=1pt]  (-2,-2)--(5, 1.5);
+      \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+      \draw[line width=2pt,black,-stealth](-2, -2)--(3.6, 0.8);
+      \node[blue] at (-0.5, 1.5)   (a) {$\vec{v}$};
+      \node[black] at (1.9, -0.9)   (b) {$\vec{v}_{\parallel}$};
+      \node[red] at (4.75,1.25) (c) {$\vec{u}$};
+      \end{tikzpicture}
+      \end{center}
+       
+      
+      We begin by finding vectors $\vec{v}$ and $\vec{d}$. The tail of $\vec{v}$ is located at $(-2, -2)$, and the head of $\vec{v}$ is at $(2, 4)$.  Using the ``head-tail" formula we get
+      $$\vec{v}=\begin{bmatrix}2-(-2)\\4-(-2)\end{bmatrix}=\begin{bmatrix}4\\6\end{bmatrix}$$ The direction vector for the line $y=\frac{1}{2}x-1$ is $$\vec{d}=\begin{bmatrix}2\\1\end{bmatrix}$$
+      We find that $\vec{v}\dotp\vec{d}=14$ and $\norm{\vec{d}}^2=5$.
+      Thus $$\mbox{proj}_{\vec{d}}\vec{v}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}=\frac{14}{5}\begin{bmatrix}2\\1\end{bmatrix}=\begin{bmatrix}28/5\\14/5\end{bmatrix}$$
+      
+      \end{example}
+
+
 \end{exploration}
 
-START HERE!
+
+
+START HERE
 
 
 \section*{Source References}

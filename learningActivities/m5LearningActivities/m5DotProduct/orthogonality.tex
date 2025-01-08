@@ -14,156 +14,265 @@
 
     \section*{Orthogonal Projections}
 
-     
-    Given a line $l$ and a vector $\vec{v}$ emanating from a point on $l$, it is sometimes convenient to express $\vec{v}$ as the sum of a vector $\vec{v}_{\parallel}$, parallel to $l$, and a vector $\vec{v}_{\perp}$, perpendicular to $l$.  If you have taken a physics course, you may have seen a force vector decomposed into the sum of two components: one parallel and one perpendicular to the direction of motion.
+    One of the most useful concepts in linear algebra that has numerous applications in further mathematics course and in varoius applications is the idea of \emph{orthogonal} projection. This builds on the more familiar idea of \emph{perpendicular} lines and \emph{right angles} from geometry in prior courses, but in a meaningful way that extends to higher dimensions. 
+
+    \subsection*{Planes, Lines, and Angles}
+
+    In prior sections, we considered lines in $\RR^n$ to be the span of a single vector, and planes in $\RR^n$ to be the span of two (linearly independent) vectors. 
+
+    \begin{center}
+      \begin{tikzpicture}
+        \begin{scope}[xshift=-6cm]
+          \draw[fill](0,0) circle [radius=1.8pt];
+          \path(0,-2) node {Span of 0 vectors: a point};
+        \end{scope}
+        \begin{scope}[xshift=-0.5cm]
+          \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)}]
+            \draw[purple!80](-2.5,0) -- (2.5,0);
+            \draw[->, thick, blue](0,0) -- +(1.5,0);
+            \draw[fill](0,0) circle [radius=1.8pt];
+          \end{scope}
+          \path(0,-2) node {Span of one vector: a line};
+        \end{scope}
+        \begin{scope}[xshift=6cm]
+          \begin{scope}[x={(1cm,-0.2cm)},y={(0.5cm,0.5cm)},z={(0cm,1cm)}]
+            \filldraw[draw=purple!80,fill=purple!10](-2,-2,0) -- (2,-2,0) -- (2,2,0) -- (-2,2,0) -- cycle;
+            \draw[->, thick, blue](0,0) -- +(0,1,0);
+            \draw[->, thick, red](0,0,0) -- +(1,0,0);
+            \draw[fill](0,0) circle [radius=1.8pt];
+          \end{scope}
+          \path(0,-2) node {Span of two vectors: a plane};
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+
+    If we orient ourselves to look down at the plane, and align the perspective so that $\vec{u}$ is the horizontal axis, then we can rotate to $\vec{v}$ using the shortest arc, making an angle measure $\theta$ between $\vec{u}$ and $\vec{v}$, liks in the following figure.
+
+    \begin{center}
+      \begin{tikzpicture}
+      \node[] at (0.8, 0.2)   (a) {$\theta$};
+      \draw (0.5,0) arc (0:45:0.5) ;
+      \draw[line width=1pt,-stealth,red](0,0)--(2.5,0)node[below right]{$\vec{u}$};
+      \draw[line width=1pt,-stealth, blue](0,0)--(1.8,2)node[above right]{$\vec{v}$};
+       \end{tikzpicture}
+      \end{center}
+
+   For now, we will consider both $\vec{u}$ to be a unit vector, since we primarily care about the direction of $\vec{u}$ rather than its magnitude. 
+
+   We can then ask ourselves the following question: Can we write $\vec{v}$ as the sum of two vectors, one in the direction of $\vec{u}$ and then one perpendicular to $\vec{u}$?
+
+   Fundamentally, we are re-orienting space so that $\vec{u}$ becomes our new unit vector $\vec{i}$.
+
+   In doing so, since vectors $\vec{v}$ will mostly not entirely lie in the same direction of $\vec{u}$, we need to find a second basis vector for the plane containing $\vec{u}$ and $\vec{v}$. 
+
+   Taking a hint from our standard coordiante system, $\vec{i}$ and $\vec{j}$ are perpendicular to each other (that is, they form a right angle), and so we choose our second basis vector $\vec{u}_\perp$ to be oriented towards $\vec{v}$ but forming a right angle with $\vec{u}$, as in the following diagram.
      
     \begin{center}
      \begin{tikzpicture}
-      \draw[line width=2pt,red,-stealth](3.6, 0.8)--(2,4);
-      \node[red] at (3.5, 2.2)   (a) {$\vec{v}_{\perp}$};
-     \node[red] at (1.5, -0.95)   (b) {$\vec{v}_{\parallel}$};
-      \node[] at (5, 1)   (c) {$l$};
-      \node[blue] at (-0.8, 1.9)   (d) {$\vec{v}=\vec{v}_{\perp}+\vec{v}_{\parallel}$};
-       \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-    \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+      \draw[line width=2pt,red,-stealth](3.02, .51)--(1.52,3.56);
+      \node[red] at (3.5, 2.2)   (a) {$\vec{u}_{\perp}$};
+     \node[red] at (1.5, -0.95)   (b) {$\vec{u}$};
+      %\node[] at (5, 1)   (c) {$l$};
+      \node[blue] at (-0.5, 1)   (d) {$\vec{v}$};
+      % \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
+    \draw[line width=2pt,blue,-stealth](-2, -2)--(1.8,3);
     \draw[line width=2pt,red,-stealth](-2, -2)--(3.6, 0.8);
     \end{tikzpicture}
      
     \end{center}
-     
-    Suppose $\vec{d}$ is a direction vector for $l$.  Then $\vec{v}_
-    {\parallel}=k\vec{d}$ for some scalar $k$.  Our goal is to find $k$. 
-    \begin{align*}\vec{v}\dotp\vec{d}&=(\vec{v}_{\parallel}+\vec{v}_{\perp})\dotp\vec{d}\\
-    &=(k\vec{d}+\vec{v}_{\perp})\dotp\vec{d}\\
-    &=k\vec{d}\dotp\vec{d}+\vec{v}_{\perp}\dotp\vec{d}\\
-    &=k\norm{\vec{d}}^2+0\\
-    &=k\norm{\vec{d}}^2
-    \end{align*}
-    We conclude that $$k=\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}$$
-    and $$\vec{v}_{\parallel}=k\vec{d}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}$$
-     
-    The vector $\vec{v}_{\parallel}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}$ is called the \dfn{projection of $\vec{v}$ onto $\vec{d}$}.  In our discussion, $\vec{d}$ is a direction vector for line $l$.  So, we can also say that $\vec{v}_{\parallel}$ is the \dfn{projection of $\vec{v}$ onto $l$}.
-     
-    To find $\vec{v}_{\perp}$, observe that $\vec{v}_{\perp}=\vec{v}-\vec{v}_{\parallel}$.
-     
-     
-    \begin{definition}\label{def:projection}
-    Let $\vec{v}$ be a vector, and let $\vec{d}$ be a non-zero vector.  The \dfn{projection of $\vec{v}$ onto $\vec{d}$} is given by
-    $$\mbox{proj}_{\vec{d}}\vec{v}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}$$
-    \end{definition}
-     
-    \begin{example}\label{ex:projection1}
-    Find the projection of $\vec{v}$, shown below, onto the line given by $y=\frac{1}{2}x-1$.
-     
-    \begin{center}
-    \begin{tikzpicture}
-     
-    \draw[thin,gray!40] (-3,-3) grid (5,5);
-      \draw[<->] (-3,0)--(5,0);
-      \draw[<->] (0,-3)--(0,5);
-      \draw[red, dashed] (2,4)--(3.6, 0.8);
-      \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-    \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
-    \draw[line width=2pt,red,-stealth](-2, -2)--(3.6, 0.8);
-    \node[blue] at (-0.5, 1.5)   (a) {$\vec{v}$};
-    \node[red] at (1.9, -0.9)   (b) {$\vec{v}_{\parallel}$};
-    \end{tikzpicture}
-    \end{center}
-     
-    \begin{explanation}
-    We begin by finding vectors $\vec{v}$ and $\vec{d}$. The tail of $\vec{v}$ is located at $(-2, -2)$, and the head of $\vec{v}$ is at $(2, 4)$.  Using the ``head-tail" formula we get
-    $$\vec{v}=\begin{bmatrix}2-(-2)\\4-(-2)\end{bmatrix}=\begin{bmatrix}4\\6\end{bmatrix}$$ The direction vector for the line $y=\frac{1}{2}x-1$ is $$\vec{d}=\begin{bmatrix}2\\1\end{bmatrix}$$
-    We find that $\vec{v}\dotp\vec{d}=14$ and $\norm{\vec{d}}^2=5$.
-    Thus $$\mbox{proj}_{\vec{d}}\vec{v}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}=\frac{14}{5}\begin{bmatrix}2\\1\end{bmatrix}=\begin{bmatrix}28/5\\14/5\end{bmatrix}$$
-    \end{explanation}
-    \end{example}
-     
-    \subsection*{Distance from a Point to a Line}
-     
-    The shortest distance from a point to a line is the length of the perpendicular line segment dropped from the point to the line.  Vector projection formula will help us find the length of such a perpendicular.
-     
-    \begin{example}\label{ex:distancefrompttoline}
-    Let $A(2, -1, 1)$ be a point in $\RR^3$.  Suppose line $l$ is given by parametric equations $$x=t+3$$
-    $$y=-t+1$$
-    $$z=t-2$$
-     
-    \begin{center}
-    \begin{tikzpicture}
-       
-       \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-       \node[] at (5, 0.8)   (a) {$l$};
-    \fill (2, 4)node[above, right]{$A(2, -1, 1)$} circle (1mm);
-    \end{tikzpicture}
-    \end{center}
-     
-    Find the distance from $A$ to $l$.
-    \begin{explanation}
-    We will first construct a vector $\vec{v}$ by picking an arbitrary point $B$ on $l$ to be the tail of $\vec{v}$ and using point $A$ as the head of $\vec{v}$.  An easy point to choose on line $l$ is the point $(3, 1, -2)$ that corresponds to $t=0$.  Now we have
-    $$\vec{v}=\overrightarrow{BA}=\begin{bmatrix}2-3\\-1-1\\1-(-2)\end{bmatrix}=\begin{bmatrix}-1\\-2\\3\end{bmatrix}$$
-     
-    \begin{center}
-    \begin{tikzpicture}
-       
-       \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-        \node[] at (5, 0.8)   (a) {$l$};
-    \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
-     
-    \fill (-2, -2) circle (1mm);
-    \fill (2, 4)node[below, right]{$A(2, -1, 1)$} circle (1mm);
-    \node[] at (-1, -2.5)   (b) {$B(3, 1, -2)$};
-    \node[blue] at (0, 2)   (c) {$\vec{v}$};
-    \end{tikzpicture}
-    \end{center}
-     
-    The line has a direction vector
-    $$\vec{d}=\begin{bmatrix}1\\-1\\1\end{bmatrix}$$
-     
-    We will now find the projection of $\overrightarrow{BA}$ onto $l$  $$\mbox{proj}_{\vec{d}} \overrightarrow{BA}=\left(\frac{\vec{v}\dotp\vec{d}}{\norm{\vec{d}}^2}\right)\vec{d}=\frac{4}{3}\begin{bmatrix}1\\-1\\1\end{bmatrix}=\begin{bmatrix}4/3\\-4/3\\4/3\end{bmatrix}$$
-     
-    \begin{center}
-    \begin{tikzpicture}
-       
-       \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-       \node[] at (5, 0.8)   (a) {$l$};
-       \node[] at (-1, -2.5)   (b) {$B(3, 1, -2)$};
-    \node[blue] at (0, 2)   (c) {$\vec{v}$};
-    \node[red] at (1.3, -1.3)   (d) {$\mbox{proj}_{\vec{d}}\overrightarrow{BA}$};
-    \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
-    \draw[line width=2pt,red,-stealth](-2, -2)--(3.6, 0.8);
-    \draw[red, dashed] (2,4)--(3.6, 0.8);
-    \fill (-2, -2)  circle (1mm);
-    \fill (2, 4)node[above, right]{$A(2, -1, 1)$} circle (1mm);
-    \end{tikzpicture}
-    \end{center}
-     
-     
-    Next, we find $\vec{v}_{\perp}$.
-    $$\vec{v}_{\perp}=\vec{v}-\vec{v}_{\parallel}=\begin{bmatrix}-1\\-2\\3\end{bmatrix}-\begin{bmatrix}4/3\\-4/3\\4/3\end{bmatrix}=\begin{bmatrix}-7/3\\-2/3\\5/3\end{bmatrix}$$
-     
-    \begin{center}
-    \begin{tikzpicture}
-      \draw[line width=2pt,red,-stealth](3.6, 0.8)--(2,4);
-       \draw [-,line width=1pt]  (-3,-2.5)--(5, 1.5);
-       \node[] at (5, 0.8)   (a) {$l$};
-       \node[] at (-1, -2.5)   (b) {$B(3, 1, -2)$};
-    \node[blue] at (0, 2)   (c) {$\vec{v}$};
-    \node[red] at (1.3, -1.3)   (d)
-    {$\mbox{proj}_{\vec{d}}\overrightarrow{BA}$};
-    \node[red] at (3.6, 2.3)   (e) {$\vec{v}_{\perp}$};
-    \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
-    \draw[line width=2pt,red,-stealth](-2, -2)--(3.6, 0.8);
-    \fill (-2, -2)  circle (1mm);
-    \fill (2, 4)node[above, right]{$A(2, -1, 1)$} circle (1mm);
-    \end{tikzpicture}
-    \end{center}
-     
-     
-    Finally, to find the distance between point $A$ and line $l$, we find the magnitude of $\vec{v}_{\perp}$.
-    $$\norm{\vec{v}_{\perp}}=\frac{1}{3}\sqrt{49+4+25}=\frac{\sqrt{78}}{3}$$
-    \end{explanation}
-    \end{example}
-     
-     
-      
 
+    The vectors in the diagram are drawn so that $\vec{v}$ is seen touching $\vec{u}_\perp$, rather than the usual coordiante system vectors joining at the origin. This is mostly to communicate that we can write $\vec{v}$ as a linear combination of $\vec{u}$ and $\vec{u}_\perp$, since $\vec{v}$ is in the plane now spanned by $\vec{u}$ and $\vec{u}_\perp$.
+
+    The symbol ``$\perp$'' is notation for ``perpendicular'', meaning that the vectors form a right angle where they meet. 
+
+    We now adopt the goal of writing $\vec{v}$ as the sum of two vectors, one in the direction of $\vec{u}$ and then another perpendicular to $\vec{u}$, such as in the following diagram. We'll denote the vector parallel to $\vec{u}$ as $\vec{v}_\parallel$, and the perpendicular vector $\vec{v}_\perp$, where $\parallel$ is ``parallel'', in reference to the vector $\vec{u}$.
+
+    \begin{center}
+      \begin{tikzpicture}
+       \draw[line width=2pt,black,-stealth](3.6, 0.8)--(2,4);
+       \node[black] at (3.5, 2.2)   (a) {$\vec{v}_{\perp}$};
+      \node[black] at (1.5, -0.95)   (b) {$\vec{v}_{\parallel}$};
+       \node[red] at (5, 1)   (c) {$\vec{u}$};
+       \node[blue] at (-0.8, 1.9)   (d) {$\vec{v}=\vec{v}_{\perp}+\vec{v}_{\parallel}$};
+       \draw[line width=2pt,red,-stealth]  (-2,-2)--(5, 1.5);
+        %\draw [line width=1pt, red, stealth]  (-3,-2.5)--(5, 1.5);
+     \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+     \draw[line width=2pt,black,-stealth](-2, -2)--(3.6, 0.8);
+     \end{tikzpicture}
+      
+     \end{center}
+
+     To find the vectors $\vec{v}_\parallel$ and $\vec{v}_\perp$, we need to appeal to trigonometry and continue the motivation that we are re-orienting space so that $\vec{u}$ gives the new direction of the first basis vector. 
+
+     With this appeal to trigonometry in mind, we note that assuming $\vec{v}_\perp$ and $\vec{v}_\parallel$ be perpendicular means that $\vec{v}_\perp, \vec{v}_\parallel,$ and $\vec{v}$ form the sides of a right triangle, and that the sides $\vec{v}_\parallel$ and $\vec{v}$ have the same angle measure $\theta$ as do $\vec{v}$ and $\vec{u}$.
+
+     Because of this, as seen in the following diagram, we can find the lengths of the triangle sides using trigonometry.
+
+
+     \begin{center}
+      \begin{tikzpicture}
+        % Axes
+        %\draw[line width=0.5pt,gray!50] (-3, -3) -- (6, 1.5);
+        %\draw[line width=0.5pt,gray!50] (-3, -3) -- (2, 5);
+        
+        % Vectors
+        \draw[line width=2pt,black,-stealth](3.6, 0.8)--(2,4);
+        \node[black] at (4, 3)   (a) {$\left\|\vec{v}_{\perp}\right\|=\left\|v\right\|\sin(\theta)$};
+        \node[black] at (1.7, -1)   (b) {$\left\|\vec{v}_{\parallel}\right\|=\left\|v\right\|\cos(\theta)$};
+        \node[red] at (5, 1)   (c) {$\vec{u}$};
+        \node[blue] at (-0.5, 1.9)   (d) {$\norm{\vec{v}}$};
+        \draw[line width=2pt,red,-stealth]  (-2,-2)--(5, 1.5);
+        \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+        \draw[line width=2pt,black,-stealth](-2, -2)--(3.6, 0.8);
+        
+        % Angle arc
+        \draw[thick,-] (-2,-2) ++(18:0.6) arc[start angle=18, end angle=63, radius=0.6];
+        \node[black] at (-1.2, -1.3) {$\theta$};
+
+      \end{tikzpicture}
+    \end{center}
+     
+     We are particularly interested in $\norm{\vec{v}_\parallel}$, since the vector $\vec{v}_\parallel$ is in $\mbox{span}(\vec{u})$, meaning it is within our desired first $1$-dimensional subspace. $\vec{v}_\parallel$ is called the \emph{projection} of $\vec{v}$ onto $\vec{u}$. 
+
+     Moreover, we would rather not have to deal with trigonometric functions (this is, after all, \emph{linear} algebra), and so we seek a calculation for the length of $\norm{\vec{v}_\parallel}$ ideally in terms of $\vec{u}$ and $\vec{v}$, and more ideally the result of some linear calculation.
+     
+     This brings us to our first important linear transformation, the \emph{dot product}, which is the solution to our projection problem of finding the length of $\vec{v}_\parallel$ (and hence being able to explicitly write $\vec{v}_\parallel$ as $\norm{\vec{v}_\parallel}\vec{u}$ since $\vec{u}$ is a unit vector).
+
+     \begin{definition}
+      For a vector $\vec{u}=\begin{bmatrix}
+         u_1\\\vdots \\ u_n
+      \end{bmatrix}$ in $\RR^n$, the linear transformation defined by the $1\times n$ matrix $[u_1\ \ldots\ u_n]$ gives the \emph{dot product} of any vector $\vec{v}$ with $\vec{u}$. 
+      
+      The linear transformation is usually denoted $\vec{u}\cdot$, and the matrix multiplication $[u_1\ \ldots\ u_n]\begin{bmatrix}
+      v_1 \\ \vdots \\v_n
+      \end{bmatrix}$ is usually denoted $\vec{u}\cdot \vec{v}$, called ``$\vec{u}$ dot $\vec{v}$''.
+     \end{definition}
+
+     To understand why $\vec{u}\cdot\vec{v}$ gives us our desired projection, we need to work out the details of what is perhaps the most lengthy collection of abstract calculations in this book. There are thankfully few, and understanding $\vec{u}\cdot\vec{v}$ in terms of projections is very important, so we must suffer through!
+
+     \begin{explanation}
+      Let's re-state our goal. We know that $\norm{\vec{v}_\parallel}$, the projection of $\vec{v}$ onto the direction vector $\vec{u}$, is calculated as $\vec{v}\cos(\theta)$, and that ideally we would find some linear means of determining this length. 
+
+      So, we dig deep and utilize some trigonometry, namely the Law of Cosines, and then utilize some algebra to solve for a more convenient representation of $\norm{\vec{v}_\parallel}$.
+
+      First, consider a slightly different triangle, the triangle made by $\vec{v}$, $\vec{u}$, and $\vec{u}-\vec{v}$, seen here:
+
+      \begin{center}
+        \begin{tikzpicture}
+          % Axes
+          %\draw[line width=0.5pt,gray!50] (-3, -3) -- (6, 1.5);
+          %\draw[line width=0.5pt,gray!50] (-3, -3) -- (2, 5);
+          
+          % Vectors
+          \draw[line width=2pt,black,-stealth](3.6, 0.8)--(2,4);
+          \node[orange] at (4, 3)   (a) {$\vec{u}-\vec{v}$};
+          \node[black] at (2.5,2) (e) {$\vec{v}_\perp$};
+          \node[black] at (1.7, -1)   (b) {$\vec{v}_{\parallel}$};
+          \node[red] at (5, 1)   (c) {$\vec{u}$};
+          \node[blue] at (-0.5, 1.9)   (d) {$\vec{v}$};
+          \draw[line width=2pt,red,-stealth]  (-2,-2)--(5, 1.5);
+          \draw[line width=2pt,orange,-stealth] (2,4)--(5,1.5);
+          \draw[line width=2pt,blue,-stealth](-2, -2)--(2,4);
+          \draw[line width=2pt,black,-stealth](-2, -2)--(3.6, 0.8);
+          
+          % Angle arc
+          \draw[thick,-] (-2,-2) ++(18:0.6) arc[start angle=18, end angle=63, radius=0.6];
+          \node[black] at (-1.2, -1.3) {$\theta$};
+  
+        \end{tikzpicture}
+      \end{center}
+      
+      The law of cosines tells us that the lengths of the larger triangle sides can be calculated (in relation to $\theta$) by the formula
+      
+      $$\norm{\vec{u}-\vec{v}}^2=\norm{\vec{u}}^2+\norm{\vec{v}}^2-2\norm{\vec{u}}\norm{\vec{v}}\cos(\theta).$$
+
+      Luckily, this gives us exactly what we need to achieve our goals! Since $\left\|u\right\|=1$, $-2\norm{\vec{u}}\norm{\vec{v}}\cos(\theta)$ is very close to the length of our desired projection, $\norm{\vec{v}_\parallel}=\norm{\vec{v}}\cos(\theta)$. Moreover, we have a formula stated only in terms of our original vectors $\vec{u}$ and $\vec{v}$, as desired. 
+
+      It gets even better, however, because for any vector $\vec{w}$, $\left\|\vec{w}\right\|^2=\sum_{k=1}^nw_k^2$, which gives us hope that we can find a linear calculation for our desired quantity (that is, sums and scalar multiplications).
+
+      An old mathematical trick is to manipulate one side of an equation until it takes on a useful form, and then use that to your advantage to simplify some equation. we will do just that, working a little more closely with the calculation $\left\|\vec{u}-\vec{v}\right\|^2$.
+
+      $$\left\|\vec{u}-\vec{v}\right\|^2=(u_1-v_1)^2+(u_2-v_2)^2+\ldots+(u_n-v_n)^2.$$
+
+      This distributes to 
+
+      $$(u_1^2-2u_1v_1+v_1^2)+(u_2^2-2u_2v_2+v_2^2)+\ldots+(u_n^2-2u_nv_n+v_n^2).$$
+
+      We can rearrange the terms in the sum nicely to give us $\left\|\vec{u}\right\|^2$ and $\left\|\vec{v}\right|^2$, since the sum of the square components gives us the square norms of each vector!
+
+      So grouping all of the $u_i^2$ and $v_i^2$ terms into their norm definitions gives us
+
+      $$\left\|\vec{u}\right\|^2+\left\|\vec{v}\right|^2-2\left(u_1v_1+u_2v_2+\ldots+u_nv_n\right).$$
+
+      Using summation notation to state the final product sum more concisely, and re-stating the original starting point of $\left|\vec{u}-\vec{v}\right\|^2$, we get
+
+      $$\left\|\vec{u}-\vec{v}\right\|^2=\left\|\vec{u}\right\|^2+\left\|\vec{v}\right\|^2-2\sum_{k=1}^nu_kv_k.$$
+
+      This, looks suspiciously similar to our statement of the Law of Cosines. In fact, we have two expressions equal to $\left\|\vec{u}-\vec{v}\right\|^2$, so we set those expressions equal to each other to get
+
+      $$\norm{\vec{u}}^2+\norm{\vec{v}}^2-2\norm{\vec{u}}\norm{\vec{v}}\cos(\theta)=\left\|\vec{u}\right\|^2+\left\|\vec{v}\right\|^2-2\sum_{k=1}^nu_kv_k.$$
+
+      Both sides of the equality have $\norm{\vec{u}}^2+\norm{\vec{v}}^2$, so those terms can cancel for simplification. Moreover, we can then divide both sides by $-2$ as well, to get the final result
+
+      $$\norm{\vec{u}}\norm{\vec{v}}\cos(\theta)=\sum_{k=1}^nu_kv_k.$$
+
+      We've done it! Since $\left\|u\right\|=1$, we've found the desired length of our projection $\norm{\vec{v}_\parallel}=\sum_{k=1}^nu_kv_k$. Even more exciting, $\sum_{k=1}^nu_kv_k$ is the sum of products, which hopefully screams at you the all-important phrase {\bf linear combination}!!!
+
+      So, why the definition of the dot product as multiplication by the matrix $[u_1\ u_2\ \ldots\ u_n]$? Well, what is matrix multiplication but a linear combination? In fact, it's the same linear combination as our sum!
+
+      Note that by definition of matrix multiplication, $[u_1\ u_2\ \ldots\ u_n]\begin{bmatrix}
+        v_1\\v_2\\\vdots\\v_n
+      \end{bmatrix}$ is the linear combination of the columns of $[u_1\ u_2\ \ldots\ u_n]$ with the coordinates of $\begin{bmatrix}
+        v_1\\v_2\\\vdots\\v_n
+      \end{bmatrix}$, which is exactly the sum $\sum_{k=1}^nu_kv_k$.
+
+     \end{explanation}
+
+    Stated more generally, let's write the \emph{dot product} in three equivalent ways:
+
+    \begin{theorem}
+      Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^n$. Then the dot product, denoted $\vec{u}\cdot\vec{v}$, is given as any of the following calculations:
+
+      \begin{enumerate}
+        \item The matrix product $[u_1\ u_2\ \ldots\ u_n]\begin{bmatrix}
+        v_1\\v_2\\\vdots\\v_n
+      \end{bmatrix}$
+        \item The matrix product $[v_1\ v_2\ \ldots\ v_n]\begin{bmatrix}
+        u_1\\u_2\\\vdots\\u_n
+      \end{bmatrix}$
+        \item The linear combination $\sum_{k=1}^nu_kv_k$.
+        \item The product $\left\|u\right\|\left\|v\right\|\cos(\theta)$.
+      \end{enumerate}
+    \end{theorem}
+
+    Each of these go beyond our original orthogonal projection case, where $\left\|u\right\|$ might not be a unit vector. 
+
+    \begin{remark}
+      We get a few nice results from the dot product. 
+
+      First, note that this gives us a way to find the smallest angle between two vectors, as we can solve for $\cos(\theta)$ to get 
+
+      $$\cos(\theta)=\frac{\vec{u}\cdot\vec{v}}{\left\|\vec{u}\right\|\left\|\vec{v}\right\|}.$$
+
+      This is sometimes called the \emph{cosine similarity}, which is a very important calculation that underlies many machine learning models, such as large language models like ChatGPT.
+
+      Also, the perpendicular projection $\vec{v}_\parallel$ is not quite able to be determined by a linear transformation, since $\vec{v}$ and $\vec{u}$ might not be unit vectors and hence there is a need to account for the product of their magnitudes. 
+
+      We thus get the following definition of the \emph{orthogonal} projection of $\vec{v}$ onto $\vec{u}$.
+    \end{remark}
+
+    \begin{definition}
+      If we \emph{orthogonally} project $\vec{v}$ onto $\vec{u}$, we denote the projection vector $\mbox{proj}(\vec{v})_{\vec{u}}$ (e.g. $\vec{v}$ is ``projected'' onto $\vec{u}$).
+  
+      
+      The projection vector has length $\frac{\vec{u}\cdot\vec{v}}{\norm{\vec{u}}}$, and the projection vector itself is explicitly stated ask
+
+      $$\mbox{proj}(\vec{v})_{\vec{u}}=\frac{\vec{u}\cdot\vec{v}}{\norm{\vec{u}}}\frac{\vec{u}}{\norm{\vec{u}}}.$$
+
+
+      Note that this aligns with our original projection length of $\left\|\vec{v}\right\|\cos(\theta)$, and that for simplicity the divisions by $\norm{\vec{u}}$ are often combined in the formula for the projection vector into a square denominator.
+    \end{definition}
+
+    The term ``orthogonal'' will have more significance in the next section, but for now it is analogous to ``perpendicular''.
+     
 \end{document}

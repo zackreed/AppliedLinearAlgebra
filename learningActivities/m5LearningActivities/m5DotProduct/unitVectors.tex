@@ -10,6 +10,8 @@
 \end{abstract}
 \maketitle
 
+In this chapter, we explore more linear transformations that have uses in various contexts and applications, and form fundamental linear transformations of vectors. The main transformations we consider are the \emph{dot product} and \emph{cross product}, which then relate to a key concept called \emph{orthogonal projections} and then allow us to re-conceptualize lines and planes in useful ways.
+
 \section*{Unit Vector in the Direction of a Given Vector}
 Recall that a {\it unit} vector is a vector of length 1.  Given a non-zero vector $\vec{v}$, we can find a unit vector in the same direction by multiplying $\vec{v}$ by an appropriate scalar.  For example, if $\vec{v}=\begin{bmatrix}a\\b\end{bmatrix}$ and $\norm{\vec{v}}=3$, then a unit vector $\vec{u}$ in the same direction is given by $\vec{u}=\begin{bmatrix}a/3\\b/3\end{bmatrix}=\begin{bmatrix}a/\norm{\vec{v}}\\b/\norm{\vec{v}}\end{bmatrix}$.
 
@@ -65,19 +67,21 @@ In general, dividing a non-zero vector by its own magnitude produces a unit vect
  \vec{u}=\frac{1}{\norm{\vec{v}}}\vec{v}=\begin{bmatrix}v_1/\norm{\vec{v}}\\v_2/\norm{\vec{v}}\\\vdots\\v_n/\norm{\vec{v}}\end{bmatrix}
 \end{equation*}
 is a unit vector in the direction of $\vec{v}$.
-\end{theorem}
 
-
-
- 
-\begin{proof}
 Because $\vec{u}$ is a positive scalar multiple of $\vec{v}$, $\vec{u}$ points in the direction of $\vec{v}$.  We now show that $\norm{\vec{u}}=1$.
 \begin{eqnarray*}
 \norm{\vec{u}}&=&\sqrt{ \Big(\frac{v_1}{\norm{\vec{v}}}\Big)^2+\Big(\frac{v_2}{\norm{\vec{v}}}\Big)^2+\ldots +\Big(\frac{v_n}{\norm{\vec{v}}}\Big)^2}\\
 &=&\frac{1}{\norm{\vec{v}}}\sqrt{v_1^2+v_2^2+\ldots +v_n^2}\\
 &=&\frac{\norm{\vec{v}}}{\norm{\vec{v}}}=1
 \end{eqnarray*}
-\end{proof}
+\end{theorem}
+
+
+
+ 
+
+
+
  
 
  
@@ -86,9 +90,9 @@ Find a unit vector in the direction of $\vec{v}=\begin{bmatrix}2\\-3\\1\\0\\1\en
  
 \begin{explanation}
 We first compute $\norm{\vec{v}}$.
-$$\norm{\vec{v}}=\sqrt{4+9+1+1}=\sqrt{15}$$
+$$\norm{\vec{v}}=\sqrt{4+9+1+1}=\sqrt{\answer{15}}$$
 By Theorem \ref{th:unit},
-$$\vec{u}=\begin{bmatrix}2/\sqrt{15}\\-3/\sqrt{15}\\1/\sqrt{15}\\0\\1/\sqrt{15}\end{bmatrix}=\frac{1}{\sqrt{15}}\begin{bmatrix}2\\-3\\1\\0\\1\end{bmatrix}$$
+$$\vec{u}=\frac{1}{\sqrt{\answer{15}}}\begin{bmatrix}\answer{2}\\\answer{-3}\\\answer{1}\\\answer{0}\\\answer{1}\end{bmatrix}$$
 \end{explanation}
 \end{example}
 

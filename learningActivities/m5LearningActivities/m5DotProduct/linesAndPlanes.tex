@@ -7,7 +7,6 @@
 \begin{document}
 \begin{abstract}
 
-    This covers lines and planes
 
 \end{abstract}
 \maketitle
@@ -17,21 +16,16 @@
 \section{Planes}
 \label{sec:planes}
 
-%\begin{outcome}
-  \begin{enumerate}
-  \item Find the vector and parametric equations of a plane in $\R^n$.
-  \item Find the normal and standard equations of a plane in $\R^3$.
-  \item Find the intersection of two planes, or of a line and a plane.
-  \item Find the angle between two planes, or between a line and a plane.
-  \item Find the shortest distance between a point and a plane.
-  \end{enumerate}
-%\end{outcome}
+As promised, we also find better ways to discuss planes and hyperplanes, in accordance with the ideas of normal vectors and the dot product.
 
-Much like the above discussion with lines, vectors can be used to
-determine planes in $\R^n$. Consider a point $P$ and two direction
+First, much like with lines we can extend the notion of planes as $2D$ spans into a vector equation. 
+
+Consider a point $P$ and two direction
 vectors $\vect{d}$ and $\vect{e}$ that are not parallel to each
-other. Then there is a unique plane passing through $P$ and containing
-$\vect{d}$ and $\vect{e}$:
+other. 
+
+If $\vec{p}$ is the vector going from the origin to $P$, then any vector $\vec{q}$ on the plane is the result of adding $\vec{p}$ to a linear combination of the direction vectors $\vec{e}$ and $\vec{d}$.
+
 \begin{center}
   \begin{tikzpicture}[rotate=-10]
     \filldraw[draw=red!80,fill=red!10](-2,0,-5) -- (4,0,-5) -- (4,0,2) -- (-2,0,2) -- cycle;
@@ -40,56 +34,32 @@ $\vect{d}$ and $\vect{e}$:
     \fill (0,0) circle [radius=2.2pt] node [left=3pt] {$P$};
   \end{tikzpicture}
 \end{center}
-The plane is infinite in each direction, although in the picture, we
-have only shown a small part of it. If $\vect{p}$ is the position
-vector of $P$ and $\vect{q}$ is the position vector of some other
-point in the plane, we have
-\begin{equation*}
-  \vect{q} = \vect{p} + t\,\vect{d} + s\,\vect{e}
-\end{equation*}
-for some real numbers $t$ and $s$. This is called the \textbf{vector
-  equation}%
-\index{vector equation!of a plane}%
-\index{plane!vector equation} of the plane.
 
-\begin{definition}{Vector equation of a plane}{vector-equation-of-plane}
+This brings us to the following definition: 
+
+
+\begin{definition}\name{Vector equation of a plane}\label{def:vector-equation-of-plane}
+
   Let $\vect{p}$ be a vector and let $\vect{d},\vect{e}$ be non-zero,
   non-parallel vectors. Then
   \begin{equation*}
     \vect{q} = \vect{p} + t\,\vect{d} + s\,\vect{e}
   \end{equation*}
-  is the \textbf{vector equation}%
-  \index{vector equation!of a plane}%
-  \index{plane!vector equation} of a plane.
+  is the \textbf{vector equation} of the plane offset by $\vec{p}$ and spanned by $\vec{d}$ and $\vec{e}$.
 \end{definition}
 
 The vector equation of a plane can also be written in
-\textbf{component form}%
-\index{vector equation!of a plane!component form}%
-\index{component form!plane}%
-\index{plane!component form}
+\textbf{component form}
+
 \begin{equation*}
   \startmat{c} x_1 \\ x_2 \\ \vdots \\ x_n \stopmat
   = \startmat{c} p_1 \\ p_2 \\ \vdots \\ p_n \stopmat
   + t \startmat{r} d_1 \\ d_2 \\ \vdots \\ d_n \stopmat,
-  + s \startmat{r} e_1 \\ e_2 \\ \vdots \\ e_n \stopmat
+  + s \startmat{r} e_1 \\ e_2 \\ \vdots \\ e_n \stopmat.
 \end{equation*}
-and in \textbf{parametric form}
-\begin{equation*}
-  \begin{array}{c@{~}c@{~}c}
-    x_1 &=& p_1 + t\,d_1 + s\,e_1, \\
-    x_2 &=& p_2 + t\,d_2 + s\,e_2, \\
-        &\vdots&             \\
-    x_n &=& p_n + t\,d_n + s\,e_n.
-  \end{array}
-\end{equation*}
-The latter set of equations are also called the \textbf{parametric
-  equations}%
-\index{parametric equations!of a plane}%
-\index{plane!parametric equations} of the plane.
 
-\begin{example}{Vector and parametric equations}{plane-from-three-points}
-  Find vector and parametric equations for the plane through the
+\begin{example}\name{Vector and parametric equations}\label{ex:plane-from-three-points}
+  Find the plane through the
   points $P = (1,2,0,0)$, $Q = (2,2,0,1)$, and $R = (0,1,1,0)$.
 \end{example}
 
@@ -107,61 +77,23 @@ The latter set of equations are also called the \textbf{parametric
     - \startmat{c} 1\\2\\0\\0 \stopmat
     = \startmat{c} -1\\-1\\1\\0 \stopmat.
   \end{equation*}
+
   Therefore the vector equation is
+
   \begin{equation*}
     \startmat{c} x\\y\\z\\w \stopmat
-    = \startmat{c} 1\\2\\0\\0 \stopmat
-    + t\,\startmat{c} 1\\0\\0\\1 \stopmat
-    + s\,\startmat{c} -1\\-1\\1\\0 \stopmat.
-  \end{equation*}
-  We can also write this as a system of parametric equations:
-  \begin{equation*}
-    \begin{array}{c@{~}c@{~}l}
-      x &=& 1 + t - s, \\
-      y &=& 2 - s, \\
-      z &=& s, \\
-      w &=& t.
-    \end{array}
-  \end{equation*}
-\end{solution}
-
-Note that the vector and parametric equations of a plane are not
-unique. For example, in Example~\ref{exa:plane-from-three-points}, we
-could have equally used $Q$ or $R$ as the base point, and/or used
-$\longvect{QR}$ as one of the direction vectors. In each case we would
-have obtained a different equation for the same plane.
-
-\begin{example}{Determine whether a point is on a plane}{point-on-plane-parametric}
-  Determine whether the point $S=(4,4,-2,1)$ lies on the plane through
-  the points $P = (1,2,0,0)$, $R = (2,2,0,1)$, and
-  $Q = (0,1,1,0)$.
-\end{example}
-
-
-\begin{solution}
-  We already found the parametric equations for this plane in
-  Example~\ref{exa:plane-from-three-points}. To determine whether the
-  point $S=(4,4,-2,1)$ lies on this plane, we must substitute its
-  coordinates into the parametric equations:
-  \begin{equation*}
-    \begin{array}{r@{~}c@{~}l}
-      4 &=& 1 + t - s, \\
-      4 &=& 2 - s, \\
-      -2 &=& s, \\
-      1 &=& t.
-    \end{array}
-  \end{equation*}
-  This is a system of linear equations. We solve it to find that it
-  has the unique solution $(t,s) = (1,-2)$. Therefore, the point $S$
-  lies on the given plane, and more specifically, it is the point that
-  corresponds to the parameters $t=1$ and $s=-2$.
+    = \startmat{c} \answer{1}\\\answer{2}\\\answer{0}\\\answer{0} \stopmat
+    + t\,\startmat{c} \answer{1}\\\answer{0}\\\answer{0}\\\answer{1} \stopmat
+    + s\,\startmat{c} \answer{-1}\\\answer{-1}\\\answer{1}\\\answer{0} \stopmat.
+\end{equation*}
 \end{solution}
 
 In the special case of 3 dimensions, a plane can also be described by
-a point and a normal vector. A \textbf{normal vector}%
-\index{normal vector of a plane}%
-\index{vector!normal vector}%
-\index{plane!normal vector} of a plane is a vector that is
+a point and a normal vector, $\vec{n}$. This leverages the strategy hinted at in the previous section, where we determined whether a point was on a line by checking orthogonality with a vector $\vec{n}$ that was orthogonal to the line's direction vector.
+
+In $\RR^3$ in particular, planes take up $2$ out of $3$ dimensions in the space, and so it is often more efficient and at times very beneficial to describe planes using only a single vector $\vec{n}$, rather than the two direction vectors. This kind of strategy comes up quite often in engineering and the sciences, and if you've taken vector calculus this idea should be familiar to you.
+
+First, a \textbf{normal vector} of a plane is a vector that is
 perpendicular to the plane.
 \begin{center}
   \begin{tikzpicture}[rotate=-10]
@@ -172,15 +104,21 @@ perpendicular to the plane.
     \fill (2,0,-2) circle [radius=2.2pt] node [right=3pt] {$Q$};
   \end{tikzpicture}
 \end{center}
+
 Given a non-zero vector $\vect{n}$ in $\R^3$ and a point $P$, there
 exists a unique plane that contains $P$ and has $\vect{n}$ as a normal
-vector. We wish to find an equation for this plane. If $Q$ is an
-arbitrary point on the plane, then by definition, the normal vector is
-orthogonal to the vector $\longvect{PQ}$. Writing this as a formula,
-we have $\vect{n} \dotprod \longvect{PQ} = 0$. If $\vect{p}$ and
-$\vect{q}$ are the position vectors of $P$ and $Q$, respectively, we
-have $\longvect{PQ} = \vect{q}-\vect{p}$, and therefore the equation
-of the plane can be written as
+vector. This is because, again, the plane takes up $2/3$ of the dimensions of $\RR^3$, meaning that the rest of $\RR^3$ is characterized only by variation along a single remaining axis. While any vector not on the plane will suffice, only one vector $\vec{n}$ (or its negative) will be orthogonal to the plane. Hence, normal vectors allow us to strategically characterize planes succinctly.
+
+To visualize this phenomenon, again create an orthonormal basis of $\RR^3$ using the following GeoGebra applet, but attend to the constraining of the final vector to a single direction (or its negative) to maintain the orthogonality.
+
+\begin{center}
+  \geogebra{ym8uzusc}{859}{457}
+\end{center}
+
+
+We wish to find an equation for this plane. The key feature of the normal vector is that it is orthogonal to any vector spanned by the plane's direction vectors $\vec{d}$ and $\vec{e}$. So, if any vector $\vec{q}$ is on the plane, then after un-shifting by $\vec{p}$ we should have a vector orthogonal to $\vec{n}$. This gives us our nice succinct definition of the plane.
+
+
 \begin{equation*}
   \vect{n} \dotprod (\vect{q}-\vect{p}) = 0,
 \end{equation*}
@@ -188,6 +126,7 @@ or equivalently,
 \begin{equation*}
   \vect{n} \dotprod \vect{q} = \vect{n} \dotprod \vect{p}.
 \end{equation*}
+
 This is called the \textbf{normal equation} of the plane. Note that in
 this equation, $\vect{n}$ and $\vect{p}$ are given and fixed, whereas
 $\vect{q}$ is a variable ranging over the position vectors of all
@@ -195,57 +134,63 @@ points on the plane.
 
 
 
-\begin{definition}{Normal equation of a plane in $\R^3$}{normal-equation-plane}
+\begin{definition}\name{Normal equation of a plane in $\R^3$}\label{def:normal-equation-plane}
+
   Let $\vect{n}$ be a non-zero vector in $\R^3$, and let $P$ be a
   point with position vector $\vect{p}$. Then there is a unique plane through
   $P$ with normal vector $\vect{n}$. It is described by the equation
   \begin{equation*}
-    \vect{n} \dotprod \vect{q} = \vect{n} \dotprod \vect{p}.
+    \vect{n} \dotprod (\vec{p}-\vect{q}) = 0.
   \end{equation*}
-  This equation is called the \textbf{normal equation}%
-  \index{plane!normal equation}%
-  \index{plane!normal equation}%
-  \index{normal equation of a plane} of the plane.
+  This equation is called the \textbf{normal equation} of the plane.
 \end{definition}
 
-\begin{example}{Finding the normal equation of a plane}{normal-equation}
+\begin{example}\name{Finding the normal equation of a plane}\label{ex:normal-equation}
+
   Find the normal equation of the plane through the point $P=(1,3,0)$
-  and orthogonal to $\vect{n}=\startmat{c}2,1,1\stopmat^T$.
+  and orthogonal to $\vect{n}=\startmat{c}2\\1\\1\stopmat$.
 \end{example}
 
 \begin{solution}
-  Let $\vect{p}=\startmat{c}1,3,0\stopmat^T$ be the position vector of $P$, and let
-  $\vect{q}=\startmat{c}x,y,z\stopmat^T$ be the position vector of some arbitrary
-  point $Q$ in the plane. The normal equation is
-  $\vect{n} \dotprod \vect{q} = \vect{n} \dotprod \vect{p}$, which we
+  Let $\vect{p}=\startmat{c}1\\3\\0\stopmat$ be the position vector of $P$, and let
+  $\vect{q}=\startmat{c}x\\y\\z\stopmat$ be the position vector of some arbitrary
+  point $Q$ in the plane. 
+  
+  The normal equation is
+  $\vect{n} \dotprod (\vec{q}-\vect{p}) = 0.$, which we
   can write in component form:
+
   \begin{equation*}
-    \startmat{c}2\\1\\1\stopmat
+    \startmat{c}\answer{2}\\\answer{1}\\\answer{1}\stopmat
     \dotprod
-    \startmat{c}x\\y\\z\stopmat
-    =
-    \startmat{c}2\\1\\1\stopmat
-    \dotprod
-    \startmat{c}1\\3\\0\stopmat.
+    \startmat{c}x-\answer{1}\\y-\answer{3}\\z-\answer{0}\stopmat
+    =0.
   \end{equation*}
-  We can pre-compute the dot product on the right-hand side:
-  $\vect{n} \dotprod \vect{p} = 1(2)+3(1)=0(1) = 5$. Therefore, the
+
+  If we take the other form of the normal equation 
+  
+  $$vect{n} \dotprod \vect{q} = \vect{n} \dotprod \vect{p},$$
+  
+  we can pre-compute the dot product on the right-hand side:
+  $\vect{n} \dotprod \vect{p} = \answer{5}$. 
+  
+  Therefore, the
   normal equation can also be written as
+
   \begin{equation*}
-    \startmat{c}2\\1\\1\stopmat
+    \startmat{c}\answer{2}\\\answer{1}\\\answer{1}\stopmat
     \dotprod
     \startmat{c}x\\y\\z\stopmat
-    = 5.
+    = \answer{5}.
   \end{equation*}
 \end{solution}
 
-\end{document}
-
-Notice that the last equation in Example~\ref{exa:normal-equation} can
+Notice that the last equation in Example~\ref{ex:normal-equation} can
 also be written in the form
 \begin{equation*}
   2x + y + z = 5.
 \end{equation*}
+
 This last form is called the \textbf{standard equation} of the plane.
 
 \begin{definition}{Standard equation of a plane in $\R^3$}{standard-equation-plane}
@@ -260,13 +205,22 @@ This last form is called the \textbf{standard equation} of the plane.
   where $a,b,c,d \in \R$ and $d = ax_0 + by_0 + cz_0$.
 \end{definition}
 
-\begin{example}{Normal and standard equations}{normal-from-three-points}
+This is often the first definition of a plane that you will see in a calculus textbook, but without motivating the definition through normal vectors and dot products it is often a mystery why we can or would write planes in this way (or, it leads to poor generalizations from lines).
+
+\begin{example}\name{Normal and standard equations}\label{exa:normal-from-three-points}
+
   Find normal and standard equations for the plane through the points
   $P = (0,1,3)$, $Q=(2,-1,0)$, and $R=(1,2,2)$.
 \end{example}
 
 \begin{solution}
-  We first need to find a normal vector for the plane. Since the
+  We first need to find a normal vector for the plane. This need motivates the final concept of the chapter, the \emph{cross product}, which we will discuss in the next section. So $\ldots$ to be continued!
+
+\end{solution}
+
+\end{document}
+  
+  Since the
   normal vector must be perpendicular to the plane, it must be
   orthogonal to both $\longvect{PQ}$ and $\longvect{PR}$. We can
   therefore use the cross product to compute a normal vector for the
@@ -626,5 +580,5 @@ between points and planes.
   Therefore, $Q = (\frac{1}{3},\frac{2}{3},\frac{1}{3})$.
 \end{solution}
 
-
+\end{document}
 

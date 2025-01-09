@@ -19,331 +19,509 @@ Both characterizations relate to the dot product, and so these provide a fitting
 First, a brief review. 
 
 \subsection*{Lines and Planes as Subspaces}
- 
+  
 We have examined lines and planes much in this course already, and have primarily described them in terms of span. Specifically, lines through the origin are $1$-dimensional subspaces of $\RR^n$, defined by the span of a single vector $\vec{u}_1$. 
 
 Planes through the origin, similarly, are $2$-dimensional subspaces of $\RR^n$ defined as the span of two vectors $\vec{u}_1$ and $\vec{u}_2$.
 
-We now 
+We now leverage the ideas of unit directional vectors, parallel vectors, and normal vectors, to more explicitly reconceptualize key features of lines and planes (and then hyperplanes as well).
 
-START HERE
+\subsection*{Lines in $\RR^n$ as Directional Spans}
 
+We can build from the idea of lines as $1$-dimensional spans to better align the more familiar characterizations of lines from previous courses, and to set the stage for fairly effective characterizations of planes and hyperplanes as well.
 
- 
-\subsection*{Parametric Lines in $\RR^2$}
 \begin{exploration}\label{init:paramline2d}
-Imagine a ladybug crawling around a plane.  At every instant in time, the ladybug's position in the plane can be described by an ordered pair $(x, y)$.  Coordinates $x$ and $y$ are functions of time.  Suppose the position of the ladybug at time $t$ is given by:
-\begin{align*}
-x&=2t-1\\
-y&=-3t+6
-\end{align*}
-Our goal is to sketch the path of the ladybug during the time interval $0\leq t\leq 3$.  To do this we will make a table of values, just like you did when you first started sketching graphs of functions.
-$$\begin{array}{|c|c|c|} 
- \hline t& x & y\\
- \hline 0 & -1 & 6\\
- \hline 1 & 1 & 3 \\
- \hline 2 & 3& 0\\
- \hline 3 & 5& -3\\
- \hline
- \end{array}$$
-  
-The point $(x, y)$, corresponding to each value of $t$ is the location of the ladybug in the coordinate plane at time $t$.
- \begin{center}
-\begin{tikzpicture}[scale=0.5]
-\draw[thin,gray!40] (-5,-6) grid (7,10);
-  \draw[<->] (-5,0)--(7,0);
-  \draw[<->] (0,-6)--(0,10);
-   
-\draw[line width=2pt,blue](-1,6)--(5,-3) ;
- 
-\fill[red] (-1,6) node[above right]{$t=0$} circle (0.2cm);
-\fill[red] (1,3) node[above right]{$t=1$} circle (0.2cm);
-\fill[red] (3,0) node[above right]{$t=2$} circle (0.2cm);
-\fill[red] (5,-3) node[above right]{$t=3$} circle (0.2cm);
-  
-\end{tikzpicture}
-\end{center}
- 
-It appears that the points corresponding to $t=0, 1, 2, 3$ lie on a line with slope $-\frac{3}{2}$.  In the next problem we will find the equation of the line that contains the path of the ladybug.
-\end{exploration}
- 
-\begin{exploration}\label{init:paramline2dpart2}
-In Exploration \ref{init:paramline2d} we considered equations
-\begin{align*}
-x&=2t-1\\
-y&=-3t+6
-\end{align*}
-that described the path of a ladybug in the plane.  We will now consider these equations in a broader context as simply describing a curve in the plane.  We conjectured that the curve described by these equations is a line with slope $-\frac{3}{2}$.  We will now find the equation of this line.
- 
-One approach to finding the equation is to solve one of the given equations for $t$, then substitute into the other equation.
-Solving $x=2t-1$ for $t$ gives us
-$$t=\frac{1}{2}x+\frac{1}{2}$$
-Substituting this expression into $y=-3t+6$ we get
-$$y=-3\left(\frac{1}{2}x+\frac{1}{2}\right)+6=-\frac{3}{2}x+\frac{9}{2}$$
-Plotting the line $y=-\frac{3}{2}x+\frac{9}{2}$ together with the path we plotted earlier, we see that our original path lies on the line.
- 
+
+  In courses such as algebra and calculus, lines were typically represented in ``standard form'', conveying an explicit relationships between the coordinates $(x,y)$ of any point on the line as
+
+  $$y=mx+b,$$
+
+  where it was understood that $m$ represented the ``slope'' and $b$ represented where the line intersected with the vertical axis. 
+
+  For instance, consider the line $y=-\frac{3}{2}x+\frac{9}{2}$, in the following figure. 
+
+
   \begin{center}
-\begin{tikzpicture}[scale=0.5]
-\draw[thin,gray!40] (-5,-6) grid (7,10);
-  \draw[<->] (-5,0)--(7,0);
-  \draw[<->] (0,-6)--(0,10);
-   
-\draw[line width=2pt,blue](-1,6)--(5,-3) ;
- 
-\draw[line width=1pt,blue, dashed](-11/3,10)node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
- 
-\fill[red] (-1,6) node[above right]{$t=0$} circle (0.2cm);
-\fill[red] (1,3) node[above right]{$t=1$} circle (0.2cm);
-\fill[red] (3,0) node[above right]{$t=2$} circle (0.2cm);
-\fill[red] (5,-3) node[above right]{$t=3$} circle (0.2cm);
- \end{tikzpicture}
-\end{center}
- 
-If we do not restrict $t$ to values between 0 and 3, we can get every point on the line $y=-\frac{3}{2}x+\frac{9}{2}$. 
+    \begin{tikzpicture}[scale=0.5]
+    \draw[thin,gray!40] (-5,-6) grid (7,10);
+      \draw[<->] (-5,0)--(7,0);
+      \draw[<->] (0,-6)--(0,10);
+       
+    \draw[line width=2pt,blue](-1,6)--(5,-3) ;
+     
+    \draw[line width=1pt,blue, dashed](-11/3,10)node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
+     
+    \fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+    \fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+    \fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+    \fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+     \end{tikzpicture}
+    \end{center}
+
+  The locations in red on the line are all explicitly found according to the standard formula, and are at times computed in tables such as the following:
+
+  $$\begin{array}{|c|c|c|} 
+  \hline t& x & y\\
+  \hline 0 & -1 & 6\\
+  \hline 1 & 1 & 3 \\
+  \hline 2 & 3& 0\\
+  \hline 3 & 5& -3\\
+  \hline
+  \end{array}$$
+
+  From a linear algebra perspective, a line represents the locations of vector heads, so each line gives us a collection of vectors that are all related, as seen in the following figure:
+
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+    \draw[thin,gray!40] (-3,-4) grid (6,7);
+      \draw[<->] (-3,0)--(6,0);
+      \draw[<->] (0,-4)--(0,7);
+      \draw[line width=2pt,blue](-1,6)--(5,-3) ;
+      \fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+      \fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+      \fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+      \fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+     \end{tikzpicture}
+     \quad
+     \quad
+     \begin{tikzpicture}[scale=0.5]
+    \draw[thin,gray!40] (-3,-4) grid (6,7);
+      \draw[<->] (-3,0)--(6,0);
+      \draw[<->] (0,-4)--(0,7);
+      \draw[line width=2pt,blue](-1,6)--(5,-3) ;
+      \draw[line width=1pt,red,-stealth](0,0)--(-1,6) ;
+      \draw[line width=1pt,red,-stealth](0,0)--(1,3) ;
+      \draw[line width=1pt,red,-stealth](0,0)--(3,0) ;
+      \draw[line width=1pt,red,-stealth](0,0)--(5,-3) ;
+      \fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+      \fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+      \fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+      \fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+     \end{tikzpicture}
+  \end{center}
+
+  From a linear algebra perspective, it becomes less important to think about a relationship between variables such as $x$ and $y$, particularly because this would become very complex when dealing with thousands of variables all at once. Rather, we build on the idea of span, direction and vector addition to come up with a concise representation of lines. 
+  
+  All you need to describe a line is to pick a \emph{starting point} $\vec{p}$ and a \emph{direction} $\vec{d}$. From there, you create any point on the line by scaling the direction vector and using vector addition on the chosen point $\vec{p}$. Let's use this to re-write the expression $y=-\frac{3}{2}x+\frac{9}{2}$ in vector format.
+
+  \begin{solution}
+    First, let's pick a point on the line, kind of as a center point, from which we build the rest of the line. 
+
+    Which vector we choose doesn't quite matter at this stage, so let's go with $\vec{p}=\begin{bmatrix}
+      1\\3
+    \end{bmatrix}$ as our starting point.
+
+    From there, let's find the direction vector that determines movement along the line. 
+
+    In the following diagram, we start at the vector $\vec{p}$, and then move to the next vector in our example, $\begin{bmatrix}
+      3\\0
+    \end{bmatrix}$. 
+
+    \begin{center}
+      \begin{tikzpicture}[scale=0.5]
+      \draw[thin,gray!40] (-5,-6) grid (7,10);
+        \draw[<->] (-5,0)--(7,0);
+        \draw[<->] (0,-6)--(0,10);
+         
+      \draw[line width=2pt,blue](-1,6)--(5,-3) ;
+       
+      \draw[line width=1pt,blue, dashed](-11/3,10);%node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
+       
+      %\fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+      \fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+      \fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+      %\fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+
+      \draw[line width=1pt,red,-stealth](0,0)node[above=5mm, right=2.5mm]{$\vec{p}$}--(1,3);
+      \draw[line width=2pt,red,-stealth](1,3)--(3,0) ;
+       \end{tikzpicture}
+      \end{center}
+
+      The vector taking us from $\vec{p}$ to $\begin{bmatrix}
+        3\\0
+      \end{bmatrix}$ is $d=\begin{bmatrix}
+        \answer{2}\\\answer{-3}
+      \end{bmatrix}$. (Hint: Think about the slope of the line).
+
+      Now, we can describe any other vector on the line by vector addition $\vec{p}+\lambda \vec{d}$, where $\lambda$ is the scalar multiple. (Note: $\vec{d}$ will typically be a unit direction vector, but it doesn't have to be, and here it will make the next problem simpler if it remains as is).
+
+    Armed with $\vec{p}$ and $\vec{d}$, write the remaining sample points on the line in vector format:
+
+    \begin{center}
+      \begin{tikzpicture}[scale=0.5]
+      \draw[thin,gray!40] (-5,-6) grid (7,10);
+        \draw[<->] (-5,0)--(7,0);
+        \draw[<->] (0,-6)--(0,10);
+         
+      \draw[line width=.5pt,blue](-1,6)--(5,-3) ;
+       
+      \draw[line width=.5pt,blue, dashed](-11/3,10);%node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
+       
+      \fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+      \fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+      \fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+      \fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+
+      \draw[line width=1pt,red,-stealth](0,0)node[above=5mm, right=2.5mm]{$\vec{p}$}--(1,3);
+      \draw[line width=1pt,red,-stealth](1,3)--(-1,6) ;
+      \draw[line width=.5pt,red,-stealth](1,3)--(3,0) ;
+      \draw[line width=.5pt,red,-stealth](1,3)--(5,-3) ;
+       \end{tikzpicture}
+      \end{center}
+
+  \end{solution}
+
+  We reach $(-1,6)$ by the sum $\vec{p}+\answer{-1}\lambda\vec{d}$, $(1,3)$ by the sum $\vec{p}+\answer{0}\lambda\vec{d}$, $(3,0)$ by the sum $\vec{p}+\answer{1}\lambda\vec{d}$, and $(5,-3)$ by the sum $\vec{p}+\answer{2}\lambda\vec{d}$.
+
+  While these were straightforward scalars, the process is the same for any point on the line, we simply find the correct amound by which to scale $\vec{d}$ after shifting away from $\vec{0}$ by $\vec{p}$.
+
 \end{exploration}
+
+This brings us to a new definition of a line:
+
+\begin{definition}
+  A line in $\RR^n$ is the set of all vectors of the form 
+
+  $$\vec{p}+\lambda \vec{d},$$
+
+  where $\lambda$ is a scalar and $\vec{p}$ and $\vec{d}$ are vectors in $\RR^n$.
+\end{definition}
+
+Notice that this definition scales very well to large vector spaces, since we don't need to deal with thousands and thousands of variables, and can instead focus on the key vectors $\vec{p}$ and $\vec{d}$.
  
-Equations such as
-\begin{align*}
-x&=2t-1\\
-y&=-3t+6
-\end{align*}
-are called \dfn{parametric equations}, and $t$ is called a \dfn{parameter}.
- 
-When given an equation of the form $y=mx+b$, we recognize it as an equation whose graph is a line and we don't need to make a table of values to sketch the graph of the equation.  We should be able to do the same for parametric equations of lines.  In the next Exploration we will examine our equations carefully to see if we can discern any patterns that would help us plot the line without making a table of values. 
- 
- 
-\begin{exploration}\label{init:paramline2dpart3}
-Let's return to parametric equations from the previous problem.
-\begin{align*}
-x&=2t-1\\
-y&=-3t+6
-\end{align*}
- 
-Consider the table of values we constructed in Exploration \ref{init:paramline2d}.
-$$\begin{array}{|c|c|c|} 
- \hline t& x & y\\
- \hline 0 & -1 & 6\\
- \hline 1 & 1 & 3 \\
- \hline 2 & 3& 0\\
- \hline 3 & 5& -3\\
- \hline
- \end{array}$$
- 
-Observe that every time $t$ increases by $1$, $x$ increases by $2$ and $y$ decreases by $3$.  An increase by $2$ in the $x$-coordinate combined with a decrease of $3$ in the $y$-coordinate corresponds to the coefficients $2$ and $-3$ of $t$ in the parametric equations.  Our findings are in agreement with the fact that the slope of the line is $-\frac{2}{3}$. 
- 
-We will capture the ``rise" and ``run" aspect of the line by using vector $\vec{v}=\begin{bmatrix}2\\-3\end{bmatrix}$. Sketching $\vec{v}$ together with the line, we find that the vector is parallel to the line. 
- 
- \begin{center}
-\begin{tikzpicture}[scale=0.5]
-\draw[thin,gray!40] (-5,-6) grid (7,10);
-  \draw[<->] (-5,0)--(7,0);
-  \draw[<->] (0,-6)--(0,10);
-   
-\draw[line width=1pt,blue](-11/3,10)node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
- 
-\draw[line width=1pt,red, -stealth](0,0)--(2,-3)node[below]{$\vec{v}=\begin{bmatrix}2\\-3\end{bmatrix}$} ;
- 
- \end{tikzpicture}
-\end{center}
- 
-Vector $\vec{v}$ is called a \dfn{direction vector}.  Observe that the components of $\vec{v}$ are the coefficients of $t$ in the parametric equations.
-\begin{align*}
-x&={\color{red}2}t-1\\
-y&={\color{red}-3}t+6
-\end{align*}
- 
-Next, let's turn our attention to constants $-1$ and $6$.  They are the values of $x$ and $y$ when $t=0$, and correspond to the point $(-1, 6)$. 
- 
-Recall that in Exploration \ref{init:paramline2d} we said that the given parametric equations describe the position of a ladybug crawling in the coordinate plane.  If we are concerned with the position of the ladybug at time $t$, the point $(-1, 6)$ is very important - this is where the bug is located when $t=0$.  But, if we are using parametric equations simply to describe the line $y=-\frac{3}{2}x+\frac{9}{2}$, without regard for when the bug is located at each point, then the point $(-1, 6)$ is not any more special than any other point on the line.  In fact, we can use any other point on this line to find another set of parametric equations that describe the same line.  Later you will be asked to show that equations
-\begin{align*}
-x&=2t+1\\
-y&=-3t+3
-\end{align*}
-describe the same line.  Thus, parametric representations are not unique.
-\end{exploration}
- 
-We can generalize our observations in Exploration \ref{init:paramline2dpart3} as follows.
- 
-\begin{formula}\label{form:paramline2d}
-Let $\vec{v}=\begin{bmatrix}a\\b\end{bmatrix}$ be a direction vector for line $l$, and let $(x_0, y_0)$ be an arbitrary point on $l$.  Then the following parametric equations describe $l$:
-\begin{align*}
-x&=at+x_0\\
-y&=bt+y_0
-\end{align*}
-\end{formula}
- 
-\begin{example}\label{ex:parameqlinepoint}
-Find parametric equations for line $l$ if $l$ contains the point $(2, -5)$ and is parallel to line $k$ with parametric equations
-\begin{align*}
-x&=3t+4\\
-y&=-8t+1
-\end{align*}
-\begin{explanation}
-To find a set of parametric equations for $l$, we need a point on $l$ and a direction vector.  Point $(2, -5)$ is on $l$.  Line $l$ is parallel to $k$, so we can use $\begin{bmatrix}3\\-8\end{bmatrix}$, a direction vector for $k$, as a direction vector for $l$.   This gives us the following parametric equations for $l$:
-\begin{align*}
-x&=3t+2\\
-y&=-8t-5
-\end{align*}
-\end{explanation}
+\begin{example}\name{A line from a point and a direction vector}\label{ex:line-point-and-direction-vector}
+
+  Write a vector equation for the line which contains the point
+  $P = (2,0,3)$ and has unit direction vector $\vec{d}$ in the direction of 
+  $\begin{bmatrix}1\\2\\1\end{bmatrix}$.
 \end{example}
- 
-\subsection*{Parametric Lines in $\RR^3$}
- 
-\begin{exploration}\label{init:paramline3d}
-Consider the following set of parametric equations
-\begin{align*}
-x&=4t+1\\
-y&=8t-3\\
-z&=5t+1
-\end{align*}
-We will begin by making a table of values.
-$$\begin{array}{|c|c|c|c|} 
- \hline t& x & y & z\\
- \hline -1 & -3 & -11 & -4\\
- \hline 0 & 1 & -3 & 1 \\
- \hline 1 & 5& 5 & 6\\
- \hline 2 & 9& 13 & 11\\
- \hline
- \end{array}$$
- 
-Observe that every time $t$ increases by $1$, $x$ increases by $4$, $y$ increases by $8$, and $z$ increases by $5$.  The pattern ``out $4$, over $8$, up $5$" is illustrated in the diagram. 
- 
- 
-%\begin{center}
-%%\tdplotsetmaincoords{70}{130}
-%\begin{tikzpicture}
- 
-%    \draw[line width=2pt,blue](-3,1,1)--(5,6,5);
-     
- %   \draw[line width=0.5pt, dashed, gray](-3,1,1)--(5,1,1);
-   % \draw[line width=0.5pt, dashed, gray](5,1,1)--(5,1,5);
-  %  \draw[line width=0.5pt, dashed, gray](5,1,1)--(5,6,1);
-   % \draw[line width=0.5pt, dashed, gray](5,6,5)--(5,6,1);
-   % \draw[line width=0.5pt, dashed, gray](-3,6,1)--(5,6,1);
-   % \draw[line width=0.5pt, dashed, gray](-3,6,1)--(-3,6,5);
-   % \draw[line width=0.5pt, dashed, gray](-3,6,1)--(-3,1,1);
-   % \draw[line width=0.5pt, dashed, gray](-3,6,5)--(-3,1,5);
-   % \draw[line width=0.5pt, dashed, gray](-3,6,5)--(5,6,5);
-     
-     
-   % \draw[line width=1pt,red, dashed, -stealth](5,1,5)--(5,5.8,5);
-   % \draw[line width=1pt,red, dashed, -stealth](-3,1,5)--(4.9,1,5);
-   %  \draw[line width=1pt,red, dashed,-stealth](-3,1,1)--(-3,1,4.8);
-      
-     
-   % \fill[red] (-3,1,1) node[above left]{$(1,-3,1)$} circle (0.1cm);
-   % \fill[red] (5,6,5) node[above left]{$(5,5,6)$} circle (0.1cm);
-     
-  %  \node[red] at (0.8, 1.3, 5)   {over $8$};
-  %  \node[red] at (-2.1, 1.3, 3.6)   {out $4$};
-  %  \node[red] at (5.1, 3, 4)   {up $5$};
-     
-%\end{tikzpicture}
-%\end{center}
- 
-We will use a direction vector $\vec{v}=\begin{bmatrix}4\\8\\5\end{bmatrix}$ to represent the direction of the line.  Note that the components of  $\vec{v}$ are the same as the coefficients of $t$ in the parametric equations. 
- 
-\begin{align*}
-x&={\color{red}4}t+1\\
-y&={\color{red}8}t-3\\
-z&={\color{red}5}t+1
-\end{align*}
- 
-Also, observe that the constants $1, -3, 1$ correspond to the coordinates of the point on the line for which $t=0$.
- 
-\begin{align*}
-x&=4t+{\color{red}1}\\
-y&=8t+({\color{red}-3})\\
-z&=5t+{\color{red}1}
-\end{align*}
-As before, the point $(1, -3, 1)$ may be replaced with any other point on the line to produce a different set of parametric equations describing the same line.
-\end{exploration}
- 
-We can generalize our observations in Exploration \ref{init:paramline3d} as follows.
- 
-\begin{formula}\label{form:paramline3d}
-Let $\vec{v}=\begin{bmatrix}a\\b\\c\end{bmatrix}$ be a direction vector for line $l$, and let $(x_0, y_0, z_0)$ be an arbitrary point on $l$.  Then the following parametric equations describe $l$:
-\begin{align*}
-x&=at+x_0\\
-y&=bt+y_0\\
-z&=ct+z_0
-\end{align*}
-\end{formula}
- 
-\begin{example}\label{ex:paramline3d}
-Find a set of parametric equations for a line in $\RR^3$ that passes through $(1, -2, 4)$ and $(-3, 1, 1)$.
-\begin{explanation}
-We need a point and a direction vector.  To find the direction vector we will use the ``head-tail" formula to find the vector whose tail is at $(1, -2, 4)$ and whose head is at $(-3, 1, 1)$.  The direction vector is
-$$\begin{bmatrix}-3-1\\1-(-2)\\1-4\end{bmatrix}=\begin{bmatrix}-4\\3\\-3\end{bmatrix}$$
-For our point, we can pick either of the two given points.  The equations will differ depending on the point we pick, but they will describe the same line.  Remember, parametric representations are not unique!  If we choose $(1, -2, 4)$ for our point we get the following set of parametric equations:
-\begin{align*}
-x&=-4t+1\\
-y&=3t-2\\
-z&=-3t+4
-\end{align*}
-\end{explanation}
+
+
+
+\begin{solution}
+  The position vector of the point $P$ is
+  $\vec{p}=\begin{bmatrix}2\\0\\3\end{bmatrix}$. 
+
+  The unit direction vector is in the direction of $\begin{bmatrix}1\\2\\1\end{bmatrix}$, but is a unit vector. Hence, we find the magnitude $\norm{\begin{bmatrix}1\\2\\1\end{bmatrix}}=\answer{\sqrt{6}}$
+  
+  Rounding the direction vector to two decimal places, we get the equation 
+  $\vec{q}= \vec{p} + \lambda\,\vec{d}$, which we can write as
+  \begin{equation*}
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} \answer{2} \\ \answer{0} \\ \answer{3} \end{bmatrix}
+    + \lambda \begin{bmatrix} \answer[tolerance=.01]{.41} \\ \answer[tolerance=.01]{.82} \\ \answer[tolerance=.01]{.41} \end{bmatrix}.
+  \end{equation*}
+\end{solution}.
+
+There are many ways to express the equation of a line, we will tend to use the vector equation, which can also be expressed generally in component form as 
+
+\begin{equation*}
+  \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}
+  = \begin{bmatrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{bmatrix}
+  + \lambda \begin{bmatrix} d_1 \\ d_2 \\ \vdots \\ d_n \end{bmatrix},
+\end{equation*}
+
+Notice that the vector equation of a line is not unique. In fact,
+there are infinitely many vector equations for the same line. For
+example, we can replace the parameter $\lambda$ with another parameter, say $t$ (which is often used) or 
+$3s$ or $1-r$. We can also choose any vector $\vec{p}$ on the line, and any direction vector $\vec{d}$ (though we tend to like unit direction vectors).
+
+\begin{example}\name{Determine whether a point is on a line}\label{ex:point-on-line}
+
+  Determine whether the point $P=(5,8,4)$ is on the line $L$ given by
+  the vector equation
+  \begin{equation*}
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
+    + t \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}.
+  \end{equation*}
 \end{example}
- 
-\subsection*{Parametric Lines in $\RR^n$}
-After working with parametric equations of lines in $\RR^2$ and $\RR^3$, it should be easy to surmise what parametric equations of lines look like for lines in $\RR^n$.
-\begin{formula}\label{form:paramlinend}
-Let $\vec{v}=\begin{bmatrix}v_1\\v_2\\\vdots\\v_n\end{bmatrix}$ be a direction vector for line $l$ in $\RR^n$, and let $(a_1, a_2,\ldots , a_n)$ be an arbitrary point on $l$.  Then the following parametric equations describe $l$:
-\begin{align*}
-x_1&=v_1t+a_1\\
-x_2&=v_2t+a_2\\
-&\quad\vdots\\
-x_n&=v_nt+a_n
-\end{align*}
-\end{formula}
- 
-\subsection*{From Parametric Equations to Vector Equations}
-Consider again the parametric equations from Exploration \ref{init:paramline2d}.
-\begin{align*}
-x&=2t-1\\
-y&=-3t+6
-\end{align*}
-These equations describe the line by providing coordinates of individual points on the line, as shown in the left figure below.
- 
- \begin{center}
-\begin{tikzpicture}[scale=0.5]
-\draw[thin,gray!40] (-3,-4) grid (6,7);
-  \draw[<->] (-3,0)--(6,0);
-  \draw[<->] (0,-4)--(0,7);
-  \draw[line width=2pt,blue](-1,6)--(5,-3) ;
-\fill[red] (-1,6) node[above right]{$t=0$} circle (0.2cm);
-\fill[red] (1,3) node[above right]{$t=1$} circle (0.2cm);
-\fill[red] (3,0) node[above right]{$t=2$} circle (0.2cm);
-\fill[red] (5,-3) node[above right]{$t=3$} circle (0.2cm);
- \end{tikzpicture}
- \quad
- \quad
- \begin{tikzpicture}[scale=0.5]
-\draw[thin,gray!40] (-3,-4) grid (6,7);
-  \draw[<->] (-3,0)--(6,0);
-  \draw[<->] (0,-4)--(0,7);
-  \draw[line width=2pt,blue](-1,6)--(5,-3) ;
-  \draw[line width=1pt,red,-stealth](0,0)--(-1,6) ;
-  \draw[line width=1pt,red,-stealth](0,0)--(1,3) ;
-  \draw[line width=1pt,red,-stealth](0,0)--(3,0) ;
-  \draw[line width=1pt,red,-stealth](0,0)--(5,-3) ;
-\fill[red] (-1,6) node[above right]{$t=0$} circle (0.1cm);
- \fill[red] (1,3) node[above right]{$t=1$} circle (0.1cm);
- \fill[red] (3,0) node[above right]{$t=2$} circle (0.1cm);
- \fill[red] (5,-3) node[above right]{$t=3$} circle (0.1cm);
- \end{tikzpicture}
+
+\begin{solution}
+  There are actually two solutions to this problem, and one will reveal a connection back to the dot product that we will then exploit further to similarly characterize planes in productive ways.
+
+  First, the point $P$ is on the line $L$ if and only if there exists some
+  $t\in\R$ such that
+  \begin{equation*}
+    \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
+    + t \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
+    = \begin{bmatrix} 5 \\ 8 \\ 4 \end{bmatrix}.
+  \end{equation*}
+  Subtracting $\begin{bmatrix}1,2,1\end{bmatrix}$ from both sides of the equation, this is
+  equivalent to
+  \begin{equation*}
+    t \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
+    = \begin{bmatrix} 4 \\ 6 \\ 3 \end{bmatrix}.
+  \end{equation*}
+
+  This vector equation is only satisfied if the following three equations are satisfied.
+
+  \begin{equation*}
+    \begin{array}{c@{~}c@{~}l}
+      \answer{2}t &=& \answer{4}, \\
+      \answer{3}t &=& \answer{6}, \\
+      \answer{t} &=& \answer{3}.
+    \end{array}
+  \end{equation*}
+
+  This is a system of three linear equations in one variable, and we
+  quickly see that it is \wordChoice{
+    \choice{consistent}
+    \choice[correct]{inconsistent}}. Therefore, the point $P$ \wordChoice{
+      \choice{does}
+      \choice[correct]{does not}}
+  lie on the line $L$.
+
+\end{solution}
+
+This next solution will also set up a more general theme on which we will capitalize to describe planes and hyperplanes.
+
+\begin{solution}
+
+  As a second solution, we can use orthogonality to our advantage. Since we know the direction vector, if we find a vector orthogonal to $\vec{d}$ (call the orthogonal vector $\vec{n}$), then after displacement by $\vec{p}$ any vector on the line will also be orthogonal to $\vec{n}$.
+
+  For reference, consider the line from the beginning of the section:
+
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+    \draw[thin,gray!40] (-5,-6) grid (7,10);
+      \draw[<->] (-5,0)--(7,0);
+      \draw[<->] (0,-6)--(0,10);
+       
+    \draw[line width=2pt,blue](-1,6)--(5,-3) ;
+     
+    \draw[line width=1pt,blue, dashed](-11/3,10);%node[below=5mm, left=0mm]{$y=-\frac{3}{2}x+\frac{9}{2}$}--(7,-6) ;
+     
+    %\fill[red] (-1,6) node[above right]{$(-1,6)$} circle (0.2cm);
+    %\fill[red] (1,3) node[above right]{$(1,3)$} circle (0.2cm);
+    %\fill[red] (3,0) node[above right]{$(3,0)$} circle (0.2cm);
+    %\fill[red] (5,-3) node[above right]{$(5,-3)$} circle (0.2cm);
+
+    \draw[line width=1pt,red,-stealth](0,0)node[above=5mm, right=2.5mm]{$\vec{p}$}--(1,3);
+    \draw[line width=2pt,red,-stealth](1,3)node[below=5mm, right=3.5mm]{$\vec{d}$}--(3,0) ;
+    \draw[line width=1pt, red, -stealth](1,3)node[above=6mm,right=3.5mm]{$\vec{n}$}--(4,5);
+     \end{tikzpicture}
+    \end{center}
+
+  The direction vector $\vec{d}=\begin{bmatrix}
+    2\\-3
+  \end{bmatrix}$ is orthogonal to the vector $\vec{n}=\begin{bmatrix}
+    3\\2
+  \end{bmatrix}$ (note that $2\times 3+(-3)\times 2=0$).
+
+  Because the dot product repsects scaling, anything in $\mbox{span}(\vec{d})$ will also be orthogonal to $\vec{n}$. So, if we take any point on the line, undo the displacement by $\vec{p}$ and then check for orthogonality with $\vec{n}$, we should also get a zero dot product.
+
+  In our current example, there is actually a whole plane of vectors orthogonal to our line 
+
+  \begin{equation*}
+    \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
+    + t \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
+    = \begin{bmatrix} 5 \\ 8 \\ 4 \end{bmatrix}.
+  \end{equation*}
+
+  (you'll see why in the next section). So we have plenty of vector $\vec{n}$ to choose from. One such vector is $\vec{n}=\begin{bmatrix}
+    -3\\1\\3
+  \end{bmatrix}$. 
+  
+  To check, calculate 
+
+  $$\vec{d}\cdot \vec{n}=\answer{-6}+\answer{3}+\answer{3}=0.$$
+
+  Thus, after we undo the displacement by $\vec{p}=\begin{bmatrix}
+    1\\2\\1
+  \end{bmatrix}$, the vector $\begin{bmatrix}
+    5\\8\\4
+  \end{bmatrix}-\begin{bmatrix}
+    1\\2\\1
+  \end{bmatrix}$ should be orthogonal to $\vec{n}$.
+
+  To check, we calculate
+
+  $$\left(\begin{bmatrix}
+    5\\8\\4
+  \end{bmatrix}-\begin{bmatrix}
+    1\\2\\1
+  \end{bmatrix}\right)\cdot \begin{bmatrix}
+    -3\\1\\3
+  \end{bmatrix}=\begin{bmatrix}
+    \answer{4}\\\answer{6}\\\answer{3}
+  \end{bmatrix}\cdot \begin{bmatrix}
+    -3\\1\\3
+  \end{bmatrix}=\answer{-12}+\answer{6}+\answer{9}=\answer{3}.$$
+
+  Thus, again we see that $\begin{bmatrix}
+    5\\8\\4
+  \end{bmatrix}$ is not on the line.
+
+  This solution, in addition to setting up representations of planes and hyperplanes in $\RR^n$, also involves \emph{centering} data back to $\vec{0}$ to make some useful calculations. This is a strategy we have enacted before, and will be important again moving forward.
+
+
+\end{solution}
+
+\begin{example}\name{Determine whether two lines intersect}\label{ex:lines-intersect}
+
+  Determine whether the lines
+  \begin{equation*}
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} 3 \\ 1 \\ 0 \end{bmatrix}
+    + t \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
+    \quad\mbox{and}\quad
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} 1 \\ -1 \\ 5 \end{bmatrix}
+    + s \begin{bmatrix} 2 \\ 1 \\ -2 \end{bmatrix}
+  \end{equation*}
+  intersect. If yes, find the point of intersection.%
+  \index{intersection!of two lines}
+\end{example}
+
+
+
+
+\begin{solution}
+  One of the well-known properties of $\RR^n$ is that two lines that are not parallel are guaranteed to meet!This is something you would have seen back in high school geometry,but comes up from time to time when in popular discourse folks compare this property to the geometry of spheres, where some parallel lines meet.
+
+  Hence, to find whether the lines meet, we need to determine if they are paralle. Luckily, all this entails is a comparison of the direction vectors $\begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 2 \\ 1 \\ -2 \end{bmatrix}$. If they are parallel, then the lines will not meet (unless they are the same line), and if they are not parallel then the lines are guaranteed to meet.
+
+  Being parallel means pointing in the exact same direction, so to compare directions, we convert the two vectors to unit vectors and take their dot product!
+
+  The first direction vector has magnitude 
+  
+  $$\norm{\begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}}=\answer{\sqrt{5}},$$
+  
+  so the first unit direction vector, we'll call it $\vec{d}_1$, is approximately 
+
+  $$\vec{d_1}\approx\begin{bmatrix}
+    \answer[tolerance=.01]{.89}\\\answer[tolerance=.01]{0}\\\answer[tolerance=.01]{.45}
+  \end{bmatrix}.$$
+
+  Similarly, the second direction vector, we'll call it $\vec{d}_2$, is approximately
+
+  $$\vec{d_2}\approx\begin{bmatrix}
+    \answer[tolerance=.01]{.67}\\\answer[tolerance=.01]{.33}\\\answer[tolerance=.01]{-.67}
+  \end{bmatrix}.$$  
+
+  Using MATLAB for a quick dot product, we get 
+
+  $$\vec{d_1}\cdot\vec{d_2}=\answer{.29}.$$
+
+  Therefore, the lines do indeed intersect, since their direction vectors are not parallel!
+  
+  The two lines intersect at $t,s$ in $R$ such
+  that
+  \begin{equation*}
+    \begin{bmatrix} 3 \\ 1 \\ 0 \end{bmatrix}
+    + t \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
+    = \begin{bmatrix} 1 \\ -1 \\ 5 \end{bmatrix}
+    + s \begin{bmatrix} 2 \\ 1 \\ -2 \end{bmatrix}.
+  \end{equation*}
+  Bringing $s$ to the left-hand side, and subtracting $\begin{bmatrix}3,1,0\end{bmatrix}$
+  from both sides of the equation, this is equivalent to
+  \begin{equation*}
+    t \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
+    - s \begin{bmatrix} 2 \\ 1 \\ -2 \end{bmatrix}
+    = \begin{bmatrix} -2 \\ -2 \\ 5 \end{bmatrix}.
+  \end{equation*}
+  This is a system of 3 linear equations in 2 variables. 
+  
+  The
+  augmented matrix of the system is
+  \begin{equation*}
+    \begin{bmatrix}
+      2 & -2 & -2 \\
+      0 & -1 & -2 \\
+      1 & 2 & 5   \\
+    \end{bmatrix}.
+  \end{equation*}
+  This system has {\rref}
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 & 1 \\
+      0 & 1 & 2 \\
+      0 & 0 & 0 \\
+    \end{bmatrix},
+  \end{equation*}
+  and has the unique solution $t=\answer{1}$ and $s=\answer{2}$.
+  
+ Plugging in $t$ or $s$ into their respective equations, we get the point of intersection is
+  \begin{equation*}
+    \begin{bmatrix} 3 \\ 1 \\ 0 \end{bmatrix}
+    + 1 \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
+    = \begin{bmatrix} 5 \\ 1 \\ 1 \end{bmatrix}.
+  \end{equation*}
+\end{solution}
+
+
+Similar to our use of the dot product to determine whether the liens were parallel, we can also use the dot product to find the angle between two intersecting
+lines. This is simply the smallest angle between (any of) their
+direction vectors. The only subtlety here is that if $\vec{u}$ is a
+direction vector for a line, then so is $-\vec{u}$, and thus we will
+find pairs of complementary angles. We will take the smaller of the
+two angles.
+
+\begin{center} \begin{tikzpicture}
+    \filldraw[fill=green!20,draw=green!50!black] (0,0) -- (-25:8mm)
+    arc (-25:25:8mm) -- cycle;
+    \filldraw[fill=yellow!20,draw=yellow!50!black] (0,0) -- (25:8mm)
+    arc (25:155:8mm) -- cycle;
+    \node at (0:5mm) {$\theta$};
+    \node at (90:4.2mm) {$\pi-\theta$};
+    \draw[red!80](25:-2.5) -- (25:2.5);
+    \draw[red!80](-25:-2.5) -- (-25:2.5);
+    \draw[->,thick,red!80!black](0,0) -- node[above,pos=0.6]{$\vec{v}$} (25:2);
+    \draw[->,thick,blue!80!black](0,0) -- node[below,pos=0.3]{$\vec{u}$} (-25:1.5);
+    \draw[->,thick,blue!80!black](0,0) -- node[below,pos=0.6]{$-\vec{u}$} (155:1.5);
+  \end{tikzpicture}
 \end{center}
- 
-If we consider the points on the line to be heads of vectors, then we can think of the line as being ``traced" by a vector as $t$ changes  (See above, right).  We can capture this algebraically by using a \dfn{vector equation} for the line:
-$$\vec{x}(t)=\begin{bmatrix}2t-1\\-3t+6\end{bmatrix}=\begin{bmatrix}2\\-3\end{bmatrix}t+\begin{bmatrix}-1\\6\end{bmatrix}$$
-Note that the direction vector $\begin{bmatrix}2\\-3\end{bmatrix}$ and the point $(-1, 6)$, now vector $\begin{bmatrix}-1\\6\end{bmatrix}$, are easy to identify in the equation.
- 
-We can use vector equations to describe lines in $\RR^n$ using the following formula.
- 
-\begin{formula}\label{form:vectorlinend}
-Let $\vec{v}=\begin{bmatrix}v_1\\v_2\\\vdots\\v_n\end{bmatrix}$ be a direction vector for line $l$ in $\RR^n$, and let $(a_1, a_2,\ldots , a_n)$ be an arbitrary point on $l$.  Then the following vector equation describes $l$:
-$$\vec{x}(t)=\begin{bmatrix}v_1\\v_2\\\vdots\\v_n\end{bmatrix}t+\begin{bmatrix}a_1\\a_2\\\vdots\\a_n\end{bmatrix}$$
-\end{formula}
- 
- 
+
+\begin{example}\name{Find the angle between two lines}\label{ex:angle-between-two-lines}
+
+  Find the angle between the two lines%
+  \index{line!angle between}%
+  \index{angle!between two lines}
+  \begin{equation*}
+    L_1:  \;
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}
+    + t \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix}
+  \end{equation*}
+  and
+  \begin{equation*}
+    L_2: \;
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    = \begin{bmatrix} 0 \\ 3 \\ 2 \end{bmatrix}
+    + s \begin{bmatrix} 2 \\ 1 \\ -1 \end{bmatrix}.
+  \end{equation*}
+\end{example}
+
+
+
+\begin{solution}
+  The direction vectors are
+  \begin{equation*}
+    \vec{u}=\begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix}
+    \quad\mbox{and}\quad
+    \vec{v}=\begin{bmatrix} 2 \\ 1 \\ -1 \end{bmatrix}.
+  \end{equation*}
+
+  In this case we don't need to convert to unit vectors, as we can directly use the definition of the dot product to generate the desired angle. 
+  
+  Recall that one formluation of the dot product is 
+  
+  $$\vec{u}\cdot\vec{v}=\norm{\vec{u}}\norm{\vec{v}}\cos(\theta).$$
+  
+  Hence, we can solve for the cosine of the angle measure (or $\theta$) as necessary. 
+  
+  We calculate
+  \begin{equation*}
+    \cos\theta =
+    \frac{\vec{u}\dotprod\vec{v}}{\norm{\vec{u}}\norm{\vec{v}}} = \answer{-1/2},
+  \end{equation*}
+  which between $\theta=0$ and $\theta=\pi$ gives $\theta=\answer{\frac{2\pi}{3}}$ (give an exact answer in terms of $\pi$).  
+  
+ The complementary angle (i.e. $\pi-\theta$) is $\answer{\frac{\pi}{3}}$. We
+  choose the smaller angle, and therefore conclude that the angle
+  between the two lines is $\answer{\frac{\pi}{3}}$.
+\end{solution}
+
 
 \end{document}

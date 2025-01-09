@@ -204,6 +204,28 @@ We will use orthonormal bases heavily in Chapter 6, and moving forward in the bo
 
 \end{exploration}
 
+Finally, we give some properties of the dot product. These essentially establish the dot product as analogous to scalar multiplication. That is, it distributes across addition, scalar multiplication, is symmetric, and has other nice properties.
+
+\begin{theorem}\label{th:dotproductproperties} The following properties hold for
+   vectors $\vec{u}$, $\vec{v}$ and $\vec{w}$ in $\RR^n$ and scalar
+   $k$ in $\RR$.
+   \begin{enumerate}
+   \item\label{item:commutative}
+     $\vec{u}\dotp\vec{v}=\vec{v}\dotp\vec{u}$
+      
+   \item\label{item:distributive} $(\vec{u}+\vec{v})\dotp \vec{w}=\vec{u}\dotp \vec{w}+\vec{v}\dotp \vec{w}$
+      
+   \item\label{item:distributive-again} $\vec{u}\dotp (\vec{v}+\vec{w})=\vec{u}\dotp\vec{v}+\vec{u}\dotp \vec{w}$
+      
+   \item\label{item:scalar} $(k\vec{u})\dotp \vec{v}=k(\vec{u}\dotp\vec{v})=\vec{u}\dotp (k\vec{v})$
+      
+   \item \label{item:positive} $\vec{u}\dotp\vec{u}\geq 0$, and $\vec{u}\dotp\vec{u}=0$ if and only if $\vec{u}={\bf 0}$.
+      
+   \item \label{item:norm}
+     $\norm{\vec{u}}^2=\vec{u}\dotp\vec{u}$
+   \end{enumerate}
+ \end{theorem}
+
 \section*{Source References}
 
 \begin{enumerate}

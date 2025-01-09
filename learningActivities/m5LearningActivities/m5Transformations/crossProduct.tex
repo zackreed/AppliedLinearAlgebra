@@ -27,17 +27,29 @@ Let's return to the unfinished problem of the previous section:
   \begin{solution}
     The goal is to find the normal vector to the plane so that we can more explicitly define the plane. For any vector $\vec{v}$, there is a nice linear transformation defined only on $\RR^3$, called the cross product and denoted $\vec{v}\times$, which will for any vector $\vec{u}$ give a third vector $\vec{w}$ that is orthogonal to both $\vec{v}$ and $\vec{u}$.
 
-    This vector $\vec{w}=\vec{v}\times\vec{u}$ is exactly what we need to describe any plane from two vectors.
+    Much like in $\RR^2$, where if you have a vector $\vec{v}=\begin{bmatrix}
+      a\\b
+    \end{bmatrix}$, you can immediately calculate a vector orthogonal to it by $\vec{n}=\begin{bmatrix}
+      -b\\a
+    \end{bmatrix}$, we have a similar formulation in $\RR^3$.
+
+    In $\RR^3$, if you have two vectors $\vec{u}=\begin{bmatrix}
+      a_1\\a_2\\a_3
+    \end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+      b_1\\b_2\\b_3
+    \end{bmatrix}$, you can explicitly find a vector orthogonal to both $\vec{u}$ and $\vec{v}$ (so long as the two are not on the same line) by the vector
+
+    $$\vec{w}=\begin{bmatrix}
+      a_2b_3-a_3b_2\\a_3b_1-a_1b_3\\a_1b_2-b_1a_2
+    \end{bmatrix}$$
+
+    This vector $\vec{w}=\vec{v}\times\vec{u}$ is exactly what we need to describe any plane from two vectors, so let's test it out on our example plane and determine its normal equation!
 
     First, let's find the two direction vectors and point that define the plane. If we center at $P$, we can use  $\longvect{PQ}$ and $\longvect{PR}$ as the planar direction vectors. 
 
     From the last section, we determined that the direction vectors are $\longvect{PQ}=\startmat{r} 2 \\ -2 \\ -3 \stopmat$ and $\longvect{PR}=\startmat{r} 1 \\ 1 \\ -1 \stopmat$.
     
-    START HERE
-    
-    
-    We can
-    therefore use the cross product to compute a normal vector for the
+    Using the general formula above, we can hopefully find a normal vector for the
     plane:
     \begin{equation*}
       \vect{n}
@@ -48,7 +60,7 @@ Let's return to the unfinished problem of the previous section:
       \times
       \startmat{r} 1 \\ 1 \\ -1 \stopmat
       ~=~
-      \startmat{r} 5 \\ -1 \\ 4 \stopmat.
+      \startmat{r} \answer{5} \\ \answer{-1} \\ \answer{4} \stopmat.
     \end{equation*}
     \begin{center}
       \begin{tikzpicture}[rotate=-10]
@@ -61,68 +73,95 @@ Let's return to the unfinished problem of the previous section:
         \fill (1,0,-2) circle [radius=2.2pt] node [right=3pt] {$R$};
       \end{tikzpicture}
     \end{center}
+
+    Let's verify that $\vec{n}$ is actually a normal vector for the plane.
+
+    Using the dot product, we get
+
+    $$\startmat{r} 2 \\ -2 \\ -3 \stopmat\cdot \startmat{r} \answer{5} \\ \answer{-1} \\ \answer{4} \stopmat=\answer{10}+\answer{2}+\answer{-12}=0,$$
+
+    and $$\startmat{r} 1 \\ 1 \\ -1 \stopmat\cdot \startmat{r} \answer{5} \\ \answer{-1} \\ \answer{4} \stopmat=\answer{5}+\answer{-1}+\answer{-4}=0,$$
+
+    so indeed, $\vec{n}$ is normal to the plane!
+
+ 
+
     Now we can easily obtain the normal equation from any point on the
     plane (say $P$) and the normal vector we just calculated:
     \begin{equation*}
-      \startmat{r} 5 \\ -1 \\ 4 \stopmat
-      \dotprod
-      \startmat{r} x \\ y \\ z \stopmat
+      \startmat{r}\answer{5} \\ \answer{-1} \\ \answer{4} \stopmat
+      \cdot
+      \startmat{r} x \\ y-1 \\ z-3 \stopmat
       =
-      \startmat{r} 5 \\ -1 \\ 4 \stopmat
-      \dotprod
-      \startmat{r} 0 \\ 1 \\ 3 \stopmat
+      0
     \end{equation*}
+
+
+
+
     We get the standard equation by computing the dot products on the
     left- and right-hand sides:
     \begin{equation*}
-      5x - y + 4z = 11.
+      \answer{5}x +\answer{-1} y + \answer{4}z = 11.
     \end{equation*}
-    It is worthwhile to double-check the answer by substituting each of
-    the three original points $P$, $Q$, and $R$ into this equation.
-    For example, for $Q=(2,-1,0)$, we obtain $5(2)-(-1)+4(0)$, which is
-    indeed $11$.
+
   \end{solution}
- 
-\subsection*{Definition of the Cross Product}
+
+  More than just in this one example, the calculation 
+
+  
+  $$\vec{w}=\begin{bmatrix}
+      a_2b_3-a_3b_2\\a_3b_1-a_1b_3\\a_1b_2-b_1a_2
+    \end{bmatrix}$$
+
+  will yield the vector in $\RR^3$ orthogonal to any pair of vectors in $\RR^3$ (that do not lie on the same line) $\vec{u}=\begin{bmatrix}
+      a_1\\a_2\\a_3
+    \end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+      b_1\\b_2\\b_3
+    \end{bmatrix}$.
+
+   
+
+  We will primarily use MATLAB to calculate this for us, but it is also beneficial to have on hand a few ways to calculate this orhtogonal vector, as in the following definition:
  
 \begin{definition}\label{def:crossproduct} Let $\vec{u=\begin{bmatrix}u_1\\u_2\\u_3\end{bmatrix}}$ and $\vec{v}=\begin{bmatrix}v_1\\v_2\\v_3\end{bmatrix}$ be vectors in $\RR^3$.  The \dfn{cross product} of $\vec{u}$ and $\vec{v}$, denoted by $\vec{u}\times\vec{v}$, is given by
 \begin{align*}
 \vec{u}\times\vec{v}&=(u_2v_3-u_3v_2)\vec{i}-(u_1v_3-u_3v_1)\vec{j}+(u_1v_2-u_2v_1)\vec{k} \\
 &=(u_2v_3-u_3v_2)\begin{bmatrix}1\\0\\0\end{bmatrix}-(u_1v_3-u_3v_1)\begin{bmatrix}0\\1\\0\end{bmatrix}+(u_1v_2-u_2v_1)\begin{bmatrix}0\\0\\1\end{bmatrix}=\begin{bmatrix}u_2v_3-u_3v_2\\-u_1v_3+u_3v_1\\u_1v_2-u_2v_1\end{bmatrix}
 \end{align*}
+
+If we fix a vector $\vec{u}$, then we get a linear transformation $\vec{u}\times$ that gives the product with any vector $\vec{v}$ defined by the following matrix
+
+$$\vec{u}\times=\begin{bmatrix}
+  0 &-u_3& u_2\\u_3 &0 &-u_1\\-u_2 &u_1 &0
+\end{bmatrix}.$$
 \end{definition}
- 
-This formula is much easier to remember when stated symbolically in terms of determinants.
-$$\vec{u}\times \vec{v}=\begin{bmatrix}u_1\\u_2\\u_3\end{bmatrix}\times\begin{bmatrix}v_1\\v_2\\v_3\end{bmatrix}=\begin{vmatrix}\vec{i}&\vec{j}&\vec{k}\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}=\vec{i}\begin{vmatrix}u_2&u_3\\v_2&v_3\end{vmatrix}-\vec{j}\begin{vmatrix}u_1&u_3\\v_1&v_3\end{vmatrix}+\vec{k}\begin{vmatrix}u_1&u_2\\v_1&v_2\end{vmatrix} $$
+
+
  
 \begin{example}\label{ex:crossproduct}
 Find the cross product of $\vec{u}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}$.
-\begin{explanation}
-\begin{align*}
-\vec{u}\times \vec{v}&=
-\begin{vmatrix}
-\vec{i} & \vec{j} & \vec{k}\\
-3 & -10 &2\\
--2 &4 &7
-\end{vmatrix} =\vec{i}
-\begin{vmatrix}
--10 & 2\\
-4 & 7
-\end{vmatrix} -\vec{j}
-\begin{vmatrix}
-3 & 2\\
--2 & 7
-\end{vmatrix} +\vec{k}
-\begin{vmatrix}
-3 & -10\\
--2 & 4
-\end{vmatrix}\\
-&=\vec{i}\Big((-10)(7)-(2)(4)\Big)-\vec{j}\Big((3)(7)-(2)(-2)\Big)+\vec{k}\Big((3)(4)-(-10)(-2)\Big)\\
-&=-78\vec{i}-25\vec{j}-8\vec{k}
-=\begin{bmatrix}-78\\ -25\\ -8\end{bmatrix}
-\end{align*}
-\end{explanation}
+
+\begin{solution}
+
+  (Hint: Use matrix multiplication in MATLAB to speed up the final calculation)
+
+$$\vec{u}\times \vec{v}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}\times\vec{v}=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}=\begin{bmatrix}\answer{0} & \answer{-2} & \answer{-10} \\
+\answer{2} & \answer{0} & \answer{-3} \\
+\answer{10} & \answer{3} & \answer{0}
+\end{bmatrix}
+\begin{bmatrix}
+\answer{-2} \\ \answer{4} \\ \answer{7}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\answer{-78} \\ \answer{-25} \\ \answer{-8}
+\end{bmatrix}$$
+
+\end{solution}
 \end{example}
+
+In MATLAB, if you define the vectors $\vec{u}$ and $\vec{v}$, then the command \texttt{cross(u,v)} will calculate the cross product for you.
  
 \subsection*{Properties of the Cross Product}
  
@@ -132,49 +171,23 @@ Find the cross product of $\vec{u}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}$ and 
 What would happen if we took the cross product of the vectors in Example \ref{ex:crossproduct} but reversed the order?
  
 Let $\vec{v}=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}$ and $\vec{u}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}$.
-Recall that $\vec{u}\times\vec{v}=\begin{bmatrix}-78\\-25\\-8\end{bmatrix}$.  We need to compute $\vec{v}\times\vec{u}$.  If you have already studied the effect that switching two rows of a matrix has on its determinant, you should be able to guess the outcome of the upcoming computation.
-\begin{align*}
-\vec{v}\times \vec{u}&=
-\begin{vmatrix}
-\vec{i} & \vec{j} & \vec{k}\\
--2 &4 &7\\
-3 & -10 &2
-\end{vmatrix} =\vec{i}
-\begin{vmatrix}
-4 & 7\\
--10 & 2
-\end{vmatrix} -\vec{j}
-\begin{vmatrix}
--2 & 7\\
-3 & 2
-\end{vmatrix} +\vec{k}
-\begin{vmatrix}
--2 & 4\\
-3 & -10
-\end{vmatrix}\\
-&=\vec{i}\Big((4)(2)-(7)(-10)\Big)-\vec{j}\Big((-2)(2)-(7)(3)\Big)+\vec{k}\Big((-2)(-10)-(4)(3)\Big)\\
-&=78\vec{i}+25\vec{j}+8\vec{k}
-=\begin{bmatrix}78\\ 25\\ 8\end{bmatrix}=-(\vec{u}\times\vec{v})
-\end{align*}
+
+Using MATLAB, we find 
+
+$$
+\vec{v}\times \vec{u}
+=\begin{bmatrix}\answer{78}\\ \answer{25}\\ \answer{8}\end{bmatrix}=\answer{-1}(\vec{u}\times\vec{v})$$
  
-This computation shows that the cross product is an operation that is not commutative. It also suggests that switching the order of the vectors changes the sign of the result.
+This computation suggests that switching the order of the vectors changes the sign of the result.
 \end{exploration}
- 
-\begin{warning}The Cross Product is not a commutative operation.
-\end{warning}
  
 \begin{theorem}\label{th:corssuvnegcrossvu}
 Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$, then
-$$\vec{u}\times\vec{v}=-(\vec{v}\times\vec{u})$$
-\end{theorem}
-
-The next theorem lists two additional properties of the cross product.  Proofs of these properties are routine and are left to the reader.
-\begin{theorem}\label{th:crossproductproperties}
-Let $\vec{u}$, $\vec{v}$ and $\vec{w}$ be vectors in $\mathbb{R}^3$, and $k$ be a scalar, then\\
 \begin{enumerate}
-\item\label{item:scalarassocofcrossprod} Scalar Associativity
+  \item $$\vec{u}\times\vec{v}=-(\vec{v}\times\vec{u})$$
+\item\label{item:scalarassocofcrossprod} 
 $$(k\vec{u})\times \vec{v}=\vec{u}\times (k\vec{v})=k(\vec{u}\times \vec{v})$$
-\item\label{item:distofrossprod} Distributivity
+\item\label{item:distofrossprod} 
 $$(\vec{u}+\vec{v})\times \vec{w}=\vec{u}\times \vec{w}+\vec{v}\times \vec{w}$$
 $$\vec{u}\times (\vec{v}+\vec{w})=\vec{u}\times \vec{v}+\vec{u}\times \vec{w}$$
 \end{enumerate}
@@ -186,63 +199,17 @@ The cross product has several important geometric properties. The following prob
 Compute the following products:
 $$\vec{i}\times\vec{j}=\begin{bmatrix}\answer{0}\\\answer{0}\\\answer{1}\end{bmatrix},\quad\vec{j}\times\vec{k}=\begin{bmatrix}\answer{1}\\\answer{0}\\\answer{0}\end{bmatrix}$$
  
-For the two vectors in each product, sketch the vectors together with the product vector.  What do you observe about the relationship between the cross product and the plane determined by the two vectors in the product? 
-\begin{hint}
-$\vec{i}\times\vec{j}=\vec{k}$.  Vector $\vec{k}$ is orthogonal to both $\vec{i}$ and $\vec{j}$. 
-\end{hint}
- 
- 
- 
 \end{exploration}
- 
-\subsubsection*{Orthogonality Property}
-\begin{exploration}\label{init:orthofcorssproduct}
-In this problem we will return to vectors of $\vec{v}=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}$ and $\vec{u}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}$ of Example \ref{ex:crossproduct} and Exploration Problem \ref{init:crossproduct2}.  We know that
-$$\vec{u}\times\vec{v}=\begin{bmatrix}-78\\-25\\-8\end{bmatrix}\quad\text{and}\quad\vec{v}\times\vec{u}=\begin{bmatrix}78\\25\\8\end{bmatrix}$$
-We will now compute the dot product of $\vec{v}\times\vec{u}$ with each of the original vectors $\vec{u}$ and $\vec{v}$.
-$$\vec{u}\dotp(\vec{v}\times\vec{u})=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}\dotp\begin{bmatrix}78\\25\\8\end{bmatrix}=0$$
-$$\vec{v}\dotp(\vec{v}\times\vec{u})=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}\dotp\begin{bmatrix}78\\25\\8\end{bmatrix}=0$$
-It is also easy to verify that $\vec{u}\dotp(\vec{u}\times\vec{v})=0$ and $\vec{v}\dotp(\vec{u}\times\vec{v})=0$.  Recall that the dot product of two vectors is $0$ if and only if the two vectors are orthogonal.
-We conclude that, at least in this case, the cross product of two vectors is orthogonal to each of the vectors. 
- 
-\end{exploration}
- 
-It turns out that the orthogonality property illustrated by Exploration Problems \ref{init:ijkcrossproducts} and \ref{init:orthofcorssproduct}  holds in general.  We state it as a theorem.
- 
-\begin{theorem}\label{th:crossproductorthtouandv}
-Let $\vec{u}$ and $\vec{v}$ be vectors of $\RR^3$, then $\vec{u}\times\vec{v}$ is orthogonal to both $\vec{u}$ and $\vec{v}$.
-\end{theorem}
-
  
 \subsubsection*{Cross Product and the Angle between Vectors}
 Recall that the dot product of $\vec{u}$ and $\vec{v}$ is related to the angle $\theta$ between $\vec{u}$ and $\vec{v}$ by the following formula
 \begin{align}\label{eq:dotproductformula}\vec{u}\dotp\vec{v}=\norm{\vec{u}}\norm{\vec{v}}\cos\theta\end{align}
-We will derive an analogous result for the cross product.  To do so, we will need the following Lemma.
- 
-\begin{lemma}\label{lemma:crossprodmagnitude}
-Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$.  Then
-$$\norm{\vec{u}\times\vec{v}}^2=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\vec{u}\dotp\vec{v})^2$$
-\end{lemma}
 
- 
-The following theorem establishes a relationship between the magnitude of the cross product, the magnitudes of the two vectors involved in the cross product and the angle between the two vectors.  It is important to note that  the identity in this theorem involves the magnitude of the cross product, not the cross product itself.
+We have a very similar property for the cross product.
  
 \begin{theorem}\label{th:crossproductsin}
 Let $\vec{u}$ and $\vec{v}$ be vectors in $\RR^3$. Let $\theta$ be the angle between $\vec{u}$ and $\vec{v}$ such that $0\leq\theta\leq \pi$. Then
 $$\norm{\vec{u}\times\vec{v}}=\norm{\vec{u}}\norm{\vec{v}}\sin\theta$$
 \end{theorem}
-\begin{proof}
-We have
-\begin{align*}
-\norm{\vec{u}\times\vec{v}}^2&=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\vec{u}\dotp\vec{v})^2\\
-&=\norm{\vec{u}}^2\norm{\vec{v}}^2-(\norm{\vec{u}}\norm{\vec{v}}\cos \theta)^2\\
-&=\norm{\vec{u}}^2\norm{\vec{v}}^2-\norm{\vec{u}}^2\norm{\vec{v}}^2\cos^2\theta\\
-&=\norm{\vec{u}}^2\norm{\vec{v}}^2(1-\cos^2\theta)\\
-&=\norm{\vec{u}}^2\norm{\vec{v}}^2\sin^2\theta
-\end{align*}
-Observe that all magnitudes are non-negative.  Also, $\sin\theta\geq 0$ because $0\leq\theta\leq \pi$.  Taking the square root of both sides give us
-$$\norm{\vec{u}\times\vec{v}}=\norm{\vec{u}}\norm{\vec{v}}\sin\theta$$
-\end{proof}
- 
 
 \end{document}

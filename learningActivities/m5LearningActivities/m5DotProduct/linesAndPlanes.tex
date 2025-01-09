@@ -220,8 +220,74 @@ This is often the first definition of a plane that you will see in a calculus te
 
 \subsection*{Hyperplanes}
 
+As we've discussed, the standard equations of planes can be viewed as manifestations of the {\bf normal equation}, $\vec{n}\cdot\vec{v}=\vec{n}\cdot\vec{p}$ for any $\vec{v}$ on the plane.
 
-An equation of the form $ax+by=d$ is a linear equation whose graph is a line in $\RR^2$. If we solve for $y$ in terms of $x$, we obtain a more familiar form of this equation, $y=-\frac{a}{b}x+\frac{d}{b}$.  The slope of the corresponding line is $m=-\frac{a}{b}$.  Observe that a line perpendicular to this line has the slope $\frac{b}{a}$.  If we interpret $a$ as a horizontal ``run" and $b$ as a vertical ``rise", we see that the vector $\begin{bmatrix}a\\b\end{bmatrix}$ is perpendicular to the line $ax+by=d$.  You can use the following GeoGebra interactive to solidify your understanding of this.
+As it turns out, this can also characterize the standard equation of the line, and the standard equations for Hyperplanes as well!
+
+In the case of a line, specifically within $\RR^2$, because of how nice $2$-dimensional slopes are, if we have a normal vector $\vec{n}=\begin{bmatrix}
+  a\\b
+\end{bmatrix}$, we also have the direction vector $\vec{d}=\begin{bmatrix}
+  -b\\a
+\end{bmatrix}$. If you remember finding normal and tangent lines in calculus, this was from the essential relationship between the slopes of normal and tangent lines.
+
+So, if we situate a line with direction vector $\vec{d}=\begin{bmatrix}
+  a\\b
+\end{bmatrix}$, point $\vec{p}=\begin{bmatrix}
+  x_1\\y_1
+\end{bmatrix}$, and an arbitrary vector on the line $\vec{v}=\begin{bmatrix}
+  x\\y
+\end{bmatrix}$, then the normal equation is
+
+$$\vec{n}\cdot \vec{v}=\vec{n}\cdot\vec{p}.$$
+
+Using the variables we have 
+
+$$\begin{bmatrix}
+  a\\b
+\end{bmatrix}\cdot \begin{bmatrix}
+  x\\y
+\end{bmatrix}=\begin{bmatrix}
+  a\\b
+\end{bmatrix}\cdot\begin{bmatrix}
+  x_1\\y_1
+\end{bmatrix}.$$
+
+Writing out the dot product, we get
+
+$$ax+by=ax_1+by_1=c,$$
+
+where $c$ is just a single placeholder for the constant $ax_1+by_1$. This is the standard form of a line, from which we can manipulate to get $y=mx+b$.
+
+So, indeed, lines in $\RR^2$ and planes in $\RR^3$ can be both characterized by a point and a normal vector. This is actually true of any hyperplane, so long as the dimension of the hyperplane is one less than the ambient space dimension.
+
+So, a hyperplane in $\RR^5$ is a $4-$dimensional subsplace characterized by the vector equation
+
+$$\vec{n}\cdot(\vec{v}-\vec{p})=0$$
+
+and the standard equation
+
+$$ax+by+cz+dw=e.$$
+
+This can be true of any finite dimensional space!
+
+\begin{definition}
+  The {\bf normal equation} of a $n-1$-dimensional hyperplane in $\RR^n$ is given as
+
+  $$\vec{n}\cdot(\vec{v}-\vec{p})=0$$
+
+  where $\vec{n}$ is the normal vector of the hyperplane and $\vec{p}$ is the centering point, and $\vec{v}$ is any other point on the plane.
+
+  The standard equation is 
+
+  $$a_1x_1+a_2x_2+\ldots+a_nx_n=c$$
+
+  where $a_k$ are the coordinates of $\vec{n}$ and $x_k$ are the coordinates of $\vec{v}$.
+\end{definition}
+
+
+\end{document}
+
+equation of the form $ax+by=d$ is a linear equation whose graph is a line in $\RR^2$. If we solve for $y$ in terms of $x$, we obtain a more familiar form of this equation, $y=-\frac{a}{b}x+\frac{d}{b}$.  The slope of the corresponding line is $m=-\frac{a}{b}$.  Observe that a line perpendicular to this line has the slope $\frac{b}{a}$.  If we interpret $a$ as a horizontal ``run" and $b$ as a vertical ``rise", we see that the vector $\begin{bmatrix}a\\b\end{bmatrix}$ is perpendicular to the line $ax+by=d$.  You can use the following GeoGebra interactive to solidify your understanding of this.
  
 
 \begin{center}
@@ -237,7 +303,6 @@ Lines and planes may seem very different, but they are all graphs of linear equa
 $$a_1x_1+a_2x_2+\dots +a_nx_n=d$$
 is called a \dfn{linear equation} in $n$ variables.  The graph of such an equation, for $3$, is called a \dfn{hyperplane}.  The vector in $\RR^n$ whose components are the coefficients $a_1, a_2, \dots ,a_n$ is orthogonal to every vector in the hyperplane.  Unfortunately, hyperplanes are impossible to see, but we can often use insights we gain from working with lines and planes and generalize them to the invisible world of higher dimensions.
 
-\end{document}
   
   Since the
   normal vector must be perpendicular to the plane, it must be

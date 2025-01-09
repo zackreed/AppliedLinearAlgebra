@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from selinger linear algebra
-\title{Vector Subspaces: Lines and Planes}
+\title{Planes and Hyperplanes}
 \begin{document}
 \begin{abstract}
 
@@ -217,6 +217,25 @@ This is often the first definition of a plane that you will see in a calculus te
   We first need to find a normal vector for the plane. This need motivates the final concept of the chapter, the \emph{cross product}, which we will discuss in the next section. So $\ldots$ to be continued!
 
 \end{solution}
+
+\subsection*{Hyperplanes}
+
+
+An equation of the form $ax+by=d$ is a linear equation whose graph is a line in $\RR^2$. If we solve for $y$ in terms of $x$, we obtain a more familiar form of this equation, $y=-\frac{a}{b}x+\frac{d}{b}$.  The slope of the corresponding line is $m=-\frac{a}{b}$.  Observe that a line perpendicular to this line has the slope $\frac{b}{a}$.  If we interpret $a$ as a horizontal ``run" and $b$ as a vertical ``rise", we see that the vector $\begin{bmatrix}a\\b\end{bmatrix}$ is perpendicular to the line $ax+by=d$.  You can use the following GeoGebra interactive to solidify your understanding of this.
+ 
+
+\begin{center}
+\geogebra{tg2duwqk}{900}{600}
+\end{center}
+
+ 
+The idea of coefficients in front of variables forming components of a normal vector should be very familiar to you.  Recall that the graph of $ax+by+cz=d$ is a plane in $\RR^3$ with a normal vector $\vec{n}=\begin{bmatrix}a\\b\\c\end{bmatrix}$.
+
+
+ 
+Lines and planes may seem very different, but they are all graphs of linear equations, just in different dimensions.  In general, an equation of the form
+$$a_1x_1+a_2x_2+\dots +a_nx_n=d$$
+is called a \dfn{linear equation} in $n$ variables.  The graph of such an equation, for $3$, is called a \dfn{hyperplane}.  The vector in $\RR^n$ whose components are the coefficients $a_1, a_2, \dots ,a_n$ is orthogonal to every vector in the hyperplane.  Unfortunately, hyperplanes are impossible to see, but we can often use insights we gain from working with lines and planes and generalize them to the invisible world of higher dimensions.
 
 \end{document}
   

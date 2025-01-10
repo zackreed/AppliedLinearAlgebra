@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from Anna Davis and Gilbert Strang
-\title{Fundamental Subspaces}\license{CC BY-NC-SA 4.0}
+\title{Vector Spaces and Subspaces}\license{CC BY-NC-SA 4.0}
 
 \begin{document}
 \begin{abstract}
@@ -12,27 +12,45 @@
 \maketitle
 
 
-\subsection*{Subspaces}
+\subsection*{Vector Spaces}
 
-Let's conclude this section by nailing down some important properties of these spaces that we've been discussing. 
+Let's conclude this section by nailing down some important properties of these spaces that we've been discussing.
 
-Recall that a \emph{vector space} $V$ is such that all linear combinations of vectors in $V$ stay in $V$, and that $\vec{0}\in V$.
+One important feature of this section is that we will bring some clarity and rigor to concepts that we have been discussing so far. We begin with the most fundamental idea for the course, that of a \emph{vector space}.
 
-Also recall that we sometimes want to talk about a \emph{subspace}. That is, we want to specifically reference some vector space, such as $\mbox{col}(A)$, while keeping in mind that it lives within an ambient vector space $V$. It's thus worth going over the following definition again:
+Thus far, we've been loosely characterizing vector spaces as sets of vectors for which addition and scalar multiplication makes sense. We now make this more specific and rigorous.
+
+\begin{definition}
+  A vector space $V$ is a set of of elements called vectors such that the following are true:
+  
+  \begin{enumerate}
+    \item $\vec{0}$ is in $V$
+    \item If $\vec{v}$ and $\vec{w}$ are in $V$, then $\vec{v}+\vec{w}$ is also in $V$.
+    \item If $\vec{v}$ is in $V$ and $\lambda$ is a real number, $\lambda\vec{v}$ is in $V$.
+  \end{enumerate}
+
+  As we can see, the loose characterization of vector spaces as sets in which addition and scalar multiplication makes sense was not far off from the rigorous definition.
+\end{definition}
+
+In this chapter, we have attended to many important sets of vectors. Here, we note that each of the fundamental spaces discussed in the chapter are indeed vector spaces in their own right, living in ambient vector spaces $\RR^n$. These contained vector spaces are called \emph{subspaces}.
+
+
 
 \begin{definition}{Subspace}
 
+  
   A vector space $W$ is a subspace of a vector space $V$ is $W$ is entirely contained within $V$, and is itself a vector space. 
 
-  \begin{example}
-  
-    $\RR^2$ is a subspace of $\RR^3$, but not of $\RR^1$ since $\RR^2$ is not contained within $\RR^1$. 
-
-  \end{example}
-
-Importantly, all of the spaces we've discussed so far (images, kernels, null spaces) are all subspaces of the domain and co-domain of a transformation. 
 
 \end{definition}
+
+\begin{example}
+  
+  $\RR^2$ is a subspace of $\RR^3$, but not of $\RR^1$ since $\RR^2$ is not contained within $\RR^1$. 
+
+\end{example}
+
+Importantly, all of the spaces we've discussed so far (images, kernels, null spaces) are all subspaces of the domain and co-domain of a transformation. 
 
 Much of our analysis so far has utilized $\mbox{span}$ to create the kernels and images of transformations, it's worth nailing down a fact about span to help us.
 
@@ -83,6 +101,8 @@ This immediately situates the kernel, nullspace, image, and column spaces that w
 Hence, the line $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$ is a subspace of $\RR^2$, as is $\mbox{im}(T)$ and $\mbox{col}(A)$, where $T$ is the transformation associated with $A$.
 
 \end{example}
+
+
 
 \begin{example}
 
@@ -147,18 +167,24 @@ Hence, $\mbox{span}\left(\begin{bmatrix}1\\2\end{bmatrix}\right)$ is a subspace 
 
 \end{exploration}
 
+
+
 \begin{remark}
 
   Images can be helpful for keeping ideas straight. 
 
   Here is an image depicting the fundamental spaces of matrices we've been discussing. To my knowledge, this was popularized by Gilbert Strang from MIT.
 
+  
+
 \begin{center}
-  \includegraphics[width=22.46, height=13.18]{fundamental_spaces_1.png}
+  \includegraphics[width=22.46cm, height=13.18cm]{fundamental_spaces_1.png}
   %cite strang http://links.jstor.org/sici?sici=0002-9890%28199311%29100%3A9%3C848%3ATFTOLA%3E2.0.CO%3B2-A
 \end{center}
 
 \end{remark}
+
+
 
 You might notice some extra terms, and also some claims about the dimensions of the spaces in this image.
 
@@ -171,6 +197,8 @@ We've been focusing on the \emph{column space} of a matrix $M$ because it gives 
   The \emph{row space} of a matrix $A$ is the span of its rows. 
 
 \end{definition}
+
+
 
 \begin{remark}
 

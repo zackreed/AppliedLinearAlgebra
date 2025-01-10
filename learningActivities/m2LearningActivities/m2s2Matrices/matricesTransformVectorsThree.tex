@@ -11,6 +11,50 @@
 \end{abstract}
 \maketitle
 
+\section*{Matrix Multiplication: Efficient Data Manipulation}
+
+In the last section, we relied on ``for loops'' to alter each vector in our smiley face data under the various transformations. For instance we required the use of a for loop to apply the stretching as below.
+
+\begin{verbatim}
+load +linalg/face_points.mat
+
+S = [1 0; 0 2];
+for i=1:size(face_points,2)
+    face_points(:,i)=S*face_points(:,i);
+end
+linalg.simple_plot_cloud(face_points);
+\end{verbatim}
+
+Let's re-visit the definition of matrix multiplication for a moment, becuase this will give us an easier way to manipulate data using matrices!
+
+\begin{definition}
+
+    Let $A$ be an $m\times n$ matrix and $B$ be an $n\times p$ matrix. The product $AB$ is an $m\times p$ matrix whose columns are given by 
+
+    $$AB=\begin{bmatrix} A\vec{b}_1 & A\vec{b}_2 & \cdots & A\vec{b}_p \end{bmatrix}$$
+
+    where $\vec{b}_1,\vec{b}_2,\ldots,\vec{b}_p$ are the columns of $B$.
+
+\end{definition}
+
+If you notice, matrix $A*B$ multiplication is \emph{defined} to make a new matrix by applying $A$ to each column of $B$ individually. So, we don't need to use a for-loop to enact a linear transformation on data vectors, we just need to multiply the transformation by the data!
+
+Said differently, the data matrix \texttt{face\_points} is a matrix of $2$-dimensional vectors. We scaled \texttt{face\_points} by individually applying $S$ to the columns of \texttt{face\_points} in the above code. If we instead just did the single matrix multiplication $S*$\texttt{face\_points}, we would achieve the same result but with a single operation. 
+
+Try it out!
+
+\begin{verbatim}
+load +linalg/face_points.mat
+
+S = [1 0; 0 2]
+
+face_points=S*face_points
+
+linalg.simple_plot_cloud(face_points);
+\end{verbatim}
+
+You'll notice you got the same result! This will make our data manipulation moving forward much more simple!
+
 \section*{Properties of Matrix Multiplication}
 
     One might expect that, with how much more nuanced matrix multiplication and matrix-vector multiplication are compared to scalar multiplication, that there would be some extra rules and constraints.
@@ -197,7 +241,7 @@
 
         \end{selectAll}
 
-        \begin{solution}
+        \begin{feedback}
         
             $N^T$ is a $3\times 4$ matrix, so it outputs a $3$-dimensional vector. $M$ is a $2\times 3$ matrix, so it takes in a $3$-dimensional vector and thus the product $MN^T$ is allowed.
 
@@ -207,7 +251,7 @@
 
             $M$ is a $2\times 3$ matrix, so it outputs a $2$-dimensional vector. $P$ is a $2\times 2$ matrix, so it takes in a $2$-dimensional vector and thus the product $PM$ is allowed.
 
-        \end{solution}
+        \end{feedback}
 
     \end{example}
 

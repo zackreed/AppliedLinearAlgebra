@@ -179,7 +179,7 @@ We now continue this theme of linear transformations to develop intuition for ho
 
     \begin{example}
 
-    Putting this together, we see that the composite transformation matrix $RS$ is 
+    Using the results $R(S\vec{e}_1)$ and $R(S\vec{e}_2)$, we can form a new matrix, called $RS$.
     
     $$RS=\begin{bmatrix} \cos 60 & -2\sin 60 \\ \sin 60 & 2\cos 60 \end{bmatrix}.$$
 
@@ -189,13 +189,15 @@ We now continue this theme of linear transformations to develop intuition for ho
 
     \begin{verbatim}
 
-        load +linalg/face_points.mat
+    load +linalg/face_points.mat
 
-        RS = [cosd(60) -2*sind(60); sind(60) 2*cosd(60)];
-        for i=1:length(face_points)
-            face_points(i,:)=RS*face_points(i,:)';
-        end
-        linalg.plot_img_points(face_points)
+    RS = [cosd(60) -2*sind(60); sind(60) 2*cosd(60)];
+
+    for i=1:size(face_points,2)
+        face_points(:,i)=RS*face_points(:,i);
+    end
+
+    linalg.plot_img_points(face_points)
     \end{verbatim}
 
     This yields the same smiley face as the two transformations in sequence!
@@ -279,17 +281,17 @@ We now continue this theme of linear transformations to develop intuition for ho
 
             \texttt{F = [-1 0; 0 1]}
 
-            \texttt{for i=1:length(face\textunderscore points)}
+            \texttt{for i=1:size(face\textunderscore points,2)}
 
-            \texttt{    face\textunderscore points(i,:)=}$\answer[format=string]{S}$\texttt{*face\textunderscore points(i,:)';}
+            \texttt{    face\textunderscore points(:,i)=}$\answer[format=string]{S}$\texttt{*face\textunderscore points(:,i);}
 
-            \texttt{        face\textunderscore points(i,:)=}$\answer[format=string]{R}$\texttt{*face\textunderscore points(i,:)';}
+            \texttt{        face\textunderscore points(:,i)=}$\answer[format=string]{R}$\texttt{*face\textunderscore points(:,i);}
 
-            \texttt{        face\textunderscore points(i,:)=}$\answer[format=string]{F}$\texttt{*face\textunderscore points(i,:)';}
+            \texttt{        face\textunderscore points(:,i)=}$\answer[format=string]{F}$\texttt{*face\textunderscore points(:,i);}
 
             \texttt{end}
 
-            \texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
+            \texttt{linalg.simple\_plot\_cloud(face\textunderscore points)}
 
             \item Now we can do the same thing, but as one transformation. We'll call the composite matrix $M$.
             
@@ -307,11 +309,11 @@ We now continue this theme of linear transformations to develop intuition for ho
 
             \texttt{for i=1:length(face\textunderscore points)}
 
-            $\qquad $\texttt{face\textunderscore points(i,:) = }$\answer[format=string]{M}$\texttt{*face\textunderscore points(i,:)';}
+            $\qquad $\texttt{face\textunderscore points(:,i) = }$\answer[format=string]{M}$\texttt{*face\textunderscore points(:,i);}
 
             \texttt{end}
 
-            \texttt{linalg.plot\textunderscore img\textunderscore points(face\textunderscore points)}
+            \texttt{linalg.simple\_plot\_cloud(face\textunderscore points)}
 
         \end{enumerate}
 

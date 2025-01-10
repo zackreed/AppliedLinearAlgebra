@@ -29,9 +29,9 @@ One very important way of thinking about how vectors relate to each other is to 
     \sspan\set{\vect{u}_1,\ldots,\vect{u}_k}
     ~=~ \set{a_1\vect{u}_1+\ldots+a_k\vect{u}_k \mid a_1,\ldots,a_k\text{ in }\R}.
   \end{equation*}
-  \begin{hint}
+  \begin{hint}\name{{\bf Hint: Notation Alert!}}
   
-    Notation alert! Set notation is a common and succinct way to describe collections of mathematical objects. Learning to read set-notation is important for being increasingly comfortable with the language of mathematics as it applies to the sciences.
+    Set notation is a common and succinct way to describe collections of mathematical objects. Learning to read set-notation is important for being increasingly comfortable with the language of mathematics as it applies to the sciences.
 
     The notation $\set{a_1\vect{u}_1+\ldots+a_k\vect{u}_k \mid a_1,\ldots,a_k\text{ in }\R}$ reads "all new vectors $\vect{v}$ of the form $a_1\vect{u}_1+\ldots+a_k\vect{u}_k$ where $a_1,\ldots,a_k$ are real numbers." In words we would say this is all possible linear combinations of the vectors $\vect{u}_1,\ldots,\vect{u}_k$, since we're allowing any collection of real nubmers to scale and add the vectors together.
 
@@ -106,12 +106,12 @@ You can select the appropriate boxes to set the spanning vectors, and then click
   \begin{center}
     \geogebra{rfbeefhu}{846}{503}
   \end{center}
-1
+
   Select the "Standard Span" button and drag the vector $\vec{v}$ to $\vec{v}=[1,2]$. If you then check the "See New Span" box, the grid will shift to the span of your two vectors. 
   
   Using the applet, what linear combination of $\vec{u}$ and $\vec{w}$ makes up $\vec{v}$?
 
-  \begin{hint}
+  \begin{hint}\name{{\bf Hint:}}
   
     Remember that a negative scalar multiple of a vector poitns in the opposite direction of the vector.
 
@@ -267,7 +267,7 @@ You can select the appropriate boxes to set the spanning vectors, and then click
     $\sspan\set{\vect{u},\vect{v}}$.
   \end{solution}
 
-  \begin{example}
+  \begin{solution}
   
     One final time, let's solve this problem, but with MATLAB. 
 
@@ -310,7 +310,7 @@ solve(vector_equation_2, [a,b])
 There's no solution, so \verb|z| is not in the span of \verb|u| and \verb|v|.
 
 
-  \end{example}
+  \end{solution}
   
 \end{example}
 
@@ -325,6 +325,8 @@ There's no solution, so \verb|z| is not in the span of \verb|u| and \verb|v|.
   This motivates the following definitions of lines, planes, and what are called \emph{hyperplanes} in $\R^n$.
 
   \begin{remark}
+
+    We now come to definitions of common spaces of vectors that you will encounter, \emph{lines, planes}, and \emph{hyperplanes}. You've at least encountered lines in previous classes, and they will have been defined differently than what you see here. We will cover lines and planes more fully in Chapter 5, and will align the notion of linear spaces to those encountered in past courses.
 
   \begin{definition}\name{Lines}
 

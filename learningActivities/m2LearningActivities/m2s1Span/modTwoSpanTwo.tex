@@ -17,7 +17,7 @@ We now become more specific about the structures of vector sets, called \emph{ve
   The magic of linear combinations, span, and redundancy is that when you have a set of only non-redundant vectors, you can build an entire space from them. This is the idea behind \emph{spaces}, \emph{subspaces} and \emph{bases}. 
 
   As we saw earlier, the span of 0 vectors in $\R^n$ is a point, namely the set $\set{\vect{0}}$. The span of one non-zero vector is a line
-through the origin, and the span of two linearly independent vectors
+through the origin, and the span of two non-redundant vectors
 is a plane through the origin.
 
 As we saw in the previous exploration, you can have points, lines, and planes that live within larger spaces, such as the line and plane living in $\R^3$.
@@ -47,7 +47,7 @@ This requires the langauge of \emph{vector spaces}, \emph{subspaces} and \emph{b
 
   Now, a subspace is essentially a vector space, but we contextualize it within a larger vector space.
 
-Take a look back at the slinear spaces we've defined so far: points, lines, and planes. Each of these are spaces in their own right, and can be considered ``subspaces'' of $\R^n$ for any $n$ greater than the minimum number of necessary spanning vectors.
+Take a look back at the linear spaces we've defined so far: points, lines, and planes. Each of these are spaces in their own right, and can be considered ``subspaces'' of $\R^n$ for any $n$ greater than the minimum number of necessary spanning vectors.
 
 \begin{center}
   \begin{tikzpicture}
@@ -80,6 +80,7 @@ We also call these sets, respectively, a {\em $0$-dimensional
 to generalize this concept of subspace to arbitrary dimensions.
 
 \begin{definition}\name{Subspace}
+
   A subset $V$ of $\R^n$ is called a \textbf{subspace}%
   \index{subspace}%
   \index{subspace!of Rn@of\/ $\R^n$}
@@ -96,6 +97,7 @@ to generalize this concept of subspace to arbitrary dimensions.
 Finally, we need to remove some redundancy. We only really care about the vectors \emph{needed} to span a space, and so we define a \emph{basis} as exactly such a set of vectors.
 
 \begin{definition}\name{Basis}
+
   Let $V$ be a subspace of\/ $\R^n$. Then
   $\set{\vect{u}_1,\ldots,\vect{u}_k}$ is a \textbf{basis} for
   $V$ if the following two conditions hold:%
@@ -131,43 +133,6 @@ Finally, we need to remove some redundancy. We only really care about the vector
   \index{basis!standard}
   of\/ $\R^n$.
 \end{example}
-
-\begin{example}\name{A non-standard basis of\/ $\R^3$}
-  \index{basis!of Rn@of\/ $\R^n$}% 
-  Check that the vectors
-  \begin{equation*}
-    \vect{u}_1 = \startmat{r} 1 \\ 2 \\ 1 \stopmat,\quad
-    \vect{u}_2 = \startmat{r} 0 \\ 1 \\ 0 \stopmat,\quad
-    \mbox{and}\quad
-    \vect{u}_3 = \startmat{r} -1 \\ 0 \\ 1 \stopmat
-  \end{equation*}
-  form a basis of\/ $\R^3$.
-\end{example}
-
-\begin{solution}
-  We must check that the vectors $\vect{u}_1,\vect{u}_2,\vect{u}_3$
-  are linearly independent and span $\R^3$. To check linear
-  independence, 
-
-
-  so $\vect{u}_1,\vect{u}_2,\vect{u}_3$ are linearly independent.
-
-
-  To check that they span all of\/ $\R^3$, let $\vect{w}=\begin{bmatrix} w_1 \\ w_2 \\ w_3 \end{bmatrix}$
-  be an arbitrary element of\/ $\R^3$. We must show that $\vect{w}$ is a linear
-  combination of $\vect{u}_1,\vect{u}_2,\vect{u}_3$. This amounts to
-  solving the system of equations
-  \begin{equation*}
-    a_1\,\vect{u}_1+a_2\,\vect{u}_2+a_3\,\vect{u}_3 = \vect{w},
-  \end{equation*}
-  
-  The system is clearly consistent, so it has a solution, and
-  therefore $\vect{w}$ is indeed a linear combination of
-  $\vect{u}_1,\vect{u}_2,\vect{u}_3$. Since $\vect{w}$ was an
-  arbitrary vector of\/ $\R^3$, it follows that
-  $\vect{u}_1,\vect{u}_2,\vect{u}_3$ span $\R^3$.
-\end{solution}
-
 
 \end{exploration}
 
@@ -254,6 +219,42 @@ With this terminology, we can say that a basis for a space $V$ is a linearly ind
   \end{center}
 
 \end{solution}
+
+% \begin{example}\name{A non-standard basis of\/ $\R^3$}
+%   \index{basis!of Rn@of\/ $\R^n$}% 
+%   Check that the vectors
+%   \begin{equation*}
+%     \vect{u}_1 = \startmat{r} 1 \\ 2 \\ 1 \stopmat,\quad
+%     \vect{u}_2 = \startmat{r} 0 \\ 1 \\ 0 \stopmat,\quad
+%     \mbox{and}\quad
+%     \vect{u}_3 = \startmat{r} -1 \\ 0 \\ 1 \stopmat
+%   \end{equation*}
+%   form a basis of\/ $\R^3$.
+% \end{example}
+
+% \begin{solution}
+%   We must check that the vectors $\vect{u}_1,\vect{u}_2,\vect{u}_3$
+%   are linearly independent and span $\R^3$. To check linear independence, use MATLAB's \texttt{solve} command, again. (We will develop more sophisticated ways of doing this in the next chapter)
+
+%   \begin{verbatim}
+%     u_1=[1;2;1]
+%     u_2=[0;1;0]
+%     u_3=[-1;0;1]
+    
+%     syms a b c
+%     assume(a^2+b^2+c^2>0)
+%     vector_equation=a*u_1+b*u_2+c*u_3==[0;0;0]
+%     solve(vector_equation,[a,b,c])
+%   \end{verbatim}
+
+
+%   so $\vect{u}_1,\vect{u}_2,\vect{u}_3$ are linearly independent.
+
+
+%   To check that they span all of\/ $\R^3$, 
+
+%   NEED TO UPDATE THIS!
+% \end{solution}
 
 \begin{remark}\name{Defining Dimension in terms of Space}
 

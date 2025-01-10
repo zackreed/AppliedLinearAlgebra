@@ -11,7 +11,7 @@
 \end{abstract}
 \maketitle
 
-\begin{exploration}\name{Matrices Transform Vectors}
+\section*{Matrices Transform Vectors}
 
     Let's begin by looking at a plot of many vectors in the plane. This is a very simple example where collections of vectors give human-interpretable data. In this case, the vectors all form the outline of a smiley face, as seen in the figure below:
 
@@ -46,7 +46,7 @@
 
         While we can use trigonometry to find an explicit function for rotatinge vectors, say by converting the cooridnates to angles and then further rotating to yeild new coordinates under the desired rotation, we can take a much simpler approach using the key tools of linear algebra, linear combinations.
 
-        We already know that we can reprsent vectors as linear combinations of basis vectors (or more generally of spanning vectors). The typical starting point for any transformation (such as rotations) is to consider the standard basis vectors. For our purposes of planar images, we'll work with $\vec{i} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\vec{j} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$.
+        We already know that we can represent vectors as linear combinations of basis vectors (or more generally of spanning vectors). The typical starting point for any transformation (such as rotations) is to consider the standard basis vectors. For our purposes of planar images, we'll work with $\vec{i} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\vec{j} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$.
 
         To rotate $\vec{i}$ by some angle $\theta$, its new coordinates depend on the sine and cosine of $\theta$, so if for now we consider our rotation function $r$ to be a rotation by $\theta$, then we can write $r(\vec{i}) = \begin{bmatrix} \cos\theta \\ \sin\theta \end{bmatrix}$.
 
@@ -161,7 +161,10 @@
 
         As it turns out, this process defines a whole class of transformations, where we don't just rotate vectors, but can also stretch, shrink, reflect, shear, and more generally apply any kind of transformation we want, as long as we build it from basis vectors.
 
+    \end{remark}
+
         \begin{definition}\name{Linear transformation}
+
             A vector function $T:\R^n\to \R^m$ is called a \textbf{linear
               transformation}%
             \index{linear transformation!on $\R^n$}, or simply \textbf{linear}, if it
@@ -183,6 +186,7 @@
         If we interpret the columns of a matrix $A$ as the transformations of the standard basis vectors, then the product $A\vec{v}$ of $A$ with any vector $\vec{v}$ is the transformed vector of $\vec{v}$. From this, we define matrix-vector multiplcation in the following way:
 
         \begin{definition}\name{Matrix-Vector Multiplication}
+
             Let $A$ be an $m\times n$ matrix and $\vec{v}$ be a vector in $\R^n$. The product $A\vec{v}$ is the vector in $\R^m$ obtained from the following operations:
             
             \begin{enumerate}
@@ -211,10 +215,10 @@
             Running the code
 
             \begin{verbatim}
-                theta=60;
-                R = [cosd(60) -sind(60); sind(60) cosd(60)];
-                v = [1; 1];
-                R*v
+            theta=60;
+            R = [cosd(theta) -sind(theta); sind(theta) cosd(theta)];
+            v = [1; 1];
+            R*v
             \end{verbatim}
 
             yeilds $\begin{bmatrix} -.37 \\ 1.37 \end{bmatrix}$, which matches the rotation calculated from the GeoGebra applet.
@@ -240,7 +244,7 @@
 
         \end{example}
 
-    \end{remark}
+
 
     \begin{example}\name{Rotating the Smile}
 
@@ -253,34 +257,32 @@
 
             \item Load the smiley face with the rotated smile and view the matrices \texttt{face\textunderscore points} and \texttt{smile\textunderscore points}. (Remember that a matrix is an array of vectors, which is how we interpret both of these matrices).
             \begin{verbatim}
-                load +linalg/separate_face_points.mat
-                face_points
-                smile_points
+            load +linalg/separate_face_points.mat
+            face_points
+            smile_points
             \end{verbatim}
 
             \item Re-write each vector (row) $\vec{v}$ in \texttt{smile\textunderscore points} as the rotated vector $R*\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
             
             \begin{verbatim}
-
-                theta=-90
-                R=[cosd(theta), -sind(theta);
-                    sind(theta), cosd(theta)]
-                for i=1:length(smile_points)
-                    %NOTE: You need to transpose the vector in smile_points 
-                    %so that the dimensions match, R is 2x2 and v is 1x2, 
-                    %so we want v' the 2x1 transpose
-                    smile_points(i,:)=R*smile_points(i,:)';
-                end
-
+            theta=-90
+            R=[cosd(theta), -sind(theta);
+                sind(theta), cosd(theta)]
+            for i=1:length(smile_points)
+                %NOTE: You need to transpose the vector in smile_points 
+                %so that the dimensions match, R is 2x2 and v is 1x2, 
+                %so we want v' the 2x1 transpose
+                smile_points(i,:)=R*smile_points(i,:)';
+            end
             \end{verbatim}
 
             \item Check that the rotation worked!
             
             \begin{verbatim}
-                linalg.plot_img_points(smile_points)
-                hold on
-                linalg.plot_img_points(face_points)
-                hold off
+            linalg.plot_img_points(smile_points)
+            hold on
+            linalg.plot_img_points(face_points)
+            hold off
             \end{verbatim}
 
         \end{enumerate}
@@ -289,9 +291,7 @@
 
     \end{example}
 
-\end{exploration}
-
-\begin{exploration}\name{Other Useful Transformation Matrices}
+\section*{Other Useful Transformation Matrices}
 
     While rotations are common, and actually quite important, there are plenty of other useful transformations that are usefl to know. These also give great opportunities to practice writing linear transformations as matrix-vector products!
 
@@ -606,12 +606,11 @@
           \end{solution}
         \end{enumerate}
 
-        \item somthing 3D
+        
 
         \end{enumerate}
 
     \end{example}
 
-\end{exploration}
 
 \end{document}

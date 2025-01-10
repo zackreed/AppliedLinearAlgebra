@@ -12,7 +12,7 @@
 
 We now become more specific about the structures of vector sets, called \emph{vector spaces}, and narrow in on sets of vectors that fundamentally construct vectors spaces, called \emph{bases}.
 
-\begin{exploration}\name{Bases: No Redundancy}
+\section*{Bases: No Redundancy}
   
   The magic of linear combinations, span, and redundancy is that when you have a set of only non-redundant vectors, you can build an entire space from them. This is the idea behind \emph{spaces}, \emph{subspaces} and \emph{bases}. 
 
@@ -112,9 +112,9 @@ Finally, we need to remove some redundancy. We only really care about the vector
 
 
 
-\end{exploration}
 
-\begin{exploration}\name{Examples of Bases}
+
+\section*{Examples of Bases}
 
 \begin{example}\name{Standard basis of\/ $\R^n$}
   Let $\vect{e}_i$ be the vector in $\R^n$ whose $i\th$ component is $1$
@@ -134,9 +134,9 @@ Finally, we need to remove some redundancy. We only really care about the vector
   of\/ $\R^n$.
 \end{example}
 
-\end{exploration}
 
-\begin{exploration}\name{Bases, Redundancy, and Linear Independence}
+
+\section*{Bases, Redundancy, and Linear Independence}
 
 The point of a basis is that it exactly builds the space you want, without redundancy. This means that if we have a redundant set of vectors, we can make a basis by removing the redundancy. 
 
@@ -280,6 +280,12 @@ With this terminology, we can say that a basis for a space $V$ is a linearly ind
 
 \end{remark}
 
+As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vectors is all you need to span $\RR^n$! You might loosely think about this as each span takes up one dimension of variation in $\RR^n$. If you have used $\vec{n}$ dimensions of variation, then you have covered the entirety of $\RR^n$ and so have spanned $\RR^n$. This is a theorem (e.g. a fact you can assume to be true) as we see here.
+
+\begin{theorem}
+  A set of $n$ linearly independent $n$-dimensional vectors spans $\RR^n$.
+\end{theorem}
+
 \begin{example}
 
   For the following vector sets, find the basis for the span of the vectors, name the kind of subspace set by the span (i.e. point, plane, line) and give the dimension of the spanning subspace.
@@ -290,9 +296,9 @@ With this terminology, we can say that a basis for a space $V$ is a linearly ind
     
     \begin{solution}
     
-      If you use MATLAB, you note that you cannot make $\vect{u}_3$ from $\vect{u}_1$ and $\vect{u}_2$, so $\vect{u}_1$ and $\vect{u}_2$ are linearly independent. 
+      Note that since $\vec{u}_1$ is the only vector with a $1$ in the third component, you cannot make $\vec{u}_1$ from a linear combination of $\vec{u}_2$ and $\vec{u}_3$. Using similar reasoning, you'll note that it is impossible to construct any of $\vec{u}_1$, $\vec{u}_2$ or $\vec{u}_3$ from linear combinations of the other two. Thus, the vectors are linearly independent. 
       
-      Thus, $\sspan\set{\vect{u}_1,\vect{u}_2}=\R^3$, since they are 3 $3$-dimensional linearly independent vectors. This technically makes a \wordChoice{
+      Thus, $\sspan\set{\vect{u}_1,\vect{u}_2,\vec{u}_3}=\R^3$, since they are 3 $3$-dimensional linearly independent vectors. This technically makes a \wordChoice{
         \choice{point}
         \choice{line}
         \choice{plane}
@@ -305,7 +311,7 @@ With this terminology, we can say that a basis for a space $V$ is a linearly ind
     
     \begin{solution}
     
-      If you use MATLAB, you note that $\vec{u}_1-\vec{u}_2=\vec{u}_3$, so $\vec{u}_1$ and $\vec{u}_2$ are linearly dependent, and $\vec{u}_3$ is redundant.
+      If you use MATLAB or reason about the ways to combine the vectors, you note that $\vec{u}_1-\vec{u}_2=\vec{u}_3$, so $\vec{u}_1$ and $\vec{u}_2$ are linearly dependent, and $\vec{u}_3$ is redundant.
       
       Thus, $\sspan\set{\vect{u}_1,\vect{u}_2}$ is a \wordChoice{
         \choice{point}
@@ -346,32 +352,33 @@ $$a_1\vect{u}_1+a_2\vect{u}_2-\vect{u}_3=0.$$
 
 More generally, if linear combinations of vectors add to the zero vector, then at least one of the vectors is a linear combination of the others. This means that the vectors are linearly dependent.
 
-This motivates the following definition:
+This motivates the following theorem:
 
-\begin{definition}\name{Linear Independence}
+\begin{theorem}\name{Linear Independence}
+
   A set of vectors $\vect{u}_1,\ldots,\vect{u}_k$ is \textbf{linearly independent} if the only solution to the equation
 
   $$a_1\vect{u}_1+\ldots+a_k\vect{u}_k=0$$
 
   is $a_1=\ldots=a_k=0$. If there is a non-zero solution, then the vectors are \textbf{linearly dependent}.
-\end{definition}
+\end{theorem}
 
-\begin{example}\name{Basis From Span Revisited}
+% \begin{example}\name{Basis From Span Revisited}
 
-  Let's revisit the prevoius example.
+%   Let's revisit the previous example.
 
-  Since the vectors are linearly dependent, the equation
+%   Since the vectors are linearly dependent, the equation
 
-  $$a_1\vect{u}_1+a_2\vect{u}_2+a_3\vect{u}_3+a_4\vect{u}_4=0$$
+%   $$a_1\vect{u}_1+a_2\vect{u}_2+a_3\vect{u}_3+a_4\vect{u}_4=0$$
 
-  can be satisfied with nonzero $a_1,a_2,a_3,a_4$.
+%   can be satisfied with nonzero $a_1,a_2,a_3,a_4$.
 
-  The \texttt{solve} command can't actually solve this system, but we will find better methods in the next chapter.
-\end{example}
+%   The \texttt{solve} command can't actually solve this system, but we will find better methods in the next chapter.
+% \end{example}
 
 \end{remark}
 
-\end{exploration}
+
 
 As we prepare for probably the most important idea in Linear Algebra, that of Linear Transformations, here's a helpful synthesis from Grant Sanderson:
 

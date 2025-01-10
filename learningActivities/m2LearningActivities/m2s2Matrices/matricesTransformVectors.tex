@@ -262,34 +262,47 @@
             smile_points
             \end{verbatim}
 
-            \item Re-write each vector (row) $\vec{v}$ in \texttt{smile\textunderscore points} as the rotated vector $R*\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
+            \item Verify that the single plot of both \texttt{face\_points} and \texttt{smile\_points} together gives you the face with the incorrectly rotated smile. 
+
+            The course function \texttt{linalg.simple_plot_cloud} will allow you to enter as many matrices as you want (with column vectors of the same dimension) and view the plot of the data as a whole. It color codes the data for you.
+
+            \begin{verbatim}
+            linalg.simple_plot_cloud(smile_points,face_points);
+            \end{verbatim}
+
+            \item Re-write each vector (column) $\vec{v}$ in \texttt{smile\textunderscore points} as the rotated vector $R\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
             
             \begin{verbatim}
             theta=-90
             R=[cosd(theta), -sind(theta);
                 sind(theta), cosd(theta)]
-            for i=1:length(smile_points)
-                %NOTE: You need to transpose the vector in smile_points 
-                %so that the dimensions match, R is 2x2 and v is 1x2, 
-                %so we want v' the 2x1 transpose
-                smile_points(i,:)=R*smile_points(i,:)';
+            
+            %Remember that a "for loop" simply tells the computer to do something over and over again.
+            %In this case, for each column "i" in the second dimension of the matrix smile_points, it
+            %re-writes the column as the matrix-vector product R*v.
+            for i=1:size(smile_points,2)
+                smile_points(:,i)=R*smile_points(:,i);
             end
+            
+            %Check out the new vectors defining smile_points
+            smile_points
             \end{verbatim}
 
-            \item Check that the rotation worked!
+            \item Check that the rotation worked by again plotting \texttt{smile\_points} (which have now been rotated) and \texttt{face\_points}.
             
             \begin{verbatim}
-            linalg.plot_img_points(smile_points)
-            hold on
-            linalg.plot_img_points(face_points)
-            hold off
+            linalg.simple_plot_cloud(smile_points,face_points);
             \end{verbatim}
 
         \end{enumerate}
 
-        The resulting plot should show the smiley face with the smile back in its original orientation.
+        The resulting plot should show the smiley face with the smile in its correct position!
 
     \end{example}
+
+    \begin{remark}
+      The live script \texttt{mod\_2\_matrix\_trans.mlx} in the course files also has further examples and practice. We will go over similar examples in the next two sections, however more practice and exposure is never a bad thing!
+    \end{remark}
 
 \section*{Other Useful Transformation Matrices}
 

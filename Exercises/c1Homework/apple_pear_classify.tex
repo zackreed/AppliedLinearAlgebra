@@ -8,7 +8,7 @@
 %apple_pear_classify
 \begin{problem}
 
-The data that comprises the apple and pear fruit clusters in \href{https://ximera.osu.edu/appliedlinearalgebra/c1ChapterOne/Exercises/c1Homework/apple_pear_vect}{the previous problem} have been collected into two matrices, $A$ and $P$, where each column of $A$ and $P$ is a vector representing a fruit measurement. Each row, therefore, must represent
+The data that comprises the apple and pear fruit clusters in \href{https://ximera.osu.edu/appliedlinearalgebra/c1ChapterOne/Exercises/c1Homework/apple_pear_vect}{the previous problem} have been collected into two matrices, \texttt{Apple} and \texttt{Pear}, where each column of \texttt{Apple} and \texttt{Pear} is a vector representing a fruit measurement. Each row, therefore, must represent
 
 \begin{multipleChoice}
   \choice{the measurement of a feature.}
@@ -16,11 +16,11 @@ The data that comprises the apple and pear fruit clusters in \href{https://ximer
   \choice{a fruit.}
 \end{multipleChoice}
 
-The matrices for $A$ and $P$ are given in the Module 1 course files, saved as \texttt{Apple.mat} and \texttt{Pear.mat}. Load the matrices into MATLAB and determine the dimensions of each matrix.
+The matrices for \texttt{Apple} and \texttt{Pear} are given in the Module 1 course files, saved as \texttt{Apple.mat} and \texttt{Pear.mat}. Load the matrices into MATLAB and determine the dimensions of each matrix.
 
-The matrix $A$ has dimensions $\answer{3}$ rows by $\answer{68}$ columns. The matrix $P$ has dimensions $\answer{3}$ rows by $\answer{75}$ columns.
+The matrix \texttt{Apple} has dimensions $\answer{3}$ rows by $\answer{68}$ columns. The matrix \texttt{Pear} has dimensions $\answer{3}$ rows by $\answer{75}$ columns.
 
-Using the data, find the average pear measurement vector $\overline{P}$ and the average apple measurement vector $\overline{A}$. Using these averages, determine which of the following fruit should be classified as a pear, apple, or neither:
+Using the data, find the average pear measurement vector $\overline{P}$ and the average apple measurement vector $\overline{\texttt{Apple}}$. Using these averages, determine which of the following fruit should be classified as a pear, apple, or neither:
 
 \begin{hint}[A note on answer entry]
   Enter the strings "apple" or "pear" or "neither" without quotes in your answers.
@@ -84,7 +84,7 @@ is more likely to be a $\answer[format=string]{pear}$, with a distance of $\answ
     load +linalg/Pear.mat
   \end{verbatim}
 
-  To find the average column of a matrix in MATLAB, use the \texttt{mean} function. The second argument of mean specifies whether you want to average along the rows or columns. For example, to find the average column of matrix $A$, use the command \texttt{mean(A,2)}. For example, to find the average row of matrix $P$, use the command \texttt{mean(P,1)}.
+  To find the average column of a matrix in MATLAB, use the \texttt{mean} function. The second argument of mean specifies whether you want to average along the rows or columns. For example, to find the average column of matrix \texttt{Apple}, use the command \texttt{mean(Apple,2)}. For example, to find the average row of matrix \texttt{Pear}, use the command \texttt{mean(Pear,1)}.
 
   Warning: Double check that your vectors are all of the same dimension (i.e. 1x3 vs 3x1), as this will impact the distance calculations and difference vectors.
 

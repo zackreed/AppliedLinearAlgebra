@@ -43,15 +43,13 @@ We now continue this theme of linear transformations to develop intuition for ho
         Let's first do each transformation in MATLAB, first the vertical stretch. For ease, we'll first load a separate file called \texttt{face\textunderscore points.mat} that contains the smiley face points as a single matrix.
 
         \begin{verbatim}
-
-            load +linalg/face_points.mat
-        
-            S = [1 0; 0 2];
-            for i=1:length(face_points)
-                face_points(i,:)=S*face_points(i,:)';
-            end
-            linalg.plot_img_points(face_points)
-
+        load +linalg/face_points.mat
+    
+        S = [1 0; 0 2];
+        for i=1:size(face_points,2)
+            face_points(:,i)=S*face_points(:,i);
+        end
+        linalg.simple_plot_cloud(face_points);
         \end{verbatim}
 
         That should yield a smiley face that is stretched vertically by a factor of $2$.
@@ -60,15 +58,16 @@ We now continue this theme of linear transformations to develop intuition for ho
             \includegraphics[width=\textwidth]{face_stretch.png}
         \end{center}
 
-        Next, if we just re-load \texttt{face\textunderscore points} and run the same code (but for a rotation matrix), we won't keep the stretching. We would just get a $60^\circ$ rotation of the original smiley face like below.
+        Next, if we just re-load \texttt{face\textunderscore points} and run the same code (but for a rotation matrix), then the stretching would be lost since we're doing a new transformation on the \emph{original} points. We would just get a $60^\circ$ rotation of the original smiley face like below.
 
         \begin{verbatim}
+        load +linalg/face_points.mat
 
-            R = [cosd(60) -sind(60); sind(60) cosd(60)];
-            for i=1:length(face_points)
-                face_points(i,:)=R*face_points(i,:)';
-            end
-            linalg.plot_img_points(face_points)
+        R = [cosd(60) -sind(60); sind(60) cosd(60)];
+        for i=1:size(face_points,2)
+            face_points(:,i)=R*face_points(:,i);
+        end
+        linalg.simple_plot_cloud(face_points);
         \end{verbatim}
 
         \begin{center}
@@ -80,20 +79,20 @@ We now continue this theme of linear transformations to develop intuition for ho
         If we do one transformation and then the other right after, we could get the following: 
 
         \begin{verbatim}
-                
-                load +linalg/face_points.mat
-    
-                S = [1 0; 0 2];
-                R = [cosd(60) -sind(60); sind(60) cosd(60)];
-                for i=1:length(face_points)
-                    face_points(i,:)=S*face_points(i,:)';
-                end
-                linalg.plot_img_points(face_points)
+        load +linalg/face_points.mat
 
-                for i=1:length(face_points)
-                    face_points(i,:)=R*face_points(i,:)';
-                end
-                linalg.plot_img_points(face_points)
+        S = [1 0; 0 2];
+        R = [cosd(60) -sind(60); sind(60) cosd(60)];
+
+        for i=1:size(face_points,2)
+            face_points(:,i)=S*face_points(:,i);
+        end
+        linalg.simple_plot_cloud(face_points);
+
+        for i=1:size(face_points,2)
+            face_points(:,i)=R*face_points(:,i);
+        end
+        linalg.simple_plot_cloud(face_points);
         \end{verbatim}
 
         Importantly, in between the for loops you see the intermediate stretching step. After the first loop, the vectors were all stretched, then they were further rotated in the second loop.
@@ -110,7 +109,7 @@ We now continue this theme of linear transformations to develop intuition for ho
             \includegraphics[width=\textwidth]{face_stretch_rotate.png}
         \end{center}
 
-        The final smiley face is the result of the two transformations in sequence.
+        The final smiley face is the result of the two transformations in sequence (i.e. one after the other).
 
         \begin{remark}
 
@@ -152,13 +151,13 @@ We now continue this theme of linear transformations to develop intuition for ho
 
     Whereas the rotation matrix $R=\begin{bmatrix} \cos 60 & -\sin 60 \\ \sin 60 & \cos 60 \end{bmatrix}$ would normally tell us where to map $\vec{e}_1$ and $\vec{e}_2$, to continue the tansformation we instead need to apply the matrix to $S\vec{e}_1$ and $S\vec{e}_2$.
 
-    \begin{hint}\name{Notation}
+    \begin{hint}\name{{\bf Hint:} Notation}
 
         Don't let the notation fool you, $S\vec{e}_1$ and $S\vec{e}_2$ vectors, not matrices. Remember that multiplying a matrix by a vector gives you a transformed vector.
 
     \end{hint}
 
-    \begin{question}
+    \begin{example}
 
         What are the rotated vectors $RS\vec{e}_1$ and $RS\vec{e}_2$?
 
@@ -174,7 +173,7 @@ We now continue this theme of linear transformations to develop intuition for ho
 
         \end{solution}
 
-    \end{question}
+    \end{example}
 
     Putting this together, we see that the composite transformation matrix $RS$ is 
     
@@ -256,7 +255,7 @@ We now continue this theme of linear transformations to develop intuition for ho
             
             Let's apply the transformations in sequence using MALTAB. 
             
-            \begin{hint}\name{MATLAB}
+            \begin{hint}\name{{\bf Hint:} MATLAB}
             
             NOTE: The code will do it all in one for loop rather than three, but notice that each line within the for loop is applying each separate transformation to the smiley face points. 
             

@@ -325,7 +325,7 @@
             \index{matrix!of a reflection}%
             \index{reflection!matrix of}%
             \index{linear transformation!reflection} $A$ corresponding to this
-            linear transformation, and a formula for $T$.
+            linear transformation.
           
           \begin{solution}
             The before-and-after picture for a reflection about the $y$-axis
@@ -359,10 +359,10 @@
                   (0,0) -- (0,5) -- (3,5) -- (3,4) -- (1,4) --
                   (1,3) -- (2,3) -- (2,2) -- (1,2) -- (1,0) -- cycle;
                   \draw[blue,thick,->,xscale=-1] (0,0) -- node[below]
-                  {$T(\vect{e}_1) = \begin{bmatrix}-1\\0\end{bmatrix}$}
+                  {$T(\vect{e}_1) = [-1,0]$}
                   (5,0);
   \draw[blue,thick,->,xscale=-1] (0,0) --
-                  node[right] {$T(\vect{e}_2) = \begin{bmatrix}0\\1\end{bmatrix}$}
+                  node[right] {$T(\vect{e}_2) = [0,1]$}
                   (0,5);
                 \end{scope}
               \end{tikzpicture}
@@ -376,13 +376,13 @@
             Therefore, the matrix of $T$ is
             \begin{equation*}
               A = \begin{bmatrix}
-                -1 & 0 \\
-                0  & 1 \\
+                \answer{-1} & \answer{0} \\
+                \answer{0}  & \answer{1} \\
               \end{bmatrix}.
             \end{equation*}
           \end{solution}
 
-          \item We describe the linear transformation that is given by each of the
+          \item Describe the linear transformation that is given by each of the
             following matrices in terms of reflections, rotations, and scalings:
             \begin{enumerate}
                 \item 
@@ -496,10 +496,7 @@
                 \end{center}
 
                 The
-                transformation $B$ is a scaling%
-                \index{matrix!of a scaling}%
-                \index{scaling!matrix of}%
-                \index{linear transformation!scaling} by a factor of $2$. 
+                transformation $B$ is a scaling of each basis vector (and hence each vector) by a factor of $2$. 
     
             \end{solution}
 

@@ -15,43 +15,97 @@
         \choice[correct]{could be}
         \choice{cannot be}
     } linearly independent.
-        \begin{problem}
-            The 
-        \end{problem}
-    \item Every set of $4$ vectors in $\R^5$ is linearly independent.
-    \item Every set of $6$ vectors in $\R^5$ is linearly dependent.
-    \item No set of $4$ vectors spans $\R^5$.
-    \item Every linearly independent set of $5$ vectors in $\R^5$ is a
-      basis of $\R^5$.
-    \item Every linearly independent set of $4$ vectors in $\R^5$ is a
-      basis of $\R^5$.
-    \item Some linearly independent set of $4$ vectors in $\R^5$ is a
-      basis of $\R^5$.
-    \item Every spanning set of $6$ vectors in $\R^5$ is a basis of
-      $\R^5$.
-    \item Every linearly independent set of $4$ vectors in $\R^5$ spans
-      a $4$-dimensional subspace of $\R^5$.
+        \begin{feedback}
+          They vectors do not have to be. For example, the vectors
+          $\set{\vect{0},\vect{0},\vect{0},\vect{0},\vect{0}}$ are
+          linearly dependent. 
+        \end{feedback}
+
+
+
+    
+    \item Every set of $4$ vectors in $\R^5$ \wordChoice{
+      \choice{must be}
+      \choice[correct]{could be}
+      \choice{cannot be}
+  } linearly independent.
+    
+    \begin{feedback}
+      Not necessarily. For example, the vectors
+      $\set{\vect{0},\vect{0},\vect{0},\vect{0}}$ are linearly
+      dependent.
+    \end{feedback}
+
+
+    
+
+    \item Every set of $6$ vectors in $\R^5$ \wordChoice{
+      \choice[correct]{must be}
+      \choice{could be}
+      \choice{cannot be}
+  } linearly dependent.
+
+    \begin{feedback}
+      If we have $5$ linearly independent vectors in $\R^5$, that set \emph{must} span $\R^5$. Hence, the addition of another vector must be in the span of the first $5$. If the first $5$ are not linearly independent, then they already are linearly dependent.
+    \end{feedback}
+
+
+    \item \wordChoice{
+      \choice{Every}
+      \choice{Some}
+      \choice[correct]{No}
+  } set of $4$ vectors spans $\RR^5$.
+
+    \begin{feedback}
+      Even if all vectors are linearly independent, the result is a $4$-dimensional subspace of $\RR^5$.
+    \end{feedback}
+
+    \item Every linearly independent set of $5$ vectors in $\R^5$ \wordChoice{
+      \choice[correct]{must be}
+      \choice{could be}
+      \choice{cannot be}
+  } a basis of $\R^5$.
+
+    \begin{feedback}
+      This satisfies the definition of a basis.
+    \end{feedback}
+  
+    \item Every linearly independent set of $4$ vectors in $\R^5$ \wordChoice{
+      \choice{must be}
+      \choice{could be}
+      \choice[correct]{cannot be}
+  } a
+    basis of $\R^5$.
+
+    \begin{feedback}
+      Again, the span is at most a $4$-dimensional subspace of $\RR^5$.
+    \end{feedback}
+  
+  
+    \item Every spanning set of $6$ vectors in $\R^5$ \wordChoice{
+      \choice{must be}
+      \choice{could be}
+      \choice[correct]{cannot be}
+  } a basis of
+    $\R^5$.
+
+    \begin{feedback}
+      By definition a basis must be linearly independent. A set of $6$ vectors in $\RR^5$ must be linearly dependent.
+    \end{feedback}
+
+
+    \item Every linearly independent set of $4$ vectors in $\R^5$ \wordChoice{
+      \choice[correct]{must}
+      \choice{could}
+      \choice{cannot}
+  } span
+    a $4$-dimensional subspace of $\R^5$.
+
+    \begin{feedback}
+      Linearly independent sets are not redundant, and hence you gain one dimension of variation for each vector.
+    \end{feedback}
     \end{enumerate}
 
-      \begin{enumerate}
-      \item No. For example, the vectors
-        $\set{\vect{0},\vect{0},\vect{0},\vect{0},\vect{0}}$ are
-        linearly dependent.
-      \item No. For example, the vectors
-        $\set{\vect{0},\vect{0},\vect{0},\vect{0}}$ are linearly
-        dependent.
-      \item Yes, by Proposition~\ref{prop:size-linearly-independent-or-spanning}.
-      \item Correct, by Proposition~\ref{prop:size-linearly-independent-or-spanning}.
-      \item Yes, by Proposition~\ref{prop:basis-test-k-vectors}.
-      \item No, in fact no such set is a basis of $\R^5$, since every
-        basis of $\R^5$ consists of $5$ vectors by
-        Theorem~\ref{thm:bases-same-size}.
-      \item No, as noted in the previous answer.
-      \item No, no basis of $\R^5$ can have $6$ elements.
-      \item Yes, because a linearly independent set of vectors is a
-        basis of the subspace it spans.
-      \end{enumerate}
-
-\end{exercise}
+  \end{exercise}
 
 \end{document}

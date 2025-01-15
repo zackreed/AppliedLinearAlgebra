@@ -431,7 +431,7 @@ Then to add row 1 to row 3, you would input
 
 
 \begin{verbatim}
-linalg.row_add{1,3,1,3}
+linalg.row_add(1,3,1,3)
 \end{verbatim}
 
 You would then multiply them together, and then by $M$, to make the new augmented matrix. For instance:
@@ -452,13 +452,13 @@ Which gives the same augmented matrix as you find below.
 
  This yields
 
- \[
+ $$
 E_{1,2}(-4)\rightarrow%{R_2-4R_1}\\
 E_{1,3}(1)\rightarrow%{R_3+R_1}\\
 \left[\begin{array}{ccc|c} 
   1&\answer{-1}&-3&1\\\answer{0}&2&5&\answer{-3}\\0&0&1&2
   \end{array}\right]
-\]
+$$
 
 Now do the same (or go by hand) to carry out and verify the remaining row operations.
 

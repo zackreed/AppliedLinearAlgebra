@@ -406,8 +406,13 @@ The corresponding augmented matrix is:
  
 
  We then add $-4$ times row 1 to row 2, and then add row 1 to row 3. 
+
+\end{example}
+
+\begin{solution}
  
  \begin{remark}\name{MATLAB Help with Elementary Matrices}
+
  Rather than needing to rewrite the matrices each time, the course linalg folder has provided simple functions to make these elementary matrices.
 
 The functions are \texttt{row\_add}, \texttt{row\_scale}, and \texttt{row\_swap}, which match the names of the elementary matrices. The arguments to these functions are always: 1st - the row(s) in the $ij$ order of the elementary matrices $E_{ij}$, 2nd - any scalars as necessary, 3rd - the dimension of the matrix. 
@@ -520,7 +525,7 @@ E_{3,1}(1/2)\rightarrow E_{3,2}(-5/2)\rightarrow
 
 \end{remark}
 
-\end{example}
+\end{solution}
 
 
 This gives us the solution $(\frac{1}{2}, -\frac{13}{2}, 2)$.

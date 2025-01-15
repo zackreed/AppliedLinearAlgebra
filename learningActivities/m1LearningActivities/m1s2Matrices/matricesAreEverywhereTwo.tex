@@ -139,15 +139,15 @@ Putting these into a matrix, we have:
   \begin{enumerate}
   \item We need to put Indiana, Minnesota, and Wisconsin into a matrix. These are the third, sixth, and twelfth rows of $P$. Since none of them are connected, we need to pull out each individual rows and stack them together. We do this using the notation (I'll start and you finish):
 
-    \[
-    \texttt{P(}\answer[given]{3}\texttt{,:); P(}\answer[given]{6}\texttt{,:);}\answer[given,format=string]{P(12,:)}\texttt{]} 
-    \]
+    
+    $$\texttt{P(}\answer[given]{3}\texttt{,:); P(}\answer[given]{6}\texttt{,:);}\answer[given,format=string]{P(12,:)}\texttt{]} $$
+    
     \item To find the submatrix of the Midwest that includes only the
       demographics of Black, American Indian, and Hawaiian, we similarly use the notation:
 
-      \[
-      \texttt{P(:,}\answer{2}\texttt{); P(:,}\answer{3}\texttt{);}\answer[format=string]{P(:,5)}\texttt{]}
-      \]
+      
+      $$\texttt{P(:,}\answer{2}\texttt{); P(:,}\answer{3}\texttt{);}\answer[format=string]{P(:,5)}\texttt{]}$$
+      
   \item To find the combined demographics of Michigan, Ohio, and
     Indiana we treat the rows as vectors and add them together. You can do this a couple of ways, such as first defining each as a new vector and then adding them together, or by doing it all at once. For clarity, I'll first make them all vectors:
 
@@ -162,9 +162,9 @@ Putting these into a matrix, we have:
 
       If you entered this correctly, you should get the following:
 
-    \[
-    \vec{p}_{\texttt{MI}} + \vec{p}_{\texttt{OH}} + \vec{p}_{\texttt{IN}} = (\answer[given]{22641134},\answer[given]{3434727},\answer[given]{84507},\answer[given]{744076},\answer[given]{9229},\answer[given]{1432402})
-    \]
+    
+    $$\vec{p}_{\texttt{MI}} + \vec{p}_{\texttt{OH}} + \vec{p}_{\texttt{IN}} = (\answer[given]{22641134},\answer[given]{3434727},\answer[given]{84507},\answer[given]{744076},\answer[given]{9229},\answer[given]{1432402})$$
+    
   \item We want to define a new matrix for 2024 let's call it $\texttt{P\_2024}$.
   
   To find the population growth matrix, we can treat each row/column as if they were vectors, so we use the scalar multiplication, but we can do it on the entire matrix at once. 

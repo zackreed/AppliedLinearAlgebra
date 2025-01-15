@@ -355,7 +355,7 @@ This utility compounds when we try to use technology to speed things up! In MATL
 
  
 
-\begin{remark}{Formal Definitions}
+\begin{remark}\name{Formal Definitions}
 
   Let's formalize our definitions.  Every linear system
 $$\begin{array}{ccccccccc}
@@ -407,7 +407,7 @@ The corresponding augmented matrix is:
 
  We then add $-4$ times row 1 to row 2, and then add row 1 to row 3. 
  
- \begin{remark}{MATLAB Help with Elementary Matrices}
+ \begin{remark}\name{MATLAB Help with Elementary Matrices}
  Rather than needing to rewrite the matrices each time, the course linalg folder has provided simple functions to make these elementary matrices.
 
 The functions are \texttt{row\_add}, \texttt{row\_scale}, and \texttt{row\_swap}, which match the names of the elementary matrices. The arguments to these functions are always: 1st - the row(s) in the $ij$ order of the elementary matrices $E_{ij}$, 2nd - any scalars as necessary, 3rd - the dimension of the matrix. 
@@ -623,7 +623,7 @@ Use MATLAB to find the \rref of the augmented matrix associated with the system.
 
  \end{feedback}
   
-This \rref matrix is not quite as nice as the our earlier matrices, and is more reminiscent of the balanced chemical equations that had many possible solutions. It is, however, in reduced row-echelon form.  
+This \texttt{rref} matrix is not quite as nice as the our earlier matrices, and is more reminiscent of the balanced chemical equations that had many possible solutions. It is, however, in reduced row-echelon form.  
 
 Let's see if (and how many) solutions exist for the system!
 

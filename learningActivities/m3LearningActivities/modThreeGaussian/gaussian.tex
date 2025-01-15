@@ -206,27 +206,21 @@ That's a key interpretation of the variables $x, y, z, w$ satisfying the system,
   Let's check it in MATLAB! We can set up the matrix 
 
   \begin{verbatim}
-    
-    M=[1, -1, 0, 0;
-        2, -2, 1, 2;
-        0, 0, 2, 1]
-
+  M=[1, -1, 0, 0;
+      2, -2, 1, 2;
+      0, 0, 2, 1]
   \end{verbatim}
 
   Then, we set up the potential solution vector 
 
   \begin{verbatim}
-  
-    x=[-1; -1; 2; 1]
-
+  x=[-1; -1; 2; 1]
   \end{verbatim}
 
   Then, we multiply $M*x$ and hope that it's $\vec{b}$!
 
   \begin{verbatim}
-  
-    b=M*x
-
+  b=M*x
   \end{verbatim}
 
   Thankfully, we get the right solution vector!
@@ -409,7 +403,7 @@ The corresponding augmented matrix is:
 
 \end{example}
 
-\begin{solution}
+
  
  \begin{remark}\name{MATLAB Help with Elementary Matrices}
 
@@ -428,9 +422,7 @@ $E_{12}(-4)=\begin{bmatrix}
 The MATLAB function that will quickly give you this matrix is 
 
 \begin{verbatim}
-
-  linalg.row_add(1,2,-4,3)
-
+linalg.row_add(1,2,-4,3)
 \end{verbatim}
 
 Notice that the order of the entries in \texttt{row\_add} are the same as you would write in the elementary matrix, just with the added need to put a dimension down as well.
@@ -439,21 +431,17 @@ Then to add row 1 to row 3, you would input
 
 
 \begin{verbatim}
-
-  linalg.row_add{1,3,1,3}
-
+linalg.row_add{1,3,1,3}
 \end{verbatim}
 
 You would then multiply them together, and then by $M$, to make the new augmented matrix. For instance:
 
 \begin{verbatim}
-
 M=[1, -1, -3, 1;
 4, -2, -7, 1;
 -1, 1, 4, 1]
 
 aug=linalg.row_add(1,3,1,3)*linalg.row_add(1,2,-4,3)*M
-
 \end{verbatim}
 
 Which gives the same augmented matrix as you find below.
@@ -508,15 +496,13 @@ E_{3,1}(1/2)\rightarrow E_{3,2}(-5/2)\rightarrow
   If we started with our same $M$, and did the following:
 
   \begin{verbatim}
-  
-    M=[1, -1, -3, 1;
-      4, -2, -7, 1;
-      -1, 1, 4, 1]
+M=[1, -1, -3, 1;
+  4, -2, -7, 1;
+  -1, 1, 4, 1]
 
-    M=sym(M)
+M=sym(M)
 
-    aug=rref(M)
-
+aug=rref(M)
   \end{verbatim}
 
   We would have arrived at the same final result, immediately. NOTE: I use sym(M) because it keeps fractions and other variables at play, which can help the MATLAB output better align with the mathematics, rather than dealing with compounding decimal errors. 
@@ -525,7 +511,7 @@ E_{3,1}(1/2)\rightarrow E_{3,2}(-5/2)\rightarrow
 
 \end{remark}
 
-\end{solution}
+
 
 
 This gives us the solution $(\frac{1}{2}, -\frac{13}{2}, 2)$.
@@ -615,15 +601,13 @@ Use MATLAB to find the \rref of the augmented matrix associated with the system.
   How'd it go? Don't forget to enter the system as a augmented matrix first. If you're having trouble, try
 
   \begin{verbatim}
-  
-    M=[1, -2, 1, 0, 2;
-    -2, 1, -1, 1, 0;
-    1, 4, 0, 1, 1]
+  M=[1, -2, 1, 0, 2;
+  -2, 1, -1, 1, 0;
+  1, 4, 0, 1, 1]
 
-    M=sym(M)
+  M=sym(M)
 
-    rref(M)
-
+  rref(M)
   \end{verbatim}
 
  \end{feedback}

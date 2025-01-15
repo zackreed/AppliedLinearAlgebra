@@ -281,13 +281,11 @@ $$A\vec{x}=\vec{0}.$$
 The code below will give these results quickly:
 
 \begin{verbatim}
-
     A = [1 0 -1 0; 2 0 0 -1; 0 2 0 -2];
     for w = [2, 3, 5, 10, pi]
         x = [w/2; w; w/2; w]
         A*x
     end
-
 \end{verbatim}
 
 Sure enough, each product $A\vec{x}$ is the zero vector! So we now have much more information about the chemical reaction. We know how much we can start with of each reactant, and then what the resulting product will be!

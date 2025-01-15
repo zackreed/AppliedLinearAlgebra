@@ -162,8 +162,8 @@ This gives us the following algorithm.
   The following algorithm will determine whether a matrix $A$ is invertible, and if it is then it will also yield the inverse matrix $A^{-1}$.
   \begin{enumerate}
     \item Augment $A$ with the identity matrix, $A|I$.
-    \item Find the \texttt{rref} of the augmented matrix. The left side of the augmented matrix will be $\texttt{rref(A)}$.
-    \item If $\texttt{rref(A)}=I$, then the right side of the final augmented matrix is $A^{-1}$, if $\texttt{rref(A)}\neq I$, then $A$ is not invertible.
+    \item Find the \texttt{rref} of the augmented matrix. The left side of the augmented matrix will be \texttt{rref(A)}.
+    \item If \texttt{rref(A)}$=I$, then the right side of the final augmented matrix is $A^{-1}$, if \texttt{rref(A)}$\neq I$, then $A$ is not invertible.
   \end{enumerate}
 \end{theorem}
 
@@ -321,6 +321,7 @@ Let's try this process a few times and verify that this gives us inverse matrice
 \end{remark}
 
 \begin{definition}\name{Left and Right Invertibility}
+
   A matrix $A$ is left invertible if there is a matrix $M$ such that $M*A=I$, and is right invertible if there is a matrix $N$ such that $A*N=I$. 
   
   A matrix is invertible if and only if it is both left and right invertible and $M=N$. This is only possible if $A$ is square.

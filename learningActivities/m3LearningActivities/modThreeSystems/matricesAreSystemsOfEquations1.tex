@@ -2,10 +2,10 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed} %PEter Selinger
-\title{Systems of Equations and Applications}
+\title{Application: Circuit Analysis}
 \begin{document}
 \begin{abstract}
-Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+
 \end{abstract}
 \maketitle
 
@@ -17,7 +17,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
 
 Systems of linear equations are everywhere, and one of the key applications of vectors and matrices is the efficient solving of such systems. Let's begin with an example from circuits!
 
-\begin{exploration}\name{Circuit Analysis and Systems of Equations}
+\subsection*{Circuit Analysis and Systems of Equations}
 
   The tools of linear algebra can be used to study the application of resistor networks. 
 
@@ -71,7 +71,8 @@ sources in a circuit to determine the current. An essential theorem
 for this application is Kirchhoff's law%
 \index{Kirchhoff's law}.
 
-\begin{theorem}{Kirchhoff's law}{kirchhoff-law}
+\begin{theorem}\name{Kirchhoff's law}\label{th:kirchhoff-law}
+
   The sum of the resistance ($R$) times the amperes ($I$) in the
   counterclockwise direction around a loop equals the sum of the
   voltage sources ($V$) in the same direction around the loop.
@@ -87,6 +88,7 @@ We will explore this in the next example where we determine the value
 of the current in the initial diagram.
 
 \begin{example}\name{Solving for current}
+
   Applying Kirchhoff's Law to the diagram below, determine the value for $I_1$.
 
   \begin{center}
@@ -134,7 +136,8 @@ of the current in the initial diagram.
 
 \end{example}
 
-\begin{example}\name{Unknown currents}
+\begin{example}\name{Unknown Currents}
+
   The diagram below consists of four circuits. The current ($I_k$) in
   the four circuits is denoted by $I_1$, $I_2$, $I_3$, $I_4$. Using
   Kirchhoff's Law, write an equation for each circuit and solve for
@@ -218,7 +221,10 @@ of the current in the initial diagram.
 
     This brings the following definitions.
 
+  \end{remark}
+
     \begin{definition}\name{Linear equation}
+
       A \textbf{linear equation}%
       \index{linear equation} is an equation of the form
       \begin{equation*}
@@ -233,7 +239,8 @@ of the current in the initial diagram.
       \index{variable}.
     \end{definition}
 
-    \begin{example}{Linear vs. non-linear equation}{linear-vs-non-linear}
+    \begin{example}\name{Linear vs. non-linear equation}\label{exa:linear-vs-non-linear}
+
       Which of the following equations are linear?
         \begin{enumerate}
           \item $2x+3y=5$ is \wordChoice{\choice[correct]{linear},\choice{non linear}}
@@ -246,6 +253,7 @@ of the current in the initial diagram.
     We then need to define a system of linear equations.
 
     \begin{definition}\name{System of linear equations}
+
       A \textbf{system of linear equations}%
       \index{system of linear equations} is a list of equations
       \begin{equation*}
@@ -268,6 +276,7 @@ of the current in the initial diagram.
     Finally, we want some terminology for whether at least one solution to a system exists.
 
     \begin{definition}\name{Consistent and inconsistent systems}
+
       A system of linear equations is called \textbf{consistent}%
       \index{consistent system}%
       \index{system of linear equations!consistent} if there exists at
@@ -277,7 +286,7 @@ of the current in the initial diagram.
       solution.
     \end{definition}
 
-  \end{remark}
+
 
 \begin{solution}
   
@@ -299,7 +308,10 @@ of the current in the initial diagram.
 
   We first need to give ourselves some ways to manipulate the system without changing the solutions. These are called \emph{elementary row operations} (or more typically just elementary operations). The somewhat evocative use of the term \emph{row} should perk our ears to suggest that there will be an explicit connection to matrices down the road!
 
+\end{remark}
+
   \begin{definition}\name{Elementary operations}
+    
     \textbf{Elementary operations}%
     \index{elementary operation} are the
     following operations:
@@ -313,7 +325,7 @@ of the current in the initial diagram.
     \end{enumerate}
   \end{definition}
 
-  \end{remark}
+  
 
   Let's use these elementary row operations to solve the system. Our goal is to get the system into a form where each equation only has one variable on the left, and one constant on the right. If we can make the system look like this, we'll have found our solution.
 
@@ -470,6 +482,5 @@ $$\begin{bmatrix}-2 & 8 & -4 & 0 \\ 0 & -4 & 14 & -6 \\ -1 & 0 & -6 & 12 \\ 8 & 
 
 \end{example}
 
-\end{exploration}
 
 \end{document}

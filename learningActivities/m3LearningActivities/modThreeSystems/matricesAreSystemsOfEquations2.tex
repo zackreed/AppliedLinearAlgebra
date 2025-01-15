@@ -2,16 +2,16 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed} %PEter Selinger
-\title{Application 2: Balancing Chemical Reactions}
+\title{Application Balancing Chemical Reactions}
 \begin{document}
 \begin{abstract}
-Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+
 \end{abstract}
 \maketitle
 
   Let's take a look at another application of systems of equations (now seen as vector equations): balancing chemical reactions.
 
-  \begin{exploration}\name{Chemical Reactions and Matrix Multiplications}
+  \section*{Chemical Reactions and Matrix Multiplications}
 
  Consider
   the chemical reaction \begin{equation*}
@@ -29,7 +29,7 @@ When considering chemical reactions, we
 want to investigate how much of each substance we began with and how
 much of each substance is involved in the result.
 
-An important theory we will use here is the {\bf mass balance theory}. It
+An important theory we will use here is the \textbf{mass balance theory}. It
 tells us that we cannot create or delete elements within a chemical
 reaction. For example, in the above expression, we must have the same
 number of atoms of oxygen, tin, and hydrogen on both sides of the
@@ -93,11 +93,15 @@ Stating this system in matrix form, we have
 
 So we have a $3\times 4$ matrix $A$ and a $4\times 1$ vector $\vec{x}$ that satisfy the equation $A\vec{x} = \vec{0}$.
 
+\end{example}
+
 \begin{remark}\name{Elementary Matrices}
 
   We're now going to use matrices to perform the same elementary row operations from the previous example. Remember that we solved the system by 1) replacing one row with another, 2) scaling one row, and 3) adding a multiple of one row to another.
 
   As it turns out, we can use matrix multiplcation to use perform these same manipulations to matrices. We will call these matrices \emph{elementary matrices}.
+
+\end{remark}
 
   \begin{definition}\name{Row Swapping Matrix}
     The \textbf{row swapping matrix} $E_{ij}$ is the matrix that results from swapping rows $i$ and $j$ of the identity matrix.
@@ -149,8 +153,8 @@ So we have a $3\times 4$ matrix $A$ and a $4\times 1$ vector $\vec{x}$ that sati
     This will add $2$ times the second row to the third row.
   \end{definition}
 
-\end{remark}
 
+\begin{solution}
 Now let's use these elementary matrices to solve the system of equations.
 
 Our chemical reaction matrix is 
@@ -167,11 +171,11 @@ We want to, as before, isolate each variable by eliminating it from the other eq
 
 This is already not too difficult for the first two columns of $A$. If we subtract twice the first row from the second row, and then halve the third row, we will have completed this task for the first two columns.
 
-Subtracting twice the first row from the second row is achieved by the {\bf row addition matrix} 
+Subtracting twice the first row from the second row is achieved by the \textbf{row addition matrix} 
 
 $$E_{2,1}(-2)=\begin{bmatrix}1 & 0 & 0 \\ -2 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix},$$
 
-and halving the third row is achieved by the {\bf scaling matrix}
+and halving the third row is achieved by the \textbf{scaling matrix}
 
 $$E_{3}(1/2)=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & .5\end{bmatrix}.$$
 
@@ -308,7 +312,7 @@ would typically be the number of mols of the molecules on each
 side. Thus one mol of $SnO_2$ added two mols of $H_2$ yields one mol
 of $Sn$ and two mols of $H_2O$.
 
-\end{example}
+\end{solution}
 
 
 \begin{example}\name{Balancing a potassium, oxygen, phosphorus, and hydrogen reaction}
@@ -374,7 +378,7 @@ of $Sn$ and two mols of $H_2O$.
 
   While in the homework you will do more practice using elementary matrices to solve this system, there is a wonderful MATLAB command that will do this for us. 
 
-  The command $\texttt{rref}$ stands for \emph{reduced row echelon form}, which puts a matrix in its echelon form, but with the added condition that the leading entry in each row is a $1$.
+  The command \texttt{rref} stands for \emph{reduced row echelon form}, which puts a matrix in its echelon form, but with the added condition that the leading entry in each row is a $1$.
 
   Using the following MATLAB code:
 
@@ -422,6 +426,6 @@ of $Sn$ and two mols of $H_2O$.
 
 \end{example}
 
-\end{exploration}
+
 
 \end{document}

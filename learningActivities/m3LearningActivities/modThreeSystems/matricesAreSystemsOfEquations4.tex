@@ -2,23 +2,23 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed} %PEter Selinger
-\title{Review and Geometry of 2D and 3D Systems of Equations}
+\title{Geometry of Systems of Equations}
 \begin{document}
 \begin{abstract}
-Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+
 \end{abstract}
 \maketitle
     
-    %\end{onlineOnly}
+
      
-    \begin{exploration}\name{Review: Possible Outcomes of 2x2 and 3x2 Systems}
+    \section*{Review: Possible Outcomes of 2x2 and 3x2 Systems}
     
       Here's a brief review of the possible outcomes of 2x2 and 3x2 systems of equations.
        
       Given a system of two equations with two unknowns, there are three possible geometric outcomes. 
       
       \begin{itemize}
-          \item First, the graphs of the two equations intersect at a point.  If this is the case, the system has exactly one solution. We say that the system is \dfn{consistent} and has a \dfn{unique solution}. 
+          \item First, the graphs of the two equations intersect at a point.  If this is the case, the system has exactly one solution. We say that the system is \textbf{consistent} and has a \textbf{unique solution}. 
            
           \begin{center}
             \begin{tikzpicture}
@@ -31,7 +31,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
                  
             \end{tikzpicture}
             \end{center}
-          \item Second, the two lines may have no points in common.  If this is the case, the system has no solutions.  We say that the system is \dfn{inconsistent}. 
+          \item Second, the two lines may have no points in common.  If this is the case, the system has no solutions.  We say that the system is \textbf{inconsistent}. 
           \begin{center}
             \begin{tikzpicture}
              
@@ -43,7 +43,9 @@ Here we introduce one of the most prevalent applications of matrices and vectors
                  
             \end{tikzpicture}
             \end{center}
+
           \item Finally, the two lines may coincide.  In this case, there are infinitely many points that satisfy both equations simultaneously.  We say that the system is consistent and has infinitely many solutions.
+          
           \begin{center}
           \begin{tikzpicture}
            
@@ -88,26 +90,27 @@ Here we introduce one of the most prevalent applications of matrices and vectors
                    \draw[line width=1pt](3, -4)--(1,4);
                    \draw[line width=1pt](3, -1)--(-4,3);
                        
-                  \end{tikzpicture}\quad\quad
-                  \begin{tikzpicture}
-                   
-                    \draw[<->] (-4,0)--(4,0);
-                    \draw[<->] (0,-4)--(0,4);
-                   
-                   \draw[line width=1pt](-2, -3)--(3,3);
-                   \draw[line width=1pt](-2, -2)--(3,4);
-                   \draw[line width=1pt](-2, -4)--(3,2);
-                       
                   \end{tikzpicture}
                   \end{center}
                   %\end{center}
                    
                   \item Finally, it is possible for all of the lines to coincide, giving us infinitely many solutions.
+                  
+                  \begin{center}
+                    \begin{tikzpicture}
+                   
+                        \draw[<->] (-4,0)--(4,0);
+                        \draw[<->] (0,-4)--(0,4);
+                       
+                       \draw[line width=1pt](-2, -3)--(3,3);
+                       \draw[line width=1pt](-2, -2)--(3,4);
+                       \draw[line width=1pt](-2, -4)--(3,2);
+                           
+                      \end{tikzpicture}
+                  \end{center}
                   \end{itemize}
   
-    \end{exploration}
-    
-  \begin{exploration}\name{Geometry of Linear Systems in Three Variables}
+    \section*{Geometry of Linear Systems in Three Variables}
     Let's now consider the following  system of three equations and three unknowns
 
     $$\begin{array}{ccccccc}
@@ -124,11 +127,12 @@ Here we introduce one of the most prevalent applications of matrices and vectors
 
         \geogebra{stvqh3ts}{1219}{521}
 
-        \begin{hint}
+        \begin{remark}
 
             The solution to the system is $(1,2,-1)$, as depicted in the GeoGebra environment. If your constant terms are different, you may have made a mistake in your row operations.
 
-        \end{hint}
+        \end{remark}
+    \end{example}
 
         \begin{solution}
 
@@ -163,7 +167,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
             \end{array}$$
 
         \end{solution}
-    \end{example}
+
 
     \begin{remark}
 
@@ -184,6 +188,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     \end{array}$$
 
     As always, use row operations to solve the system. We're going to pay particular attention to the format of the "solved" system at the end of this section, and in the coming sections as well.
+    \end{example}
 
     \begin{solution}
 
@@ -237,11 +242,9 @@ Here we introduce one of the most prevalent applications of matrices and vectors
 
     \end{solution}
 
-\end{example}
 
-\end{exploration}
 
-\begin{exploration}\name{Review: Possible Outcomes of 3x3 Systems}
+\section*{Review: Possible Outcomes of 3x3 Systems}
 
 We'll be unpacking more examples of systems with or without solutions in the homework, but here's an overview of the different ways that solutions can or can't exist for 3x3 systems of equations.
 
@@ -307,7 +310,7 @@ There are four ways for a system to be inconsistent.  They are depicted below.
     \end{tikzpicture}
 \end{center}
 
-\end{exploration}
+
 
 In the next chapter, we'll apply these ideas to the notion of matrix inverses, which take a much more intentional orientation towards interpreting these operations for matrices, and determining whether the matrix equation 
 

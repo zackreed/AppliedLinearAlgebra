@@ -2,14 +2,14 @@
 \input{../../../preamble.tex}
 
 \author{Zack Reed} %PEter Selinger
-\title{Geometry of Systems of Equations: Introduction}
+\title{Geometry of Systems of Equations}
 \begin{document}
 \begin{abstract}
-Here we introduce one of the most prevalent applications of matrices and vectors, the solving of systems of equations.
+
 \end{abstract}
 \maketitle
 
-\begin{exploration}\name{The Geometry of Systems of Equations}
+\section*{The Geometry of Systems of Equations}
 
   We've seen but two examples of the numerous ways that systems of equations can be used to model and solve examples. We now return with greater detail to the idea of \emph{elementary row operations} (and elementary matrices) to gain an intution for why they work, and to further see when any why some systems do or don't have solutions, and how many.
 
@@ -90,6 +90,8 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     This last step is mostly for convention, as we tend to write variables in the order $x, y, z$, etc.
        
     This solution can be written as an ordered pair $(\answer{-4}, \answer{2})$.
+
+\end{example}
     
         \begin{solution}
     
@@ -106,7 +108,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     
         \end{solution}
 
-      \end{example}
+      
     
     The main idea behind row operations is that they generate \emph{equivalent} systems of equations. \emph{Equivalence} is a big picture idea in mathematics, where you can change mathematical objects while keeping some useful property the same.
     
@@ -135,21 +137,21 @@ Here we introduce one of the most prevalent applications of matrices and vectors
       
       $$x=\pm\sqrt{2}$$
       
-      If you evaluate $x$ as either $\sqrt{2}$ or $-\sqrt{2}$ to the equations above, you'll find that {\bf each equation} is satisfied by either value. So, each equation is \emph{equivalent} to the others in the sense that {\bf they have the same solution set}.
+      If you evaluate $x$ as either $\sqrt{2}$ or $-\sqrt{2}$ to the equations above, you'll find that \textbf{each equation} is satisfied by either value. So, each equation is \emph{equivalent} to the others in the sense that \textbf{they have the same solution set}.
       
       The utility of applying operations to mathematical objects is we can find some desired unknown information about the object. In this case we find the solution sets.
       
       \end{remark}
 
-  \end{exploration}
 
-  \begin{exploration}\name{More on the Geometry of Systems of Equations}
+
+  \section*{More on the Geometry of Systems of Equations}
     
     The previous example features a linear system of two equations and two unknowns (variables) with a unique solution. We'll now go through a couple of other examples that have no solutions or infinitely many solutions, and examine their geometries. 
     
     We'll also introduce a third equation to the system, to see the impact of having a different number of equations than variables.
     
-    \begin{example}
+    \begin{exploration}
     
         Create your own system of equations and see if you can solve it. The following GeoGebra environment will let you create a system of up to three equations and perform row operations to search for a solution. For consistency, the color of the top row (and corresponding line) will be green, the 2nd row will be purple, and the bottom row will be pink. 
     
@@ -165,9 +167,9 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     
         \end{hint}
     
-    \end{example}
+    \end{exploration}
     
-    \begin{example}
+    \begin{exploration}
     
         Let's consider systems that don't have unique solutions. In a 2x2 case, this means the lines are parallel. Parallel lines depend only on the relationship between the coefficients of $x$ and $y$, not on the constants. This gives us some different scenarios, depending on the values of the constants in our system.
     
@@ -187,6 +189,8 @@ Here we introduce one of the most prevalent applications of matrices and vectors
             \choice[correct]{The equations can describe the same line.}
             \choice[correct]{The equations can describe two parallel lines.}
         \end{selectAll}
+
+    \end{exploration}
     
         \begin{solution}
     
@@ -233,7 +237,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     
         \end{solution}
     
-    \end{example}
+    
     
     Now let's explore some more complex scenarios. Earlier we noted that row operations don't necessarily preserve the underlying lines of the system, but they do preserve the \emph{solution set}. We're going to use this idea to create a 3x2 system of equations that has a unique solution, and then discuss ways to make other, not so nice, systems.
     
@@ -308,6 +312,7 @@ Here we introduce one of the most prevalent applications of matrices and vectors
         Use row operations to verify that the system has these properties.
     
         Use new equations than the ones provided in previous examples. 
+    \end{example}
     
         \begin{solution}
     
@@ -370,8 +375,8 @@ Here we introduce one of the most prevalent applications of matrices and vectors
     
         \end{solution}
     
-    \end{example}
+    
 
-  \end{exploration}
+
 
 \end{document}

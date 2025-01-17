@@ -16,6 +16,25 @@
 
     Which of the following vectors can be added to $\set{\vect{u}_1,\vect{u}_2}$ to make a basis for $\R^3$?
 
+    \begin{exercise}
+
+        For the following subspaces of
+        $\R^n$, determine the dimension of the larger space in which the vectors live, determine the dimension of the subspace described, and find a basis for the subspace.
+    
+    (NOTE: More questions will appear after you correctly answer the currently visible questions)
+
+    \begin{hint}
+    
+        This will take a few steps. You'll first need to interpret the subspace in terms of linear combinations of vectors, using the parameters $a, b, $ and $c$ to determine the spanning vectors. It will help to start with \texttt{syms a b c} and \texttt{assume(a^2+b^2+c^2>0)} before using the solve command.
+
+        Then you'll need to check whether the spanning vectors are a basis for the subspace or not. 
+
+        If they're not a basis, make a basis out of the first available linearly independent vectors.
+
+        Don't factor nor simplify the basis vectors at all when entering them.
+
+    \end{hint}
+
     \begin{enumerate}
     \item $\vect{v}_1 = \startmat{r} -2 \\ 1 \\ 5\stopmat$ \wordChoice{\choice{will work}\choice[correct]{won't work}}
     \begin{problem}

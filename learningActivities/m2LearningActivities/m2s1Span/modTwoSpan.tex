@@ -315,13 +315,17 @@ Solve for the \verb|a| and \verb|b| if they exist:
 solve(vector_equation, [a,b])
 \end{verbatim}
 
+According to MATLAB, $\vec{w}$ is in the span of $\vec{u}$ and $\vec{v}$ via the linear combination
+
+$$\vec{w}=\answer{5}\vec{u}+\answer{-1}\vec{v}.$$
+
 Now try \verb|u|, \verb|v|, and \verb|z|:
 \begin{verbatim}
 vector_equation_2 = a*u + b*v == z
 solve(vector_equation_2, [a,b])
 \end{verbatim}
 
-There's no solution, so \verb|z| is not in the span of \verb|u| and \verb|v|.
+There's no solution, so \verb|z| \wordChoice{\choice{is}\choice[correct]{is not}} in the span of \verb|u| and \verb|v|.
 
 
   \end{solution}

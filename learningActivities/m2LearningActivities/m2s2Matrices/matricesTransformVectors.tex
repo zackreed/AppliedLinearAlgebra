@@ -231,16 +231,16 @@ R*v
 
                 \item For a $45^\circ$ rotation, the rotation matrix $R$ is $\begin{bmatrix} \cos 45 & -\sin 45 \\ \sin 45 & \cos 45 \end{bmatrix} = \begin{bmatrix} \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix}$.
                 
-                The matrix-vector product $A\vec{v}$, where $\vec{v}=\begin{bmatrix} 2 \\ 3 \end{bmatrix}$, is (use 2 decimal places) $A\vec{v}=\answer{2}\begin{bmatrix} \answer{.71} \\ \answer{.71} \end{bmatrix} + \answer{3}\begin{bmatrix} \answer{-.71} \\ \answer{.71} \end{bmatrix} = \begin{bmatrix} -.71 \\ 3.54 \end{bmatrix}$, just as we calculated earlier.
+                The matrix-vector product $A\vec{v}$, where $\vec{v}=\begin{bmatrix} 2 \\ 3 \end{bmatrix}$, is (use 2 decimal places) $A\vec{v}=\answer{2}\begin{bmatrix} \answer[tolerance=.01]{.71} \\ \answer[tolerance=.01]{.71} \end{bmatrix} + \answer[tolerance=.01]{3}\begin{bmatrix} \answer[tolerance=.01]{-.71} \\ \answer[tolerance=.01]{.71} \end{bmatrix} = \begin{bmatrix} -.71 \\ 3.54 \end{bmatrix}$, just as we calculated earlier.
 
                 \item For a $30^\circ$ rotation, the rotation matrix $R$ is $\begin{bmatrix} \cos 30 & -\sin 30 \\ \sin 30 & \cos 30 \end{bmatrix} = \begin{bmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{bmatrix}$.
                 
-                The matrix-vector product $A\vec{v}$, where $\vec{v}=\begin{bmatrix} -1 \\ -2 \end{bmatrix}$, is (use 2 decimal places) $A\vec{v}=\answer{-1}\begin{bmatrix} \answer{.87} \\ \answer{.5} \end{bmatrix} + \answer{-2}\begin{bmatrix} \answer{-.5} \\ \answer{.87} \end{bmatrix} = \begin{bmatrix} .13 \\ -2.23 \end{bmatrix}$, just as we calculated earlier.
+                The matrix-vector product $A\vec{v}$, where $\vec{v}=\begin{bmatrix} -1 \\ -2 \end{bmatrix}$, is (use 2 decimal places) $A\vec{v}=\answer{-1}\begin{bmatrix} \answer[tolerance=.01]{.87} \\ \answer[tolerance=.01]{.5} \end{bmatrix} + \answer[tolerance=.01]{-2}\begin{bmatrix} \answer[tolerance=.01]{-.5} \\ \answer[tolerance=.01]{.87} \end{bmatrix} = \begin{bmatrix} .13 \\ -2.23 \end{bmatrix}$, just as we calculated earlier.
             \end{enumerate}
 
             \begin{hint}
             
-                If you want to try out basic rotations from both definitions in a MATLAB file, find the \texttt{mod\textunderscore 2\textunderscore matrix\textunderscore trans.mlx} live script in the course files.
+                If you want to try out basic transformations from both definitions in a MATLAB file, find the \texttt{mod\textunderscore 2\textunderscore matrix\textunderscore trans.mlx} live script in the course files.
 
             \end{hint}
 
@@ -259,9 +259,9 @@ R*v
 
             \item Load the smiley face with the rotated smile and view the matrices \texttt{face\textunderscore points} and \texttt{smile\textunderscore points}. (Remember that a matrix is an array of vectors, which is how we interpret both of these matrices).
             \begin{verbatim}
-            load +linalg/separate_face_points.mat
-            face_points
-            smile_points
+load +linalg/separate_face_points.mat
+face_points
+smile_points
             \end{verbatim}
 
             \item Verify that the single plot of both \texttt{face\_points} and \texttt{smile\_points} together gives you the face with the incorrectly rotated smile. 
@@ -269,31 +269,31 @@ R*v
             The course function \texttt{linalg.simple\_plot\_cloud} will allow you to enter as many matrices as you want (with column vectors of the same dimension) and view the plot of the data as a whole. It color codes the data for you.
 
             \begin{verbatim}
-            linalg.simple_plot_cloud(smile_points,face_points);
+linalg.simple_plot_cloud(smile_points,face_points);
             \end{verbatim}
 
             \item Re-write each vector (column) $\vec{v}$ in \texttt{smile\textunderscore points} as the rotated vector $R\vec{v}$, where $R$ is the rotation matrix for a $-90$ degree rotation.
             
             \begin{verbatim}
-            theta=-90
-            R=[cosd(theta), -sind(theta);
-                sind(theta), cosd(theta)]
-            
-            %Remember that a "for loop" simply tells the computer to do something over and over again.
-            %In this case, for each column "i" in the second dimension of the matrix smile_points, it
-            %re-writes the column as the matrix-vector product R*v.
-            for i=1:size(smile_points,2)
-                smile_points(:,i)=R*smile_points(:,i);
-            end
-            
-            %Check out the new vectors defining smile_points
-            smile_points
+theta=-90
+R=[cosd(theta), -sind(theta);
+    sind(theta), cosd(theta)]
+
+%Remember that a "for loop" simply tells the computer to do something over and over again.
+%In this case, for each column "i" in the second dimension of the matrix smile_points, it
+%re-writes the column as the matrix-vector product R*v.
+for i=1:size(smile_points,2)
+    smile_points(:,i)=R*smile_points(:,i);
+end
+
+%Check out the new vectors defining smile_points
+smile_points
             \end{verbatim}
 
             \item Check that the rotation worked by again plotting \texttt{smile\_points} (which have now been rotated) and \texttt{face\_points}.
             
             \begin{verbatim}
-            linalg.simple_plot_cloud(smile_points,face_points);
+linalg.simple_plot_cloud(smile_points,face_points);
             \end{verbatim}
 
         \end{enumerate}

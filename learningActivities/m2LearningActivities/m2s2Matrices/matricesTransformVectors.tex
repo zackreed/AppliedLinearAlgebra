@@ -104,23 +104,25 @@
 
         Try it out on a few vectors using the following GeoGebra applet:
 
-        First enter where you want the new basis vectors to go after rotation. For $90^\circ$ rotation, $r(\vec{i})$ should be $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ and $r(\vec{j})$ should be $\begin{bmatrix} -1 \\ 0 \end{bmatrix}$.
+        First enter into the $S(\vec{i})$ and $S(\vec{j})$ ($S$ is the general notation in the applet for a linear transformation, $r$ is the specific notation for ``rotation" in our example) boxes the coordinates of the new locations of the standard basis vectors after rotation. For $90^\circ$ rotation, $r(\vec{i})$ should be $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ and $r(\vec{j})$ should be $\begin{bmatrix} -1 \\ 0 \end{bmatrix}$.
 
-        Then, check the "Track Vector Transformation" box and move the vector $\vec{v}$ to a location of our choosing. Hitting the "Apply Linear Transformation" button will rotate the vector by $90^\circ$, and will display the resulting linear combination of the rotated basis vectors.
+        Then, check the ``Track Vector Transformation" box and move the vector $\vec{v}$ to a location of your choosing. Hitting the ``Apply Linear Transformation" button will apply the linear trasnformation determined by the new locations of the basis vectors (in this case it should rotate the vectors by $90^\circ$), and will display the resulting linear combination of the rotated basis vectors.
 
         \begin{center}
             \geogebra{uaua5mpa}{1156}{636}
         \end{center}
 
+        Notice that the right side of the screen shows where the chosen vector $\vec{v}$ ends after the linear transformation, and states it as a linear combination of the new basis vectors $S(\vec{i})$ and $S(\vec{j})$.
+
         Use the applet to find the rotations of the following vectors:
 
         \begin{enumerate}
 
-            \item $\vec{v}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ rotated by $60^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer{-.37} \\ \answer{1.37} \end{bmatrix}$.
+            \item $\vec{v}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ rotated by $60^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer[tolerance=.01]{-.37} \\ \answer[tolerance=.01]{1.37} \end{bmatrix}$.
             
-            \item $\vec{v}=\begin{bmatrix} 2 \\ 3 \end{bmatrix}$ rotated by $45^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer{-.71} \\ \answer{3.54} \end{bmatrix}$.
+            \item $\vec{v}=\begin{bmatrix} 2 \\ 3 \end{bmatrix}$ rotated by $45^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer[tolerance=.01]{-.71} \\ \answer[tolerance=.01]{3.54} \end{bmatrix}$.
             
-            \item $\vec{v}=\begin{bmatrix} -1 \\ -2 \end{bmatrix}$ rotated by $30^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer{.13} \\ \answer{-2.23} \end{bmatrix}$.
+            \item $\vec{v}=\begin{bmatrix} -1 \\ -2 \end{bmatrix}$ rotated by $30^\circ$ is (rounded to two decimal places) $\begin{bmatrix} \answer[tolerance=.01]{.13} \\ \answer[tolerance=.01]{-2.23} \end{bmatrix}$.
         \end{enumerate}
 
     \end{example}
@@ -215,10 +217,10 @@
             Running the code
 
             \begin{verbatim}
-            theta=60;
-            R = [cosd(theta) -sind(theta); sind(theta) cosd(theta)];
-            v = [1; 1];
-            R*v
+theta=60;
+R = [cosd(theta) -sind(theta); sind(theta) cosd(theta)];
+v = [1; 1];
+R*v
             \end{verbatim}
 
             yeilds $\begin{bmatrix} -.37 \\ 1.37 \end{bmatrix}$, which matches the rotation calculated from the GeoGebra applet.

@@ -97,19 +97,25 @@ vectors may span a $3$-dimensional space (or sometimes a $2$-dimensional space, 
 
 Let's start by looking in $\R^2$. The following GeoGebra applet allows you to input two vectors and see their span in $\R^2$. 
 
-You can select the appropriate boxes to set the spanning vectors, and then click the "Show Span" button to see the span. You can then drag the vector $\vect{v}$ to see the linear combination of the spanning vectors that make up $\vect{v}$.
+Select the ``Set New Span Vectors'' box to enter new vectors, $\vec{b}_1$ and $\vec{b}_2$ that will span the transformed $\RR^2$. Then select the ``Find v in Current Span'' button. The default will find $\vec{v}$, a green vector, in the standard grid for $\RR^2$ (e.g. with the standard vectors $\vec{i}=\begin{bmatrix}
+  1\\0
+\end{bmatrix}$ and $\vec{j}=\begin{bmatrix}
+  0\\1
+\end{bmatrix}$), and you will see the linear combination of $\vec{i}$ and $\vec{j}$ that make up $\vec{v}$ on the grid, as well as in a formula on the right.
+
+\begin{center}
+  \geogebra{rfbeefhu}{846}{503}
+\end{center}
+
+Then, select the ``New Vectors" button to see the grid transform into the span of $\vec{b}_1$ and $\vec{b}_2$. You will again see $\vec{v}$, but as a linear combination of $\vec{b}_1$ and $\vec{b}_2$, as well as the formula in terms of the new span vectors.
+
+You can always return to the standard spanning vectors with ``Standard Vectors''.
 
 \begin{example}
 
-  Using the applet, set $\vect{u}=\startmat{r} 1 \\ 1 \stopmat$ and $\vec{w}=\startmat{r} 2 \\ 3 \stopmat$. Then click "Show Span" to see the span of these vectors in $\R^2$.
-
-  \begin{center}
-    \geogebra{rfbeefhu}{846}{503}
-  \end{center}
-
-  Select the "Standard Span" button and drag the vector $\vec{v}$ to $\vec{v}=[1,2]$. If you then check the "See New Span" box, the grid will shift to the span of your two vectors. 
+  Using the applet, set $\vect{u}=\startmat{r} 1 \\ 1 \stopmat$ and $\vec{w}=\startmat{r} 2 \\ 3 \stopmat$ as new spanning vectors for $\RR^2$.
   
-  Using the applet, what linear combination of $\vec{u}$ and $\vec{w}$ makes up $\vec{v}$?
+  What linear combination of $\vec{u}$ and $\vec{w}$ makes up $\vec{v}$?
 
   \begin{hint}\name{{\bf Hint:}}
   
@@ -165,13 +171,17 @@ You can select the appropriate boxes to set the spanning vectors, and then click
 
   Before we work it out analytically, let's visualize this example in GeoGebra. The following applet lets you input three vectors to view their span in $\R^3$.
 
-  You can select the appropriate boxes to set the spanning vectors, and then click the "Show Span" button to see the span. You can then drag the vector $\vect{v}$ to see whether or not it is in the span of the vectors.
+  Again, use ``Set New Basis'' to select the spanning vectors $\vec{b}_1$, $\vec{b}_2$ and $\vec{b}_3$.
 
   Since the applet requires 3 vectors, for this example input $\vec{u}, \vec{v}, \vec{w}$. 
 
   \begin{center}
     \geogebra{y95ydrhy}{798}{478}
   \end{center}
+
+  Then again select ``Find v In Current Basis'' as before to explore ways to make a vector from the selected span. The default is the standard vectors $\vec{i}$, $\vec{j}$ and $\vec{k}=\begin{bmatrix}
+    0\\0\\1
+  \end{bmatrix}$. Selecting ``Span of New Vectors'' will again visualize constructing a vector $\vec{v}$ from the new span. You can RIGHT CLICK and drag to alter the 3D screen.
 
   Notice that the span of $\vect{u}$ and $\vect{v}$ is a plane, and that $\vect{w}$ is in this plane, while $\vect{z}$ is not.
 

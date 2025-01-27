@@ -161,9 +161,9 @@
             This gives the system 
 
             $$\begin{array}{ccccccc}
-                 1x& +0y&+0z &=&1 \\
-                0x&+1y& +0z& =&2\\
-                0x &+1y &+1z 1z&=&-1.
+                 1x& +0y&+0z &=&\answer{1} \\
+                0x&+1y& +0z& =&\answer{2}\\
+                0x &+1y &+1z 1z&=&\answer{-1}.
             \end{array}$$
 
         \end{solution}
@@ -217,8 +217,8 @@
         This gives the system, in its most reduced form:
 
         $$\begin{array}{ccccccc}
-            1x& +0y&+2.2z &=&4.6 \\
-            0x&+1y& -1.8z& =&-1.4\\
+            1x& +0y&+\answer{2.2}z &=&4.6 \\
+            0x&+1y& -1.8z& =&\answer{-1.4}\\
             0x &+0y &+0z &=&0.
         \end{array}$$
 
@@ -227,18 +227,18 @@
         In this case, let's set $z=\tau$, which is an unknown constant value. This changes the system to be 
 
         $$\begin{array}{ccccccc}
-            1x& +0y&+2.2\tau &=&4.6 \\
-            0x&+1y& -1.8\tau& =&-1.4\\
+            1x& +0y&+\answer{2.2}\tau &=&4.6 \\
+            0x&+1y& -1.8\tau& =&\answer{-1.4}\\
             0x &+0y &+0\tau &=&0.
         \end{array}$$
 
         Note that the third equations is still true for any number $\tau$. Then since $\tau$ is just some unknown constant, we can solve for $x$ and $y$, getting
 
-        $$x=4.6-2.2\tau$$
+        $$x=\answer{4.6}-\answer{2.2}\tau$$
         
-        $$y=-1.4+1.8\tau.$$
+        $$y=\answer{-1.4}+\answer{1.8}\tau.$$
 
-        So any points of the form $(4.6-2.2\tau, -1.4+1.8\tau, \tau)$ will satisfy the system.
+        So any points of the form $(\answer{4.6}-\answer{2.2}\tau, \answer{-1.4}+\answer{1.8}\tau, \tau)$ will satisfy the system.
 
     \end{solution}
 
@@ -251,7 +251,7 @@ We'll be unpacking more examples of systems with or without solutions in the hom
 Given a linear system of three equations in three variables, there are three ways in which the system can be consistent.
 
 \begin{itemize}
-    \item First, the three planes could intersect at a single point, giving us a unique solution.
+    \item First, the three planes could intersect at a single point, giving us \wordChoice{\choice[correct]{a unique solution.}\choice{infinitely many solutions.}\choice{no solutions.}}
     \begin{center}
         \tdplotsetmaincoords{70}{130}
             \begin{tikzpicture}
@@ -261,7 +261,7 @@ Given a linear system of three equations in three variables, there are three way
         \fill[] (0,0,0) circle (0.1cm);
             \end{tikzpicture}
         \end{center}
-    \item Second, the three planes can intersect in a line, forming a paddle-wheel shape.  In this case, every point along the line of intersection is a solution to the system, giving us infinitely many solutions.
+    \item Second, the three planes can intersect in a line, forming a paddle-wheel shape.  In this case, every point along the line of intersection is a solution to the system, giving us \wordChoice{\choice{a unique solution.}\choice[correct]{infinitely many solutions.}\choice{no solutions.}}.
         \begin{center}
         \tdplotsetmaincoords{70}{130}
                 \begin{tikzpicture}
@@ -271,7 +271,8 @@ Given a linear system of three equations in three variables, there are three way
                 \draw[-](0,0,-2)--(0,0,2) ;
             \end{tikzpicture}
             \end{center}
-    \item Finally, the three planes can coincide.  If this is the case, there are infinitely many solutions.
+    \item Finally, the three planes can coincide.  If this is the case, we have \wordChoice{\choice{a unique solution.}\choice[correct]{infinitely many solutions.}\choice{no solutions.}}.
+    
         \begin{center}
         \tdplotsetmaincoords{70}{130}
             \begin{tikzpicture}
@@ -282,7 +283,7 @@ Given a linear system of three equations in three variables, there are three way
         \end{center}
 \end{itemize}
 
-There are four ways for a system to be inconsistent.  They are depicted below.
+There are four ways for a system to be inconsistent (meaning no solution).  They are depicted below.
 %\begin{center}[4in]
 \begin{center}
 \tdplotsetmaincoords{70}{130}
@@ -312,7 +313,7 @@ There are four ways for a system to be inconsistent.  They are depicted below.
 
 
 
-In the next chapter, we'll apply these ideas to the notion of matrix inverses, which take a much more intentional orientation towards interpreting these operations for matrices, and determining whether the matrix equation 
+In the next section, we'll apply these ideas to the notion of matrix inverses, which take a much more intentional orientation towards interpreting these operations for matrices, and determining whether the matrix equation 
 
 $$A\vec{x}=\vec{b}$$
 

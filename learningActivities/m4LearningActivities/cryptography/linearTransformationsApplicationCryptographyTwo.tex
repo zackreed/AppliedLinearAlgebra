@@ -45,9 +45,9 @@ The way that one decrypts an encrypted message in the case of Hill ciphers is by
     \stopmat
     ~\simeq~\ldots~\simeq~
     \startmat{ccc|ccc}
-    1 & 0 & 0  & \answer{0.5909} & \answer{0.2273} & \answer{-0.8636} \\
-    0 & 1 & 0  &   \answer{0.0455} & \answer{-0.1364} & \answer{0.3182} \\
-    0 & 0 & 1  \answer{-0.3636} & \answer{0.0909} & \answer{0.4545}
+    1 & 0 & 0  & \answer[tolerance=.01]{0.5909} & \answer[tolerance=.01]{0.2273} & \answer[tolerance=.01]{-0.8636} \\
+    0 & 1 & 0  &   \answer[tolerance=.01]{0.0455} & \answer[tolerance=.01]{-0.1364} & \answer[tolerance=.01]{0.3182} \\
+    0 & 0 & 1 & \answer[tolerance=.01]{-0.3636} & \answer[tolerance=.01]{0.0909} & \answer[tolerance=.01]{0.4545}
     \stopmat
   \end{equation*}
 
@@ -225,9 +225,9 @@ the key and therefore decrypt the rest of the ciphertext.
   6 & 18 & 8 \\
   14 & 28 & 9 \\
 \stopmat$, and the $rref(C|I)$ is $\begin{bmatrix}
-  1&0&0&\answer{-0.1303} & \answer{-0.2248} & \answer{0.2143} \\
-  0&1&0\answer{0.1218} & \answer{0.0651} & \answer{-0.0714} \\
-  0&0&1\answer{-0.1765} & \answer{0.1471} & \answer{0}
+  1&0&0&\answer[tolerance=.01]{-0.1303} & \answer[tolerance=.01]{-0.2248} & \answer[tolerance=.01]{0.2143} \\
+  0&1&0 & \answer[tolerance=.01]{0.1218} & \answer[tolerance=.01]{0.0651} & \answer[tolerance=.01]{-0.0714} \\
+  0&0&1 & \answer[tolerance=.01]{-0.1765} & \answer[tolerance=.01]{0.1471} & \answer{0}
   \end{bmatrix}$.
 
   Thus, $C$ is invertible. Using $\texttt{linalg.mod\_p}$ (with the 2nd argument 29) on the found inverse, we get.

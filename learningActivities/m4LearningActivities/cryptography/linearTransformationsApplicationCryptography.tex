@@ -67,13 +67,13 @@ symbols.
   encoding of ``Attack at dawn'' is
   $1,\answer{20},20,1,3,\answer{11},0,1,20,0,\answer{4},1,\answer{23},14$.
 
-  The course function $\texttt{linalg.string\_to\_vector}$ will do this for you.
+  The course function \texttt{linalg.string\_to\_vector} will do this for you.
   
   Conversely, we have $9=\qq{I}$,
   $0=\mbox{Space}$, $12=\qq{L}$, $9=\qq{I}$, $11=\qq{K}$, $5=\qq{E}$, and so
   on. We find that the decoded string is ``$\answer[format=string]{I LIKE CODES.}$''
 
-  The course function $\texttt{linalg.vectors\_to\_string}$ will do this for you.
+  The course function \texttt{linalg.vectors\_to\_string} will do this for you.
 \end{solution}
 
 \end{example}
@@ -96,7 +96,7 @@ change many letters of the ciphertext. We will examine one such diffusive cipher
   The matrix $A$ is called the \textbf{encryption matrix} of the cipher.
 
   \begin{remark}
-    We need to define $A$ such that we always get integers back, so rotations or fractional scalings won't work. Also, after matrix multiplication some numbers may be outside of the range $[1, 2, \ldots, 27, 28]$. The course function $\texttt{linalg.string\_to\_vector}$ accounts for this through a process called ``modular arithmetic'', where $k$ is converted to the remainder $r$ in the formula $k=29*i+r$ for some suitable $i$. We won't worry about this too much, but modding often comes up in computer applications.
+    We need to define $A$ such that we always get integers back, so rotations or fractional scalings won't work. Also, after matrix multiplication some numbers may be outside of the range $[1, 2, \ldots, 27, 28]$. The course function \texttt{linalg.string\_to\_vector} accounts for this through a process called ``modular arithmetic'', where $n$ is converted to the remainder $r$ in the formula $n=29*k+r$ for some suitable $k$. We won't worry about this too much, but modding often comes up in computer applications.
   \end{remark}
 \end{definition}
 
@@ -140,7 +140,7 @@ change many letters of the ciphertext. We will examine one such diffusive cipher
     (23,0,0).
   \end{equation*}
 
-  This can be automatically done with the course function $\texttt{linalg.split\_vector(plaintext,3)}$.
+  This can be automatically done with the course function \texttt{linalg.split\_vector(plaintext,3)}.
 
   To compute the ciphertext, we regard each plaintext block as a
   $3$-dimensional column vector and multiply by the encryption matrix
@@ -183,10 +183,10 @@ change many letters of the ciphertext. We will examine one such diffusive cipher
     = \startmat{c} \answer{123}\\147\\102 \stopmat,
     \quad
     A \startmat{c} 23 \\ 0 \\ 0 \stopmat
-    = \startmat{c} 46\\69\\\answer{32} \stopmat.
+    = \startmat{c} 46\\69\\\answer{23} \stopmat.
   \end{align*}
 
-  Note that the ciphertext vectors are not numbers between $0$ and $28$, as required to convert back to letters, but the course function $\texttt{linalg.vectors\_to\_string}$ will perform this modular arithmetic for us.
+  Note that the ciphertext vectors are not numbers between $0$ and $28$, as required to convert back to letters, but the course function \texttt{linalg.vectors\_to\_string} will perform this modular arithmetic for us.
   
   Therefore, we convert the ciphertext using 
 
@@ -204,7 +204,7 @@ We've seen that encoding a message using a Hill cipher entails using a matrix to
 \begin{example}
   Suppose the encryption matrix re-ordered the coordinate axes according to the matrix $A=\begin{bmatrix}
     1&0&0\\0&0&1\\0&1&0
-  \end{bmatrix}$, producing the ciphertext "UES HTEF OCRE  ", find the transformation-reversing matrix $M$ and decript the message.
+  \end{bmatrix}$, producing the ciphertext ``UES HTEF OCRE", find the transformation-reversing matrix $M$ and decript the message.
 \end{example}
 
 \begin{solution}
@@ -222,13 +222,17 @@ We've seen that encoding a message using a Hill cipher entails using a matrix to
   If we apply $A$ to the ciphertext vectors (which can be succinctly done by storing the vectors all as a matrix) we get the plaintext blocks 
 
   $\begin{bmatrix}
-    21 \\\answer{19}\\\answer{5}\end{bmatrix}$, $\begin{bmatrix}
-    0 \\\answer{20}\\8\end{bmatrix}$, $\begin{bmatrix}
-    5\\0\\\answer{6}\end{bmatrix}$, $\begin{bmatrix}
-    15\\\answer{18}\\\answer{3}\end{bmatrix}$, and $\begin{bmatrix}
+    21 \\\answer{19}\\\answer{5}\end{bmatrix}$, 
+    $\begin{bmatrix}
+    0 \\\answer{20}\\8\end{bmatrix}$, 
+    $\begin{bmatrix}
+    5\\0\\\answer{6}\end{bmatrix}$, 
+    $\begin{bmatrix}
+    15\\\answer{18}\\\answer{3}\end{bmatrix}$, 
+    and $\begin{bmatrix}
     5\\0\\0\end{bmatrix}$.
 
-  These vectors (run through the course function $\texttt{linalg.vectors\_to\_string})$ produce the original phrase (input all caps and don't enter the spaces at the end) ``$\answer[format=string]{USE THE FORCE}$''.
+  These vectors (run through the course function \texttt{linalg.vectors\_to\_string}) produce the original phrase (input all caps and don't enter the spaces at the end) ``$\answer[format=string]{USE THE FORCE}$''.
 
 \end{solution}
 

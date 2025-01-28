@@ -28,9 +28,9 @@ The way that one decrypts an encrypted message in the case of Hill ciphers is by
       1 & 3 & 2 \\
     \stopmat.
   \end{equation*}
-\end{example}
 
-\begin{solution}
+  Solution:
+
   The process is analogous to encryption, except that we need to use
   the decryption matrix $A^{-1}$ instead of $A$. We first calculate
   $A^{-1}$.
@@ -119,7 +119,7 @@ The way that one decrypts an encrypted message in the case of Hill ciphers is by
 
   Converting these plaintext blocks to letters, and omitting the trailing space (using the course function $\texttt{linalg.vectors\_to\_string})$,
   we find that the plaintext (in all caps) is ``$\answer[format=string]{RETURN TO BASE}$''.
-\end{solution}
+\end{example}
 
 \section*{Breaking Hill Ciphers}
 
@@ -149,9 +149,9 @@ the key and therefore decrypt the rest of the ciphertext.
   love''. 
   
   Decrypt the message.
-\end{example}
 
-\begin{solution}
+  Solution:
+
   The first three blocks of the ciphertext are $\q{EFNOR.AHI}$, i.e.,
   \begin{equation*}
     \mbox{Ciphertext blocks:}\quad
@@ -267,7 +267,7 @@ the key and therefore decrypt the rest of the ciphertext.
 
   Armed with the decryption matrix $A^{-1}$, Eve can now decrypt
   Alice's entire message. The plaintext is (in all caps) ``$\answer[format=string]{MY DEAR LOVE RUN AWAY WITH ME AT MIDNIGHT}$''.
-\end{solution}
+\end{example}
 
 As the example shows, the Hill cipher is not secure at all. The main
 problem is that the cipher is {\em linear}, i.e., each component of a

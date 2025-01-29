@@ -51,7 +51,7 @@ The way that one decrypts an encrypted message in the case of Hill ciphers is by
     \stopmat
   \end{equation*}
 
-  Using the course function $\texttt{linalg.mod\_p(M,29)}$, (where $M$ is the augmented matrix), we get the following augmented matrix that converts the inverse to the numbers $0$ to $28$ (needed for the cipher).
+  Using the course function \texttt{linalg.mod\_p(M,29)}, (where $M$ is the augmented matrix), we get the following augmented matrix that converts the inverse to the numbers $0$ to $28$ (needed for the cipher).
 
   This yields:
 
@@ -117,7 +117,7 @@ The way that one decrypts an encrypted message in the case of Hill ciphers is by
       \end{bmatrix}\stackrel{29}{=}\startmat{c} 19 \\ 5 \\ 0 \stopmat.
   \end{align*}
 
-  Converting these plaintext blocks to letters, and omitting the trailing space (using the course function $\texttt{linalg.vectors\_to\_string})$,
+  Converting these plaintext blocks to letters, and omitting the trailing space (using the course function \texttt{linalg.vectors\_to\_string}),
   we find that the plaintext (in all caps) is ``$\answer[format=string]{RETURN TO BASE}$''.
 \end{example}
 
@@ -230,7 +230,7 @@ the key and therefore decrypt the rest of the ciphertext.
   0&0&1 & \answer[tolerance=.01]{-0.1765} & \answer[tolerance=.01]{0.1471} & \answer{0}
   \end{bmatrix}$.
 
-  Thus, $C$ is invertible. Using $\texttt{linalg.mod\_p}$ (with the 2nd argument 29) on the found inverse, we get.
+  Thus, $C$ is invertible. Using \texttt{linalg.mod\_p} (with the 2nd argument 29) on the found inverse, we get.
   
   \begin{equation*}
     C^{-1}
@@ -241,7 +241,7 @@ the key and therefore decrypt the rest of the ciphertext.
       22 & 1 & 0 \\
     \stopmat.
   \end{equation*}
-  This allows Eve to compute the decryption matrix (do the matrix multiplication and then don't forget to use $\texttt{linalg.mod\_p(M,29)}$, where $M$ is the resulting product.):
+  This allows Eve to compute the decryption matrix (do the matrix multiplication and then don't forget to use \texttt{linalg.mod\_p(M,29)}, where $M$ is the resulting product.):
   \begin{equation*}
     A^{-1}
     =
@@ -266,7 +266,7 @@ the key and therefore decrypt the rest of the ciphertext.
   \end{equation*}
 
   Armed with the decryption matrix $A^{-1}$, Eve can now decrypt
-  Alice's entire message. The plaintext is (in all caps) ``$\answer[format=string]{MY DEAR LOVE RUN AWAY WITH ME AT MIDNIGHT}$''.
+  Alice's entire message. The plaintext is (in all caps) ``$\answer[format=string]{MY DEAR LOVE, RUN AWAY WITH ME AT MIDNIGHT}$''.
 \end{example}
 
 As the example shows, the Hill cipher is not secure at all. The main

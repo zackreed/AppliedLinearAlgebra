@@ -236,9 +236,29 @@ There are many linear algebra books that go over the process of finding the dete
 
 As you can see, this process is tedious by hand, so from here on out we will use technology to calculate the determinant for us. The command in MATLAB is $\texttt{det(A)}$, where $A$ is the defined matrix. 
 
+\section*{Properties of the Determinant}
+
+Here are some nice properties of the determinant. Specifically, these let you find the determinant of a matrix that is constructed in relation to other known matrices. These are true for determinants of $n\times n$ matrices of any size. 
+
+As an example, if you know $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, you immediately know $\mbox{det}(A*B)=a\cdot b$. The following similar results help us make various quick calculations with determinants, and will be useful on the homework and moving forward. These results are not proven in this text, but the proofs can be found in any of the listed texts in the \href{https://ximera.osu.edu/appliedlinearalgebra/a1Copyright/learningActivities/m0Copyright/textHistory}{Text History} (Link) page at the beginning of this text.
+
+\begin{theorem}
+    The following properties hold true of the determinant for any matrices of size $n\times n$.
+    \begin{enumerate}
+        \item $\mbox{det}(I)=1$, where $I$ is the identity matrix.
+        \item If $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, then $\mbox{det}(A*B)=a\cdot b$.
+        \item If $A$ is invertible, then $\mbox{det}(A^{-1})=\frac{1}{\mbox{det}(A)}$.
+        \item If you make matrix $A'$ by swapping two rows (or two columns) of a matrix $A$, then $\mbox{det}(A')=-\mbox{det}(A)$. In other words, swapping two rows (or columns) of a matrix negates the determinant of the original matrix. 
+        \item If you make matrix $A'$ by multiplying a row of matrix $A$ by a constant $t$, then $\mbox{det}(A')=t\cdot \mbox{det}(A)$. In other words, scaling a row of a matrix also scales the determinant.
+        \item The determinant of a triangular matrix is the product of the diagonal entries (i.e. the pivots).
+        \item $\mbox{det}(A)=0$ if and only if $A$ is not invertible.
+        \item $\mbox{det}(A^T)=\mbox{det}(A)$.
+    \end{enumerate}
+\end{theorem}
+
 \subsection*{Higher Dimensions}
 
-In higher dimensions, the process is the same, but the determinants cascade. For instance, in a $4\times 4$ matrix, the first minor expansion across the top row yields four entry-minor pairs, but the minors are $3\times 3$ matrices, so the minor determinants each require further expansion by minors, yielding $12$ calculations overall, plus the final summation and tracking of when to add and subtract to preserve the relative coordinate vector orientations.
+In higher dimensions, the process of minor expansion is the same, but the determinants cascade. For instance, in a $4\times 4$ matrix, the first minor expansion across the top row yields four entry-minor pairs, but the minors are $3\times 3$ matrices, so the minor determinants each require further expansion by minors, yielding $12$ calculations overall, plus the final summation and tracking of when to add and subtract to preserve the relative coordinate vector orientations.
 
 Here is a general representation of one minor expansion in a general matrix:
 

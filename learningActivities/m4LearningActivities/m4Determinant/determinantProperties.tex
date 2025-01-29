@@ -3,39 +3,45 @@
 
 \author{Zack Reed}
 %borrowed from ximera interactive la
-\title{Properties of the Determinant}
+\title{Two Summary Videos}
 \begin{document}
 \begin{abstract}
 
 \end{abstract}
 \maketitle
 
-\section*{Properties of the Determinant}
+% \section*{Properties of the Determinant}
 
-Here are some nice properties of the determinant. Specifically, these let you find the determinant of a matrix that is constructed in relation to other known matrices. 
+% Here are some nice properties of the determinant. Specifically, these let you find the determinant of a matrix that is constructed in relation to other known matrices. 
 
-As an example, if you know $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, you immediately know $\mbox{det}(A*B)=a\cdot b$. The following similar results help us make various quick calculations with determinants, and will be useful on the homework and moving forward. These results are not proven in this text, but the proofs can be found in any of the listed texts in the \href{https://ximera.osu.edu/appliedlinearalgebra/a1Copyright/learningActivities/m0Copyright/textHistory}{Text History} (Link) page at the beginning of this text.
+% As an example, if you know $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, you immediately know $\mbox{det}(A*B)=a\cdot b$. The following similar results help us make various quick calculations with determinants, and will be useful on the homework and moving forward. These results are not proven in this text, but the proofs can be found in any of the listed texts in the \href{https://ximera.osu.edu/appliedlinearalgebra/a1Copyright/learningActivities/m0Copyright/textHistory}{Text History} (Link) page at the beginning of this text.
 
-\begin{theorem}
-    The following properties hold true of the determinant for any matrices of size $n\times n$.
-    \begin{enumerate}
-        \item $\mbox{det}(I)=1$, where $I$ is the identity matrix.
-        \item If $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, then $\mbox{det}(A*B)=a\cdot b$.
-        \item If $A$ is invertible, then $\mbox{det}(A^{-1})=\frac{1}{\mbox{det}(A)}$.
-        \item If you make matrix $A'$ by swapping two rows (or two columns) of a matrix $A$, then $\mbox{det}(A')=-\mbox{det}(A)$. In other words, swapping two rows (or columns) of a matrix negates the determinant of the original matrix. 
-        \item If you make matrix $A'$ by multiplying a row of matrix $A$ by a constant $t$, then $\mbox{det}(A')=t\cdot \mbox{det}(A)$. In other words, scaling a row of a matrix also scales the determinant.
-        \item The determinant of a triangular matrix is the product of the diagonal entries (i.e. the pivots).
-        \item $\mbox{det}(A)=0$ if and only if $A$ is not invertible.
-        \item $\mbox{det}(A^T)=\mbox{det}(A)$.
-    \end{enumerate}
-\end{theorem}
+% \begin{theorem}
+%     The following properties hold true of the determinant for any matrices of size $n\times n$.
+%     \begin{enumerate}
+%         \item $\mbox{det}(I)=1$, where $I$ is the identity matrix.
+%         \item If $\mbox{det}(A)=a$ and $\mbox{det}(B)=b$ for $n\times n$ matrices $A$ and $B$, then $\mbox{det}(A*B)=a\cdot b$.
+%         \item If $A$ is invertible, then $\mbox{det}(A^{-1})=\frac{1}{\mbox{det}(A)}$.
+%         \item If you make matrix $A'$ by swapping two rows (or two columns) of a matrix $A$, then $\mbox{det}(A')=-\mbox{det}(A)$. In other words, swapping two rows (or columns) of a matrix negates the determinant of the original matrix. 
+%         \item If you make matrix $A'$ by multiplying a row of matrix $A$ by a constant $t$, then $\mbox{det}(A')=t\cdot \mbox{det}(A)$. In other words, scaling a row of a matrix also scales the determinant.
+%         \item The determinant of a triangular matrix is the product of the diagonal entries (i.e. the pivots).
+%         \item $\mbox{det}(A)=0$ if and only if $A$ is not invertible.
+%         \item $\mbox{det}(A^T)=\mbox{det}(A)$.
+%     \end{enumerate}
+% \end{theorem}
 
-\section*{Summative Video}
+\section*{Summative Videos}
 
-As a recap of the important aspects and uses of the determinant for invertibility, watch the following video by Grant Sanderson:
+Here are two summary videos for the chapter, both by Grant Sanderson. First, a review of the idea of determinant, which you've already seen if you watched it at the beginning of the determinant section.
 
 \begin{center}
     \youtube{Ip3X9LOh2dk}
+\end{center}
+
+Now, a video that ties together all of the themes from the chapter: Determinants, inverses, rank, nullity, etc. Since it requires understanding of determinants, we waited until now to post this video, but hopefully it's a nice review!
+
+\begin{center}
+    \youtube{uQhTuRlWMxw}
 \end{center}
 
 \end{document}

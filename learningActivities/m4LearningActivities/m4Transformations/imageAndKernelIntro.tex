@@ -18,7 +18,7 @@ We're now going to focus again on properties of linear transformations, which wi
 
 \subsection*{The Image of a Linear Transformation}
 
-A few times throughout the course so far, we've encountered a phenomenon in which matrices ``squish'' space down to a smaller dimension. For instance, if we take the point cloud from $\texttt{mug.mat}$ as a representation of unaltered space and apply the matrix $A=\begin{bmatrix}
+A few times throughout the course so far, we've encountered a phenomenon in which matrices ``squish'' space down to a smaller dimension. For instance, if we take the point cloud from \texttt{+linalg/mug.mat} as a representation of unaltered space and apply the matrix $A=\begin{bmatrix}
   1&0&1\\0&2&2\\1&2&3
 \end{bmatrix}$, we see that the result of multiplication by $A$ squishes the mug down to the diagonal plane shown below. 
 
@@ -37,7 +37,7 @@ A few times throughout the course so far, we've encountered a phenomenon in whic
 \end{center}
 
 \begin{center}
-  \includegraphics[width=22.62cm, height=11.8cm]{squished_mug.png}
+  \includegraphics[width=22.62cm, height=11.44cm]{squished_mug.png}
 \end{center}
 
 Many matrices have this same effect, where the space to which vectors are sent via transformation differs from the original space of the mapping. 
@@ -46,24 +46,45 @@ This phenomenon is very important for the idea of invertibility (and more ideas 
 
 First, we define the image of a transformation simply as the set of all mapped-to vectors by a transformation.
 
-First, we discuss some terminology related to linear transformations (and more generally, functions). 
+Let's discuss some terminology related to linear transformations (and more generally, functions). 
 
 \begin{definition}
   Let $V$ and $W$ be vector spaces and $T$ a linear transformation from vectors in $V$ to vectors in $W$. That is, if $\vec{v}$ is in $V$, then $T(v)$ is in $W$.
 
-  We call $V$ the \emph{domain} of $T$ and $W$ the \emph{codomain} of $T$.
+  \begin{center}
+    \begin{tikzpicture}[scale=1]
+     
+      \draw[->] (0,0)--(3,0);
+      \draw[->] (0,0)--(0,3);
+      \draw[->] (0,0)--(-1.5,-1);
+      
+      % Labels for the new nodes
+      \node[red] at (5.3,3.3) (W) {$W=\RR^2$}; % Near the top of the diagonal axis
+      \node[red] at (0.3, 3.2) (V) {$V=\RR^3$}; % Near the top of the vertical axis
+       
+      \draw[<->] (4,0)--(8,0);
+      \draw[<->] (5,-1)--(5,3);
+      \draw[line width=2pt,blue](4.5,-1)--(6.5,3);
+      \node[] at (3.25, 2)   (b) {$T$};
+      \draw [->,line width=1pt,-stealth]  (2,1) to[out=45] (4.5, 1);
+     %\node[blue] at (7, 2.3)   (b) {$\mbox{im}(T)$};
+     
+    \end{tikzpicture}
+    \end{center}
+
+  We call $V$ the \emph{domain} of $T$ and $W$ the \emph{codomain} of $T$. In the preceding figure, the map $T$ takes vectors in $\RR^3$ to a line within $\RR^2$. We would say $V$ is $\RR^3$, and $W$ is $\RR^2$.
 \end{definition}
 
 Said plainly, the domain of $T$ is the set of vectors that get mapped by $T$, and the codomain of $T$ is all of the mapped-to vectors. 
 
-In the mug example, the set of vectors making the mug picture are in $\RR^3$, so $\RR^3$ is the domain of the transformation with matrix $A$. The resulting squished mug plane still lives in $\RR^3$, so the codomain of $T$ is still $\RR^3$. 
+In the mug example, the set of vectors making the mug picture are in $\RR^3$, so $\RR^3$ is the \wordChoice{\choice[correct]{domain}\choice{co-domain}} of the transformation with matrix $A$. The resulting squished mug plane still lives in $\RR^3$, so the \wordChoice{\choice{domain}\choice[correct]{co-domain}} of $T$ is still $\RR^3$. 
 
 Since the matrix $A=\begin{bmatrix}
   1&0&0\\
   0&1&0\\
-\end{bmatrix}$ is a $2x3$ matrix, it takes in vectors in $\RR^3$ and outputs vectors in $\RR^2$, so the domain is $\RR^3$ and the codomain is $\RR^2$.
+\end{bmatrix}$ is a $2x3$ matrix, it takes in vectors in $\RR^3$ and outputs vectors in $\RR^2$, so the \wordChoice{\choice[correct]{domain}\choice{co-domain}} is $\RR^3$ and the \wordChoice{\choice{domain}\choice[correct]{co-domain}} is $\RR^2$.
 
-This distinction could still be more refined, however. For instance we want better language to describe that the result of the mug-squishing matrix $A$ was not just $\RR^3$, but rather a plane within $\RR^3$. For this, we say that the squished-mug plane is the \emph{image} of the transformation.
+This distinction could still be more refined, however. For instance we want better language to describe that the result of the mug-squishing matrix $A$ was not just $\RR^3$, but rather a plane within $\RR^3$. Similarly, the transformation $T$ in the preceding figure doesn't map to all of $\RR^2$, but just to a line \emph{within} $\RR^2$. This distinction is important, as we will elaborate. For this, we say that the squished-mug plane and the line from $T$ are the \emph{images} of the transformations.
 
 \begin{definition}\label{def:imageofT}
 Let $V$ and $W$ be vector spaces and let $T:V\rightarrow W$ be a linear transformation.  
@@ -129,7 +150,7 @@ The image of $T$ is a line in $\RR^2$ determined by the vector $\begin{bmatrix}\
 \ref{item:impart2} The following sketch illustrates that $T$ transforms $3$-D space to a line in $2$-D.
  
 \begin{center}
-\begin{tikzpicture}[scale=.7]
+\begin{tikzpicture}[scale=1]
  
   \draw[->] (0,0)--(3,0);
   \draw[->] (0,0)--(0,3);
@@ -169,7 +190,7 @@ $$\begin{bmatrix}1 & 2 & 2 &-1 & 0\\-1 & 3 & 1 & 0 & -1\\3 & 0 & 0 & 3 & 6\\ 1 &
 Because the first three columns are pivot columns, these columns are linearly independent and complete the spanning set.  Therefore,
 $$\mbox{im}(T)=\mbox{span}\left(\begin{bmatrix}1\\-1\\3\\1\end{bmatrix}, \begin{bmatrix}2\\3\\0\\-1\end{bmatrix}, \begin{bmatrix}2\\1\\0\\1\end{bmatrix}\right)$$
 
-Because of this, $\mbox{dim}(\mbox{im}(T))=3$.
+Because of this, $\mbox{dim}(\mbox{im}(T))=\answer{3}$.
 \end{explanation}
 \end{example}
  
@@ -228,15 +249,15 @@ Again taking \texttt{rref(A)} yields:
  
 $$\mbox{rref}(A)= \begin{bmatrix} 1 & 0 & 0 & 1 & 2\\0 & 1 & 0 & 1 & 1\\0 & 0 & 1 & -2 & -2\\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}$$
  
-We have encountered this scenario before when solving systems of equations, particularly when balancing chemical reactions. Since we are solving $A\vec{x}=\vec{0}$, the resulting system of equations has five variables, three of which are taken by pivots of $rref(A)$, and two of which we are free to choose. 
+We have encountered this scenario before when solving systems of equations, particularly when balancing chemical reactions. Since we are solving $A\vec{x}=\vec{0}$, the resulting system of equations has \wordChoice{\choice{two}\choice{three}\choice[correct]{five}} variables, \wordChoice{\choice{two}\choice[correct]{three}\choice{five}} of which are taken by pivots of $rref(A)$, and \wordChoice{\choice[correct]{two}\choice{three}\choice{five}} of which we are free to choose. 
 
 Moreover, because the matrix does not yield any contradictory equations (namely because any non-pivot rows are all $0$s), we can have infinitely many solutions based on the chosen values of the free variables, which we will call $s$ and $t$.
 
 So, $A\vec{x}=\vec{0}$ is satisfied for vectors of the form 
 
-$$\begin{bmatrix}-s\\-s\\2s\\s\\0\end{bmatrix},$$
+$$\begin{bmatrix}\answer{-1}s\\\answer{-1}s\\\answer{2}s\\s\\\answer{0}s\end{bmatrix},$$
 
-$$\begin{bmatrix}-2t\\-t\\t\\0\\t\end{bmatrix},$$
+$$\begin{bmatrix}\answer{-2}t\\\answer{-1}t\\\answer{1}t\\\answer{0}t\\t\end{bmatrix},$$
 
 and their linear combinations.
 
@@ -320,6 +341,10 @@ Since technically a linear transformation $T$ isn't always described by a matrix
     \answer{1} 
     \end{bmatrix}\right)$.
 \end{example}
+
+\begin{hint}
+Note: Remember that $B$ maps vectors $v$ in $\RR^5$, so there are 5 coordinates in the domain, and you want to correctly assign the right coordinate from the \texttt{rref} information. Moreover, you want to put a 1 in the coordinate associated with the free variable. 
+\end{hint}
  
 
 \end{document}

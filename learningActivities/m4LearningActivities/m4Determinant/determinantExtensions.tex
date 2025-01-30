@@ -14,6 +14,8 @@
 
 The sign of an integral tells us the relative height orientation of a function's graph to the $x$-axis. 
 
+\begin{example}
+    
 Consider the function $f(x)=\cos(x)$ between $\pi/2$ and $3\pi/2$.
 
 \begin{tikzpicture}[scale=1.5]
@@ -48,7 +50,9 @@ Consider the function $f(x)=\cos(x)$ between $\pi/2$ and $3\pi/2$.
     \node[left] at (0,-1) {\(-1\)};
 \end{tikzpicture}
 
-The integral $\int_{\pi/2}^{3\pi/2}\cos(x)\cdot\ dx=-2$. We know that the area measure here is $2$ units, but the $-$ sign tells us that the region is located below the $x$-axis.
+The integral $\int_{\pi/2}^{3\pi/2}\cos(x)\cdot\ dx=-2$. We know that the area measure here is $\answer{2}$ units, but the $-$ sign tells us that the region is located \wordChoice{\choice{above}\choice[correct]{below}} the $x$-axis.
+
+\end{example}
 
 Similarly, the sign of the determinant tells us information about relative orientation. Though fundamentally they are connected, we are not measuring relative orientation to an axis, but relative orientation of the transformed unit vectors. 
 
@@ -90,25 +94,25 @@ Let's do some more examples to further illustrate this phenomenon.
     \begin{enumerate}
         \item The rotation matrix $R=\begin{bmatrix}
             \cos(\pi/4)& -\sin(\pi/4)\\ \sin(\pi/4) & \cos(\pi/4)
-        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{1}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+        \end{bmatrix}$ scales spatial area by a (positive) measure of $\answer{1}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
             \choice[correct]{before}
             \choice{after}
         } $A\vec{j}$.
         \item The scaling matrix $S=\begin{bmatrix}
             4& 0\\ 0 & -3
-        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{12}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+        \end{bmatrix}$ scales spatial area by a (positive) measure of $\answer{12}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
             \choice{before}
             \choice[correct]{after}
         } $A\vec{j}$.
         \item The matrix $A=\begin{bmatrix}
             -2& 4\\ 3 & -3
-        \end{bmatrix}$ scales spatial area by a (positive) factor of $\answer{6}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+        \end{bmatrix}$ scales spatial area by a (positive) measure of $\answer{6}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
             \choice{before}
             \choice[correct]{after}
         } $A\vec{j}$.
         \item The matrix $B=\begin{bmatrix}
             4& -4\\ 4 & 0
-        \end{bmatrix}$ scales spatial area by a factor of $\answer{16}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
+        \end{bmatrix}$ scales spatial area by a measure of $\answer{16}$ and from a relative orientation perspective (as described in the last example) the transformed unit vector $A\vec{i}$ is \wordChoice{
             \choice[correct]{before}
             \choice{after}
         } $A\vec{j}$.

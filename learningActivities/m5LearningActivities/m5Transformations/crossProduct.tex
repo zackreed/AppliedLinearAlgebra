@@ -22,9 +22,9 @@ Let's return to the unfinished problem of the previous section:
 
     Find normal and standard equations for the plane through the points
     $P = (0,1,3)$, $Q=(2,-1,0)$, and $R=(1,2,2)$.
-  \end{example}
-  
-  \begin{solution}
+
+    Solution:
+
     The goal is to find the normal vector to the plane so that we can more explicitly define the plane. For any vector $\vec{v}$, there is a nice linear transformation defined only on $\RR^3$, called the cross product and denoted $\vec{v}\times$, which will for any vector $\vec{u}$ give a third vector $\vec{w}$ that is orthogonal to both $\vec{v}$ and $\vec{u}$.
 
     Much like in $\RR^2$, where if you have a vector $\vec{v}=\begin{bmatrix}
@@ -105,7 +105,7 @@ Let's return to the unfinished problem of the previous section:
       \answer{5}x +\answer{-1} y + \answer{4}z = 11.
     \end{equation*}
 
-  \end{solution}
+  \end{example}
 
   More than just in this one example, the calculation 
 
@@ -142,7 +142,7 @@ $$\vec{u}\times=\begin{bmatrix}
 \begin{example}\label{ex:crossproduct}
 Find the cross product of $\vec{u}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}-2\\ 4\\ 7\end{bmatrix}$.
 
-\begin{solution}
+Solution:
 
   (Hint: Use matrix multiplication in MATLAB to speed up the final calculation)
 
@@ -158,7 +158,7 @@ $$\vec{u}\times \vec{v}=\begin{bmatrix}3\\ -10\\ 2\end{bmatrix}\times\vec{v}=\be
 \answer{-78} \\ \answer{-25} \\ \answer{-8}
 \end{bmatrix}$$
 
-\end{solution}
+
 \end{example}
 
 In MATLAB, if you define the vectors $\vec{u}$ and $\vec{v}$, then the command \texttt{cross(u,v)} will calculate the cross product for you.

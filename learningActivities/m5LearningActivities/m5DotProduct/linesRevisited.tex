@@ -235,9 +235,10 @@ $3s$ or $1-r$. We can also choose any vector $\vec{p}$ on the line, and any dire
     = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
     + t \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}.
   \end{equation*}
-\end{example}
 
-\begin{solution}
+
+Solution:
+
   There are actually two solutions to this problem, and one will reveal a connection back to the dot product that we will then exploit further to similarly characterize planes in productive ways.
 
   First, the point $P$ is on the line $L$ if and only if there exists some
@@ -272,11 +273,6 @@ $3s$ or $1-r$. We can also choose any vector $\vec{p}$ on the line, and any dire
       \choice[correct]{does not}}
   lie on the line $L$.
 
-\end{solution}
-
-This next solution will also set up a more general theme on which we will capitalize to describe planes and hyperplanes.
-
-\begin{solution}
 
   As a second solution, we can use orthogonality to our advantage. Since we know the direction vector, if we find a vector orthogonal to $\vec{d}$ (call the orthogonal vector $\vec{n}$), then after displacement by $\vec{p}$ any vector on the line will also be orthogonal to $\vec{n}$.
 
@@ -356,7 +352,9 @@ This next solution will also set up a more general theme on which we will capita
   This solution, in addition to setting up representations of planes and hyperplanes in $\RR^n$, also involves \emph{centering} data back to $\vec{0}$ to make some useful calculations. This is a strategy we have enacted before, and will be important again moving forward.
 
 
-\end{solution}
+\end{example}
+
+This last solution gives us a more general method of analysis.
 
 \begin{example}\name{Determine whether two lines intersect}\label{ex:lines-intersect}
 
@@ -372,12 +370,9 @@ This next solution will also set up a more general theme on which we will capita
   \end{equation*}
   intersect. If yes, find the point of intersection.%
   \index{intersection!of two lines}
-\end{example}
 
+  Solution:
 
-
-
-\begin{solution}
   One of the well-known properties of $\RR^n$ is that two lines that are not parallel are guaranteed to meet!This is something you would have seen back in high school geometry,but comes up from time to time when in popular discourse folks compare this property to the geometry of spheres, where some parallel lines meet.
 
   Hence, to find whether the lines meet, we need to determine if they are paralle. Luckily, all this entails is a comparison of the direction vectors $\begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 2 \\ 1 \\ -2 \end{bmatrix}$. If they are parallel, then the lines will not meet (unless they are the same line), and if they are not parallel then the lines are guaranteed to meet.
@@ -448,7 +443,7 @@ This next solution will also set up a more general theme on which we will capita
     + 1 \begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}
     = \begin{bmatrix} 5 \\ 1 \\ 1 \end{bmatrix}.
   \end{equation*}
-\end{solution}
+\end{example}
 
 
 Similar to our use of the dot product to determine whether the liens were parallel, we can also use the dot product to find the angle between two intersecting
@@ -491,11 +486,9 @@ two angles.
     = \begin{bmatrix} 0 \\ 3 \\ 2 \end{bmatrix}
     + s \begin{bmatrix} 2 \\ 1 \\ -1 \end{bmatrix}.
   \end{equation*}
-\end{example}
 
+  Solution:
 
-
-\begin{solution}
   The direction vectors are
   \begin{equation*}
     \vec{u}=\begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix}
@@ -521,7 +514,7 @@ two angles.
  The complementary angle (i.e. $\pi-\theta$) is $\answer{\frac{\pi}{3}}$. We
   choose the smaller angle, and therefore conclude that the angle
   between the two lines is $\answer{\frac{\pi}{3}}$.
-\end{solution}
+\end{example}
 
 
 \end{document}

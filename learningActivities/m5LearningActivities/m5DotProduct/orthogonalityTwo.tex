@@ -99,7 +99,7 @@ Also, you've gained some idea about the potential vagueness of information gaine
 
       First obtaining the projection, we know that the length of the projection is $\frac{\vec{u}\cdot\vec{v}}{\norm{\vec{u}}}$. 
 
-      $$\norm{\vec{u}}=\sqrt{\answer{36}+\answer{9}}=\answer{\sqrt{45}}.$$
+      $$\norm{\vec{u}}=\sqrt{\answer{36}+\answer{9}}=\answer{\sqrt{45}}\text{ (NOTE: Enter the exact number)}.$$
 
       $$\vec{u}\cdot\vec{v}=\answer{24}+\answer{18}=\answer{42}.$$
 
@@ -184,19 +184,16 @@ We will use orthonormal bases heavily in Chapter 6, and moving forward in the bo
 
    This can be done efficiently by writing the basis as the columns of a $3\times 3$ matrix $B$, and iterating the dot product through all possible pairs of columns (which we can do with a for loop)
 
-   \begin{verbatim}
-   B=[.714 -.698 .059;
-   -.645 -.688 -.332;
-   .273 .199 -.941]
-
-   for i=1:3
-   for j=1:3
-   i
-   j
-   dot_prod=dot(B(:,i),B(:,j))
-   end
-   end
-   \end{verbatim}
+   \texttt{B=[.714 -.698 .059;} \\
+   \texttt{- .645 -.688 -.332;} \\
+   \texttt{.273 .199 -.941]} \\
+   \texttt{for i=1:3} \\
+   \texttt{ for j=1:3} \\
+   \texttt{    i} \\
+   \texttt{    j} \\
+   \texttt{    dot\_prod=dot(B(:,i),B(:,j))} \\
+   \texttt{ end} \\
+   \texttt{end}
 
    Because of rounding error, this will produce dot products such as $-2.5\times 10^{-5}$, $.9992$, $-6.27\times10^{-4}$, these should all be interpreted as $0$ or $1$.
 

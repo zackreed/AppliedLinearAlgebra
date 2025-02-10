@@ -143,6 +143,25 @@ In particular, two key features of the standard coordinate system that make it s
 
 This is the idea of an \emph{orthonormal} basis for $\RR^n$, which are very nice bases to work with. Orthonormal bases have a very nice characterization by the dot product, as we give below.
 
+First, however, a quick note about calculating the norm of vectors with the dot product.
+
+%a remark about calculating the norm of vectors with the dot product
+\begin{remark}
+   Recall that the norm of a vector $\vec{v}=\begin{bmatrix}
+      v_1\\v_2\\\vdots\\v_n
+   \end{bmatrix}$ is given by $\norm{\vec{v}}=\sqrt{v_1^2+v_2^2+\cdots+v_n^2}$. 
+
+   This can be written more succinctly as $\norm{\vec{v}}=\sqrt{\vec{v}\cdot\vec{v}}$.
+
+   This is because, $\vec{v}\cdot\vec{v}=\begin{bmatrix}
+      v_1\\v_2\\\vdots\\v_n
+   \end{bmatrix}\cdot\begin{bmatrix}
+      v_1\\v_2\\\vdots\\v_n
+   \end{bmatrix}=v_1^2+v_2^2+\cdots+v_n^2$, and so taking the square root of this quantity gives the norm of $\vec{v}$.
+\end{remark}
+
+Now, we give the definition of an orthonormal basis.
+
 \begin{definition}
    A basis $\lbrace u_1,u_2,\ldots,u_n\rbrace$ is \emph{orthonormal} if 
 

@@ -33,7 +33,14 @@ and three main ways of understanding matrix-matrix multiplication:
    $$(AB)_{ij}=\sum_{k=1}^n A_{ik}B_{kj}.$$
 \end{enumerate}
 
-Now, we gain a new understanding of both, related to the dot product. First we will look more closely at the entry-wise matrix multiplication formula in the light of linear combinations and the dot product, and then we will extend this to the column-wise matrix-vector multiplication of matrices.
+Now, we gain a new understanding of both, related to the dot product. First, here's a video bringing some unifying connections between matrix multiplication and the dot product.
+
+\begin{center}
+   \youtube{yyAgyccu8NI}
+\end{center}
+
+
+This lets us look more closely at the entry-wise matrix multiplication formula in the light of linear combinations and the dot product, and then we will extend this to the column-wise matrix-vector multiplication of matrices.
 
 First, le'ts take a look at the entry-wise definition. The key formula is that the $i,j$ entry of the matrix is given by 
 
@@ -60,6 +67,12 @@ Since in the dot product $\vec{u}$ is a $1\times n$ matrix and $\vec{v}$ is a $n
 So, one way of viewing matrix multiplication is that every entry of the product $(AB)_{ij}$ is the dot product of the $i$th row of $A$ with the $j$th column of $B$. This is a better explanation of the matrix multiplication entry-wise formula.
 
 Now, this also gives us a quicker way to do the dot products of many vectors at once!
+
+Let's use this as an opportunity to review the idea of an orthonormal basis, and more specifically to check whether a set of $n$ vectors makes an orthonormal basis for $\RR^n$, as seen in the following video:
+
+\begin{center}
+   \youtube{bZeaWEM_eF0}
+\end{center}
 
 \subsection*{Orthogonal Projection From Matrix Multiplication}
 
@@ -134,7 +147,11 @@ We began with the motivation of orthogonally decomposing vectors $\vec{v}$ into 
    
   \end{center}
 
-What has been thus far left unsaid, was that if $\vec{u}_\perp$ is the unit vector perpendicular to $\vec{u}$, then $\vec{u}_\perp$ and $\vec{u}$ form an orthonormal basis for $\RR^2$.
+What has been thus far left unsaid, was that if $\vec{u}_\perp$ is the unit vector perpendicular to $\vec{u}$, then $\vec{u}_\perp$ and $\vec{u}$ form an orthonormal basis for $\RR^2$. This is the idea of an \emph{orthogonal decomposition} of a vector in terms of an orthonormal basis. The following video will give some detail about this idea that is then expanded on in the proceeding text.
+
+\begin{center}
+   \youtube{ZedYCAHqLDQ}
+\end{center}
 
 Moreover, if we do the same orthogonal decomposition of $\vec{v}$, but for $\vec{u}_\perp$ instead of for $\vec{u}$, and then put both diagrams together, we would get the following diagram:
 

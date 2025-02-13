@@ -3,7 +3,7 @@
 
 \author{Zack Reed}
 %borrowed from selinger linear algebra
-\title{Singular Value Decomposition (SVD)}
+\title{Singular Value Decomposition (SVD): Rotations and Stretches}
 \begin{document}
 \begin{abstract}
 
@@ -51,7 +51,7 @@ Reversing a vertical stretch is the vertical compression $\begin{bmatrix}1 &0\\
   \begin{verbatim}
 
     reverse_face=[1 0;0 1/3]*trans_face
-    linalg.simple_plot_cloud(reverse_face)
+    linalg.simple_plot_cloud(reverse_face);
 
   \end{verbatim}
 
@@ -66,7 +66,7 @@ then you un-do the shear by shearing in the reverse direction $\begin{bmatrix}1 
   \begin{verbatim}
 
     reverse_face=[1 -2;0 1]*reverse_face
-    linalg.simple_plot_cloud(reverse_face)
+    linalg.simple_plot_cloud(reverse_face);
 
   \end{verbatim}
 
@@ -81,7 +81,7 @@ and then you un-do the rotation by rotating in the reverse direction $\begin{bma
   \begin{verbatim}
 
     reverse_face=[0 -1;-1 0]*reverse_face
-    linalg.simple_plot_cloud(reverse_face)
+    linalg.simple_plot_cloud(reverse_face);
 
   \end{verbatim}
 
@@ -95,13 +95,13 @@ Important data analysis techniques arising from Linear Algebra recreate this pro
 
 The analysis on voting records in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{the previous section} can be performed through a special matrix decomposition called the \emph{singular value decomposition}. This particular decomposition forms the backbone of many modern data analysis techniques, and is at times the first step one takes when buildling machine learlning models today. The \emph{singular value decomposition} (SVD) is also useful in engineering, the sciences, and many software-based applications. We will be using the SVD as a context in which to unpack many important ideas in Linear Algebra.
 
-n many mathematics texts, you spend the majority of your time learning how to \emph{compute} something, often by hand, and then only later do you learn \emph{why} you might make a computation or \emph{how} a computation can be used for various tasks. Hopefully this process accompanies some intuition about why the computation works the way it does. 
+In many mathematics texts, you spend the majority of your time learning how to \emph{compute} something, often by hand, and then only later do you learn \emph{why} you might make a computation or \emph{how} a computation can be used for various tasks. Hopefully this somewhat different introduction to the SVD accompanies some intuition about why the computation works the way it does. 
 
 As you move beyond this course, however, and especially once you progress into your specific domains of study (engineering, data science, etc.), you will increasingly rely on technology to perform computations for you and your primary job is to know \emph{when} to make a computation, to \emph{interpret} the result of that computation, and to know \emph{what went wrong or right} when a computation yielded an unexpected result. 
 
 We will foreground this latter approach to learning the SVD. In many respects, we have already been employing these emphases already, but this focus will be especially true for the SVD as we will gain a general understanding of one method of SVD computation at the very end of this chapter, and then gain other more employable computations in later chapters, but will largely spend our time: learning \emph{what} the SVD is, learning \emph{how} to use it in various situations, and using technology to calculate it for us.
 
-\section{SVD Part 1: ``Rotations" and Stretches}
+\section*{SVD Part 1: ``Rotations" and Stretches}
 
 The first important aspect of the SVD is that it decomposes \emph{any} matrix $M$ into three matrices, often called $U$, $S$, and $V$ (though you can label these matrices whatever you want). This is a very important utility of the SVD, that it works on any matrix. Many other useful decompositions only work on certain matrices with special conditions.
 
@@ -111,8 +111,93 @@ To find the SVD in MATLAB, use the syntax \texttt{[U, S, V]=svd(A)}. \texttt{svd
 
 The decomposition is that $A=U*S*V^{T}$. 
 
+
+
 \begin{problem}
-Use MATLAB to explore the properties of $U, S$, and $V$ below, selecting all that are true. Use \texttt{face\_points} as a test subject for the transformations associated with $U$, $S$, and $V$.
+Let's use MATLAB to explore the properties of $U, S$, and $V$. Use \texttt{face\_points} as a test subject for the transformations associated with $U$, $S$, and $V$.
+
+
+First, let's examine the transformational interpretations of the SVD first. In short, the SVD lets you write any matrix as the product of \emph{two ``rotations"} and a \emph{stretching}. This is much simpler than breaking down a matrix into elementary transformations, and even will work on matrices representing many transformations. (Note: We say ``rotations'' in quotes because in $2$ and $3$ dimensions these matrices could be a mix of rotations and reflections. More generally these are called \emph{orthogonal} matrices, which we'll explore later.)
+
+
+  
+
+  Trying this out on our $A$ matrix, we get $V^T=\begin{bmatrix}
+    -.9871 & .1602 \\ .1602 & .9871
+  \end{bmatrix}$. If we apply this to \facepoints with
+
+  \begin{verbatim}
+    new_face=V'*face_points
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the image
+
+    %1120x840
+    \begin{center}
+      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_V_A.png}
+    \end{center}
+
+  Notice that this is a rotation of \facepoints, but a different rotation than the construction rotation from the introduction.
+
+  Applying what we know about linear transformations, the matrix $V^T$ has rotated the face to align with the direction vectors
+
+  
+
+  $$v_1=\begin{bmatrix}\answer[tolerance=.001]{-.9871}\\\answer[tolerance=.0001]{.1602}\end{bmatrix}, v_2=\begin{bmatrix}\answer[tolerance=.001]{.1602}\\\answer[tolerance=.0001]{.9871}\end{bmatrix}. \text{ (Note: Answer these to four decimal places)}$$
+
+  \begin{feedback}
+    If you need to, it might help to use \texttt{linalg.simple\_plot\_quiver(V(:,1),V(:,2))} to visualize the the rotation with respect to the columns of $V$.
+
+    The full code would be
+
+
+    \begin{verbatim}
+      A=[2 -1;3 0]
+      [U, S, V]=svd(A)
+      new_face=V'*face_points
+      linalg.simple_plot_cloud(new_face);
+      hold on
+      linalg.simple_plot_quiver(V(:,1),V(:,2))
+      hold off
+    \end{verbatim}
+  \end{feedback}
+
+  
+  Next, apply $S$ to $V^T*face\_points$
+
+  \begin{verbatim}
+    new_face=S*new_face
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the image
+
+    %1120x840
+    \begin{center}
+      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_S_A.png}
+    \end{center}
+
+  Checking the dimensions of the new figure window, we notice that the face has compressed vertically inward and stretched horizontally outward, according to the diagonal values of $S$.
+
+  PICK UP HERE AND MAKE THESE QUESTIONS
+
+  Finally, if we apply $U$ to $S*V'*face\_points$, we get 
+
+  \begin{verbatim}
+    new_face=U*new_face
+    linalg.simple_plot_cloud(new_face);
+  \end{verbatim}
+
+  we get the same figure as when we apply $A$ to \facepoints. 
+
+  Keeping in mind the dimensions of the face image after multiplication by $S$, you'll note that $U$ applied another rotation. 
+
+  Finally, with a couple of quick for loops you'll note that teh columns of both $U$ and $V$ are unit vectors. 
+
+
+
+Let's put this all together to determine the properties of $U$, $S$, and $V$!
 
 \begin{selectAll}
 
@@ -136,60 +221,9 @@ Use MATLAB to explore the properties of $U, S$, and $V$ below, selecting all tha
 
 \end{selectAll}
 
-\begin{feedback}
-
-  Let's explore the transformational interpretations of the SVD first. In short, the SVD lets you write any matrix as the product of \emph{two ``rotations"} and a \emph{stretching}. This is much simpler than breaking down a matrix into elementary transformations, and even will work on matrices representing many transformations. (Note: We say ``rotations'' in quotes because in $2$ and $3$ dimensions these matrices could be a mix of rotations and reflections. More generally these are called \emph{orthogonal} matrices, which we'll explore later.)
-
-  Trying this out on our $A$ matrix, we get $V^T=\begin{bmatrix}
-    -.9871 & .1602 \\ .1602 & .9871
-  \end{bmatrix}$. If we apply this to \facepoints with
-
-  \begin{verbatim}
-    new_face=V'*face_points
-    linalg.simple_plot_cloud(new_face);
-  \end{verbatim}
-
-  we get the image
-
-    %1120x840
-    \begin{center}
-      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_V_A.png}
-    \end{center}
-
-  Notice that this is a rotation of \facepoints, but a different rotation than the construction rotation from the introduction.
-  
-  If we then apply $S$ to $V^T*face\_points$, we get 
-
-  \begin{verbatim}
-    new_face=S*new_face
-    linalg.simple_plot_cloud(new_face);
-  \end{verbatim}
-
-  we get the image
-
-    %1120x840
-    \begin{center}
-      \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_S_A.png}
-    \end{center}
-
-  Checking the dimensions of the new figure window, we notice that the face has compressed vertically inward and stretched horizontally outward, according to the diagonal values of $S$.
-
-  Finally, if we apply $U$ to $S*V'*face\_points$, we get 
-
-  \begin{verbatim}
-    new_face=U*new_face
-    linalg.simple_plot_cloud(new_face);
-  \end{verbatim}
-
-  we get the same figure as when we apply $A$ to \facepoints. 
-
-  Keeping in mind the dimensions of the face image after multiplication by $S$, you'll note that $U$ applied another rotation. 
-
-  Finally, with a couple of quick for loops you'll note that teh columns of both $U$ and $V$ are unit vectors. 
-
-\end{feedback}
-
 \end{problem}
+
+
 
 As we said before, the SVD can be applied to \emph{any} matrix, unlike many decompositions that require square matrices. Let's again explore the SVD, but on two nonsquare matrices that map $3$-dimensional vectors.
 

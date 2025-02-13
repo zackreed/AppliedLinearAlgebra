@@ -79,7 +79,7 @@ Unfortunately, 200 dimensions are impossible to visualize. But, as is thankfully
 
 Let's explore the solution to this issue with data that we can visualize. 
 
-Open up MATLAB and load the \texttt{.mat} file called $\texttt{noise\_line.mat}$. Then take a look at the plot.
+Open up MATLAB and load the \texttt{.mat} file called \texttt{noise\_line.mat}. Then take a look at the plot.
 
 \begin{verbatim}
 
@@ -97,8 +97,7 @@ You should see an image like the following:
 
 The data is technically 3-dimensional, and it would be messy to try and make sense of the data from a table or from a single matrix, such as the following matrix showing the first 9 data vectors in 3D:
 
-\[
-\texttt{data\_matrix}=\begin{bmatrix}
+\texttt{data\_matrix}=$\begin{bmatrix}
 -1.0201 & 3.0132  & -0.6987 \\
 -0.3617 & 1.3268  & -0.3374 \\
 2.0980  & -5.3478 & 1.2988  \\
@@ -109,8 +108,8 @@ The data is technically 3-dimensional, and it would be messy to try and make sen
 -2.5682 & 8.2888  & -2.5877 \\
 1.3599  & -3.5429 & 1.1710\\
 \ldots
-\end{bmatrix}
-\]
+\end{bmatrix}$
+
 
 looking closely at the data, however, you might notice that the data is localized with a pseudo-linear relationship, generally moving up and to the right in 3D space. In fact, if you plot a line through the data, you notice that the datapoints don't stray too far from the line, as seen here:
 
@@ -119,11 +118,15 @@ looking closely at the data, however, you might notice that the data is localize
   \includegraphics[width=22.62cm, height=17cm]{noisy_line_2.png}
 \end{center}
 
-Lines are $1$-dimensional vector spaces that can be described just by a point and a direction vector, which you can find from the loaded data as $\texttt{line\_point}$ and $\texttt{line\_direction}$. 
+Lines are $1$-dimensional vector spaces that can be described just by a point and a direction vector, which you can find from the loaded data as \texttt{line\_point} and \texttt{line\_direction}. 
 
-In some sense, this means that it is not too far off to describe the entire data set with just two vectors, $\texttt{line\_point}=\begin{bmatrix}0\\0\\0\end{bmatrix}$ and $\texttt{line\_direction}=\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. You might say that the data is comprised of points within the cube $[-4,4]\times[-10,10]\times[-3,3]$ that are ``close to'' the line $t\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. This is a much simpler description than the original data matrix. 
+In some sense, this means that it is not too far off to describe the entire data set with just two vectors, \texttt{line\_point}=\begin{bmatrix}0\\0\\0\end{bmatrix} and \texttt{line\_direction}=$\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. You might say that the data is comprised of points within the cube $[-4,4]\times[-10,10]\times[-3,3]$ that are ``close to'' the line $t\begin{bmatrix}.3180\\-.9090\\.2710\end{bmatrix}$. This is a much simpler description than the original data matrix. 
 
 You might also gain information about regions or individual data points by determining the directions of data points along the line in relation to the center point, in this case $\vec{0}$. For instance, if you project the data points onto the line, you can separate the data into two groups determined by their location relative to the center point. 
+
+\begin{remark}
+  Recall that projections are obtained from dot products, which can be found by matrix multiplication with a transposed vector (or a matrix of vectors). In the case that you project onto a unit direction vector, remember that you also can create an orthogonal decomposition of the data.
+\end{remark}
 
 Try the following:
 
@@ -142,6 +145,8 @@ You should see the following line, which is the projections of the data points a
 \end{center}
 
 You can then separate the points along the center, by creating "left" and "right" sets and plotting them individually.
+
+Here, we separate according to the projection magnitude. If the orthogonal projection is $0$, then the vector is orthogonal to the line, and the projection is at the origin. A positive projection magnitude means you move in the direction of the unit vector, and a negative projection means you move parallel but in the opposite direction.
 
 \begin{verbatim}
 

@@ -124,7 +124,7 @@ First, let's examine the transformational interpretations of the SVD first. In s
 
   Trying this out on our $A$ matrix, we get $V^T=\begin{bmatrix}
     -.9871 & .1602 \\ .1602 & .9871
-  \end{bmatrix}$. If we apply this to \facepoints with
+  \end{bmatrix}$. If we apply this to \texttt{face\_points}  with
 
   \begin{verbatim}
     new_face=V'*face_points
@@ -138,7 +138,7 @@ First, let's examine the transformational interpretations of the SVD first. In s
       \includegraphics[width=29.63cm, height=22.22cm]{face_svd_rots_V_A.png}
     \end{center}
 
-  Notice that this is a rotation of \facepoints, but a different rotation than the construction rotation from the introduction.
+  Notice that this is a rotation of \texttt{face\_points} , but a different rotation than the construction rotation from the introduction.
 
   Applying what we know about orthogonal projections, the matrix $V^T$ has projected the face vectors to the orthonormal basis:
 
@@ -189,7 +189,7 @@ First, let's examine the transformational interpretations of the SVD first. In s
     linalg.simple_plot_cloud(new_face);
   \end{verbatim}
 
-  we get the same figure as when we apply $A$ to \facepoints. 
+  we get the same figure as when we apply $A$ to \texttt{face\_points} . 
 
   Keeping in mind the dimensions of the face image after multiplication by $S$, you'll note that $U$ applied another rotation. 
 
@@ -349,7 +349,7 @@ Once again, we have a rotation applied to the disc, and this final transformatio
 
 This final rotation aligns the face with the following orthonormal basis vectors:
 
-$$u_1=\begin{bmatrix}\answer[tolerance=.001]{.3684}\\\answer[tolerance=.0001]{.2123}\\\answer[tolerance=.0001]{-.9051}\end{bmatrix}, u_2=\begin{bmatrix}\answer[tolerance=.001]{-.9154}\\\answer[tolerance=.0001]{-.0871}\\\answer[tolerance=.0001]{-.3930}\end{bmatrix}, u_3=\begin{bmatrix}\answer[tolerance=.001]{-.1622}\\\answer[tolerance=.0001]{..9733}\\\answer[tolerance=.0001]{.1622}\end{bmatrix}.$$
+$$u_1=\begin{bmatrix}\answer[tolerance=.001]{.3684}\\\answer[tolerance=.0001]{.2123}\\\answer[tolerance=.0001]{-.9051}\end{bmatrix}, u_2=\begin{bmatrix}\answer[tolerance=.001]{-.9154}\\\answer[tolerance=.0001]{-.0871}\\\answer[tolerance=.0001]{-.3930}\end{bmatrix}, u_3=\begin{bmatrix}\answer[tolerance=.001]{-.1622}\\\answer[tolerance=.0001]{.9733}\\\answer[tolerance=.0001]{.1622}\end{bmatrix}.$$
 
 \end{problem}
 
@@ -464,7 +464,12 @@ First, compute the SVD of $C$ and multiply \texttt{smiley\_3D} by the transposed
 
 As we can see, this again rotated \texttt{smiley\_3D} in space.
 
+This rotation projects the face vectors to the orthonormal basis vectors:
+
+$$v_1=\begin{bmatrix}\answer[tolerance=.001]{-.8165}\\\answer[tolerance=.0001]{.4082}\\\answer[tolerance=.0001]{-.4082}\end{bmatrix}, v_2=\begin{bmatrix}\answer[tolerance=.001]{.4082}\\\answer[tolerance=.0001]{.9082}\\\answer[tolerance=.0001]{.0918}\end{bmatrix}, v_3=\begin{bmatrix}\answer[tolerance=.001]{-.4082}\\\answer[tolerance=.0001]{.0918}\\\answer[tolerance=.0001]{.9082}\end{bmatrix}.$$
+
 Now, we multiply by $S_C$, the singular value diagonal matrix.
+
 
 \begin{verbatim}
 
@@ -478,7 +483,11 @@ Now, we multiply by $S_C$, the singular value diagonal matrix.
   \includegraphics[width=29.63cm, height=22.22cm]{face_svd_C_S.png}
 \end{center}
 
-Interestingly, this compressed the face sphere into a line, but a line in $\RR^2$ rather than in $\RR^3$ as before. If we inspect $S_C$, we note that its dimensions are $2\times 3$, and its only nonzero daigonal entry is in the first dimension. So, not only is the single dimension of rank captured in there being one nonzero singular value, but also the $S_C$ matrix has a $2$D output. This is in preparation for the left singular matrix $U_C$, which has dimension $2\times 2$, matching the output dimension of the $2\times 3$ matrix. 
+Interestingly, this compressed the face sphere into a line, but a line in $\RR^{\answer{2}}$ rather than in $\RR^3$ as before. This is because $S_C$ transforms $\answer{3}$-dimensional vectors into $\answer{2}$-dimensional vectors but has only $\answer{1}$ nonzero diagonal entry.
+
+
+
+ This is in preparation for the left singular matrix $U_C$, which has dimension $2\times 2$, matching the output dimension of the $2\times 3$ matrix. 
 
 Applying the $2$D rotation from the left singular matrix, we get
 
@@ -497,6 +506,7 @@ Applying the $2$D rotation from the left singular matrix, we get
 \end{problem}
 
 So, for the matrix $C$, the SVD broke down the rank 1 transformation into a rotation in $3D$ space to align the axes for stretching and compressing, a compression down to a line in $2D$ space, and then a rotation in $2D$ to yeild the final rank 1 $2\times 3$ transformation. 
+
 
 \begin{problem}
 

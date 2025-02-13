@@ -140,14 +140,14 @@ First, let's examine the transformational interpretations of the SVD first. In s
 
   Notice that this is a rotation of \facepoints, but a different rotation than the construction rotation from the introduction.
 
-  Applying what we know about linear transformations, the matrix $V^T$ has rotated the face to align with the direction vectors
+  Applying what we know about orthogonal projections, the matrix $V^T$ has projected the face vectors to the orthonormal basis:
 
   
 
   $$v_1=\begin{bmatrix}\answer[tolerance=.001]{-.9871}\\\answer[tolerance=.0001]{.1602}\end{bmatrix}, v_2=\begin{bmatrix}\answer[tolerance=.001]{.1602}\\\answer[tolerance=.0001]{.9871}\end{bmatrix}. \text{ (Note: Answer these to four decimal places)}$$
 
   \begin{feedback}
-    If you need to, it might help to use \texttt{linalg.simple\_plot\_quiver(V(:,1),V(:,2))} to visualize the the rotation with respect to the columns of $V$.
+    If you need to, it might help to use \texttt{linalg.simple\_plot\_quiver(V(1,:)',V(2,:)')} to visualize the the rotation with respect to the columns of $V$.
 
     The full code would be
 
@@ -180,9 +180,9 @@ First, let's examine the transformational interpretations of the SVD first. In s
 
   Checking the dimensions of the new figure window, we notice that the face has compressed vertically inward and stretched horizontally outward, according to the diagonal values of $S$.
 
-  PICK UP HERE AND MAKE THESE QUESTIONS
+  Looking at the matrix $S$ the face is horizontally stretched by a factor of $\answer[tolerance=.01]{3.65}$ and horizontally compressed by a factor of $\answer[tolerance=.01]{.82}$.
 
-  Finally, if we apply $U$ to $S*V'*face\_points$, we get 
+  Finally, if we apply $U$ to $S*V'*$\texttt{face\_points}, we get 
 
   \begin{verbatim}
     new_face=U*new_face
@@ -193,9 +193,19 @@ First, let's examine the transformational interpretations of the SVD first. In s
 
   Keeping in mind the dimensions of the face image after multiplication by $S$, you'll note that $U$ applied another rotation. 
 
-  Finally, with a couple of quick for loops you'll note that teh columns of both $U$ and $V$ are unit vectors. 
+  This rotation aligns the face with the direction vectors $u_1=\begin{bmatrix}\answer[tolerance=.001]{-.5847}\\\answer[tolerance=.0001]{-.8112}\end{bmatrix}$ and $u_2=\begin{bmatrix}\answer[tolerance=.001]{-.8112}\\\answer[tolerance=.0001]{.5847}\end{bmatrix}$.
 
 
+Connecting the ideas from last chapter about dot products and orthonormal bases, you might note that any rotation matrix in $\RR^2$ simply rotates the standard basis vectors while keeping them length 1 and orthogonal. One might conclude that any rotation in $\RR^2$ is given by an orthonormal basis for $\RR^2$. 
+
+We have two rotation matrices here, let's check if they give orthonormal bases for $\RR^2$!
+
+The dot products 
+
+%V'*V gives the identity matrix and so does U'*U
+$$V^T*V=\begin{bmatrix}\answer{1} & \answer{0}\\\answer{0} & \answer{1}\end{bmatrix} \text{ and } U^T*U=\begin{bmatrix}\answer{1} & \answer{0}\\\answer{0} & \answer{1}\end{bmatrix}.$$
+
+Hence, $V$ and $U$ \wordChoice{\choice[correct]{give}\choice{do not give}} orthonormal bases for $\RR^2$.
 
 Let's put this all together to determine the properties of $U$, $S$, and $V$!
 
@@ -225,7 +235,7 @@ Let's put this all together to determine the properties of $U$, $S$, and $V$!
 
 
 
-As we said before, the SVD can be applied to \emph{any} matrix, unlike many decompositions that require square matrices. Let's again explore the SVD, but on two nonsquare matrices that map $3$-dimensional vectors.
+As we said before, the SVD can be applied to \emph{any} matrix, unlike many decompositions that require square matrices. Let's again explore the SVD, but on two matrices that map $3$-dimensional vectors and are not full rank.
 
 We'll first examine a rank 2 3x3 matrix, and then a 3x2 matrix, as these both will illuminate some important structural aspects of the SVD matrices. 
 
@@ -235,8 +245,9 @@ We can further note the rank of $B$ by observing its effect on a $3$D cloud of v
 
 \begin{verbatim}
 
-  B=[1 0 1;
-  3 1 -3]
+  B=[1 3 -3;
+      0 1 -2;
+      1 -3 9]
   load +linalg/smiley_3D.mat
   linalg.simple_plot_cloud(head, eyes, smile);
   face=[head,eyes,smile]
@@ -260,6 +271,8 @@ which yeilds the plots
 
 This visualizes more specifically the structure of $B$ in that it compresses space down to a plane. While further analysis of $B$ can determine which vectors span the image space, we can actually determine this same information from the SVD. 
 
+\begin{problem}
+
 First, remember that the SVD breaks down any matrix into two rotations and a stretch. Let's see these in action.
 
 After taking the SVD, we start with the matrix $V_B^T$.
@@ -279,14 +292,29 @@ which yields
   \includegraphics[width=29.63cm, height=22.22cm]{face_svd_3D_B_V.png}
 \end{center}
 
-(Note: I maintained the head, eyes, and smile separately for these figures so that the rotations were more evident.). This clearly performed a rotation in space.
+(Note: I maintained the head, eyes, and smile separately for these figures so that the rotations were more evident.). This clearly performed a rotation in space, though the rotation was not over one specific axis of rotation, sucha as the standard rotations around the $x$, $y$, and $z$ axes.
+
+The matrix $V'$ projected the face vectors along the orthonormal basis vectors: 
+
+$$v_1=\begin{bmatrix}\answer[tolerance=.001]{-.0511}\\\answer[tolerance=.0001]{.3842}\\\answer[tolerance=.0001]{-.9218}\end{bmatrix}, v_2=\begin{bmatrix}\answer[tolerance=.001]{-.5954}\\\answer[tolerance=.0001]{-.7528}\\\answer[tolerance=.0001]{-.2807}\end{bmatrix}, v_3=\begin{bmatrix}\answer[tolerance=.001]{.8018}\\\answer[tolerance=.0001]{-.5345}\\\answer[tolerance=.0001]{-.2673}\end{bmatrix}.$$
+
+\begin{feedback}
+To visualize this orientation along the new axis, use the following code (in addition to the previous code). Note that the scaling factors are arbitrary and can be adjusted to better visualize the vectors.
+
+\begin{verbatim}
+  hold on
+  linalg.simple_plot_quiver(10*V_B(1,:)',10*V_B(2,:)',10*V_B(3,:)');
+  hold off
+\end{verbatim}
+
+\end{feedback}
 
 Then, we follow up by multiplying by $S_B$.
 
 \begin{verbatim}
 
   two_face=S_B*two_face
-  linalg.simple_plot_cloud(two_face)
+  linalg.simple_plot_cloud(two_face);
 
 \end{verbatim}
 
@@ -297,7 +325,11 @@ which yields
   \includegraphics[width=29.63cm, height=22.22cm]{face_svd_3D_B_S.png}
 \end{center}
 
-Note that this time, the cloud flattened into a $2D$ disc. Then, we finish by multiplying by $U_B$.
+This scaled the rotated face in the $x$-direction by a factor of $\answer[tolerance=.01]{10.4962}$, in the $y$-direction by a factor of $\answer[tolerance=.01]{2.1975}$, and in the $z$-direction by a factor of $\answer[tolerance=.01]{0}$.
+
+Notice that the final scaling of the $z$ direction squishes the dimension of the face down to $\answer{2}$. This accounts for the rank of the matrix $B$, since the result is a $2$D disc (which is about to be rotated by $U$).
+
+Then, we finish by multiplying by $U_B$.
 
 \begin{verbatim}
 
@@ -314,6 +346,12 @@ which yields
 \end{center}
 
 Once again, we have a rotation applied to the disc, and this final transformation matches the result of multiplication by $B$.
+
+This final rotation aligns the face with the following orthonormal basis vectors:
+
+$$u_1=\begin{bmatrix}\answer[tolerance=.001]{.3684}\\\answer[tolerance=.0001]{.2123}\\\answer[tolerance=.0001]{-.9051}\end{bmatrix}, u_2=\begin{bmatrix}\answer[tolerance=.001]{-.9154}\\\answer[tolerance=.0001]{-.0871}\\\answer[tolerance=.0001]{-.3930}\end{bmatrix}, u_3=\begin{bmatrix}\answer[tolerance=.001]{-.1622}\\\answer[tolerance=.0001]{..9733}\\\answer[tolerance=.0001]{.1622}\end{bmatrix}.$$
+
+\end{problem}
 
 What you might notice from this third figure is that the flattened disc is not round and circular, but actually quite stretched in two directions. If you inspect the axes more closely after multiplication by $S_B$, you'll note that this stretching was indeed present, as the $x,y,z$ axes spanned $[-100,100]$, $[-20,20]$ and $[-1,1]$.
 
@@ -334,7 +372,7 @@ Based on this analysis, mark which statement is correct about the SVD in this ex
   In fact, you can explain the rank of $B$ by the compressing stage of multiplication by $S$. Since $S$ is diagonal, it stretched and compressed the rotated face matrix along the standard axes. The $x$-direction got stretched by around $10$, the $y$-direction got stretched by around $2$, but the $z$-direction flattened, resulting in a $2$-dimensional disc which was then rotated by $U$. You can in fact describe the process of constructing $B$ from the SVD as: 
 
   \begin{enumerate}
-    \item $V^T$ rotates space to set up stretching and compression by $S$
+    \item $V^T$ orthogonally projects data to set up stretching and compression by $S$
     \item $S$ stretches and compresses space according to the rank (and amount of spread) of the matrix (more on this later).
     \item $U$ rotates the stretched and compressed space to the directions over which $B$ spreads image vectors.
   \end{enumerate}
@@ -345,7 +383,20 @@ Based on this analysis, mark which statement is correct about the SVD in this ex
 
 We can actually be even more specific, beyond merely saying $U$ and $V$ rotate and $S$ compresses. There is in fact important and specific information gained by the columns of $U$ and $V$, as well as the diagonal elements of $S$. 
 
-We will adopt specific terminology to refer to these vectors and values. The columns of $U$ are the \emph{left singular vectors}, the columns of $V$ are the \emph{right singular vectors}, and the diagonal values of $S$ are the \emph{singular values} of a matrix $M$. You can for now distinguish the left and right singular vectors by the order of multiplication $U*S*V^T$.
+We will adopt specific terminology to refer to these vectors and values. 
+
+\begin{remark}\name{Terminology:}
+
+  The three-matrix decomposition $A=U*S*V^T$ is called the \emph{singular value decomposition} of $A$.
+  
+  The columns of $U$ are the \emph{left singular vectors}. 
+
+  The columns of $V$ are the \emph{right singular vectors}. 
+  
+  The diagonal values of $S$ are the \emph{singular values} of a matrix $M$. 
+  
+  You can for now distinguish the left and right singular vectors by the order of multiplication $U*S*V^T$.
+\end{remark}
 
 If you plot the columns of $U$ (the left singular vectors) alongside the final transformation (after scaling for visibility), you get the following 
 
@@ -357,7 +408,7 @@ If you plot the columns of $U$ (the left singular vectors) alongside the final t
 \begin{hint}\name{MATLAB Code}
   \begin{verbatim}
 
-    linalg.simple_plot_cloud(two_head,two_eyes,two_smile);
+    linalg.simple_plot_cloud(two_face);
     hold on
     linalg.simple_plot_quiver(150*U_B(:,1),50*U_B(:,2),20*U_B(:,3));
     hold off
@@ -367,9 +418,13 @@ If you plot the columns of $U$ (the left singular vectors) alongside the final t
 
 The blue vector is the first singular vector, the red is the second, and the yellow is the third. If you plot this yourself and rotate the figure, you'll note that the first two singular vectors orthogonally span the plane on which the disc sits (and hence span the image of the transformation), and the third singular vector is perpendicular to the plane. 
 
+\begin{remark}\name{Looking Ahead: Thinking about Stretching!}
+
 Even more important, the first singular vector points in the direction of the maximum stretching of the disc, the second points in the next direction of stretching, and the third points away from the disc, where there is no stretching. If you return to the singular values (the diagonal of $S$), you actually get a direct correspondance of the amount of stretching (which makes sense, since $S$ stretches and compresses the sphere after rotation by $V$). So the sphere was first stretched by a factor of $10$ (the first singular value) in the $x$-direction, then by a factor of $2$ (the second singular vector) in the $y$-direction, and then by a factor of $0$ (the third singular vector) in the $z$-direction. 
 
 The left singular vectors then rotated space so that the $10$-stretched axis pointed in the direction of $u_1=\begin{bmatrix}.3684\\.2123\\-.9051\end{bmatrix}$, the $2$-stretched axis pointed in the direction of $u_2=\begin{bmatrix}-.9154\\-.0871\\-.3930\end{bmatrix}$, and then the final singular vector points in the direction of the remaining dimension of $3D$ space (the direction over which the vectors were compressed down to the plane).
+
+\end{remark}
 
 All of this lets us utilize the SVD to tell us exactly how any linear transformation re-orients space. If we let a sphere in space (such as \texttt{smiley\_3D}) be a small stand-in for the typical structure of $\RR^3$, we see that all matrices can be described by:
 
@@ -381,12 +436,16 @@ All of this lets us utilize the SVD to tell us exactly how any linear transforma
 
 \end{enumerate}
 
+\begin{problem}
+
 Let's explore this with another, non-square matrix, $C=\begin{bmatrix}
   2 & -1 & 1\\
   -6 & 3 & -3
-\end{bmatrix}$. $C$ is a $2\times 3$ matrix with rank $1$, so we anticipate that it will compress $3D$ space to a line living in $\RR^2$. Let's see how the SVD breaks this process down.
+\end{bmatrix}$. 
 
-First, compute the SVD of $C$ and multiply \texttt{smiley\_3D} by the right singular matrix $V_C^T$.
+$C$ is a $2\times 3$ matrix with rank $\answer{1}$, so we anticipate that it will compress $\answer{3}$-dimensional space to a \wordChoice{\choice{point}\choice[correct]{line}\choice{plane}} living in $\answer{2}$-dimensional space. Let's see how the SVD breaks this process down.
+
+First, compute the SVD of $C$ and multiply \texttt{smiley\_3D} by the transposed right singular matrix $V_C^T$.
 
 \begin{verbatim}
 
@@ -435,6 +494,8 @@ Applying the $2$D rotation from the left singular matrix, we get
   \includegraphics[width=29.63cm, height=22.22cm]{face_svd_C_U.png}
 \end{center}
 
+\end{problem}
+
 So, for the matrix $C$, the SVD broke down the rank 1 transformation into a rotation in $3D$ space to align the axes for stretching and compressing, a compression down to a line in $2D$ space, and then a rotation in $2D$ to yeild the final rank 1 $2\times 3$ transformation. 
 
 \begin{problem}
@@ -474,7 +535,7 @@ So, for the matrix $C$, the SVD broke down the rank 1 transformation into a rota
 
     Further, from the previous two examples, it should be noted that any zero singular vectors entail a reduction of dimension in the image space (because of the flattening along the corresponding axis during multiplication by $S$), so the rank is exactly the number of nonzero singular values. 
     
-    Similarly, since $U$ rotates and reflects space according to the left singular vectors, any singular vectors corresponding to nonzero singular values will span the image space of $M$, and any right singular vectors corresponding to zero singular values span the rest of $\RR^m$. Moreover, since $V$ initially rotates space to align for the stretching and compression of $S$, the columns of $V$ corresponding to zero singular vectors spans the null space of $M$, since those directions get flattened out by $S$.
+    Similarly, since $U$ rotates and reflects space according to the left singular vectors, any singular vectors corresponding to nonzero singular values will span the image space of $M$, and any right singular vectors corresponding to zero singular values span the rest of $\RR^m$. Moreover, since $V$ initially projects space to align for the stretching and compression of $S$, the columns of $V$ corresponding to zero singular vectors spans the null space of $M$, since those directions get flattened out by $S$.
 
   \end{feedback}
 

@@ -189,7 +189,7 @@ Use MATLAB to explore the properties of $U, S$, and $V$ below, selecting all tha
 
 \end{feedback}
 
-\end{[problem]}
+\end{problem}
 
 As we said before, the SVD can be applied to \emph{any} matrix, unlike many decompositions that require square matrices. Let's again explore the SVD, but on two nonsquare matrices that map $3$-dimensional vectors.
 
@@ -307,6 +307,8 @@ Based on this analysis, mark which statement is correct about the SVD in this ex
 
 \end{feedback}
 
+\end{problem}
+
 We can actually be even more specific, beyond merely saying $U$ and $V$ rotate and $S$ compresses. There is in fact important and specific information gained by the columns of $U$ and $V$, as well as the diagonal elements of $S$. 
 
 We will adopt specific terminology to refer to these vectors and values. The columns of $U$ are the \emph{left singular vectors}, the columns of $V$ are the \emph{right singular vectors}, and the diagonal values of $S$ are the \emph{singular values} of a matrix $M$. You can for now distinguish the left and right singular vectors by the order of multiplication $U*S*V^T$.
@@ -350,7 +352,7 @@ Let's explore this with another, non-square matrix, $C=\begin{bmatrix}
   -6 & 3 & -3
 \end{bmatrix}$. $C$ is a $2\times 3$ matrix with rank $1$, so we anticipate that it will compress $3D$ space to a line living in $\RR^2$. Let's see how the SVD breaks this process down.
 
-First, compute the SVD of $C$ and multiply \texttt{smiley_3D} by the right singular matrix $V_C^T$.
+First, compute the SVD of $C$ and multiply \texttt{smiley\_3D} by the right singular matrix $V_C^T$.
 
 \begin{verbatim}
 

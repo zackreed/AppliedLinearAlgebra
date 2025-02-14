@@ -11,7 +11,7 @@
 \maketitle
 
 
-\section{Subspace Fitting and the SVD}
+\section*{Subspace Fitting and the SVD}
 
 %\begin{outcome}
 %  \begin{enumerate}
@@ -113,7 +113,7 @@ Whereas in the previous section we considered the columns of a matrix from the s
   \end{tikzpicture}
 \end{center}
 
-You can manipulate and work with this data by loading $\texttt{+linalg/subspace\_fitting\_data.mat}$ in MATLAB.
+You can manipulate and work with this data by loading \texttt{+linalg/subspace\_fitting\_data.mat} in MATLAB.
 
 
 
@@ -147,6 +147,8 @@ the subspace to be the quantity
   D = d(\vect{v}_1,W)^2 + \ldots + d(\vect{v}_m,W)^2.
 \end{equation*}
 
+Here, $d$ is the distance from the vector to the subspace, which is the same as the perpendicular vector $\vec{v}_\perp$ from the orthogonal decompositions in \href{https://ximera.osu.edu/appliedlinearalgebra/c5ChapterFive/learningActivities/m5LearningActivities/m5DotProduct/orthogonalityThree}{the previous chapter.}
+
 You can visualize this phenomenon in $2$-dimensions with the following GeoGebra application:
 
 \begin{center}
@@ -158,6 +160,35 @@ You can visualize this phenomenon in $2$-dimensions with the following GeoGebra 
 You can enter and alter points in Vector Lists 1 and 2 to change the data points you want to visualize with green dots. A line through the origin is visualzied in blue, and can be rotated by clicking and dragging the blue dot at the end of the direction vector $\vec{v}$. If you keep ``Emphasize Distances to Line" checked, you will see the distances $d(\vec{v}_i,L)$ from the points to the line visualized, and will also see a calculation ``Distance Square Sum='' which automatically calculates the sum of square distances \begin{equation*}
   D = d(\vect{v}_1,L)^2 + \ldots + d(\vect{v}_m,L)^2
 \end{equation*} for you.
+
+\begin{problem}
+  Using the applet above, consider the following data matrix of points in $\RR^2$:
+
+  $$\begin{bmatrix} 1 & 1.1 & 1 & -2 & -2.1 & .9\\ 
+    .5 & .6 & -1 & 1 & 1.1 & -1.1\end{bmatrix}$$
+
+  On which line given the by the following direction vectors does the data have the smallest total squared distance?
+
+  \begin{multipleChoice}
+    \choice{$\begin{bmatrix} -.982 \\ -.188 \end{bmatrix}$}
+    \choice{$\begin{bmatrix} -.525 \\ -.851 \end{bmatrix}$}
+    \choice[correct]{$\begin{bmatrix} -.898 \\ .441 \end{bmatrix}$}
+    \choice{$\begin{bmatrix} 0 \\ 1 \end{bmatrix}$}
+
+  \end{multipleChoice}
+
+  Now, select ``Emphasize Projection Vectors'', which displays the lengths of the projection vectors of the data points onto the line. On which line given by the following direction vectors does the data have the largest total squared projection length sum?
+
+  %use the same multiple choice
+  \begin{multipleChoice}
+    \choice{$\begin{bmatrix} -.982 \\ -.188 \end{bmatrix}$}
+    \choice{$\begin{bmatrix} -.525 \\ -.851 \end{bmatrix}$}
+    \choice[correct]{$\begin{bmatrix} -.898 \\ .441 \end{bmatrix}$}
+    \choice{$\begin{bmatrix} 0 \\ 1 \end{bmatrix}$}
+  \end{multipleChoice}
+
+  This demonstrates a key idea that will be repeated throughout the rest of the course: Minimizing the distance to a subspace is the same as maximizing the projection length along the subspace.
+\end{problem}
 
 The goal of describing high-dimensional data using low-dimensional subspaces that ``closely approximate'' the data is akin to finding subspaces that minimize the sum of square distances from the data to the subspace, and can be generally stated as follows:
 
@@ -191,7 +222,8 @@ The goal of describing high-dimensional data using low-dimensional subspaces tha
   Find the 1-dimensional subspace that best approximates this
   collection of points. What is the total squared distance of the
   points to the subspace?
-\end{example}
+
+  As it turns out, the SVD provides the means of finding best-fitting subspaces. We will solve this problem after we more explicitly connect the idea of maximizing spread to an algorithm that finds the SVD. For now, we will just note that we use the SVD to answer these questions.
 
 
   The space $W$ is shown in the following illustration, along with the
@@ -216,7 +248,9 @@ The goal of describing high-dimensional data using low-dimensional subspaces tha
   \end{center}
   Of course, in real life the data is much more complex than in this example
 
+\end{example}
 
+Let's state another problem, in $\RR^3$, that we will return to and again use the SVD to solve. Because data can be very high dimensional and quite complex, it is important to observe that we have many dimensions of possibility on which to explore best-fit subspaces. 
 
 
 \begin{example}\name{Subspace fitting in $\R^3$}\label{ex:subspace-fitting-r3}
@@ -249,7 +283,7 @@ The goal of describing high-dimensional data using low-dimensional subspaces tha
   the subspace?
 \end{example}
 
-
+Now that we've asked questions begging answers, let's explore how the SVD will be used to provide answers.
 
 \section*{Maximizing Spread, Minimizing Distance, Computing the SVD}
 
@@ -369,10 +403,224 @@ With these features in mind, the SVD production algorithm is as follows.
 
   There are other ways to compute the SVD more efficiently and with connections to other concepts to be explored in future modules, but this first cosntruction method emphasizes that the singular vectors are built to maximize the spread of the vectors along the projected subspaces, that the singular values quantify the spread along the projected subpsaces, and that the singular vectors form orthonormal bases of $\RR^m$ and $\RR^n$. 
 
-  Indeed, because matrix multiplication gives the dot product of each row $A$ with the vector $\vec{v}$, $\left\|A\vec{v}\right\|^2$ is the same computation as $P$, the spread of the vectors along the projection in the direction of $\vec{v}$. Hence, maximizing $\left\|A\vec{v}\right\|$ also maximizes $\left\|A\vec{v}\right\|^2=P$. As we've already discussed, maximizing $P$ is the same as minimizing $D$, so we have found the sequence of basis vectors from which to construt best-fitting subspaces.
-
   For a more detailed analysis of this process, see Blum, Hopcroft, and Kannan's \emph{Foundations of Data Science} (2015). A free pdf version can be found \href{https://www.cs.cornell.edu/jeh/book.pdf}{here}.
 
 \end{theorem}
+
+\begin{remark}
+  Unpacking the consequences of this algorithm, and the consequences of the SVD, is complex so let's review the important parts:
+  \begin{enumerate}
+    \item $A$ is an $m\times n$ matrix, meaning we have $n$ $m$-dimensional data vectors. 
+    \item We want to project the data onto a $k$-dimensional subspace that maximizes the spread of the data along the subspace.
+    \item We first find the direction $\vec{v}_1$ in $\RR^n$ such that $A\vec{v}_1$ maximizes the spread of the data along a line in $\RR^m$. $vec{v}_1$ is the first right singular vector of $A$, the line $A\vec{v}_1=\sigma_1\vec{u}_1$ is the first left singular vector of $A$, with direction $\vec{u}_1$ and the amount of spread $\sigma_1$.
+    \item We then repeat, finding more direction vectors $\vec{v}_2,\vec{v}_3,\ldots$ that are orthogonal to the previous vectors and progressively maximize the spread of the data along the subspaces they span.
+    \item The end result is an orthonormal basis $U$ of $\RR^m$ and an orthonormal basis $V$ of $\RR^n$ that span the subspaces that best fit the data, and the singular values $\sigma_1,\sigma_2,\ldots$ quantify the spread of the data along the subspaces.
+  \end{enumerate}
+\end{remark}
+
+Now, let's use the SVD to solve our two problems.
+
+\begin{problem}
+  The matrix $A$ whose columns are the given points is
+  \begin{equation*}
+    A = \begin{bmatrix}
+      2 & -1 & 2 & -6 & 6 & 0 & 1 & -2 & -7 \\
+      -3 & 0 & 3 & -7 & 11 & -1 & 6 & -3 & -6
+    \end{bmatrix}.
+  \end{equation*}
+  We compute the SVD of $A$ to find the best-fitting 1-dimensional subspace:
+
+  \begin{verbatim}
+    A = [2 -1 2 -6 6 0 1 -2 -7; -3 0 3 -7 11 -1 6 -3 -6];
+    [U,S,V] = svd(A);
+  \end{verbatim}
+
+  Notice that $V$ is a $9\times 9$ matrix and $U$ is a $2\times 2$ matrix. Because we want to fit the data in $\RR^2$ to a 1-dimensional subspace, we will use the first left singular vector $\vec{u}_1$ as the direction of the best-fitting line. Because $\vec{v}_1$ gives the direction in $\RR^9$ over which the spread along the line is maximized, and we want to project onto the line spanned by $\vec{u}_1$, we need to project the data by the product $\vec{u}_1\vec{v}_1^T$. That projection would not account for the spread of the data, however, so we also need to multiply $\vec{v}_1$ by the singular value $\sigma_1$ to account for the spread. This means the best-fitting line is given by the product $\vec{u}_1\sigma_1\vec{v}_1^T$.
+
+  We do this in MATLAB, pulling from $U$ and $V$ and $S$, by the following code:
+
+  \begin{verbatim}
+    line = U(:,1)*S(1,1)*V(:,1)';
+  \end{verbatim}
+
+  Plotting the data and the projection in MATLAB should reveal the following diagram:
+
+  \begin{verbatim}
+linalg.simple_plot_cloud(line,A)
+hold on
+linalg.simple_plot_line([0;0],U(:,1))
+axis equal
+hold off
+  \end{verbatim}
+
+  \begin{center}
+    \begin{tikzpicture}[scale=0.15]
+      \draw[thin,->] (-12,0) -- (12,0);
+      \draw[thin,->] (0,-12) -- (0,12);
+      \draw[thin] (0,10) -- (-1,10) node[left] {$10$};
+      \draw[thin] (10,0) -- (10,-1) node[below] {$10$};
+      \draw[thick,blue] (-8,-12) -- (8,12);
+      \fill[color=red] (2,-3) circle (0.4);
+      \fill[color=red] (-1, 0) circle (0.4);
+      \fill[color=red] (2, 3) circle (0.4);
+      \fill[color=red] (-6, -7) circle (0.4);
+      \fill[color=red] (6, 11) circle (0.4);
+      \fill[color=red] (0, -1) circle (0.4);
+      \fill[color=red] (1, 6) circle (0.4);
+      \fill[color=red] (-2, -3) circle (0.4);
+      \fill[color=red] (-7, -6) circle (0.4);
+    \end{tikzpicture}
+  \end{center}
+
+  From this, the projections of the data onto the best fitting line are: 
+
+  $$\vec{p}_1=\begin{bmatrix}
+    \answer[tolerance=.01]{-.7692}\\-1.1538
+  \end{bmatrix},\vec{p}_2=\begin{bmatrix}
+    -.3077\\\answer[tolerance=.01]{-.4615}
+  \end{bmatrix},\vec{p}_3=\begin{bmatrix}
+    \answer[tolerance=.01]{2}\\3
+  \end{bmatrix},\vec{p}_4=\begin{bmatrix}
+    -5.0769\\\answer[tolerance=.01]{-7.6154}
+  \end{bmatrix},\vec{p}_5=\begin{bmatrix}
+    \answer[tolerance=.01]{6.9231}\\10.3846
+  \end{bmatrix},\vec{p}_6=\begin{bmatrix}
+    -.4615\\\answer[tolerance=.01]{-.6923}
+  \end{bmatrix},\vec{p}_7=\begin{bmatrix}
+    3.0769\\\answer[tolerance=.01]{4.6154}
+  \end{bmatrix},\vec{p}_8=\begin{bmatrix}
+    \answer[tolerance=.01]{-2}\\-3
+  \end{bmatrix},\vec{p}_9=\begin{bmatrix}
+    -4.9231\\\answer[tolerance=.01]{-7.3846}
+  \end{bmatrix}.$$
+
+  You can find the total squared distance of the points to the subspace in a couple of ways. First, take the difference between \texttt{A} and \texttt{line}, square each entry, and sum the entries. If you do this, you get a total squared distance of $\answer{27}$ (Use the following code.):
+
+  \begin{verbatim}
+    diff=A-line
+    total_length=0
+    for i=1:9
+        len=norm(diff(:,i))^2;
+        total_length=total_length+len;
+    end
+    total_length
+  \end{verbatim}
+
+  Alternatively, $S$ encodes the singular values, the sum of the spread in the two directions of $\RR^2$. $\sigma_1$ is the spread along the best-fitting line, so $\sigma_2$ is the spread orthogonal to the line, so $\sigma_2^2$ is the total squared distance of the points to the subspace. In this case, $\sigma_2^2=\answer{27}$.
+
+  So we see that the singular values tell us both information about the spread along subspaces as well as the total squared distance of the data to the subspaces!
+\end{problem}
+
+Now, similarly for our problem using data in $\RR^3$, we can see how this plays out with multiple dimensions of best-fit subspaces:
+
+\begin{problem}
+  The matrix $B$ whose columns are the given data in $\RR^3$ is
+  \begin{equation*}
+    B = \begin{bmatrix}
+      -7 & 0 & 2 & 10 & -2 & -8 & 5 & -6 & 9 & -2 \\
+      4 & 3 & -5 & -4 & 5 & -1 & 4 & 9 & -6 & -7 \\
+      5 & 3 & -4 & 1 & 4 & -5 & 2 & 6 & 3 & -8
+    \end{bmatrix}.
+  \end{equation*}
+  We compute the SVD of $B$ to find the best-fitting 1-dimensional subspace:
+
+  \begin{verbatim}
+    B = [-7 0 2 10 -2 -8 5 -6 9 -2; 
+    4 3 -5 -4 5 -1 4 9 -6 -7; 
+    5 3 -4 1 4 -5 2 6 3 -8];
+    [U,S,V] = svd(B);
+  \end{verbatim}
+
+  Notice that $V$ is a $10\times 10$ matrix and $U$ is a $3\times 3$ matrix. Because we want to fit the data in $\RR^3$ to a 1-dimensional subspace, we will use the first left singular vector $\vec{u}_1$ as the direction of the best-fitting line. Because $\vec{v}_1$ gives the direction in $\RR^{10}$ over which $B\vec{v}$ maximally spreads the data along the line, and we want to project onto the line spanned by $\vec{u}_1$, we need to project the data by the product $\vec{u}_1\vec{v}_1^T$. 
+  
+  That projection would not account for the amount of spread of the data, however, so we also need to multiply $\vec{v}_1$ by the singular value $\sigma_1$ to account for the spread. This means the best-fitting line is given by the product $\vec{u}_1\sigma_1\vec{v}_1^T$.
+
+  We do this in MATLAB, pulling from $U$ and $V$ and $S$, by the following code:
+
+  \begin{verbatim}
+    line = U(:,1)*S(1,1)*V(:,1)';
+  \end{verbatim}
+
+  Plotting the data and the projection in MATLAB should reveal the following diagram:
+
+  \begin{verbatim}
+linalg.simple_plot_cloud(line,B)
+hold on
+linalg.simple_plot_line([0;0;0],U(:,1))
+axis equal
+hold off
+  \end{verbatim}
+
+  The projections onto the best-fitting line are:
+
+$$\vec{p}_1=\begin{bmatrix}
+    \answer{-6}\\6\\\answer{3}
+  \end{bmatrix},\vec{p}_2=\begin{bmatrix}
+    -2\\\answer{2}\\1
+  \end{bmatrix},\vec{p}_3=\begin{bmatrix}
+    \answer{4}\\-4\\-2
+  \end{bmatrix},\vec{p}_4=\begin{bmatrix}
+    6\\\answer{-6}\\-3
+  \end{bmatrix},\vec{p}_5=\begin{bmatrix}
+    \answer{-4}\\4\\2
+  \end{bmatrix},\vec{p}_6=\begin{bmatrix}
+    -2\\\answer{2}\\\answer{1}
+  \end{bmatrix},\vec{p}_7=\begin{bmatrix}
+    0\\0\\\answer{0}
+  \end{bmatrix},\vec{p}_8=\begin{bmatrix}
+    \answer{-8}\\8\\4
+  \end{bmatrix},\vec{p}_9=\begin{bmatrix}
+    6\\\answer{-6}\\-3
+  \end{bmatrix},\vec{p}_{10}=\begin{bmatrix}
+    \answer{4}\\-4\\-2
+  \end{bmatrix}.$$
+
+  Keeping in mind the relationship between the total spread along the line and the singular values, the total squared distance from the data to the line is $\answer{333}$. (Hint: Use the squares of the singular values not used in the projection.)
+
+  Now, for the 2-dimensional subspace, we can use the first two left singular vectors to find the best-fitting plane. Here, we project onto the first two left singular vectors, $\vec{u}_1$ and $\vec{u}_2$, scaling by the first two singular values, and along the directions dicated by the first two right singular vectors, $\vec{v}_1$ and $\vec{v}_2$.
+
+  \begin{verbatim}
+    plane = U(:,1:2)*S(1:2,1:2)*V(:,1:2)';
+  \end{verbatim}
+
+Plotting the data and the projection in MATLAB should reveal the following plane:
+
+  \begin{verbatim}
+linalg.simple_plot_cloud(plane,B)
+hold on
+linalg.simple_plot_plane([0;0;0],U(:,1:2))
+axis equal
+hold off
+  \end{verbatim}
+
+  From this, the projections of the data onto the best fitting plane are: 
+
+  $$\vec{p}_1=\begin{bmatrix}
+    \answer{-6}\\\answer{6}\\3
+  \end{bmatrix},\vec{p}_2=\begin{bmatrix}
+    0\\\answer{3}\\\answer{3}
+  \end{bmatrix},\vec{p}_3=\begin{bmatrix}
+    \answer{2}\\-5\\-4
+  \end{bmatrix},\vec{p}_4=\begin{bmatrix}
+    \answer{10}\\-4\\1
+  \end{bmatrix},\vec{p}_5=\begin{bmatrix}
+    -2\\\answer{5}\\\answer{4}
+  \end{bmatrix},\vec{p}_6=\begin{bmatrix}
+    \answer{-8}\\-1\\-5
+  \end{bmatrix},\vec{p}_7=\begin{bmatrix}
+    4\\\answer{2}\\4
+  \end{bmatrix},\vec{p}_8=\begin{bmatrix}
+    \answer{-6}\\9\\\answer{6}
+  \end{bmatrix},\vec{p}_9=\begin{bmatrix}
+    10\\\answer{-4}\\1
+  \end{bmatrix},\vec{p}_{10}=\begin{bmatrix}
+    \answer{-2}\\-7\\\answer{-8}
+  \end{bmatrix}.$$
+
+  Again, keeping in mind that the singular values tell you both the amount of spread and the total distance to the subspace, we get that the total square distance from the plane to the data is $\answer{22}$.
+
+  Finally, for the 3-dimensional subspace, we actaully  have the entire space. Since the data is in $\RR^3$, the best-fitting 3-dimensional subspace is $\RR^3$ itself. If the data were in $\RR^4$, we might be able to have a 3-dimensional subspace that best fits the data, but that we could not visualize this.
+  
+\end{problem}
 
 \end{document}

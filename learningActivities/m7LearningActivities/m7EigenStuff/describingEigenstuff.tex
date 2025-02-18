@@ -16,7 +16,7 @@
     
 At several places in this course it has been valuable to restrict ourselves to square matrices, and we do so again when discussing eigenvalues and eigenvectors. 
     
-Recall that any $n \times n$  matrix induces a linear transformation from $\RR^n$ to itself.  For our first few examples, let us consider the case $n = 2$.
+Recall that any $n \times n$  matrix is a linear transformation from $\RR^n$ to itself.  For our first few examples, let us consider the case $n = 2$.
     
 \begin{exploration}\label{init:eignintro}
 Let $A=\begin{bmatrix} 2& 1\\ 1&2
@@ -33,24 +33,26 @@ Let $A=\begin{bmatrix} 2& 1\\ 1&2
 
 \end{exploration}
     
-In Exploration \ref{init:eignintro} we found that certain vectors do not change direction under the linear transformation induced by matrix $A$.  Such vectors are examples of \dfn{eigenvectors} of $A$.
+In Exploration \ref{init:eignintro} we found that certain vectors do not change direction under the linear transformation induced by matrix $A$.  Such vectors are examples of \textbf{eigenvectors} of $A$.
     
 In general, any nonzero vector whose image under a matrix transformation is parallel to the original vector is called an \dfn{eigenvector} of the matrix that induced the transformation.  The following definition captures this idea algebraically.
     
 \begin{definition}\label{def:eigen}
+
 Let $A$ be an $n \times n$ matrix.  We say that a non-zero vector $\vec{x}$ is an \dfn{eigenvector} of $A$ if $$A\vec{x} = \lambda \vec{x}$$
 for some scalar $\lambda$.
-We say that $\lambda$ is an \dfn{eigenvalue} of $A$ associated with the eigenvector $\vec{x}$. %$lambda$.
+We say that $\lambda$ is an \dfn{eigenvalue} of $A$ associated with the eigenvector $\vec{x}$. 
 \end{definition}
     
 Let's revisit Exploration \ref{init:eignintro} in light of Definition \ref{def:eigen}.  In the exploration, we observed visually that vectors parallel to $\begin{bmatrix} 1\\ 1 \end{bmatrix}$ were eigenvectors associated with $A=\begin{bmatrix} 2& 1\\ 1&2
 \end{bmatrix}$, as these vectors changed length but remained parallel to the original vector under the linear transformation induced by $A$.  To verify this algebraically, observe that all vectors parallel to $\begin{bmatrix} 1\\ 1 \end{bmatrix}$ can be written in the form $\begin{bmatrix} a\\ a \end{bmatrix}$, $(a\neq 0)$.  We compute
 $$\begin{bmatrix} 2& 1\\ 1&2 \end{bmatrix} \begin{bmatrix} a\\ a \end{bmatrix} =
 \begin{bmatrix} 3a\\ 3a \end{bmatrix}= 3 \begin{bmatrix} a\\ a \end{bmatrix}$$
-This shows that any non-zero scalar multiple of $\begin{bmatrix} 1\\ 1 \end{bmatrix}$ is an eigenvector of $A$ which has a corresponding eigenvalue of 3.
+This shows that any non-zero scalar multiple of $\vec{v}=\begin{bmatrix} 1\\ 1 \end{bmatrix}$ is an eigenvector of $A$ which has a corresponding eigenvalue of 3.
     
 \begin{center}
-\begin{tikzpicture}
+    %make the scale 1.2
+\begin{tikzpicture}[scale=1.2]
     
     \draw[<->] (-4,0)--(4,0);
     \draw[<->] (0,-4)--(0,4);
@@ -58,12 +60,12 @@ This shows that any non-zero scalar multiple of $\begin{bmatrix} 1\\ 1 \end{bmat
     \draw[line width=1pt,-stealth, blue](0, 0)--(1, 1);
     \draw[line width=1pt,-stealth, blue](0, 0)--(2, 2);
     \draw[line width=1pt,-stealth, blue](0, 0)--(3, 3);
-    \draw[line width=1pt,-stealth, blue](0, 0)--(-1, -1);
+    \draw[line width=1pt,-stealth, blue](0, 0)--(-1, -1); 
     \draw[line width=1pt,-stealth, blue](0, 0)--(-2, -2);
     \draw[line width=1pt,-stealth, blue](0, 0)--(-3, -3);
     
     
-    \node[blue] at (3, 3.5)   (a) {$\begin{bmatrix}2&1\\1&2\end{bmatrix}\begin{bmatrix}a\\a\end{bmatrix}=3\begin{bmatrix}a\\a\end{bmatrix}$};
+    \node[blue] at (3, 3.5)   (a) {$A*\vec{v}=3\vec{v}$};
     
     \end{tikzpicture}
 \end{center}
@@ -87,13 +89,19 @@ The above discussion leads us to the following result.
 \begin{observation}\label{obs:finerPointsOfEigDef}
 A couple of finer points of Definition \ref{def:eigen} require clarification.
     \begin{itemize}
-    \item The definition requires that eigenvectors be non-zero.  Imagine what would happen if we allowed $\vec{x}=\vec{0}$ to be an eigenvector of $A$. Clearly $A\vec{0}=\lambda\vec{0}$ for all scalars $\lambda$.  This means that every number would be an eigenvalue of every matrix.  Because eigenvalues are supposed to capture certain information about the matrix, allowing every number to be an eigenvalue of every matrix would defeat the purpose.
-    \item Until now, we had talked about  eigenvectors as vectors whose images under a matrix transformation are parallel to the original vectors.  But the algebraic definition allows non-zero vectors that map to zero to be considered eigenvectors.  (What would an eigenvalue of such an eigenvector be?)  The zero vector has no direction, so we cannot say that the image of such an eigenvector is parallel to the original vector.  Example \ref{ex:eigen} will illustrate this point.
+    \item We require eigenvectors to be non-zero.  
+    
+    Imagine what would happen if we allowed $\vec{x}=\vec{0}$ to be an eigenvector of $A$. Clearly $A\vec{0}=\lambda\vec{0}$ for all scalars $\lambda$.  This means that every number would be an eigenvalue of every matrix.  Because eigenvalues are supposed to capture certain information about the matrix, allowing every number to be an eigenvalue of every matrix would defeat the purpose.
+    \item Until now, we had talked about  eigenvectors as vectors whose images under a matrix transformation are parallel to the original vectors.  
+    
+    But the algebraic definition allows non-zero vectors that map to zero to be considered eigenvectors.  (What would an eigenvalue of such an eigenvector be?)  The zero vector has no direction, so we cannot say that the image of such an eigenvector is parallel to the original vector.  Example \ref{ex:eigen} will illustrate this point.
     \end{itemize}
 \end{observation}
     
 \begin{example}\label{ex:eigen}
-Let $P=\begin{bmatrix} 1& 0\\ 0&0\end{bmatrix}$.  Note that $P$ takes a vector in $\RR^2$ and projects it onto the $x$-axis, as we learned in Practice Problem \ref{prob:standardmatrix3}.  Which vectors in $\RR^2$ would be the eigenvectors, and what are the corresponding eigenvalues?
+Let $P=\begin{bmatrix} 1& 0\\ 0&0\end{bmatrix}$.  Note that $P$ takes a vector in $\RR^2$ and projects it onto the $x$-axis.
+
+Which vectors in $\RR^2$ would be the eigenvectors, and what are the corresponding eigenvalues?
 \begin{explanation}
 Since $P\vec{x}$ is the projection of $\vec{x}$ onto the $x$-axis, in many cases $P\vec{x}$ and $\vec{x}$ are not parallel.  Notice, however, that all of the red vectors located along the $x$-axis in the diagram are fixed by $P$. So, for any of the red vectors we have $P\vec{x}=\vec{x}=1\vec{x}$, which means that each of the red vectors is an eigenvector of $P$ with the corresponding eigenvalue of $1$.
 \begin{center}
@@ -127,11 +135,11 @@ Since $P\vec{x}$ is the projection of $\vec{x}$ onto the $x$-axis, in many cases
 \draw[line width=1pt,-stealth, red](0, 0)--(1,0);
     
     
-    \node[red] at (3.5, 0.7)   (a) {$\begin{bmatrix}1&0\\0&0\end{bmatrix}\vec{x}=1\vec{x}$};
+    \node[red] at (3.5, 0.7)   (a) {$P\vec{x}=1\vec{x}$};
     
-    \node[blue] at (1.2, 3)   (a) {$\begin{bmatrix}1&0\\0&0\end{bmatrix}\vec{x}=0\vec{x}$};
+    \node[blue] at (1.2, 3)   (a) {$P\vec{x}=0\vec{x}$};
     
-    \node[black] at (2.2, -1)   (a) {$\begin{bmatrix}1&0\\0&0\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}x_1\\0\end{bmatrix}$};
+    %\node[black] at (2.2, -1)   (a) {$\begin{bmatrix}1&0\\0&0\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}x_1\\0\end{bmatrix}$};
     \end{tikzpicture}
 \end{center}
     
@@ -169,7 +177,7 @@ A natural question is this: does every square matrix have eigenvalues and eigenv
 Let $M=\begin{bmatrix}
 \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}\\
 \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}
-\end{bmatrix}$.  Note that $M$ takes any vector $\vec{x}$ in $\RR^2$ and rotates it $45^{\circ}$, as we saw in Example \ref{ex: rotate45}. 
+\end{bmatrix}$.  Note that $M$ takes any vector $\vec{x}$ in $\RR^2$ and rotates it by $\frac{\pi}{4}$ radians. 
     
 \begin{center}
 \begin{tikzpicture}
@@ -232,9 +240,12 @@ Let $M=\begin{bmatrix}
     
 %{\color{red} Inserting a tikz here would be nice, I think.}
     
-Since $M$ rotates every vector in $\RR^2$, \emph{every} nonzero vector changes direction, so there are no eigenvectors in the plane.  It turns out that $M$ does have eigenvectors and eigenvalues, but in order to find them we need to work with vectors whose entries are complex numbers.  Since these vectors are not in $\RR^2$, we cannot see them. 
+Since $M$ rotates every vector in $\RR^2$, \wordChoice{\choice[correct]{every}\choice{some}\choice{no}} nonzero vector(s) changes direction, so there \wordChoice{\choice{are}\choice[correct]{are no}} eigenvectors in the plane.  
+
+It turns out that $M$ does have eigenvectors and eigenvalues, but in order to find them we need to work with vectors whose entries are complex numbers. As a brief review, complex numbers are numbers of the form $a+bi$, where $a$ and $b$ are real numbers and $i$ is the imaginary unit, which is defined to be $i=\sqrt{-1}$. The real part of $a+bi$ is $a$, and the complex part of $a+bi$ is $b$. Any complex numbers with complex parts are not visible in the plane, so we cannot see the eigenvectors of $M$.  
     
-To follow the computation below, you need to recall that the imaginary unit $i$ is defined to by $i^2=-1$.  
+To follow the computation below, you need to recall that the imaginary unit $i$ is defined to by $i^2=-1$, and that for two complex numbers $a+bi$ and $c+di$, their product is computed as follows:
+$$(a+bi)(c+di)=ac+adi+bci+bdi^2=ac+adi+bci-bd=(ac-bd)+i(ad+bc)$$
     
     
 %\begin{center}[3in]
@@ -256,7 +267,7 @@ $$\begin{bmatrix}
 \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}
 \end{bmatrix} \begin{bmatrix} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2} i \end{bmatrix} =
 \begin{bmatrix} \frac{1}{2}-\frac{1}{2} i\\ \frac{1}{2}+ \frac{1}{2} i \end{bmatrix}= (\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}i) \begin{bmatrix} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2} i \end{bmatrix},$$
-so $\begin{bmatrix} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2} i \end{bmatrix}$ is an eigenvector of $M$.  Its corresponding eigenvalue is $\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}i$.
+so \(\begin{bmatrix} \answer{\frac{\sqrt{2}}{2}}\\ \answer{\frac{\sqrt{2}}{2} i} \end{bmatrix}\) is an eigenvector of \(M\). Its corresponding eigenvalue is \(\answer{\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}i}\).
 \end{example}
     
 We will continue to work with complex numbers as we study eigenvalues and eigenvectors.

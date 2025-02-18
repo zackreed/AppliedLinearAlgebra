@@ -28,6 +28,12 @@
 
 In this section, we will more closely examine the geometric properties of the SVD that allow for analyses such as seen in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{the Voting Records Application}.
 
+First, here's a video overview of the ways that SVD can be used to approximate and analyze data:
+
+\begin{center}
+  \youtube{FMAffJiu5lM}
+\end{center}
+
 Whereas in the previous section we considered the columns of a matrix from the standard transformational perspective, we now consider the $n$ columns of a matrix to be data points in $\RR^m$, where the matrix $A$ is $m\times n$. 
 
 
@@ -147,7 +153,14 @@ the subspace to be the quantity
   D = d(\vect{v}_1,W)^2 + \ldots + d(\vect{v}_m,W)^2.
 \end{equation*}
 
+
 Here, $d$ is the distance from the vector to the subspace, which is the same as the perpendicular vector $\vec{v}_\perp$ from the orthogonal decompositions in \href{https://ximera.osu.edu/appliedlinearalgebra/c5ChapterFive/learningActivities/m5LearningActivities/m5DotProduct/orthogonalityThree}{the previous chapter.}
+
+This idea of distances to subspaces is crucial for data analysis and quantifying error. The following video goes over the connections between distance calculations, the SVD, and the best-fitting subspaces:
+
+\begin{center}
+  \youtube{3JvkXFatJJw}
+\end{center}
 
 You can visualize this phenomenon in $2$-dimensions with the following GeoGebra application:
 
@@ -388,6 +401,12 @@ There are four important features of singular values and singular vectors that c
   \item The SVD factors $A$ into $U*S*V^T$.
 \end{enumerate}
 
+Here's a video going over the following algorithm, explaining the connections between the algorithm and the features of the SVD:
+
+\begin{center}
+  \youtube{yv_3fuu2XAQ}
+\end{center}
+
 With these features in mind, the SVD production algorithm is as follows.
 
 \begin{theorem}{SVD-Producing Algorithm}
@@ -492,7 +511,9 @@ hold off
     -5.0769\\\answer[tolerance=.01]{-7.6154}
   \end{bmatrix},\vec{p}_5=\begin{bmatrix}
     \answer[tolerance=.01]{6.9231}\\10.3846
-  \end{bmatrix},\vec{p}_6=\begin{bmatrix}
+  \end{bmatrix},$$
+  
+  $$\vec{p}_6=\begin{bmatrix}
     -.4615\\\answer[tolerance=.01]{-.6923}
   \end{bmatrix},\vec{p}_7=\begin{bmatrix}
     3.0769\\\answer[tolerance=.01]{4.6154}
@@ -575,7 +596,9 @@ $$\vec{p}_1=\begin{bmatrix}
     -2\\\answer{2}\\\answer{1}
   \end{bmatrix},\vec{p}_7=\begin{bmatrix}
     0\\0\\\answer{0}
-  \end{bmatrix},\vec{p}_8=\begin{bmatrix}
+  \end{bmatrix},$$
+  
+  $$\vec{p}_8=\begin{bmatrix}
     \answer{-8}\\8\\4
   \end{bmatrix},\vec{p}_9=\begin{bmatrix}
     6\\\answer{-6}\\-3
@@ -617,7 +640,9 @@ hold off
     \answer{-8}\\-1\\-5
   \end{bmatrix},\vec{p}_7=\begin{bmatrix}
     4\\\answer{2}\\4
-  \end{bmatrix},\vec{p}_8=\begin{bmatrix}
+  \end{bmatrix},$$
+  
+  $$\vec{p}_8=\begin{bmatrix}
     \answer{-6}\\9\\\answer{6}
   \end{bmatrix},\vec{p}_9=\begin{bmatrix}
     10\\\answer{-4}\\1

@@ -22,7 +22,7 @@ We listed a few reasons why we are interested in finding eigenvalues and eigenve
 For an $n \times n$ matrix, we will see that the eigenvalues are the roots of a polynomial called the \dfn{characteristic polynomial}.  So finding eigenvalues is equivalent to solving a polynomial equation of degree $n$.  Finding the corresponding eigenvectors turns out to be a matter of computing the null space of a matrix, as the following exploration demonstrates.
     
 \begin{exploration}\label{exp:slowdown}
-If a vector $\vec{x}$ is an eigenvector satisfying Equation (\ref{def:eigen}), then clearly it also satisfies  $A\vec{x}-\lambda \vec{x} =$ \wordChoice{\choice{0} \choice[correct]{$\vec{0}$}}.
+If a vector $\vec{x}$ is an eigenvector satisfying the equation $A\vec{x}=\lambda \vec{x}$, then clearly it also satisfies  $A\vec{x}-\lambda \vec{x} =$ \wordChoice{\choice{0} \choice[correct]{$\vec{0}$}}.
     
 It seems natural at this point to try to factor.  We would love to ``factor out'' $\vec{x}$.  Here is the procedure:
 \begin{align*}
@@ -52,14 +52,14 @@ $$\mbox{det}(A-\lambda I) = 0$$ is called the \dfn{characteristic equation} of $
     
 \begin{example}\label{ex:2x2eig}
 Let $A=\begin{bmatrix} 2& 1\\ 1&2
-\end{bmatrix}$.  Compute the eigenvalues of this matrix using the characteristic equation.
+\end{bmatrix}$.  Compute the eigenvalues of this matrix using the characteristic equation. (List your answers in an increasing order.)
 \begin{explanation}
-\begin{align*}\det(A-\lambda I)=\begin{vmatrix}2-\lambda&1\\1&2-\lambda\end{vmatrix}&=(2-\lambda)^2-1\\
-&=\lambda^2-4\lambda+3\\
-&=(\lambda-1)(\lambda-3)
-\end{align*}
-The characteristic equation $(\lambda-1)(\lambda-3)=0$ has solutions $\lambda_1=1$ and $\lambda_2=3$.  These are the eigenvalues of $A$.
-\end{explanation}
+    \begin{align*}\det(A-\lambda I)=\begin{vmatrix} \answer{2}-\lambda & \answer{1} \\ \answer{1} &\answer{2}-\lambda \end{vmatrix} &= (\lambda{2}-\lambda)^2 - \answer{1} \\
+    &= \lambda^2 - \answer{4} \lambda + \answer{3} \\
+    &= (\lambda - \answer{1})(\lambda - \answer{3})
+    \end{align*}
+    The characteristic equation \((\lambda - \answer{1})(\lambda - \answer{3}) = \answer{0}\) has solutions \(\lambda_1 = \answer{1}\) and \(\lambda_2 = \answer{3}\). These are the eigenvalues of \(A\).
+    \end{explanation}
 \end{example}
     
 \begin{example}\label{ex:2x2eig2}
@@ -74,15 +74,12 @@ $\lambda_1=\answer{0}$ and $\lambda_2=\answer{4}$
 \begin{example}\label{ex:3x3eig}
 Let $C=\begin{bmatrix} 2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{bmatrix}$.  Compute the eigenvalues of $C$ using the characteristic equation.
 \begin{explanation}
-\begin{align*}\det(C-\lambda I)&=\begin{vmatrix}2-\lambda & 1 & 1\\ 1 & 2-\lambda & 1\\ 1 & 1 & 2-\lambda\end{vmatrix}\\
-&=(2-\lambda)\begin{vmatrix}2-\lambda&1\\1&2-\lambda\end{vmatrix}-1\begin{vmatrix}1&1\\1&2-\lambda\end{vmatrix}+1\begin{vmatrix}1&2-\lambda\\1&1\end{vmatrix}\\
-&=(2-\lambda)^3-(2-\lambda)-((2-\lambda)-1)+1-(2-\lambda)\\
-&=8-12\lambda+6\lambda^2-\lambda^3-2+\lambda-2+\lambda+1+1-2+\lambda\\
-&=4-9\lambda+6\lambda^2-\lambda^3\\
-&=-(\lambda-4)(\lambda-1)^2
-\end{align*}
-Matrix $C$ has eigenvalues $\lambda_1=1$ and $\lambda_2=4$.
-\end{explanation}
+    \begin{align*}\det(C-\lambda I)&=\begin{vmatrix} \answer{2}-\lambda & \answer{1} & \answer{1} \\ \answer{1} & \answer{2}-\lambda & \answer{1} \\ \answer{1} & \answer{1} & \answer{2}-\lambda \end{vmatrix}\\
+    &=\answer{4} - \answer{9} \lambda + \answer{6} \lambda^2 - \lambda^3\\
+    &=-(\lambda - \answer{4})(\lambda - \answer{1})^2
+    \end{align*}
+    Matrix \(C\) has eigenvalues \(\lambda_1 = \answer{1}\) and \(\lambda_2 = \answer{4}\).
+    \end{explanation}
 \end{example}
     
 In Example \ref{ex:3x3eig}, the factor  $(\lambda-1)$ appears twice.  This repeated factor gives rise to the eigenvalue $\lambda_1=1$.  We say that the eigenvalue $\lambda_1=1$ has \dfn{algebraic multiplicity} $2$.
@@ -93,7 +90,7 @@ There are actually two kinds of multiplicities associated with eigenvalues that 
 
 The \emph{algebraic multiplicity} of an eigenvalue $\lambda$ is the number of times that it occurs as a root of the characteristic polynomial.
 
-The \dfn{geometric multiplicity} of an eigenvalue $\lambda$ is the dimension of the corresponding eigenspace $\mathcal{S}_\lambda$.
+The \emph{geometric multiplicity} of an eigenvalue $\lambda$ is the dimension of the corresponding eigenspace $\mathcal{S}_\lambda$. As we'll discuss, the eigenspace $\mathcal{S}_\lambda$ is the span of all eigenvectors associated with the eigenvalue $\lambda$.
 \end{definition}
 
 Consider now the following lemma.

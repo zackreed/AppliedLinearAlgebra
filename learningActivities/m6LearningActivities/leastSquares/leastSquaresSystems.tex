@@ -8,8 +8,6 @@
 \begin{document}
 \begin{abstract}
 
-    One application of IPSs is least squares.
-
 \end{abstract}
 \maketitle
 
@@ -17,12 +15,6 @@
 \section*{Least Squares and the Moore-Penrose Pseudo-Inverse}
 \label{sec:least-squares}
 
-%\begin{outcome}
-%  \begin{enumerate}
-%  \item Find least squares approximations for a system of equations.
-%  \item Find best fit lines and parabolas for a set of data points.
-%  \end{enumerate}
-%\end{outcome}
 
 One immediate application of the SVD is a new ability to still ``solve'' inconsistent systems of equations $A\vect{v}=\vect{b}$. Though no true exact solution is possible, we would still like
 to find a ``best'' solution. For example, consider the following system
@@ -59,7 +51,8 @@ solution'', i.e., numbers $x$ and $y$ such that each of the three
 equations ``almost'' holds. We can formulate the problem more
 precisely as follows:
 
-\begin{problem}{Least squares approximation problem}{least squares-approximation}
+\begin{problem}\name{Least squares approximation problem}\label{prob:least squares-approximation}
+
   Given a (possibly inconsistent) system of equations
   $A\vect{v}=\vect{b}$, find $\vect{v}$ such that
   \begin{equation*}
@@ -123,6 +116,7 @@ the usual sense.
 
 You might recall from earlier chapters that solving systems of equations (for which one solution exists) is equivalent to finding an inverse of the coefficients matrix of the system. 
 
+\begin{example}
 
 Consider the following system, for which we found a solution \href{https://ximera.osu.edu/appliedlinearalgebra/c3ChapterThree/learningActivities/m3LearningActivities/modThreeSystems/matricesAreSystemsOfEquations3}{in Chapter 3}. 
 
@@ -136,18 +130,16 @@ $$\begin{matrix}
 
 
 This system can be represented in matrix format as $A\vec{x}=\vec{b}$, with the coefficient matrix $A=\begin{bmatrix}
-  2 & -1\\ 3 & 2
+  \answer{2} & \answer{-1}\\ \answer{3} & \answer{2}
 \end{bmatrix}$ and the constant vector $\vec{b}=\begin{bmatrix}
-  -10 \\-8
-\end{bmatrix}$. 
+  \answer{-10} \\ \answer{-8}
+\end{bmatrix}$.
 
 Since $A$ is invertible, meaning $A^{-1}*A=I$ (where $A^{-1}$ is the inverse matrix), we can solve for a solution vector $\vec{x}$ by left-multiplicaiton by $A^{-1}$, 
 
 $$\vec{x}=A^{-1}*A*\vec{x}=A^{-1}\vec{b}.$$
 
-This yeilds the solution 
-
-
+You can use the following code
 
 \begin{verbatim}
   
@@ -160,18 +152,23 @@ This yeilds the solution
 \end{verbatim}
 
 
-to yield $\vec{x}=\begin{bmatrix}
-  -4\\2
-\end{bmatrix}$. You can similarly find an inverse by $\texttt{x=A\\b}$, without explicitly solving for $A^{-1}$.
+to yield the solution  $\vec{x}=\begin{bmatrix}
+  \answer{-4}\\\answer{2}
+\end{bmatrix}$. You can similarly find an inverse by \texttt{x=A\\b}, without explicitly solving for $A^{-1}$.
 
 Now, let's use the SVD as a new way to construct $A^{-1}$ that will also give us a means of finding a least-squares solution when an inverse does not exist. 
 
+\textbf{Solution:}
+
 Computing the SVD of $A$ gives $U=\begin{bmatrix}
-  -.3827 & -.9239\\-.9239& -.3827
-\end{bmatrix}$, $V=\begin{bmatrix}
-  -.9239 & -.3827\\
-  -.3827 & .9239
-\end{bmatrix}$, and singular values $\sigma_1=3.8284$ and $\sigma_2=1.8284$.
+  \answer[tolerance=.01]{-.3827} & \answer[tolerance=.01]{-.9239}\\
+  \answer[tolerance=.01]{-.9239} & \answer[tolerance=.01]{-.3827}
+\end{bmatrix}$,  
+$V=\begin{bmatrix}
+  \answer[tolerance=.01]{-.9239} & \answer[tolerance=.01]{-.3827}\\
+  \answer[tolerance=.01]{-.3827} & \answer[tolerance=.01]{.9239}
+\end{bmatrix}$,  
+and singular values $\sigma_1=\answer[tolerance=.01]{3.8284}$ and $\sigma_2=\answer[tolerance=.01]{1.8284}$.
 
 Because $A=U*S*V^T$, we can re-state the matrix equation as 
 
@@ -193,13 +190,29 @@ and
 
 $$\vec{x}=V*S^\dagger*U^T\vec{b}.$$
 
+Let's do so, using the following code:
+
+\begin{verbatim}
+[U, S, V]=svd(A);
+S_dagger=[1/S(1, 1) 0;
+0 1/S(2, 2)];
+x=V*S_dagger*U'*b
+\end{verbatim}
+
+This yields the same solution $\vec{x}=\begin{bmatrix}
+  \answer{-4}\\\answer{2}
+\end{bmatrix}$ as before.
+
+\end{example}
+
 Moreover, the product $V*S^\dagger*U^T$ equals the inverse matrix $A^{-1}$. 
 
 Even more importantly, however, a slight adjustment to this process also gives us what's called the \emph{Moore-Penrose pseudo-inverse}, and the ability to find least squares approximations of solutions to systems of equations. 
 
 
 
-\begin{example}{Least squares approximation}{least-squares-approximation}
+\begin{example}\name{Least squares approximation}\label{ex:least-squares-approximation}
+
   Find the least squares approximation for the system of equations
   \begin{equation*}
     \begin{array}{r@{~}c@{~}r@{~}c@{~}r@{~}c@{~}r}
@@ -209,20 +222,25 @@ Even more importantly, however, a slight adjustment to this process also gives u
       2x &+& 2y &-&  z &=& -8. \\
     \end{array}
   \end{equation*}
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We first write the system in matrix form $A\vect{v}=\vect{b}$, where
   \begin{equation*}
     A = \startmat{rrr}
-      2 & 2 & 2 \\
-      1 & -1 & -1 \\
-      -1 & -1 & 2 \\
-      2 & 2 & -1 \\
+      \answer{2} & \answer{2} & \answer{2} \\
+      \answer{1} & \answer{-1} & \answer{-1} \\
+      \answer{-1} & \answer{-1} & \answer{2} \\
+      \answer{2} & \answer{2} & \answer{-1} \\
     \stopmat
     \quad\mbox{and}\quad
-    \vect{b} = \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat.
-  \end{equation*}
+    \vect{b} = \startmat{r} 
+      \answer{1} \\ 
+      \answer{-2} \\ 
+      \answer{4} \\ 
+      \answer{-8} 
+    \stopmat.
+\end{equation*}
 
 
 First, note that $A$ is a rectangular matrix, and hence is automatically not invertible. Moreover, there are more equations than variables in the system, and so there certainly is not guaranteed to be one exact solution.
@@ -234,19 +252,19 @@ Finding the SVD of $A$ yields the matrices
 \[
 U =
 \begin{bmatrix}
--0.6667 & -0.6159 & -0.2551 & -0.3333 \\
-0.0000 & 0.3827 & -0.9239 & 0.0000 \\
-0.3333 & -0.6159 & -0.2551 & 0.6667 \\
--0.6667 & 0.3080 & 0.1276 & 0.6667
+\answer[tolerance=.01]{-0.6667} & -0.6159 & \answer[tolerance=.01]{-0.2551} & -0.3333 \\
+0 & \answer[tolerance=.01]{0.3827} & -0.9239 & \answer[tolerance=.01]{0} \\
+0.3333 & \answer[tolerance=.01]{-0.6159} & -0.2551 & \answer[tolerance=.01]{0.6667} \\
+\answer[tolerance=.01]{-0.6667} & 0.3080 & 0.1276 & \answer[tolerance=.01]{0.6667}
 \end{bmatrix}
 \]
 
 \[
 S =
 \begin{bmatrix}
-4.2426 & 0      & 0 \\
-0      & 3.2004 & 0 \\
-0      & 0      & 1.3257 \\
+\answer[tolerance=.01]{4.2426} & 0      & 0 \\
+0      & \answer[tolerance=.01]{3.2004} & 0 \\
+0      & 0      & \answer[tolerance=.01]{1.3257} \\
 0      & 0      & 0
 \end{bmatrix}
 \]
@@ -256,13 +274,15 @@ and
 \[
 V =
 \begin{bmatrix}
--0.7071 & 0.1196 & -0.6969 \\
--0.7071 & -0.1196 & 0.6969 \\
--0.0000 & -0.9856 & -0.1691
+\answer[tolerance=.01]{-0.7071} & 0.1196 & \answer[tolerance=.01]{-0.6969} \\
+-0.7071 & \answer[tolerance=.01]{-0.1196} & 0.6969 \\
+0 & -0.9856 & \answer[tolerance=.01]{-0.1691}
 \end{bmatrix}
 \].
 
-$U$ and $V$ are always orthogonal, which is nice, but $S^\dagger$ will need more care. We can still ``invert'' $S$ by taking the reciprocal singular values, but $S$ is not square and so we can't just make a new diagonal matrix inverting the entries. We can, however take $S^T$ and invert the entries to make $S^\dagger$. This will also help keep the dimensions of the matrices straight as we attempt to solve for $\vec{x}$. 
+$U$ and $V$ are always orthogonal, which is nice, but $S^\dagger$ will need more care. 
+
+We can still ``invert'' $S$ by taking the reciprocal singular values, but $S$ is not square and so we can't just make a new diagonal matrix inverting the entries. We can, however take $S^T$ and invert the entries to make $S^\dagger$. This will also help keep the dimensions of the matrices straight as we attempt to solve for $\vec{x}$. 
 
 If you do the following: 
 
@@ -274,11 +294,11 @@ If you do the following:
   S_dagger
 \end{verbatim}
 
-you get $S^\dagger=\begin{bmatrix}
-  .2357 & 0      & 0      & 0 \\
-  0      & .3125 & 0      & 0 \\
-  0      & 0      & .7543 & 0
-  \end{bmatrix}$. 
+you get \( S^\dagger = \begin{bmatrix}
+  \answer[tolerance=.01]{0.2357} & 0      & 0      & 0 \\
+  0      & \answer[tolerance=.01]{0.3125} & 0      & 0 \\
+  0      & 0      & \answer[tolerance=.01]{0.7543} & 0
+  \end{bmatrix}. \)
 
   Then, we can do the same steps as before, however let's keep track of the dimensions as we go. 
 
@@ -297,22 +317,24 @@ $$\vec{x}=V*S^\dagger*U^T\vec{b}.$$
 This makes sense with the system of equations, however, since there were only three variables in the systems. 
 
 Doing this in MATLAB, we get $\vec{x}=\begin{bmatrix}
-  -1\\-1\\2
+  \answer{-1}\\\answer{-1}\\\answer{2}
 \end{bmatrix}$. 
 
 Let's check how far off our system solution is. We want $A\vec{x}=\vec{b}$. 
 
-If we do $A*\begin{bmatrix}
-  -1\\-1\\2
-\end{bmatrix}$, we get $\overline{\vec{b}}=\begin{bmatrix}
-  0\\-2\\6\\-6
-\end{bmatrix}$. In each coordinate, we were not too far off from $\vec{b}$. 
+If we do \( A*\begin{bmatrix}
+  \answer{-1}\\\answer{-1}\\\answer{2}
+\end{bmatrix} \), we get \( \overline{\vec{b}}=\begin{bmatrix}
+  \answer{0}\\\answer{-2}\\\answer{6}\\\answer{-6}
+\end{bmatrix}. \) In each coordinate, we were not too far off from $\vec{b}$. 
+
+
 
 We can also check the approximation error by checking the norm of $A\vec{x}-\vec{b}$. This is a least squares check on the error, since the norm $\norm{A\vect{x}-\vect{b}}$ involves the sum of square errors. 
 
-In our case, $\norm{A\vect{x}-\vect{b}}=3$. While we typically want much smaller errors than $3$, the use of SVD guarantees that we have found the solution with the smallest square error out of all possible $3D$ solution vectors. 
+In our case, $\norm{A\vect{x}-\vect{b}}=\answer{3}$. While we typically want much smaller errors, the use of SVD guarantees that we have found the solution with the smallest square error out of all possible $3D$ solution vectors. 
 
-\end{solution}
+\end{example}
 
 \begin{remark}
 

@@ -105,7 +105,7 @@ the origin does not make much sense. Instead, we should be looking for
 an \textbf{affine subspace}. An affine subspace is similar to a
 subspace, except it does not necessarily contain the origin.
 
-You can analyze this data by loading $\texttt{+linalg/subspace\_fitting\_affine\_data.mat}$ in MATLAB.
+You can analyze this data by loading \texttt{+linalg/subspace\_fitting\_affine\_data.mat} in MATLAB.
 
 In fact, the \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{voting records example} required an accounting of this centering issue as well. We have centered many data sets before, in some ways this section is a deeper dive into the importance of centering data. 
 
@@ -259,20 +259,24 @@ We call the vector $\vec{v}$ around which any affine space is centered the \emph
   Find the 1-dimensional affine subspace that best approximates this
   collection of points. What is the total squared distance of the
   points to the subspace?
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We start by computing the centroid:
+
+
   \begin{equation*}
     \centroid{\vect{v}} =
     \frac{1}{9}(\vect{v}_1+\ldots+\vect{v}_9)
     = \frac{1}{9}\startmat{r} 45 \\ 36 \stopmat
-    = \startmat{r} 5 \\ 4 \stopmat.
+    = \startmat{r} \answer{5} \\ \answer{4} \stopmat.
   \end{equation*}
+
   Next, we shift all vectors by $-\centroid{\vect{v}}$ to get a new
   collection of vectors $\vect{w}_1,\ldots,\vect{w}_9$ centered at the
   origin.
   For example,
+
   \begin{eqnarray*}
     \vect{w}_1 ~~=~~ \vect{v}_1 - \centroid{\vect{v}}
     &=& \startmat{r} 10 \\ -6 \stopmat
@@ -284,39 +288,46 @@ We call the vector $\vec{v}$ around which any affine space is centered the \emph
     - \startmat{r} 5 \\ 4 \stopmat
     ~~=~~ \startmat{r} -3 \\ 6 \stopmat,
   \end{eqnarray*}
+
   and so on. We get
+
   \begin{equation*}
     \set{\vect{w}_1,\ldots,\vect{w}_9} =
     \set{
-      \startmat{r} 5 \\ -10 \stopmat,
-      \startmat{r} -3 \\ 6 \stopmat,
-      \startmat{r} 0 \\ -5 \stopmat,
-      \startmat{r} 3 \\ -1 \stopmat,
-      \startmat{r} -3 \\ 1 \stopmat,
-      \startmat{r} -2 \\ -1 \stopmat,
-      \startmat{r} -1 \\ 7 \stopmat,
-      \startmat{r} 5 \\ -5 \stopmat,
-      \startmat{r} -4 \\ 8 \stopmat
+      \startmat{r} \answer{5} \\ -10 \stopmat,
+      \startmat{r} -3 \\ \answer{6} \stopmat,
+      \startmat{r} \answer{0} \\ -5 \stopmat,
+      \startmat{r} 3 \\ \answer{-1} \stopmat,
+      \startmat{r} \answer{-3} \\ 1 \stopmat,
+      \startmat{r} -2 \\ \answer{-1} \stopmat,
+      \startmat{r} \answer{-1} \\ 7 \stopmat,
+      \startmat{r} 5 \\ \answer{-5} \stopmat,
+      \startmat{r} -4 \\ \answer{8} \stopmat
     }.
   \end{equation*}
 
-  Next we, we use the SVD 
+  Next we, we use the SVD. 
+  
+  In the code below, the centering is done by the code \texttt{W-mean(W,2)*ones(1,9)}, which turns the single vector \texttt{mean(W,2)} into a $2\times 9$ matrix of the centroid repeated 9 times.
   
   \begin{verbatim}
   
-    W=[5 -3 0 3 -3 -2 -1 5 -4;
-    -10 6 -5 -1 1 -1 7 -5 8]
-    [U, S, V]=svd(W)
+    W=[10 2 5 8 2 3 4 10 1;
+    -6 10 -1 3 5 3 11 -1 12];
+    W_centered=W-mean(W,2)*ones(1,9);
+    [U, S, V]=svd(W_centered)
 
   \end{verbatim}
 
-  to find the left singular vectors $U=\begin{bmatrix}
-    .4472&.8944\\-.8944&.4472
-  \end{bmatrix}$ and the singular values $S=\begin{bmatrix}19.2354&0\\0&5.4772\end{bmatrix}$. You might notice that $S$ is really a $2\times 9$ matrix, and that $V$ is a $9\times 9$ matrix. This is because the domain of $W$ as a linear transformation is $\RR^9$, and also because there are $9$ data vectors. 
+  We get the left singular vectors 
+
+  $U=\begin{bmatrix}
+    \answer[tolerance=.01]{.4472}&\answer[tolerance=.01]{.8944}\\\answer[tolerance=.01]{-.8944}&\answer[tolerance=.01]{.4472}
+  \end{bmatrix}$ and $S=\begin{bmatrix}\answer[tolerance=.01]{19.2354}&0\\0&\answer[tolerance=.01]{5.4772}\end{bmatrix}$. You might notice that $S$ is really a $\answer{2}\times \answer{9}$ matrix, and that $V$ is a $\answer{9}\times \answer{9}$ matrix. This is because the domain of $W$ as a linear transformation is $\RR^9$, and also because there are $\answer{9}$ data vectors.
 
   We interpret this to mean that in $\RR^2$, the data is most spread in the direction $\vec{u}_1=\begin{bmatrix}
-    .4472\\-.8944
-  \end{bmatrix}$ in the spread amount $\sigma_1=19.2354$. 
+    \answer[tolerance=.01]{.4472}\\ \answer[tolerance=.01]{-.8944}
+  \end{bmatrix}$ in the amount $\sigma_1=\answer[tolerance=.01]{19.2354}$. 
   
   We form a line from the first singular vector, offset by the centroid, 
   to make the best-fitting 1-dimensional affine subspace for
@@ -324,8 +335,8 @@ We call the vector $\vec{v}$ around which any affine space is centered the \emph
   \begin{equation*}
     \centroid{\vect{v}} + W
     = \set{\centroid{\vect{v}} + \vect{w} \mid \vect{w}\in W}
-    = \set{\left.\startmat{r} 5 \\ 4 \stopmat +
-        t\startmat{r} .4472 \\ -.8944 \stopmat ~\right\vert~ t\in\R}.
+    = \set{\startmat{r} \answer{5} \\ \answer{4} \stopmat +
+        t\startmat{r} .4472 \\ -.8944 \stopmat ~\text{ such that }~ t\in\R}.
   \end{equation*}
 
   Note that this is the equation of a line passing through the
@@ -398,7 +409,7 @@ We can also project the data onto the line to view the spread-maximizing project
 \end{center}
 \vspace{-4ex}\par  
 
-\end{solution}
+\end{example}
 
 The plots from \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/leastSquaresApplicationVotingImages}{voting records example} were exactly the projections of the voting data onto the centered $1D$ and $2D$ best-fitting subspaces formed from the SVD. 
 

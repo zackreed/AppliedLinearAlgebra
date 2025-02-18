@@ -415,7 +415,15 @@ With these features in mind, the SVD production algorithm is as follows.
     \item We first find the direction $\vec{v}_1$ in $\RR^n$ such that $A\vec{v}_1$ maximizes the spread of the data along a line in $\RR^m$. $vec{v}_1$ is the first right singular vector of $A$, the line $A\vec{v}_1=\sigma_1\vec{u}_1$ is the first left singular vector of $A$, with direction $\vec{u}_1$ and the amount of spread $\sigma_1$.
     \item We then repeat, finding more direction vectors $\vec{v}_2,\vec{v}_3,\ldots$ that are orthogonal to the previous vectors and progressively maximize the spread of the data along the subspaces they span.
     \item The end result is an orthonormal basis $U$ of $\RR^m$ and an orthonormal basis $V$ of $\RR^n$ that span the subspaces that best fit the data, and the singular values $\sigma_1,\sigma_2,\ldots$ quantify the spread of the data along the subspaces.
+
   \end{enumerate}
+\end{remark}
+
+\begin{remark}\name{Quantifying Error}
+
+  Importantly, the singular values tell you the spread along the best-fitting subspaces \emph{and} the error in the approximation. If you have $n$-dimensional data and use a $k$-dimensional approximation using the SVD, the sum of the first $k$ singular vectors tells you the amount of spread along that subspace. The remaining $n-k$ vectors, however, tell you the amount of spread of the data {\bf NOT} in the subspace, which is exactly the error of the approximation.
+
+  So, if you have a matrix $A$ and you use a $k$-dimensional approximation using $\vec{u}_1,\ldots,\vec{u}_k$ and $\sigma_1,\ldots,\sigma_k$, the spread of the approximation data is given by $\sigma_1^2+\ldots+\sigma_k^2$, and the error of the approximation is given by $\sigma_{k+1}^2+\ldots+\sigma_n^2$.
 \end{remark}
 
 Now, let's use the SVD to solve our two problems.
@@ -617,7 +625,7 @@ hold off
     \answer{-2}\\-7\\\answer{-8}
   \end{bmatrix}.$$
 
-  Again, keeping in mind that the singular values tell you both the amount of spread and the total distance to the subspace, we get that the total square distance from the plane to the data is $\answer{22}$.
+  Again, keeping in mind that the singular values tell you both the amount of spread and the total distance to the subspace, we get that the total square distance from the plane to the data is $\answer{27}$.
 
   Finally, for the 3-dimensional subspace, we actaully  have the entire space. Since the data is in $\RR^3$, the best-fitting 3-dimensional subspace is $\RR^3$ itself. If the data were in $\RR^4$, we might be able to have a 3-dimensional subspace that best fits the data, but that we could not visualize this.
   

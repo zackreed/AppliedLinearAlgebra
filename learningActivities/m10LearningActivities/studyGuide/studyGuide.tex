@@ -11,33 +11,242 @@
 \end{abstract}
 \maketitle
 
-\section{Chapter One}
 
-Stuff
 
-\section{Chapter Two}
+\section*{Vectors, Matrices, and Linear Combinations}
 
-Stuff
+\begin{example}
+    Let $A=\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$ and $B=\begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}$. 
+    \begin{enumerate}
+        \item If $\vec{v}$ is the first row of $A$ and $\vec{w}$ is the second column of $B$, then $2\vec{v}+3\vec{w} = \begin{bmatrix} \answer{20} \\ \answer{28} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+        
+        \item If $\vec{v}$ is the first column of $A$ and $\vec{w}$ is the second row of $B$, then $2\vec{v}+3\vec{w} = \begin{bmatrix} \answer{23} \\ \answer{30} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+        
+        \item If $\vec{v}$ is the first row of $A$ and $\vec{w}$ is the second row of $B$, then $2\vec{v}+3\vec{w} = \begin{bmatrix} \answer{23} \\ \answer{28} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+        
+        \item If $\vec{v}$ is the first column of $A$ and $\vec{w}$ is the second column of $B$, then $2\vec{v}+3\vec{w} = \begin{bmatrix} \answer{20} \\ \answer{30} \end{bmatrix}$.(Note: Make both of the vectors into either column or row vectors before performing the operation.)
+    \end{enumerate}
+\end{example}
 
-\section{Chapter Three}
+\begin{example}
+    Which of these vectors in $\RR^4$ are linear combinations of the vectors
 
-Stuff
+    \[
+        \vec{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 3 \\ -4 \end{bmatrix}, \vec{v}_2 = \begin{bmatrix} -2 \\ 3 \\ 4 \\ 5 \end{bmatrix}, \vec{v}_3 = \begin{bmatrix} 3 \\ -4 \\ 5 \\ 6 \end{bmatrix}?
+    \]
 
-\section{Chapter Four}
+    \begin{selectAll}
+        \choice{$\begin{bmatrix} -5 \\ -3.5 \\ 2 \\ 1.5 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} -6\\1\\-20\\-9 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} 5\\-4\\-5\\-14 \end{bmatrix}$}
+        \choice{$\begin{bmatrix} -6 \\ 15 \\ 0 \\ -15 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} 6\\-5\\4\\-3 \end{bmatrix}$}
+        \choice{$\begin{bmatrix} 6 \\ 7 \\ 8 \\ 9 \end{bmatrix}$}
+    \end{selectAll}
+\end{example}
 
-Stuff
+\section*{Span and Bases}
 
-\section{Chapter Five}
+\begin{example}
+Find bases for the following spaces.
 
-Stuff
+\begin{enumerate}
+    \item A basis of unit vectors for the range of the matrix \[
+A = \begin{bmatrix} 
+-5.2224 & -4.0484 & -4.9298 & -3.4443 \\ 
+-1.9373 & -2.4145 & -0.9249 & -1.1244 \\ 
+2.7016 & 1.9515 & 2.4393 & 1.6093 \\ 
+4.7306 & 2.3337 & 7.3003 & 4.5229 
+\end{bmatrix}
+\]
 
-\section{Chapter Six}
+\textbf{MATLAB Code:}
 
-Stuff
+\begin{verbatim}
+A = [-5.2224 -4.0484 -4.9298 -3.4443; 
+-1.9373 -2.4145 -0.9249 -1.1244; 
+2.7016 1.9515 2.4393 1.6093; 
+4.7306 2.3337 7.3003 4.5229];
+\end{verbatim}
 
-\section{Chapter Seven}
+    \textbf{Answer:}
 
-Stuff
+    A basis for the range of the matrix $A$ (with the first coordinate of each vector given) is 
+
+    \[
+b_1 = \begin{bmatrix} -0.6703 \\ \answer[tolerance=.01]{-0.2486} \\ \answer[tolerance=.01]{0.3468} \\ \answer[tolerance=.01]{0.6072} \end{bmatrix}, \quad
+b_2 = \begin{bmatrix} -0.7216 \\ \answer[tolerance=.01]{-0.4304} \\ \answer[tolerance=.01]{0.3479} \\ \answer[tolerance=.01]{0.4160} \end{bmatrix}, \quad
+b_3 = \begin{bmatrix} -0.5366 \\ \answer[tolerance=.01]{-0.1007} \\ \answer[tolerance=.01]{0.2655} \\ \answer[tolerance=.01]{0.7946} \end{bmatrix}
+\]
+
+    Note, other bases are possible. This takes the appropriate vectors from the matrix $A$ and makes them unit vectors, in the order they appear.
+
+    \item A unit vector basis for the null space of the previous matrix is \[
+b_1 = \begin{bmatrix} -0.3608 \\ \answer[tolerance=.01]{0.4008} \\ \answer[tolerance=.01]{0.5174} \\ \answer[tolerance=.01]{0.6645} \end{bmatrix}
+\]
+
+
+    
+    \item An orthonormal basis for the range of the matrix \[
+B = \begin{bmatrix} 
+-8 & 5 & -5 \\ 
+35 & 65 & 9 
+\end{bmatrix}
+\]
+
+    \textbf{Answer:} $B$ has rank $\answer{2}$, and is a $2\times 3$ matrix. So the range is $\RR^{\answer{2}}$. Hence, \wordChoice{\choice[correct]{any}\choice{no}\choice{only some}} orthonormal basis for $\RR^{\answer{2}}$ will work.
+
+    \item An orthonormal basis for the null space of the previous matrix.
+    
+    \textbf{Solution:}
+
+    If we take the SVD of $B$, the third column of $S$ is $\begin{bmatrix}
+        \answer{0}\\\answer{0}
+    \end{bmatrix}$ which tells us that the third basis vector in $V$ spans the null space of $B$. Since $B$ has rank $\answer{2}$ then the null space of $B$ is $\answer{1}$-dimensional. Since $V$ gives an orthonormal basis for $\RR^3$, we can form the orthonormal basis for the null space of $B$ by the vector
+
+    $$b_1=\begin{bmatrix}
+        \answer[tolerance=.01]{-0.4660} \\
+        \answer[tolerance=.01]{0.1297} \\
+        \answer[tolerance=.01]{0.8752}
+        \end{bmatrix}$$
+    
+    \item A basis of unit vectors for the eigenspace of the matrix \[
+\begin{bmatrix} 
+5.2713 & 0.0352 & 0.6612 & 0.1352 & -1.4593 & -0.0311 & 0.2197 & 0.7133 \\ 
+0.0352 & 5.5933 & -0.2701 & -0.2153 & -0.8639 & -0.8503 & 0.5779 & -0.4228 \\ 
+0.6612 & -0.2701 & 5.0584 & 0.3328 & 0.9953 & -0.5785 & -0.1108 & -1.2348 \\ 
+0.1352 & -0.2153 & 0.3328 & 4.2787 & -0.3371 & -0.0054 & 0.7662 & 0.5801 \\ 
+-1.4593 & -0.8639 & 0.9953 & -0.3371 & 4.3892 & -1.0024 & 0.3618 & 0.0643 \\ 
+-0.0311 & -0.8503 & -0.5785 & -0.0054 & -1.0024 & 4.3743 & 0.6907 & -1.1862 \\ 
+0.2197 & 0.5779 & -0.1108 & 0.7662 & 0.3618 & 0.6907 & 5.5454 & 0.2893 \\ 
+0.7133 & -0.4228 & -1.2348 & 0.5801 & 0.0643 & -1.1862 & 0.2893 & 4.4894 
+\end{bmatrix}
+\] that corresponds to the eigenvalue of highest algebraic multiplicity.
+
+\textbf{MATLAB Code:}
+\begin{verbatim}
+A = [5.2713 0.0352 0.6612 0.1352 -1.4593 -0.0311 0.2197 0.7133;
+0.0352 5.5933 -0.2701 -0.2153 -0.8639 -0.8503 0.5779 -0.4228;
+0.6612 -0.2701 5.0584 0.3328 0.9953 -0.5785 -0.1108 -1.2348;
+0.1352 -0.2153 0.3328 4.2787 -0.3371 -0.0054 0.7662 0.5801;
+-1.4593 -0.8639 0.9953 -0.3371 4.3892 -1.0024 0.3618 0.0643;
+-0.0311 -0.8503 -0.5785 -0.0054 -1.0024 4.3743 0.6907 -1.1862;
+0.2197 0.5779 -0.1108 0.7662 0.3618 0.6907 5.5454 0.2893;
+0.7133 -0.4228 -1.2348 0.5801 0.0643 -1.1862 0.2893 4.4894];
+\end{verbatim}
+
+
+\textbf{Answer:}
+
+The eigenvalue of highest multiplicity is $\lambda=\answer{6}$. It has algebraic multiplicity $\answer{4}$. It has geometric multiplicity $\answer{4}$, meaning the eigenvectors for $\lambda$ form a $\answer{4}$-dimensional subspace of $\RR^8$. A basis for this subspace (ordered by the first coordinate of each vector) and comprised only of unit vectors is
+
+\[
+b_1 = \begin{bmatrix} 
+    \answer[tolerance=.01]{0.0471} \\ 
+-0.0973 \\ 
+0.2240 \\ 
+-0.0576 \\ 
+\answer[tolerance=.01]{-0.2443} \\ 
+0.6548 \\ 
+0.1308 \\ 
+-0.6552 
+\end{bmatrix}, \quad
+b_2 = \begin{bmatrix} 
+-0.1775 \\ 
+\answer[tolerance=.01]{-0.5789} \\ 
+\answer[tolerance=.01]{-0.3995} \\ 
+-0.0210 \\ 
+\answer[tolerance=.01]{-0.1796} \\ 
+0.6529 \\ 
+0.0124 \\ 
+-0.1212 
+\end{bmatrix}, \quad
+b_3 = \begin{bmatrix} 
+\answer[tolerance=.01]{-0.5632} \\ 
+\answer[tolerance=.01]{0.0453} \\ 
+-0.4700 \\ 
+\answer[tolerance=.01]{-0.1151} \\ 
+-0.0618 \\ 
+0.5284 \\ 
+\answer[tolerance=.01]{0.2654} \\ 
+\answer[tolerance=.01]{-0.3053} 
+\end{bmatrix}, \quad
+b_4 = \begin{bmatrix} 
+\answer[tolerance=.01]{0.3474} \\ 
+-0.5025 \\ 
+0.3365 \\ 
+\answer[tolerance=.01]{0.4078} \\ 
+\answer[tolerance=.01]{0.2344} \\ 
+\answer[tolerance=.01]{-0.0815} \\ 
+0.4131 \\ 
+0.3393 
+\end{bmatrix}
+\]
+
+
+\end{enumerate}
+
+\end{example}
+
+
+
+\section*{Linear Transformations}
+
+\section*{Matrix Operations}
+
+
+\section*{Systems of Equations}
+
+\section*{Gaussian Elimination}
+
+
+\section*{Matrix Inverses}
+
+\begin{example}
+    Which of the following matrices are invertible? Verify this with at least two methods, one of which should be the determinant.
+
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{example}
+
+\section*{Range and Null Space}
+
+\section*{Determinants}
+
+
+\section*{Dot Products}
+
+\section*{Projections}
+
+\section*{Orthonormal Bases}
+
+\section*{Cross Products}
+
+\section*{Lines and Planes}
+
+
+\section*{SVD}
+
+
+\section*{Eigenvalues and Eigenvectors}
+
+\begin{example}
+    Find the eigenvalues and eigenvectors of the matrix 
+
+    
+\end{example}
+
+\section*{Multiplicity and Eigenspace}
+
+\begin{example}
+    What is the dimension of the eigenspace corresponding to the eigenvalue with the highest algebraic multiplicity for the matrix 
+
+
+
+\end{example}
+
+
 
 
 \end{document}

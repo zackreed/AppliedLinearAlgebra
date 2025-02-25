@@ -4,7 +4,7 @@
 
 \author{Zack Reed}
 %borrowed from selinger linear algebra
-\title{Inner Product Spaces and applications: least squares}
+\title{Least Squares}
 \begin{document}
 \begin{abstract}
 
@@ -130,6 +130,7 @@ The alternative least squares approximation problem has a very elegant solution,
 provided by the following proposition.
 
 \begin{proposition}\name{Solution of the least squares approximation problem}\label{prop:least-squares-approximation}
+
   A vector $\vect{v}$ is a least squares approximation of the system
   of equations $A\vect{v}=\vect{b}$ if and only if
   \begin{equation*}
@@ -200,87 +201,99 @@ provided by the following proposition.
       2x &+& 2y &-&  z &=& -8. \\
     \end{array}
   \end{equation*}
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We first write the system in matrix form $A\vect{v}=\vect{b}$, where
   \begin{equation*}
     A = \startmat{rrr}
-      2 & 2 & 2 \\
-      1 & -1 & -1 \\
-      -1 & -1 & 2 \\
-      2 & 2 & -1 \\
+      \answer{2} & \answer{2} & \answer{2} \\
+      \answer{1} & \answer{-1} & \answer{-1} \\
+      \answer{-1} & \answer{-1} & \answer{2} \\
+      \answer{2} & \answer{2} & \answer{-1} \\
     \stopmat
     \quad\mbox{and}\quad
-    \vect{b} = \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat.
-  \end{equation*}
+    \vect{b} = \startmat{r} 
+      \answer{1} \\ 
+      \answer{-2} \\ 
+      \answer{4} \\ 
+      \answer{-8} 
+    \stopmat.
+\end{equation*}
   The least
   squares approximation is given by the solution of the system of
-  equations $A^TA\vect{v} = A^T\vect{b}$. We calculate:
+  equations $A^TA\vect{v} = A^T\vect{b}$. 
+  
+  We calculate:
   \begin{equation*}
     A^TA =
-    \startmat{rrrr}
-      2 & 1 & -1 & 2 \\
-      2 & -1 & -1 & 2 \\
-      2 & -1 & 2 & -1 \\
-    \stopmat
+    % \startmat{rrrr}
+    %   2 & 1 & -1 & 2 \\
+    %   2 & -1 & -1 & 2 \\
+    %   2 & -1 & 2 & -1 \\
+    % \stopmat
+    % \startmat{rrr}
+    %   2 & 2 & 2 \\
+    %   1 & -1 & -1 \\
+    %   -1 & -1 & 2 \\
+    %   2 & 2 & -1 \\
+    % \stopmat
+    % =
     \startmat{rrr}
-      2 & 2 & 2 \\
-      1 & -1 & -1 \\
-      -1 & -1 & 2 \\
-      2 & 2 & -1 \\
-    \stopmat
-    =
-    \startmat{rrr}
-      10 & 8 & -1 \\
-      8  & 10 & 1 \\
-      -1 & 1 & 10 \\
-    \stopmat,
+    \answer{10} & \answer{8} & \answer{-1} \\
+    \answer{8}  & \answer{10} & \answer{1} \\
+    \answer{-1} & \answer{1} & \answer{10} \\
+  \stopmat,
   \end{equation*}
   \begin{equation*}
     A^T\vect{b} =
-    \startmat{rrrr}
-      2 & 1 & -1 & 2 \\
-      2 & -1 & -1 & 2 \\
-      2 & -1 & 2 & -1 \\
-    \stopmat
-    \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
-    =
-    \startmat{r} -20 \\ -16 \\ 20  \stopmat.
+    % \startmat{rrrr}
+    %   2 & 1 & -1 & 2 \\
+    %   2 & -1 & -1 & 2 \\
+    %   2 & -1 & 2 & -1 \\
+    % \stopmat
+    % \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
+    % =
+    \startmat{r} \answer{-20} \\ \answer{-16} \\ \answer{20}  \stopmat.
   \end{equation*}
+
   Therefore, we must solve the system of equations
-  \begin{equation*}
+ \begin{equation*}
     \startmat{rrr}
-      10 & 8 & -1 \\
-      8  & 10 & 1 \\
-      -1 & 1 & 10 \\
+      \answer{10} & \answer{8} & \answer{-1} \\
+      \answer{8}  & \answer{10} & \answer{1} \\
+      \answer{-1} & \answer{1} & \answer{10} \\
     \stopmat
     \startmat{c} x \\ y \\ z \stopmat
     =
-    \startmat{r} -20 \\ -16 \\ 20  \stopmat.
+    \startmat{r} \answer{-20} \\ \answer{-16} \\ \answer{20}  \stopmat.
   \end{equation*}
-  After some row operations, we find that the unique solution is
-  $(x,y,z) = (-1, -1, 2)$.  We can double-check this answer as
+
+
+  Using any appropriate means, we find that the unique solution is
+  $(x,y,z) = (\answer{-1}, \answer{-1}, \answer{2})$.  
+  
+  We can double-check this answer as
   follows. We calculate
   \begin{equation*}
     A\vect{v} - \vect{b}
-    ~=~
-    \startmat{rrr}
-      2 & 2 & 2 \\
-      1 & -1 & -1 \\
-      -1 & -1 & 2 \\
-      2 & 2 & -1 \\
-    \stopmat
-    \startmat{r} -1 \\ -1 \\ 2 \stopmat
-    - \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
-    ~=~
-    \startmat{r} 0 \\ -2 \\ 6 \\ -6 \stopmat
-    - \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
+    % ~=~
+    % \startmat{rrr}
+    %   2 & 2 & 2 \\
+    %   1 & -1 & -1 \\
+    %   -1 & -1 & 2 \\
+    %   2 & 2 & -1 \\
+    % \stopmat
+    % \startmat{r} -1 \\ -1 \\ 2 \stopmat
+    % - \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
+    % ~=~
+    % \startmat{r} 0 \\ -2 \\ 6 \\ -6 \stopmat
+    % - \startmat{r} 1 \\ -2 \\ 4 \\ -8 \stopmat
     ~=~ \startmat{r} -1 \\ 0 \\ 2 \\ 2 \stopmat
   \end{equation*}
   and check that this vector is orthogonal to every column of
   $A$. Since this is the case, our answer is correct.
-\end{solution}
+\end{example}
 
 An important application of least squares approximations is
 \textbf{curve fitting}%
@@ -319,9 +332,9 @@ solve curve fitting problems.
   \index{fitting!line fitting} or a \textbf{linear regression}%
   \index{linear regression}%
   \index{curve fitting!linear regression} for the data.
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We first write down a system of equations that expresses the
   relationship $y=a+bx$ for each of the seven data points $(x,y)$:
   \begin{equation*}
@@ -343,57 +356,63 @@ solve curve fitting problems.
   approximation for the system of equations. We let
   \begin{equation*}
     A = \startmat{rr}
-      1 & 17 \\
-      1 & 22 \\
-      1 & 26 \\
-      1 & 20 \\
-      1 & 24 \\
-      1 & 23 \\
-      1 & 23 \\
+      \answer{1} & \answer{17} \\
+      \answer{1} & \answer{22} \\
+      \answer{1} & \answer{26} \\
+      \answer{1} & \answer{20} \\
+      \answer{1} & \answer{24} \\
+      \answer{1} & \answer{23} \\
+      \answer{1} & \answer{23} \\
     \stopmat
     \quad\mbox{and}\quad
     \vect{b} =
     \startmat{r}
-      320 \\
-      570 \\
-      850 \\
-      470 \\
-      750 \\
-      620 \\
-      680 \\
+      \answer{320} \\
+      \answer{570} \\
+      \answer{850} \\
+      \answer{470} \\
+      \answer{750} \\
+      \answer{620} \\
+      \answer{680} \\
     \stopmat.
 \end{equation*}
+
 We must solve
 the equation $A^TA\vect{v} = A^T\vect{b}$. We calculate
 \begin{equation*}
-    A^TA = \startmat{cc}
-      7 & 155 \\
-      155 & 3483
-    \stopmat
-    \quad\mbox{and}\quad
-    A^T\vect{b} =
-    \startmat{c}
-      4260 \\
-      97380
-    \stopmat.
+  A^TA = \startmat{cc}
+    \answer{7} & \answer{155} \\
+    \answer{155} & \answer{3483}
+  \stopmat
+  \quad\mbox{and}\quad
+  A^T\vect{b} =
+  \startmat{c}
+    \answer{4260} \\
+    \answer{97380}
+  \stopmat.
 \end{equation*}
+
 So the system of equations we must solve is
 \begin{equation*}
-    \startmat{cc}
-      7 & 155 \\
-      155 & 3483
-    \stopmat
-    \startmat{c} a \\ b \stopmat
-    =
-    \startmat{c}
-      4260 \\
-      97380
-    \stopmat.
+  \startmat{cc}
+    \answer{7} & \answer{155} \\
+    \answer{155} & \answer{3483}
+  \stopmat
+  \startmat{c} a \\ b \stopmat
+  =
+  \startmat{c}
+    \answer{4260} \\
+    \answer{97380}
+  \stopmat.
 \end{equation*}
-  After some row operations, we find the unique solutions
-  $(a,b)=(-720,60)$. This means that the desired linear approximation
-  is $y=-720 + 60x$. The following plot shows this function along with
+
+  Using any appropriate means, we find the unique solutions
+  $(a,b)=(\answer{-720},\answer{60})$. 
+  
+  This means that the desired linear approximation
+  is $y=\answer{-720} + \answer{60}x$. The following plot shows this function along with
   the original data points.
+
   \begin{center}
     \begin{tikzpicture}[xscale=0.7,yscale=0.7]
       \draw[->] (15,2) -- (28,2) node[right] {$x$ (temperature)};
@@ -432,11 +451,12 @@ So the system of equations we must solve is
     \end{array}
   \end{equation*}
   The sum of the squares of the errors is $20^2 + 10^2 + 30^2 + 40^2 + 20^2 + 30^2 + 10^2 = 4400$.
-\end{solution}
+\end{example}
 
 \begin{example}\name{Least squares parabola}\label{ex:least-squares-parabola}
   \index{least squares parabola}%
   \index{curve fitting!least squares parabola}
+
   Find a quadratic polynomial that is the best fit for the following
   data points:
   \begin{equation*}
@@ -450,9 +470,9 @@ So the system of equations we must solve is
       (x_7,y_7) &=& ( 9,& 19.0). \\
     \end{array}
   \end{equation*}
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We are looking for an equation of the form
   $y=a+bx+cx^2$. Substituting each of the seven data points into the
   equation, we obtain 7 equations in the unknowns $a$, $b$, and $c$:
@@ -471,59 +491,62 @@ So the system of equations we must solve is
   \begin{equation*}
     A =
     \startmat{rrr}
-      1 & 3 &  9 \\
-      1 & 4 & 16 \\
-      1 & 5 & 25 \\
-      1 & 6 & 36 \\
-      1 & 7 & 49 \\
-      1 & 8 & 64 \\
-      1 & 9 & 81 \\
+      \answer{1} & \answer{3} &  \answer{9} \\
+      \answer{1} & \answer{4} & \answer{16} \\
+      \answer{1} & \answer{5} & \answer{25} \\
+      \answer{1} & \answer{6} & \answer{36} \\
+      \answer{1} & \answer{7} & \answer{49} \\
+      \answer{1} & \answer{8} & \answer{64} \\
+      \answer{1} & \answer{9} & \answer{81} \\
     \stopmat
     \quad\mbox{and}\quad
     \vect{b} =
     \startmat{r}
-      23.5 \\
-      13.5 \\
-      12.5 \\
-      5.5 \\
-      9.0 \\
-      8.0 \\
-      19.0 \\
+      \answer{23.5} \\
+      \answer{13.5} \\
+      \answer{12.5} \\
+      \answer{5.5} \\
+      \answer{9} \\
+      \answer{8} \\
+      \answer{19} \\
     \stopmat.
 \end{equation*}
 To find the least squares approximation, we calculate
 \begin{equation*}
     A^TA = \startmat{ccc}
-      7 & 42 & 280 \\
-      42 & 280 & 2016 \\
-      280 & 2016 & 15316 \\
+      \answer{7} & \answer{42} & \answer{280} \\
+      \answer{42} & \answer{280} & \answer{2016} \\
+      \answer{280} & \answer{2016} & \answer{15316} \\
     \stopmat
     \quad\mbox{and}\quad
     A^T\vect{b} =
     \startmat{c}
-      91 \\
-      518 \\
-      3430 \\
+      \answer{91} \\
+      \answer{518} \\
+      \answer{3430} \\
     \stopmat
 \end{equation*}
 and solve the system of equations $A^TA\vect{v} = A^T\vect{b}$, i.e.,
 \begin{equation*}
     \startmat{ccc}
-      7 & 42 & 280 \\
-      42 & 280 & 2016 \\
-      280 & 2016 & 15316 \\
+      \answer{7} & \answer{42} & \answer{280} \\
+      \answer{42} & \answer{280} & \answer{2016} \\
+      \answer{280} & \answer{2016} & \answer{15316} \\
     \stopmat
-    \startmat{c} a \\ b \\ c \stopmat
+    \startmat{c} a\\b\\c\stopmat
     ~=~
     \startmat{c}
-      91 \\
-      518 \\
-      3430 \\
+      \answer{91} \\
+      \answer{518} \\
+      \answer{3430} \\
     \stopmat.
 \end{equation*}
+
   After doing some row operations, we find that the unique solution is
-  $(a,b,c) = (67,-19,1.5)$. Therefore, the desired quadratic
-  approximation is $y = 67 - 19x + 1.5x^2$. The following plot shows
+  $(a,b,c) = (\answer{67},\answer{-19},\answer{1.5})$. 
+  
+  Therefore, the desired quadratic
+  approximation is $y = \answer{67} + \answer{-19}x + \answer{1.5}x^2$. The following plot shows
   this function along with the original data points.
   \begin{center}
     \def\X{*2.0}
@@ -565,7 +588,7 @@ and solve the system of equations $A^TA\vect{v} = A^T\vect{b}$, i.e.,
     \end{array}
   \end{equation*}
   The sum of the squares of the errors is $0^2 + 1.5^2 + 3^2 + 1.5^2 + 1.5^2 + 3^2 + 1.5^2 = 27$.
-\end{solution}
+\end{example}
 
 \subsection*{Subspace fitting vs. curve fitting}
 

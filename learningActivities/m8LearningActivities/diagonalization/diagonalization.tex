@@ -53,17 +53,21 @@ Now, we re-visit his video on eigentheory. Feel free to watch the whole thing as
 
 \end{exploration}
 
-This is another decomposition, in fact very similar to the SVD, where $A$ is factored into matrices formed by its eigenvalues and eigenvectors. This is actually a very restrictive theorem:
+This is another decomposition, in fact very similar to the SVD, where $A$ is factored into matrices formed by its eigenvalues and eigenvectors. 
+
+We have the following theorem to characterize when a matrix is diagonalizable:
 
 \begin{theorem}
 
-  An $n\times n$ matrix $A$ is diagonalizable only when its eigenvectors form an $n\times n$ invertible matrix. When this happens, $A$ is similar by $P$ to a diagonal matrix $D$ whose entries are its eigenvalues.
+  An $n\times n$ matrix $A$ is diagonalizable only when its eigenvectors form an $n\times n$ invertible matrix $P$. When this happens, $A$ is similar by $P$ to a diagonal matrix $D$ whose entries are its eigenvalues.
 
   Said differently, a matrix $A$ is only diagonalizable when it has $n$ linearly independent eigenvectors. We call the decomposition $PDP^{-1}$ an \emph{eigen decomposition} of $A$.
 
 \end{theorem}
 
-Note, diagonalizability is much more restrictive than the SVD in that it only applies to square matrices with $n$ linearly independent eigenvectors. This is a trade off and both decompositions are useful. The broad applicability of the SVD (and its numerous applications) are very useful, but often we utilize the very nice properties of diagonalizable matrices for other purposes. We will see this in the next section. 
+Note, diagonalizability is much more restrictive than the SVD in that it only applies to square matrices with $n$ linearly independent eigenvectors. This is a trade off and both decompositions are useful. 
+
+The broad applicability of the SVD (and its numerous applications) are very useful, but often we utilize the very nice properties of diagonalizable matrices for other purposes. We will see this in the next section. 
 
 \begin{example}\label{ex:diagonalizematrix}
   Let
@@ -76,76 +80,90 @@ Note, diagonalizability is much more restrictive than the SVD in that it only ap
   \end{equation*}
    Find an invertible matrix $P$ and a diagonal matrix $D$ such that $P^{-1}AP=D$.
    
-  \begin{explanation}
+ 
   We will use eigenvectors of $A$ as the columns of $P$, and
-  the corresponding eigenvalues of $A$ as the diagonal entries of $D$. Proceeding in MATLAB as we did in the previous chapter, we find the eigenvalues of $A$ are $\lambda_1 =2,\lambda_2 = 2$, and $\lambda_3 = 6$. 
-   
-  One possible basis for $\mathcal{S}_2$, the eigenspace corresponding to $2$, is
+  the corresponding eigenvalues of $A$ as the diagonal entries of $D$. 
+  
+  Proceeding in MATLAB we get:
+  
+  \begin{verbatim}
+  A=[2 0 0;1 4 -1;-2 -4 4];
+  A=sym(A)
+  [P,D]=eig(A)
+  \end{verbatim}
+  
+  we find the eigenvalues of $A$ are $\lambda_1 =6,\lambda_2 = 2$, and $\lambda_3 = 2$. 
+  
+
+  The first column of $P$ is the only non-integer column $\vec{v}_1=\begin{bmatrix}0\\-1/2\\1\end{bmatrix}$. After doubling $\vec{v}_1$ to make nice integer eigenvectors, we get a basis for $\mathcal{S}_6$ is given by
+  $\left\{\begin{bmatrix}
+  0 \\
+  \answer{1} \\
+  \answer{-2}
+  \end{bmatrix}\right\}$.
+
+  Using the remaining columns of $P$, a possible basis for $\mathcal{S}_2$, the eigenspace corresponding to $2$, as
   $\left\{
   \begin{bmatrix}
   -2 \\
-  1 \\
-  0
+  \answer{1} \\
+  \answer{0}
   \end{bmatrix},
   \begin{bmatrix}
-  1 \\
-  0 \\
+  \answer{1} \\
+  \answer{0} \\
   1
   \end{bmatrix}
-  \right\}$,
-  while a basis for $\mathcal{S}_6$ is given by
-  $\left\{\begin{bmatrix}
-  0 \\
-  1 \\
-  -2
-  \end{bmatrix}\right\}$.
+  \right\}$.
    
-  We construct the matrix $P$ by using these basis elements as columns.
-  \begin{equation*}
-  P=\begin{bmatrix}
-  -2 & 1 & 0 \\
-  1 & 0 & 1 \\
-  0 & 1 & -2
-  \end{bmatrix}
-  \end{equation*}
-  
-  Checking using on of many techniques in MATLAB reveals that $P$ is invertible, with
+  Many techniques in MATLAB reveal that $P$ is invertible, with
+
+  %write P^-1 but having every few entries wrapped in \answer{}
 
   \begin{equation*}
-  P^{-1}=\begin{bmatrix}
-  -1/4 & 1/2 & 1/4 \\
-  1/2 & 1 & 1/2 \\
-  1/4 & 1/2 & -1/4
-  \end{bmatrix}
+    P^{-1}=\begin{bmatrix}
+      \answer[tolerance=.1]{-1/2} & -1 & 1/2 \\
+      \answer[tolerance=.1]{-1/4} & \answer[tolerance=.1]{1/2} & 1/4 \\
+      1/2 & 1 & \answer[tolerance=.1]{1/2}
+    \end{bmatrix}
   \end{equation*}
+
   Thus,
-  \begin{eqnarray*}
-  P^{-1}AP &=&\begin{bmatrix}
-  -1/4 & 1/2 & 1/4 \\
-  1/2 & 1 & 1/2 \\
-  1/4 & 1/2 & -1/4
-  \end{bmatrix} \begin{bmatrix}
-  2 & 0 & 0 \\
-  1 & 4 & -1 \\
-  -2 & -4 & 4
-  \end{bmatrix} \begin{bmatrix}
-  -2 & 1 & 0 \\
-  1 & 0 & 1 \\
-  0 & 1 & -2
-  \end{bmatrix} \\
-  &=&\begin{bmatrix}
-  2 & 0 & 0 \\
-  0 & 2 & 0 \\
-  0 & 0 & 6
-  \end{bmatrix}
-  \end{eqnarray*}
+
+  %write out P^-1AP but having every few entries wrapped in \answer{}
+
+  \begin{equation*}
+    P^{-1}AP=\begin{bmatrix}
+      \answer[tolerance=.1]{-1/2} & -1 & 1/2 \\
+      \answer[tolerance=.1]{-1/4} & \answer[tolerance=.1]{1/2} & 1/4 \\
+      1/2 & 1 & \answer[tolerance=.1]{1/2}
+    \end{bmatrix}
+    \begin{bmatrix}
+    2 & 0 & 0 \\
+    \answer{1} & 4 & \answer{-1} \\
+    \answer{-2} & \answer{-4} & 4
+    \end{bmatrix}
+    \begin{bmatrix}
+    \answer{0} & \answer{-2} & 1 \\
+    \answer{-1/2} & 1 & \answer{0}\\
+    1 & 0 & \answer{1}
+    \end{bmatrix}
+    =\begin{bmatrix}
+      \answer{6} & 0 & 0 \\
+      0 & \answer{2} & 0 \\
+      0 & 0 & \answer{2}
+    \end{bmatrix}
+  \end{equation*}
+
+
+  
   You can see that the result here is a diagonal matrix where the entries on the main diagonal are the eigenvalues of $A$. Notice that eigenvalues on the main diagonal {\it must} be in the same order as the corresponding eigenvectors in $P$.
-  \end{explanation}
+
   \end{example}
    
   It is often easier to work with matrices that are diagonalizable, as the next Exploration demonstrates. 
    
-  \begin{exploration}\name{Powers of Diagonalizable Matrices}
+  \begin{example}\name{Powers of Diagonalizable Matrices}\label{ex:diagonalizematrix2}
 
   Let $A=\begin{bmatrix}
   2 & 0 & 0 \\
@@ -169,15 +187,46 @@ Note, diagonalizability is much more restrictive than the SVD in that it only ap
          &=PD^5P^{-1}
   \end{align*}
   With this in mind, it is not as daunting to calculate $A^5$.  We can compute the product $PD^5$ quite easily since $D^5$ is diagonal.  That leaves just one product of $3 \times 3$ matrices to compute by hand to compute $A^5$.  And the savings in work would certainly be more pronounced for larger matrices or for powers larger that 5.
-\end{exploration}
+
+  That being said, 
+
+    $$A^{20}=PD^{20}P^{-1}=$$
+    $$\begin{bmatrix}
+    \answer{0} & \answer{-2} & 1 \\
+    \answer{-1/2} & 1 & \answer{0}\\
+    1 & 0 & \answer{1}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \answer{60466176} & 0 & 0 \\
+      0 & \answer{1024} & 0 \\
+      0 & 0 & \answer{1024}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \answer[tolerance=.1]{-1/2} & -1 & 1/2 \\
+      \answer[tolerance=.1]{-1/4} & \answer[tolerance=.1]{1/2} & 1/4 \\
+      1/2 & 1 & \answer[tolerance=.1]{1/2}
+    \end{bmatrix}=$$
+    $$\begin{bmatrix}
+      \answer{1024} & 0 & 0 \\
+      15116288 & \answer{30233600} & -15116288 \\
+      -30232576 & \answer{-60465152} & 30233600
+    \end{bmatrix}$$
+
+\end{example}
    
-  Because matrix $A$ was diagonalizable, we were able to cut down on computations.  When we chose to work with $D$ and $P$ instead of $A$ we worked with the eigenvalues and eigenvectors of $A$.  Each column of $P$ is an eigenvector of $A$, and so we repeatedly made use of the following theorem (with $m=5$).
+  Because matrix $A$ was diagonalizable, we were able to cut down on computations.  When we chose to work with $D$ and $P$ instead of $A$ we worked with the eigenvalues and eigenvectors of $A$. 
+
+  This example illustrates the power of the following theorem.
    
   \begin{theorem}\label{th:eigpowers}
   Let $A$ be an $n \times n$ matrix and suppose $A\vec{x}=\lambda \vec{x}$.  Then $A^m \vec{x} = \lambda^m \vec{x}$
   \end{theorem}
+
+  \section*{Determining Diagonalizability}
+
+  Now, we examine different conditions by which a matrix is diagonalizable.  
    
-  Matrix $A$ had a repeated eigenvalue of 2.  The next theorem and corollary show that matrices which have \emph{distinct} eigenvalues (where none are repeated) have desirable properties.
+  Matrix $A$ from example \ref{ex:diagonalizematrix2} had a repeated eigenvalue of 2.  The next theorem and corollary show that matrices which have \emph{distinct} eigenvalues (where none are repeated) have desirable properties.
    
   \begin{theorem}\label{th:linindepeigenvectors}
   Let $A$ be an $n\times n$ matrix, and suppose that $A$
@@ -195,7 +244,7 @@ Note, diagonalizability is much more restrictive than the SVD in that it only ap
    
   %The corollary tells us that many matrices can be diagonalized in this way.
   \begin{remark}
-      Note that Corollary \ref{th:distincteigenvalues} is NOT an ``if and only if statement".  This means that if $A$ has repeated eigenvalues it is still sometimes possible to diagonalize $A$, as seen in Example \ref{ex:diagonalizematrix}.
+      Note that Corollary \ref{th:distincteigenvalues} is NOT an ``if and only if statement".  This means that if $A$ has repeated eigenvalues it is still sometimes possible to diagonalize $A$.
   \end{remark}
    
   Not every matrix has an eigenvalue decomposition. Sometimes we cannot find an invertible matrix $P$ such that $P^{-1}AP=D$.  Consider the following example.
@@ -210,41 +259,34 @@ Note, diagonalizability is much more restrictive than the SVD in that it only ap
   \end{bmatrix}
   \end{equation*}
   If possible, find an invertible matrix $P$ and a diagonal matrix $D$ so that $P^{-1}AP=D$.
-   
-   
-  \begin{explanation}
-  The characteristic equation of $A$ is fairly simply calculated and reveals that the eigenvalues of $A$ are $\lambda_1 =1$ and  $\lambda_2=1$.
+
+  The characteristic equation of $A$ is fairly simply calculated and reveals that the eigenvalues of $A$ are $\lambda_1 =\answer{1}$ and  $\lambda_2=\answer{1}$.
+  
+  
   To find $P$, the next step would be to find a basis for the corresponding eigenspace $\mathcal{S}_1$.  We solve the equation $\left( A - \lambda I \right) \vec{x} = \vec{0}$.
   Writing this equation as an augmented matrix, we already have a matrix in row echelon form:
   \begin{equation*}
   \left[\begin{array}{cc|c} 
-  0 & -1 & 0 \\
-  0 & 0 & 0
+  0 & \answer{-1} & \answer{0} \\
+  0 & \answer{0} & \answer{0}
    \end{array}\right]
   \end{equation*}
+
   We see that the eigenvectors in $\mathcal{S}_1$ are of the form
+
   $$
-  \begin{bmatrix}
-  t \\
-  0
-  \end{bmatrix}
-  =t\begin{bmatrix}
-  1 \\
-  0
+  t\begin{bmatrix}
+  \answer{1} \\
+  \answer{0}
   \end{bmatrix},
   $$
   so a basis for the eigenspace $\mathcal{S}_1$ is given by
   $\begin{bmatrix}
-  1 \\
-  0
+  \answer{1} \\
+  \answer{0}
   \end{bmatrix}$.
-  It is easy to see that we cannot form an invertible matrix $P$, because any two eigenvectors will be of the form
-  $\begin{bmatrix}
-  t \\
-  0
-  \end{bmatrix}$,
-  and so the second row of $P$ would have a row of zeros, and $P$ could not be invertible.  Hence $A$ cannot be diagonalized.
-  \end{explanation}
+  It is easy to see that we \wordChoice{\choice{can}\choice[correct]{cannot}} form an invertible matrix $P$, because the eigenvectors forming the columns of $P$ are \wordChoice{\choice{linearly independent}\choice[correct]{linearly dependent}} and thus $P$ \wordChoice{\choice{is}\choice[correct]{is not}} invergible. Hence $A$ \wordChoice{\choice{is}\choice[correct]{is not}} diagonalizable.
+
   \end{example}
   
   Not all hope is lost for matrices with repeated eigenvalues, however. We do have a farily useful test to determine if matrices with repeated eigenvalues are diagonalizable.
@@ -256,11 +298,11 @@ Note, diagonalizability is much more restrictive than the SVD in that it only ap
   \end{theorem}
    
   \begin{proof}
-  Suppose $A$ is diagonalizable and let $\lambda_1, \ldots, \lambda_t$ be the distinct eigenvalues of $A$, with algebraic multiplicities $m_1, \ldots, m_t$, respectively and geometric multiplicities $k_1, \ldots, k_t$, respectively.  Since $A$ is diagonalizable, Theorem \ref{th:eigenvectorsanddiagonalizable} implies that $ k_1+\cdots+k_t=n$.  By applying Lemma \ref{lemma:dimeigenspace} $t$ times, we have
+  Suppose $A$ is diagonalizable and let $\lambda_1, \ldots, \lambda_t$ be the distinct eigenvalues of $A$, with algebraic multiplicities $m_1, \ldots, m_t$, respectively and geometric multiplicities $k_1, \ldots, k_t$, respectively.  Since $A$ is diagonalizable, Theorem \ref{th:eigenvectorsanddiagonalizable} implies that $ k_1+\cdots+k_t=n$.  We thus have
   $$n = k_1+\cdots+k_t \le m_1+\cdots+m_t = n,$$
   which is only possible if $k_i=m_i$ for $i=1,\ldots,t$.
    
-  Conversely, if the geometric multiplicity equals the algebraic multiplicity of each eigenvalue, then obtaining a basis for each eigenspace yields $n$ eigenvectors.  Applying Theorem \ref{th:linindepeigenvectors}, we know that these $n$ eigenvectors are linearly independent, so Theorem \ref{th:eigenvectorsanddiagonalizable} implies that $A$ is diagonalizable.
+  Conversely, if the geometric multiplicity equals the algebraic multiplicity of each eigenvalue, then obtaining a basis for each eigenspace yields $n$ eigenvectors. So these $n$ eigenvectors are linearly independent, so we conclude that $A$ is diagonalizable.
   \end{proof}
 
 

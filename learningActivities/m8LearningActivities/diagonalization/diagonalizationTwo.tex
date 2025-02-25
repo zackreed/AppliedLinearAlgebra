@@ -13,11 +13,16 @@
 \section*{Diagonalization and Real Symmetric Matrices}
 
 We have seen that some matrices are diagonalizable, and others are not. In this section, we will see that
-symmetric matrices have very nice properties related to diagonalization. Recall that a matrix $A$ is
-\textbf{symmetric} if $A=A^T$. We begin with some observations
-about the eigenvalues and eigenvectors of a real symmetric matrix.
+symmetric matrices have very nice properties related to diagonalization. 
+
+\begin{remark}
+  Recall that a matrix $A$ is
+  \textbf{symmetric} if $A=A^T$. We begin with some observations
+  about the eigenvalues and eigenvectors of a real symmetric matrix.
+\end{remark}
 
 \begin{proposition}\name{Eigenvalues and eigenvectors of real symmetric matrices}\label{prop:eigenvalues-symmetric}
+
   Let $A$ be a symmetric matrix with real entries. Then
 
     \begin{enumerate}
@@ -28,7 +33,9 @@ about the eigenvalues and eigenvectors of a real symmetric matrix.
 \end{proposition}
 
 \begin{remark}
-  We emphasize the ``real'' property of the matrix entries and the eigenvalues because of an as-of-yet unexplored fact that some matrices have ``complex'' eigenvalues. The complex number system and complex vector spaces are very important for mathematics and science, but will not be heavily explored in this class. 
+  We emphasize the ``real'' property of the matrix entries and the eigenvalues because we have observed that some matrices have ``complex'' eigenvalues. 
+  
+  The complex number system and complex vector spaces are very important for mathematics and science, but will not be heavily explored in this class. 
 
   As a brief summary of the idea, for further independent exploration, the complex numbers arise from a need to find roots of polynomials. If we just restrict ourselves to the real number system (the number system you've worked with for the vast majority of mathematics), even simple polynomial root equations such as $x^2+1=0$ have no solution. If we, however, define a new number $i$ to be $i=\sqrt{-1}$, then by default $i$ is the solution to the equation $x^2+1=0$.
 
@@ -41,15 +48,21 @@ about the eigenvalues and eigenvectors of a real symmetric matrix.
   \end{bmatrix}$ is $\lambda^2+1$. Thus its eigenvalues are $\lambda=\pm i$. These complex eigenvalues can sometimes be harder to work with, so a nice feature of real symmetric matrices is that they are guaranteed to have real eigenvalues.
 \end{remark}
 
-Recall that an $n\times n$-matrix $A$ is \textbf{diagonalizable} if there exists an invertible matrix $P$
-and a diagonal matrix $D$ such that $D = P^{-1}AP$. 
+\begin{definition}\name{Orthogonal diagonalizability}\label{def:orthogonal-diagonalizable}
 
-We say that $A$ is \textbf{orthogonally diagonalizable} if $P$ can, moreover, be
+  Recall that an $n\times n$-matrix $A$ is \textbf{diagonalizable} if there exists an invertible matrix $P$
+  and a diagonal matrix $D$ such that $D = P^{-1}AP$. 
+
+  We say that $A$ is \textbf{orthogonally diagonalizable} if $P$ can, moreover, be
 chosen to be orthogonal. Orthogonal diagonalizability is a convenient
 property, because when $P$ is orthogonal, then $P^{-1}=P^T$, and we
 can interchangeably write $D = P^{-1}AP$ or $D = P^TAP$.  The
 following is the main theorem about the diagonalization of real
 symmetric matrices.
+\end{definition}
+
+
+
 
 \begin{theorem}\name{Diagonalization of real symmetric matrices}\label{th:diagonalization-symmetric}
   Every real symmetric matrix $A$ is orthogonally diagonalizable.
@@ -66,11 +79,24 @@ symmetric matrices.
   \end{equation*}
   i.e., find an orthogonal matrix $P$ and a diagonal matrix $D$ such
   that $D = P^{-1}AP$.
-\end{example}
 
-\begin{solution}
+  \textbf{Solution:}
+
   We proceed in much the same way as with prior diagonalization work,
   except that at a crucial moment, we ensure that $P$ is orthogonal.
+
+  The following solution will first work with the characteristic polynomial, however you can feel free to expidite this process by using the MATLAB code below:
+
+  \begin{verbatim}
+    A = [3 2; 2 6];
+    A=sym(A)
+    [P,D] = eig(A)
+    P
+    D
+  \end{verbatim}
+
+  (Note: You will get a fraction in the second column of $P$, scale the column so that the fraction becomes $1$ to get the same answer as below.)
+
   We start by calculating the characteristic polynomial of $A$:
   \begin{equation*}
     \det(A-\eigenvar I)
@@ -83,55 +109,55 @@ symmetric matrices.
   \end{equation*}
   We find the roots using the quadratic formula. The roots of the
   characteristic polynomial, and therefore the eigenvalues of $A$, are
-  $\eigenvar=7$ and $\eigenvar=2$. For the eigenvalue $\eigenvar=7$,
+  $\eigenvar=7$ and $\eigenvar=2$. For the eigenvalue $\eigenvar=2$, we find the eigenvector
+  \begin{equation*}
+    \vect{w} = \startmat{r} \answer{-2} \\ \answer{1} \stopmat,
+  \end{equation*}
+  and for the eigenvalue $\eigenvar=7$,
   we find the eigenvector
   \begin{equation*}
-    \vect{v} = \startmat{r} 1 \\ 2 \stopmat,
-  \end{equation*}
-  and for the eigenvalue $\eigenvar=2$, we find the eigenvector
-  \begin{equation*}
-    \vect{w} = \startmat{r} -2 \\ 1 \stopmat.
-  \end{equation*}
-  We note that these two eigenvectors are orthogonal to each other,
-  as we would expect. So
-  the vectors $\set{\vect{v},\vect{w}}$ form an orthogonal set. We
+    \vect{v} = \startmat{r} \answer{1} \\ \answer{2} \stopmat.
+  \end{equation*} 
+
+  A quick matrix multiplication reveals that these vectors \wordChoice{\choice[correct]{are}\choice{are not}} orthogonal, and moreover reveals that the norm of both vectors is $\sqrt{5}$.
+  
+  So
+  the vectors $\set{\vect{v},\vect{w}}$ form an orthogonal set. 
+  
+  We
   turn this into an orthonormal set by normalizing each eigenvector,
-  i.e., the normalized eigenvectors are
+  i.e., the normalized eigenvectors are (NOTE the order of $\vec{v}$ and $\vec{w}$!):
+
   \begin{equation*}
     \vect{u}_1
     ~=~ \frac{1}{\norm{\vect{v}}}\vect{v}
-    ~=~ \frac{1}{\sqrt{5}} \startmat{r} 1 \\ 2 \stopmat
+    ~=~ \frac{1}{\answer{\sqrt{5}}} \startmat{r} 1 \\ 2 \stopmat
     \quad\mbox{and}\quad
     \vect{u}_2
     ~=~ \frac{1}{\norm{\vect{w}}}\vect{w}
-    ~=~ \frac{1}{\sqrt{5}} \startmat{r} -2 \\ 1 \stopmat.
+    ~=~ \frac{1}{\answer{\sqrt{5}}} \startmat{r} -2 \\ 1 \stopmat.
   \end{equation*}
   We let $P$ be the matrix that has columns $\vect{u}_1$ and
-  $\vect{u}_2$, i.e.,
-  \begin{equation*}
-    P = \frac{1}{\sqrt{5}} \startmat{rr} 1 & -2 \\ 2 & 1 \stopmat.
-  \end{equation*}
+  $\vect{u}_2$.
+  
   Note that since $\vect{u}_1$ and $\vect{u}_2$ are orthonormal, $P$
   is automatically orthogonal. Moreover, we
   have
   \begin{equation*}
     P^{-1}
     ~=~ P^T
-    ~=~ \frac{1}{\sqrt{5}} \startmat{rr} 1 & 2 \\ -2 & 1 \stopmat.
   \end{equation*}
-  Finally,
+
+  So, we confirm that $A$ is diagonalizable by the calculation
   \begin{equation*}
     P^{-1}AP
     ~=~ P^TAP
-    ~=~ \frac{1}{5}
-    \startmat{rr} 1 & 2 \\ -2 & 1 \stopmat
-    \startmat{rr} 3 & 2 \\ 2 & 6 \stopmat
-    \startmat{rr} 1 & -2 \\ 2 & 1 \stopmat
-    ~=~ \startmat{rr} 7 & 0 \\ 0 & 2 \stopmat.
+    ~=~ \startmat{rr} \answer{7} & 0 \\ 0 & \answer{2} \stopmat.
   \end{equation*}
-\end{solution}
+\end{example}
 
 \begin{example}\name{Diagonalization of real symmetric matrices}\label{ex:diagonalization-symmetric2}
+
   Find an orthogonal matrix $P$ and a diagonal matrix $D$ such that $D =
   P^{-1}AP$, where
   \begin{equation*}
@@ -141,10 +167,11 @@ symmetric matrices.
       -2 & 2 &  0 \\
     \stopmat.
   \end{equation*}
-\end{example}
 
-\begin{solution}
-  Again, we start by calculating the characteristic polynomial and its roots:
+  \textbf{Solution:}
+
+  Again, we start by calculating the characteristic polynomial and its roots, however you can feel free to expidite this process by using MATLAB. Note that MATLAB will list $P$ and $D$ in a different order than we do below.
+
   \begin{equation*}
     \det(A-\eigenvar I)
     ~=~ \begin{array}{|rrr|}
@@ -166,11 +193,12 @@ symmetric matrices.
     \stopmat\vect{v}
     = \vect{0}.
   \end{equation*}
+
   The solution space is 2-dimensional, with basis
   \begin{equation*}
-    \vect{v}_1 = \startmat{r} 1 \\ 1 \\ 0 \stopmat
+    \vect{v}_1 = \startmat{r} \answer{1} \\ \answer{1} \\ 0 \stopmat
     \quad\mbox{and}\quad
-    \vect{v}_2 = \startmat{r} 0 \\ 2 \\ 1 \stopmat.
+    \vect{v}_2 = \startmat{r} 0 \\ \answer{2} \\ \answer{1} \stopmat.
   \end{equation*}
   To find the eigenvectors for $\eigenvar=-2$, we solve the system of
   equations
@@ -186,20 +214,18 @@ symmetric matrices.
   \end{equation*}
   The solution space is 1-dimensional, with basis
   \begin{equation*}
-    \vect{v}_3 = \startmat{r} 1 \\ -1 \\ 2 \stopmat.
+    \vect{v}_3 = \startmat{r} 1 \\ \answer{-1} \\ \answer{2} \stopmat.
   \end{equation*}
 
   As we would expect,
   $\vect{v}_3$ is orthogonal to $\vect{v}_1$ and
-  $\vect{v}_2$. However, there is a slight complication: $\vect{v}_1$
-  and $\vect{v}_2$ are not orthogonal to each other. This is because
-  they are eigenvectors for the {\em same} eigenvalue ($\eigenvar=4$),
-  not for {\em distinct} eigenvalues. We found basis
-  $\set{\vect{v}_1,\vect{v}_2}$ for the eigenspace for $\eigenvar=4$,
-  but it doesn't happen to be an orthogonal basis. 
+  $\vect{v}_2$. 
+  
+  However, there is a slight complication: $\vect{v}_1$
+  and $\vect{v}_2$ are not orthogonal to each other. 
   
   However, we can fix
-  this by normalizing $\vec{v}_1$ into $\vec{v}_1^{\prime}$, then projecting $\vec{v}_2$ onto $\vec{v}_1^{\prime}$ and creating a new vector $\vec{v}_2^{\prime}=\vec{v}_2-\vec{v}_1^\prime$, and normalizing $\vec{v}_2^\prime$. This orthogonalization process will be discussed more in Chapter 9. 
+  this by normalizing $\vec{v}_1$ into $\vec{v}_1^{\prime}$, then projecting $\vec{v}_2$ onto $\vec{v}_1^{\prime}$ and creating a new vector $\vec{v}_2^{\prime}=\vec{v}_2-\vec{v}_1^\prime$, and normalizing $\vec{v}_2^\prime$. This orthogonalization process will be discussed more in Chapter 9, but for now, we will just give the results.
 
   Doing this yields the orthogonal basis
   $\set{\vect{u}_1,\vect{u}_2}$ for the eigenspace for $\eigenvar=4$,
@@ -239,7 +265,7 @@ We have
     ~=~ \startmat{ccc} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & -2 \stopmat.
 \end{equation*}
 
-\end{solution}
+\end{example}
 
 
 

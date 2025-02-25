@@ -12,40 +12,42 @@
 
 \section*{Redefining the SVD}
 We return to the Singular Value Decomposition to make some important connections between the SVD and eigenvectors and eigenvalues. This will help further uncover the reason that each matrix has an SVD.
+
+The most important underlying mechanic to this construction of the SVD is that $A^T*A=A*A^T$, and they are both real symmetric matrices. As we know, real symmetric matrices are automattically diagonalizable, and we construct the $U$, $S$, and $V$ matrices from the eigenvectors and eigenvalues of $A^T*A$ and $A*A^T$.
  
 \begin{definition}\label{singularvalues}
 Let $A$ be an $m\times n$ matrix. The \dfn{singular values} of $A$ are the square roots of the positive
 eigenvalues of $A^TA.$
 \end{definition}
- 
-Noting that $A^TA$ is always a real symmetric matrix, hopefully the last two sections have primed you to anticipate all of the nice properties that $A^TA$ will have.
 
 The Singular Value Decomposition (SVD) can be thought of as
 a generalization of orthogonal diagonalization of a symmetric matrix
 to an arbitrary $m\times n$ matrix.
+
+As in Chapter 6, we will give a general algorithm for using the eigenvalues and eigenvectors of $A^TA$ to find the SVD of $A$. We first need the following result:
  
 \begin{lemma}\label{lem:samenonzeroeigenvalues}
 Let $A$ be an $m \times n$ matrix. Then $A^TA$ and $AA^T$ have the same \textbf{nonzero eigenvalues}.
 \end{lemma}
  
-Suppose $A$ is an $m\times n$ matrix, and suppose that  $\lambda$ is a nonzero eigenvalue of $A^TA$.
-Then there exists a nonzero vector $\vec{x} \in \RR^n$ such that
-\begin{equation}\label{nonzero}
-(A^TA)\vec{x}=\lambda \vec{x}
-\end{equation}
-Multiplying both sides of this equation by $A$ yields:
-\begin{eqnarray*}
-A(A^TA)\vec{x} & = & A\lambda \vec{x}\\
-(AA^T)(A\vec{x}) & = & \lambda (A\vec{x})
-\end{eqnarray*}
-Since $\lambda\neq 0$ and $\vec{x}\neq 0_n$, $\lambda \vec{x}\neq 0_n$,
-and thus by equation~(\ref{nonzero}),
-$(A^TA)\vec{x}\neq 0_m$; thus $A^T(A\vec{x})\neq 0_m$,
-implying that $A\vec{x}\neq 0_m$.
+% Suppose $A$ is an $m\times n$ matrix, and suppose that  $\lambda$ is a nonzero eigenvalue of $A^TA$.
+% Then there exists a nonzero vector $\vec{x} \in \RR^n$ such that
+% \begin{equation}\label{nonzero}
+% (A^TA)\vec{x}=\lambda \vec{x}
+% \end{equation}
+% Multiplying both sides of this equation by $A$ yields:
+% \begin{eqnarray*}
+% A(A^TA)\vec{x} & = & A\lambda \vec{x}\\
+% (AA^T)(A\vec{x}) & = & \lambda (A\vec{x})
+% \end{eqnarray*}
+% Since $\lambda\neq 0$ and $\vec{x}\neq 0_n$, $\lambda \vec{x}\neq 0_n$,
+% and thus by equation~(\ref{nonzero}),
+% $(A^TA)\vec{x}\neq 0_m$; thus $A^T(A\vec{x})\neq 0_m$,
+% implying that $A\vec{x}\neq 0_m$.
  
-Therefore $A\vec{x}$ is an eigenvector of $AA^T$ corresponding to eigenvalue
-$\lambda$.  An analogous argument can be used to show that every
-nonzero eigenvalue of $AA^T$ is an eigenvalue of $A^TA$.
+% Therefore $A\vec{x}$ is an eigenvector of $AA^T$ corresponding to eigenvalue
+% $\lambda$.  An analogous argument can be used to show that every
+% nonzero eigenvalue of $AA^T$ is an eigenvalue of $A^TA$.
 
  
 Given an $m\times n$ matrix $A$, recall that the SVD of a matrix $A$ is the product
@@ -62,7 +64,11 @@ eigenvectors of $A^TA$.
 lie on its main diagonal, and are the singular values of $A$ (i.e. the square root of the eigenvalues of $A^TA$).
 \end{itemize}
 
-How can we find such a decomposition? We are aiming to decompose $A$ in the following form:
+Now, we roughly outline how you can generate the SVD of $A$ using eigentheory.
+
+\begin{remark}
+
+We are aiming to decompose $A$ in the following form:
 \begin{equation*}
 A=U\left[
 \begin{array}{cc}
@@ -75,18 +81,24 @@ where $S $ is a block matrix of the form
 \[
 S =\left[
 \begin{array}{ccc}
-S _{1} &  & 0 \\
+\sigma_{1} &  & 0 \\
 & \ddots &  \\
-0 &  & S _{k}
+0 &  & \sigma_{k}
 \end{array}
-\right]
+\right].
 \]
-Thus $A^T=V\left[
+
+We will first construct $A^TA$ and then play out the implications of the assumed SVD form of $A$.
+
+First,  $A^T=V\left[
 \begin{array}{cc}
 S & 0 \\
 0 & 0
 \end{array}
-\right] U^T$ and it follows that
+\right] U^T.$ 
+
+Then, if we left multiply $A$ by $A^T$ and follow the assumed decompositions, we get
+
 \begin{equation*}
 A^TA=V\left[
 \begin{array}{cc}
@@ -103,24 +115,33 @@ S & 0 \\
 S ^{2} & 0 \\
 0 & 0
 \end{array}
-\right] V^T
+\right] V^T.
 \end{equation*}
-and so $A^TAV=V\left[
+
+Note that the final step relied on the assumption that $U$ was an orthogonal matrix. This gives us the diagonalization $A^TAV=V\left[
 \begin{array}{cc}
 S ^{2} & 0 \\
 0 & 0
 \end{array}
-\right] .$ Similarly, $AA^TU=U\left[
+\right] .$ 
+
+Similarly, we can diagonalize $AA^T$ in terms of $U$: $AA^TU=U\left[
 \begin{array}{cc}
 S ^{2} & 0 \\
 0 & 0
 \end{array}
-\right] .$ Therefore, you would find an orthonormal basis of eigenvectors
-for $AA^T$ make them the columns of a matrix such that the
+\right] .$ 
+
+Therefore, to find the SVD of $A$, it suffices to find an orthonormal basis of eigenvectors
+for $AA^T$ and make them the columns of a matrix such that the
 corresponding eigenvalues are decreasing. This gives $U.$ You could then do
 the same for $A^TA$ to get $V$.
+
+Finally, we're guaranteed that the orthogonal eigendecomposition of $AA^T$ exists since $AA^T$ is a real symmetric matrix. 
+
+\end{remark}
  
-We formalize this discussion in the following theorem.
+We formalize this in the following theorem:
  
 \begin{theorem}[Singular Value Decomposition]\label{th:singvaldecomp}
 Let $A$ be an $m\times n$ matrix. Then the following are true: 
@@ -136,104 +157,96 @@ Let $A$ be an $m\times n$ matrix. Then the following are true:
 
 \end{theorem}
 
-This gives us a more readiliy accessible means of finding the SVD of a matrix $A$ than was discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. Rather than iteratively maximizing $\norm{A\vec{v}}$ over orthogonal unit vectors $\vec{v}$, we simply compute $A^TA$ and find the guaranteed eigenvalues and eigenvectors. This also further clarifies why the SVD exists for \emph{any} matrix $A$, which was perhaps unclear from the algorithm discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. That is, we didn't quite discuss whether or why the algorithm guaranteed a full set of singular values and singular vectors. We now, however, know for certain that $A^TA$ is orthogonally diagonalizable, which guarantees the existence and orthogonal properties of the SVD.
+This gives us a more readiliy accessible means of finding the SVD of a matrix $A$ than was discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. Rather than iteratively maximizing $\norm{A\vec{v}}$ over orthogonal unit vectors $\vec{v}$, we simply compute $A^TA$ and find the guaranteed eigenvalues and eigenvectors. 
+
+This also further clarifies why the SVD exists for \emph{any} matrix $A$, which was perhaps unclear from the algorithm discussed in \href{https://ximera.osu.edu/appliedlinearalgebra/c6ChapterSix/learningActivities/m6LearningActivities/leastSquares/PCASVDIntro}{Chapter 6}. That is, we didn't quite discuss whether or why the algorithm guaranteed a full set of singular values and singular vectors. We now, however, know for certain that $A^TA$ is orthogonally diagonalizable, which guarantees the existence and orthogonal properties of the SVD.
  
-Let's compute the SVD of a simple matrix.
+\begin{remark}
+  This process of using eigen decompositions to solve minimization problems is not unique to the SVD, and in fact will be integral to the next section. So practicing this method of constructing the SVD of matrices is not a useless exercise.
+
+  Hence, let's practice this method on simple matrices.
+\end{remark}
+
+
  
 \begin{example}\label{ex:SVD2x3}
 Let
 $A=\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]$.
 Find the SVD of $A$.
  
-\begin{explanation}
+
+
 To begin, we compute $AA^T$ and $A^TA$.
 \[ AA^T = \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
 \left[\begin{array}{rr} 1 & 3 \\ -1 & 1 \\ 3 & 1  \end{array}\right]
-= \left[\begin{array}{rr} 11 & 5 \\ 5 & 11  \end{array}\right]\]
+= \left[\begin{array}{rr} \answer{11} & \answer{5} \\ \answer{5} & \answer{11}  \end{array}\right]\]
  
 \[ A^TA = \left[\begin{array}{rr} 1 & 3 \\ -1 & 1 \\ 3 & 1  \end{array}\right]
 \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-= \left[\begin{array}{rrr} 10 & 2 & 6 \\ 2 & 2 & -2\\
-6 & -2 & 10 \end{array}\right]\]
+= \left[\begin{array}{rrr} 
+  \answer{10} & \answer{2} & \answer{6} \\ 
+  \answer{2} & \answer{2} & \answer{-2} \\ 
+  \answer{6} & \answer{-2} & \answer{10} 
+  \end{array}\right]
+\]
+
+
+
 Since $AA^T$ is $2\times 2$ while $A^T A$ is $3\times 3$, and $AA^T$
 and $A^TA$ have the same {\em nonzero} eigenvalues (by Lemma
 \ref{lem:samenonzeroeigenvalues}), we compute the characteristic polynomial  $c_{AA^T}(x)$ (because it is
-easier to compute than $c_{A^TA}(x)$).
+easier to compute than $c_{A^TA}(x)$). (Note: You can also use MATLAB to expidite this process, but it will reverse the order of the eigenvectors and eigenvalues if you use \texttt{eig} on a symbolic matrix.)
+
 \begin{eqnarray*}
 c_{AA^T}(z)& = &\det(zI-AA^T)=  \det \left[\begin{array}{cc}
-z-11 & -5 \\ -5 & z-11 \end{array}\right]\\
-& = &(z-11)^2 - 25 \\
-& = & z^2-22z+121-25\\
-& = & z^2-22z+96\\
-& = & (z-16)(z-6)
+  z-\answer{11} & \answer{-5} \\ 
+  \answer{-5} & z-\answer{11} 
+  \end{array}\right] \\
 \end{eqnarray*}
-Therefore, the eigenvalues of $AA^T$ are $\lambda_1=16$ and $\lambda_2=6$.
- 
-The eigenvalues of $A^TA$ are $\lambda_1=16$, $\lambda_2=6$, and
-$\lambda_3=0$, and the singular values of $A$ are $S_1=\sqrt{16}=4$ and
-$S_2=\sqrt{6}$.
+
+Therefore, the eigenvalues of $AA^T$ are (ordered from greatest to least) $\lambda_1=\answer{16}$ and $\lambda_2=\answer{6}$.
+
+The eigenvalues of $A^TA$ are $\lambda_1=\answer{16}$, $\lambda_2=\answer{6}$, and
+$\lambda_3=\answer{0}$, and the singular values of $A$ are $S_1=\sqrt{\answer{16}}=\answer{4}$ and
+$S_2=\sqrt{\answer{6}}$.
 By convention, we list the eigenvalues (and corresponding singular values)
-in non increasing order (i.e., from largest to smallest).
+in non-increasing order (i.e., from largest to smallest).
  
 \textbf{To find the matrix $V$}:
  
 To construct the matrix $V$ we need to find eigenvectors for $A^TA$.
 Since the eigenvalues of $AA^T$ are distinct, the corresponding
 eigenvectors are orthogonal, and we need only normalize them.
+
+You can proceed by either solving the system $(\lambda I-A^TA)\vec{x}= \vec{0}$ or by computing the eigenvalues and eigenvectors of $A^TA$ in MATLAB. If using MATLAB, it will be easiest on a symbolic matrix, and be aware that the order of the columns in MATALB may differ from the order of the columns in the solution here.
  
-$\lambda_1=16$: solve $(16I-A^TA)\vec{x}_1= \vec{0}$.
- 
-\[ \left[\begin{array}{rrr|r}
-6 & -2 & -6 & 0 \\ -2 & 14 & 2 & 0 \\ -6 & 2 & 6 & 0
-\end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_1 =\left[\begin{array}{r} t \\ 0 \\ t \end{array}\right]
-=t\left[\begin{array}{r} 1 \\ 0 \\ 1 \end{array}\right],
-t\in \RR. \]
- 
-$\lambda_2=6$: solve $(6I-A^TA)\vec{x}_2= \vec{0}$.
- 
-\[ \left[\begin{array}{rrr|r}
--4 & -2 & -6 & 0 \\ -2 & 4 & 2 & 0 \\ -6 & 2 & -4 & 0
-\end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & 1 & 0 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_2=\left[\begin{array}{r} -s \\ -s \\ s \end{array}\right]
-=s\left[\begin{array}{r} -1 \\ -1 \\ 1 \end{array}\right],
-s\in \RR. \]
- 
-$\lambda_3=0$: solve $(-A^TA)\vec{x}_3= \vec{0}$.
-\[ \left[\begin{array}{rrr|r}
--10 & -2 & -6 & 0 \\ -2 & -2 & 2 & 0 \\ -6 & 2 & -10 & 0
-\end{array}\right]
-\rightarrow
-\left[\begin{array}{rrr|r}
-1 & 0 & 1 & 0 \\ 0 & 1 & -2 & 0 \\ 0 & 0 & 0 & 0
-\end{array}\right],
-\mbox{ so }
-\vec{x}_3=\left[\begin{array}{r} -r \\ 2r \\ r \end{array}\right]
-=r\left[\begin{array}{r} -1 \\ 2 \\ 1 \end{array}\right],
-r\in \RR. \]
-Let
-\[ \vec{v}_1=\frac{1}{\sqrt{2}}\left[\begin{array}{r} 1\\ 0\\ 1 \end{array}\right],
-\vec{v}_2=\frac{1}{\sqrt{3}}\left[\begin{array}{r} -1\\ -1\\ 1 \end{array}\right],
-\vec{v}_3=\frac{1}{\sqrt{6}}\left[\begin{array}{r} -1\\ 2\\ 1 \end{array}\right]\]
-Then
+$\lambda_1=\answer{16}$ has eigenvector $\vec{x}_1=\left[\begin{array}{r} \answer{1} \\ \answer{0} \\ \answer{1} \end{array}\right]$,
+
+$\lambda_2=\answer{6}$ has eigenvector $\vec{x}_2=\left[\begin{array}{r} \answer{-1} \\ \answer{-1} \\ \answer{1} \end{array}\right]$.
+
+$\lambda_3=\answer{0}$ has eigenvector $\vec{x}_3=\left[\begin{array}{r} \answer{-1} \\ \answer{2} \\ \answer{1} \end{array}\right]$.
+
+Now, we simply normalize the vectors.
+
+\[ \vec{v}_1=\frac{1}{\sqrt{\answer{2}}}\left[\begin{array}{r} \answer{1}\\ \answer{0}\\ \answer{1} \end{array}\right],
+\vec{v}_2=\frac{1}{\sqrt{\answer{3}}}\left[\begin{array}{r} \answer{-1}\\ \answer{-1}\\ \answer{1} \end{array}\right],
+\vec{v}_3=\frac{1}{\sqrt{\answer{6}}}\left[\begin{array}{r} \answer{-1}\\ \answer{2}\\ \answer{1} \end{array}\right]\]
+
+We then make $V$ from the eigenvectors. Note that the factor of $\frac{1}{\sqrt{6}}$ is an adjustment so that no columns are fractions.
+
 \[ V=\frac{1}{\sqrt{6}}\left[\begin{array}{rrr}
-\sqrt 3 & -\sqrt 2 & -1  \\
-0 & -\sqrt 2 & 2 \\
-\sqrt 3 & \sqrt 2 & 1 \end{array}\right]\]
+  \answer[tolerance=.1]{\sqrt{3}} & \answer[tolerance=.1]{-\sqrt{2}} & \answer[tolerance=.1]{-1}  \\
+\answer[tolerance=.1]{0} & \answer[tolerance=.1]{-\sqrt{2}} & \answer[tolerance=.1]{2} \\
+\answer[tolerance=.1]{\sqrt{3}} & \answer[tolerance=.1]{\sqrt{2}} & \answer[tolerance=.1]{1} \end{array}\right]\]
+
 Also,
-\[ S = \left[\begin{array}{rrr} 4 & 0 & 0 \\
-0 & \sqrt 6 & 0 \end{array}\right]\]
+
+\[ S = \left[\begin{array}{rrr} \answer{4} & \answer{0} & \answer{0} \\
+\answer{0} & \answer[tolerance=.1]{\sqrt{6}} & \answer{0} \end{array}\right]\]
+
+
 and we use $A$, $V^T$, and $S$ to find $U$. Since $V$ is orthogonal and $A=US V^T$, it follows that $AV=US$.
+
 Let $V=\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]$, and
 let $U=\left[\begin{array}{cc} \vec{u}_1 & \vec{u}_2 \end{array}\right]$, where
 $\vec{u}_1$ and $\vec{u}_2$ are the two columns of $U$. Then we have
@@ -246,38 +259,40 @@ A\left[\begin{array}{ccc} \vec{v}_1 & \vec{v}_2 & \vec{v}_3 \end{array}\right]
 &=& \left[\begin{array}{ccc} S_1\vec{u}_1 & S_2 \vec{u}_2 &
 0 \end{array}\right]
 \end{eqnarray*}
-which implies that $A\vec{v}_1=S_1\vec{u}_1 = 4\vec{u}_1$ and
-$A\vec{v}_2=S_2\vec{u}_2 = \sqrt 6 \vec{u}_2$. Thus,
+which implies that $A\vec{v}_1=S_1\vec{u}_1 = \answer{4}\vec{u}_1$ and
+$A\vec{v}_2=S_2\vec{u}_2 = \answer[tolerance=.1]{\sqrt{6}} \vec{u}_2$. 
+
+Thus,
 \[ \vec{u}_1 = \frac{1}{4}A\vec{v}_1
-= \frac{1}{4}
-\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-\frac{1}{\sqrt{2}}\left[\begin{array}{r} 1\\ 0\\ 1 \end{array}\right]
-= \frac{1}{4\sqrt 2}\left[\begin{array}{r} 4\\ 4 \end{array}\right]
+% = \frac{1}{4}
+% \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
+% \frac{1}{\sqrt{2}}\left[\begin{array}{r} 1\\ 0\\ 1 \end{array}\right]
+% = \frac{1}{4\sqrt 2}\left[\begin{array}{r} 4\\ 4 \end{array}\right]
 = \frac{1}{\sqrt 2}\left[\begin{array}{r} 1\\ 1 \end{array}\right]\]
 and
 \[ \vec{u}_2 = \frac{1}{\sqrt 6}A\vec{v}_2
-= \frac{1}{\sqrt 6}
-\left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
-\frac{1}{\sqrt{3}}\left[\begin{array}{r} -1\\ -1\\ 1 \end{array}\right]
-=\frac{1}{3\sqrt 2}\left[\begin{array}{r} 3\\ -3 \end{array}\right]
+% = \frac{1}{\sqrt 6}
+% \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]
+% \frac{1}{\sqrt{3}}\left[\begin{array}{r} -1\\ -1\\ 1 \end{array}\right]
+% =\frac{1}{3\sqrt 2}\left[\begin{array}{r} 3\\ -3 \end{array}\right]
 =\frac{1}{\sqrt 2}\left[\begin{array}{r} 1\\ -1 \end{array}\right]
 \]
 Therefore,
 \[ U=\frac{1}{\sqrt{2}}\left[\begin{array}{rr} 1 & 1 \\
-1 & -1 \end{array}\right]\]
-and
-\begin{eqnarray*}
-A & = & \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]\\
-& = & \left(\frac{1}{\sqrt{2}}\left[\begin{array}{rr} 1 & 1 \\
-1 & -1 \end{array}\right]\right)
-\left[\begin{array}{rrr} 4 & 0 & 0 \\
-0 & \sqrt 6 & 0 \end{array}\right]
-\left(\frac{1}{\sqrt{6}}\left[\begin{array}{rrr}
-\sqrt 3 & 0 & \sqrt 3  \\
--\sqrt 2 & -\sqrt 2 & \sqrt2 \\
--1 & 2 & 1 \end{array}\right]\right)
-\end{eqnarray*}
-\end{explanation}
+1 & -1 \end{array}\right].\]
+% and
+% \begin{eqnarray*}
+% A & = & \left[\begin{array}{rrr} 1 & -1 & 3 \\ 3 & 1 & 1 \end{array}\right]\\
+% & = & \left(\frac{1}{\sqrt{2}}\left[\begin{array}{rr} 1 & 1 \\
+% 1 & -1 \end{array}\right]\right)
+% \left[\begin{array}{rrr} 4 & 0 & 0 \\
+% 0 & \sqrt 6 & 0 \end{array}\right]
+% \left(\frac{1}{\sqrt{6}}\left[\begin{array}{rrr}
+% \sqrt 3 & 0 & \sqrt 3  \\
+% -\sqrt 2 & -\sqrt 2 & \sqrt2 \\
+% -1 & 2 & 1 \end{array}\right]\right)
+% \end{eqnarray*}
+
 \end{example}
  
 Consider another example.
@@ -404,129 +419,129 @@ Let's check this. $U^TAV=$
  
  You will do one more example in Chapter 9, after learning about standard processes for finding orthonormal bases from a list of linearly independent vectors. 
 
- Finally, let's re-visit the use of SVD to find the best-fitting subspaces for the data given in $\texttt{+linalg/subspace\_fitting\_affine\_data.mat}$, depicted here:
+%  Finally, let's re-visit the use of SVD to find the best-fitting subspaces for the data given in \texttt{+linalg/subspace\_fitting\_affine\_data.mat}, depicted here:
 
- \begin{example}\name{Affine subspace fitting problem}\label{ex:affine-subspace-fitting}
-    Consider the following collection of points in $\R^2$:
-    \begin{equation*}
-      \set{
-        \startmat{r} 10 \\ -6 \stopmat,
-        \startmat{r} 2 \\ 10 \stopmat,
-        \startmat{r} 5 \\ -1 \stopmat,
-        \startmat{r} 8 \\ 3 \stopmat,
-        \startmat{r} 2 \\ 5 \stopmat,
-        \startmat{r} 3 \\ 3 \stopmat,
-        \startmat{r} 4 \\ 11 \stopmat,
-        \startmat{r} 10 \\ -1 \stopmat,
-        \startmat{r} 1 \\ 12 \stopmat
-      }.
-    \end{equation*}
-    Find the 1-dimensional affine subspace that best approximates this
-    collection of points. What is the total squared distance of the
-    points to the subspace?
-  \end{example}
+%  \begin{example}\name{Affine subspace fitting problem}\label{ex:affine-subspace-fitting}
+%     Consider the following collection of points in $\R^2$:
+%     \begin{equation*}
+%       \set{
+%         \startmat{r} 10 \\ -6 \stopmat,
+%         \startmat{r} 2 \\ 10 \stopmat,
+%         \startmat{r} 5 \\ -1 \stopmat,
+%         \startmat{r} 8 \\ 3 \stopmat,
+%         \startmat{r} 2 \\ 5 \stopmat,
+%         \startmat{r} 3 \\ 3 \stopmat,
+%         \startmat{r} 4 \\ 11 \stopmat,
+%         \startmat{r} 10 \\ -1 \stopmat,
+%         \startmat{r} 1 \\ 12 \stopmat
+%       }.
+%     \end{equation*}
+%     Find the 1-dimensional affine subspace that best approximates this
+%     collection of points. What is the total squared distance of the
+%     points to the subspace?
+%   \end{example}
   
-  \begin{solution}
-    We start by computing the centroid:
-    \begin{equation*}
-      \centroid{\vect{v}} =
-      \frac{1}{9}(\vect{v}_1+\ldots+\vect{v}_9)
-      = \frac{1}{9}\startmat{r} 45 \\ 36 \stopmat
-      = \startmat{r} 5 \\ 4 \stopmat.
-    \end{equation*}
-    Next, we shift all vectors by $-\centroid{\vect{v}}$ to get a new
-    collection of vectors $\vect{w}_1,\ldots,\vect{w}_9$ centered at the
-    origin.
-    For example,
-    \begin{eqnarray*}
-      \vect{w}_1 ~~=~~ \vect{v}_1 - \centroid{\vect{v}}
-      &=& \startmat{r} 10 \\ -6 \stopmat
-      - \startmat{r} 5 \\ 4 \stopmat
-      ~~=~~ \startmat{r} 5 \\ -10 \stopmat,
-      \\
-      \vect{w}_2 ~~=~~ \vect{v}_2 - \centroid{\vect{v}}
-      &=& \startmat{r} 2 \\ 10 \stopmat
-      - \startmat{r} 5 \\ 4 \stopmat
-      ~~=~~ \startmat{r} -3 \\ 6 \stopmat,
-    \end{eqnarray*}
-    and so on. We get
-    \begin{equation*}
-      \set{\vect{w}_1,\ldots,\vect{w}_9} =
-      \set{
-        \startmat{r} 5 \\ -10 \stopmat,
-        \startmat{r} -3 \\ 6 \stopmat,
-        \startmat{r} 0 \\ -5 \stopmat,
-        \startmat{r} 3 \\ -1 \stopmat,
-        \startmat{r} -3 \\ 1 \stopmat,
-        \startmat{r} -2 \\ -1 \stopmat,
-        \startmat{r} -1 \\ 7 \stopmat,
-        \startmat{r} 5 \\ -5 \stopmat,
-        \startmat{r} -4 \\ 8 \stopmat
-      }.
-    \end{equation*}
-    Next we, we proceed by finding $A^T$. We have
+%   \begin{solution}
+%     We start by computing the centroid:
+%     \begin{equation*}
+%       \centroid{\vect{v}} =
+%       \frac{1}{9}(\vect{v}_1+\ldots+\vect{v}_9)
+%       = \frac{1}{9}\startmat{r} 45 \\ 36 \stopmat
+%       = \startmat{r} 5 \\ 4 \stopmat.
+%     \end{equation*}
+%     Next, we shift all vectors by $-\centroid{\vect{v}}$ to get a new
+%     collection of vectors $\vect{w}_1,\ldots,\vect{w}_9$ centered at the
+%     origin.
+%     For example,
+%     \begin{eqnarray*}
+%       \vect{w}_1 ~~=~~ \vect{v}_1 - \centroid{\vect{v}}
+%       &=& \startmat{r} 10 \\ -6 \stopmat
+%       - \startmat{r} 5 \\ 4 \stopmat
+%       ~~=~~ \startmat{r} 5 \\ -10 \stopmat,
+%       \\
+%       \vect{w}_2 ~~=~~ \vect{v}_2 - \centroid{\vect{v}}
+%       &=& \startmat{r} 2 \\ 10 \stopmat
+%       - \startmat{r} 5 \\ 4 \stopmat
+%       ~~=~~ \startmat{r} -3 \\ 6 \stopmat,
+%     \end{eqnarray*}
+%     and so on. We get
+%     \begin{equation*}
+%       \set{\vect{w}_1,\ldots,\vect{w}_9} =
+%       \set{
+%         \startmat{r} 5 \\ -10 \stopmat,
+%         \startmat{r} -3 \\ 6 \stopmat,
+%         \startmat{r} 0 \\ -5 \stopmat,
+%         \startmat{r} 3 \\ -1 \stopmat,
+%         \startmat{r} -3 \\ 1 \stopmat,
+%         \startmat{r} -2 \\ -1 \stopmat,
+%         \startmat{r} -1 \\ 7 \stopmat,
+%         \startmat{r} 5 \\ -5 \stopmat,
+%         \startmat{r} -4 \\ 8 \stopmat
+%       }.
+%     \end{equation*}
+%     Next we, we proceed by finding $A^T$. We have
 
-    \begin{equation*}
-      A^T = \startmat{rrrrrrrrr}
-        5 & -3 & 0 & 3 & -3 & -2 & -1 & 5 & -4 \\
-        -10 & 6 & -5 & -1 & 1 & -1 & 7 & -5 & 8 \\
-      \stopmat
-    \end{equation*}
-    and
-    \begin{equation*}
-      B = A^TA = \startmat{rr}
-        98 & -136 \\
-        -136 & 302 \\
-      \stopmat.
-    \end{equation*}
+%     \begin{equation*}
+%       A^T = \startmat{rrrrrrrrr}
+%         5 & -3 & 0 & 3 & -3 & -2 & -1 & 5 & -4 \\
+%         -10 & 6 & -5 & -1 & 1 & -1 & 7 & -5 & 8 \\
+%       \stopmat
+%     \end{equation*}
+%     and
+%     \begin{equation*}
+%       B = A^TA = \startmat{rr}
+%         98 & -136 \\
+%         -136 & 302 \\
+%       \stopmat.
+%     \end{equation*}
 
-    The eigenvalues of $B$ are $\eigenvar_1 = 370$ and $\eigenvar_2 =
-    30$, with corresponding eigenvectors
-    \begin{equation*}
-      \vect{u}_1 = \startmat{r} 1 \\ -2 \stopmat
-      \quad\mbox{and}\quad
-      \vect{u}_2 = \startmat{r} 2 \\ 1 \stopmat
-    \end{equation*}
+%     The eigenvalues of $B$ are $\eigenvar_1 = 370$ and $\eigenvar_2 =
+%     30$, with corresponding eigenvectors
+%     \begin{equation*}
+%       \vect{u}_1 = \startmat{r} 1 \\ -2 \stopmat
+%       \quad\mbox{and}\quad
+%       \vect{u}_2 = \startmat{r} 2 \\ 1 \stopmat
+%     \end{equation*}
 
-    For simplicity in this example, we won't proceed to normalize the singular vectors and will simply maintain the squared singular values (the first of which gives the total square spread of the data on the subspace). 
+%     For simplicity in this example, we won't proceed to normalize the singular vectors and will simply maintain the squared singular values (the first of which gives the total square spread of the data on the subspace). 
     
-    Thus, the best-fitting 1-dimensional subspace for
-    $\vect{w}_1,\ldots,\vect{w}_9$ is $W = \sspan\set{\vect{u}_1}$, and
-    the best-fitting 1-dimensional affine subspace for
-    $\vect{v}_1,\ldots,\vect{v}_9$ is
-    \begin{equation*}
-      \centroid{\vect{v}} + W
-      = \set{\centroid{\vect{v}} + \vect{w} \mid \vect{w}\in W}
-      = \set{\left.\startmat{r} 5 \\ 4 \stopmat +
-          t\startmat{r} 1 \\ -2 \stopmat ~\right\vert~ t\in\R}.
-    \end{equation*}
-    Note that this is the equation of a line passing through the
-    centroid $\centroid{\vect{v}}$, and with direction vector
-    $\vect{u}_1$. The points $\vect{v}_1,\ldots,\vect{v}_9$, their
-    centroid, and the affine subspace $\centroid{\vect{v}} + W$ are
-    shown in the following illustration:
-    \begin{center}
-      \begin{tikzpicture}[scale=0.2]
-        \draw[thin,->] (-12,0) -- (12,0);
-        \draw[thin,->] (0,-12) -- (0,12);
-        \draw[thin] (0,10) -- (-1,10) node[left] {$10$};
-        \draw[thin] (10,0) -- (10,-1) node[below] {$10$};
-        \draw[thick,blue] (5,4) +(-6,12) -- +(6,-12);
-        \fill[color=blue] (5,4) circle (0.6);
-        \draw[blue, ->] (5,4) +(8,4) node[right,yshift=4] {centroid} -- +(0.4,0.2);
-        \fill[color=red] (10, -6) circle (0.3);
-        \fill[color=red] (10, -1) circle (0.3);
-        \fill[color=red] (5, -1) circle (0.3);
-        \fill[color=red] (8, 3) circle (0.3);
-        \fill[color=red] (3, 3) circle (0.3);
-        \fill[color=red] (2, 5) circle (0.3);
-        \fill[color=red] (2, 10) circle (0.3);
-        \fill[color=red] (4, 11) circle (0.3);
-        \fill[color=red] (1, 12) circle (0.3);
-      \end{tikzpicture}
-    \end{center}
-    \vspace{-4ex}\par  
-  \end{solution}
+%     Thus, the best-fitting 1-dimensional subspace for
+%     $\vect{w}_1,\ldots,\vect{w}_9$ is $W = \sspan\set{\vect{u}_1}$, and
+%     the best-fitting 1-dimensional affine subspace for
+%     $\vect{v}_1,\ldots,\vect{v}_9$ is
+%     \begin{equation*}
+%       \centroid{\vect{v}} + W
+%       = \set{\centroid{\vect{v}} + \vect{w} \mid \vect{w}\in W}
+%       = \set{\left.\startmat{r} 5 \\ 4 \stopmat +
+%           t\startmat{r} 1 \\ -2 \stopmat ~\right\vert~ t\in\R}.
+%     \end{equation*}
+%     Note that this is the equation of a line passing through the
+%     centroid $\centroid{\vect{v}}$, and with direction vector
+%     $\vect{u}_1$. The points $\vect{v}_1,\ldots,\vect{v}_9$, their
+%     centroid, and the affine subspace $\centroid{\vect{v}} + W$ are
+%     shown in the following illustration:
+%     \begin{center}
+%       \begin{tikzpicture}[scale=0.2]
+%         \draw[thin,->] (-12,0) -- (12,0);
+%         \draw[thin,->] (0,-12) -- (0,12);
+%         \draw[thin] (0,10) -- (-1,10) node[left] {$10$};
+%         \draw[thin] (10,0) -- (10,-1) node[below] {$10$};
+%         \draw[thick,blue] (5,4) +(-6,12) -- +(6,-12);
+%         \fill[color=blue] (5,4) circle (0.6);
+%         \draw[blue, ->] (5,4) +(8,4) node[right,yshift=4] {centroid} -- +(0.4,0.2);
+%         \fill[color=red] (10, -6) circle (0.3);
+%         \fill[color=red] (10, -1) circle (0.3);
+%         \fill[color=red] (5, -1) circle (0.3);
+%         \fill[color=red] (8, 3) circle (0.3);
+%         \fill[color=red] (3, 3) circle (0.3);
+%         \fill[color=red] (2, 5) circle (0.3);
+%         \fill[color=red] (2, 10) circle (0.3);
+%         \fill[color=red] (4, 11) circle (0.3);
+%         \fill[color=red] (1, 12) circle (0.3);
+%       \end{tikzpicture}
+%     \end{center}
+%     \vspace{-4ex}\par  
+%   \end{solution}
 
 
 \end{document}

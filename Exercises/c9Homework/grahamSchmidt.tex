@@ -8,119 +8,116 @@
 
 \begin{problem}\label{ex:orthogonal-basis-r3}
   In $\R^3$ with the usual dot product, find an orthogonal basis for
-  \begin{equation*}
-    \sspan\set{
-      \startmat{c} \answer{1} \\ \answer{2} \\ \answer{3} \stopmat,~
-      \startmat{c} \answer{2} \\ \answer{6} \\ \answer{0} \stopmat
-    }.
-  \end{equation*}
+  $$\startmat{c} 1 \\ 2 \\ 3 \stopmat,\startmat{c} 2 \\ 6 \\ 0 \stopmat
+    .$$
+
+    (Note: Use Graham-Schmidt to find the orthogonal basis.)
+ 
 
   Answer:
   
-    $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{2} \\ \answer{3} \stopmat$,
+    $\vect{u}_1 = \startmat{c} 1 \\ 2 \\ 3 \stopmat$,
     $\vect{u}_2 = \startmat{c} \answer{1} \\ \answer{4} \\ \answer{-3} \stopmat$.
 
 \end{problem}
 
 \begin{problem}
   In $\R^4$ with the usual dot product, find an orthogonal basis for
-  \begin{equation*}
-    \sspan\set{
-      \startmat{c} \answer{0} \\ \answer{1} \\ \answer{1} \\  \answer{0} \stopmat,~
-      \startmat{c} \answer{3} \\ \answer{0} \\ \answer{2} \\ \answer{-1} \stopmat
-    }.
-  \end{equation*}
+
+  $$\startmat{c} 0 \\ 1 \\ 1 \\ 0 \stopmat,\startmat{c} 3 \\ 0 \\ 2 \\ -1 \stopmat
+    .$$
+
+  (Note: Use Graham-Schmidt to find the orthogonal basis.)
 
   Answer:
 
-    $\vect{u}_1 = \startmat{c} \answer{0} \\ \answer{1} \\ \answer{1} \\ \answer{0} \stopmat$,
+    $\vect{u}_1 = \startmat{c} 0 \\ 1 \\ 1 \\ 0 \stopmat$,
     $\vect{u}_2 = \startmat{c} \answer{3} \\ \answer{-1} \\ \answer{1} \\ \answer{-1} \stopmat$.
 
 \end{problem}
 
 \begin{problem}
   In $\R^4$ with the usual dot product, find an orthogonal basis for
-  \begin{equation*}
-    \sspan\set{
-      \startmat{c} \answer{1} \\ \answer{0} \\ \answer{1} \\  \answer{0} \stopmat,~
-      \startmat{c} \answer{1} \\ \answer{3} \\ \answer{1} \\ \answer{-1} \stopmat,~
-      \startmat{c} \answer{2} \\ \answer{4} \\ \answer{2} \\  \answer{2} \stopmat
-    }.
-  \end{equation*}
+
+  $$\startmat{c} 1 \\ 0 \\ 1 \\ 0 \stopmat,\startmat{c} 1 \\ 3 \\ 1 \\ -1 \stopmat
+    ,\startmat{c} 2 \\ 4 \\ 2 \\ 2 \stopmat
+    .$$
+
+  (Note: Use Graham-Schmidt to find the orthogonal basis.)
 
   Answer:
 
-    $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{0} \\ \answer{1} \\ \answer{0} \stopmat$,
+    $\vect{u}_1 = \startmat{c} 1 \\ 0 \\ 1 \\ 0 \stopmat$,
     $\vect{u}_2 = \startmat{c} \answer{0} \\ \answer{3} \\ \answer{0} \\ \answer{-1} \stopmat$,
     $\vect{u}_3 = \startmat{c} \answer{0} \\ \answer{1} \\ \answer{0} \\ \answer{3} \stopmat$.
 
 \end{problem}
 
-\begin{problem}
-  Let
-  \begin{equation*}
-    A = \startmat{ccc}
-      \answer{3} & \answer{-1} & \answer{0} \\
-      \answer{-1} & \answer{5} & \answer{2} \\
-      \answer{0} & \answer{2} & \answer{3} \\
-    \stopmat,
-  \end{equation*}
-  and consider the vector space $\R^3$ with the inner product given by
-  $\iprod{\vect{v},\vect{w}} = \vect{v}^T A\vect{w}$.
-  Let
-  \begin{equation*}
-    \vect{v}_1 = \startmat{c} \answer{1} \\ \answer{0} \\ \answer{2} \stopmat,
-    \quad
-    \vect{v}_2 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{-5} \stopmat,
-    \quad\mbox{and}\quad
-    \vect{v}_3 = \startmat{c} \answer{2} \\ \answer{2} \\ \answer{3} \stopmat.
-  \end{equation*}
-  Apply the Gram-Schmidt procedure to
-  $\vect{v}_1,\vect{v}_2,\vect{v}_3$ to find an orthogonal basis
-  $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3}$ for $\R^3$ with respect to
-  the above inner product.
+% \begin{problem}
+%   Let
+%   \begin{equation*}
+%     A = \startmat{ccc}
+%       \answer{3} & \answer{-1} & \answer{0} \\
+%       \answer{-1} & \answer{5} & \answer{2} \\
+%       \answer{0} & \answer{2} & \answer{3} \\
+%     \stopmat,
+%   \end{equation*}
+%   and consider the vector space $\R^3$ with the inner product given by
+%   $\iprod{\vect{v},\vect{w}} = \vect{v}^T A\vect{w}$.
+%   Let
+%   \begin{equation*}
+%     \vect{v}_1 = \startmat{c} \answer{1} \\ \answer{0} \\ \answer{2} \stopmat,
+%     \quad
+%     \vect{v}_2 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{-5} \stopmat,
+%     \quad\mbox{and}\quad
+%     \vect{v}_3 = \startmat{c} \answer{2} \\ \answer{2} \\ \answer{3} \stopmat.
+%   \end{equation*}
+%   Apply the Gram-Schmidt procedure to
+%   $\vect{v}_1,\vect{v}_2,\vect{v}_3$ to find an orthogonal basis
+%   $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3}$ for $\R^3$ with respect to
+%   the above inner product.
 
-  Answer:
+%   Answer:
 
-    $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{0} \\ \answer{2} \stopmat$,
-    $\vect{u}_2 = \startmat{c} \answer{1} \\ \answer{1} \\ \answer{-1} \stopmat$,
-    $\vect{u}_3 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{0} \stopmat$.
+%     $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{0} \\ \answer{2} \stopmat$,
+%     $\vect{u}_2 = \startmat{c} \answer{1} \\ \answer{1} \\ \answer{-1} \stopmat$,
+%     $\vect{u}_3 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{0} \stopmat$.
 
-\end{problem}
+% \end{problem}
 
-\begin{problem}
-  Let
-  \begin{equation*}
-    A = \startmat{cccc}
-      \answer{3} & \answer{2} & \answer{0} & \answer{0} \\
-      \answer{2} & \answer{5} & \answer{1} & \answer{0} \\
-      \answer{0} & \answer{1} & \answer{3} & \answer{1} \\
-      \answer{0} & \answer{0} & \answer{1} & \answer{3} \\
-    \stopmat,
-  \end{equation*}
-  and consider the vector space $\R^4$ with the inner product given by
-  $\iprod{\vect{v},\vect{w}} = \vect{v}^T A\vect{w}$.
-  Let
-  \begin{equation*}
-    \vect{v}_1 = \startmat{c} \answer{1} \\ \answer{-1} \\ \answer{1} \\ \answer{1} \stopmat,
-    \quad
-    \vect{v}_2 = \startmat{c} \answer{2} \\ \answer{0} \\ \answer{0} \\ \answer{2} \stopmat,
-    \quad\mbox{and}\quad
-    \vect{v}_3 = \startmat{c} \answer{2} \\ \answer{0} \\ \answer{2} \\ \answer{3} \stopmat,
-  \end{equation*}
-  and let $W=\sspan\set{\vect{v}_1,\vect{v}_2,\vect{v}_3}$.  Apply the
-  Gram-Schmidt procedure to $\vect{v}_1,\vect{v}_2,\vect{v}_3$ to find
-  an orthogonal basis $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3}$ for $W$
-  with respect to the above inner product.
+% \begin{problem}
+%   Let
+%   \begin{equation*}
+%     A = \startmat{cccc}
+%       \answer{3} & \answer{2} & \answer{0} & \answer{0} \\
+%       \answer{2} & \answer{5} & \answer{1} & \answer{0} \\
+%       \answer{0} & \answer{1} & \answer{3} & \answer{1} \\
+%       \answer{0} & \answer{0} & \answer{1} & \answer{3} \\
+%     \stopmat,
+%   \end{equation*}
+%   and consider the vector space $\R^4$ with the inner product given by
+%   $\iprod{\vect{v},\vect{w}} = \vect{v}^T A\vect{w}$.
+%   Let
+%   \begin{equation*}
+%     \vect{v}_1 = \startmat{c} \answer{1} \\ \answer{-1} \\ \answer{1} \\ \answer{1} \stopmat,
+%     \quad
+%     \vect{v}_2 = \startmat{c} \answer{2} \\ \answer{0} \\ \answer{0} \\ \answer{2} \stopmat,
+%     \quad\mbox{and}\quad
+%     \vect{v}_3 = \startmat{c} \answer{2} \\ \answer{0} \\ \answer{2} \\ \answer{3} \stopmat,
+%   \end{equation*}
+%   and let $W=\sspan\set{\vect{v}_1,\vect{v}_2,\vect{v}_3}$.  Apply the
+%   Gram-Schmidt procedure to $\vect{v}_1,\vect{v}_2,\vect{v}_3$ to find
+%   an orthogonal basis $\set{\vect{u}_1,\vect{u}_2,\vect{u}_3}$ for $W$
+%   with respect to the above inner product.
 
-  Answer:
+%   Answer:
 
 
-    $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{-1} \\ \answer{1} \\ \answer{1} \stopmat$,
-    $\vect{u}_2 = \startmat{c} \answer{1} \\ \answer{1} \\ \answer{-1} \\ \answer{1} \stopmat$,
-    $\vect{u}_3 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{1} \\ \answer{0} \stopmat$.
+%     $\vect{u}_1 = \startmat{c} \answer{1} \\ \answer{-1} \\ \answer{1} \\ \answer{1} \stopmat$,
+%     $\vect{u}_2 = \startmat{c} \answer{1} \\ \answer{1} \\ \answer{-1} \\ \answer{1} \stopmat$,
+%     $\vect{u}_3 = \startmat{c} \answer{-1} \\ \answer{1} \\ \answer{1} \\ \answer{0} \stopmat$.
 
-\end{problem}
+% \end{problem}
 
 
 \end{document}

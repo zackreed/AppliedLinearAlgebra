@@ -14,7 +14,7 @@ vectors.
 
 (NOTE: Take the vectors in order. You want to consider the first available linearly dependent vectors when filling in the answers. The first answer should not depend on MATLAB, but you might want to use MATLAB to determine the second dependent vector)
 
-\begin{hint}
+\begin{expandable}{stuff}{Hint}
 
     If it's not immediately obvious which vectors are linear combinations of others,that's totally okay! 
     
@@ -22,11 +22,7 @@ vectors.
 
     First, use \texttt{assume(a^2+b^2+c^2>0)} to get rid of the trivial solution, then use \texttt{solve} to see if a linear combination of the vectors add to the zero vector.
 
-    If you use the \texttt{"ReturnConditions",true} arguments at the end of solve, it will tell you which coefficients are non-zero. 
-
-    You might need to do this more than once depending on which and how many vectors are redundant.
-
-\end{hint}
+\end{expandable}
 \begin{equation*}
   \vect{u}_1 = \startmat{r} 1 \\ 0 \\ 1 \stopmat,\quad
   \vect{u}_2 = \startmat{r} 2 \\ 0 \\ 2 \stopmat,\quad

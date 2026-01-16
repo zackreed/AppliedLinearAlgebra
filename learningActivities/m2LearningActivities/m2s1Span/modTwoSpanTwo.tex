@@ -159,7 +159,7 @@ With this terminology, we say that a basis for a space $V$ is a linearly indepen
   \index{basis!of a span}.
 \end{example}
 
-\begin{solution}
+
   Let $S=\sspan\set{\vect{u}_1,\ldots,\vect{u}_4}$. We need to remove redundancy from the set to find a basis for $S$.
 
   We will use MATALB to speed up our calculations, as we will have more sophisticated ways of doing this process in the next chapter.
@@ -193,6 +193,7 @@ With this terminology, we say that a basis for a space $V$ is a linearly indepen
 
   That yielded no solutions, so $u_3$ and $u_4$ are not in the span of $u_1$ and $u_2$. We can actually see this on inspection, since $u_1$ and $u_2$ are multiples of each other, and $u_3$ and $u_4$ are not multiples of $u_1$ or $u_2$.
 
+  \begin{exercise}
   Now let's check $u_1$ and $u_3$:
 
   \begin{verbatim}
@@ -212,6 +213,8 @@ With this terminology, we say that a basis for a space $V$ is a linearly indepen
 
   Therefore, a basis for $\sspan\set{\vect{u}_1,\ldots,\vect{u}_4}$ is $\set{\vect{u}_1,\vect{u}_3}$.
 
+\end{exercise}
+
   You can visualize this subspace of $\R^3$ in the following applet:
 
   Select the ``Set New Basis'' box to enter new vectors, $\vec{b}_1$, $\vec{b}_2$ and $\vec{b}_3$ that will span the transformed $\RR^3$. Then select the ``Find v in Current Basis'' button. The default will find $\vec{v}$, a green vector, in the standard grid for $\RR^3$ (e.g. with the standard vectors $\vec{i}=\begin{bmatrix}
@@ -230,7 +233,7 @@ With this terminology, we say that a basis for a space $V$ is a linearly indepen
     \geogebra{y95ydrhy}{798}{478}
   \end{center}
 
-\end{solution}
+
 
 % \begin{example}\name{A non-standard basis of\/ $\R^3$}
 %   \index{basis!of Rn@of\/ $\R^n$}% 
@@ -298,7 +301,7 @@ As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vec
   A set of $n$ linearly independent $n$-dimensional vectors spans $\RR^n$.
 \end{theorem}
 
-\begin{example}
+\begin{exercise}
 
   For the following vector sets, find the basis for the span of the vectors, name the kind of subspace set by the span (i.e. point, plane, line) and give the dimension of the spanning subspace.
 
@@ -306,7 +309,7 @@ As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vec
 
     \item $\vect{u}_1=\startmat{r} 1 \\ 1 \\ 1 \stopmat$, $\vect{u}_2=\startmat{r} 1 \\ 1 \\ 0 \stopmat$, $\vect{u}_3=\startmat{r} 1 \\ 0 \\ 0 \stopmat$.
     
-    \begin{solution}
+
     
       Note that since $\vec{u}_1$ is the only vector with a $1$ in the third component, you \wordChoice{\choice{can}\choice[correct]{cannot}} make $\vec{u}_1$ from a linear combination of $\vec{u}_2$ and $\vec{u}_3$. Using similar reasoning, you'll note that it is \wordChoice{\choice{possible}\choice[correct]{impossible}} to construct any of $\vec{u}_1$, $\vec{u}_2$ or $\vec{u}_3$ from linear combinations of the other two. Thus, the vectors are \wordChoice{\choice{linearly dependent}\choice[correct]{linearly independent}}. 
       
@@ -317,11 +320,11 @@ As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vec
         \choice[correct]{hyperplane}
       }
 
-    \end{solution}
+
 
     \item $\vect{u}_1=\startmat{r} 1 \\ -1 \\ 1 \stopmat$, $\vect{u}_2=\startmat{r} 2 \\ 0 \\ 1 \stopmat$, $\vect{u}_3=\startmat{r} 1 \\ 1 \\ 0 \stopmat$.
     
-    \begin{solution}
+
     
       If you use MATLAB or reason about the ways to combine the vectors, you note that $\answer{1}\vec{u}_1+\answer{-1}\vec{u}_2=\vec{u}_3$, so $\vec{u}_1$ and $\vec{u}_2$ are \wordChoice{\choice[correct]{linearly dependent}\choice{linearly independent}}, and $\vec{u}_3$ is \wordChoice{\choice{also linearly independent}\choice[correct]{redundant}}.
       
@@ -332,12 +335,10 @@ As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vec
         \choice{hyperplane}
       }, a $\answer{2}$-dimensional subspace of $\R^3$.
 
-    \end{solution}
+
 
     \item $\vect{u}_1=\startmat{r} 28 \\ -32 \stopmat$, $\vect{u}_2=\startmat{r} 0 \\ 0 \stopmat$, $\vect{u}_3=\startmat{r} -7/2 \\ 4 \stopmat$, $\vect{u}_4=\startmat{r} -21 \\ 24 \stopmat$.
-    
-    \begin{solution}
-    
+
       Upon inspection, each vector is a scalar multiple of $\vect{u}_1$. Moreover, you can't have the $0$ vector in a basis, as you can't use it to span anything. So $\sspan\set{\vect{u}_1, \vect{u}_3, \vect{u}_4}=\sspan\set{\vect{u}_1}$, a $1$-dimensional subspace (e.g. a \wordChoice{
         \choice{point}
         \choice[correct]{line}
@@ -345,11 +346,11 @@ As it turns out, having $\vec{n}$ linearly independent $\vec{n}$-dimensional vec
         \choice{hyperplane}
       }) in $\R^2$.
 
-    \end{solution}
+
     
   \end{enumerate}
 
-\end{example}
+\end{exercise}
 
 \begin{remark}\name{A Test for Linear Independence}
 Our process was slightly inefficient, since we had to set up and solve multiple systems of equations iteratively. If we wanted a quicker check for linear independence, there is a single system that will tell us if a set of vectors is linearly independent or dependent (though it won't) tell us which vectors are dependent on which others. 

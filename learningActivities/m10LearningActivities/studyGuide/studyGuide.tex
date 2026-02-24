@@ -45,6 +45,32 @@
     \end{selectAll}
 \end{example}
 
+\begin{example}
+    Let $A=\begin{bmatrix} 2 & 0 \\ -1 & 3 \end{bmatrix}$ and $B=\begin{bmatrix} 1 & 4 \\ 2 & -1 \end{bmatrix}$.
+    \begin{enumerate}
+        \item If $\vec{v}$ is the first row of $A$ and $\vec{w}$ is the first row of $B$, then $3\vec{v}-2\vec{w} = \begin{bmatrix} \answer{2} \\ \answer{2} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+
+        \item If $\vec{v}$ is the second column of $A$ and $\vec{w}$ is the second column of $B$, then $\vec{v}+4\vec{w} = \begin{bmatrix} \answer{16} \\ \answer{-1} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+
+        \item If $\vec{v}$ is the first column of $A$ and $\vec{w}$ is the second row of $B$, then $2\vec{v}+3\vec{w} = \begin{bmatrix} \answer{10} \\ \answer{-5} \end{bmatrix}$. (Note: Make both of the vectors into either column or row vectors before performing the operation.)
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Which of these vectors in $\RR^3$ are linear combinations of the vectors
+    \[
+        \vec{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix}, \qquad \vec{v}_2 = \begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}?
+    \]
+
+    \begin{selectAll}
+        \choice[correct]{$\begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} 3 \\ -1 \\ 7 \end{bmatrix}$}
+        \choice[correct]{$\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$}
+        \choice{$\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$}
+    \end{selectAll}
+\end{example}
+
 \section*{Span and Bases}
 
 \begin{example}
@@ -190,17 +216,102 @@ b_4 = \begin{bmatrix}
 
 
 
+\begin{example}
+    Let $A = \begin{bmatrix} 1 & 2 & 3 \\ 0 & 1 & 1 \\ 1 & 3 & 4 \end{bmatrix}$.
+    \begin{enumerate}
+        \item Find a basis for the range (column space) of $A$.
+
+        \textbf{Answer:} The rank of $A$ is $\answer{2}$, so the range is $\answer{2}$-dimensional. A basis for the range consists of columns $\answer{1}$ and $\answer{2}$ of $A$ (the pivot columns), giving
+        \[
+            b_1 = \begin{bmatrix} \answer{1} \\ \answer{0} \\ \answer{1} \end{bmatrix}, \quad
+            b_2 = \begin{bmatrix} \answer{2} \\ \answer{1} \\ \answer{3} \end{bmatrix}.
+        \]
+
+        \item Find a basis for the null space of $A$.
+
+        \textbf{Answer:} The null space is $\answer{1}$-dimensional. A basis vector is (hint: build the vector from the final column of rref($A$)):
+        \[
+            b_1 = \begin{bmatrix} \answer{-1} \\ \answer{-1} \\ \answer{1} \end{bmatrix}.
+        \]
+
+    \end{enumerate}
+\end{example}
+
 \section*{Linear Transformations}
 
-\section*{Matrix Operations}
+\begin{example}
+    Let $T:\RR^2\to\RR^2$ be the linear transformation defined by the matrix $A = \begin{bmatrix} 2 & 1 \\ 1 & -3 \end{bmatrix}$.
+
+    Since $\det(A) = \answer{-7}$, the rank of $A$ is $\answer{2}$ and so the dimension of the range is $\answer{2}$. Thus, the null space of $T$ is $\answer{0}$-dimensional.
+\end{example}
+
+\begin{example}
+    Let $T:\RR^3\to\RR^2$ be given by the matrix $A = \begin{bmatrix} 1 & 2 & -1 \\ 3 & -1 & 2 \end{bmatrix}$.
+
+    Since $\det(A) = \answer{0}$, the rank of $A$ is \wordChoice{\choice{1}\choice{2}\choice{0}\choice[correct]{cannot determine from the determinant}}. Also, $A$ \wordChoice{\choice[correct]{is not invertible}\choice{is invertible}}.
+
+    The rank of $A$ is $\answer{2}$ and then null space has dimension $\answer{1}$.
+
+\end{example}
+
 
 
 \section*{Systems of Equations}
 
-\section*{Gaussian Elimination}
+\begin{example}
+    Determine the number of solutions to each system of equations.
+    \begin{enumerate}
+        \item $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$
+
+        \textbf{Answer:} This system has \wordChoice{\choice[correct]{exactly one solution}\choice{no solution}\choice{infinitely many solutions}}. The unique solution is $x = \answer{1}$, $y = \answer{2}$.
+
+        \item $\begin{cases} 2x - 4y = 6 \\ -x + 2y = -3 \end{cases}$
+
+        \textbf{Answer:} This system has \wordChoice{\choice{exactly one solution}\choice{no solution}\choice[correct]{infinitely many solutions}}. Setting $y = t$, solutions are of the form $x = 2t + 3$, $y = t$.
+
+        \item $\begin{cases} x + y = 4 \\ x + y = 7 \end{cases}$
+
+        \textbf{Answer:} This system has \wordChoice{\choice{exactly one solution}\choice[correct]{no solution}\choice{infinitely many solutions}}.
+
+        \item $\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 4 \end{cases}$
+
+        \textbf{Answer:} This system has \wordChoice{\choice[correct]{exactly one solution}\choice{no solution}\choice{infinitely many solutions}}. The unique solution is (up to 2 decimal places) $x = \answer[tolerance=0.01]{1.5714}$, $y = \answer[tolerance=0.01]{2.2857}$, $z = \answer[tolerance=0.01]{2.1429}$.
+
+        \item Solve the system $A\vec{x} = \vec{b}$ where $A = \begin{bmatrix} 1 & -1 & 2 \\ 2 & 1 & -1 \\ 1 & 3 & -5 \end{bmatrix}$ and $\vec{b} = \begin{bmatrix} 3 \\ 0 \\ -6 \end{bmatrix}$.
+
+        \textbf{Answer:} The system has \wordChoice{\choice[correct]{exactly one solution}\choice{no solution}\choice{infinitely many solutions}}. The solution is $x_1 = \answer[tolerance=0.01]{1.0345}$, $x_2 = \answer[tolerance=0.01]{-2.1724}$, $x_3 = \answer[tolerance=0.01]{-0.1034}$.
+    \end{enumerate}
+\end{example}
 
 
 \section*{Matrix Inverses}
+
+\begin{example}
+    Which of the following matrices are invertible? For those that are invertible, find the inverse. Use the determinant as one method.
+    \begin{enumerate}
+        \item $A = \begin{bmatrix} 3 & 1 \\ 2 & 1 \end{bmatrix}$
+
+        \textbf{Answer:} $\det(A) = \answer{1}$, so $A$ \wordChoice{\choice[correct]{is invertible}\choice{is not invertible}}. The inverse is
+        \[
+        A^{-1} = \begin{bmatrix} \answer{1} & \answer{-1} \\ \answer{-2} & \answer{3} \end{bmatrix}.
+        \]
+
+        \item $B = \begin{bmatrix} 2 & 4 \\ 1 & 2 \end{bmatrix}$
+
+        \textbf{Answer:} $\det(B) = \answer{0}$, so $B$ \wordChoice{\choice{is invertible}\choice[correct]{is not invertible}}.
+
+        \item $C = \begin{bmatrix} 1 & 0 & 2 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix}$
+
+        \textbf{Answer:} $\det(C) = \answer{2} \neq 0$, so $C$ \wordChoice{\choice[correct]{is invertible}\choice{is not invertible}}. The inverse is
+        \[
+        C^{-1} = \begin{bmatrix} \answer{1} & \answer{0} & \answer{-1} \\ \answer{0} & \answer{1} & \answer{-3/2} \\ \answer{0} & \answer{0} & \answer{1/2} \end{bmatrix}.
+        \]
+
+        \item $D = \begin{bmatrix} k & 2 \\ 3 & 6 \end{bmatrix}$
+
+        \textbf{Answer:} $D$ is not invertible when $k = \answer{1}$.
+    \end{enumerate}
+\end{example}
 
 \begin{example}\label{ex:invertible}
     Which of the following matrices are invertible? Verify this with at least two methods, one of which should be the determinant.
@@ -314,22 +425,80 @@ E = [pi exp(y) x^2;
 
 See example \ref{ex:basesprob}.
 
+\begin{example}
+    Let $A = \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 0 & 1 & 1 \end{bmatrix}$.
+    \begin{enumerate}
+        \item The rank of $A$ is $\answer{2}$.
+
+        \item A basis for the range (column space) of $A$ is
+        \[
+        b_1 = \begin{bmatrix} \answer{1} \\ \answer{2} \\ \answer{0} \end{bmatrix}, \quad b_2 = \begin{bmatrix} \answer{2} \\ \answer{4} \\ \answer{1} \end{bmatrix}.
+        \]
+        (These are the pivot columns.)
+
+        \item The null space of $A$ is $\answer{1}$-dimensional (by rank-nullity: $3 - 2 = 1$).
+
+        \item A basis vector for the null space of $A$ is
+        \[
+        \vec{n} = \begin{bmatrix} \answer{1} \\ \answer{-1} \\ \answer{1} \end{bmatrix}.
+        \]
+
+        \item A vector $\vec{b} = \begin{bmatrix} 3 \\ 6 \\ 2 \end{bmatrix}$ \wordChoice{\choice[correct]{is}\choice{is not}} in the range of $A$.
+    \end{enumerate}
+\end{example}
+
 \section*{Determinants}
 
 See Example \ref{ex:invertible}.
+
+\begin{example}
+    Compute the following determinants.
+    \begin{enumerate}
+        \item $\det\begin{bmatrix} 5 & 2 \\ 3 & 4 \end{bmatrix} = \answer{14}$.
+
+        \item $\det\begin{bmatrix} 1 & 2 & 0 \\ -1 & 1 & 3 \\ 2 & 0 & 1 \end{bmatrix} = \answer{15}$.
+
+        \item If $A$ is invertible and $\det(A) = 3$, then $\det(A^{-1}) = \answer{1/3}$.
+
+        \item $\det\begin{bmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{bmatrix} = \answer{24}$. (Hint: for triangular matrices, the determinant is the product of the diagonal entries.)
+    \end{enumerate}
+\end{example}
 
 \section*{Dot Products}
 
 See Example \ref{ex:orthonormal}.
 
+\begin{example}
+    Let $\vec{u} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 1 \\ 4 \\ -2 \end{bmatrix}$.
+    \begin{enumerate}
+        \item $\vec{u} \cdot \vec{v} = \answer{-8}$.
+
+        \item $\|\vec{u}\| = \sqrt{\answer{14}}$.
+
+        \item $\|\vec{v}\| = \sqrt{\answer{21}}$.
+
+        \item Are $\vec{u}$ and $\vec{v}$ orthogonal? \wordChoice{\choice{Yes}\choice[correct]{No}}.
+
+        \item Let $\vec{w} = \begin{bmatrix} 3 \\ 6 \\ 3 \end{bmatrix}$. Then $\vec{u} \cdot \vec{w} = \answer{9}$ and $\vec{w} \cdot \vec{w} = \answer{54}$. The projection of $\vec{u}$ onto $\vec{w}$ is $\dfrac{\vec{u}\cdot\vec{w}}{\vec{w}\cdot\vec{w}}\vec{w} = \begin{bmatrix} \answer{1/2} \\ \answer{1} \\ \answer{1/2} \end{bmatrix}$.
+    \end{enumerate}
+\end{example}
+
 \section*{Projections}
+
+\begin{example}
+    Let $\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}$.
+    \begin{enumerate}
+        \item The projection of $\vec{u}$ on to the best-fitting two-dimensional subspace of the data matrix $A=\begin{bmatrix} 10 & 5 & -1 \\ 2 & 0 & 1 \\ 3 & 1 & 4 \end{bmatrix}$ (the columns are data vectors) is the vector (up to 2 decimal places) $\begin{bmatrix} \answer[tolerance=.01]{1.0942} \\ \answer[tolerance=.01]{.7889} \\ \answer[tolerance=.01]{2.3610} \end{bmatrix}$.
+        
+        \item The projection of $\vec{v}$ on to the best-fitting two-dimensional subspace of the data matrix $A$ (the rows are data vectors) is the vector (up to 2 decimal places) $\begin{bmatrix} \answer[tolerance=.01]{2.5192} \\ \answer[tolerance=.01]{1.0076} \\ \answer[tolerance=.01]{1.1679} \end{bmatrix}$.
+    \end{enumerate}
+\end{example}
 
 \section*{Orthonormal Bases}
 
 See Example \ref{ex:basesprob}.
 
-\begin{example}\label{ex:orthonormal}
-
+\begin{example}
 Which of the following sets of vectors form orthonormal bases for $\RR^n$?
 
 \begin{enumerate}
@@ -443,41 +612,92 @@ $Q$ \wordChoice{\choice[correct]{is}\choice{is not}} an orthonormal basis for $\
 
 \end{example}
 
-\section*{Cross Products}
-
-Coming Soon
 
 \section*{Lines and Planes}
 
 \begin{example}
-
     \begin{enumerate}
-        \item Define the line passing through the plane spanned by vectors $\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ and $\begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$ going through the point $(1,2,3)$ and normal to the plane.
-        \item %now a different example. Still a normal line but different vectors
-        
+        \item Find the equation of the plane passing through the origin and spanned by $\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$.
+
+        \textbf{Answer:} The normal to the plane is $\vec{n} = \vec{u}\times\vec{v} = \begin{bmatrix} \answer{-3} \\ \answer{6} \\ \answer{-3} \end{bmatrix}$. Simplifying, the normal direction is $\begin{bmatrix} \answer{1} \\ \answer{-2} \\ \answer{1} \end{bmatrix}$. The equation of the plane is $x - 2y + z = \answer{0}$.
+
+        \item Find the line passing through the point $(1,2,3)$ and normal to the plane found in part (a). Write the parametric equation as $(x,y,z) = (1,2,3) + t\cdot\vec{n}$ for some normal vector $\vec{n}$.
+
+        \textbf{Answer:} The parametric equations are $x = 1 + \answer{1}t$, $y = 2 + \answer{-2}t$, $z = 3 + \answer{1}t$.
+
+        \item The plane through the point $(0,0,0)$ with normal $\vec{n} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}$ has equation $\answer{2}x + \answer{-1}y + \answer{3}z = \answer{0}$.
+
+        \item The plane through the point $(1,-1,2)$ with normal $\vec{n} = \begin{bmatrix} 1 \\ 2 \\ -1 \end{bmatrix}$ has equation $x + 2y - z = \answer{-3}$.
     \end{enumerate}
 \end{example}
 
 
-\section*{SVD}
-
-
-\section*{Eigenvalues and Eigenvectors}
+\section*{SVD, Eigenvalues and Eigenvectors}
 
 \begin{example}
-    Find the eigenvalues and eigenvectors of the matrix 
+    Let $A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}$.
+    \begin{enumerate}
+        \item The singular values of $A$ are $\sigma_1 = \answer{3}$ and $\sigma_2 = \answer{2}$.
 
-    
+        \item The rank of $A$ is $\answer{2}$, so $A$ has $\answer{2}$ nonzero singular values.
+
+        \item The null space of $A$ is $\answer{0}$-dimensional; $A\vec{x}=\vec{0}$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Let $B = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$.
+    \begin{enumerate}
+        \item $B$ has singular values $\sigma_1 = \answer{1}$ and $\sigma_2 = \answer{0}$.
+        \item $B$ has eigenvalues $\lambda_1 = \answer{1}$ and $\lambda_2 = \answer{0}$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Find the eigenvalues and eigenvectors of the matrix
+
+    $A = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix}$.
+
+    \textbf{Answer:}
+    The characteristic polynomial is $\det(A - \lambda I) = (\answer{3}-\lambda)(\answer{2}-\lambda) = 0$, so the eigenvalues are $\lambda_1 = \answer{3}$ and $\lambda_2 = \answer{2}$.
+
+    For $\lambda_1 = 3$: An eigenvector is $\vec{v}_1 = \begin{bmatrix} \answer{1} \\ \answer{0} \end{bmatrix}$.
+
+    For $\lambda_2 = 2$: An eigenvector is $\vec{v}_2 = \begin{bmatrix} \answer{1} \\ \answer{-1} \end{bmatrix}$.
+\end{example}
+
+\begin{example}
+    Find the eigenvalues and eigenvectors of the matrix
+
+    $B = \begin{bmatrix} 4 & -2 \\ 1 & 1 \end{bmatrix}$.
+
+    \textbf{Answer:}
+    The characteristic polynomial is $\lambda^2 + \answer{-5}\lambda + \answer{6} = 0$, so the eigenvalues are $\lambda_1 = \answer{3}$ and $\lambda_2 = \answer{2}$.
+
+    For $\lambda_1$: An eigenvector is $\vec{v}_1 = \begin{bmatrix} \answer{2} \\ \answer{1} \end{bmatrix}$.
+
+    For $\lambda_2$: An eigenvector is $\vec{v}_2 = \begin{bmatrix} \answer{1} \\ \answer{1} \end{bmatrix}$.
 \end{example}
 
 \section*{Multiplicity and Eigenspace}
 
 \begin{example}
-    What is the dimension of the eigenspace corresponding to the eigenvalue with the highest algebraic multiplicity for the matrix 
+    Let $A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}$.
+    \begin{enumerate}
+        \item The eigenvalues of $A$ (in increasing order) are $\lambda_1 = \answer{2}$ and $\lambda_2 = \answer{3}$.
 
+        \item $\lambda_1$ has algebraic multiplicity $\answer{2}$ and geometric multiplicity $\answer{1}$. So the eigenspace for $\lambda_1$ is $\answer{1}$-dimensional.
 
+        \item $\lambda_2$ has algebraic multiplicity $\answer{1}$ and geometric multiplicity $\answer{1}$.
 
+        \item A basis for the eigenspace of $\lambda_1 $ is $\left\{\begin{bmatrix} \answer{1} \\ \answer{0} \\ \answer{0} \end{bmatrix}\right\}$.
+
+        \item A basis for the eigenspace of $\lambda_2 $ is $\left\{\begin{bmatrix} \answer{0} \\ \answer{0} \\ \answer{1} \end{bmatrix}\right\}$.
+
+        \item Is $A$ diagonalizable? \wordChoice{\choice{Yes, because all eigenvalues are distinct.}\choice[correct]{No, because an eigenvalue has algebraic multiplicity greater than its geometric multiplicity.}}.
+    \end{enumerate}
 \end{example}
+
 
 
 
